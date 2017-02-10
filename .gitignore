@@ -1,12 +1,16 @@
 *.userprefs
 
 ## Botwinder specific:
-Bot/bin/
-UserBot/bin/
-Core/bin/
-Modules/bin/
-Entities/bin/
-bin/
+/config/
+/archives/
+/TimeAtWork/
+/meetings/
+/*.pdb
+/*.dll
+/*.mdb
+/*.exe
+/*.bat
+/*.xml
 
 ## Laravel
 storage/framework/
