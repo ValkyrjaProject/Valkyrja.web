@@ -1,0 +1,100 @@
+#Changelog
+
+**Botwinder 2.0 beta** - 09.02.2017
+  * We've got 2.0 beta, which was forced prematurely and the infrastructure is **not** in place yet. This means a bit more stability, but it's nowhere near where it should be. Working on it!
+  * Speaking of stability, as compensation for contributors we've created a new bot account that has only very few servers and therefor it's doing quite well. More info at <http://botwinder.info/invite>
+  * Added `SubModerator` permission group. See the documentation for the new defaults on the commands.
+  * `!permissions` - Configure permission groups for every built-in command. Use without parameters for help.
+  * `!restrict` - Block a command from certain channels. Use with `CommandID`, `add` or `remove`, and `ChannelID` parameters. _(ChannelID is that long number.)_
+  * `!deleteRequest` - Set a command to have the issuing request message deleted automatically. Use with `CommandID` and `true` or `false` parameters.
+  * `!promoteEveryone` - Assign _everyone_ a role!
+  * `!ping` - The best ping command ever invented ;)
+  * `!dice` - The command was upgraded slightly.
+  * `!guide` - Comprehensive configuration guide on youtube.
+  * `!discordGuide` - Get general help with Discord.
+  * `!discordPermissions` - An article (and a video) on how to correctly set-up your server, channels, roles and channel permissions.
+  * `!timer` - now supports random messages (and even self-commands)
+  * New Config option (kinda): `Full sentences are now support as a command prefix to ban @rhea 0 because she ate all the cookies.` - Yes, even this will work.
+  * New Config option: `Use Timestamp` for User Activity log (joined and left the server)
+  * A lot of improvements, fixes and hacks of the library (Rhea killed some gigabyte sized memory leaks in that library!)
+  * Server upgrade - we've upgraded the server in January. Twice! Growing too fast.
+  * Oh and we are open source once again! Links to our multiple repositories can be found at <http://botwinder.info/contribute>
+
+**Botwinder 1.9.9** - 17.11.2016
+  * Botwinder is now content-complete for `2.0` release, however there is a lot of back-end code to crunch before we actually flip that number.
+  * Added `!mute @user` and `!muteChannel` commands - these have to be configured on the website, there is more hidden behind the mute though ;)
+  * Added `!clear n @user` - you can now delete `n` messages of the `@user` only, or even use `!nuke @user` to delete all the messages in the channel by that `@user`.
+  * Implemented the `!op` system similar to what you may know from IRC, where you can _op_ yourself and then take moderation action against a naughty one. If you configure this on the website, it will block `mute`, `kick` and `ban` commands and therefor force you to use `!op` command to give yourself permissions to use these. (Obviously you still need mod/admin permissions.) It's useful, why? Read about it here <http://rhea-ayase.eu/articles/2016-11/On-the-topic-of-moderation>
+  * Implemented new antispam feature that will prevent people from sending too many messages too fast. This will use `mute` system, and therefore requires that to be configured as well. Naughty one gets temporarily muted once for 5 minutes, then 2nd time if he spams again, and third time will be banana.
+  * Improved `!ban` duration parameter, you can now use any combination of `d` or `h` for days or hours, for example `!ban @someone 7d6h This will ban @someone for 7 days and 6 hours.`
+  * New `!meetings` system for all your meeting needs! Maybe you're familiar with the IRC `Meet Bot` which was inspiration to this. This system is often used in open-source communities to keep track of their meetings. Example meeting: <http://botwinder.info/meetings/244607894165651457/Example%20meeting>
+  * Bumload of minor tweaks and fixes of all kinds.
+  * Also check out the new version of the Features page, go read about these new commands there! <http://botwinder.info/features>
+
+**Botwinder 1.9.0** - 28.10.2016
+  * Added a timer support for SelfCommands - this means that you can use `!timer` to schedule for example daily `!nuke` of a channel :P
+  * Added custom alias support - you can now create an `!alias` to any command :]
+  * The config page was fixed up and we added "log out" button.
+  * Minor fixes.
+
+**Botwinder 1.8.0** - 25.10.2016
+  * Added a new config options to remove `!join`/`!leave` and `!promote`/`!demote` messages from the chat. e.g. someone uses `!join overwatch`, both this message and Botwinders response will be deleted in a few seconds.
+  * You can now use `"multiple words"` parameters. For example this will be useful if you are creating a custom poll: `!poll addOption option1 "option two" option3 "option four with many words"` (similarly you will have to vote the same way `!vote "option two"`)
+  * Improved antispam performance.
+  * Tweaked some other commands to improve their output.
+
+**Botwinder 1.7.0** - 22.10.2016
+  * A little bit of a gap in standard releases once a week, as Rhea was in hospital - but it's all good now! =)
+  * Added new fancy `!poll` system, where you can create polls with your own options, or even let the user vote on anything they wish! Check the `!poll` command without parameters to see the details.
+  * Re-written the `!help` command to also accept a parameter now. If you run it without, it will behave as it always did (with better formatting) but if you use parameter it will trigger regex search on commands and display only the ones matching the expression. For example `!help ban|kick` will display description of ban and kick commands.
+  * Also added requested `!contribute` command, using which you can let people know how can they help us.
+  * A bunch of minor and major fixes around the bot and the website, security update on the server, etc...
+
+**Botwinder 1.6.0** - 09.10.2016
+  * Added requested `!removeAllWarnings @user`
+  * A bunch of minor and major fixes around the bot and the website.
+  * Implemented Reddit verification system. Head over to the <http://botwinder.info/config> to check it out and configure it if you would like to use this feature. This system can send people a message with all the info how to proceed and what are benefits (configured) and after the bot receives a message on reddit, it will assign the user specified role on your server. Comes with `!verify` command, using which admins can verify people manually (`!verify @Rhea https://www.reddit.com/user/RheaAyase` or `!verify @Rhea force` - without additional info..) Further you can look up their status using `!whois` and `!find` commands. You can see this in action on the [Elite Dangerous server](https://discord.gg/elite).
+
+**Botwinder 1.5.0** - 02.10.2016
+  * Why the jump to `1.5`? Well, because we now have the awesome <http://botwinder.info/config> page! Please poke Rhea if you find an issue with it. Also please rather not use `!config` much as it is incomplete and obsolete now, the website contains many more options :]
+  * Added requested `!nuke` command that will completely nuke the channel. This is somewhat experimental and may fail with really huuuuge channels, please poke Rhea if you have any feedback.
+  * Fixed up some issues with timers, please excuse if it went off for you while it shouldn't during the change...
+
+**Botwinder 1.2.6** - 27.09.2016
+  * Added `!config ModChannelLogEditedMessages` which used to be under the `ModChannelLogDeletedMessages` option. It defaults to false, so you have to set it up, even if you had the deleted logging set to true.
+  * Added `!config ModChannelIgnoreUsers` where you can add userIDs that will be ignored by the above mentioned two logging options.
+  * Optimized bits of the code and hacked the core library a little bit more.
+  * It seems that discord has globally borked code colours... I will not change the log style until the next update, hopefully it will get back to normal.
+
+**Botwinder 1.2.5** - 24.09.2016
+  * A lot of website changes and upgrades...
+  * <https://www.patreon.com/Botwinder> - 27 subscriptions of just 1$ to pay for the server! =]
+  * New log format is here!
+  * We also have advanced antispam, however the configuration will be available only via the <http://botwinder.info/config> _(Which is almost finished!!)_
+  * `!quickBan` - Quickly ban someone! Even many of the someone! Just mention all the someone's (Don't forget to configure it using `!config` or <http://botwinder.info/config>)
+  * Minor bugs were squished.
+
+**Botwinder 1.2.4** - 16.09.2016
+  * The delicate C# letters of simplified intelligence are no longer on github due to people stealing them in a way that violates my license.
+  * Fixed twitch notification issues (caused by me forgetting to implement latest changes to twitch API)
+  * Role assignment using `!join` or `!promote` was improved and now it will search for 1) exact match, 2) case insensitive match, 3) any expression match...
+  * Role assignment often bugs out when discord servers have a derp and respond to Botwinder with an error. This will now display a message about it, instead of incorrectly telling you about insufficient permissions. Just double-check that it went through and you got the role, it usually does go through.
+  * <http://botwinder.info/updates> - Check out upcoming features and changelog.
+  * Also a fair amount of minor tweaks and improvements as usual.
+
+**Botwinder 1.2.3** - 27.08.2016
+  * A bunch of commands and features to help me provide better support to other servers.
+  * Improved formatting of some commands, fixed some typos...
+  * Added `!config RemoveMassMentions n` - Deletes a message if it contains more than `n` mentions. Use `0` to disable this feature, it is recommended to set this to 7. _(It is disabled by default.)_
+  * Added `!config SpambotBanLimit n` - Ban people after they had `n` messages removed by the above `RemoveMassMentions`. Use `0` to disable this feature, it is recommended to set this to 7. _(It is disabled by default.)_
+  * Added `!config KarmaConsumeVerb value` - Example: Rhea just _nommed_ one of her cookies! `nommed` is default value of this option.
+  * `!patchnotes` - Display some info about latest updates.
+
+**Botwinder 1.2.2** - 12.08.2016
+  * A bunch of fixes and minor improvements.
+  * And I improved formatting of... something that I don't remember.
+  * An irrelevant update that you don't care about.
+  * :Botwinder: emoji
+  * Also giveaways will now display the number of participants when you end them.
+
+**Teh Website** is live, although it's without configuration for now. That will require a lot more work!
