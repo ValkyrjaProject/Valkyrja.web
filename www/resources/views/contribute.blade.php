@@ -43,11 +43,15 @@
               , <code>DiscordBot</code>
               , <code>DokaDoka</code>
               , <code>Drburst</code>
+              , <code>DVS</code>
               , <code>freiheit</code>
+              , <code>Gamer Jamer ツ</code>
               , <code>haxxor</code>
               , <code>LainBear</code>
               , <code>Levi&nbsp;Brunette</code>
               , <code>Lewis</code>
+              , <code>Racorac</code>
+              , <code>Ronen</code>
               , <code>sandman</code>
               , <code>tarballqc</code>
               , <code>tickL</code>

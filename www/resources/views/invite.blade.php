@@ -52,6 +52,8 @@
               <br />
               After you get the green light, you can invite the Mk.II bot. The Mk.I will leave on his own (or you can also kick it out)
               <br />
+              Remember that the bot is bound to servers you own, or servers you explicitly ask for (Talk to Rhea)
+              <br />
               <i>Don't forget to set-up permissions and role hierarchy!</i>
             </p>
         </div>
