@@ -13,3 +13,4 @@ Please take a look at our website to see what's the bot about, full list of feat
 
 * Please read the [Contributing file](CONTRIBUTING.md) before you start =)
 
+* If there is a security issue, contact SpyTec\#1329 on Discord or email spytec13@gmail.com
