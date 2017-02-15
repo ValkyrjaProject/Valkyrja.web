@@ -151,6 +151,10 @@ class ConfigController extends Controller
         {
             abort(403, "Unauthorized access");
         }
+        else if (!$this->authorizedForServer($request, $request['serverId']))
+        {
+            abort(403, "Unauthorized access");
+        }
 
         ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
         if ($request->old('serverId') == NULL) {
@@ -183,6 +187,65 @@ class ConfigController extends Controller
             'userId' => $userId,
             'serverId' => $serverId
         ]);
+    }
+    public function authorizedForServer(Request $request, $serverId)
+    {
+        $provider = new Discord([
+            'clientId'     => config('discordoauth2.client_id'),
+            'clientSecret' => config('discordoauth2.client_secret'),
+            'redirectUri'  => url('config')
+        ]);
+
+
+        if ($request->hasCookie('access_token') && Crypt::decrypt($request->cookie('access_token'))->hasExpired())
+        {
+            try {
+                $refresh_token = Crypt::decrypt($request->cookie('access_token'))->getRefreshToken();
+                $token = $provider->getAccessToken('refresh_token', [
+                    'refresh_token' => $refresh_token,
+                ]);
+            } catch (DiscordRequestException $e) {
+                Cookie::queue(
+                    Cookie::forget('access_token')
+                );
+                $notAuthorized = $this->notAuthorized($request, $provider);
+                if ($notAuthorized !== null) {
+                    return $notAuthorized;
+                }
+            }
+        }
+        else if($request->hasCookie('access_token'))
+        {
+            $token = Crypt::decrypt($request->cookie('access_token'));
+        }
+        else
+        {
+            $token = $provider->getAccessToken('authorization_code', [
+                'code' => $request['code'],
+            ]);
+        }
+        $user = $provider->getResourceOwner($token);
+        if($user->id == "") {
+            Cookie::queue(
+                Cookie::forget('access_token')
+            );
+            $notAuthorized = $this->notAuthorized($request, $provider);
+            if ($notAuthorized !== null) {
+                return $notAuthorized;
+            }
+        }
+        // Get the guilds.
+        $guilds = $user->guilds;
+        $guildsWithManageGuilds = [];
+
+        foreach ($guilds as $guild) {
+            $dir = $this->relative_conf_folder.$guild->id;
+            if( ($guild->owner || $guild->permissions & 40) && file_exists($dir) && $guild->id == $serverId )
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
