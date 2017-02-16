@@ -73,7 +73,7 @@
                 </div>
             </div>
             <!-- Freud -->
-            <div class="team-member cell padding-bottom">
+            <!--div class="team-member cell padding-bottom">
                 <div class="profile">
                     <img class="avatar" src="img/team-freud.jpg" />
                     <p class="labels">
@@ -87,7 +87,7 @@
                 <div class="icons spaced">
                     <a href="https://twitter.com/RSN_Freud"><img src="/img/twitter.png" alt="twitter.com/RSN_Freud"></a>
                 </div>
-            </div>
+            </div-->
         </div>
         <div class="row">
             <h1 class="cell">Support Team</h1>
@@ -108,7 +108,7 @@
                 <span class="email"><a href="emailto:masterchief_john-117@botwinder.info">masterchief_john-117@botwinder.info</a></span>
             </div>
             <!-- Levi -->
-            <div class="team-member cell padding-bottom">
+            <!--div class="team-member cell padding-bottom">
                 <div class="profile">
                     <img class="avatar" src="img/team-levi.jpg" />
                     <p class="labels">
@@ -125,11 +125,11 @@
                     <a href="https://twitch.tv/LeviBrunette"><img src="/img/twitch.png" alt="twitch.tv/LeviBrunette"></a>
                     <a href="https://youtube.com/LeviBrunette"><img src="/img/youtube.png" alt="youtube.com/LeviBrunette"></a>
                 </div>
-            </div>
+            </div-->
         </div>
         <div class="row">
             <!-- TwoDog -->
-            <div class="team-member cell">
+            <!--div class="team-member cell">
                 <div class="profile">
                     <img class="avatar" src="img/team-twodog.jpg" />
                     <p class="labels">
@@ -144,7 +144,7 @@
                     <a href="http://twodog.pro"><img src="/img/external.png" alt="TwoDog's website"></a>
                     <a href="https://twitter.com/TheTwoDog_"><img src="/img/twitter.png" alt="twitter.com/TheTwoDog_"></a>
                 </div>
-            </div>
+            </div-->
         </div>
     </section>
 </section>
