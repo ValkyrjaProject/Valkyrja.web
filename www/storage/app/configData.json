@@ -52,6 +52,7 @@
   "ModChannelIgnoreUsers": [null, "list"],
   "UserActivityChannel": [0, "int"],
   "UserActivityMention": [false, "bool"],
+  "UserActivityMentionLeft": [false, "bool"],
   "UserActivityLogJoined": [false, "bool"],
   "UserActivityLogLeft": [false, "bool"],
   "UserActivityLogTimestamp": [true, "bool"],

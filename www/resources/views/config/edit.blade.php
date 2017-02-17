@@ -323,13 +323,16 @@
 					Display the following message when a new user joins your server. Use <code>{0}</code> in the message where their username should be.
 					<br />
 					@include("config.types.multi-line-text", ['key' => "UserActivityMessageJoined", 'data' => $configData["UserActivityMessageJoined"][0]])
+					<br />
+					@include("config.types.bool", ['key' => "UserActivityMention", 'data' => $configData["UserActivityMention"][0]])
+					Mention these people? (Will use only their username if this is <code>false</code>)
 					<br /><br />
 					@include("config.types.bool", ['key' => "UserActivityLogLeft", 'data' => $configData["UserActivityLogLeft"][0]])
 					Display the following message when someone leaves your server. Use <code>{0}</code> in the message where their username should be.
 					<br />
 					@include("config.types.multi-line-text", ['key' => "UserActivityMessageLeft", 'data' => $configData["UserActivityMessageLeft"][0]])
-					<br /><br />
-					@include("config.types.bool", ['key' => "UserActivityMention", 'data' => $configData["UserActivityMention"][0]])
+					<br />
+					@include("config.types.bool", ['key' => "UserActivityMentionLeft", 'data' => $configData["UserActivityMentionLeft"][0]])
 					Mention these people? (Will use only their username if this is <code>false</code>)
 				</p>
 			</div>
