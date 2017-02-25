@@ -37,7 +37,7 @@
                         &nbsp; This documentation contains a list of commands, permissions who can use those, and short description. Permissions are configured via the <a href="/config">configuration</a>, and the hierarchy is as follows: <code>ServerOwner&nbsp;&gt;&nbsp;Admin&nbsp;&gt;&nbsp;Moderator&nbsp;&gt;&nbsp;SubModerator&nbsp;&gt;&nbsp;Member&nbsp;&gt;&nbsp;Everyone</code> where for example Admin can use everything that is marked as Admin, Moderator, or Everyone, but can not use commands marked as ServerOwner.
                     </p>
                     <p>
-                        &nbsp; <code>ServerOwner</code> stands for either server owner, or someone with the <code>ManageServer</code>, <code>ManageRoles</code> and <code>Administrator</code> permissions, and <code>Admin</code>, <code>Moderator</code>, <code>SubModerator</code> and <code>Member</code> roles have to be <a href="/config">configured</a>.
+                        &nbsp; <code>ServerOwner</code> stands for either server owner, or someone with the <code>ManageServer</code> and <code>Administrator</code> permissions, and <code>Admin</code>, <code>Moderator</code>, <code>SubModerator</code> and <code>Member</code> roles have to be <a href="/config">configured</a>.
                     </p>
                 </div>
 
