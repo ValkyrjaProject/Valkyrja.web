@@ -18,7 +18,7 @@
             </ul>
         </p>
         <p>
-            Please do not PM individual team members
+            Please do not PM individual team members including Rhea. Join the <a href="https://discord.gg/XgVvkXx">Discord Server</a>, take a look at <code>FAQ</code>, recent <code>Diary</code> entries, and then ask in the <code>help</code> channel
             <br />
             You can also find <code>Rhea</code> on the <a href="https://webchat.freenode.net/?channels=#botwinder" target="_blank">freenode irc</a>, but please note that she won't respond anywhere nearly as fast as our support team on Discord, she is on IRC only at work (European hours)
         </p>
