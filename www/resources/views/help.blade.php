@@ -18,7 +18,7 @@
             </ul>
         </p>
         <p>
-            Please do not PM individual team members with the only exception being <code>Rhea#0321</code>
+            Please do not PM individual team members
             <br />
             You can also find <code>Rhea</code> on the <a href="https://webchat.freenode.net/?channels=#botwinder" target="_blank">freenode irc</a>, but please note that she won't respond anywhere nearly as fast as our support team on Discord, she is on IRC only at work (European hours)
         </p>
