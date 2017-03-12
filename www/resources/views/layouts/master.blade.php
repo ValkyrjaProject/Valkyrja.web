@@ -30,7 +30,7 @@
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('help') }}" href="/help"><img class="media hidden-sm-down" src="/img/discord-small.png" alt="Help" /><br class="hidden-sm-down" />Help</a></li>
                     <li class="nav-item"><a class="nav-link external" href="//status.botwinder.info"><img class="media hidden-sm-down" src="/img/satellite.png" alt="Status" /><br class="hidden-sm-down" />Status</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('team') }}" href="/team"><img class="media hidden-sm-down" src="/img/heart.png" alt="The Team" /><br class="hidden-sm-down" />The&nbsp;Team</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('contribute') }}" href="/contribute"><img class="media hidden-sm-down" src="/img/cookie.png" alt="Contribute" /><br class="hidden-sm-down" />Contribute</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link {{ Helper::setActive('contribute') }}" href="/contribute"><img class="media hidden-sm-down" src="/img/cookie.png" alt="Contribute" /><br class="hidden-sm-down" />Contribute</a></li> --}}
                 </ul>
             </div>
         </nav>
