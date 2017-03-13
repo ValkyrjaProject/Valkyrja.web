@@ -3,6 +3,7 @@
   "ExecuteCommandsOnEditedMessages": [true, "bool"],
   "IgnoreBots": [true, "bool"],
   "IgnoreEveryone": [true, "bool"],
+  "PrioritizeAntispam": [false, "bool"],
   "RemoveDiscordInvites": [false, "bool"],
   "BanDiscordInvites": [false, "bool"],
   "RemoveDuplicateMessages": [false, "bool"],
