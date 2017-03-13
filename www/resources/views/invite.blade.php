@@ -36,7 +36,7 @@
               You can use Botwinder Mk.II for <b>one day trial period</b>, after which the bot will automatically leave your server, if you do not meet at least <b>one of the requirements</b> below.
               <br />
               <b>Requirements</b> <i>(one of)</i><ul>
-                <li><a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> Subscribers at 3$ or more can use the bot on any servers they own (or explicitly specified server they do not own)</li>
+                <li><a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> Subscribers at 3$ or more</li>
                 <li><a href="https://discordapp.com/partners" target="_blank">Discord Partner</a> with <a href="https://i.imgur.com/6c8oUoD.png" target="_blank">VIP voice servers</a></li>
                 <li>Handpicked partners with worthy cause <i>(talk to our <a href="/team">PR team</a>)</i></li>
                 <li>Communities of at least 2000 members</li>
