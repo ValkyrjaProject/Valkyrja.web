@@ -36,7 +36,7 @@
               You can use Botwinder Mk.II for <b>one day trial period</b>, after which the bot will automatically leave your server, if you do not meet at least <b>one of the requirements</b> below.
               <br />
               <b>Requirements</b> <i>(one of)</i><ul>
-                <li><a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> Subscrabers at 3$ or more can use the bot on any servers they own (or explicitly specified server they do not own)</li>
+                <li><a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> Subscribers at 3$ or more can use the bot on any servers they own (or explicitly specified server they do not own)</li>
                 <li><a href="https://discordapp.com/partners" target="_blank">Discord Partner</a> with <a href="https://i.imgur.com/6c8oUoD.png" target="_blank">VIP voice servers</a></li>
                 <li>Handpicked partners with worthy cause <i>(talk to our <a href="/team">PR team</a>)</i></li>
                 <li>Communities of at least 2000 members</li>
@@ -47,12 +47,13 @@
                     <button class="btn btn-primary">Invite</button>
                 </a>
             </div>
+            <br />
             <p class="row">
               <b>Patreon info for subscribers:</b><ul>
                 <li>Please make sure to contact <code>Rhea#0321</code> with your patreon details (patreon username or email) (Large communities or Discord Partners do not have to confirm anything.)</li>
                 <li>After you get the green light, you can invite the Mk.II bot. The Mk.I will leave on his own (or you can also kick it out)</li>
                 <li>Remember that the bot is bound to servers you own, or one extra server you explicitly ask for (Talk to Rhea - PM her the <code>Server ID</code>)</li>
-              </ul><br /><br />
+              </ul><br />
               <i>Don't forget to set-up permissions and role hierarchy!</i>
             </p>
         </div>
