@@ -51,7 +51,7 @@
     <section class="container team-table">
         <div class="row">
             <h1 class="cell">Dev Team</h1>
-            <h1 class="cell">Public Relations</h1>
+            <h1 class="cell">Support Team</h1>
         </div>
         <div class="row">
             <!-- freiheit -->
@@ -72,28 +72,6 @@
                     <a href="https://twitter.com/freiheit"><img src="/img/twitter.png" alt="twitter.com/freiheit"></a>
                 </div>
             </div>
-            <!-- Freud -->
-            <!--div class="team-member cell padding-bottom">
-                <div class="profile">
-                    <img class="avatar" src="img/team-freud.jpg" />
-                    <p class="labels">
-                    <span class="name">Freud</span>
-                    <br />PR</p>
-                </div>
-                <p><i>
-                    The abused one.. Talking to people, in the name of the Jefi.
-                </i></p>
-                <span class="email"><a href="emailto:freud@botwinder.info">freud@botwinder.info</a></span>
-                <div class="icons spaced">
-                    <a href="https://twitter.com/RSN_Freud"><img src="/img/twitter.png" alt="twitter.com/RSN_Freud"></a>
-                </div>
-            </div-->
-        </div>
-        <div class="row">
-            <h1 class="cell">Support Team</h1>
-            <h1 class="cell">&nbsp;</h1>
-        </div>
-        <div class="row">
             <!-- MasterChief -->
             <div class="team-member cell padding-bottom">
                 <div class="profile">
@@ -107,45 +85,13 @@
                 </i></p>
                 <span class="email"><a href="emailto:masterchief_john-117@botwinder.info">masterchief_john-117@botwinder.info</a></span>
             </div>
-            <!-- Levi -->
-            <!--div class="team-member cell padding-bottom">
-                <div class="profile">
-                    <img class="avatar" src="img/team-levi.jpg" />
-                    <p class="labels">
-                    <span class="name">Levi Brunette</span>
-                    <br />Support, PR</p>
-                </div>
-                <p><i>
-                    A junior community leader, hobbyist artist, and a trash can. Good with computers, setting things up, and fixing things when they break.
-                </i></p>
-                <span class="email"><a href="emailto:levi.brunette@botwinder.info">levi.brunette@botwinder.info</a></span>
-                <div class="icons spaced">
-                    <a href="https://steamcommunity.com/id/SuperLeboy"><img src="/img/external.png" alt="Levi's website"></a>
-                    <a href="https://twitter.com/Levi_Brunette"><img src="/img/twitter.png" alt="twitter.com/Levi_Brunette"></a>
-                    <a href="https://twitch.tv/LeviBrunette"><img src="/img/twitch.png" alt="twitch.tv/LeviBrunette"></a>
-                    <a href="https://youtube.com/LeviBrunette"><img src="/img/youtube.png" alt="youtube.com/LeviBrunette"></a>
-                </div>
-            </div-->
+        </div>
+        <!--div class="row">
+            <h1 class="cell">Public Relations</h1>
+            <h1 class="cell">&nbsp;</h1>
         </div>
         <div class="row">
-            <!-- TwoDog -->
-            <!--div class="team-member cell">
-                <div class="profile">
-                    <img class="avatar" src="img/team-twodog.jpg" />
-                    <p class="labels">
-                    <span class="name">TwoDog</span>
-                    <br />Support, PR</p>
-                </div>
-                <p><i>
-                    Kiwi, Student, Gamer and an all around Discord Enthusiast.
-                </i></p>
-                <span class="email"><a href="emailto:twodog@botwinder.info">twodog@botwinder.info</a></span>
-                <div class="icons spaced">
-                    <a href="http://twodog.pro"><img src="/img/external.png" alt="TwoDog's website"></a>
-                    <a href="https://twitter.com/TheTwoDog_"><img src="/img/twitter.png" alt="twitter.com/TheTwoDog_"></a>
-                </div>
-            </div-->
-        </div>
+        </div-->
     </section>
 </section>
 @endsection
