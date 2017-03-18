@@ -58,6 +58,12 @@
 					Remember that you can <code>{{ $configData["CommandCharacter"][0] }}permit @people</code> to allow anyone mentioned to post a single link or anything else in this section, for three minutes.
 				</p>
 				<p>
+					<b>Prioritize Antispam</b>
+					<br />
+					@include("config.types.bool", ['key' => "PrioritizeAntispam", 'data' => $configData["PrioritizeAntispam"][0]])
+					Do you want to run antispam first, before anything else? This will likely cause some false-positives sometimes, when people are legitimately using the same command a few times in a row for example (such as someone eating three cookies.)
+				</p>
+				<p>
 					<b>Members ignore Antispam</b>
 					<br />
 					@include("config.types.bool", ['key' => "MembersIgnoreAntispam", 'data' => $configData["MembersIgnoreAntispam"][0]])
