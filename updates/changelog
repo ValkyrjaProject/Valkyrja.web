@@ -1,12 +1,12 @@
 #Changelog
 
 **Botwinder 2.0 beta** - 09.02.2017
-  * We've got 2.0 beta, which was forced prematurely and the infrastructure is **not** in place yet. This means a bit more stability, but it's nowhere near where it should be. Working on it!
-  * Speaking of stability, as compensation for contributors we've created a new bot account that has only very few servers and therefor it's doing quite well. More info at <http://botwinder.info/invite>
+  * We've got 2.0 beta, which was forced prematurely and the infrastructure is **not** in place yet. Sacrifice is temporarily disabled Timers, Polls, Events, Giveaways and Notifications. Working on it!
+  * We've created a new bot account for contributors, that has only very few servers and therefor it's faster and more stable. More info at <http://botwinder.info/invite>
   * Added `SubModerator` permission group. See the documentation for the new defaults on the commands.
   * `!permissions` - Configure permission groups for every built-in command. Use without parameters for help.
-  * `!restrict` - Block a command from certain channels. Use with `CommandID`, `add` or `remove`, and `ChannelID` parameters. _(ChannelID is that long number.)_
-  * `!deleteRequest` - Set a command to have the issuing request message deleted automatically. Use with `CommandID` and `true` or `false` parameters.
+  * `!restrict` - Block a command from certain channels.
+  * `!deleteRequest` - Set a command to have the issuing request message deleted automatically.
   * `!promoteEveryone` - Assign _everyone_ a role!
   * `!ping` - The best ping command ever invented ;)
   * `!dice` - The command was upgraded slightly.
