@@ -797,6 +797,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>issueWarning</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Send a PM to a <code>@user</code>, with a warning message, and note this in the database.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>@user warning message</code>; where <code>@user</code> is a user mention or id and you can add the same warning to multiple people, just mention them all.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>addWarning</h2>
                     <table class="command">
                     <tr>
