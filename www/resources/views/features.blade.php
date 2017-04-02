@@ -990,7 +990,7 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Display a list of PublicRoles. These are similar to MemberRoles, except that these can be joined by anyone using <code>join</code> or <code>leave</code> commands. Useful if you want your members to have tags, for example for different platform (they play the game pn pc or xbox..) or if they have different specialisation (healer, tank, ...) etc etc =] <b>Set this up in the <a href="/config">configuration</a>.</b></td>
+                        <td>Display a list of PublicRoles. These are similar to MemberRoles, except that these can be joined by anyone using <code>join</code> or <code>leave</code> commands. Useful if you want your members to have tags, for example for different platform (they play the game on pc or xbox..) or if they have different specialisation (healer, tank, ...) etc etc =] <b>Set this up in the <a href="/config">configuration</a>.</b></td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
