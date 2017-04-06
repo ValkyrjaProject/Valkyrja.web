@@ -55,11 +55,11 @@
     </section>
     <footer>
         <section class="middle-container">
-            <div>
+            <!--div>
                 <small>
                     <a href="https://www.patreon.com/Botwinder" target="_blank">Help us cover the server costs - subscribe just $1 on Patreon!</a>
                 </small>
-            </div>
+            </div-->
             <div class="gray-links">
                 <small class="x-small">
                     <div class="copyright">© {{date("Y") === '2016' ? '2016' : '2016-'.date("Y") }} Rhea & SpyTec</div>
