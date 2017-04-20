@@ -274,9 +274,13 @@
                     Now if someone leaves and then rejoins the server, they will be Muted again, and this time it is treated as an antispam mute, which means that the third one will get you banned. So cheating to get rid of the "mute" role is really bad idea and if the <i>victim</i> leaves and joins the server twice while they are muted, they get banned.
 				</p>
 				<p>
+                    <b><a href="http://rhea-ayase.eu/articles/2017-04/Moderation-guidelines" target="_blank">Moderation Guidelines</a></b>
+                    <br />
+                    Moderation guidelines for inclusive community. <i>(Written by Rhea.)</i>
+                    <br />
                     <b><a href="http://rhea-ayase.eu/articles/2016-11/On-the-topic-of-moderation" target="_blank">On the topic of Moderation</a></b>
                     <br />
-                    An article about moderating a community, full of Discord/Botwinder examples. <i>(Written by Rhea.)</i>
+                    Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by Rhea.)</i>
 				</p>
 			</div>
 			<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configLogging" aria-expanded="false" aria-controls="configLogging">
