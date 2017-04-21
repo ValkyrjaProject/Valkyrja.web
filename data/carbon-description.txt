@@ -45,7 +45,7 @@
 </style>
 
 <div>
-<a href="http://invite.botwinder.info" class="botwinder-btn">
+<a href="http://botwinder.info/invite" class="botwinder-btn">
   <img src="http://botwinder.info/img/jefi-small.png" alt="Jefi">
   <br />Invite
 </a>
@@ -66,7 +66,11 @@
 <div class="botwinder-description">
   <b>Botwinder</b> is highly customizable <b>Community Management</b> bot, full of advanced tools that will help you run just about any community, small or large.
 
+<br />
+Please read the information <u><b><a href="http://botwinder.info.invite">on our website</a></b></u> before inviting the bot.
+
 <ul>
+<br />
   <li><b>Advanced moderation tools:</b><ul>
     <li>Mute people or channels.</li>
     <li>Kick anyone out</li>
@@ -76,11 +80,13 @@
 	<li>You can also nuke the whole channel (wipe all the messages) or clear only specific amount of messages by specific user.</li>
   </ul></li>
 
+<br />
   <li><b>Role Assignment:</b><ul>
     <li>Specify public roles which will be available to anyone using join and leave commands.</li>
     <li>Give the moderators ability to promote or demote people into specified member roles.</li>
   </ul></li>
   
+<br />
   <li><b>Antispam</b><ul>
     <li>Remove Discord invites.</li>
     <li>Remove mass-mentions.</li>
@@ -91,6 +97,7 @@
     <li>You can also set-up automated ban for spammers. if they continue doing the above.</li>
   </ul></li>
   
+<br />
   <li><b>Logging:</b><ul>
     <li>Log edited and/or deleted messages.</li>
     <li>Log kicked, banned, and muted users.</li>
@@ -98,6 +105,7 @@
     <li>Set up ignored users and channels where the bot will not act or log anything.</li>
   </ul></li>
 
+<br />
   <li><b>New Members</b><ul>
     <li>Assign a role to everyone, as soon as they join.</li>
     <li>PM people when they join.</li>
@@ -105,6 +113,7 @@
     <li>Verify members with reddit account and assign them a role</li>
   </ul></li>
   
+<br />
   <li><b>Other Modules:</b><ul>
     <li>Custom Commands - create simple commands with simple parameters.</li>
     <li>Aliases - create an alias from any command, custom or original.</li>
@@ -114,6 +123,7 @@
     <li>Meetings - ever heard of the meet-bot for IRC? This is similar.</li>
     <li>Livestream Notifications - set-up a notification for when you go live on Twitch, Hitbox, or Beam.</li>
   </ul></li>
+<br />
   <li><b>...and much more!</b></li>
 </ul>
 
