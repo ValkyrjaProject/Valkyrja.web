@@ -363,27 +363,42 @@
 					@include("config.types.int", ['key' => "WelcomeRoleID", 'data' => $configData["WelcomeRoleID"][0]])
 				</p><br />
 				<p>
-					<b>Reddit Verification</b>
+					<b>Verification systems</b>
 					<br /><br />
-					How does this work... The bot will send a user information how to get verified - the user is asked to send a PM over Reddit to the bot. After Botwinder receives this message, it will save the info in the database and assign the user configured role. If they have been verified previously and for some reason left the server (or have been kicked/banned) the bot will simply assign them the verified role without having them re-send the message.
+                    How does this work... The bot will send information how to get verified to the user, they follow the steps and at the end receive Verified Role. We recommend to give this role normal permissions, while the <code>@everyone</code> role should have just basic read permissions and be unable to speak, upload files, etc...
 					<br /><br />
+                    <b>Reddit Verification</b>
+                    <br />
+                    The bot will ask the user to send a message via Reddit, and after receiving it with the right codes, it will assign them the Verified Role.
+                    <br /><br />
+                    <b>Code Verification</b>
+                    <br />
+                    The bot will PM the user your rules (configured below) with hidden code within, in order to force the user to read them. They have to find the code, and send it back, to be assigned the Verified Role.
+                    <br /><br />
 					@include("config.types.bool", ['key' => "VerifyEnabled", 'data' => $configData["VerifyEnabled"][0]])
-					Enable verification via reddit message, and assign the following role to verified users Recommended permissions: <a href="/img/verifyRole.png" target="_blank">Verified Role</a> and <a href="/img/verifyEveryone.png" target="_blank">@everyone</a> (Role ID - use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get it)
+					Enable verification system.
+                    <br />
+                    Assign the following role to verified users. (Role ID - use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get it)
 					<br />
 					@include("config.types.int", ['key' => "VerifyRoleID", 'data' => $configData["VerifyRoleID"][0]])
+                    <br />
+                    (Recommended permissions: <a href="/img/verifyRole.png" target="_blank">Verified Role</a> and <a href="/img/verifyEveryone.png" target="_blank">@everyone</a>)
 					<br /><br />
-					List the benefits of the verification, these will be sent to the user during the process. (What permissions will the configured role give them?)
+					@include("config.types.bool", ['key' => "VerifyUseReddit", 'data' => $configData["VerifyUseReddit"][0]])
+					Use Reddit message to verify people? (Set this to <code>false</code> to use "Code Verification.")
+					<br /><br />
+					This message will be included in the instructions PMed to the user. If you are using Reddit, you can just list the benefits (extra permissions) of the verification, or in case of the Code Verification, we recommend using well crafted rules, such as the ones in the <a href="http://rhea-ayase.eu/articles/2017-04/Moderation-guidelines" target="_blank">Moderation Guidelines</a> written by Rhea.
 					<br />
 					@include("config.types.multi-line-text", ['key' => "VerifyPM", 'data' => $configData["VerifyPM"][0]])
 					<br /><br />
 					@include("config.types.bool", ['key' => "VerifyOnWelcome", 'data' => $configData["VerifyOnWelcome"][0]])
 					Send the verification info to the user, as soon as they join the server. You can also send it to them using <code>{{ $configData["CommandCharacter"][0] }}verify @user</code> or they can request it be sent with <code>{{ $configData["CommandCharacter"][0] }}verify</code> without parameters.
 					<br /><br />
-					How many {{ $configData["KarmaCurrency"][0] }} do you want to give them? Use <code>0</code> (zero) to disable. Also depends on whether your karma system is enabled or not.
+					How many {{ $configData["KarmaCurrency"][0] }} do you want to give them? Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
 					<br />
 					@include("config.types.int", ['key' => "VerifyKarma", 'data' => $configData["VerifyKarma"][0]])
 					<br /><br />
-					If you happen to have a user who does not have reddit account or for some reason can't use our system, you can manually verify them with any other link to any social network, email, or simply use the <code>force</code> keyword to forcefully verify them. Examples follow:
+					If you happen to have a user who does not have Reddit account or for some reason can't use our system, you can manually verify them with any other link to any social network, email, or simply use the <code>force</code> keyword to forcefully verify them. Examples follow:
 					<br />
 					<code>{{ $configData["CommandCharacter"][0] }}verify @Rhea https://www.reddit.com/user/RheaAyase</code>
 					<br />

@@ -67,6 +67,7 @@
   "VerifyRoleID": [0, "int"],
   "VerifyKarma": [3, "int32"],
   "VerifyPM": ["Benefits of verifying are:\n**1.** Verified accounts can embed links and images.\n**2.** Ability to use voice activation instead of being forced to use push to talk.\n**3.** It will allow us to throw you a message off-discord if something happens, and it serves as a protection against bots, spammers and trolls.", "string"],
+  "VerifyUseReddit": [true, "bool"],
   "RemovePromote": [false, "bool"],
   "RemoveJoin": [false, "bool"],
   "RoleIDsAdmin": [null, "list"],
