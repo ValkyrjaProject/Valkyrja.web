@@ -1,10 +1,8 @@
 #Upcoming features
 
-* **Botwinder 2.0** - Rewrite the bot to support clustered environment and set-up a cluster of servers for high quality service. (Q1 2017)
-* **Verification** - Replace the old reddit based verification system with a new and much better one! (Q1 2017)
-* **Configuration upgrade** - Replace the somewhat complicated system that uses IDs with nice dropdown-to-add and a list of role-names. This will be using the api to get the names/ids for the list, it will be a lot more user friendly than the current temporary system. (Q1 2017)
 * **PublicRoles upgrade** - You will be able to create groups of public roles, where the user will have only one of the roles at a time. If they `!join` another, the previous one will be removed. For example the [Elite Dangerous server](https://discord.gg/elite) has public roles for allegiance and factions. These would be two groups, where you can be only either imperial or federal, and you can be part of only one of the factions. (Q2 2017)
 * **Points and ranks** earned with activity, everything should be customizable and you should be able to choose what those points are, how many are needed for a new rank/level, how to announce it, and whether to assign a specific role with it or not. (Q2 2017)
+* **Configuration upgrade** - Replace the somewhat complicated system that uses IDs with nice dropdown-to-add and a list of role-names. This will be using the api to get the names/ids for the list, it will be a lot more user friendly than the current temporary system. (Q1 2017)
 * **Botwinder 3.0** - Implement code necessary to support redundant clustered environment. (Q2-Q3 2017)
 * **Anti-PMspam** - Rather complex system which may as well end up being separate bot which will include only our standard antispam plus this new feature. (Q3 2017)
 * **Twitter notifications** (Q3-Q4 2017)
