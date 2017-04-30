@@ -111,6 +111,40 @@
                     </tr>
                     </table>
                 </div>
+                <div class="features-indent">
+                    <h2>subscribe</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Subscribe to patchnotes and maintenance notifications (you will be PMed these)</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>unsubscribe</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Unsubscribe from the patchnotes and maintenance notifications.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
 
                 <h1 class="features-h1">Commands ~ Admin</h1>
                 <div class="features-indent">
