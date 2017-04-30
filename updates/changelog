@@ -2,7 +2,7 @@
 
 **Botwinder 2.1** - 30th of April, 2017
   * This update was brought to you thanks to patreon-paid unpaid-time-off of Rhea's actual job.
-  * Code Verification - You can now find a new option on the config page to switch between the old Reddit verification and the new Code verification. You can effectively force people to read your rules, which will be PMed to the user with a hidden code within the text. The user is asked to reply the bot with this code in order to get verified - to get the role assigned. **Important:** please check your configuration if you've been using the Reddit verification before!
+  * `Code Verification` - You can now find a new option on the config page to switch between the old Reddit verification and the new Code verification. You can effectively force people to read your rules, which will be PMed to the user with a hidden code within the text. The user is asked to reply the bot with this code in order to get verified - to get the role assigned.
   * `!subscribe` - Subscribe to these fancy patchnotes and other important maintenance notifications via PM.
   * `!unsubscribe` - Unsubscribe from the above.
   * `!issueWarning` - This command will PM the user worded message and add it as warning to the database.
