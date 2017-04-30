@@ -1,6 +1,7 @@
 #Changelog
 
 **Botwinder 2.1** - 30th of April, 2017
+  * This update was brought to you thanks to patreon-paid unpaid-time-off of Rhea's actual job.
   * Code Verification - You can now find a new option on the config page to switch between the old Reddit verification and the new Code verification. You can effectively force people to read your rules, which will be PMed to the user with a hidden code within the text. The user is asked to reply the bot with this code in order to get verified - to get the role assigned. **Important:** please check your configuration if you've been using the Reddit verification before!
   * `!subscribe` - Subscribe to these fancy patchnotes and other important maintenance notifications via PM.
   * `!unsubscribe` - Unsubscribe from the above.
@@ -8,6 +9,7 @@
   * `!timer expire` - New option for timers, where you can now set them to expire at specified date and time.
   * `!giveaway start roleID/mention` - You can now use giveaway start with a role ID (use `!getRole name` to get the id) or role mention, to restrict the giveaway to that role only.
   * All kinds of minor tweaks and fixes, and performance improvements, yet again, we've double the server performance.
+  * Patreon now says that the next goal to implement is "experience, ranks and levels," but we will implement the next goal first, and this one later, swapping them around. So the 2.2 update will be "public role-groups."
   * Oh and hey, we are always looking for Botwinder-experienced support people (start by being active and helping in our server) and Web Developer to help out with <https://github.com/RheaAyase/Botwinder.web/issues> =)
 
 **Botwinder 2.0** - 9th of February, 2017
