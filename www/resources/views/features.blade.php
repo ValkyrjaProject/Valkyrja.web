@@ -24,6 +24,7 @@
                         <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
                         <li>Set up your own <b>custom commands</b>, with a few keywords! (<code>!commands</code>)</li>
                         <li>You can <b>create an alias</b> to <i>any</i> command. (<code>!alias</code>)</li>
+                        <li>Did you like <b>temporary channels</b> on TeamSpeak? No problem, we've got you. (<code>!tempChannel</code>)</li>
                         <li>Create <b>scheduled messages</b> or timers. These can even be <b>scheduled commands</b>, so you can even schedule a daily <code>!nuke</code> of a channel! :D (<code>!timers</code>)</li>
                         <li>Run a <b>poll</b>! Those can be as simple as with yes/no/abstain options, or you can add anything you desire. You can even choose to run a free poll where the user can vote on literally anything and it will be added as a new option! (<code>!poll</code>)</li>
                         <li>Run the best <b>events</b> in the universe with signups, checkin, keep track of score, etc... (<code>!event</code>)</li>
@@ -756,6 +757,23 @@
                     <tr>
                         <td>Parameters</td>
                         <td><code>@user</code> mention or ID (or multiple mentions)</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>tempChannel</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Creates a temporary voice channel. This channel will be destroyed when it becomes empty, with grace period of three minutes since it's creation. <i>(You can make it public using <code>!permissions</code>)</i></td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Name of the new channel.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
