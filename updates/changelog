@@ -1,5 +1,11 @@
 #Changelog
 
+**Botwinder 2.2** - 21st of May, 2017
+  * This is a simple update with mostly minor and invisible tweaks and fixes.
+  * `!tempChannel` - Creates a temporary voice channel. This channel will be destroyed when it becomes empty, with grace period of three minutes since it's creation. This command is under the SubModerator permission by default and you can make it public using `!permissions`. You can also use a `!tc` alias, or create your own using `!alias`.
+  * `!help` - We've replaced parameterless `help` with a simple reference to the web documentation as it would usually result in several messages worth of spam in PM.
+  * Oh and hey, we are always looking for Botwinder-experienced support people (start by being active and helping in our server) and Web Developer to help out with <https://github.com/RheaAyase/Botwinder.web/issues> =)
+
 **Botwinder 2.1** - 30th of April, 2017
   * This update was brought to you thanks to patreon-paid unpaid-time-off of Rhea's actual job.
   * `Code Verification` - You can now find a new option on the config page to switch between the old Reddit verification and the new Code verification. You can effectively force people to read your rules, which will be PMed to the user with a hidden code within the text. The user is asked to reply the bot with this code in order to get verified - to get the role assigned.
