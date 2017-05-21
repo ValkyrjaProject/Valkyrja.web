@@ -769,7 +769,7 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Creates a temporary voice channel. This channel will be destroyed when it becomes empty, with grace period of three minutes since it's creation. <i>(You can make it public using <code>!permissions</code>)</i></td>
+                        <td>Creates a temporary voice channel. This channel will be destroyed when it becomes empty, with grace period of three minutes since it's creation. <i>(You can make it public using <code>!permissions</code> or use a <code>!tc</code> alias)</i></td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
