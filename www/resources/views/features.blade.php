@@ -732,7 +732,7 @@
                         <td>Description</td>
                         <td>Temporarily mute mentioned members from both the chat and voice. This command has to be configured in the <a href="/config">configuration</a>.
                             <br />
-                            <b>It is important</b> that you understand how does the Muting system work:<br />
+                            <b>It is important</b> that you understand how the Muting system works:<br />
                             Regardless of how is the user muted, they get unmuted next time the bot restarts, this is to ensure that nobody is left hanging, because it is supposed to be a timed feature.
                             Now if someone leaves and then rejoins the server, they will be Muted again, and this time it is treated as an antispam mute, which means that the third one will get you banned. So cheating to get rid of the "mute" role is really bad idea and if the <i>victim</i> leaves and joins the server twice while they are muted, they get banned.
                         </td>
