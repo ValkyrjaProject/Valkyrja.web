@@ -1,5 +1,12 @@
 #Changelog
 
+**Botwinder 2.3** - 26th of May, 2017
+  * Minor update with some new features for events, and a bunch of fixes.
+  * `!event score+` & `!event score-` options added. These will relatively add or subtract score to/from mentioned users. (The original `score` keyword was setting absolute value.)
+  * `!help` now correctly handles all the things, including custom commands. Also fixed an issue caused by previous update where the regex parameter was not actually working right.
+  * `!meetings` system was fixed and tweaked, thanks to `/r/linux_gaming` guys taking the time to find those issues <3
+  * Oh and hey, we are always looking for Botwinder-experienced support people (start by being active and helping in our server) and Web Developer to help out with <https://github.com/RheaAyase/Botwinder.web/issues> =)
+
 **Botwinder 2.2** - 21st of May, 2017
   * This is a simple update with mostly minor and invisible tweaks and fixes.
   * `!tempChannel` - Creates a temporary voice channel. This channel will be destroyed when it becomes empty, with grace period of three minutes since it's creation. This command is under the SubModerator permission by default and you can make it public using `!permissions`. You can also use a `!tc` alias, or create your own using `!alias`.
@@ -115,3 +122,4 @@
   * Also giveaways will now display the number of participants when you end them.
 
 **Teh Website** is live, although it's without configuration for now. That will require a lot more work!
+
