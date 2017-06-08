@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:title" content="Botwinder Discord Bot - @yield('title')">
-    <meta property="og:description" content="Highly customizable Community Management bot, provides advanced moderation tools, role assignment, antispam, polls, giveaways, events, custom commands & aliases, scheduled messages & commands, and even livestream notifications or meeting management systems. Comes with cookies!">
+    <meta property="og:description" content="Highly customizable Community Management bot, provides advanced moderation tools, role assignment, temporary channels, antispam, user verification, polls, giveaways, events, custom commands & aliases, scheduled messages & commands, and even livestream notifications or meeting management systems. Comes with cookies!">
     <meta property="og:type" content="website">
     <meta property="og:image" content="http://botwinder.info/img/jefi-mirror.png">
     <meta property="og:url" content="{{ Request::path() }}">
