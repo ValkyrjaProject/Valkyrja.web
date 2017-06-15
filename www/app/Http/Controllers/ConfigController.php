@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Crypt;
+use Discord\OAuth\Parts\User;
 use Illuminate\Http\Response;
+use League\OAuth2\Client\Token\AccessToken;
 use Session;
 use Illuminate\Http\Request;
 use \Discord\OAuth\Discord;
@@ -21,67 +23,86 @@ class ConfigController extends Controller
      */
     private $relative_conf_folder = '../../config/';
 
-    /**
-    * Display login screen if not logged in, else show list of servers currently owner of
-    */
-    public function index(Request $request){
+    private $provider;
 
-        $provider = new Discord([
+    /**
+     * ConfigController constructor.
+     * @internal param string $relative_conf_folder
+     */
+    public function __construct()
+    {
+        $this->provider = new Discord([
             'clientId'     => config('discordoauth2.client_id'),
             'clientSecret' => config('discordoauth2.client_secret'),
-            'redirectUri'  => url('config')
+            'redirectUri'  => url('config/login')
+        ]);
+    }
+
+    public function login(Request $request)
+    {
+        // TODO: display login with discord page
+        // If code is not set
+        if ($request->hasCookie('access_token')) {
+            return redirect()->action('ConfigController@displayServers');
+        }
+        if (!isset($request['code'])) {
+            $authorizationUrl = $this->provider->getAuthorizationUrl(['scope' => ['identify', 'guilds']]);
+
+            // Get the state generated for you and store it to the session. CSRF protection
+            $request->session()->put('oauth2state', $this->provider->getState());
+            //$request->session()->save(); // Avoid at all costs here
+
+            return view('config', ['authorizationUrl' => $authorizationUrl]);
+        }
+        //CSRF protection
+        elseif ((empty($request['state']) || ($request['state'] !== $request->session()->get('oauth2state')))) {
+            $request->session()->forget('oauth2state');
+            abort(403, 'Unauthorized action. CSRF-Prevention');
+        }
+        $response = redirect();
+        try {
+            $access_token = $this->provider->getAccessToken('authorization_code', [
+                'code' => $request['code'],
+            ]);
+            $response = $response->action('ConfigController@displayServers')->cookie('access_token', encrypt($access_token))->with('messages', ['You are now logged in!']);
+            //$response = $response->action('ConfigController@login')->with('messages', ['msg', 'The Message']);
+        }
+        catch (DiscordRequestException $e) {
+            echo 'lol2';
+            $response = $response->action('ConfigController@login')->with('messages', 'There was an error logging you in, try again.');
+        }
+        return $response;
+    }
+
+    /**
+     * Display login screen if not logged in, else show list of servers currently owner of
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|Response|\Illuminate\View\View
+     */
+    public function displayServers(Request $request){
+
+        // TODO: Check if everything works as normal - add new pages and add middleware to get into here. Rename function and have login for index
+        // Get the user object.
+        /** @var AccessToken $access_token */
+        $access_token = decrypt($request->cookie('access_token'));
+
+        $access_token = $this->provider->getAccessToken('refresh_token', [
+            'refresh_token' => $access_token->getRefreshToken()
         ]);
 
-        // If they have previously authorized
-        // TODO: Change to middleware, if authorized and valid, proceed. Otherwise, given they have 'code' GET value, show 'config' view
-        if (!$request->hasCookie('access_token'))
-        {
-            $notAuthorized = $this->notAuthorized($request, $provider);
-            if ($notAuthorized !== null) {
-                return $notAuthorized;
-            }
-        }
-        // If they have authorized
-        if ($request->hasCookie('access_token') && Crypt::decrypt($request->cookie('access_token'))->hasExpired())
-        {
-            try {
-                $refresh_token = Crypt::decrypt($request->cookie('access_token'))->getRefreshToken();
-                $token = $provider->getAccessToken('refresh_token', [
-                    'refresh_token' => $refresh_token,
-                ]);
-            } catch (DiscordRequestException $e) {
-                Cookie::queue(
-                    Cookie::forget('access_token')
-                );
-                $notAuthorized = $this->notAuthorized($request, $provider);
-                if ($notAuthorized !== null) {
-                    return $notAuthorized;
-                }
-            }
-        }
-        else if($request->hasCookie('access_token'))
-        {
-          $token = Crypt::decrypt($request->cookie('access_token'));
-        }
-        else
-        {
-          $token = $provider->getAccessToken('authorization_code', [
-            'code' => $request['code'],
-          ]);
-        }
-        // Get the user object.
-        $user = $provider->getResourceOwner($token);
-        if($user->id == "") {
+        /** @var User $user */
+        $user = $this->provider->getResourceOwner($access_token);
+        if($user->getId() == "") {
             Cookie::queue(
                 Cookie::forget('access_token')
             );
-            $notAuthorized = $this->notAuthorized($request, $provider);
+            $notAuthorized = $this->notAuthorized($request, $this->provider);
             if ($notAuthorized !== null) {
                 return $notAuthorized;
             }
         }
         // Get the guilds.
-        $guilds = $user->guilds;
+        $guilds = $user->getGuildsAttribute();
         $guildsWithManageGuilds = [];
 
         foreach ($guilds as $guild) {
@@ -92,19 +113,12 @@ class ConfigController extends Controller
             }
         }
 
-        $request->session()->put('userId', Crypt::encrypt($user->id));
-        $request->session()->save();
+        //$request->session()->put('userId', Crypt::encrypt($user->id));
+        //$request->session()->save();
 
-        if($request->hasCookie('access_token'))
-        {
-            return view('config.display_servers', ['user' => $user, 'guilds' => $guildsWithManageGuilds]);
-        }
+        return view('config.display_servers', ['user' => $user, 'guilds' => $guildsWithManageGuilds]);
 
-        $response = new Response(view('config.display_servers', ['user' => $user, 'guilds' => $guildsWithManageGuilds]));
-        $response->withCookie(cookie()->forever('access_token', Crypt::encrypt($token)));
-
-
-        return $response;
+        //response()->headers->removeCookie(); Do this instead
     }
 
     private function notAuthorized(Request $request, Discord $provider)
@@ -128,11 +142,9 @@ class ConfigController extends Controller
     }
     public function logout(Request $request)
     {
-        Cookie::queue(
-            Cookie::forget('access_token')
-        );
-        $request->session()->regenerate();
-        return redirect('config');
+        $request->session()->forget('oauth2state');
+        return redirect()->action('ConfigController@login')->with('messages', ['You are now logged out.'])
+            ->withCookie(cookie()->forget('access_token'));
     }
     /**
     * Load and display config file to the client
