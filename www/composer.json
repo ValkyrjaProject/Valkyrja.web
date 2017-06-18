@@ -9,8 +9,7 @@
         "laravel/framework": "5.3.*",
         "andreasindal/laravel-markdown": "1.0",
         "restcord/restcord": "^0.1.4",
-        "team-reflex/oauth2-discord": "^1.0",
-        "jeremeamia/superclosure": "^2.3"
+        "team-reflex/oauth2-discord": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
