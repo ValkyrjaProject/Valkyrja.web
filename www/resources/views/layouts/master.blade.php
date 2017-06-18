@@ -36,7 +36,7 @@
         </nav>
     </header>
     <section class="main-body">
-        @if (session('messages'))
+        @if (session('messages') && is_array(session('messages')))
             <div class="container">
                 @foreach (session('messages') as $message)
                     <p class="alert alert-info">{{ $message }}</p>

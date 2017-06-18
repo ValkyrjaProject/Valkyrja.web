@@ -26,7 +26,8 @@ class AuthorizeDiscord
         ]);
 
         if (!$request->hasCookie('access_token')) {
-            return redirect()->action('ConfigController@login')->with('danger', 'Text here');
+            $request->session()->flush();
+            return redirect()->route('login')->withCookie(cookie()->forget('access_token'));
         }
 
         /** @var AccessToken $access_token */
@@ -35,10 +36,9 @@ class AuthorizeDiscord
             $access_token = $provider->getAccessToken('refresh_token', [
                 'refresh_token' => $access_token->getRefreshToken()
             ]);
-
             $response = $next($request);
             $response = $response instanceof Response ? $response : response($response);
-            return $response->cookie('access_token', $access_token);
+            return $response->cookie('access_token', encrypt($access_token));
         }
 
         return $next($request);
