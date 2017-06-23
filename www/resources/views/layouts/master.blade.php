@@ -10,6 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="http://botwinder.info/img/jefi-mirror.png">
     <meta property="og:url" content="{{ Request::path() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/app.css">
     <link href='https://fonts.googleapis.com/css?family=Alegreya+SC|Alegreya|Alegreya+Sans|Source+Code+Pro' rel='stylesheet' type='text/css'>
@@ -35,7 +36,7 @@
             </div>
         </nav>
     </header>
-    <section class="main-body">
+    <section id="app" class="main-body">
         @if (Session::has('messages'))
             <div class="container">
                 @foreach (Session::get('messages') as $message)
