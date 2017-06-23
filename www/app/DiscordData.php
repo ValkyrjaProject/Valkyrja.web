@@ -143,4 +143,11 @@ class DiscordData extends Model
         });
     }
 
+    /**
+     * Clear cache for servers
+     * @param $userId
+     */
+    public static function clearCache($userId) {
+        Cache::forget('user_'.$userId.'_guilds');
+    }
 }

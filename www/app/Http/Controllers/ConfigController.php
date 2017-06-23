@@ -101,6 +101,11 @@ class ConfigController extends Controller
 
     public function logout(Request $request, $message = '')
     {
+        if ($request->session()->has('userId')) {
+            $userId = $request->session()->get('userId');
+            DiscordData::clearCache($userId);
+        }
+
         $message = $message ? $message : 'You are now logged out.';
         $request->session()->flush();
         return redirect()->action('ConfigController@login')->with('messages', [$message])
