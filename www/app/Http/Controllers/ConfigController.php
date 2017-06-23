@@ -32,6 +32,7 @@ class ConfigController extends Controller
             'clientSecret' => config('discordoauth2.client_secret'),
             'redirectUri'  => url('config/login')
         ]);
+        ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
     }
 
     public function login(Request $request)
@@ -74,7 +75,6 @@ class ConfigController extends Controller
      */
     public function displayServers(Request $request){
 
-        // TODO: Check if everything works as normal - add new pages and add middleware to get into here. Rename function and have login for index
         // Get the user object.
         /** @var AccessToken $access_token */
         $access_token = decrypt($request->cookie('access_token'));
@@ -83,7 +83,14 @@ class ConfigController extends Controller
             'refresh_token' => $access_token->getRefreshToken()
         ]);
 
-        $discord_data = new DiscordData($this->provider, $access_token);
+        $userId = null;
+        if ($request->session()->has('userId')) $userId = $request->session()->get('userId');
+
+        $discord_data = new DiscordData($this->provider, $access_token, $userId);
+
+        $user = $discord_data->getUser();
+        $request->session()->put('userId', $user->getId());
+
         $guilds = $discord_data->getGuilds();
         if ($guilds->isEmpty()) {
             $request->session()->flash('messages', ['You do not control any servers! If you do, refresh or logout and login again.']);
@@ -128,8 +135,6 @@ class ConfigController extends Controller
             abort(403, "Unauthorized access");
         }
 
-        ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
-
         $configData = new ConfigData;
         $configData->updateConfigWithId($serverId);
 
@@ -159,8 +164,6 @@ class ConfigController extends Controller
         if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
         }
-        
-        ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
 
         $user_values = $request->all();
 

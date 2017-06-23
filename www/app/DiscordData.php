@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Exceptions\EmptyUserException;
+use Cache;
 use Discord\OAuth\Discord;
+use Discord\OAuth\Parts\Guild;
 use Discord\OAuth\Parts\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -21,7 +23,22 @@ class DiscordData extends Model
     /** @var AccessToken $access_token */
     private $access_token;
     const CONFIG_FOLDER = '../../config/';
-
+    protected $userFillable = [
+        'id',
+        'username',
+        'email',
+        'discriminator',
+        'avatar',
+        'verified',
+        'mfa_enabled',
+    ];
+    protected $guildFillable = [
+        'id',
+        'name',
+        'icon',
+        'owner',
+        'permissions',
+    ];
     /**
      * DiscordData constructor.
      * @param Discord $provider
@@ -43,7 +60,20 @@ class DiscordData extends Model
     public function getUser()
     {
         if (!isset($this->user)) {
+            if ($this->userId && Cache::has('user_'.$this->userId)) {
+                $user = Cache::get('user_'.$this->userId);
+                return $this->user = new User($this->provider, $this->access_token, $user);
+            }
+
             $this->user = $this->provider->getResourceOwner($this->access_token);
+            $this->userId = $this->user->getId();
+
+            $user = array();
+            foreach ($this->userFillable as $name) {
+                $user[$name] = $this->user->{$name};
+            }
+
+            Cache::add('user_'.$this->user->getId(), $user, 120);
             usleep(200000);
         }
         if ($this->user->getId() == "") {
@@ -61,11 +91,36 @@ class DiscordData extends Model
         }
         // Get the eligible guilds.
         if (!isset($this->guilds)) {
+            if (Cache::has('user_'.$this->userId.'_guilds')) {
+                $userGuilds = Cache::get('user_'.$this->userId.'_guilds');
+                $guilds = new Collection();
+                foreach ($userGuilds as $guild) {
+                    $guilds->push(
+                        $this->provider->buildPart(Guild::class, $this->access_token, $guild)
+                    );
+                }
+
+                return $this->guilds = collect($guilds)->filter(function ($guild) {
+                    return ($guild->owner || $guild->permissions & 40) && file_exists(self::CONFIG_FOLDER.$guild->id);
+                });
+            }
             $guilds = $this->user->getGuildsAttribute();
-            usleep(200000);
+
             $this->guilds = collect($guilds)->filter(function ($guild) {
                 return ($guild->owner || $guild->permissions & 40) && file_exists(self::CONFIG_FOLDER.$guild->id);
             });
+
+            $guildsArray = array();
+            foreach ($this->guilds as $guild) {
+                $guildArray = array();
+                foreach ($this->guildFillable as $name) {
+                    $guildArray[$name] = $guild->{$name};
+                }
+                array_push($guildsArray, $guildArray);
+            }
+
+            Cache::add('user_'.$this->userId.'_guilds', $guildsArray, 15);
+            usleep(200000);
         }
         return $this->guilds;
     }
