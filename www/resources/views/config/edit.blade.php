@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
 	<div class="col-xs-12">
-		<form action="{{ url('config/save') }}" method="post">
+		<form action="{{ url('config/save/'.$serverId) }}" method="post">
 			<h1 class="col-md-8">Configure Botwinder</h1>
 			<span class="col-md-4">
 				<input class="btn btn-primary float-right" type="submit" value="Save"><br />
@@ -451,8 +451,6 @@
 				</p><br />
 			</div>
 
-			<input type="hidden" name="userId" value="{{ $userId }}">
-			<input type="hidden" name="serverId" value="{{ $serverId }}">
 			{{ csrf_field() }}
 			<input class="btn btn-primary" type="submit" value="Save">
 		</form>

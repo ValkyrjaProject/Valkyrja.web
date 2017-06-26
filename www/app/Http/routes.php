@@ -11,6 +11,15 @@
 |
 */
 
+
+
+Route::get('/callback', 'TestController@index');
+Route::group(['middleware' => ['authorizeDiscord']], function () {
+    Route::get('/config', 'ConfigController@displayServers')->name('displayServers');
+    Route::get('/config/edit/{serverId}', 'ConfigController@displayConfig')->name('editConfig');
+    Route::post('/config/save/{serverId}', 'ConfigController@saveConfig');
+});
+Route::get('/meetings/{channelID}/{meetingName}', 'MeetingsController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/docs', 'FeaturesController@index');
 Route::get('/features', 'FeaturesController@index');
@@ -19,14 +28,7 @@ Route::get('/contribute', 'ContributeController@index');
 Route::get('/help', 'HelpController@index');
 Route::get('/team', 'TeamController@index');
 Route::get('/invite', 'InviteController@index');
-
-Route::get('/callback', 'TestController@index');
-Route::get('/config', 'ConfigController@index');
-Route::get('/meetings/{channelID}/{meetingName}', 'MeetingsController@index');
-Route::group(['middleware' => ['web']], function () {
-	Route::post('/config/save', 'ConfigController@saveConfig');
-	Route::post('/config/edit', 'ConfigController@displayConfig');
-	Route::get('/config/edit', 'ConfigController@displayConfig');
-	Route::get('/config/logout', 'ConfigController@logout');
-    Route::any('/meetings/{channelID}/{meetingName}/meeting', 'MeetingsController@getMeeting');
-});
+Route::get('/config/login', 'ConfigController@login')->name('login');
+Route::post('/config/edit', 'ConfigController@redirectConfig');
+Route::get('/config/logout', 'ConfigController@logout')->name('logout');;
+Route::any('/meetings/{channelID}/{meetingName}/meeting', 'MeetingsController@getMeeting');

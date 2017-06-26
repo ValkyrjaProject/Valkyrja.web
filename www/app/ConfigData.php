@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Storage;
 
@@ -13,6 +14,7 @@ class ConfigData extends Model
 {
     public $defaultConfig = [];
     public $rawConfig = [];
+    private $config_folder = '../../config/';
 
     function __construct()
     {
@@ -27,6 +29,19 @@ class ConfigData extends Model
     public function getDefaultConfig()
     {
         return $this->defaultConfig;
+    }
+
+    public function updateConfigWithId($serverId)
+    {
+        $file_dir = $this->config_folder.$serverId.'/config.json';
+        if (!file_exists($file_dir))
+        {
+            throw new FileNotFoundException(); //TODO: Create own exception?
+        }
+
+        // Get the config
+        $server = json_decode(file_get_contents($file_dir), true);
+        return $this->updateConfig($server);
     }
     public function updateConfig($config)
     {
