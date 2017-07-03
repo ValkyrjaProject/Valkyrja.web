@@ -88,15 +88,15 @@ class ConfigController extends Controller
 
         $discord_data = new DiscordData($this->provider, $access_token, $userId);
 
-        $user = $discord_data->getUser();
+        $user = $discord_data->getCurrentUser();
         $request->session()->put('userId', $user->getId());
 
-        $guilds = $discord_data->getGuilds();
+        $guilds = $discord_data->getUserGuilds();
         if ($guilds->isEmpty()) {
             $request->session()->flash('messages', ['You do not control any servers! If you do, refresh or logout and login again.']);
         }
 
-        return view('config.display_servers', ['user' => $discord_data->getUser(), 'guilds' => $guilds]);
+        return view('config.display_servers', ['user' => $discord_data->getCurrentUser(), 'guilds' => $guilds]);
     }
 
     public function logout(Request $request, $message = '')
@@ -123,10 +123,11 @@ class ConfigController extends Controller
     /**
      * Load and display config file to the client
      * @param Request $request
+     * @param ConfigData $configData
      * @param $serverId
      * @return Controller|\Illuminate\Http\RedirectResponse
      */
-    public function displayConfig(Request $request, $serverId)
+    public function displayConfig(Request $request, ConfigData $configData, $serverId)
     {
         /** @var AccessToken $access_token */
         $access_token = decrypt($request->cookie('access_token'));
@@ -134,18 +135,18 @@ class ConfigController extends Controller
             'refresh_token' => $access_token->getRefreshToken()
         ]);
 
-        $discord_data = new DiscordData($this->provider, $access_token);
+        $discord_data = new DiscordData($this->provider, $access_token, $serverId);
 
         if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
         }
 
-        $configData = new ConfigData;
         $configData->updateConfigWithId($serverId);
 
         return view('config.edit', [
             'configData' => $configData->getConfigValues(),
-            'serverId' => $serverId
+            'serverId' => $serverId,
+            'discordData' => $configData->filterGuildRoles($discord_data->getGuildRoles())
         ]);
     }
 
@@ -153,10 +154,11 @@ class ConfigController extends Controller
     /**
      * Receive config settings from client and save to file (TODO: Use ConfigDataValidation)
      * @param Request $request
+     * @param ConfigData $configData
      * @param $serverId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveConfig(Request $request, $serverId)
+    public function saveConfig(Request $request, ConfigData $configData, $serverId)
     {
         /** @var AccessToken $access_token */
         $access_token = decrypt($request->cookie('access_token'));
@@ -172,16 +174,11 @@ class ConfigController extends Controller
 
         $user_values = $request->all();
 
-        $configData = new ConfigData;
-
         // Change values to array and set as null if no values exist
         foreach ($configData->getConfigValues() as $key => $value) {
-            if ($value[1] == 'list' && isset($user_values[$key]) && $user_values[$key]) {
-                $user_values[$key] = explode("\n", $user_values[$key]);
-                if (is_array($user_values[$key])) {
-                    foreach ($user_values[$key] as $index => $user_value) {
-                        $user_values[$key][$index] = (int)$user_value;
-                    }
+            if ($value[1] == 'list' && isset($user_values[$key]) && is_array($user_values[$key]) && $user_values[$key]) {
+                foreach ($user_values[$key] as $index => $user_value) {
+                    $user_values[$key][$index] = (int)$user_value;
                 }
             }
             elseif ($value[1] == 'list' && isset($user_values[$key]) && !$user_values[$key]) {
@@ -199,21 +196,8 @@ class ConfigController extends Controller
             }
         }
 
-        $configData->updateConfig($user_values);
+        $configData->saveConfig($user_values, $serverId);
 
-        $server = json_decode(file_get_contents($this->relative_conf_folder.$serverId.'/config.json'), true);
-        $rawConfigValues = $configData->getRawConfigValues();
-
-        foreach ($configData->getRawConfigValues() as $key => $value) {
-            $server[$key] = $rawConfigValues[$key];
-        }
-
-        $file = fopen($this->relative_conf_folder.$serverId.'/config.json', 'w');
-
-        $json_indented_by_4 = json_encode($server, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
-        $json_indented_by_2 = preg_replace('/^(  +?)\\1(?=[^ ])/m', '$1', $json_indented_by_4);
-        fwrite($file, $json_indented_by_2);
-        fclose($file);
 
         return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
     }

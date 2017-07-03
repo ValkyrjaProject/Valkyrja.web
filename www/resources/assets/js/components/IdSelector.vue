@@ -2,7 +2,12 @@
     <div class="idSelector">
         <div class="listContainer">
             <h2>Available {{idType}}</h2>
-            <input class="form-control" type="text" v-model="queryAvailable">
+            <div class="input-group">
+                <input class="form-control" type="text" v-model="queryAvailable" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" @click="queryAvailable = ''">x</button>
+                </span>
+            </div>
             <div class="dragArea selectList">
                 <div v-for="item in filterAvailable" class="listItem" @click="add(item)">
                     {{item.name}}
@@ -13,7 +18,12 @@
         </div>
         <div class="listContainer">
             <h2>Selected {{idType}}</h2>
-            <input class="form-control" type="text" v-model="querySelected">
+            <div class="input-group">
+                <input class="form-control" type="text" v-model="querySelected" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" @click="querySelected = ''">x</button>
+                </span>
+            </div>
             <div class="dragArea selectList">
                 <div v-for="item in filterSelected" class="listItem" @click="remove(item)">
                     {{item.name}}
@@ -30,12 +40,8 @@
 
     export default {
         props: {
-            initTypeAvailable: {
-                type: Array,
-                required: false
-            },
-            initTypeSelected: {
-                type: Array,
+            initData: {
+                type: Object,
                 required: false
             },
             initFormName: {
@@ -49,8 +55,8 @@
         },
         data: function () {
             return {
-                typeAvailable: this.initTypeAvailable,
-                typeSelected: this.initTypeSelected,
+                typeAvailable: this.initData['available'] || [],
+                typeSelected: this.initData['selected'] || [],
                 inputName: this.initFormName,
                 idType: this.initIdType,
                 queryAvailable: '',
@@ -62,9 +68,11 @@
                 return this.inputName + '[]';
             },
             filterAvailable: function () {
+                if (this.typeAvailable.length < 1) return [];
                 return this.findBy(this.typeAvailable, this.queryAvailable, 'name')
             },
             filterSelected: function () {
+                if (this.typeSelected.length < 1) return [];
                 return this.findBy(this.typeSelected, this.querySelected, 'name')
             }
         },

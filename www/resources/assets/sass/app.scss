@@ -515,9 +515,16 @@ img {
     }
     &.empty {
       opacity: 0.75;
+      border: none;
       font-style: italic;
       cursor: default;
+      background-color: transparent;
+      &:hover, &:active {
+        background-color: transparent;
+      }
     }
   }
-
+}
+.input-group {
+  border-spacing: 0;
 }

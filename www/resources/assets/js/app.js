@@ -1,11 +1,24 @@
-import Sticky from './sticky'
 import Vue from 'vue'
+import Sticky from './sticky'
 import IdSelector from './components/IdSelector.vue'
+import TextField from './components/TextField.vue'
 
-new Vue({
+
+let vm = new Vue({
     el:'#app',
+    data: function () {
+        return {
+            CommandCharacter: ''
+        }
+    },
     components:{
-        IdSelector
+        IdSelector,
+        TextField
+    },
+    methods: {
+        updateCC: function (value) {
+            this.CommandCharacter = value
+        }
     }
 });
 
