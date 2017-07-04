@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "smooth-scroll": "^11.1.0",
-    "vue": "^2.3.4"
+    "vue": "^2.3.4",
+    "vue-select": "github:sagalbot/vue-select"
   }
 }

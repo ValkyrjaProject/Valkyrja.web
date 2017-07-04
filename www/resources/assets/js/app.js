@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Sticky from './sticky'
 import IdSelector from './components/IdSelector.vue'
 import TextField from './components/TextField.vue'
+import TypeSelector from './components/TypeSelector.vue'
+import CustomInputList from './components/CustomInputList.vue'
 
-
-let vm = new Vue({
+new Vue({
     el:'#app',
     data: function () {
         return {
@@ -13,7 +14,9 @@ let vm = new Vue({
     },
     components:{
         IdSelector,
-        TextField
+        TextField,
+        TypeSelector,
+        CustomInputList
     },
     methods: {
         updateCC: function (value) {

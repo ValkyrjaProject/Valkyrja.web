@@ -43,7 +43,13 @@ class DiscordData extends Model
         'permissions',
     ];
     private $serverId;
+    /**
+     * @var Collection $serverRoles
+     */
     private $serverRoles;
+    /**
+     * @var Collection $serverChannels
+     */
     private $serverChannels;
 
     /**
@@ -155,7 +161,7 @@ class DiscordData extends Model
     }
 
     /**
-     * @return mixed
+     * @return Collection
      * @throws EmptyPropertyException
      */
     public function getGuildChannels() {
@@ -165,13 +171,13 @@ class DiscordData extends Model
             if (Cache::has('server_'.$this->serverId.'_channels')) {
                 return $this->serverChannels = Cache::get('server_'.$this->serverId.'_channels');
             }
-            $serverChannels = collect($this->discord->guild->getGuildChannels([$this->serverId]));
-
-            foreach ($serverChannels as $serverChannel) {
+            $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
+            $serverChannels = collect();
+            foreach ($rawServerChannels as $serverChannel) {
                 if ($serverChannel['type'] === 'text') {
                     $tempArray = [];
                     $tempArray['id'] = $serverChannel['id'];
-                    $tempArray['name'] = $serverChannel['name'];
+                    $tempArray['name'] = '#'.$serverChannel['name'];
 
                     $serverChannels->push($tempArray);
                 }
@@ -179,11 +185,11 @@ class DiscordData extends Model
             $this->serverChannels = $serverChannels;
             Cache::add('server_'.$this->serverId.'_channels', $this->serverChannels, 30);
         }
-        return $this->serverRoles;
+        return $this->serverChannels;
     }
 
     /**
-     * @return Collection|mixed
+     * @return Collection
      * @throws EmptyPropertyException
      */
     public function getGuildRoles() {

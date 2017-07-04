@@ -9,4 +9,7 @@ if (is_array($data)) {
         echo $id."\n";
     }
 }
+else {
+    echo $data;
+}
 ?></textarea>

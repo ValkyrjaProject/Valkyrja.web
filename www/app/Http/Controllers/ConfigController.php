@@ -37,7 +37,6 @@ class ConfigController extends Controller
 
     public function login(Request $request)
     {
-        // TODO: display login with discord page
         // If code is not set
         if ($request->hasCookie('access_token')) {
             return redirect()->action('ConfigController@displayServers');
@@ -143,10 +142,22 @@ class ConfigController extends Controller
 
         $configData->updateConfigWithId($serverId);
 
+        $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
+        $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$guildChannels) {
+            return ! $guildChannels->has($key);
+        });
+
+        $configData->filterGuildRoles($guildRoles);
+        $configData->filterGuildChannels($guildChannels);
+
         return view('config.edit', [
             'configData' => $configData->getConfigValues(),
             'serverId' => $serverId,
-            'discordData' => $configData->filterGuildRoles($discord_data->getGuildRoles())
+            'discordData' => $configData->getDiscordData(),
+            'guild' => [
+                'roles' => $guildRoles,
+                'channels' => $guildChannels
+            ]
         ]);
     }
 
@@ -174,6 +185,7 @@ class ConfigController extends Controller
 
         $user_values = $request->all();
 
+        // TODO: Remove temporary solution below. This should be fixed by ConfigDataValidation instead once implemented.
         // Change values to array and set as null if no values exist
         foreach ($configData->getConfigValues() as $key => $value) {
             if ($value[1] == 'list' && isset($user_values[$key]) && is_array($user_values[$key]) && $user_values[$key]) {
@@ -187,7 +199,6 @@ class ConfigController extends Controller
             elseif ($value[1] == 'int32' && isset($user_values[$key])) {
                 $user_values[$key] = ((int)$user_values[$key]) & 0x7FFFFFFF;
             }
-            // TODO: Remove temporary solution below. This should be fixed by ConfigDataValidation instead once implemented.
             elseif ($value[1] == 'int' && isset($user_values[$key])) {
                 $user_values[$key] = (int)$user_values[$key];
             }

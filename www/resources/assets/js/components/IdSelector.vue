@@ -25,6 +25,7 @@
                 </span>
             </div>
             <div class="dragArea selectList">
+                <input type="hidden" :name="inputName" value="">
                 <div v-for="item in filterSelected" class="listItem" @click="remove(item)">
                     {{item.name}}
                     <input type="hidden" :name="formInputName" :value="item.id">

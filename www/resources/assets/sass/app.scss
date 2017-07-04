@@ -463,7 +463,7 @@ img {
 //  }
 //}
 
-.idSelector {
+.idSelector, .inputList {
   display: table;
   background: #d3eaff;
   border: 1px solid #c0d5e9;
@@ -527,4 +527,17 @@ img {
 }
 .input-group {
   border-spacing: 0;
+}
+.inline {
+  display: inline-block;
+}
+.v-select {
+  .dropdown-toggle {
+    background-color: white !important;
+    border: 1px solid #a7bfd9 !important;
+  }
+  .selected-tag {
+    background-color: #e4f8ff !important;
+    border: 1px solid #d0e2e9 !important;
+  }
 }

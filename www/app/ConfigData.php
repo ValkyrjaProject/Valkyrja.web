@@ -158,7 +158,7 @@ class ConfigData extends Model
      */
     private function filterRoleData(Collection $serverRoles, $name) {
         if (!isset($this->defaultConfig[$name][0])) {
-            return ["available" => $serverRoles];
+            return ["available" => array_values($serverRoles->all())];
         }
         elseif (!is_array($this->defaultConfig[$name][0])) {
             $roles = $serverRoles->partition(function ($row) use (&$name) {
@@ -179,4 +179,59 @@ class ConfigData extends Model
 
         return $roles;
     }
+
+    /**
+     * Filters through list of roles and puts them in available/selected list
+     * @param Collection $serverChannels
+     * @return array
+     */
+    public function filterGuildChannels(Collection $serverChannels)
+    {
+        $channelTypes = [
+            "ModChannelIgnore"
+        ];
+        foreach ($channelTypes as $channel) {
+            $this->discordData[$channel] = $this->filterChannelData($serverChannels, $channel);
+        }
+        return $this->discordData;
+    }
+
+    /**
+     * Filters through roles and puts them in their respective available/selected list
+     * @param Collection $serverChannels
+     * @param $name
+     * @return array|Collection
+     */
+    private function filterChannelData(Collection $serverChannels, $name) {
+        if (!isset($this->defaultConfig[$name][0])) {
+            return ["available" => array_values($serverChannels->all())];
+        }
+        elseif (!is_array($this->defaultConfig[$name][0])) {
+            $channels = $serverChannels->partition(function ($row) use (&$name) {
+                return $row['id'] == $this->defaultConfig[$name][0];
+            });
+        }
+        else
+        {
+            $channels = $serverChannels->partition(function ($row) use (&$name) {
+                return in_array($row['id'], $this->defaultConfig[$name][0]);
+            });
+        }
+
+        $channels["selected"] = array_values($channels->get(0)->all());
+        unset($channels[0]);
+        $channels["available"] = array_values($channels->get(1)->all());
+        unset($channels[1]);
+
+        return $channels;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDiscordData(): array
+    {
+        return $this->discordData;
+    }
+
 }

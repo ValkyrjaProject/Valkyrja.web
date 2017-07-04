@@ -24,13 +24,13 @@
             <div id="collapsingNavbar" class="collapse navbar-toggleable-sm">
                 <ul class="nav navbar-nav">
                     <li class="nav-item"><a class="nav-link {{ Request::path() == '/' ? "active" : "" }}" href="/"><img class="media hidden-sm-down" src="/img/jefi-small.png" alt="Home" /><br class="hidden-sm-down" />Home</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('docs') }}" href="/docs"><img class="media hidden-sm-down" src="/img/book.png" alt="Docs" /><br class="hidden-sm-down" />Docs</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('config') }}" href="/config"><img class="media hidden-sm-down" src="/img/wrench.png" alt="Config" /><br class="hidden-sm-down" />Config</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('invite') }}" href="/invite"><img class="media hidden-sm-down" src="/img/rocket.png" alt="Invite" /><br class="hidden-sm-down" />Invite</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('updates') }}" href="/updates"><img class="media hidden-sm-down" src="/img/updates.png" alt="Updates" /><br class="hidden-sm-down" />Updates</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('help') }}" href="/help"><img class="media hidden-sm-down" src="/img/discord-small.png" alt="Help" /><br class="hidden-sm-down" />Help</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('docs') }}" href="{{ url('docs') }}"><img class="media hidden-sm-down" src="/img/book.png" alt="Docs" /><br class="hidden-sm-down" />Docs</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('config') }}" href="{{ url('config') }}"><img class="media hidden-sm-down" src="/img/wrench.png" alt="Config" /><br class="hidden-sm-down" />Config</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('invite') }}" href="{{ url('invite') }}"><img class="media hidden-sm-down" src="/img/rocket.png" alt="Invite" /><br class="hidden-sm-down" />Invite</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('updates') }}" href="{{ url('updates') }}"><img class="media hidden-sm-down" src="/img/updates.png" alt="Updates" /><br class="hidden-sm-down" />Updates</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('help') }}" href="{{ url('help') }}"><img class="media hidden-sm-down" src="/img/discord-small.png" alt="Help" /><br class="hidden-sm-down" />Help</a></li>
                     <li class="nav-item"><a class="nav-link external" href="//status.botwinder.info"><img class="media hidden-sm-down" src="/img/satellite.png" alt="Status" /><br class="hidden-sm-down" />Status</a></li>
-                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('team') }}" href="/team"><img class="media hidden-sm-down" src="/img/heart.png" alt="The Team" /><br class="hidden-sm-down" />The&nbsp;Team</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Helper::setActive('team') }}" href="{{ url('team') }}"><img class="media hidden-sm-down" src="/img/heart.png" alt="The Team" /><br class="hidden-sm-down" />The&nbsp;Team</a></li>
                     {{-- <li class="nav-item"><a class="nav-link {{ Helper::setActive('contribute') }}" href="/contribute"><img class="media hidden-sm-down" src="/img/cookie.png" alt="Contribute" /><br class="hidden-sm-down" />Contribute</a></li> --}}
                 </ul>
             </div>
