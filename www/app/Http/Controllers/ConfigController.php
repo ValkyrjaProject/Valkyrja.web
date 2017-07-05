@@ -193,7 +193,7 @@ class ConfigController extends Controller
                     $user_values[$key][$index] = (int)$user_value;
                 }
             }
-            elseif ($value[1] == 'list' && isset($user_values[$key]) && !$user_values[$key]) {
+            elseif ($value[1] == 'list' && isset($user_values[$key])) {
                 $user_values[$key] = NULL;
             }
             elseif ($value[1] == 'int32' && isset($user_values[$key])) {
@@ -202,7 +202,8 @@ class ConfigController extends Controller
             elseif ($value[1] == 'int' && isset($user_values[$key])) {
                 $user_values[$key] = (int)$user_values[$key];
             }
-            elseif ($value[1] == 'char' && strlen($user_values[$key]) == 0) {
+            // Set to default value if it's empty
+            elseif ($key == 'CommandCharacter' && strlen($user_values[$key]) == 0) {
                 $user_values[$key] = (String)$configData->getConfigValues()['CommandCharacter'][0];
             }
         }

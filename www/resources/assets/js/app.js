@@ -9,7 +9,7 @@ new Vue({
     el:'#app',
     data: function () {
         return {
-            CommandCharacter: ''
+            CommandCharacter: '!'
         }
     },
     components:{
