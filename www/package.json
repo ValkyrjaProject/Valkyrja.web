@@ -5,8 +5,14 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
+    "bootstrap-sass": "^3.0.0",
     "gulp": "^3.9.1",
-    "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "laravel-elixir": "^6.0.0-15",
+    "laravel-elixir-vue-2": "^0.3.0"
+  },
+  "dependencies": {
+    "smooth-scroll": "^11.1.0",
+    "vue": "^2.3.4",
+    "vue-select": "github:sagalbot/vue-select"
   }
 }

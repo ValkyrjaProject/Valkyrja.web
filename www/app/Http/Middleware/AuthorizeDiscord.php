@@ -18,7 +18,6 @@ class AuthorizeDiscord
      */
     public function handle($request, Closure $next)
     {
-        // TODO: Check if valid Discord token.
         $provider = new Discord([
             'clientId'     => config('discordoauth2.client_id'),
             'clientSecret' => config('discordoauth2.client_secret'),
@@ -29,7 +28,6 @@ class AuthorizeDiscord
             $request->session()->flush();
             return redirect()->route('login')->withCookie(cookie()->forget('access_token'));
         }
-
         /** @var AccessToken $access_token */
         $access_token = decrypt($request->cookie('access_token'));
         if ($access_token->hasExpired()) {

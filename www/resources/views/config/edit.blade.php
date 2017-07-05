@@ -25,7 +25,7 @@
 				</p>
 				<p>
 					<b>Command Prefix</b>
-					@include("config.types.text", ['key' => "CommandCharacter", 'data' => $configData["CommandCharacter"][0]]) (You can actually use any string or sentence...)
+                    <text-field init-id="CommandCharacter" init-name="CommandCharacter" init-value="{{ $configData["CommandCharacter"][0] }}" v-on:input-event="updateCC"></text-field>
 				</p>
 				<p>
 					@include("config.types.bool", ['key' => "ExecuteCommandsOnEditedMessages", 'data' => $configData["ExecuteCommandsOnEditedMessages"][0]])
@@ -55,7 +55,7 @@
 					<i>Antispam will not even try to do anything if the bot does not have <code>ManageMessages</code> & <code>Ban</code> permissions.</i>
 				</p>
 				<p>
-					Remember that you can <code>{{ $configData["CommandCharacter"][0] }}permit @people</code> to allow anyone mentioned to post a single link or anything else in this section, for three minutes.
+					Remember that you can <code>@{{ CommandCharacter }}permit @people</code> to allow anyone mentioned to post a single link or anything else in this section, for three minutes.
 				</p>
 				<p>
 					<b>Prioritize Antispam</b>
@@ -185,64 +185,64 @@
 				Moderation
 			</button>
 			<div class="form-inline form-group collapse" id="configModeration"><br />
-				Some of the options in this section are <b>lists of RoleIDs</b>, in order to add another, simply throw them on separate lines. Use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get <b>role ID</b>. <i>(These lists are work in progress, it will be a cute search box to add a new role in the future.)</i>
+				Some of the options in this section are <b>lists of RoleIDs</b>, in order to add another, simply throw them on separate lines. Use <code>@{{ CommandCharacter }}getRole name</code> to get <b>role ID</b>. <i>(These lists are work in progress, it will be a cute search box to add a new role in the future.)</i>
 				<br /><br />
 				<p>
 					<b>Administrator roles</b>
 					<br />
 					Roles that will have Administrator permissions - refer to the documentation to see what an Admin can do.
 					<br />
-					@include("config.types.list", ['key' => "RoleIDsAdmin", 'data' => $configData["RoleIDsAdmin"][0]])
+                    <id-selector :init-data='{{ json_encode($discordData['RoleIDsAdmin']) }}' init-form-name="RoleIDsAdmin" init-id-type="Roles"></id-selector>
 				</p>
 				<p>
 					<b>Moderator roles</b>
 					<br />
 					Roles that will have Moderator permissions - refer to the documentation to see what a Moderator can do.
 					<br />
-					@include("config.types.list", ['key' => "RoleIDsModerator", 'data' => $configData["RoleIDsModerator"][0]])
+                    <id-selector :init-data='{{ json_encode($discordData['RoleIDsModerator']) }}' init-form-name="RoleIDsModerator" init-id-type="Roles"></id-selector>
 				</p>
 				<p>
 					<b>SubModerator roles</b>
 					<br />
 					Roles that will have SubModerator permissions - refer to the documentation to see what a SubModerator can do.
 					<br />
-					@include("config.types.list", ['key' => "RoleIDsSubModerator", 'data' => $configData["RoleIDsSubModerator"][0]])
+                    <id-selector :init-data='{{ json_encode($discordData['RoleIDsSubModerator']) }}' init-form-name="RoleIDsSubModerator" init-id-type="Roles"></id-selector>
 				</p>
 				<p>
 					<b>Member roles</b>
 					<br />
-					Moderators will be able to <code>{{ $configData["CommandCharacter"][0] }}promote</code> and <code>{{ $configData["CommandCharacter"][0] }}demote</code> people into these Member roles.
+					Moderators will be able to <code>@{{ CommandCharacter }}promote</code> and <code>@{{ CommandCharacter }}demote</code> people into these Member roles.
 					<br />
-					@include("config.types.list", ['key' => "RoleIDsMember", 'data' => $configData["RoleIDsMember"][0]])
+                    <id-selector :init-data='{{ json_encode($discordData['RoleIDsMember']) }}' init-form-name="RoleIDsMember" init-id-type="Roles"></id-selector>
 				</p>
 				<p>
 					@include("config.types.bool", ['key' => "RemovePromote", 'data' => $configData["RemovePromote"][0]])
-					Remove all uses of <code>{{ $configData["CommandCharacter"][0] }}promote</code>/<code>{{ $configData["CommandCharacter"][0] }}demote</code> commands from the chat.
+					Remove all uses of <code>@{{ CommandCharacter }}promote</code>/<code>@{{ CommandCharacter }}demote</code> commands from the chat.
 				</p>
 				<p>
 					<b>Public roles</b>
 					<br />
-					These roles are public, and anyone can <code>{{ $configData["CommandCharacter"][0] }}join</code> or <code>{{ $configData["CommandCharacter"][0] }}leave</code> them.
+					These roles are public, and anyone can <code>@{{ CommandCharacter }}join</code> or <code>@{{ CommandCharacter }}leave</code> them.
 					<br />
-					@include("config.types.list", ['key' => "PublicRoleIDs", 'data' => $configData["PublicRoleIDs"][0]])
+                    <id-selector :init-data='{{ json_encode($discordData['PublicRoleIDs']) }}' init-form-name="PublicRoleIDs" init-id-type="Roles"></id-selector>
 				</p>
 				<p>
 					@include("config.types.bool", ['key' => "RemoveJoin", 'data' => $configData["RemoveJoin"][0]])
-					Remove all uses of <code>{{ $configData["CommandCharacter"][0] }}join</code>/<code>{{ $configData["CommandCharacter"][0] }}leave</code> commands from the chat.
+					Remove all uses of <code>@{{ CommandCharacter }}join</code>/<code>@{{ CommandCharacter }}leave</code> commands from the chat.
 				</p>
 				<p>
 					<b>!op</b>
 					<br />
-					This feature will act like Operators known from IRC. If configured, it will disable the use of ban/kick/mute commands unless <i>you</i> are <code>{{ $configData["CommandCharacter"][0] }}op</code>-ed (you can still use quickban, if configured, because it's quick!) This helps making it clear to the user, that <i>you</i> are now a acting as a moderator and you are not just joking around. Set the Operator role below to enable it, or use <code>0</code> (zero) to disable.
+					This feature will act like Operators known from IRC. If configured, it will disable the use of ban/kick/mute commands unless <i>you</i> are <code>@{{ CommandCharacter }}op</code>-ed (you can still use quickban, if configured, because it's quick!) This helps making it clear to the user, that <i>you</i> are now a acting as a moderator and you are not just joking around. Set the Operator role below to enable it, or use <code>0</code> (zero) to disable.
 					<br /><br />
-					<b>Operator</b> role (<b>Role ID</b> - use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get it.) Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
+					<b>Operator</b> role (<b>Role ID</b> - use <code>@{{ CommandCharacter }}getRole name</code> to get it.) Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
 					<br />
-					@include("config.types.int", ['key' => "RoleIDOperator", 'data' => $configData["RoleIDOperator"][0]])
+                    <type-selector init-id-type="RoleIDOperator" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["RoleIDOperator"][0])) }}' :init-values='{{ json_encode($guild['roles']->all()) }}'></type-selector>
 				</p>
 				<p>
 					<b>Quickban</b>
 					<br />
-					Should you wish to use the <code>{{ $configData["CommandCharacter"][0] }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>{{ $configData["CommandCharacter"][0] }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
+					Should you wish to use the <code>@{{ CommandCharacter }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>@{{ CommandCharacter }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
 					<br />
 					@include("config.types.multi-line-text", ['key' => "QuickbanReason", 'data' => $configData["QuickbanReason"][0]])
 					<br /><br />
@@ -253,17 +253,17 @@
 				<p>
 					<b>Mute</b>
 					<br />
-					Duration of the <code>{{ $configData["CommandCharacter"][0] }}mute @user</code> and <code>{{ $configData["CommandCharacter"][0] }}muteChannel</code> commands (This is hard-capped between 5 and 60 minutes.)
+					Duration of the <code>@{{ CommandCharacter }}mute @user</code> and <code>@{{ CommandCharacter }}muteChannel</code> commands (This is hard-capped between 5 and 60 minutes.)
 					<br />
 					@include("config.types.int", ['key' => "MuteDuration", 'data' => $configData["MuteDuration"][0]]) (minutes)
 					<br /><br />
-					<code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels. (<b>Role ID</b> - use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get it.)
+					<code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels. (<b>Role ID</b> - use <code>@{{ CommandCharacter }}getRole name</code> to get it.)
 					<br />
-					@include("config.types.int", ['key' => "MuteRole", 'data' => $configData["MuteRole"][0]])
+					<type-selector init-id-type="MuteRole" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["MuteRole"][0])) }}' :init-values='{{ json_encode($guild['roles']->all()) }}'></type-selector>
 					<br /><br />
 					The above role will not be configured in the following channel, allowing you to talk to muted people in it. (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
 					<br />
-					@include("config.types.int", ['key' => "MuteIgnoreChannel", 'data' => $configData["MuteIgnoreChannel"][0]])
+                    <type-selector init-id-type="MuteIgnoreChannel" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["MuteIgnoreChannel"][0])) }}' :init-values='{{ json_encode($guild['channels']->all()) }}'></type-selector>
 					<br />
                     Example usage of this <i>chill-zone</i> channel: <a href="/img/mute.gif" target="_blank">gif</a> which can be configured with <a href="/img/mute-permissions.gif" target="_blank">these permissions</a>.
                     <br /><br />
@@ -293,11 +293,11 @@
 					@include("config.types.bool", ['key' => "ModChannelLogBans", 'data' => $configData["ModChannelLogBans"][0]])
 					Log banned and kicked users into the following channel, if you don't set one, the other below mentioned channel will be used. (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
 					<br />
-					@include("config.types.int", ['key' => "ModChannelBans", 'data' => $configData["ModChannelBans"][0]])
+                    <type-selector init-id-type="ModChannelBans" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["ModChannelBans"][0])) }}' :init-values='{{ json_encode($guild['channels']->all()) }}'></type-selector>
 					<br /><br />
 					In which channel would you like to log the below configured events? (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
 					<br />
-					@include("config.types.int", ['key' => "ModChannel", 'data' => $configData["ModChannel"][0]])
+                    <type-selector init-id-type="ModChannel" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["ModChannel"][0])) }}' :init-values='{{ json_encode($guild['channels']->all()) }}'></type-selector>
 					<br /><br />
 					@include("config.types.bool", ['key' => "ModChannelLogEditedMessages", 'data' => $configData["ModChannelLogEditedMessages"][0]])
 					Log edited messages.
@@ -309,22 +309,22 @@
 					Log messages deleted by Antispam.
 					<br />
 					@include("config.types.bool", ['key' => "ModChannelLogMembers", 'data' => $configData["ModChannelLogMembers"][0]])
-					Log the use of the <code>{{ $configData["CommandCharacter"][0] }}join</code> and <code>{{ $configData["CommandCharacter"][0] }}leave</code> commands, as well as the <code>{{ $configData["CommandCharacter"][0] }}promote</code> & <code>{{ $configData["CommandCharacter"][0] }}demote</code>.
+					Log the use of the <code>@{{ CommandCharacter }}join</code> and <code>@{{ CommandCharacter }}leave</code> commands, as well as the <code>@{{ CommandCharacter }}promote</code> & <code>@{{ CommandCharacter }}demote</code>.
 					<br /><br />
 					Ignore channels in this list - messages deleted or edited in these channels will not be logged. (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
 					<br />
-					@include("config.types.list", ['key' => "ModChannelIgnore", 'data' => $configData["ModChannelIgnore"][0]])
+                    <id-selector :init-data='{{ json_encode($discordData['ModChannelIgnore']) }}' init-form-name="ModChannelIgnore" init-id-type="Channels"></id-selector>
 					<br /><br />
 					Ignore people/bots in this list - messages by these users will not be logged. (User ID - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
 					<br />
-					@include("config.types.list", ['key' => "ModChannelIgnoreUsers", 'data' => $configData["ModChannelIgnoreUsers"][0]])
+                    <custom-input-list title="Ignore users" form-name="ModChannelIgnoreUsers" :init-values="{{ json_encode($configData["ModChannelIgnoreUsers"][0]) }}"></custom-input-list>
 				</p><br />
 				<p>
 					<b>User Activity channel</b>
 					<br /><br />
 					In which channel would you like to log the below configured events? (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
 					<br />
-					@include("config.types.int", ['key' => "UserActivityChannel", 'data' => $configData["UserActivityChannel"][0]])
+                    <type-selector init-id-type="UserActivityChannel" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["UserActivityChannel"][0])) }}' :init-values='{{ json_encode($guild['channels']->all()) }}'></type-selector>
 					<br />
 					@include("config.types.bool", ['key' => "UserActivityLogTimestamp", 'data' => $configData["UserActivityLogTimestamp"][0]])
 					Include a Timestamp.
@@ -358,9 +358,9 @@
 					<br />
 					@include("config.types.multi-line-text", ['key' => "WelcomeMessage", 'data' => $configData["WelcomeMessage"][0]])
 					<br /><br />
-					Assign them the following role. (Role ID - use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get it)
+					Assign them the following role. (Role ID - use <code>@{{ CommandCharacter }}getRole name</code> to get it)
 					<br />
-					@include("config.types.int", ['key' => "WelcomeRoleID", 'data' => $configData["WelcomeRoleID"][0]])
+                    <type-selector init-id-type="WelcomeRoleID" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["WelcomeRoleID"][0])) }}' :init-values='{{ json_encode($guild['roles']->all()) }}'></type-selector>
 				</p><br />
 				<p>
 					<b>Verification systems</b>
@@ -378,9 +378,9 @@
 					@include("config.types.bool", ['key' => "VerifyEnabled", 'data' => $configData["VerifyEnabled"][0]])
 					Enable verification system.
                     <br />
-                    Assign the following role to verified users. (Role ID - use <code>{{ $configData["CommandCharacter"][0] }}getRole name</code> to get it)
+                    Assign the following role to verified users. (Role ID - use <code>@{{ CommandCharacter }}getRole name</code> to get it)
 					<br />
-					@include("config.types.int", ['key' => "VerifyRoleID", 'data' => $configData["VerifyRoleID"][0]])
+                    <type-selector init-id-type="VerifyRoleID" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["VerifyRoleID"][0])) }}' :init-values='{{ json_encode($guild['roles']->all()) }}'></type-selector>
                     <br />
                     (Recommended permissions: <a href="/img/verifyRole.png" target="_blank">Verified Role</a> and <a href="/img/verifyEveryone.png" target="_blank">@everyone</a>)
 					<br /><br />
@@ -392,7 +392,7 @@
 					@include("config.types.multi-line-text", ['key' => "VerifyPM", 'data' => $configData["VerifyPM"][0]])
 					<br /><br />
 					@include("config.types.bool", ['key' => "VerifyOnWelcome", 'data' => $configData["VerifyOnWelcome"][0]])
-					Send the verification info to the user, as soon as they join the server. You can also send it to them using <code>{{ $configData["CommandCharacter"][0] }}verify @user</code> or they can request it be sent with <code>{{ $configData["CommandCharacter"][0] }}verify</code> without parameters.
+					Send the verification info to the user, as soon as they join the server. You can also send it to them using <code>@{{ CommandCharacter }}verify @user</code> or they can request it be sent with <code>@{{ CommandCharacter }}verify</code> without parameters.
 					<br /><br />
 					How many {{ $configData["KarmaCurrency"][0] }} do you want to give them? Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
 					<br />
@@ -400,11 +400,11 @@
 					<br /><br />
 					If you happen to have a user who does not have Reddit account or for some reason can't use our system, you can manually verify them with any other link to any social network, email, or simply use the <code>force</code> keyword to forcefully verify them. Examples follow:
 					<br />
-					<code>{{ $configData["CommandCharacter"][0] }}verify @Rhea https://www.reddit.com/user/RheaAyase</code>
+					<code>@{{ CommandCharacter }}verify @Rhea https://www.reddit.com/user/RheaAyase</code>
 					<br />
-					<code>{{ $configData["CommandCharacter"][0] }}verify @Rhea rhea@botwinder.info</code>
+					<code>@{{ CommandCharacter }}verify @Rhea rhea@botwinder.info</code>
 					<br />
-					<code>{{ $configData["CommandCharacter"][0] }}verify @Rhea force</code>
+					<code>@{{ CommandCharacter }}verify @Rhea force</code>
 				</p>
 			</div>
 			<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
