@@ -173,6 +173,11 @@ class DiscordData extends Model
                 return $this->serverChannels = Cache::get('server_'.$this->serverId.'_channels');
             }
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
+
+            if (!$this->botwinderIsNotOnServer($rawServerChannels)) {
+                abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
+            }
+
             Log::info($rawServerChannels);
             $serverChannels = collect();
             foreach ($rawServerChannels as $serverChannel) {
@@ -202,6 +207,11 @@ class DiscordData extends Model
                 return $this->serverRoles = Cache::get('server_'.$this->serverId.'_roles');
             }
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
+
+            if (!$this->botwinderIsNotOnServer($rawServerRoles)) {
+                abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
+            }
+
             Log::info($rawServerRoles);
             $serverRoles = collect();
             foreach ($rawServerRoles as $serverRole) {
@@ -217,11 +227,20 @@ class DiscordData extends Model
         return $this->serverRoles;
     }
 
+    public function botwinderIsNotOnServer(Collection $receivedData)
+    {
+        if ($receivedData->has('code') && $receivedData->get('code') == 50001) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Clear cache for servers
      * @param $userId
      */
-    public static function clearCache($userId) {
+    public static function clearCache($userId)
+    {
         Cache::forget('user_'.$userId.'_guilds');
     }
 

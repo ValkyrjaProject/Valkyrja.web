@@ -7,7 +7,11 @@
         <div class="float-middle section-big">
             <h1>Internal Server Error</h1>
             <p>
-                Something went wrong on our end. Try to refresh or clear cache
+                @if (isset($exception))
+                    {{ $exception->getMessage() }}
+                @else
+                    Something went wrong on our end. Try to refresh or clear cache
+                @endif
             </p>
         </div>
     </div>
