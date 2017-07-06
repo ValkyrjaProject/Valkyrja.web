@@ -172,6 +172,7 @@ class DiscordData extends Model
                 return $this->serverChannels = Cache::get('server_'.$this->serverId.'_channels');
             }
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
+            Log::info($rawServerChannels);
             $serverChannels = collect();
             foreach ($rawServerChannels as $serverChannel) {
                 if ($serverChannel['type'] === 'text') {
@@ -200,6 +201,7 @@ class DiscordData extends Model
                 return $this->serverRoles = Cache::get('server_'.$this->serverId.'_roles');
             }
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
+            Log::info($rawServerRoles);
             $serverRoles = collect();
             foreach ($rawServerRoles as $serverRole) {
                 $tempArray = [];
