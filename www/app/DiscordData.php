@@ -174,7 +174,7 @@ class DiscordData extends Model
             }
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
-            if (!$this->botwinderIsNotOnServer($rawServerChannels)) {
+            if ($this->botwinderIsNotOnServer($rawServerChannels)) {
                 abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
             }
 
@@ -208,7 +208,7 @@ class DiscordData extends Model
             }
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
 
-            if (!$this->botwinderIsNotOnServer($rawServerRoles)) {
+            if ($this->botwinderIsNotOnServer($rawServerRoles)) {
                 abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
             }
 
