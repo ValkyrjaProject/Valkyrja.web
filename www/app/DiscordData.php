@@ -4,6 +4,7 @@ namespace App;
 
 use App\Exceptions\EmptyUserException;
 use Cache;
+use Log;
 use Discord\OAuth\Discord;
 use Discord\OAuth\Parts\Guild;
 use Discord\OAuth\Parts\User;
