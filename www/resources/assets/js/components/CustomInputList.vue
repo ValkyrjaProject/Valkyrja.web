@@ -3,7 +3,7 @@
         <div class="listContainer">
             <h2>{{ title }}</h2>
             <div class="input-group">
-                <input class="form-control" type="text" v-model.number="content" placeholder="Add ID" @keypress.enter.prevent="addItem">
+                <input class="form-control" type="text" v-model.trim="content" placeholder="Add ID" @keypress.enter.prevent="addItem">
                 <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button" @click="addItem">+</button>
                 </span>
