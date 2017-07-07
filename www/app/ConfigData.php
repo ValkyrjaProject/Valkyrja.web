@@ -72,7 +72,15 @@ class ConfigData extends Model
                 if ($this->defaultConfig[$key][1] == "bool") {
                     $this->defaultConfig[$key][0] = (bool)$config[$key];
                     $this->rawConfig[$key] = (bool)$config[$key];
-                } else {
+                }
+                elseif ($this->defaultConfig[$key][1] == "list") {
+                    foreach ($config[$key] as $itemKey => $item) {
+                        $config[$key][$itemKey] = (String)$item;
+                    }
+                    $this->defaultConfig[$key][0] = $config[$key];
+                    $this->rawConfig[$key] = $config[$key];
+                }
+                else {
                     $this->defaultConfig[$key][0] = $config[$key];
                     $this->rawConfig[$key] = $config[$key];
                 }

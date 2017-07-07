@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "andreasindal/laravel-markdown": "1.0",
         "restcord/restcord": "^0.1.4",
-        "team-reflex/oauth2-discord": "^1.0"
+        "team-reflex/oauth2-discord": "^1.0",
+        "rap2hpoutre/laravel-log-viewer": "^0.10.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

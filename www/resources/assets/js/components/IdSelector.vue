@@ -3,7 +3,7 @@
         <div class="listContainer">
             <h2>Available {{idType}}</h2>
             <div class="input-group">
-                <input class="form-control" type="text" v-model="queryAvailable" placeholder="Search for...">
+                <input class="form-control" type="text" v-model="queryAvailable" placeholder="Search for..." @keypress.enter.prevent="addTop(filterAvailable, queryAvailable)">
                 <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button" @click="queryAvailable = ''">x</button>
                 </span>
@@ -19,7 +19,7 @@
         <div class="listContainer">
             <h2>Selected {{idType}}</h2>
             <div class="input-group">
-                <input class="form-control" type="text" v-model="querySelected" placeholder="Search for...">
+                <input class="form-control" type="text" v-model="querySelected" placeholder="Search for..." @keypress.enter.prevent="removeTop(filterSelected, querySelected)">
                 <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button" @click="querySelected = ''">x</button>
                 </span>
@@ -105,6 +105,14 @@
                 return list.filter(function (item) {
                     return item[column].toLowerCase().includes(value.toLowerCase())
                 })
+            },
+            addTop: function (list, query) {
+                if (list.length < 1 || query.length < 1) return;
+                this.add(list[0])
+            },
+            removeTop: function (list, query) {
+                if (list.length < 1 || query.length < 1) return;
+                this.remove(list[0])
             }
         }
     }

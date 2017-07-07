@@ -32,3 +32,7 @@ Route::get('/config/login', 'ConfigController@login')->name('login');
 Route::post('/config/edit', 'ConfigController@redirectConfig');
 Route::get('/config/logout', 'ConfigController@logout')->name('logout');;
 Route::any('/meetings/{channelID}/{meetingName}/meeting', 'MeetingsController@getMeeting');
+
+Route::group(['middleware' => ['authorizeDiscord', 'authorizeAdmins']], function () {
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+});
