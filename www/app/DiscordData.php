@@ -91,7 +91,7 @@ class DiscordData extends Model
                 $user[$name] = $this->user->{$name};
             }
 
-            Cache::add('user_'.$this->user->getId(), $user, 120);
+            Cache::add('user_'.$this->user->getId(), $user, 1);
             usleep(200000);
         }
         if ($this->user->getId() == "") {
@@ -137,7 +137,7 @@ class DiscordData extends Model
                 array_push($guildsArray, $guildArray);
             }
 
-            Cache::add('user_'.$this->userId.'_guilds', $guildsArray, 15);
+            Cache::add('user_'.$this->userId.'_guilds', $guildsArray, 1);
             usleep(200000);
         }
         return $this->guilds;
@@ -169,9 +169,9 @@ class DiscordData extends Model
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
 
         if (!isset($this->serverChannels)) {
-            if (Cache::has('server_'.$this->serverId.'_channels')) {
+            /*if (Cache::has('server_'.$this->serverId.'_channels')) {
                 return $this->serverChannels = Cache::get('server_'.$this->serverId.'_channels');
-            }
+            }*/
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
@@ -190,7 +190,7 @@ class DiscordData extends Model
                 }
             }
             $this->serverChannels = $serverChannels;
-            Cache::add('server_'.$this->serverId.'_channels', $this->serverChannels, 30);
+            //Cache::add('server_'.$this->serverId.'_channels', $this->serverChannels, 30);
         }
         return $this->serverChannels;
     }
@@ -203,9 +203,9 @@ class DiscordData extends Model
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
 
         if (!isset($this->serverRoles)) {
-            if (Cache::has('server_'.$this->serverId.'_roles')) {
+            /*if (Cache::has('server_'.$this->serverId.'_roles')) {
                 return $this->serverRoles = Cache::get('server_'.$this->serverId.'_roles');
-            }
+            }*/
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerRoles)) {
@@ -222,7 +222,7 @@ class DiscordData extends Model
                 $serverRoles->push($tempArray);
             }
             $this->serverRoles = $serverRoles;
-            Cache::add('server_'.$this->serverId.'_roles', $this->serverRoles, 30);
+            //Cache::add('server_'.$this->serverId.'_roles', $this->serverRoles, 30);
         }
         return $this->serverRoles;
     }
