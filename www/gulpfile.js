@@ -1,5 +1,5 @@
 var elixir = require('laravel-elixir');
-
+require('laravel-elixir-vue-2');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,10 +13,11 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+    mix.webpack(
+        'app.js'
+    );
     mix.scripts([
-        'bootstrap.min.js', 'bootstrap-toc.min.js', 'sticky.js' , 'app.js'
-    ]);
-    mix.browserSync({
-        proxy: 'botwinder.dev'
-    });
+        'bootstrap.min.js',
+        'bootstrap-toc.min.js'
+    ], 'public/js/vendor.js');
 });

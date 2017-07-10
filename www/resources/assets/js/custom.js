@@ -1,30 +1,3 @@
-import Vue from 'vue'
-import Sticky from './sticky'
-import IdSelector from './components/IdSelector.vue'
-import TextField from './components/TextField.vue'
-import TypeSelector from './components/TypeSelector.vue'
-import CustomInputList from './components/CustomInputList.vue'
-
-new Vue({
-    el:'#app',
-    data: function () {
-        return {
-            CommandCharacter: '!'
-        }
-    },
-    components:{
-        IdSelector,
-        TextField,
-        TypeSelector,
-        CustomInputList
-    },
-    methods: {
-        updateCC: function (value) {
-            this.CommandCharacter = value
-        }
-    }
-});
-
 function getUrlParameter(sParam) {
     let sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),

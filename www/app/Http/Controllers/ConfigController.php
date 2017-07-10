@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Crypt;
-use Illuminate\Http\Response;
-use Session;
+use App\DiscordData;
+use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Request;
 use \Discord\OAuth\Discord;
 use \Discord\OAuth\DiscordRequestException;
-use Cookie;
 
 use App\ConfigData as ConfigData;
 
@@ -21,293 +19,199 @@ class ConfigController extends Controller
      */
     private $relative_conf_folder = '../../config/';
 
-    /**
-    * Display login screen if not logged in, else show list of servers currently owner of
-    */
-    public function index(Request $request){
+    private $provider;
 
-        $provider = new Discord([
+    /**
+     * ConfigController constructor.
+     * @internal param string $relative_conf_folder
+     */
+    public function __construct()
+    {
+        $this->provider = new Discord([
             'clientId'     => config('discordoauth2.client_id'),
             'clientSecret' => config('discordoauth2.client_secret'),
-            'redirectUri'  => url('config')
+            'redirectUri'  => url('config/login')
         ]);
-
-        // If they have previously authorized
-        // TODO: Change to middleware, if authorized and valid, proceed. Otherwise, given they have 'code' GET value, show 'config' view
-        if (!$request->hasCookie('access_token'))
-        {
-            $notAuthorized = $this->notAuthorized($request, $provider);
-            if ($notAuthorized !== null) {
-                return $notAuthorized;
-            }
-        }
-        // If they have authorized
-        if ($request->hasCookie('access_token') && Crypt::decrypt($request->cookie('access_token'))->hasExpired())
-        {
-            try {
-                $refresh_token = Crypt::decrypt($request->cookie('access_token'))->getRefreshToken();
-                $token = $provider->getAccessToken('refresh_token', [
-                    'refresh_token' => $refresh_token,
-                ]);
-            } catch (DiscordRequestException $e) {
-                Cookie::queue(
-                    Cookie::forget('access_token')
-                );
-                $notAuthorized = $this->notAuthorized($request, $provider);
-                if ($notAuthorized !== null) {
-                    return $notAuthorized;
-                }
-            }
-        }
-        else if($request->hasCookie('access_token'))
-        {
-          $token = Crypt::decrypt($request->cookie('access_token'));
-        }
-        else
-        {
-          $token = $provider->getAccessToken('authorization_code', [
-            'code' => $request['code'],
-          ]);
-        }
-        // Get the user object.
-        $user = $provider->getResourceOwner($token);
-        if($user->id == "") {
-            Cookie::queue(
-                Cookie::forget('access_token')
-            );
-            $notAuthorized = $this->notAuthorized($request, $provider);
-            if ($notAuthorized !== null) {
-                return $notAuthorized;
-            }
-        }
-        // Get the guilds.
-        $guilds = $user->guilds;
-        $guildsWithManageGuilds = [];
-
-        foreach ($guilds as $guild) {
-            $dir = $this->relative_conf_folder.$guild->id;
-            if( ($guild->owner || $guild->permissions & 40) && file_exists($dir) )
-            {
-                array_push($guildsWithManageGuilds, $guild);
-            }
-        }
-
-        $request->session()->put('userId', Crypt::encrypt($user->id));
-        $request->session()->save();
-
-        if($request->hasCookie('access_token'))
-        {
-            return view('config.display_servers', ['user' => $user, 'guilds' => $guildsWithManageGuilds]);
-        }
-
-        $response = new Response(view('config.display_servers', ['user' => $user, 'guilds' => $guildsWithManageGuilds]));
-        $response->withCookie(cookie()->forever('access_token', Crypt::encrypt($token)));
-
-
-        return $response;
+        ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
     }
 
-    private function notAuthorized(Request $request, Discord $provider)
+    public function login(Request $request)
     {
         // If code is not set
+        if ($request->hasCookie('access_token')) {
+            return redirect()->action('ConfigController@displayServers');
+        }
         if (!isset($request['code'])) {
-            $authorizationUrl = $provider->getAuthorizationUrl(['scope' => ['identify', 'guilds']]);
+            $authorizationUrl = $this->provider->getAuthorizationUrl(['scope' => ['identify', 'guilds']]);
 
             // Get the state generated for you and store it to the session. CSRF protection
-            $request->session()->put('oauth2state', $provider->getState());
-            $request->session()->save();
+            $request->session()->put('oauth2state', $this->provider->getState());
 
             return view('config', ['authorizationUrl' => $authorizationUrl]);
         }
         //CSRF protection
-        elseif (empty($request['state']) || ($request['state'] !== $request->session()->get('oauth2state'))) {
+        elseif ((empty($request['state']) || ($request['state'] !== $request->session()->get('oauth2state')))) {
             $request->session()->forget('oauth2state');
             abort(403, 'Unauthorized action. CSRF-Prevention');
         }
-        return null;
+        $response = redirect();
+        try {
+            $access_token = $this->provider->getAccessToken('authorization_code', [
+                'code' => $request['code'],
+            ]);
+            $response = $response->route('displayServers')->cookie('access_token', encrypt($access_token))->with('messages', ['You are now logged in!']);
+        }
+        catch (DiscordRequestException $e) {
+            $response = $response->route('login')->with('messages', ['There was an error logging you in, try again.']);
+        }
+        return $response;
     }
-    public function logout(Request $request)
-    {
-        Cookie::queue(
-            Cookie::forget('access_token')
-        );
-        $request->session()->regenerate();
-        return redirect('config');
-    }
+
     /**
-    * Load and display config file to the client
-    */
-    public function displayConfig(Request $request)
+     * Display login screen if not logged in, else show list of servers currently owner of
+     * @param Request $request
+     * @return Controller|\Illuminate\Http\RedirectResponse
+     */
+    public function displayServers(Request $request){
+
+        // Get the user object.
+        /** @var AccessToken $access_token */
+        $access_token = decrypt($request->cookie('access_token'));
+
+        $access_token = $this->provider->getAccessToken('refresh_token', [
+            'refresh_token' => $access_token->getRefreshToken()
+        ]);
+
+        $userId = null;
+        if ($request->session()->has('userId')) $userId = $request->session()->get('userId');
+
+        $discord_data = new DiscordData($this->provider, $access_token, $userId);
+
+        $user = $discord_data->getCurrentUser();
+        $request->session()->put('userId', $user->getId());
+
+        $guilds = $discord_data->getUserGuilds();
+        if ($guilds->isEmpty()) {
+            $request->session()->flash('messages', ['You do not control any servers! If you do, refresh or logout and login again.']);
+        }
+
+        return view('config.display_servers', ['user' => $discord_data->getCurrentUser(), 'guilds' => $guilds]);
+    }
+
+    public function logout(Request $request, $message = '')
     {
-        if (!isset($request['serverId']) && $request->old('serverId') == NULL)
-        {
-            return redirect('config');
+        if ($request->session()->has('userId')) {
+            $userId = $request->session()->get('userId');
+            DiscordData::clearCache($userId);
         }
-        else if (Crypt::decrypt($request->session()->get('userId')) !== $request['userId'] && $request->old('userId') == NULL)
-        {
+
+        $message = $message ? $message : 'You are now logged out.';
+        $request->session()->flush();
+        return redirect()->action('ConfigController@login')->with('messages', [$message])
+            ->withCookie(cookie()->forget('access_token'));
+    }
+
+    public function redirectConfig(Request $request)
+    {
+        if (!$request->input('serverId')) {
+            return redirect()->route('displayServers');
+        }
+        return redirect()->route('editConfig', ['serverID' => $request->input('serverId')]);
+    }
+
+    /**
+     * Load and display config file to the client
+     * @param Request $request
+     * @param ConfigData $configData
+     * @param $serverId
+     * @return Controller|\Illuminate\Http\RedirectResponse
+     */
+    public function displayConfig(Request $request, ConfigData $configData, $serverId)
+    {
+        /** @var AccessToken $access_token */
+        $access_token = decrypt($request->cookie('access_token'));
+        $access_token = $this->provider->getAccessToken('refresh_token', [
+            'refresh_token' => $access_token->getRefreshToken()
+        ]);
+
+        $discord_data = new DiscordData($this->provider, $access_token, $serverId);
+
+        if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
         }
-        else if ($request->old('userId') && Crypt::decrypt($request->session()->get('userId')) !== $request->old('userId'))
-        {
-            abort(403, "Unauthorized access");
-        }
-        else if (!$this->authorizedForServer($request, $request['serverId']))
-        {
-            abort(403, "Unauthorized access");
-        }
 
-        ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
-        if ($request->old('serverId') == NULL) {
-            $serverId = $request['serverId'];
-        }
-        else {
-            $serverId = $request->old('serverId');
-        }
-        $file_dir = $this->relative_conf_folder.$serverId.'/config.json';
-        if (!file_exists($file_dir))
-        {
-            abort(404, "Botwinder isn't added to this server. If it is, please contact Rhea to look into it.");
-        }
+        $configData->updateConfigWithId($serverId);
 
-        if ($request->old('userId') == NULL) {
-            $userId = $request['userId'];
-        }
-        else {
-            $userId = $request->old('userId');
-        }
+        $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
+        $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$guildChannels) {
+            return ! $guildChannels->has($key);
+        });
 
-        // Get the config
-        $server = json_decode(file_get_contents($file_dir), true);
-
-        $configData = new ConfigData;
-        $configData->updateConfig($server);
+        $configData->filterGuildRoles($guildRoles);
+        $configData->filterGuildChannels($guildChannels);
 
         return view('config.edit', [
             'configData' => $configData->getConfigValues(),
-            'userId' => $userId,
-            'serverId' => $serverId
+            'serverId' => $serverId,
+            'discordData' => $configData->getDiscordData(),
+            'guild' => [
+                'roles' => $guildRoles,
+                'channels' => $guildChannels
+            ]
         ]);
     }
-    public function authorizedForServer(Request $request, $serverId)
-    {
-        $provider = new Discord([
-            'clientId'     => config('discordoauth2.client_id'),
-            'clientSecret' => config('discordoauth2.client_secret'),
-            'redirectUri'  => url('config')
-        ]);
 
-
-        if ($request->hasCookie('access_token') && Crypt::decrypt($request->cookie('access_token'))->hasExpired())
-        {
-            try {
-                $refresh_token = Crypt::decrypt($request->cookie('access_token'))->getRefreshToken();
-                $token = $provider->getAccessToken('refresh_token', [
-                    'refresh_token' => $refresh_token,
-                ]);
-            } catch (DiscordRequestException $e) {
-                Cookie::queue(
-                    Cookie::forget('access_token')
-                );
-                $notAuthorized = $this->notAuthorized($request, $provider);
-                if ($notAuthorized !== null) {
-                    return $notAuthorized;
-                }
-            }
-        }
-        else if($request->hasCookie('access_token'))
-        {
-            $token = Crypt::decrypt($request->cookie('access_token'));
-        }
-        else
-        {
-            $token = $provider->getAccessToken('authorization_code', [
-                'code' => $request['code'],
-            ]);
-        }
-        $user = $provider->getResourceOwner($token);
-        if($user->id == "") {
-            Cookie::queue(
-                Cookie::forget('access_token')
-            );
-            $notAuthorized = $this->notAuthorized($request, $provider);
-            if ($notAuthorized !== null) {
-                return $notAuthorized;
-            }
-        }
-        // Get the guilds.
-        $guilds = $user->guilds;
-        $guildsWithManageGuilds = [];
-
-        foreach ($guilds as $guild) {
-            $dir = $this->relative_conf_folder.$guild->id;
-            if( ($guild->owner || $guild->permissions & 40) && file_exists($dir) && $guild->id == $serverId )
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
-    * Receive config settings from client and save to file (TODO: Use ConfigDataValidation)
-    */
-    public function saveConfig(Request $request)
+     * Receive config settings from client and save to file (TODO: Use ConfigDataValidation)
+     * @param Request $request
+     * @param ConfigData $configData
+     * @param $serverId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveConfig(Request $request, ConfigData $configData, $serverId)
     {
-        // Verify user. Session should be encrypted
-        if (Crypt::decrypt($request->session()->get('userId')) !== $request['userId'])
-        {
+        /** @var AccessToken $access_token */
+        $access_token = decrypt($request->cookie('access_token'));
+        $access_token = $this->provider->getAccessToken('refresh_token', [
+            'refresh_token' => $access_token->getRefreshToken()
+        ]);
+
+        $discord_data = new DiscordData($this->provider, $access_token);
+
+        if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
         }
 
-        ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
-
         $user_values = $request->all();
 
-        $configData = new ConfigData;
-
+        // TODO: Remove temporary solution below. This should be fixed by ConfigDataValidation instead once implemented.
         // Change values to array and set as null if no values exist
         foreach ($configData->getConfigValues() as $key => $value) {
-            if ($value[1] == 'list' && isset($user_values[$key]) && $user_values[$key]) {
-                $user_values[$key] = explode("\n", $user_values[$key]);
-                if (is_array($user_values[$key])) {
-                    foreach ($user_values[$key] as $index => $user_value) {
-                        $user_values[$key][$index] = (int)$user_value;
-                    }
+            if ($value[1] == 'list' && isset($user_values[$key]) && is_array($user_values[$key]) && $user_values[$key]) {
+                foreach ($user_values[$key] as $index => $user_value) {
+                    $user_values[$key][$index] = (int)$user_value;
                 }
             }
-            elseif ($value[1] == 'list' && isset($user_values[$key]) && !$user_values[$key]) {
+            elseif ($value[1] == 'list' && isset($user_values[$key])) {
                 $user_values[$key] = NULL;
             }
             elseif ($value[1] == 'int32' && isset($user_values[$key])) {
                 $user_values[$key] = ((int)$user_values[$key]) & 0x7FFFFFFF;
             }
-            // TODO: Remove temporary solution below. This should be fixed by ConfigDataValidation instead once implemented.
             elseif ($value[1] == 'int' && isset($user_values[$key])) {
                 $user_values[$key] = (int)$user_values[$key];
             }
-            elseif ($value[1] == 'char' && strlen($user_values[$key]) == 0) {
+            // Set to default value if it's empty
+            elseif ($key == 'CommandCharacter' && strlen($user_values[$key]) == 0) {
                 $user_values[$key] = (String)$configData->getConfigValues()['CommandCharacter'][0];
             }
         }
 
-        $configData->updateConfig($user_values);
+        $configData->saveConfig($user_values, $serverId);
 
-        $server = json_decode(file_get_contents($this->relative_conf_folder.$request['serverId'].'/config.json'), true);
-        $rawConfigValues = $configData->getRawConfigValues();
 
-        foreach ($configData->getRawConfigValues() as $key => $value) {
-            $server[$key] = $rawConfigValues[$key];
-        }
-
-        $file = fopen($this->relative_conf_folder.$request['serverId'].'/config.json', 'w');
-
-        $json_indented_by_4 = json_encode($server, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
-        $json_indented_by_2 = preg_replace('/^(  +?)\\1(?=[^ ])/m', '$1', $json_indented_by_4);
-        fwrite($file, $json_indented_by_2);
-        fclose($file);
-
-        Session::flash('messages', ['Your config was saved!']);
-
-        return redirect('updates'); // TODO: Redirect to /config
+        return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
     }
+
 }

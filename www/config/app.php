@@ -109,6 +109,7 @@ return [
     */
 
     'log' => env('APP_LOG', 'single'),
+    'log-level' => env('APP_LOG_LEVEL', 'error'),
 
     /*
     |--------------------------------------------------------------------------
@@ -158,6 +159,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
     ],
 
