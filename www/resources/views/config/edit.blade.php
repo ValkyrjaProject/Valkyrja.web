@@ -136,19 +136,19 @@
 					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
 				</p>
 				<p>
-					<b>Hitbox links</b>
+					<b>Hitbox/Smashcast links</b>
 					<br />
 					@include("config.types.bool", ['key' => "RemoveHitboxLinks", 'data' => $configData["RemoveHitboxLinks"][0]])
-					Remove Hitbox links?
+					Remove Hitbox and Smashcast links?
 					<br />
 					@include("config.types.bool", ['key' => "BanHitboxLinks", 'data' => $configData["BanHitboxLinks"][0]])
 					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
 				</p>
 				<p>
-					<b>Beam links</b>
+					<b>Beam/Mixer links</b>
 					<br />
 					@include("config.types.bool", ['key' => "RemoveBeamLinks", 'data' => $configData["RemoveBeamLinks"][0]])
-					Remove Beam links?
+					Remove Beam and Mixer links?
 					<br />
 					@include("config.types.bool", ['key' => "BanBeamLinks", 'data' => $configData["BanBeamLinks"][0]])
 					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
