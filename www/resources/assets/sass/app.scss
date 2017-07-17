@@ -463,65 +463,169 @@ img {
 //  }
 //}
 
-.idSelector, .inputList {
+.loadComponent {
+  position: relative;
+  .loading{
+    display: block;
+    width:100%;
+    height:100%;
+    background: rgba(255, 255, 255, 0.34);
+    position: absolute;
+    top:0;
+    left:0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 999;
+    span {
+      padding:5px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      background: transparentize(#025aa5, 0.65);
+      border: 1px solid transparentize(#025aa5, 0.63);
+      opacity: 0.8;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.45);
+      position: absolute;
+      top:50%;
+      left:50%;
+      margin-top:-15px;
+      margin-left:-85px;
+    }
+  }
+}
+
+.idSelector, .inputList, .customCommands {
   display: table;
   background: #d3eaff;
   border: 1px solid #c0d5e9;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  width: 80%;
+  width: 500px;
+  max-width: 80%;
   border-collapse:separate;
   border-spacing: 8px;
-  .listContainer {
-    display: table-cell;
-    background: #dcf5ff;
-    border: 1px solid #c9e0e9;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    height: 350px;
-    padding:8px;
+  label {
+    display: inline;
   }
-  .selectList {
-    max-height:260px;
-    overflow: auto;
-    overflow-x: hidden;
-    width:100%;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+}
+.noHeight{
+  height:auto;
+}
+.center {
+  margin: 0 auto;
+}
+.centerText {
+  text-align: center;
+}
+.listContainer {
+  display: table-cell;
+  background: #dcf5ff;
+  border: 1px solid #c9e0e9;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  //height: 350px;
+  padding:8px;
+  min-width: 250px;
+}
+.selectList {
+  max-height:260px;
+  max-width:250px;
+  overflow: auto;
+  overflow-x: hidden;
+  width:100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.tallerList {
+  max-height:560px;
+}
+.customCommands {
+  .static{
+    min-width: 120px;
   }
-  .listItem {
-    width:100%;
+}
+.listItem {
+  width:100%;
+  height:36px;
+  display: block;
+  background: #e4f8ff;
+  border: 1px solid #d0e2e9;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 3px 0;
+  cursor: pointer;
+  &:hover {
+    background: desaturate(darken(#e4f8ff, 4), 18);
+    border-color: desaturate(darken(#d0e2e9, 4), 18);
+  }
+  &:active {
+    background: desaturate(darken(#e4f8ff, 8), 18);
+    border-color: desaturate(darken(#d0e2e9, 8), 18);
+  }
+  &.ghost {
+    opacity: 0.75;
+    border-style:dotted;
+  }
+  &.empty {
+    opacity: 0.75;
+    border: none;
+    font-style: italic;
+    cursor: default;
+    background-color: transparent;
+    &:hover, &:active {
+      background-color: transparent;
+    }
+  }
+}
+.listItemGroup {
+  display: table;
+  padding:0;
+  &:hover, &:active {
     background: #e4f8ff;
-    border: 1px solid #d0e2e9;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 3px 0;
-    cursor: pointer;
+    border-color: #d0e2e9;
+  }
+  &.has-danger{
+    border-color:red;
+  }
+  .itemLeft{
+    width:100%;
+    height:100%;
+    display: inherit;
+    text-align: left;
     &:hover {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
       background: desaturate(darken(#e4f8ff, 4), 18);
     }
     &:active {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
       background: desaturate(darken(#e4f8ff, 8), 18);
     }
-    &.ghost {
-      opacity: 0.75;
-      border-style:dotted;
+  }
+  .input-group-addon{
+    background: #e4f8ff;
+    border:none;
+    border-right: 1px solid #d0e2e9;
+    border-top-left-radius:.25rem !important;
+    border-bottom-left-radius:.25rem !important;
+    &:hover {
+      background: desaturate(darken(#e4f8ff, 4), 18);
+      border-color: desaturate(darken(#d0e2e9, 4), 18);
     }
-    &.empty {
-      opacity: 0.75;
-      border: none;
-      font-style: italic;
-      cursor: default;
-      background-color: transparent;
-      &:hover, &:active {
-        background-color: transparent;
-      }
+    &:active {
+      background: desaturate(darken(#e4f8ff, 8), 18);
+      border-color: desaturate(darken(#d0e2e9, 4), 18);
     }
   }
 }

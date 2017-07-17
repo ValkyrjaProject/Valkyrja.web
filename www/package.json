@@ -11,8 +11,10 @@
     "laravel-elixir-vue-2": "^0.3.0"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "smooth-scroll": "^11.1.0",
     "vue": "^2.3.4",
-    "vue-select": "github:sagalbot/vue-select"
+    "vue-select": "github:sagalbot/vue-select",
+    "vuex": "^2.3.1"
   }
 }

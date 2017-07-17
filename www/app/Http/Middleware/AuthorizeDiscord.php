@@ -29,14 +29,14 @@ class AuthorizeDiscord
             return redirect()->route('login')->withCookie(cookie()->forget('access_token'));
         }
         /** @var AccessToken $access_token */
-        $access_token = decrypt($request->cookie('access_token'));
+        $access_token = $request->cookie('access_token');
         if ($access_token->hasExpired()) {
             $access_token = $provider->getAccessToken('refresh_token', [
                 'refresh_token' => $access_token->getRefreshToken()
             ]);
             $response = $next($request);
             $response = $response instanceof Response ? $response : response($response);
-            return $response->cookie('access_token', encrypt($access_token));
+            return $response->cookie('access_token', $access_token);
         }
 
         return $next($request);

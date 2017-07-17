@@ -177,6 +177,9 @@ class DiscordData extends Model
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
                 abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
             }
+            /*elseif ($this->discordError($rawServerChannels)) {
+                abort(500, 'Discord is having issues, please try again later.');
+            }*/
 
             Log::info($rawServerChannels);
             $serverChannels = collect();
@@ -250,5 +253,13 @@ class DiscordData extends Model
     public function setServerId($serverId)
     {
         $this->serverId = $serverId;
+    }
+
+    public static function getProvider() {
+        return new Discord([
+            'clientId'     => config('discordoauth2.client_id'),
+            'clientSecret' => config('discordoauth2.client_secret'),
+            'redirectUri'  => url('config/login')
+        ]);
     }
 }
