@@ -1,8 +1,10 @@
 <template>
-    <input class="form-control" type="text" :id="id" :name="name" v-model="value" @keyup="changeHandler">
+    <input class="form-control" type="text" :id="id" :name="name" :value="value" @input="updateCommandCharacter">
 </template>
 
 <script>
+    import {updateCommandCharacter} from '../vuex/actions'
+
     export default {
         props: [
             'initId',
@@ -13,16 +15,20 @@
             return {
                 id: this.initId,
                 name: this.initName,
-                value: this.initValue
+            }
+        },
+        computed: {
+            value () {
+                return this.$store.state.commandCharacter
             }
         },
         methods: {
-            changeHandler() {
-                this.$emit('input-event', this.value)
+            updateCommandCharacter (e) {
+                this.$store.dispatch('updateCommandCharacter', e.target.value)
             }
         },
-        created: function () {
-            this.changeHandler();
+        created() {
+            this.$store.dispatch('updateCommandCharacter', this.initValue)
         }
     }
 </script>

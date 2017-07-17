@@ -73,20 +73,27 @@ class ConfigData extends Model
                     $this->defaultConfig[$key][0] = (bool)$config[$key];
                     $this->rawConfig[$key] = (bool)$config[$key];
                 }
-                elseif ($this->defaultConfig[$key][1] == "list") {
+                elseif ($this->defaultConfig[$key][1] == "list" && $key !== 'CustomCommands') {
                     foreach ($config[$key] as $itemKey => $item) {
                         $config[$key][$itemKey] = (String)$item;
                     }
                     $this->defaultConfig[$key][0] = $config[$key];
                     $this->rawConfig[$key] = $config[$key];
                 }
+                /*elseif ($this->defaultConfig[$key][1] == "customCommand") {
+                    foreach ($config[$key] as $itemKey => $item) {
+                        if ()
+                        $config[$key][$itemKey] = (String)$item;
+                    }
+                    $this->defaultConfig[$key][0] = $config[$key];
+                    $this->rawConfig[$key] = $config[$key];
+                }*/
                 else {
                     $this->defaultConfig[$key][0] = $config[$key];
                     $this->rawConfig[$key] = $config[$key];
                 }
             }
         }
-
         return true;
     }
 
@@ -240,6 +247,11 @@ class ConfigData extends Model
     public function getDiscordData(): array
     {
         return $this->discordData;
+    }
+
+    public function getAttribute($attribute)
+    {
+        return $this->rawConfig[$attribute];
     }
 
 }

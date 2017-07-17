@@ -11,15 +11,20 @@
 |
 */
 
-
-
 Route::get('/callback', 'TestController@index');
-Route::group(['middleware' => ['authorizeDiscord']], function () {
-    Route::get('/config', 'ConfigController@displayServers')->name('displayServers');
-    Route::get('/config/edit/{serverId}', 'ConfigController@displayConfig')->name('editConfig');
-    Route::post('/config/save/{serverId}', 'ConfigController@saveConfig');
+
+Route::group(['prefix' => 'config'], function () {
+    Route::get('/login', 'ConfigController@login')->name('login');
+    Route::get('/logout', 'ConfigController@logout')->name('logout');;
+    Route::post('/edit', 'ConfigController@redirectConfig');
+
+    Route::group(['middleware' => ['authorizeDiscord']], function () {
+        Route::get('/', 'ConfigController@displayServers')->name('displayServers');
+        Route::get('/edit/{serverId}', 'ConfigController@displayConfig')->name('editConfig');
+        Route::post('/save/{serverId}', 'ConfigController@saveConfig');
+    });
 });
-Route::get('/meetings/{channelID}/{meetingName}', 'MeetingsController@index');
+
 Route::get('/', 'HomeController@index');
 Route::get('/docs', 'FeaturesController@index');
 Route::get('/features', 'FeaturesController@index');
@@ -28,11 +33,20 @@ Route::get('/contribute', 'ContributeController@index');
 Route::get('/help', 'HelpController@index');
 Route::get('/team', 'TeamController@index');
 Route::get('/invite', 'InviteController@index');
-Route::get('/config/login', 'ConfigController@login')->name('login');
-Route::post('/config/edit', 'ConfigController@redirectConfig');
-Route::get('/config/logout', 'ConfigController@logout')->name('logout');;
+Route::get('/meetings/{channelID}/{meetingName}', 'MeetingsController@index');
 Route::any('/meetings/{channelID}/{meetingName}/meeting', 'MeetingsController@getMeeting');
 
 Route::group(['middleware' => ['authorizeDiscord', 'authorizeAdmins']], function () {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+});
+Route::group(['prefix' => 'api', 'middleware' => ['authorizeDiscord']], function () {
+    Route::get('roles/{serverId}', 'ApiController@getRoles');
+    //Route::get('roles/{serverId}/{configAttribute}', 'ApiController@getRolesData');
+
+    Route::get('channels/{serverId}', 'ApiController@getChannels');
+    //Route::get('channels/{serverId}/{configAttribute}', 'ApiController@getChannelsData');
+
+    Route::get('data/{serverId}/{configAttribute}', 'ApiController@getData');
+
+    Route::get('botwinderCommands', 'ApiController@getBotwinderCommands');
 });
