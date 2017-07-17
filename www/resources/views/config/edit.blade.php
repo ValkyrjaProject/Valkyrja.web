@@ -7,7 +7,6 @@
 	<div class="col-xs-12">
 		<form action="{{ url('config/save/'.$serverId) }}" method="post">
 			<h1 class="col-md-8">Configure Botwinder</h1>
-			<custom-commands form-name="CustomCommands"></custom-commands>
 			<span class="col-md-4">
 				<input class="btn btn-primary float-right" type="submit" value="Save"><br />
 			</span>
@@ -451,6 +450,14 @@
 					@include("config.types.bool", ['key' => "KarmaLimitResponse", 'data' => $configData["KarmaLimitResponse"][0]])
 					Tell people if they exceed this limit?
 				</p><br />
+			</div>
+			<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#customCommands" aria-expanded="false" aria-controls="customCommands">
+				Custom Commands
+			</button>
+			<div class="form-group collapse" id="customCommands">
+				<p>
+					<custom-commands form-name="CustomCommands"></custom-commands>
+				</p>
 			</div>
 
 			{{ csrf_field() }}
