@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomCommands;
 use App\DiscordData;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Request;
-use \Discord\OAuth\Discord;
 use \Discord\OAuth\DiscordRequestException;
 
 use App\ConfigData as ConfigData;
@@ -14,11 +14,6 @@ use App\Http\Requests\ConfigDataValidation as ConfigDataValidation;
 
 class ConfigController extends Controller
 {
-    /**
-     * Relative config from www folder
-     */
-    private $relative_conf_folder = '../../config/';
-
     private $provider;
 
     /**
@@ -27,11 +22,7 @@ class ConfigController extends Controller
      */
     public function __construct()
     {
-        $this->provider = new Discord([
-            'clientId'     => config('discordoauth2.client_id'),
-            'clientSecret' => config('discordoauth2.client_secret'),
-            'redirectUri'  => url('config/login')
-        ]);
+        $this->provider = DiscordData::getProvider();
         ini_set('precision', 20); // PHP specific config. Removes scientific notation of big numbers
     }
 
@@ -48,8 +39,7 @@ class ConfigController extends Controller
             $request->session()->put('oauth2state', $this->provider->getState());
 
             return view('config', ['authorizationUrl' => $authorizationUrl]);
-        }
-        //CSRF protection
+        } //CSRF protection
         elseif ((empty($request['state']) || ($request['state'] !== $request->session()->get('oauth2state')))) {
             $request->session()->forget('oauth2state');
             abort(403, 'Unauthorized action. CSRF-Prevention');
@@ -59,9 +49,8 @@ class ConfigController extends Controller
             $access_token = $this->provider->getAccessToken('authorization_code', [
                 'code' => $request['code'],
             ]);
-            $response = $response->route('displayServers')->cookie('access_token', encrypt($access_token))->with('messages', ['You are now logged in!']);
-        }
-        catch (DiscordRequestException $e) {
+            $response = $response->route('displayServers')->cookie('access_token', $access_token)->with('messages', ['You are now logged in!']);
+        } catch (DiscordRequestException $e) {
             $response = $response->route('login')->with('messages', ['There was an error logging you in, try again.']);
         }
         return $response;
@@ -72,20 +61,12 @@ class ConfigController extends Controller
      * @param Request $request
      * @return Controller|\Illuminate\Http\RedirectResponse
      */
-    public function displayServers(Request $request){
-
-        // Get the user object.
-        /** @var AccessToken $access_token */
-        $access_token = decrypt($request->cookie('access_token'));
-
-        $access_token = $this->provider->getAccessToken('refresh_token', [
-            'refresh_token' => $access_token->getRefreshToken()
-        ]);
-
+    public function displayServers(Request $request)
+    {
         $userId = null;
         if ($request->session()->has('userId')) $userId = $request->session()->get('userId');
 
-        $discord_data = new DiscordData($this->provider, $access_token, $userId);
+        $discord_data = $this->getDiscordData($request, null, $userId);
 
         $user = $discord_data->getCurrentUser();
         $request->session()->put('userId', $user->getId());
@@ -128,13 +109,7 @@ class ConfigController extends Controller
      */
     public function displayConfig(Request $request, ConfigData $configData, $serverId)
     {
-        /** @var AccessToken $access_token */
-        $access_token = decrypt($request->cookie('access_token'));
-        $access_token = $this->provider->getAccessToken('refresh_token', [
-            'refresh_token' => $access_token->getRefreshToken()
-        ]);
-
-        $discord_data = new DiscordData($this->provider, $access_token, $serverId);
+        $discord_data = $this->getDiscordData($request, $serverId);
 
         if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
@@ -144,7 +119,7 @@ class ConfigController extends Controller
 
         $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
         $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$guildChannels) {
-            return ! $guildChannels->has($key);
+            return !$guildChannels->has($key);
         });
 
         $configData->filterGuildRoles($guildRoles);
@@ -166,18 +141,14 @@ class ConfigController extends Controller
      * Receive config settings from client and save to file (TODO: Use ConfigDataValidation)
      * @param Request $request
      * @param ConfigData $configData
+     * @param CustomCommands $customCommands
      * @param $serverId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveConfig(Request $request, ConfigData $configData, $serverId)
+    public function saveConfig(Request $request, ConfigData $configData, CustomCommands $customCommands, $serverId)
     {
-        /** @var AccessToken $access_token */
-        $access_token = decrypt($request->cookie('access_token'));
-        $access_token = $this->provider->getAccessToken('refresh_token', [
-            'refresh_token' => $access_token->getRefreshToken()
-        ]);
-
-        $discord_data = new DiscordData($this->provider, $access_token);
+        /*dd($request->all());*/
+        $discord_data = $this->getDiscordData($request);
 
         if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
@@ -189,6 +160,11 @@ class ConfigController extends Controller
         // Change values to array and set as null if no values exist
         foreach ($configData->getConfigValues() as $key => $value) {
             if ($value[1] == 'list' && isset($user_values[$key]) && is_array($user_values[$key]) && $user_values[$key]) {
+                if ($key === 'CustomCommands') {
+                    $user_values[$key] = $customCommands->validate(collect($user_values[$key]));
+                    // format and validate custom commands
+                    continue;
+                }
                 foreach ($user_values[$key] as $index => $user_value) {
                     $user_values[$key][$index] = (int)$user_value;
                 }
@@ -201,8 +177,7 @@ class ConfigController extends Controller
             }
             elseif ($value[1] == 'int' && isset($user_values[$key])) {
                 $user_values[$key] = (int)$user_values[$key];
-            }
-            // Set to default value if it's empty
+            } // Set to default value if it's empty
             elseif ($key == 'CommandCharacter' && strlen($user_values[$key]) == 0) {
                 $user_values[$key] = (String)$configData->getConfigValues()['CommandCharacter'][0];
             }
@@ -214,4 +189,20 @@ class ConfigController extends Controller
         return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
     }
 
+    /**
+     * @param Request $request
+     * @param null $serverId
+     * @param null $userId
+     * @return DiscordData
+     */
+    public function getDiscordData(Request $request, $serverId = null, $userId = null)
+    {
+        /** @var AccessToken $access_token */
+        $access_token = $request->cookie('access_token');
+        $access_token = $this->provider->getAccessToken('refresh_token', [
+            'refresh_token' => $access_token->getRefreshToken()
+        ]);
+
+        return new DiscordData($this->provider, $access_token, $serverId, $userId);
+    }
 }

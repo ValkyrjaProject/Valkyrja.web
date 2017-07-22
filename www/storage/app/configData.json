@@ -1,5 +1,6 @@
 {
   "CommandCharacter": ["!", "string"],
+  "CustomCommands": [null, "list"],
   "ExecuteCommandsOnEditedMessages": [true, "bool"],
   "IgnoreBots": [true, "bool"],
   "IgnoreEveryone": [true, "bool"],

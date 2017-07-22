@@ -1,26 +1,50 @@
 import Vue from 'vue'
+import store from './vuex/store.js'
+import {updateBotwinderCommands, updateRoles, updateChannels} from './vuex/actions'
+
 import Sticky from './sticky'
 import IdSelector from './components/IdSelector.vue'
 import TextField from './components/TextField.vue'
 import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
+import CustomCommands from './components/CustomCommands.vue'
 
 new Vue({
+    store,
     el:'#app',
-    data: function () {
-        return {
-            CommandCharacter: '!'
-        }
-    },
     components:{
         IdSelector,
         TextField,
         TypeSelector,
-        CustomInputList
+        CustomInputList,
+        CustomCommands
+    },
+    computed: {
+        /**
+         * @return {string}
+         */
+        CommandCharacter () {
+            return this.$store.state.commandCharacter
+        },
+        roles () {
+            return this.$store.state.roles;
+        },
+        channels () {
+            return this.$store.state.channels;
+        }
     },
     methods: {
-        updateCC: function (value) {
-            this.CommandCharacter = value
+        updateCommandCharacter (e) {
+            this.$store.dispatch('updateCommandCharacter', e.target.value)
+        },
+    },
+    created() {
+        const partArray = window.location.pathname.split( '/' );
+        if (partArray[2] === 'edit') {
+            this.$store.dispatch('editServerId', partArray[3]);
+            this.$store.dispatch('updateRoles');
+            this.$store.dispatch('updateChannels');
+            this.$store.dispatch('updateBotwinderCommands');
         }
     }
 });

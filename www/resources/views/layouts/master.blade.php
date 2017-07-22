@@ -10,7 +10,6 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="http://botwinder.info/img/jefi-mirror.png">
     <meta property="og:url" content="{{ Request::path() }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/app.css">
     <link href='https://fonts.googleapis.com/css?family=Alegreya+SC|Alegreya|Alegreya+Sans|Source+Code+Pro' rel='stylesheet' type='text/css'>
@@ -72,7 +71,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
     <script src="/js/vendor.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
     @include('layouts.subviews.google-analytics', ['token' => 'UA-87348259-1'])
 </body>
 </html>

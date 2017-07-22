@@ -9,8 +9,8 @@
     import vSelect from 'vue-select'
     export default {
         props: {
-            initValues: {
-                type: Object
+            values: {
+                type: Array
             },
             defaultValue: {
                 type: Object
@@ -24,7 +24,6 @@
         },
         data: function () {
             return {
-                values: this.getValues(this.initValues),
                 selected: this.defaultValue || ''
             }
         },
