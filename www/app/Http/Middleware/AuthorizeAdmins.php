@@ -27,7 +27,7 @@ class AuthorizeAdmins
         ]);
 
         /** @var AccessToken $access_token */
-        $access_token = decrypt($request->cookie('access_token'));
+        $access_token = $request->cookie('access_token');
         $access_token = $provider->getAccessToken('refresh_token', [
             'refresh_token' => $access_token->getRefreshToken()
         ]);
