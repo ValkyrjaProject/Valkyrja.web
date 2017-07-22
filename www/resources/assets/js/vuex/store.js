@@ -79,6 +79,10 @@ const mutations = {
         }
     },
 
+    EDIT_CUSTOM_COMMANDS_CLASS (state, payload) {
+        state.data.CustomCommands.commandsList[payload.index]['classData'] = payload.classData;
+    },
+
     UPDATE_STATE (state, payload) {
         Vue.set(state.data, payload.key, payload.data);
     },
@@ -120,12 +124,14 @@ const getters = {
         let available = state.roles.filter(e => {
             return !whitelist.includes(e['id']);
         });
-        return {selected: selected, available: available};
+        return {
+            selected: selected,
+            available: available
+        };
     }
 };
 
 export default new Vuex.Store({
-    strict: true,
     state,
     mutations,
     actions,

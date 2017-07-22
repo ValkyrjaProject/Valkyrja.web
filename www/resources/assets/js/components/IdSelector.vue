@@ -5,47 +5,37 @@
         </div>
         <div class="listContainer">
             <h2>Available {{idType}}</h2>
-            <div class="input-group">
-                <input class="form-control" type="text" v-model="queryAvailable" placeholder="Search for..." @keypress.enter.prevent="addTop(filterAvailable, queryAvailable)">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button" @click="queryAvailable = ''">✕</button>
-                </span>
-            </div>
-            <div class="dragArea selectList">
-                <div v-for="item in filterAvailable" class="listItem" @click="add(item)">
-                    {{item.name}}
-                </div>
-                <div class="listItem empty" v-if="!typeAvailable.length && !queryAvailable">Empty</div>
-                <div class="listItem empty" v-if="!filterAvailable.length && queryAvailable">Not found</div>
-            </div>
+            <list-container v-model="typeAvailable"
+                            :form-name="initFormName"
+                            :hide-form="true"
+                            :include-search="true"></list-container>
         </div>
         <div class="listContainer">
             <h2>Selected {{idType}}</h2>
-            <div class="input-group">
-                <input class="form-control" type="text" v-model="querySelected" placeholder="Search for..." @keypress.enter.prevent="removeTop(filterSelected, querySelected)">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button" @click="querySelected = ''">✕</button>
-                </span>
-            </div>
-            <div class="dragArea selectList">
-                <div v-for="item in filterSelected" class="listItem" @click="remove(item)">
-                    {{item.name}}
-                </div>
-                <span v-if="!hideInputs">
-                    <input v-for="item in typeSelected" type="hidden" :name="formInputName" :value="item.id">
-                </span>
-                <div class="listItem empty" v-if="!typeSelected.length && !querySelected">Empty</div>
-                <div class="listItem empty" v-if="!filterSelected.length && querySelected">Not found</div>
-            </div>
+            <list-container v-model="typeSelected"
+                            :form-name="initFormName"
+                            :hide-form="hideInputs"
+                            :include-search="true"></list-container>
         </div>
     </div>
 </template>
 
 <script>
+    import ListContainer from '../components/ListContainer.vue'
     import {editData, removeData} from '../vuex/actions'
 
     export default {
+        components: {
+            ListContainer
+        },
         props: {
+            value: {
+                type: Object,
+                required: false,
+                default: function () {
+                    return {}
+                }
+            },
             initFormName: {
                 type: String,
                 required: true
@@ -62,6 +52,11 @@
             stateIndex: {
                 type: Number,
                 required: false
+            },
+            useStore: {
+                type: Boolean,
+                required: false,
+                default: true
             }
         },
         data: function () {
@@ -73,12 +68,12 @@
             }
         },
         created () {
-            if (this.initFormName !== 'CustomCommands') {
+            if (this.useStore) {
                 this.isLoading = true;
                 this.$store.dispatch('updateState', this.initFormName)
                     .then(() => {
-                            this.isLoading = false;
-                        });
+                        this.isLoading = false;
+                    });
             }
         },
         computed: {
@@ -86,76 +81,42 @@
                 return this.initFormName + '[]';
             },
             types () {
-                let commands;
-                if (this.initFormName === 'CustomCommands') {
-                    commands = this.$store.getters[this.initFormName.toLowerCase()](this.stateIndex);
+                if (this.useStore) {
+                    return this.$store.getters[this.idType.toLowerCase()](this.initFormName) || [];
                 }
-                else {
-                    commands = this.$store.getters[this.idType.toLowerCase()](this.initFormName)
+                return this.value;
+            },
+            typeAvailable: {
+                get () {
+                    return this.types['available'] || []
+                },
+                set (value) {
+                    if (this.useStore) {
+                        this.$store.dispatch('editData', {
+                            key: this.initFormName,
+                            data: value.id
+                        });
+                    }
+                    else {
+                        this.$emit('add', value);
+                    }
                 }
-                if (commands === null) {
-                    return []
+            },
+            typeSelected: {
+                get () {
+                    return this.types['selected'] || []
+                },
+                set (value) {
+                    if (this.useStore) {
+                        this.$store.dispatch('removeData', {
+                            key: this.initFormName,
+                            data: value.id
+                        });
+                    }
+                    else {
+                        this.$emit('remove', value);
+                    }
                 }
-                return commands;
-            },
-            typeAvailable () {
-                return this.types['available'] || []
-            },
-            typeSelected () {
-                return this.types['selected'] || []
-            },
-            filterAvailable () {
-                if (this.typeAvailable.length < 1) return [];
-                return this.findBy(this.typeAvailable, this.queryAvailable, 'name')
-            },
-            filterSelected () {
-                if (this.typeSelected.length < 1) return [];
-                return this.findBy(this.typeSelected, this.querySelected, 'name')
-            }
-        },
-        methods: {
-            add: function (item) {
-                if (this.initFormName === 'CustomCommands') {
-                    this.$store.dispatch('editCustomCommandsRoles', {key: this.stateIndex, data: item.id});
-                }
-                else {
-                    this.$store.dispatch('editData', {key: this.initFormName, data: item.id});
-                }
-                this.clearQuery();
-            },
-            remove: function (item) {
-                if (this.initFormName === 'CustomCommands') {
-                    this.$store.dispatch('removeCustomCommandsRoles', {key: this.stateIndex, data: item.id });
-                }
-                else {
-                    this.$store.dispatch('removeData', {key: this.initFormName, data: item.id });
-                }
-                this.clearQuery();
-            },
-            clearQuery: function () {
-                this.queryAvailable = '';
-                this.querySelected = '';
-            },
-            sortArray: function(array) {
-                array.sort(function (a, b) {
-                    const textA = a.name.toUpperCase();
-                    const textB = b.name.toUpperCase();
-                    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-                })
-            },
-            findBy: function (list, value, column) {
-                //return list;
-                return list.filter(function (item) {
-                    return item[column].toLowerCase().includes(value.toLowerCase())
-                })
-            },
-            addTop: function (list, query) {
-                if (list.length < 1 || query.length < 1) return;
-                this.add(list[0])
-            },
-            removeTop: function (list, query) {
-                if (list.length < 1 || query.length < 1) return;
-                this.remove(list[0])
             }
         }
     }

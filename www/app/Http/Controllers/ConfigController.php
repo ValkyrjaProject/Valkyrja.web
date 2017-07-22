@@ -147,7 +147,6 @@ class ConfigController extends Controller
      */
     public function saveConfig(Request $request, ConfigData $configData, CustomCommands $customCommands, $serverId)
     {
-        /*dd($request->all());*/
         $discord_data = $this->getDiscordData($request);
 
         if (!$discord_data->canEditGuild($serverId)) {

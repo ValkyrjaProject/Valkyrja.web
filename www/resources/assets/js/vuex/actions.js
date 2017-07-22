@@ -45,6 +45,10 @@ export const removeCustomCommand = ({commit}, attribute) => {
     commit('REMOVE_CUSTOM_COMMAND', attribute);
 }
 
+export const editCustomCommandsClass = ({commit}, attribute) => {
+    commit('EDIT_CUSTOM_COMMANDS_CLASS', attribute);
+}
+
 export const updateRoles = ({commit}) => {
     configData.getRoles(store.state.serverId)
         .then(response => {

@@ -20,5 +20,8 @@ elixir(function(mix) {
         'bootstrap.min.js',
         'bootstrap-toc.min.js'
     ], 'public/js/vendor.js');
-    mix.version('js/app.js');
+    mix.version([
+        'js/app.js',
+        'css/app.css'
+    ]);
 });
