@@ -1,1 +1,1 @@
-This is somewhat advanced bot, but our web-config is straight forward. Just <a href="http://invite.botwinder.info">add the bot</a> to your server and head over to <a href="http://botwinder.info/config">botwinder.info/config</a>
+This is somewhat advanced bot, but our web-config is straight forward. Just <a href="http://botwinder.info/invite">add the bot</a> to your server and head over to <a href="http://botwinder.info/config">botwinder.info/config</a>

@@ -1,92 +1,50 @@
 <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Alegreya+SC" rel="stylesheet">
 
-<style>
-.botwinder-description {
-  padding: 10px;
-  font-size: 11pt;
-  font-family: 'Alegreya Sans', sans-serif;
-  background-color: #c4e1ff;
-}
-.botwinder-btn {
-  font-family: 'Alegreya SC', sans-serif;
-  text-align: center;
-  background-color: #ffffff;
-  display: inline-block;
-  color: #206694 !important;
-  font-size: 12pt;
-  text-decoration: none;
-  padding: 10px 20px !important;
-  -webkit-transition: 40ms ease-in-out all;
-  -moz-transition: 40ms ease-in-out all;
-  -ms-transition: 40ms ease-in-out all;
-  -o-transition: 40ms ease-in-out all;
-  transition: 40ms ease-in-out all;
-}
-.botwinder-btn:visited {
-  color: #206694 !important;
-}
-.botwinder-btn:hover {
-  color: #0f5583 !important;
-  text-decoration: none;
-  background-color: #afd1f4;
-}
-.botwinder-btn.active {
-  color: #0f5583 !important;
-  text-decoration: none;
-  background-color: #c4e1ff !important;
-}
-.botwinder-btn:hover {
-  -webkit-transition: 40ms ease-in-out all;
-  -moz-transition: 40ms ease-in-out all;
-  -ms-transition: 40ms ease-in-out all;
-  -o-transition: 40ms ease-in-out all;
-  transition: 40ms ease-in-out all;
-}
-</style>
+<style>.botwinder-description{padding:10px;font-size:11pt;font-family:'Alegreya Sans',sans-serif;background-color:#c4e1ff;}.botwinder-btn{font-family:'Alegreya SC',sans-serif;text-align:center;background-color:#ffffff;display:inline-block;color:#206694!important;font-size:12pt;text-decoration:none;padding:10px 20px!important;-webkit-transition:40ms ease-in-out all;-moz-transition:40ms ease-in-out all;-ms-transition:40ms ease-in-out all;-o-transition:40ms ease-in-out all;transition:40ms ease-in-out all;}.botwinder-btn:visited{color:#206694!important;}.botwinder-btn:hover{color:#0f5583!important;text-decoration:none;background-color:#afd1f4;}.botwinder-btn.active{color:#0f5583!important;text-decoration:none;background-color:#c4e1ff!important;}.botwinder-btn:hover{-webkit-transition:40ms ease-in-out all;-moz-transition:40ms ease-in-out all;-ms-transition:40ms ease-in-out all;-o-transition:40ms ease-in-out all;transition:40ms ease-in-out all;}ul{list-style-type:initial !important;padding-left:40px !important;}</style>
 
 <div>
 <a href="http://botwinder.info/invite" class="botwinder-btn">
   <img src="http://botwinder.info/img/jefi-small.png" alt="Jefi">
-  <br />Invite
+  <br/>Invite
 </a>
 <a href="http://botwinder.info/docs" class="botwinder-btn">
   <img src="http://botwinder.info/img/book.png" alt="Jefi">
-  <br />Docs
+  <br/>Docs
 </a>
 <a href="http://botwinder.info/config" class="botwinder-btn">
   <img src="http://botwinder.info/img/wrench.png" alt="Jefi">
-  <br />Config
+  <br/>Config
 </a>
 <a href="http://botwinder.info/help" class="botwinder-btn">
   <img src="http://botwinder.info/img/discord-small.png" alt="Jefi">
-  <br />Support
+  <br/>Support
 </a>
 </div>
 
 <div class="botwinder-description">
   <b>Botwinder</b> is highly customizable <b>Community Management</b> bot, full of advanced tools that will help you run just about any community, small or large.
 
-<br />
-Please read the information <u><b><a href="http://botwinder.info.invite">on our website</a></b></u> before inviting the bot.
+<br/>
+<b>Please read the information <u><a href="http://botwinder.info/invite">on our website</a></u> before inviting the bot.</b>
 
 <ul>
-<br />
+<br/>
   <li><b>Advanced moderation tools:</b><ul>
     <li>Mute people or channels.</li>
     <li>Kick anyone out</li>
     <li>Ban people for specific amount of time, regardless of whether they are on the server or not!</li>
     <li>Keep track of their usernames and nicknames, when did they create an account and join.</li>
     <li>Add notes about people, keep track of all their previous kicks or bans.</li>
-	<li>You can also nuke the whole channel (wipe all the messages) or clear only specific amount of messages by specific user.</li>
+    <li>Temporary voice channels - automatically deleted when they're empty.</li>
   </ul></li>
 
-<br />
+<br/>
   <li><b>Role Assignment:</b><ul>
     <li>Specify public roles which will be available to anyone using join and leave commands.</li>
     <li>Give the moderators ability to promote or demote people into specified member roles.</li>
   </ul></li>
   
-<br />
+<br/>
   <li><b>Antispam</b><ul>
     <li>Remove Discord invites.</li>
     <li>Remove mass-mentions.</li>
@@ -97,7 +55,7 @@ Please read the information <u><b><a href="http://botwinder.info.invite">on our 
     <li>You can also set-up automated ban for spammers. if they continue doing the above.</li>
   </ul></li>
   
-<br />
+<br/>
   <li><b>Logging:</b><ul>
     <li>Log edited and/or deleted messages.</li>
     <li>Log kicked, banned, and muted users.</li>
@@ -105,15 +63,15 @@ Please read the information <u><b><a href="http://botwinder.info.invite">on our 
     <li>Set up ignored users and channels where the bot will not act or log anything.</li>
   </ul></li>
 
-<br />
+<br/>
   <li><b>New Members</b><ul>
     <li>Assign a role to everyone, as soon as they join.</li>
     <li>PM people when they join.</li>
     <li>Set-up welcome / leave messages.</li>
-    <li>Verify members with reddit account and assign them a role</li>
+    <li>Verify members with hidden code within your rules, or with Reddit account and assign them a role</li>
   </ul></li>
   
-<br />
+<br/>
   <li><b>Other Modules:</b><ul>
     <li>Custom Commands - create simple commands with simple parameters.</li>
     <li>Aliases - create an alias from any command, custom or original.</li>
@@ -123,11 +81,12 @@ Please read the information <u><b><a href="http://botwinder.info.invite">on our 
     <li>Meetings - ever heard of the meet-bot for IRC? This is similar.</li>
     <li>Livestream Notifications - set-up a notification for when you go live on Twitch, Hitbox, or Beam.</li>
   </ul></li>
-<br />
+<br/>
   <li><b>...and much more!</b></li>
 </ul>
 
-<br />Comes with <b>cookies</b> and friendly dev team, who will always help and answer your questions with a smile! 
-<br /><br />
+<br/>Comes with <b>cookies</b> and friendly dev team, who will always help and answer your questions with a smile! 
+<br/><br/>
 Stability and 99.9965% uptime guaranteed!
 </div>
+
