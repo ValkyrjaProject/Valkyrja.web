@@ -34,16 +34,19 @@ class AuthorizeDiscord
         /** @var AccessToken $access_token */
         $access_token = $request->cookie('access_token');
 
-        if (is_string($access_token)) {
-            try {
-                Log::warning('access_token is a string: '.decrypt($access_token));
+        try {
+            if (is_string($access_token)) {
+                if (!(($access_token = decrypt($access_token)) instanceof AccessToken)) {
+                    Log::warning('access_token is a string: '.$access_token);
+                    return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again');
+                }
             }
-            catch (Exception $e) {
-                Log::warning('access_token is a string (could not decrypt): '.decrypt($access_token));
-            }
+        }
+        catch (Exception $e) {
+            Log::warning('access_token is a string (could not decrypt): '.$access_token);
             return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again');
         }
-        else if ($access_token->hasExpired()) {
+        if ($access_token->hasExpired()) {
             try {
                 $access_token = $provider->getAccessToken('refresh_token', [
                     'refresh_token' => $access_token->getRefreshToken()
