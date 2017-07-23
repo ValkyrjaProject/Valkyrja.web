@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\CustomCommands;
 use App\DiscordData;
+use App\Exceptions\NotOnServer;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Request;
 use \Discord\OAuth\DiscordRequestException;
@@ -11,6 +14,7 @@ use \Discord\OAuth\DiscordRequestException;
 use App\ConfigData as ConfigData;
 
 use App\Http\Requests\ConfigDataValidation as ConfigDataValidation;
+use Response;
 
 class ConfigController extends Controller
 {
@@ -117,7 +121,16 @@ class ConfigController extends Controller
 
         $configData->updateConfigWithId($serverId);
 
-        $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
+        try {
+            $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
+        }
+        catch (NotOnServer $e) {
+            abort(404, $e->getMessage());
+        }
+        catch (Exception $e) {
+            return $this->logout($request, $e->getMessage());
+        }
+
         $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$guildChannels) {
             return !$guildChannels->has($key);
         });

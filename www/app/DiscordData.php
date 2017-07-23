@@ -2,8 +2,11 @@
 
 namespace App;
 
+use App\Exceptions\DiscordException;
 use App\Exceptions\EmptyUserException;
+use App\Exceptions\NotOnServer;
 use Cache;
+use Illuminate\Http\RedirectResponse;
 use Log;
 use Discord\OAuth\Discord;
 use Discord\OAuth\Parts\Guild;
@@ -162,8 +165,10 @@ class DiscordData extends Model
     }
 
     /**
-     * @return Collection
+     * @return RedirectResponse|Collection
      * @throws EmptyPropertyException
+     * @throws DiscordException
+     * @throws NotOnServer
      */
     public function getGuildChannels() {
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
@@ -175,7 +180,8 @@ class DiscordData extends Model
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
-                abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
+                Log::info('Botwinder not on server: '.$this->serverId);
+                throw new NotOnServer("Botwinder is not on the server, if it is, ask in Jefi's Nest");
             }
             /*elseif ($this->discordError($rawServerChannels)) {
                 abort(500, 'Discord is having issues, please try again later.');
@@ -184,6 +190,11 @@ class DiscordData extends Model
             Log::info($rawServerChannels);
             $serverChannels = collect();
             foreach ($rawServerChannels as $serverChannel) {
+                if (!isset($serverChannel['type'])) {
+                    Log::error(isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
+
+                    throw new DiscordException('There was an error getting channels from the server. Please try again');
+                }
                 if ($serverChannel['type'] === 'text') {
                     $tempArray = [];
                     $tempArray['id'] = $serverChannel['id'];

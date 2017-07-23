@@ -6,6 +6,7 @@ use Closure;
 use Discord\OAuth\Discord;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Response;
+use Log;
 
 class AuthorizeDiscord
 {
@@ -30,7 +31,16 @@ class AuthorizeDiscord
         }
         /** @var AccessToken $access_token */
         $access_token = $request->cookie('access_token');
-        if ($access_token->hasExpired()) {
+
+        if (is_string($access_token)) {
+            Log::warning('access_token is a string: '.$access_token);
+            $request->session()->flush();
+            return redirect()
+                ->route('login')
+                ->withCookie(cookie()->forget('access_token'))
+                ->with('messages', ['There was an error authenticating you. Please login again.']);
+        }
+        else if ($access_token->hasExpired()) {
             $access_token = $provider->getAccessToken('refresh_token', [
                 'refresh_token' => $access_token->getRefreshToken()
             ]);
