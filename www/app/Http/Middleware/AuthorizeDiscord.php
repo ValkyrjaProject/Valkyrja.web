@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Discord\OAuth\Discord;
 use Discord\OAuth\DiscordRequestException;
+use Exception;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Response;
@@ -34,7 +35,12 @@ class AuthorizeDiscord
         $access_token = $request->cookie('access_token');
 
         if (is_string($access_token)) {
-            Log::warning('access_token is a string: '.$access_token);
+            try {
+                Log::warning('access_token is a string: '.decrypt($access_token));
+            }
+            catch (Exception $e) {
+                Log::warning('access_token is a string (could not decrypt): '.decrypt($access_token));
+            }
             return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again');
         }
         else if ($access_token->hasExpired()) {
