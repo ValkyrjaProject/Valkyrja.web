@@ -40,7 +40,7 @@
                 </div>
                 <div class="from-group" :class="{'has-danger': activeCommand.Response.length === 0}">
                     <label class="form-control-label">
-                        <b>Response</b>
+                        <b>Response message</b> - You can use <code>{sender}</code> or <code>{mentioned}</code> variables.
                         <textarea class="form-control" command-name="Response" :value="activeCommand.Response"
                                   @input="updateActiveCommand"></textarea>
                     </label>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group">
                     <label>
-                        <b>Description</b>
+                        <b>Description</b> - the <code>{{CommandCharacter}}help</code> message.
                         <input class="form-control" command-name="Description" :value="activeCommand.Description"
                                @input="updateActiveCommand">
                     </label>
@@ -158,6 +158,9 @@
             },
             roles() {
                 return this.$store.getters['customcommands'](this.activeCommandIndex);
+            },
+            CommandCharacter() {
+                return this.$store.state.commandCharacter;
             }
         },
         methods: {

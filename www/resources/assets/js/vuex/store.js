@@ -111,7 +111,7 @@ const getters = {
             return state.data[attribute].includes(e['id']);
         });
         let available = state.channels.filter(function (e) {
-            return state.data[attribute].includes(e['id']);
+            return !state.data[attribute].includes(e['id']);
         });
         return {selected: selected, available: available};
     },

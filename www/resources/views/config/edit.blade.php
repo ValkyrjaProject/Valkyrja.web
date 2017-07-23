@@ -186,8 +186,6 @@
 				Moderation
 			</button>
 			<div class="form-inline form-group collapse" id="configModeration"><br />
-				Some of the options in this section are <b>lists of RoleIDs</b>, in order to add another, simply throw them on separate lines. Use <code>@{{ CommandCharacter }}getRole name</code> to get <b>role ID</b>. <i>(These lists are work in progress, it will be a cute search box to add a new role in the future.)</i>
-				<br /><br />
 				<p>
 					<b>Administrator roles</b>
 					<br />
@@ -236,7 +234,7 @@
 					<br />
 					This feature will act like Operators known from IRC. If configured, it will disable the use of ban/kick/mute commands unless <i>you</i> are <code>@{{ CommandCharacter }}op</code>-ed (you can still use quickban, if configured, because it's quick!) This helps making it clear to the user, that <i>you</i> are now a acting as a moderator and you are not just joking around. Set the Operator role below to enable it, or use <code>0</code> (zero) to disable.
 					<br /><br />
-					<b>Operator</b> role (<b>Role ID</b> - use <code>@{{ CommandCharacter }}getRole name</code> to get it.) Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
+					<b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
 					<br />
                     <type-selector init-id-type="RoleIDOperator" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["RoleIDOperator"][0])) }}' :values='roles'></type-selector>
 				</p>
@@ -258,11 +256,11 @@
 					<br />
 					@include("config.types.int", ['key' => "MuteDuration", 'data' => $configData["MuteDuration"][0]]) (minutes)
 					<br /><br />
-					<code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels. (<b>Role ID</b> - use <code>@{{ CommandCharacter }}getRole name</code> to get it.)
+					<code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels.
 					<br />
 					<type-selector init-id-type="MuteRole" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["MuteRole"][0])) }}' :values='roles'></type-selector>
 					<br /><br />
-					The above role will not be configured in the following channel, allowing you to talk to muted people in it. (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
+					The above role will not be configured in the following channel, allowing you to talk to muted people in it.
 					<br />
                     <type-selector init-id-type="MuteIgnoreChannel" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["MuteIgnoreChannel"][0])) }}' :values='channels'></type-selector>
 					<br />
@@ -292,11 +290,11 @@
 					<b>Mod channel</b>
 					<br /><br />
 					@include("config.types.bool", ['key' => "ModChannelLogBans", 'data' => $configData["ModChannelLogBans"][0]])
-					Log banned and kicked users into the following channel, if you don't set one, the other below mentioned channel will be used. (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
+					Log banned and kicked users into the following channel, if you don't set one, the other below mentioned channel will be used.
 					<br />
                     <type-selector init-id-type="ModChannelBans" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["ModChannelBans"][0])) }}' :values='channels'></type-selector>
 					<br /><br />
-					In which channel would you like to log the below configured events? (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
+					In which channel would you like to log the below configured events?
 					<br />
                     <type-selector init-id-type="ModChannel" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["ModChannel"][0])) }}' :values='channels'></type-selector>
 					<br /><br />
@@ -312,7 +310,7 @@
 					@include("config.types.bool", ['key' => "ModChannelLogMembers", 'data' => $configData["ModChannelLogMembers"][0]])
 					Log the use of the <code>@{{ CommandCharacter }}join</code> and <code>@{{ CommandCharacter }}leave</code> commands, as well as the <code>@{{ CommandCharacter }}promote</code> & <code>@{{ CommandCharacter }}demote</code>.
 					<br /><br />
-					Ignore channels in this list - messages deleted or edited in these channels will not be logged. (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
+					Ignore channels in this list - messages deleted or edited in these channels will not be logged.
 					<br />
                     <id-selector init-form-name="ModChannelIgnore" init-id-type="Channels"></id-selector>
 					<br /><br />
@@ -323,7 +321,7 @@
 				<p>
 					<b>User Activity channel</b>
 					<br /><br />
-					In which channel would you like to log the below configured events? (<b>Channel ID</b> - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
+					In which channel would you like to log the below configured events?
 					<br />
                     <type-selector init-id-type="UserActivityChannel" label="name" :default-value='{{ json_encode($guild['channels']->get($configData["UserActivityChannel"][0])) }}' :values='channels'></type-selector>
 					<br />
@@ -359,7 +357,7 @@
 					<br />
 					@include("config.types.multi-line-text", ['key' => "WelcomeMessage", 'data' => $configData["WelcomeMessage"][0]])
 					<br /><br />
-					Assign them the following role. (Role ID - use <code>@{{ CommandCharacter }}getRole name</code> to get it)
+					Assign them the following role.
 					<br />
                     <type-selector init-id-type="WelcomeRoleID" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["WelcomeRoleID"][0])) }}' :values='roles'></type-selector>
 				</p><br />
@@ -379,7 +377,7 @@
 					@include("config.types.bool", ['key' => "VerifyEnabled", 'data' => $configData["VerifyEnabled"][0]])
 					Enable verification system.
                     <br />
-                    Assign the following role to verified users. (Role ID - use <code>@{{ CommandCharacter }}getRole name</code> to get it)
+                    Assign the following role to verified users.
 					<br />
                     <type-selector init-id-type="VerifyRoleID" label="name" :default-value='{{ json_encode($guild['roles']->get($configData["VerifyRoleID"][0])) }}' :values='roles'></type-selector>
                     <br />
