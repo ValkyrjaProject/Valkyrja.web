@@ -83,14 +83,13 @@ class ConfigController extends Controller
         return view('config.display_servers', ['user' => $discord_data->getCurrentUser(), 'guilds' => $guilds]);
     }
 
-    public function logout(Request $request, $message = '')
+    public function logout(Request $request, $message = 'You are now logged out.')
     {
         if ($request->session()->has('userId')) {
             $userId = $request->session()->get('userId');
             DiscordData::clearCache($userId);
         }
 
-        $message = $message ? $message : 'You are now logged out.';
         $request->session()->flush();
         return redirect()->action('ConfigController@login')->with('messages', [$message])
             ->withCookie(cookie()->forget('access_token'));
@@ -123,6 +122,10 @@ class ConfigController extends Controller
 
         try {
             $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
+
+            $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$guildChannels) {
+                return !$guildChannels->has($key);
+            });
         }
         catch (NotOnServer $e) {
             abort(404, $e->getMessage());
@@ -130,10 +133,6 @@ class ConfigController extends Controller
         catch (Exception $e) {
             return $this->logout($request, $e->getMessage());
         }
-
-        $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$guildChannels) {
-            return !$guildChannels->has($key);
-        });
 
         $configData->filterGuildRoles($guildRoles);
         $configData->filterGuildChannels($guildChannels);

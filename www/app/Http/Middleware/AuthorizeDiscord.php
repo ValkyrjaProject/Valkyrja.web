@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Discord\OAuth\Discord;
+use Discord\OAuth\DiscordRequestException;
+use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Response;
 use Log;
@@ -13,11 +15,11 @@ class AuthorizeDiscord
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $provider = new Discord([
             'clientId'     => config('discordoauth2.client_id'),
@@ -26,29 +28,42 @@ class AuthorizeDiscord
         ]);
 
         if (!$request->hasCookie('access_token')) {
-            $request->session()->flush();
-            return redirect()->route('login')->withCookie(cookie()->forget('access_token'));
+            return $this->redirectToLogin($request);
         }
         /** @var AccessToken $access_token */
         $access_token = $request->cookie('access_token');
 
         if (is_string($access_token)) {
             Log::warning('access_token is a string: '.$access_token);
-            $request->session()->flush();
-            return redirect()
-                ->route('login')
-                ->withCookie(cookie()->forget('access_token'))
-                ->with('messages', ['There was an error authenticating you. Please login again.']);
+            return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again');
         }
         else if ($access_token->hasExpired()) {
-            $access_token = $provider->getAccessToken('refresh_token', [
-                'refresh_token' => $access_token->getRefreshToken()
-            ]);
+            try {
+                $access_token = $provider->getAccessToken('refresh_token', [
+                    'refresh_token' => $access_token->getRefreshToken()
+                ]);
+            }
+            catch (DiscordRequestException $e) {
+                Log::warning($e->getTraceAsString());
+                return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again.');
+            }
             $response = $next($request);
             $response = $response instanceof Response ? $response : response($response);
             return $response->cookie('access_token', $access_token);
         }
 
         return $next($request);
+    }
+
+    protected function redirectToLogin(Request $request, $message = '')
+    {
+        $request->session()->flush();
+        $redirect = redirect()
+            ->route('login')
+            ->withCookie(cookie()->forget('access_token'));
+        if ($message) {
+            return $redirect->with('messages', [$message]);
+        }
+        return $redirect;
     }
 }

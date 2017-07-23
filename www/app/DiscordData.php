@@ -191,7 +191,7 @@ class DiscordData extends Model
             $serverChannels = collect();
             foreach ($rawServerChannels as $serverChannel) {
                 if (!isset($serverChannel['type'])) {
-                    Log::error(isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
+                    Log::error('Server channels: '.isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
 
                     throw new DiscordException('There was an error getting channels from the server. Please try again');
                 }
@@ -211,6 +211,7 @@ class DiscordData extends Model
 
     /**
      * @return Collection
+     * @throws DiscordException
      * @throws EmptyPropertyException
      */
     public function getGuildRoles() {
@@ -229,6 +230,11 @@ class DiscordData extends Model
             Log::info($rawServerRoles);
             $serverRoles = collect();
             foreach ($rawServerRoles as $serverRole) {
+                if (!isset($serverRole['id'])) {
+                    Log::error('Server roles: '.isset($rawServerRoles['code']) ? $rawServerRoles['code'] : $rawServerRoles);
+
+                    throw new DiscordException('There was an error getting roles from the server. Please try again');
+                }
                 $tempArray = [];
                 $tempArray['id'] = $serverRole['id'];
                 $tempArray['name'] = $serverRole['name'];
