@@ -34,7 +34,7 @@ class ApiController extends Controller
             $userId = $request->session()->get('userId');
 
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
-            if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
+            if (!$this->discordData->canEditConfig($serverId)) return response()->json('Unauthorized access', 404);
 
             $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
             return response()->json(array_values($guildRoles = $this->discordData->getGuildRoles()
@@ -44,7 +44,7 @@ class ApiController extends Controller
                 ->all()));
         }
         catch (InvalidGrantException $e) {
-            return response()->json('Error authenticating you. Please logout and login', 404);
+            return response()->json('Error authenticating you. Please logout and login', 403);
         }
         catch (Exception $e) {
             Log::warning($e);
@@ -61,11 +61,11 @@ class ApiController extends Controller
             $userId = $request->session()->get('userId');
 
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
-            if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
+            if (!$this->discordData->canEditConfig($serverId)) return response()->json('Unauthorized access', 404);
             return response()->json($this->discordData->getGuildChannels());
         }
         catch (InvalidGrantException $e) {
-            return response()->json('Error authenticating you. Please logout and login', 404);
+            return response()->json('Error authenticating you. Please logout and login', 403);
         }
         catch (Exception $e) {
             Log::warning($e);
@@ -82,7 +82,7 @@ class ApiController extends Controller
             $userId = $request->session()->get('userId');
 
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
-            if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
+            if (!$this->discordData->canEditConfig($serverId)) return response()->json('Unauthorized access', 404);
 
             $configData->updateConfigWithId($serverId);
             $this->discordData->getGuildRoles();

@@ -120,7 +120,7 @@ class ConfigController extends Controller
             $request->session()->put('userId', $user->getId());
         }
 
-        if (!$discord_data->canEditGuild($serverId)) {
+        if (!$discord_data->canEditConfig($serverId)) {
             abort(403, "Unauthorized access");
         }
 
@@ -168,7 +168,7 @@ class ConfigController extends Controller
     {
         $discord_data = $this->getDiscordData($request);
 
-        if (!$discord_data->canEditGuild($serverId)) {
+        if (!$discord_data->canEditConfig($serverId)) {
             abort(403, "Unauthorized access");
         }
 

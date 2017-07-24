@@ -150,7 +150,7 @@ class DiscordData extends Model
      * @param $serverId
      * @return bool
      */
-    public function canEditGuild($serverId) {
+    public function canEditConfig($serverId) {
         if (!isset($this->user)) {
             $this->getCurrentUser();
         }
