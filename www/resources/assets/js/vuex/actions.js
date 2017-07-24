@@ -78,7 +78,7 @@ export const updateState = ({commit}, attribute) => {
         configData.getValues(store.state.serverId, attribute)
             .then(response => {
                 commit('UPDATE_STATE', {key: attribute, data: response['data'] || []});
-                resolve()
+                resolve();
             })
             .catch(error => {
                 commit('API_ERROR', error['response']['data']);

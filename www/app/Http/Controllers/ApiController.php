@@ -37,7 +37,7 @@ class ApiController extends Controller
             if (!$this->discordData->canEditConfig($serverId)) return response()->json('Unauthorized access', 404);
 
             $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
-            return response()->json(array_values($guildRoles = $this->discordData->getGuildRoles()
+            return json_encode(array_values($guildRoles = $this->discordData->getGuildRoles()
                 ->filter(function ($role) use (&$guildChannels) {
                     return !$guildChannels->has($role['id']);
                 })
@@ -62,7 +62,8 @@ class ApiController extends Controller
 
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
             if (!$this->discordData->canEditConfig($serverId)) return response()->json('Unauthorized access', 404);
-            return response()->json($this->discordData->getGuildChannels());
+
+            return json_encode($this->discordData->getGuildChannels());
         }
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 403);
@@ -88,6 +89,7 @@ class ApiController extends Controller
             $this->discordData->getGuildRoles();
 
             $results = $configData->getAttribute($configAttribute);
+            //dd(response()->json(json_encode($results)));
             if ($configAttribute === 'CustomCommands') {
                 foreach ($results as &$command) {
                     if (isset($command['RoleWhitelist'])) {
@@ -98,7 +100,7 @@ class ApiController extends Controller
                     $command['Description'] = trim(str_replace('(Custom non-Botwinder command.)', '', $command['Description']));
                 }
             }
-            return response()->json($results);
+            return json_encode($results);
         }
         catch (Exception $exception) {
             Log::warning($exception);
