@@ -40,7 +40,7 @@
                 </div>
                 <div class="from-group" :class="{'has-danger': activeCommand.Response.length === 0}">
                     <label class="form-control-label">
-                        <b>Response message</b> - You can use <code>{sender}</code> or <code>{mentioned}</code> variables.
+                        <b>Response message</b> - You can use <code>{{sender}}</code> or <code>{{mentioned}}</code> variables.
                         <textarea class="form-control" command-name="Response" :value="activeCommand.Response"
                                   @input="updateActiveCommand"></textarea>
                     </label>
@@ -165,7 +165,17 @@
         },
         methods: {
             setActiveCommand(command) {
+                if (this.activeCommand) {
+                    this.$store.dispatch('editCustomCommandsClass', {
+                        index: this.activeCommandIndex,
+                        classData: {'active': false}
+                    });
+                }
                 this.$store.dispatch('updateActiveCustomCommand', command);
+                this.$store.dispatch('editCustomCommandsClass', {
+                    index: this.customCommands.indexOf(command),
+                    classData: {'active': true}
+                });
             },
             addRoleWhitelist(role) {
                 this.$store.dispatch('editCustomCommandsRoles', {key: this.activeCommandIndex, data: role.id});

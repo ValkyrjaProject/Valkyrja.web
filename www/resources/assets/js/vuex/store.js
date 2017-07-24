@@ -80,7 +80,13 @@ const mutations = {
     },
 
     EDIT_CUSTOM_COMMANDS_CLASS (state, payload) {
-        state.data.CustomCommands.commandsList[payload.index]['classData'] = payload.classData;
+        if (state.data.CustomCommands.commandsList[payload.index]['classData'] === undefined) Vue.set(state.data.CustomCommands.commandsList[payload.index], 'classData', {});
+        for (let key in payload.classData) {
+            if (!payload.classData.hasOwnProperty(key)) continue;
+            //state.data.CustomCommands.commandsList[payload.index]['classData'][key] = payload.classData[key];
+            Vue.set(state.data.CustomCommands.commandsList[payload.index]['classData'], key, payload.classData[key]);
+            //state.data.CustomCommands.commandsList[payload.index]['classData'].splice(key, 1, payload.classData[key]);
+        }
     },
 
     UPDATE_STATE (state, payload) {

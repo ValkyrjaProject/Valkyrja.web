@@ -593,8 +593,16 @@ img {
     background: #e4f8ff;
     border-color: #d0e2e9;
   }
+  &.active {
+    background: lighten(#e4f8ff, 2);
+    border-color: darken(#d0e2e9, 15);
+    .input-group-addon {
+      background: lighten(#e4f8ff, 2);
+      border-color: darken(#d0e2e9, 15);
+    }
+  }
   &.has-danger{
-    border-color:red;
+    border-color:#d9534f;
   }
   .itemLeft{
     width:100%;
@@ -631,6 +639,18 @@ img {
 }
 .input-group {
   border-spacing: 0;
+}
+.inputList {
+  width:300px;
+  .input-group-btn {
+    width: 1% !important;
+  }
+  .selectList {
+    max-width:100%;
+  }
+  .listItem {
+    font-family: 'Source Code Pro', 'Consolas', sans-serif;
+  }
 }
 .inline {
   display: inline-block;
