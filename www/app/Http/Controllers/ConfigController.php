@@ -71,7 +71,12 @@ class ConfigController extends Controller
         $userId = null;
         if ($request->session()->has('userId')) $userId = $request->session()->get('userId');
 
-        $discord_data = $this->getDiscordData($request, null, $userId);
+        try {
+            $discord_data = $this->getDiscordData($request, null, $userId);
+        }
+        catch (Exception $e) {
+            return $this->logout($request, 'Unable to authorize you, please login again');
+        }
 
         $user = $discord_data->getCurrentUser();
         $request->session()->put('userId', $user->getId());
@@ -113,7 +118,12 @@ class ConfigController extends Controller
      */
     public function displayConfig(Request $request, ConfigData $configData, $serverId)
     {
-        $discord_data = $this->getDiscordData($request, $serverId);
+        try {
+            $discord_data = $this->getDiscordData($request, $serverId);
+        }
+        catch (Exception $e) {
+            return $this->logout($request, 'Unable to authorize you, please login again');
+        }
 
         if (!$request->session()->has('userId')) {
             $user = $discord_data->getCurrentUser();
@@ -166,7 +176,12 @@ class ConfigController extends Controller
      */
     public function saveConfig(Request $request, ConfigData $configData, CustomCommands $customCommands, $serverId)
     {
-        $discord_data = $this->getDiscordData($request);
+        try {
+            $discord_data = $this->getDiscordData($request);
+        }
+        catch (Exception $e) {
+            return $this->logout($request, 'Unable to authorize you, please login again');
+        }
 
         if (!$discord_data->canEditConfig($serverId)) {
             abort(403, "Unauthorized access");
