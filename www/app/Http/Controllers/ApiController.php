@@ -28,8 +28,14 @@ class ApiController extends Controller
     {
         try {
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+            if (!$this->discordData->canEditGuild($serverId)) abort(500, 'Unauthorized access');
 
             $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
+            return response()->json(array_values($guildRoles = $this->discordData->getGuildRoles()
+                ->filter(function ($role) use (&$guildChannels) {
+                    return !$guildChannels->has($role['id']);
+                })
+                ->all()));
         }
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 404);
@@ -37,17 +43,14 @@ class ApiController extends Controller
         catch (Exception $e) {
             return response()->json($e->getMessage(), 404);
         }
-        return response()->json(array_values($guildRoles = $this->discordData->getGuildRoles()
-            ->filter(function ($role) use (&$guildChannels) {
-                return !$guildChannels->has($role['id']);
-            })
-            ->all()));
     }
 
     public function getChannels(Request $request, ConfigController $configController, $serverId)
     {
         try {
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+            if (!$this->discordData->canEditGuild($serverId)) abort(500, 'Unauthorized access');
+            return response()->json($this->discordData->getGuildChannels());
         }
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 404);
@@ -55,17 +58,17 @@ class ApiController extends Controller
         catch (Exception $e) {
             return response()->json($e->getMessage(), 404);
         }
-
-        return response()->json($this->discordData->getGuildChannels());
     }
 
     public function getData(Request $request, ConfigData $configData, ConfigController $configController, $serverId, $configAttribute)
     {
-        $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
-
-        $configData->updateConfigWithId($serverId);
-        $this->discordData->getGuildRoles();
         try {
+            $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+            if (!$this->discordData->canEditGuild($serverId)) abort(500, 'Unauthorized access');
+
+            $configData->updateConfigWithId($serverId);
+            $this->discordData->getGuildRoles();
+            
             $results = $configData->getAttribute($configAttribute);
             if ($configAttribute === 'CustomCommands') {
                 foreach ($results as &$command) {

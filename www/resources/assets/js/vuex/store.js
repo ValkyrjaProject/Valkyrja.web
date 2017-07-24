@@ -24,8 +24,7 @@ const state = {
 // mutations to modify state attributes
 const mutations = {
     API_ERROR (state, error) {
-        state.errors.push(error);
-        /*console.log(error);*/
+        if (state.errors.indexOf(error) < 0) state.errors.push(error);
     },
 
     CLEAR_API_ERROR (state) {
