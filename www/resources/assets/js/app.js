@@ -2,6 +2,7 @@ import Vue from 'vue'
 import store from './vuex/store.js'
 import {updateBotwinderCommands, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
 
+import {mapGetters, mapState} from 'vuex'
 import Sticky from './sticky'
 import IdSelector from './components/IdSelector.vue'
 import TextField from './components/TextField.vue'
@@ -9,6 +10,7 @@ import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
 import Modal from './components/Modal.vue'
+
 
 new Vue({
     store,
@@ -22,18 +24,6 @@ new Vue({
         Modal
     },
     computed: {
-        /**
-         * @return {string}
-         */
-        CommandCharacter () {
-            return this.$store.state.commandCharacter
-        },
-        roles () {
-            return this.$store.state.roles;
-        },
-        channels () {
-            return this.$store.state.channels;
-        },
         errors: {
             get () {
                 return this.$store.state.errors;
@@ -41,11 +31,34 @@ new Vue({
             set () {
                 this.$store.dispatch('clearAPIError')
             }
-        }
+        },
+        ...mapGetters('loading', [
+            /*
+              `isLoading` returns a function with a parameter of loader name.
+              e.g. `isLoading('creating user')` will return you a boolean value.
+            */
+            'isLoading',
+            /*
+              `anyLoading` returns a boolean value if any loader name exists on store.
+            */
+            'anyLoading',
+        ]),
+        ...mapState([
+            'CommandCharacter',
+            'roles',
+            'channels',
+            'forbidSubmitForm'
+         ])
     },
     methods: {
         updateCommandCharacter (e) {
             this.$store.dispatch('updateCommandCharacter', e.target.value)
+        },
+        onSubmit (e) {
+            console.log(this.anyLoading);
+            if (!this.anyLoading) {
+                document.forms[0].submit();
+            }
         },
     },
     created() {

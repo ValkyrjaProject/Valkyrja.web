@@ -2,14 +2,23 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import * as actions from './actions'
+import { createVuexLoader } from 'vuex-loading'
+
+const VuexLoading = createVuexLoader({
+    moduleName: 'loading',
+    componentName: 'v-loading',
+    className: 'v-loading',
+});
 
 Vue.use(Vuex);
+Vue.use(VuexLoading);
 
 // root state
 const state = {
     errors: [],
+    forbidSubmitForm: false,
     serverId: '',
-    commandCharacter: '',
+    CommandCharacter: '',
     roles: [],
     channels: [],
     data: {
@@ -25,6 +34,7 @@ const state = {
 const mutations = {
     API_ERROR (state, error) {
         if (state.errors.indexOf(error) < 0) state.errors.push(error);
+        state.forbidSubmitForm = true;
     },
 
     CLEAR_API_ERROR (state) {
@@ -36,7 +46,7 @@ const mutations = {
     },
 
     EDIT_COMMAND_CHARACTER (state, character) {
-        state.commandCharacter = character
+        state.CommandCharacter = character
     },
 
     EDIT_ROLES (state, roles) {
@@ -103,7 +113,7 @@ const mutations = {
     },
 
     UPDATE_COMMAND_CHARACTER (state, value) {
-        state.commandCharacter = value;
+        state.CommandCharacter = value;
     },
 
     UPDATE_BOTWINDER_COMMANDS (state, value) {
@@ -147,6 +157,7 @@ const getters = {
 };
 
 export default new Vuex.Store({
+    plugins: [VuexLoading.Store],
     state,
     mutations,
     actions,

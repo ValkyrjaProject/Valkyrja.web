@@ -89,8 +89,8 @@ class ApiController extends Controller
             $this->discordData->getGuildRoles();
 
             $results = $configData->getAttribute($configAttribute);
-            //dd(response()->json(json_encode($results)));
-            if ($configAttribute === 'CustomCommands') {
+
+            if ($configAttribute === 'CustomCommands' && $results !== null) {
                 foreach ($results as &$command) {
                     if (isset($command['RoleWhitelist'])) {
                         foreach ($command['RoleWhitelist'] as &$whitelist) {

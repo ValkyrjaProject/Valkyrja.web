@@ -19,7 +19,7 @@
         },
         computed: {
             value () {
-                return this.$store.state.commandCharacter
+                return this.$store.state.CommandCharacter
             }
         },
         methods: {

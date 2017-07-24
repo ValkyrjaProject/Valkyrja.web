@@ -5,10 +5,17 @@
 @section('content')
 <div class="container">
 	<div class="col-xs-12">
-		<form action="{{ url('config/save/'.$serverId) }}" method="post">
-			<h1 class="col-md-8">Configure Botwinder</h1>
+		<form action="{{ url('config/save/'.$serverId) }}" method="post" @submit.prevent="onSubmit">
+			<h1 class="col-md-8">
+                <v-loading message='Configure Botwinder'>
+                    <span slot='spinner' class="align-bottom">
+                        <v-loading-spinner width='1em' height='1em' />
+                    </span>
+                    <span>Configure Botwinder</span>
+                </v-loading>
+            </h1>
 			<span class="col-md-4">
-				<input class="btn btn-primary float-right" type="submit" value="Save"><br />
+				<input class="btn btn-primary float-right" type="submit" value="Save" :disabled="anyLoading"><br />
 			</span>
 			<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configBasic" aria-expanded="true" aria-controls="configBasic">
 				Basic configuration
@@ -25,7 +32,6 @@
 				</p>
 				<p>
 					<b>Command Prefix</b>
-                    {{--<input class="code form-control" type="text" id="CommandCharacter" name="CommandCharacter" :value="CommandCharacter" @input="updateCommandCharacter">--}}
 					<text-field init-id="CommandCharacter" init-name="CommandCharacter" init-value="{{ $configData["CommandCharacter"][0] }}"></text-field>
 				</p>
 				<p>
@@ -459,7 +465,7 @@
 			</div>
 
 			{{ csrf_field() }}
-			<input class="btn btn-primary" type="submit" value="Save">
+			<input class="btn btn-primary" type="submit" value="Save" :disabled="anyLoading">
 		</form>
 	</div>
 </div>

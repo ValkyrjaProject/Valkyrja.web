@@ -1,6 +1,6 @@
 <template>
     <div class="customCommands loadComponent">
-        <div v-if="isLoading" class="loading">
+        <div v-if="$isLoading(this.formName)" class="loading">
             <span>Loading config please wait!</span>
         </div>
         <div class="listContainer">
@@ -108,19 +108,15 @@
                 required: true
             }
         },
-        data: function () {
-            return {
-                isLoading: true
-            };
-        },
         components: {
             IdSelector,
             ListContainer
         },
         created() {
+            this.$startLoading(this.formName);
             this.$store.dispatch('updateCustomCommands', this.formName)
                 .then(() => {
-                    this.isLoading = false;
+                    this.$endLoading(this.formName);
                     this.setActiveCommand(this.customCommands[0]);
                 });
         },
@@ -139,7 +135,7 @@
                 return this.$store.state.data.CustomCommands.activeCommand
             },
             CommandCharacter() {
-                return this.$store.state.commandCharacter;
+                return this.$store.state.CommandCharacter;
             },
             botwinderCommands() {
                 return this.$store.state.botwinderCommands;
@@ -160,7 +156,7 @@
                 return this.$store.getters['customcommands'](this.activeCommandIndex);
             },
             CommandCharacter() {
-                return this.$store.state.commandCharacter;
+                return this.$store.state.CommandCharacter;
             }
         },
         methods: {

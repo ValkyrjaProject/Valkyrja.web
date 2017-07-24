@@ -1,6 +1,6 @@
 <template>
     <div class="idSelector loadComponent">
-        <div v-if="isLoading" class="loading">
+        <div v-if="$isLoading(this.initFormName)" class="loading">
             <span>Loading config please wait!</span>
         </div>
         <div class="listContainer">
@@ -69,10 +69,10 @@
         },
         created () {
             if (this.useStore) {
-                this.isLoading = true;
+                this.$startLoading(this.initFormName);
                 this.$store.dispatch('updateState', this.initFormName)
                     .then(() => {
-                        this.isLoading = false;
+                        this.$endLoading(this.initFormName);
                     });
             }
         },
