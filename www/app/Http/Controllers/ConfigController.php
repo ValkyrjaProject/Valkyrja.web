@@ -115,6 +115,11 @@ class ConfigController extends Controller
     {
         $discord_data = $this->getDiscordData($request, $serverId);
 
+        if (!$request->session()->has('userId')) {
+            $user = $discord_data->getCurrentUser();
+            $request->session()->put('userId', $user->getId());
+        }
+
         if (!$discord_data->canEditGuild($serverId)) {
             abort(403, "Unauthorized access");
         }

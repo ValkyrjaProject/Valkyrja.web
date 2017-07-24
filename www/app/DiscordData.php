@@ -98,7 +98,7 @@ class DiscordData extends Model
             usleep(200000);
         }
         if ($this->user->getId() == "") {
-            throw new EmptyUserException();
+            throw new EmptyUserException('Error authenticating you. Please logout and login again');
         }
         return $this->user;
     }

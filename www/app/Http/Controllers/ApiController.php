@@ -28,7 +28,12 @@ class ApiController extends Controller
     public function getRoles(Request $request, ConfigController $configController, $serverId)
     {
         try {
-            $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+            if (!$request->session()->has('userId')) {
+                throw new Exception('Error authenticating you. Please logout and login again');
+            }
+            $userId = $request->session()->get('userId');
+
+            $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
             if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
 
             $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
@@ -50,7 +55,12 @@ class ApiController extends Controller
     public function getChannels(Request $request, ConfigController $configController, $serverId)
     {
         try {
-            $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+            if (!$request->session()->has('userId')) {
+                throw new Exception('Error authenticating you. Please logout and login again');
+            }
+            $userId = $request->session()->get('userId');
+
+            $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
             if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
             return response()->json($this->discordData->getGuildChannels());
         }
@@ -66,7 +76,12 @@ class ApiController extends Controller
     public function getData(Request $request, ConfigData $configData, ConfigController $configController, $serverId, $configAttribute)
     {
         try {
-            $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+            if (!$request->session()->has('userId')) {
+                throw new Exception('Error authenticating you. Please logout and login again');
+            }
+            $userId = $request->session()->get('userId');
+
+            $this->discordData = $configController->getDiscordData($request, $serverId, $userId);
             if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
 
             $configData->updateConfigWithId($serverId);
