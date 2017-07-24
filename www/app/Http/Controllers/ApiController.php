@@ -8,6 +8,7 @@ use App\DiscordData;
 use Exception;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
+use Log;
 
 class ApiController extends Controller
 {
@@ -41,6 +42,7 @@ class ApiController extends Controller
             return response()->json('Error authenticating you. Please logout and login', 404);
         }
         catch (Exception $e) {
+            Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
     }
@@ -56,6 +58,7 @@ class ApiController extends Controller
             return response()->json('Error authenticating you. Please logout and login', 404);
         }
         catch (Exception $e) {
+            Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
     }
@@ -83,6 +86,7 @@ class ApiController extends Controller
             return response()->json($results);
         }
         catch (Exception $exception) {
+            Log::warning($exception);
             return response()->json($exception->getMessage(), 404);
         }
     }
