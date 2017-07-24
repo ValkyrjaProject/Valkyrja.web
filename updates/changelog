@@ -1,5 +1,14 @@
 #Changelog
 
+**Botwinder 2.4** - 25th of July, 2017
+  * Beam renamed to Mixer... and some other changes with Hitbox as well. Weird stuff happening.
+  * Command Options: Implemented channel whitelist. You can now use `!cmdChannelWhitelist` to allow a command to be used only in specific channels only.
+  * Command Options: Formerly known command `!restrict` or `!restrictChannel` was renamed to `!cmdChannelBlacklist` to better accomodate the above change.
+  * The usual bunch of tweaks, fixes, bugs and fixed bugs.
+  * **WebConfig Upgrades**! (<http://botwinder.info/config>)
+  * You can now pick roles and channels with a search bar instead of the role IDs
+  * Custom Commands can now be created, edited and removed, using the WebConfig as well.
+
 **Botwinder 2.3** - 26th of May, 2017
   * Minor update with some new features for events, and a bunch of fixes.
   * `!event score+` & `!event score-` options added. These will relatively add or subtract score to/from mentioned users. (The original `score` keyword was setting absolute value.)
