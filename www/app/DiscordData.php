@@ -4,7 +4,7 @@ namespace App;
 
 use App\Exceptions\DiscordException;
 use App\Exceptions\EmptyUserException;
-use App\Exceptions\NotOnServer;
+use App\Exceptions\ServerIssueException;
 use Cache;
 use Illuminate\Http\RedirectResponse;
 use Log;
@@ -168,7 +168,7 @@ class DiscordData extends Model
      * @return RedirectResponse|Collection
      * @throws EmptyPropertyException
      * @throws DiscordException
-     * @throws NotOnServer
+     * @throws ServerIssueException
      */
     public function getGuildChannels() {
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
@@ -180,12 +180,13 @@ class DiscordData extends Model
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
-                Log::info('Botwinder not on server: '.$this->serverId);
-                throw new NotOnServer("Botwinder is not on the server, if it is, ask in Jefi's Nest");
+                Log::error($rawServerChannels['code'].': Botwinder not on server: '.$this->serverId);
+                throw new ServerIssueException("Botwinder is not on the server, if it is, ask in Jefi's Nest");
             }
-            /*elseif ($this->discordError($rawServerChannels)) {
-                abort(500, 'Discord is having issues, please try again later.');
-            }*/
+            elseif ($this->hasNoPermissions($rawServerChannels)) {
+                Log::error($rawServerChannels['code'].': Botwinder does not have sufficient permissions: '.$this->serverId);
+                throw new ServerIssueException("Botwinder does not have sufficient permissions.");
+            }
 
             Log::info($rawServerChannels);
             $serverChannels = collect();
@@ -213,6 +214,7 @@ class DiscordData extends Model
      * @return Collection
      * @throws DiscordException
      * @throws EmptyPropertyException
+     * @throws ServerIssueException
      */
     public function getGuildRoles() {
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
@@ -224,7 +226,12 @@ class DiscordData extends Model
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerRoles)) {
-                abort(500, 'Botwinder is not on the server, if it is, ask in Jefi\'s Nest'); // TODO: Move out of model?
+                Log::error('Botwinder not on server: '.$this->serverId);
+                throw new ServerIssueException("Botwinder is not on the server, if it is, ask in Jefi's Nest");
+            }
+            elseif ($this->hasNoPermissions($rawServerRoles)) {
+                Log::error($rawServerRoles['code'].': Botwinder does not have sufficient permissions: '.$this->serverId);
+                throw new ServerIssueException("Botwinder does not have sufficient permissions.");
             }
 
             Log::info($rawServerRoles);
@@ -278,5 +285,13 @@ class DiscordData extends Model
             'clientSecret' => config('discordoauth2.client_secret'),
             'redirectUri'  => url('config/login')
         ]);
+    }
+
+    private function hasNoPermissions(Collection $receivedData)
+    {
+        if ($receivedData->has('code') && $receivedData->get('code') == 50013) {
+            return true;
+        }
+        return false;
     }
 }

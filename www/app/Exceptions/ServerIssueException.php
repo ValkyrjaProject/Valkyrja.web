@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class NotOnServer extends Exception
+class ServerIssueException extends Exception
 {
     //
 }

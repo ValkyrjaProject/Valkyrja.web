@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CustomCommands;
 use App\DiscordData;
-use App\Exceptions\NotOnServer;
+use App\Exceptions\ServerIssueException;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use League\OAuth2\Client\Token\AccessToken;
@@ -119,7 +119,8 @@ class ConfigController extends Controller
         }
 
         $configData->updateConfigWithId($serverId);
-
+        $guildChannels = collect();
+        $guildRoles = collect();
         try {
             $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
 
@@ -127,7 +128,7 @@ class ConfigController extends Controller
                 return !$guildChannels->has($key);
             });
         }
-        catch (NotOnServer $e) {
+        catch (ServerIssueException $e) {
             abort(404, $e->getMessage());
         }
         catch (Exception $e) {
