@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import store from './vuex/store.js'
-import {updateBotwinderCommands, updateRoles, updateChannels} from './vuex/actions'
+import {updateBotwinderCommands, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
 
 import Sticky from './sticky'
 import IdSelector from './components/IdSelector.vue'
@@ -8,6 +8,7 @@ import TextField from './components/TextField.vue'
 import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
+import Modal from './components/Modal.vue'
 
 new Vue({
     store,
@@ -17,7 +18,8 @@ new Vue({
         TextField,
         TypeSelector,
         CustomInputList,
-        CustomCommands
+        CustomCommands,
+        Modal
     },
     computed: {
         /**
@@ -31,6 +33,14 @@ new Vue({
         },
         channels () {
             return this.$store.state.channels;
+        },
+        errors: {
+            get () {
+                return this.$store.state.errors;
+            },
+            set () {
+                this.$store.dispatch('clearAPIError')
+            }
         }
     },
     methods: {

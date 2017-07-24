@@ -7,6 +7,7 @@ use App\CustomCommands;
 use App\DiscordData;
 use Exception;
 use Illuminate\Http\Request;
+use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 
 class ApiController extends Controller
 {
@@ -25,10 +26,18 @@ class ApiController extends Controller
 
     public function getRoles(Request $request, ConfigController $configController, $serverId)
     {
-        $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+        try {
+            $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
 
-        $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
-        return json_encode(array_values($guildRoles = $this->discordData->getGuildRoles()
+            $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
+        }
+        catch (InvalidGrantException $e) {
+            return response()->json('Error authenticating you. Please logout and login', 404);
+        }
+        catch (Exception $e) {
+            return response()->json($e->getMessage(), 404);
+        }
+        return response()->json(array_values($guildRoles = $this->discordData->getGuildRoles()
             ->filter(function ($role) use (&$guildChannels) {
                 return !$guildChannels->has($role['id']);
             })
@@ -37,9 +46,17 @@ class ApiController extends Controller
 
     public function getChannels(Request $request, ConfigController $configController, $serverId)
     {
-        $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+        try {
+            $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
+        }
+        catch (InvalidGrantException $e) {
+            return response()->json('Error authenticating you. Please logout and login', 404);
+        }
+        catch (Exception $e) {
+            return response()->json($e->getMessage(), 404);
+        }
 
-        return json_encode($this->discordData->getGuildChannels());
+        return response()->json($this->discordData->getGuildChannels());
     }
 
     public function getData(Request $request, ConfigData $configData, ConfigController $configController, $serverId, $configAttribute)
@@ -60,7 +77,7 @@ class ApiController extends Controller
                     $command['Description'] = trim(str_replace('(Custom non-Botwinder command.)', '', $command['Description']));
                 }
             }
-            return json_encode($results);
+            return response()->json($results);
         }
         catch (Exception $exception) {
             return response()->json([ 'error' => 404, 'message' => 'Not found' ], 404);

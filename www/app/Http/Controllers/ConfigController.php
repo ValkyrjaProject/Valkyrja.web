@@ -7,6 +7,7 @@ use App\DiscordData;
 use App\Exceptions\ServerIssueException;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Request;
 use \Discord\OAuth\DiscordRequestException;
@@ -205,6 +206,7 @@ class ConfigController extends Controller
      * @param Request $request
      * @param null $serverId
      * @param null $userId
+     * @throws InvalidGrantException
      * @return DiscordData
      */
     public function getDiscordData(Request $request, $serverId = null, $userId = null)

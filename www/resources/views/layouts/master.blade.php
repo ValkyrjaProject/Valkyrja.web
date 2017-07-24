@@ -52,6 +52,14 @@
             </div>
         @endif
         @yield('content')
+        <modal v-if="errors.length > 0" @close="errors = []">
+            <h2 slot="header">An error occurred</h2>
+            <ul slot="body">
+                <li v-for="error in errors">
+                    @{{ error }}
+                </li>
+            </ul>
+        </modal>
     </section>
     <footer>
         <section class="middle-container">

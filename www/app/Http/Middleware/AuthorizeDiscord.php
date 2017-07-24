@@ -53,7 +53,7 @@ class AuthorizeDiscord
                 ]);
             }
             catch (DiscordRequestException $e) {
-                Log::warning($e->getTraceAsString());
+                Log::warning($e);
                 return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again.');
             }
             $response = $next($request);

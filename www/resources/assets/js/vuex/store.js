@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 // root state
 const state = {
+    errors: [],
     serverId: '',
     commandCharacter: '',
     roles: [],
@@ -22,6 +23,15 @@ const state = {
 
 // mutations to modify state attributes
 const mutations = {
+    API_ERROR (state, error) {
+        state.errors.push(error);
+        /*console.log(error);*/
+    },
+
+    CLEAR_API_ERROR (state) {
+        state.errors = [];
+    },
+
     EDIT_SERVER_ID (state, id) {
         state.serverId = id
     },

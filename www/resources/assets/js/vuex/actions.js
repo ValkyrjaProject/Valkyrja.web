@@ -56,7 +56,7 @@ export const updateRoles = ({commit}) => {
             //console.log(store.state.roles);
         })
         .catch(error => {
-            console.log(error);
+            commit('API_ERROR', error['response']['data']);
         });
 
 }
@@ -68,7 +68,7 @@ export const updateChannels = ({commit}) => {
             //console.log(store.state.channels);
         })
         .catch(error => {
-            console.log(error);
+            commit('API_ERROR', error['response']['data']);
         });
 }
 
@@ -81,7 +81,7 @@ export const updateState = ({commit}, attribute) => {
                 resolve()
             })
             .catch(error => {
-                console.log(error);
+                commit('API_ERROR', error['response']['data']);
                 reject();
             });
     });
@@ -113,4 +113,8 @@ export const updateBotwinderCommands = ({commit}) => {
         .catch(error => {
             console.log(error);
         });
+}
+
+export const clearAPIError = ({commit}) => {
+    commit('CLEAR_API_ERROR');
 }
