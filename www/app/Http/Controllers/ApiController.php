@@ -28,7 +28,7 @@ class ApiController extends Controller
     {
         try {
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
-            if (!$this->discordData->canEditGuild($serverId)) abort(500, 'Unauthorized access');
+            if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
 
             $guildChannels = $this->discordData->getGuildChannels()->keyBy('id');
             return response()->json(array_values($guildRoles = $this->discordData->getGuildRoles()
@@ -49,7 +49,7 @@ class ApiController extends Controller
     {
         try {
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
-            if (!$this->discordData->canEditGuild($serverId)) abort(500, 'Unauthorized access');
+            if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
             return response()->json($this->discordData->getGuildChannels());
         }
         catch (InvalidGrantException $e) {
@@ -64,11 +64,11 @@ class ApiController extends Controller
     {
         try {
             $this->discordData = $configController->getDiscordData($request, $serverId, $userId = null);
-            if (!$this->discordData->canEditGuild($serverId)) abort(500, 'Unauthorized access');
+            if (!$this->discordData->canEditGuild($serverId)) abort(403, 'Unauthorized access');
 
             $configData->updateConfigWithId($serverId);
             $this->discordData->getGuildRoles();
-            
+
             $results = $configData->getAttribute($configAttribute);
             if ($configAttribute === 'CustomCommands') {
                 foreach ($results as &$command) {
@@ -83,7 +83,7 @@ class ApiController extends Controller
             return response()->json($results);
         }
         catch (Exception $exception) {
-            return response()->json([ 'error' => 404, 'message' => 'Not found' ], 404);
+            return response()->json($exception->getMessage(), 404);
         }
     }
 
