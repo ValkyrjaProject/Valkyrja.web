@@ -55,7 +55,6 @@ new Vue({
             this.$store.dispatch('updateCommandCharacter', e.target.value)
         },
         onSubmit (e) {
-            console.log(this.anyLoading);
             if (!this.anyLoading) {
                 document.forms[0].submit();
             }

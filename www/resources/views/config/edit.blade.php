@@ -5,17 +5,17 @@
 @section('content')
 <div class="container">
 	<div class="col-xs-12">
-		<form action="{{ url('config/save/'.$serverId) }}" method="post" @submit.prevent="onSubmit">
+		<form action="{{ url('config/save/'.$serverId) }}" method="post" @submit.prevent>
 			<h1 class="col-md-8">
                 <v-loading message='Configure Botwinder'>
                     <span slot='spinner' class="align-bottom">
-                        <v-loading-spinner width='1em' height='1em' />
+                        <v-loading-spinner width='1em' height='1em' ></v-loading-spinner>
                     </span>
                     <span>Configure Botwinder</span>
                 </v-loading>
             </h1>
 			<span class="col-md-4">
-				<input class="btn btn-primary float-right" type="submit" value="Save" :disabled="anyLoading"><br />
+				<button class="btn btn-primary float-right" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
 			</span>
 			<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configBasic" aria-expanded="true" aria-controls="configBasic">
 				Basic configuration
@@ -465,7 +465,7 @@
 			</div>
 
 			{{ csrf_field() }}
-			<input class="btn btn-primary" type="submit" value="Save" :disabled="anyLoading">
+			<button class="btn btn-primary" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
 		</form>
 	</div>
 </div>
