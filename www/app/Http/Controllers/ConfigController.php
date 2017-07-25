@@ -16,6 +16,7 @@ use App\ConfigData as ConfigData;
 
 use App\Http\Requests\ConfigDataValidation as ConfigDataValidation;
 use Response;
+use Throwable;
 
 class ConfigController extends Controller
 {
@@ -74,7 +75,7 @@ class ConfigController extends Controller
         try {
             $discord_data = $this->getDiscordData($request, null, $userId);
         }
-        catch (Exception $e) {
+        catch (Throwable $e) {
             return $this->logout($request, 'Unable to authorize you, please login again');
         }
 
@@ -121,7 +122,7 @@ class ConfigController extends Controller
         try {
             $discord_data = $this->getDiscordData($request, $serverId);
         }
-        catch (Exception $e) {
+        catch (Throwable $e) {
             return $this->logout($request, 'Unable to authorize you, please login again');
         }
 
@@ -179,7 +180,7 @@ class ConfigController extends Controller
         try {
             $discord_data = $this->getDiscordData($request);
         }
-        catch (Exception $e) {
+        catch (Throwable $e) {
             return $this->logout($request, 'Unable to authorize you, please login again');
         }
 

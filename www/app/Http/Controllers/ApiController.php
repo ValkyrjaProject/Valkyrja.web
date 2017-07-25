@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 use Log;
+use Throwable;
 
 class ApiController extends Controller
 {
@@ -46,7 +47,7 @@ class ApiController extends Controller
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 403);
         }
-        catch (Exception $e) {
+        catch (Throwable $e) {
             Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
@@ -68,7 +69,7 @@ class ApiController extends Controller
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 403);
         }
-        catch (Exception $e) {
+        catch (Throwable $e) {
             Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
@@ -102,9 +103,9 @@ class ApiController extends Controller
             }
             return json_encode($results);
         }
-        catch (Exception $exception) {
-            Log::warning($exception);
-            return response()->json($exception->getMessage(), 404);
+        catch (Throwable $e) {
+            Log::warning($e);
+            return response()->json($e->getMessage(), 404);
         }
     }
 
