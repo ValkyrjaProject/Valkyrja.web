@@ -180,15 +180,12 @@ class DiscordData extends Model
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
-                Log::error($rawServerChannels['code'].': Botwinder not on server: '.$this->serverId);
                 throw new ServerIssueException("Botwinder is not on the server, if it is, ask in Jefi's Nest");
             }
             elseif ($this->hasNoPermissions($rawServerChannels)) {
-                Log::error($rawServerChannels['code'].': Botwinder does not have sufficient permissions: '.$this->serverId);
                 throw new ServerIssueException("Botwinder does not have sufficient permissions.");
             }
 
-            Log::info($rawServerChannels);
             $serverChannels = collect();
             foreach ($rawServerChannels as $serverChannel) {
                 if (!isset($serverChannel['type'])) {
@@ -226,15 +223,12 @@ class DiscordData extends Model
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerRoles)) {
-                Log::error('Botwinder not on server: '.$this->serverId);
                 throw new ServerIssueException("Botwinder is not on the server, if it is, ask in Jefi's Nest");
             }
             elseif ($this->hasNoPermissions($rawServerRoles)) {
-                Log::error($rawServerRoles['code'].': Botwinder does not have sufficient permissions: '.$this->serverId);
                 throw new ServerIssueException("Botwinder does not have sufficient permissions.");
             }
 
-            Log::info($rawServerRoles);
             $serverRoles = collect();
             foreach ($rawServerRoles as $serverRole) {
                 if (!isset($serverRole['id'])) {

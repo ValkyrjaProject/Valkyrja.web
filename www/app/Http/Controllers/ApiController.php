@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ConfigData;
 use App\CustomCommands;
 use App\DiscordData;
+use App\Exceptions\ServerIssueException;
+use Discord\OAuth\DiscordRequestException;
 use Exception;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
@@ -47,7 +49,12 @@ class ApiController extends Controller
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 403);
         }
+        catch (ServerIssueException $e) {
+            return response()->json($e->getMessage(), 404);
+        }
         catch (Throwable $e) {
+            if ($e instanceof DiscordRequestException)
+                return response()->json('Error authenticating you. Please logout and login', 403);
             Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
@@ -69,7 +76,12 @@ class ApiController extends Controller
         catch (InvalidGrantException $e) {
             return response()->json('Error authenticating you. Please logout and login', 403);
         }
+        catch (ServerIssueException $e) {
+            return response()->json($e->getMessage(), 404);
+        }
         catch (Throwable $e) {
+            if ($e instanceof DiscordRequestException)
+                return response()->json('Error authenticating you. Please logout and login', 403);
             Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
@@ -103,7 +115,15 @@ class ApiController extends Controller
             }
             return json_encode($results);
         }
+        catch (InvalidGrantException $e) {
+            return response()->json('Error authenticating you. Please logout and login', 403);
+        }
+        catch (ServerIssueException $e) {
+            return response()->json($e->getMessage(), 404);
+        }
         catch (Throwable $e) {
+            if ($e instanceof DiscordRequestException)
+                return response()->json('Error authenticating you. Please logout and login', 403);
             Log::warning($e);
             return response()->json($e->getMessage(), 404);
         }
