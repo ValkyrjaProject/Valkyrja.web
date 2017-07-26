@@ -1,5 +1,6 @@
 {
   "CommandCharacter": ["!", "string"],
+  "AltCommandPrefix": ["", "string"],
   "CustomCommands": [null, "list"],
   "ExecuteCommandsOnEditedMessages": [true, "bool"],
   "IgnoreBots": [true, "bool"],
