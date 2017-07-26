@@ -31,11 +31,11 @@
                     Second common mistake is wallpapering (to some degree) channel permissions. This may prevent the bot from talking - executing commands, this may also block it from correctly handling channel or user mute, etc. Read <a href="http://rhea-ayase.eu/articles/2016-12/Discord-Guide-Server-setup-and-permissions" target="_blank">this guide about permissions</a>.
 				</p>
 				<p>
-					<b>Command Prefix</b> - required option, do not leave this empty!</ br>
+					<b>Command Prefix</b> - required option, do not leave this empty!<br />
 					<text-field init-id="CommandCharacter" init-name="CommandCharacter" init-value="{{ $configData["CommandCharacter"][0] }}"></text-field>
 				</p>
 				<p>
-					<b>Alternative Command Prefix</b> - will be used as well as the above, you can leave this one empty.</ br>
+					<b>Alternative Command Prefix</b> - will be used as well as the above, you can leave this one empty.<br />
 					@include("config.types.text", ['key' => "AltCommandPrefix", 'data' => $configData["AltCommandPrefix"][0]])
 				</p>
 				<p>
