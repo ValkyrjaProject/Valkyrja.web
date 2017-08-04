@@ -23,11 +23,17 @@ const state = {
     channels: [],
     data: {
         CustomCommands: {
-            commandsList: [], // list of command Objects
-            activeCommand: null
+            itemsList: [], // list of command Objects
+            activeItem: null
         }
     },
-    botwinderCommands: []
+    botwinderCommands: [],
+    itemModifier: {
+        /*CustomCommands: {
+            itemsList: [], // list of command Objects
+            activeItem: null
+        }*/
+    }
 };
 
 // mutations to modify state attributes
@@ -66,45 +72,48 @@ const mutations = {
     },
 
     EDIT_CUSTOM_COMMANDS_ROLES (state, payload) {
-        if (state.data.CustomCommands.commandsList[payload.key].RoleWhitelist === null) state.data.CustomCommands.commandsList[payload.key].RoleWhitelist = [];
-        state.data.CustomCommands.commandsList[payload.key].RoleWhitelist.push(payload.data);
+        if (state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist === null) state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist = [];
+        state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist.push(payload.data);
     },
 
     REMOVE_CUSTOM_COMMANDS_ROLES (state, payload) {
-        state.data.CustomCommands.commandsList[payload.key].RoleWhitelist
-            .splice(state.data.CustomCommands.commandsList[payload.key].RoleWhitelist.findIndex(x => x===payload.data), 1);
+        state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist
+            .splice(state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist.findIndex(x => x===payload.data), 1);
     },
 
-    UPDATE_ACTIVE_CUSTOM_COMMAND (state, payload) {
-        state.data.CustomCommands.activeCommand = payload;
+    UPDATE_ACTIVE_ITEM (state, payload) {
+        state.itemModifier[payload.formName].activeItem = payload.item;
     },
 
-    UPDATE_ACTIVE_CUSTOM_COMMAND_DATA (state, payload) {
-        Vue.set(state.data.CustomCommands.activeCommand, payload.key, payload.data);
+    UPDATE_ACTIVE_ITEM_DATA (state, payload) {
+        Vue.set(state.itemModifier[payload.formName].activeItem, payload.key, payload.data);
     },
 
-    ADD_CUSTOM_COMMAND (state, payload) {
-        state.data.CustomCommands.commandsList.push(payload);
+    ADD_ITEM (state, payload) {
+        state.itemModifier[payload.formName].itemsList.push(payload.item);
     },
 
-    REMOVE_CUSTOM_COMMAND (state, payload) {
-        state.data.CustomCommands.commandsList
-            .splice(state.data.CustomCommands.commandsList.findIndex(x => x===payload), 1);
+    REMOVE_ITEM (state, payload) {
+        state.itemModifier[payload.formName].itemsList
+            .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x===payload.item), 1);
     },
 
-    UPDATE_CUSTOM_COMMANDS (state, payload) {
+    UPDATE_ITEM_MODIFIER (state, payload) {
         if (payload !== null) {
-            state.data.CustomCommands.commandsList = payload;
+            if (!state.itemModifier.hasOwnProperty(payload.key)) {
+                Vue.set(state.itemModifier, payload.key, {itemsList: [], activeItem: null});
+            }
+            Vue.set(state.itemModifier[payload.key], 'itemsList', payload.data);
         }
     },
 
-    EDIT_CUSTOM_COMMANDS_CLASS (state, payload) {
-        if (state.data.CustomCommands.commandsList[payload.index]['classData'] === undefined) Vue.set(state.data.CustomCommands.commandsList[payload.index], 'classData', {});
+    EDIT_ITEM_CLASS (state, payload) {
+        if (state.itemModifier[payload.formName].itemsList[payload.index]['classData'] === undefined) Vue.set(state.itemModifier[payload.formName].itemsList[payload.index], 'classData', {});
         for (let key in payload.classData) {
             if (!payload.classData.hasOwnProperty(key)) continue;
-            //state.data.CustomCommands.commandsList[payload.index]['classData'][key] = payload.classData[key];
-            Vue.set(state.data.CustomCommands.commandsList[payload.index]['classData'], key, payload.classData[key]);
-            //state.data.CustomCommands.commandsList[payload.index]['classData'].splice(key, 1, payload.classData[key]);
+            //state.itemModifier.CustomCommands.commandsList[payload.index]['classData'][key] = payload.classData[key];
+            Vue.set(state.itemModifier[payload.formName].itemsList[payload.index]['classData'], key, payload.classData[key]);
+            //state.itemModifier.CustomCommands.commandsList[payload.index]['classData'].splice(key, 1, payload.classData[key]);
         }
     },
 
@@ -140,8 +149,8 @@ const getters = {
         });
         return {selected: selected, available: available};
     },
-    customcommands: state => (attribute) => {
-        let whitelist = state.data.CustomCommands.commandsList[attribute].RoleWhitelist;
+    item_modifier: state => (attribute) => {
+        let whitelist = state.itemModifier[attribute.formName].itemsList[attribute.index].RoleWhitelist;
         if (whitelist === null) whitelist = [];
         let selected = state.roles.filter(e => {
             return whitelist.includes(e['id']);

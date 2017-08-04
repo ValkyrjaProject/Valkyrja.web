@@ -1,57 +1,48 @@
 <template>
     <div class="customCommands loadComponent">
         <div v-if="$isLoading(this.formName)" class="loading">
-            <span>Loading config please wait!</span>
+            <span>{{loadingText}}</span>
         </div>
-        <div class="listContainer">
-            <h2>Custom commands</h2>
-            <list-container :value="customCommands"
-                            @input="setActiveCommand($event)"
-                            @click="removeCommand($event)"
-                            @add="newCommand()"
-                            :hide-form="true"
-                            :include-search="true"
-                            :can-add="true"
-                            list-type="doubleInput"
-                            show-attribute="ID"
-                            form-name="CustomCommands"
-                            class="tallerList"></list-container>
-        </div>
-        <div class="listContainer">
-            <div v-if="activeCommand != null">
+        <item-modifier :form-name="formName"
+                       list-name="Custom Commands"
+                       :new-item-layout="addCustomCommandTemplate"
+                       item-layout-primary-key="ID">
+            <template scope="props">
                 <div class="from-group"
-                     :class="{'has-danger': isDuplicate(activeCommand) || activeCommand.ID.length === 0 || hasWhitespace(activeCommand.ID) || isBotwinderCommand(activeCommand)}">
+                     :class="{'has-danger': isDuplicate(props.activeItem) || props.activeItem.ID.length === 0 || hasWhitespace(props.activeItem.ID) || isBotwinderCommand(props.activeItem)}">
                     <label class="form-control-label">
                         <b>Id</b> - Unique command identifier, prefix+this is what you will use to run your command.
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{ CommandCharacter }}</span>
-                            <input class="form-control" command-name="ID" :value="activeCommand.ID"
-                                   @input="updateActiveCommand">
+                            <input class="form-control" command-name="ID" :value="props.activeItem.ID"
+                                   @input="updateActiveCommandData">
                         </div>
                     </label>
-                    <div class="form-control-feedback" v-if="isDuplicate(activeCommand)">Id must be unique.</div>
-                    <div class="form-control-feedback" v-if="isBotwinderCommand(activeCommand)">
+                    <div class="form-control-feedback" v-if="isDuplicate(props.activeItem)">Id must be unique.</div>
+                    <div class="form-control-feedback" v-if="isBotwinderCommand(props.activeItem)">
                         Id cannot be the same as a Botwinder command.
                     </div>
-                    <div class="form-control-feedback" v-if="activeCommand.ID.length === 0">Id cannot be empty.</div>
-                    <div class="form-control-feedback" v-if="hasWhitespace(activeCommand.ID)">
+                    <div class="form-control-feedback" v-if="props.activeItem.ID.length === 0">Id cannot be empty.</div>
+                    <div class="form-control-feedback" v-if="hasWhitespace(props.activeItem.ID)">
                         Id cannot contain whitespaces.
                     </div>
                 </div>
-                <div class="from-group" :class="{'has-danger': activeCommand.Response.length === 0}">
+                <div class="from-group" :class="{'has-danger': props.activeItem.Response.length === 0}">
                     <label class="form-control-label">
-                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code v-pre>{{mentioned}}</code> variables.
-                        <textarea class="form-control" command-name="Response" :value="activeCommand.Response"
-                                  @input="updateActiveCommand"></textarea>
+                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code
+                            v-pre>{{mentioned}}</code> variables.
+                        <textarea class="form-control" command-name="Response" :value="props.activeItem.Response"
+                                  @input="updateActiveCommandData"></textarea>
                     </label>
-                    <div class="form-control-feedback" v-if="activeCommand.Response.length === 0">Response is required
+                    <div class="form-control-feedback" v-if="props.activeItem.Response.length === 0">
+                        Response is required
                     </div>
                 </div>
                 <div class="form-group">
                     <label>
                         <b>Description</b> - the <code>{{CommandCharacter}}help</code> message.
-                        <input class="form-control" command-name="Description" :value="activeCommand.Description"
-                               @input="updateActiveCommand">
+                        <input class="form-control" command-name="Description" :value="props.activeItem.Description"
+                               @input="updateActiveCommandData">
                     </label>
                     <b>Whitelisted roles</b> - Only these roles can use the command. Leave empty to be unrestricted.
                     <id-selector :value="roles"
@@ -69,37 +60,20 @@
                         <b>Delete request</b> - Delete the message issuing the command?
                     </label>
                 </div>
-            </div>
-            <div v-else>Nothing selected</div>
-        </div>
-        <span v-for="command in customCommands">
-            <span v-for="(commandType, commandTypeKey) in command" v-if="commandType !== null">
-                <span v-if="commandTypeKey === 'RoleWhitelist'">
-                    <span v-if="commandType.length == 0">
-                        <input type="hidden" :name="inputName(commandTypeKey, command)" value="">
-                    </span>
-                    <span v-else>
-                        <input v-for="(role, roleKey) in commandType" type="hidden"
-                               :name="roleName(commandTypeKey, command)" :value="role">
-                    </span>
-                </span>
-                <span v-else-if="commandTypeKey === 'DeleteRequest'">
-                    <input type="hidden" :name="inputName(commandTypeKey, command)" :value="commandType || false">
-                </span>
-                <input v-else type="hidden" :name="inputName(commandTypeKey, command)" :value="commandType || ''">
-            </span>
-        </span>
+            </template>
+        </item-modifier>
     </div>
 </template>
 
 <script>
-    import ListContainer from '../components/ListContainer.vue'
+    import ItemModifier from '../components/ItemModifier.vue'
     import IdSelector from '../components/IdSelector.vue'
     import {
-        updateActiveCustomCommandData,
-        addCustomCommand,
-        updateCommandCharacter,
-        updateActiveCustomCommand
+        updateActiveItemData,
+        updateActiveItem,
+        editCustomCommandsRoles,
+        removeCustomCommandsRoles,
+        editItemClass
     } from '../vuex/actions'
 
     export default {
@@ -108,16 +82,23 @@
                 required: true
             }
         },
+        data: function() {
+            return {
+                loadingText: "Loading config please wait!"
+            }
+        },
         components: {
-            IdSelector,
-            ListContainer
+            ItemModifier,
+            IdSelector
         },
         created() {
             this.$startLoading(this.formName);
-            this.$store.dispatch('updateCustomCommands', this.formName)
+            this.$store.dispatch('updateItemModifier', this.formName)
                 .then(() => {
                     this.$endLoading(this.formName);
-                    this.setActiveCommand(this.customCommands[0]);
+                })
+                .catch(() => {
+                    this.loadingText = 'Could not get config values.';
                 });
         },
         computed: {
@@ -125,14 +106,14 @@
                 return this.customCommands.indexOf(this.activeCommand);
             },
             customCommands() {
-                let commands = this.$store.state.data.CustomCommands.commandsList;
+                let commands = this.$store.state.itemModifier[this.formName].itemsList;
                 if (commands === null) {
                     return []
                 }
                 return commands;
             },
             activeCommand() {
-                return this.$store.state.data.CustomCommands.activeCommand
+                return this.$store.state.itemModifier[this.formName].activeItem
             },
             CommandCharacter() {
                 return this.$store.state.CommandCharacter;
@@ -142,125 +123,89 @@
             },
             deleteRequest: {
                 get() {
-                    return this.$store.state.data.CustomCommands.activeCommand.DeleteRequest
+                    return this.$store.state.itemModifier[this.formName].activeItem.DeleteRequest
                 },
                 set(value) {
-                    this.$store.dispatch('updateActiveCustomCommandData',
+                    this.$store.dispatch('updateActiveItemData',
                         {
                             key: 'DeleteRequest',
+                            formName: this.formName,
                             data: value
                         })
                 }
             },
             roles() {
-                return this.$store.getters['customcommands'](this.activeCommandIndex);
+                return this.$store.getters['item_modifier']({
+                    formName: this.formName,
+                    index: this.activeCommandIndex
+                });
             },
             CommandCharacter() {
                 return this.$store.state.CommandCharacter;
-            }
-        },
-        methods: {
-            setActiveCommand(command) {
-                if (this.activeCommand !== null && this.activeCommandIndex >= 0) {
-                    this.$store.dispatch('editCustomCommandsClass', {
-                        index: this.activeCommandIndex,
-                        classData: {'active': false}
-                    });
-                }
-                this.$store.dispatch('updateActiveCustomCommand', command);
-                if (command !== null && command !== undefined) {
-                    this.$store.dispatch('editCustomCommandsClass', {
-                        index: this.customCommands.indexOf(command),
-                        classData: {'active': true}
-                    });
-                }
             },
-            addRoleWhitelist(role) {
-                this.$store.dispatch('editCustomCommandsRoles', {key: this.activeCommandIndex, data: role.id});
-            },
-            removeRoleWhitelist(role) {
-                this.$store.dispatch('removeCustomCommandsRoles', {key: this.activeCommandIndex, data: role.id});
-            },
-            newCommand() {
-                const command = {
-                    ID: 'command' + this.customCommands.length,
+            addCustomCommandTemplate() {
+                return {
+                    ID: 'command',
                     Response: 'Response',
                     Description: '',
                     RoleWhitelist: [],
                     DeleteRequest: false
                 };
-                this.$store.dispatch('addCustomCommand', command);
-                this.setActiveCommand(command);
-
-                let duplicateCommand = this.isDuplicate(command);
-                if (duplicateCommand) {
-                    this.$store.dispatch('editCustomCommandsClass', {
-                        index: this.customCommands.indexOf(command),
-                        classData: {'has-danger': true}
-                    });
-                    this.$store.dispatch('editCustomCommandsClass', {
-                        index: this.customCommands.indexOf(duplicateCommand),
-                        classData: {'has-danger': true}
-                    })
-                }
             },
-            removeCommand(command) {
-                this.$store.dispatch('removeCustomCommand', command);
-                if (command === this.activeCommand) {
-                    if (this.customCommands.length > 0) {
-                        this.setActiveCommand(this.customCommands[0]);
-                    }
-                    else {
-                        this.setActiveCommand();
-                    }
-                }
+        },
+        methods: {
+            addRoleWhitelist(role) {
+                this.$store.dispatch('editCustomCommandsRoles', {
+                    key: this.activeCommandIndex,
+                    formName: this.formName,
+                    data: role.id
+                });
             },
-            inputName(attribute, command) {
-                return this.formName + '[' + this.customCommands.indexOf(command) + ']' + '[' + attribute + ']'
+            removeRoleWhitelist(role) {
+                this.$store.dispatch('removeCustomCommandsRoles', {
+                    key: this.activeCommandIndex,
+                    formName: this.formName,
+                    data: role.id
+                });
             },
-            roleName(attribute, command) {
-                return this.inputName(attribute, command) + '[]';
-            },
-            updateActiveCommand(e) {
-                this.$store.dispatch('updateActiveCustomCommandData', {
+            updateActiveCommandData(e) {
+                this.$store.dispatch('updateActiveItemData', {
                     key: e.target.getAttribute('command-name'),
+                    formName: this.formName,
                     data: e.target.value
                 });
-                this.$store.dispatch('editCustomCommandsClass', {
+                this.$store.dispatch('editItemClass', {
                     index: this.activeCommandIndex,
+                    formName: this.formName,
                     classData: {'has-danger': !this.commandIsValid(this.activeCommand)}
                 });
 
                 for (let command of this.customCommands) {
                     let duplicateCommand = this.isDuplicate(command);
                     if (duplicateCommand) {
-                        this.$store.dispatch('editCustomCommandsClass',
+                        this.$store.dispatch('editItemClass',
                             {
                                 index: this.customCommands.indexOf(command),
+                                formName: this.formName,
                                 classData: {'has-danger': true}
                             });
-                        this.$store.dispatch('editCustomCommandsClass',
+                        this.$store.dispatch('editItemClass',
                             {
                                 index: this.customCommands.indexOf(duplicateCommand),
+                                formName: this.formName,
                                 classData: {'has-danger': true}
                             });
                     }
                     else {
                         let isValid = this.commandIsValid(command);
                         if (command.classData === undefined || ( command.classData !== undefined && command.classData['has-danger'] !== !isValid )) {
-                            this.$store.dispatch('editCustomCommandsClass',
+                            this.$store.dispatch('editItemClass',
                                 {
                                     index: this.customCommands.indexOf(command),
+                                    formName: this.formName,
                                     classData: {'has-danger': !isValid}
                                 });
                         }
-                        /*else if (command.classData['has-danger'] !== !isValid) {
-                            this.$store.dispatch('editCustomCommandsClass',
-                                {
-                                    index: this.customCommands.indexOf(command),
-                                    classData: {'has-danger': !isValid}
-                                });
-                        }*/
                     }
                 }
             },
