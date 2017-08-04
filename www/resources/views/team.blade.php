@@ -102,6 +102,9 @@
                 </i></p>
                 <span class="email"><a href="emailto:alice@botwinder.info">alice@botwinder.info</a></span>
             </div>
+            <div class="clearfix hidden-sm-down">
+                <!-- endline -->
+            </div>
             <!-- DokaDoka -->
             <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
@@ -115,15 +118,7 @@
                 </i></p>
                 <span class="email"><a href="emailto:dokadoka@botwinder.info">dokadoka@botwinder.info</a></span>
             </div>
-            <div class="col-md-6 team-member padding-bottom">
-            </div>
         </div>
-        <!--div class="row">
-            <h1 class="cell">Public Relations</h1>
-            <h1 class="cell">&nbsp;</h1>
-        </div>
-        <div class="row">
-        </div-->
     </section>
 </section>
 @endsection
