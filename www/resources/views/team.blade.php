@@ -50,12 +50,33 @@
 <section class="main-body blue">
     <section class="container team-table">
         <div class="row">
-            <h1 class="cell">Support Team</h1>
-            <h1 class="cell">&nbsp;</h1>
+            <h1 class="cell">Dev Team</h1>
+        </div>
+        <div class="row container">
+            <!-- freiheit -->
+            <div class="col-md-6 team-member padding-bottom">
+                <div class="profile">
+                    <img class="avatar" src="img/team-freiheit.jpg" />
+                    <p class="labels">
+                    <span class="name">freiheit</span>
+                    <br />Consultant</p>
+                </div>
+                <p><i>
+                    He's just this guy you know? And a Linux sysadmin.
+                </i></p>
+                <div class="icons spaced">
+                    <a href="http://eric.eisenhart.com"><img src="/img/external.png" alt="freiheit's website"></a>
+                    <a href="https://github.com/freiheit"><img src="/img/github.png" alt="github.com/freiheit"></a>
+                    <a href="https://twitter.com/freiheit"><img src="/img/twitter.png" alt="twitter.com/freiheit"></a>
+                </div>
+            </div>
         </div>
         <div class="row">
+            <h1 class="cell">Support Team</h1>
+        </div>
+        <div class="row container">
             <!-- MasterChief -->
-            <div class="team-member cell padding-bottom">
+            <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
                     <img class="avatar" src="img/team-masterchief.jpg" />
                     <p class="labels">
@@ -65,9 +86,10 @@
                 <p><i>
                     Programmer in study, also a weirdo.
                 </i></p>
+                <span class="email"><a href="emailto:team@botwinder.info">mastercheif_john-117@botwinder.info</a></span>
             </div>
             <!-- Alice -->
-            <div class="team-member cell padding-bottom">
+            <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
                     <img class="avatar" src="img/team-alice.jpg" />
                     <p class="labels">
@@ -78,14 +100,8 @@
                     System admin and technology enthusiast, supports the religion of cookies.
                 </i></p>
             </div>
-        </div>
-        <div class="row">
-            <h1 class="cell">&nbsp;</h1>
-            <h1 class="cell">Dev Team</h1>
-        </div>
-        <div class="row">
             <!-- DokaDoka -->
-            <div class="team-member cell padding-bottom">
+            <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
                     <img class="avatar" src="img/team-dokadoka.jpg" />
                     <p class="labels">
@@ -95,23 +111,6 @@
                 <p><i>
                     &nbsp;
                 </i></p>
-            </div>
-            <!-- freiheit -->
-            <div class="team-member cell padding-bottom">
-                <div class="profile">
-                    <img class="avatar" src="img/team-freiheit.jpg" />
-                    <p class="labels">
-                    <span class="name">freiheit</span>
-                    <br />Consultant</p>
-                </div>
-                <p><i>
-                    He's just this guy, system admin, you know?
-                </i></p>
-                <div class="icons spaced">
-                    <a href="http://eric.eisenhart.com"><img src="/img/external.png" alt="freiheit's website"></a>
-                    <a href="https://github.com/freiheit"><img src="/img/github.png" alt="github.com/freiheit"></a>
-                    <a href="https://twitter.com/freiheit"><img src="/img/twitter.png" alt="twitter.com/freiheit"></a>
-                </div>
             </div>
         </div>
         <!--div class="row">
