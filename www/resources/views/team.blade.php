@@ -64,6 +64,7 @@
                 <p><i>
                     He's just this guy you know? And a Linux sysadmin.
                 </i></p>
+                <span class="email"><a href="emailto:freiheit@botwinder.info"freiheit>@botwinder.info</a></span>
                 <div class="icons spaced">
                     <a href="http://eric.eisenhart.com"><img src="/img/external.png" alt="freiheit's website"></a>
                     <a href="https://github.com/freiheit"><img src="/img/github.png" alt="github.com/freiheit"></a>
@@ -86,7 +87,7 @@
                 <p><i>
                     Programmer in study, also a weirdo.
                 </i></p>
-                <span class="email"><a href="emailto:team@botwinder.info">mastercheif_john-117@botwinder.info</a></span>
+                <span class="email"><a href="emailto:masterchief_john-117team@botwinder.info">mastercheif_john-117@botwinder.info</a></span>
             </div>
             <!-- Alice -->
             <div class="col-md-6 team-member padding-bottom">
@@ -99,6 +100,7 @@
                 <p><i>
                     System admin and technology enthusiast, supports the religion of cookies.
                 </i></p>
+                <span class="email"><a href="emailto:alice@botwinder.info">alice@botwinder.info</a></span>
             </div>
             <!-- DokaDoka -->
             <div class="col-md-6 team-member padding-bottom">
@@ -111,6 +113,9 @@
                 <p><i>
                     &nbsp;
                 </i></p>
+                <span class="email"><a href="emailto:dokadoka@botwinder.info">dokadoka@botwinder.info</a></span>
+            </div>
+            <div class="col-md-6 team-member padding-bottom">
             </div>
         </div>
         <!--div class="row">
