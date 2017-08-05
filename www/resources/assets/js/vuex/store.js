@@ -71,14 +71,21 @@ const mutations = {
         state.data[payload.key].splice(state.data[payload.key].findIndex(x => x===payload.data), 1);
     },
 
-    EDIT_CUSTOM_COMMANDS_ROLES (state, payload) {
-        if (state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist === null) state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist = [];
-        state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist.push(payload.data);
+    EDIT_ITEM_ROLES (state, payload) {
+        if (state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName] === null) state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName] = [];
+        state
+            .itemModifier[payload.formName]
+            .itemsList[payload.key][payload.roleName]
+            .push(payload.data);
     },
 
-    REMOVE_CUSTOM_COMMANDS_ROLES (state, payload) {
-        state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist
-            .splice(state.itemModifier[payload.formName].itemsList[payload.key].RoleWhitelist.findIndex(x => x===payload.data), 1);
+    REMOVE_ITEM_ROLES (state, payload) {
+        state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName]
+            .splice(state
+                .itemModifier[payload.formName]
+                .itemsList[payload.key][payload.roleName]
+                .findIndex(x => x===payload.data)
+                , 1);
     },
 
     UPDATE_ACTIVE_ITEM (state, payload) {
@@ -150,7 +157,7 @@ const getters = {
         return {selected: selected, available: available};
     },
     item_modifier: state => (attribute) => {
-        let whitelist = state.itemModifier[attribute.formName].itemsList[attribute.index].RoleWhitelist;
+        let whitelist = state.itemModifier[attribute.formName].itemsList[attribute.index][attribute.roleName];
         if (whitelist === null) whitelist = [];
         let selected = state.roles.filter(e => {
             return whitelist.includes(e['id']);

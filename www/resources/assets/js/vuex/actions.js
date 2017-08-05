@@ -21,12 +21,12 @@ export const removeData = ({commit}, payload) => {
     commit('REMOVE_DATA', {key: payload.key, data: payload.data});
 };
 
-export const editCustomCommandsRoles = ({commit}, payload) => {
-    commit('EDIT_CUSTOM_COMMANDS_ROLES', {key: payload.key, data: payload.data});
+export const editItemRoles = ({commit}, payload) => {
+    commit('EDIT_ITEM_ROLES', payload);
 };
 
-export const removeCustomCommandsRoles = ({commit}, payload) => {
-    commit('REMOVE_CUSTOM_COMMANDS_ROLES', {key: payload.key, data: payload.data});
+export const removeItemRoles = ({commit}, payload) => {
+    commit('REMOVE_ITEM_ROLES', payload);
 };
 
 export const updateActiveItem = ({commit}, attribute) => {

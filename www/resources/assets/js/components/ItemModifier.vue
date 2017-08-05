@@ -41,7 +41,8 @@
 </template>
 
 <script>
-    import ListContainer from '../components/ListContainer.vue'
+    import ListContainer from './ListContainer.vue'
+    import listItems from '../mixins/listItems.vue'
     import {
         addItem,
         updateActiveItem,
@@ -50,6 +51,7 @@
     } from '../vuex/actions'
 
     export default {
+        mixins: [listItems],
         props: {
             formName: {
                 required: true
@@ -76,24 +78,6 @@
                 this.setActiveItem(this.itemList[0]);
             }
         },
-        computed: {
-            activeItemIndex() {
-                return this.itemList.indexOf(this.activeItem);
-            },
-            itemList() {
-                let items = this.$store.state.itemModifier[this.formName];
-                if (items.hasOwnProperty('itemsList')) {
-                    items = items['itemsList'];
-                }
-                else {
-                    items = [];
-                }
-                return items;
-            },
-            activeItem() {
-                return this.$store.state.itemModifier[this.formName].activeItem
-            }
-        },
         methods: {
             setActiveItem(item) {
                 if (this.activeItem !== null && this.activeItemIndex >= 0) {
@@ -116,13 +100,6 @@
                 }
             },
             newItem() {
-                /*const item = {
-                    ID: 'command' + this.itemList.length,
-                    Response: 'Response',
-                    Description: '',
-                    RoleWhitelist: [],
-                    DeleteRequest: false
-                };*/
                 let item = Object.assign({}, this.newItemLayout);
                 item[this.itemLayoutPrimaryKey] += this.itemList.length;
 
@@ -165,16 +142,7 @@
             },
             roleName(attribute, item) {
                 return this.inputName(attribute, item) + '[]';
-            },
-            isDuplicate(check) {
-                // Check if item already exists
-                for (let item of this.itemList) {
-                    if (item[this.itemLayoutPrimaryKey] === check[this.itemLayoutPrimaryKey] && this.itemList.indexOf(item) !== this.itemList.indexOf(check)) {
-                        return item;
-                    }
-                }
-                return false;
-            },
+            }
         }
     }
 </script>
