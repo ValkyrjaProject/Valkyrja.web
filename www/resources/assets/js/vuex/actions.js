@@ -100,8 +100,8 @@ export const updateItemModifier = ({commit}, attribute) => {
     })
 };
 
-export const updateCommandCharacter = ({commit}, attribute) => {
-    commit('UPDATE_COMMAND_CHARACTER', attribute)
+export const updateStoreValue = ({commit}, attribute) => {
+    commit('UPDATE_STORE_VALUE', attribute)
 };
 
 export const updateBotwinderCommands = ({commit}) => {

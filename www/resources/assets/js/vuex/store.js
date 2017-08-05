@@ -19,6 +19,7 @@ const state = {
     forbidSubmitForm: false,
     serverId: '',
     CommandCharacter: '',
+    SpambotBanLimit: 0,
     roles: [],
     channels: [],
     data: {
@@ -128,8 +129,8 @@ const mutations = {
         Vue.set(state.data, payload.key, payload.data);
     },
 
-    UPDATE_COMMAND_CHARACTER (state, value) {
-        state.CommandCharacter = value;
+    UPDATE_STORE_VALUE (state, payload) {
+        state[payload.key] = payload.data;
     },
 
     UPDATE_BOTWINDER_COMMANDS (state, value) {

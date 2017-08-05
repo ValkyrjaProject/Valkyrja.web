@@ -87,7 +87,8 @@
 					<br />
 					If you do not want the bot to ban people for spamming, set this to <code>0</code> (zero) otherwise set a number of how many spammy messages should we tolerate before banning them. Spammy messages = links or anything else in this section below, while all the options below do have a ban option for this as well.
 					<br />
-					@include("config.types.int", ['key' => "SpambotBanLimit", 'data' => $configData["SpambotBanLimit"][0]])
+					{{--@include("config.types.int", ['key' => "SpambotBanLimit", 'data' => $configData["SpambotBanLimit"][0]])--}}
+					<text-field init-id="SpambotBanLimit" init-name="SpambotBanLimit" init-value="{{ $configData["SpambotBanLimit"][0] }}"></text-field>
 				</p>
 				<p>
 					<b>Discord Invites</b>
@@ -96,7 +97,7 @@
 					Remove messages that contain discord invites?
 					<br />
 					@include("config.types.bool", ['key' => "BanDiscordInvites", 'data' => $configData["BanDiscordInvites"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> invites have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> invites have been removed?
 				</p>
 				<p>
 					<b>Duplicate messages</b>
@@ -108,7 +109,7 @@
 					We can also remove these cross-server. Imagine that there is someone going through many servers and posting some advertisement everywhere, but only a single message per-server so it doesn't count as standard spam. Botwinder would notice these messages as being duplicates between servers.
 					<br />
 					@include("config.types.bool", ['key' => "BanDuplicateMessages", 'data' => $configData["BanDuplicateMessages"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> messages have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> messages have been removed?
 				</p>
 				<p>
 					<b>Mass-mentions</b>
@@ -118,7 +119,7 @@
 					@include("config.types.int", ['key' => "RemoveMassMentions", 'data' => $configData["RemoveMassMentions"][0]])
 					<br />
 					@include("config.types.bool", ['key' => "BanMassMentions", 'data' => $configData["BanMassMentions"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> messages have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> messages have been removed?
 				</p>
 				<p>
 					<b>Mute fast-message spam</b>
@@ -135,7 +136,7 @@
 					Remove YouTube links?
 					<br />
 					@include("config.types.bool", ['key' => "BanYoutubeLinks", 'data' => $configData["BanYoutubeLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 				<p>
 					<b>Twitch links</b>
@@ -144,7 +145,7 @@
 					Remove Twitch links?
 					<br />
 					@include("config.types.bool", ['key' => "BanTwitchLinks", 'data' => $configData["BanTwitchLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 				<p>
 					<b>Hitbox/Smashcast links</b>
@@ -153,7 +154,7 @@
 					Remove Hitbox and Smashcast links?
 					<br />
 					@include("config.types.bool", ['key' => "BanHitboxLinks", 'data' => $configData["BanHitboxLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 				<p>
 					<b>Beam/Mixer links</b>
@@ -162,7 +163,7 @@
 					Remove Beam and Mixer links?
 					<br />
 					@include("config.types.bool", ['key' => "BanBeamLinks", 'data' => $configData["BanBeamLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 				<p>
 					<b>Imgur-like links</b>
@@ -171,7 +172,7 @@
 					Remove imgur, gfycat, giphy or tinypic links?
 					<br />
 					@include("config.types.bool", ['key' => "BanImgurOrGifLinks", 'data' => $configData["BanImgurOrGifLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 				<p>
 					<b>All standard links</b>
@@ -180,7 +181,7 @@
 					Remove all standard links? This is a list of more-less standard <code>TLD</code>s to be removed, for example <code>.com</code>, <code>.net</code>, and many others... <i>(except the options above (youtube, imgur,..) - enable those if you want them removed as well.)</i>
 					<br />
 					@include("config.types.bool", ['key' => "BanStandardLinks", 'data' => $configData["BanStandardLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 				<p>
 					<b>Extended links</b>
@@ -189,7 +190,7 @@
 					Remove Extended links? Extended links are basically <code>anything.anything</code>
 					<br />
 					@include("config.types.bool", ['key' => "BanExtendedLinks", 'data' => $configData["BanExtendedLinks"][0]])
-					Ban people after <code>{{ $configData["SpambotBanLimit"][0] }}</code> links have been removed?
+					Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
 				</p>
 			</div>
 			<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configModeration" aria-expanded="false" aria-controls="configModeration">

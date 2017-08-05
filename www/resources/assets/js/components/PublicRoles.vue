@@ -97,7 +97,7 @@
             },
             itemIsValid(command) {
                 return !(command.ID.length === 0
-                    || this.hasWhitespace(command.ID);
+                    || this.hasWhitespace(command.ID));
 
             }
         }
