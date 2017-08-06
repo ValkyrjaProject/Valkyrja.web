@@ -62,9 +62,9 @@
                     <br />Consultant</p>
                 </div>
                 <p><i>
-                    He's just this guy you know? And a Linux sysadmin.
+                    He's just this guy, you know? And a Linux sysadmin.
                 </i></p>
-                <span class="email"><a href="emailto:freiheit@botwinder.info"freiheit>@botwinder.info</a></span>
+                <span class="email"><a href="emailto:freiheit@botwinder.info">freiheit@botwinder.info</a></span>
                 <div class="icons spaced">
                     <a href="http://eric.eisenhart.com"><img src="/img/external.png" alt="freiheit's website"></a>
                     <a href="https://github.com/freiheit"><img src="/img/github.png" alt="github.com/freiheit"></a>
@@ -114,7 +114,7 @@
                     <br />Support</p>
                 </div>
                 <p><i>
-                    &nbsp;
+                    Engineering student and botwinder enthusiast.
                 </i></p>
                 <span class="email"><a href="emailto:dokadoka@botwinder.info">dokadoka@botwinder.info</a></span>
             </div>
