@@ -16,7 +16,7 @@
                 <br />Project and Code Lead</p>
             </div>
             <p><i>
-                Former game programmer, player and streamer, an active contributor to gaming and open source communities. Currently wearing her RedHat, playing with the delicate C# letters in Linux.
+                Former game programmer, Community Manager, .NET & OpenShift Engineer. Currently wearing her Red Hat, playing with the delicate C# letters in Linux.
             </i></p>
             <span class="email"><a href="emailto:rhea@botwinder.info">rhea@botwinder.info</a></span>
             <div class="icons spaced">
