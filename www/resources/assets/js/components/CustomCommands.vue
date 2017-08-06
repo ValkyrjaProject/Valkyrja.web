@@ -15,7 +15,7 @@
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">{{ CommandCharacter }}</span>
                             <input class="form-control" command-name="ID" :value="props.activeItem.ID"
-                                   @input="updateActiveCommandData">
+                                   @input="updateActiveItemData">
                         </div>
                     </label>
                     <div class="form-control-feedback" v-if="isDuplicate(props.activeItem)">Id must be unique.</div>
@@ -32,7 +32,7 @@
                         <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code
                             v-pre>{{mentioned}}</code> variables.
                         <textarea class="form-control" command-name="Response" :value="props.activeItem.Response"
-                                  @input="updateActiveCommandData"></textarea>
+                                  @input="updateActiveItemData"></textarea>
                     </label>
                     <div class="form-control-feedback" v-if="props.activeItem.Response.length === 0">
                         Response is required
@@ -42,16 +42,16 @@
                     <label>
                         <b>Description</b> - the <code>{{CommandCharacter}}help</code> message.
                         <input class="form-control" command-name="Description" :value="props.activeItem.Description"
-                               @input="updateActiveCommandData">
+                               @input="updateActiveItemData">
                     </label>
                     <b>Whitelisted roles</b> - Only these roles can use the command. Leave empty to be unrestricted.
                     <id-selector :value="roles"
-                                 @add="addRoleWhitelist($event)"
-                                 @remove="removeRoleWhitelist($event)"
+                                 @add="addRole($event)"
+                                 @remove="removeRole($event)"
                                  init-id-type="Roles"
-                                 init-form-name="CustomCommands"
+                                 :init-form-name="formName"
                                  :hide-inputs="true"
-                                 :state-index="activeCommandIndex"
+                                 :state-index="activeItemIndex"
                                  :use-store="false"></id-selector>
                 </div>
                 <div class="form-group">
@@ -66,17 +66,15 @@
 </template>
 
 <script>
-    import ItemModifier from '../components/ItemModifier.vue'
-    import IdSelector from '../components/IdSelector.vue'
+    import ItemModifier from './ItemModifier.vue'
+    import IdSelector from './IdSelector.vue'
     import {
-        updateActiveItemData,
-        updateActiveItem,
-        editCustomCommandsRoles,
-        removeCustomCommandsRoles,
-        editItemClass
+        updateActiveItemData
     } from '../vuex/actions'
+    import listItems from '../mixins/listItems'
 
     export default {
+        mixins: [listItems],
         props: {
             formName: {
                 required: true
@@ -84,7 +82,9 @@
         },
         data: function() {
             return {
-                loadingText: "Loading config please wait!"
+                itemLayoutPrimaryKey: 'ID',
+                loadingText: "Loading config please wait!",
+                roleName: 'RoleWhitelist'
             }
         },
         components: {
@@ -102,19 +102,6 @@
                 });
         },
         computed: {
-            activeCommandIndex() {
-                return this.customCommands.indexOf(this.activeCommand);
-            },
-            customCommands() {
-                let commands = this.$store.state.itemModifier[this.formName].itemsList;
-                if (commands === null) {
-                    return []
-                }
-                return commands;
-            },
-            activeCommand() {
-                return this.$store.state.itemModifier[this.formName].activeItem
-            },
             CommandCharacter() {
                 return this.$store.state.CommandCharacter;
             },
@@ -134,15 +121,6 @@
                         })
                 }
             },
-            roles() {
-                return this.$store.getters['item_modifier']({
-                    formName: this.formName,
-                    index: this.activeCommandIndex
-                });
-            },
-            CommandCharacter() {
-                return this.$store.state.CommandCharacter;
-            },
             addCustomCommandTemplate() {
                 return {
                     ID: 'command',
@@ -154,70 +132,6 @@
             },
         },
         methods: {
-            addRoleWhitelist(role) {
-                this.$store.dispatch('editCustomCommandsRoles', {
-                    key: this.activeCommandIndex,
-                    formName: this.formName,
-                    data: role.id
-                });
-            },
-            removeRoleWhitelist(role) {
-                this.$store.dispatch('removeCustomCommandsRoles', {
-                    key: this.activeCommandIndex,
-                    formName: this.formName,
-                    data: role.id
-                });
-            },
-            updateActiveCommandData(e) {
-                this.$store.dispatch('updateActiveItemData', {
-                    key: e.target.getAttribute('command-name'),
-                    formName: this.formName,
-                    data: e.target.value
-                });
-                this.$store.dispatch('editItemClass', {
-                    index: this.activeCommandIndex,
-                    formName: this.formName,
-                    classData: {'has-danger': !this.commandIsValid(this.activeCommand)}
-                });
-
-                for (let command of this.customCommands) {
-                    let duplicateCommand = this.isDuplicate(command);
-                    if (duplicateCommand) {
-                        this.$store.dispatch('editItemClass',
-                            {
-                                index: this.customCommands.indexOf(command),
-                                formName: this.formName,
-                                classData: {'has-danger': true}
-                            });
-                        this.$store.dispatch('editItemClass',
-                            {
-                                index: this.customCommands.indexOf(duplicateCommand),
-                                formName: this.formName,
-                                classData: {'has-danger': true}
-                            });
-                    }
-                    else {
-                        let isValid = this.commandIsValid(command);
-                        if (command.classData === undefined || ( command.classData !== undefined && command.classData['has-danger'] !== !isValid )) {
-                            this.$store.dispatch('editItemClass',
-                                {
-                                    index: this.customCommands.indexOf(command),
-                                    formName: this.formName,
-                                    classData: {'has-danger': !isValid}
-                                });
-                        }
-                    }
-                }
-            },
-            isDuplicate(check) {
-                // Check if command already exists
-                for (let command of this.customCommands) {
-                    if (command.ID === check.ID && this.customCommands.indexOf(command) !== this.customCommands.indexOf(check)) {
-                        return command;
-                    }
-                }
-                return false;
-            },
             isBotwinderCommand(check) {
                 // Check if command already exists
                 for (let id of this.botwinderCommands) {
@@ -230,7 +144,7 @@
             hasWhitespace(input) {
                 return /^.*\s.*$/.test(input)
             },
-            commandIsValid(command) {
+            itemIsValid(command) {
                 return !(command.ID.length === 0
                     || this.hasWhitespace(command.ID)
                     || this.isBotwinderCommand(command)

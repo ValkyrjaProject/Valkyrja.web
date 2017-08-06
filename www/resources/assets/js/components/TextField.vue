@@ -1,5 +1,5 @@
 <template>
-    <input class="form-control" type="text" :id="id" :name="name" :value="value" @input="updateCommandCharacter">
+    <input class="form-control" type="text" :id="id" :name="name" :value="value" @input="updateStoreValue">
 </template>
 
 <script>
@@ -19,16 +19,22 @@
         },
         computed: {
             value () {
-                return this.$store.state.CommandCharacter
+                return this.$store.state[this.name]
             }
         },
         methods: {
-            updateCommandCharacter (e) {
-                this.$store.dispatch('updateCommandCharacter', e.target.value)
+            updateStoreValue (e) {
+                this.$store.dispatch('updateStoreValue', {
+                    key: this.initName,
+                    data: e.target.value
+                })
             }
         },
         created() {
-            this.$store.dispatch('updateCommandCharacter', this.initValue)
+            this.$store.dispatch('updateStoreValue', {
+                key: this.initName,
+                data: this.initValue
+            })
         }
     }
 </script>

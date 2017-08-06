@@ -45,6 +45,7 @@ new Vue({
         ]),
         ...mapState([
             'CommandCharacter',
+            'SpambotBanLimit',
             'roles',
             'channels',
             'forbidSubmitForm'
