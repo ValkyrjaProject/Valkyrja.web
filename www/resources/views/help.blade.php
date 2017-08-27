@@ -18,7 +18,7 @@
             </ul>
         </p>
         <p>
-            Please do not PM individual team members including Rhea. Join the <a href="https://discord.gg/XgVvkXx">Discord Server</a>, take a look at <code>FAQ</code>, recent <code>Diary</code> entries, and then ask in the <code>help</code> channel
+            Please do not PM individual team members including Rhea. Join the <a href="https://discord.gg/XgVvkXx">Discord Server</a>, take a look at <code>FAQ</code>, recent entries in <code>news</code>, and then ask in the <code>support</code> channel
         </p>
     </div>
 </section>
