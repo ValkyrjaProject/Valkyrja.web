@@ -12,8 +12,38 @@
     <section class="nav container col-sm-9 scrollspy-elements" style="position:relative;">
         <div class="row col-xs-12">
             <div>
-                <h1>Key Features</h1>
-                <p>
+                <h1>Open Source</h1>
+                <div class="features-indent">
+                    Botwinder is Open Source and you can find it in the below repositories, contribution is welcome.
+                    <table class="command">
+                    <tr>
+                        <td>Botwinder.core</td>
+                        <td>Core client code.</td>
+                    </tr>
+                    <tr>
+                        <td>Botwinder.discord</td>
+                        <td>Most of Botwinder's features</td>
+                    </tr>
+                    <tr>
+                        <td>Botwinder.secure</td>
+                        <td>Private repository containing sensitive code, such as antispam.</td>
+                    </tr>
+                    <tr>
+                        <td>Botwinder.web</td>
+                        <td>This website.</td>
+                    </tr>
+                    <tr>
+                        <td>Botwinder.service</td>
+                        <td>What you can see as `Skywinder` on Discord, a server cluster management bot.</td>
+                    </tr>
+                    <tr>
+                        <td>Botwinder.status</td>
+                        <td>The `status.botwinder.info` page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
+                    </tr>
+                    </table>
+                </div>
+                <h1 class="features-h1">Key Features</h1>
+                <div class="features-indent">
                     These are some features that are not fully covered by simple commands:
                     <ul>
                         <li><b>Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
@@ -32,7 +62,7 @@
                         <li>Set-up <b>Livestream notifications</b> (twitch, hitbox and beam) and run giveaways on discord, and much more to come...</li>
                         <li>Last but not least, we put a lot of emphasis on <b>security</b>. No server has access to any data from any other server, and no sensitive data is available to public. As you can see below we have different permission levels, and everything somewhat important or sensitive is hidden behind those permissions, including previously known usernames, times, etc etc...</li>
                     </ul>
-                </p>
+                </div>
                 <h1 class="features-h1">Command permissions</h1>
                 <div class="features-indent">
                     <p>
