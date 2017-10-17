@@ -5,13 +5,21 @@ export const editServerId = ({commit}, id) => {
     commit('EDIT_SERVER_ID', id)
 };
 
-export const editRoles = ({commit}, roles) => {
-    commit('EDIT_ROLES', roles)
+/*export const editRole = ({commit}, data) => {
+    commit('EDIT_ROLE', data);
 };
 
-export const editChannels = ({commit}, channels) => {
-    commit('EDIT_CHANNELS', channels)
+export const editChannel = ({commit}, data) => {
+    commit('EDIT_CHANNEL', data);
 };
+
+export const removeRole = ({commit}, data) => {
+    commit('REMOVE_ROLE', data);
+};
+
+export const removeChannel = ({commit}, data) => {
+    commit('REMOVE_CHANNEL', data);
+};*/
 
 export const editData = ({commit}, payload) => {
     commit('EDIT_DATA', {key: payload.key, data: payload.data});
@@ -49,25 +57,12 @@ export const editItemClass = ({commit}, attribute) => {
     commit('EDIT_ITEM_CLASS', attribute);
 };
 
-export const updateRoles = ({commit}) => {
-    configData.getRoles(store.state.serverId)
-        .then(response => {
-            commit('EDIT_ROLES', response['data']);
-        })
-        .catch(error => {
-            commit('API_ERROR', error['response']['data']);
-        });
-
+export const updateRoles = ({commit}, attribute) => {
+    commit('EDIT_ROLES', attribute);
 };
 
-export const updateChannels = ({commit}) => {
-    configData.getChannels(store.state.serverId)
-        .then(response => {
-            commit('EDIT_CHANNELS', response['data']);
-        })
-        .catch(error => {
-            commit('API_ERROR', error['response']['data']);
-        });
+export const updateChannels = ({commit}, attribute) => {
+    commit('EDIT_CHANNELS', attribute);
 };
 
 export const updateState = ({commit}, attribute) => {
@@ -75,7 +70,7 @@ export const updateState = ({commit}, attribute) => {
     return new Promise((resolve, reject) => {
         configData.getValues(store.state.serverId, attribute)
             .then(response => {
-                commit('UPDATE_STATE', {key: attribute, data: response['data'] || []});
+                commit('UPDATE_STATE', {key: attribute, data: response['data']});
                 resolve();
             })
             .catch(error => {
@@ -83,6 +78,18 @@ export const updateState = ({commit}, attribute) => {
                 reject();
             });
     });
+};
+
+export const initialState = ({commit}, data) => {
+    commit('UPDATE_STATE', {key: null, data: data});
+};
+
+export const updateCustomCommands = ({commit}, data) => {
+    commit('UPDATE_ITEM_MODIFIER', {key: 'custom_commands', data: data});
+};
+
+export const updateCommandCharacter = ({commit}, data) => {
+    commit('EDIT_COMMAND_PREFIX', data);
 };
 
 export const updateItemModifier = ({commit}, attribute) => {

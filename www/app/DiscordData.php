@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App;
 use App\Exceptions\DiscordException;
 use App\Exceptions\EmptyUserException;
 use App\Exceptions\ServerIssueException;
@@ -29,7 +30,7 @@ class DiscordData extends Model
     private $guilds;
     /** @var AccessToken $access_token */
     private $access_token;
-    const CONFIG_FOLDER = '../../config/';
+
     protected $userFillable = [
         'id',
         'username',
@@ -122,13 +123,12 @@ class DiscordData extends Model
                 }
 
                 return $this->guilds = collect($guilds)->filter(function ($guild) {
-                    return ($guild->owner || $guild->permissions & 40) && file_exists(self::CONFIG_FOLDER.$guild->id);
+                    return ($guild->owner || $guild->permissions & 40) && ServerConfig::find($guild->id);
                 });
             }
             $guilds = $this->user->getGuildsAttribute();
-
             $this->guilds = collect($guilds)->filter(function ($guild) {
-                return ($guild->owner || $guild->permissions & 40) && file_exists(self::CONFIG_FOLDER.$guild->id);
+                return ($guild->owner || $guild->permissions & 40) && ServerConfig::find($guild->id);
             });
 
             $guildsArray = array();
@@ -160,7 +160,7 @@ class DiscordData extends Model
         }
 
         return collect($this->guilds)->contains(function ($guild) use ($serverId)  {
-            return ($serverId == $guild->id) && ($guild->owner || $guild->permissions & 40) && file_exists(self::CONFIG_FOLDER.$guild->id);
+            return ($serverId == $guild->id) && ($guild->owner || $guild->permissions & 40) && ServerConfig::find($guild->id);
         });
     }
 
@@ -174,9 +174,24 @@ class DiscordData extends Model
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
 
         if (!isset($this->serverChannels)) {
-            /*if (Cache::has('server_'.$this->serverId.'_channels')) {
-                return $this->serverChannels = Cache::get('server_'.$this->serverId.'_channels');
-            }*/
+            // For local debugging
+            if (App::environment('local')) {
+                $serverChannels = collect();
+                if (Cache::has('channels')) {
+                    $serverChannels = collect(Cache::get('channels'));
+                }
+                else {
+                    for ($i = 0; $i <= 10; $i++) {
+                        $tempArray = [];
+                        $tempArray['id'] = (string)rand(0, PHP_INT_MAX);
+                        $tempArray['name'] = '#'.str_random(rand(4, 16));
+                        $serverChannels->push($tempArray);
+                    }
+                    Cache::add('channels', $serverChannels->all(), 60);
+                }
+                $this->serverChannels = $serverChannels;
+                return $this->serverChannels;
+            }
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
@@ -190,7 +205,6 @@ class DiscordData extends Model
             foreach ($rawServerChannels as $serverChannel) {
                 if (!isset($serverChannel['type'])) {
                     Log::error('Server channels: '.isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
-
                     throw new DiscordException('There was an error getting channels from the server. Please try again');
                 }
                 if ($serverChannel['type'] === 'text') {
@@ -202,7 +216,6 @@ class DiscordData extends Model
                 }
             }
             $this->serverChannels = $serverChannels;
-            //Cache::add('server_'.$this->serverId.'_channels', $this->serverChannels, 30);
         }
         return $this->serverChannels;
     }
@@ -217,9 +230,23 @@ class DiscordData extends Model
         if (!isset($this->serverId)) throw new EmptyPropertyException('Server ID is not set');
 
         if (!isset($this->serverRoles)) {
-            /*if (Cache::has('server_'.$this->serverId.'_roles')) {
-                return $this->serverRoles = Cache::get('server_'.$this->serverId.'_roles');
-            }*/
+            if (App::environment('local')) {
+                $serverRoles = collect();
+                if (Cache::has('roles')) {
+                    $serverRoles = collect(Cache::get('roles'));
+                }
+                else {
+                    for ($i = 0; $i <= 25; $i++) {
+                        $tempArray = [];
+                        $tempArray['id'] = (string)rand(0, PHP_INT_MAX);
+                        $tempArray['name'] = str_random(rand(4, 24));
+                        $serverRoles->push($tempArray);
+                    }
+                    Cache::add('roles', $serverRoles->all(), 60);
+                }
+                $this->serverRoles = $serverRoles;
+                return $this->serverRoles;
+            }
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerRoles)) {
@@ -243,7 +270,6 @@ class DiscordData extends Model
                 $serverRoles->push($tempArray);
             }
             $this->serverRoles = $serverRoles;
-            //Cache::add('server_'.$this->serverId.'_roles', $this->serverRoles, 30);
         }
         return $this->serverRoles;
     }
@@ -277,7 +303,7 @@ class DiscordData extends Model
         return new Discord([
             'clientId'     => config('discordoauth2.client_id'),
             'clientSecret' => config('discordoauth2.client_secret'),
-            'redirectUri'  => url('config/login')
+            'redirectUri'  => route('login')
         ]);
     }
 

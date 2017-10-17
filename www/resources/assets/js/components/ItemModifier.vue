@@ -10,7 +10,7 @@
                             :include-search="true"
                             :can-add="true"
                             list-type="doubleInput"
-                            show-attribute="ID"
+                            show-attribute="commandid"
                             :form-name="formName"
                             class="tallerList"></list-container>
         </div>
@@ -34,7 +34,9 @@
                 <span v-else-if="typeof(itemType)  === 'boolean'">
                     <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || false">
                 </span>
-                <input v-else type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || ''">
+                <span v-else-if="itemType.length > 0">
+                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || ''">
+                </span>
             </span>
         </span>
     </div>

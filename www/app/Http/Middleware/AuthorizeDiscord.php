@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\DiscordData;
 use Closure;
 use Discord\OAuth\Discord;
 use Discord\OAuth\DiscordRequestException;
@@ -22,11 +23,7 @@ class AuthorizeDiscord
      */
     public function handle(Request $request, Closure $next)
     {
-        $provider = new Discord([
-            'clientId'     => config('discordoauth2.client_id'),
-            'clientSecret' => config('discordoauth2.client_secret'),
-            'redirectUri'  => url('config')
-        ]);
+        $provider = DiscordData::getProvider();
 
         if (!$request->hasCookie('access_token')) {
             return $this->redirectToLogin($request);

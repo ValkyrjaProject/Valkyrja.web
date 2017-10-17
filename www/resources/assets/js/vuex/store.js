@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import * as actions from './actions'
-import { createVuexLoader } from 'vuex-loading'
+import {createVuexLoader} from 'vuex-loading'
 
 const VuexLoading = createVuexLoader({
     moduleName: 'loading',
@@ -18,104 +18,122 @@ const state = {
     errors: [],
     forbidSubmitForm: false,
     serverId: '',
-    CommandCharacter: '',
+    command_prefix: '',
     SpambotBanLimit: 0,
     roles: [],
     channels: [],
-    data: {
-        CustomCommands: {
+    data: {},
+    botwinderCommands: [],
+    itemModifier: {
+        custom_commands: {
             itemsList: [], // list of command Objects
             activeItem: null
         }
     },
-    botwinderCommands: [],
-    itemModifier: {
-        /*CustomCommands: {
-            itemsList: [], // list of command Objects
-            activeItem: null
-        }*/
-    }
+    /*rolesData: [],
+    channelsData: []*/
 };
 
 // mutations to modify state attributes
 const mutations = {
-    API_ERROR (state, error) {
+    API_ERROR(state, error) {
         if (state.errors.indexOf(error) < 0) state.errors.push(error);
         state.forbidSubmitForm = true;
     },
 
-    CLEAR_API_ERROR (state) {
+    CLEAR_API_ERROR(state) {
         state.errors = [];
     },
 
-    EDIT_SERVER_ID (state, id) {
+    EDIT_SERVER_ID(state, id) {
         state.serverId = id
     },
 
-    EDIT_COMMAND_CHARACTER (state, character) {
-        state.CommandCharacter = character
+    EDIT_COMMAND_PREFIX(state, character) {
+        state.command_prefix = character
     },
 
-    EDIT_ROLES (state, roles) {
+    EDIT_ROLES(state, roles) {
         state.roles = roles;
     },
 
-    EDIT_CHANNELS (state, channels) {
+    EDIT_CHANNELS(state, channels) {
         state.channels = channels;
     },
 
-    EDIT_DATA (state, payload) {
-        state.data[payload.key].push(payload.data);
+    //IdSelector START
+    /*EDIT_ROLE(state, payload) {
+        console.log('test');
+        state.rolesData.push(payload);
     },
 
-    REMOVE_DATA (state, payload) {
-        state.data[payload.key].splice(state.data[payload.key].findIndex(x => x===payload.data), 1);
+    REMOVE_ROLE(state, payload) {
+        state.rolesData.splice(state.rolesData.findIndex(x => x === payload.data), 1);
     },
 
-    EDIT_ITEM_ROLES (state, payload) {
-        if (state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName] === null) state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName] = [];
-        state
-            .itemModifier[payload.formName]
+    EDIT_CHANNEL(state, payload) {
+        state.channelsData.push(payload);
+    },
+
+    REMOVE_CHANNEL(state, payload) {
+        state.channelsData.splice(state.channelsData.findIndex(x => x === payload.data), 1);
+    },*/
+    //IdSelector END
+
+    EDIT_DATA(state, payload) {
+        state[payload.key].push(payload.data);
+    },
+
+    REMOVE_DATA(state, payload) {
+        state[payload.key].splice(state.data[payload.key].findIndex(x => x === payload.data), 1);
+    },
+
+    EDIT_ITEM_ROLES(state, payload) {
+        if (state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName] === null) {
+            state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName] = [];
+        }
+
+        state.itemModifier[payload.formName]
             .itemsList[payload.key][payload.roleName]
             .push(payload.data);
     },
 
-    REMOVE_ITEM_ROLES (state, payload) {
+    REMOVE_ITEM_ROLES(state, payload) {
         state.itemModifier[payload.formName].itemsList[payload.key][payload.roleName]
             .splice(state
-                .itemModifier[payload.formName]
-                .itemsList[payload.key][payload.roleName]
-                .findIndex(x => x===payload.data)
+                    .itemModifier[payload.formName]
+                    .itemsList[payload.key][payload.roleName]
+                    .findIndex(x => x === payload.data)
                 , 1);
     },
 
-    UPDATE_ACTIVE_ITEM (state, payload) {
+    UPDATE_ACTIVE_ITEM(state, payload) {
         state.itemModifier[payload.formName].activeItem = payload.item;
     },
 
-    UPDATE_ACTIVE_ITEM_DATA (state, payload) {
+    UPDATE_ACTIVE_ITEM_DATA(state, payload) {
         Vue.set(state.itemModifier[payload.formName].activeItem, payload.key, payload.data);
     },
 
-    ADD_ITEM (state, payload) {
+    ADD_ITEM(state, payload) {
         state.itemModifier[payload.formName].itemsList.push(payload.item);
     },
 
-    REMOVE_ITEM (state, payload) {
+    REMOVE_ITEM(state, payload) {
         state.itemModifier[payload.formName].itemsList
-            .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x===payload.item), 1);
+            .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x === payload.item), 1);
     },
 
-    UPDATE_ITEM_MODIFIER (state, payload) {
+    UPDATE_ITEM_MODIFIER(state, payload) {
         if (payload !== null) {
-            if (!state.itemModifier.hasOwnProperty(payload.key)) {
+            if (!state.itemModifier.hasOwnProperty(payload.key) || payload.data === null) {
                 Vue.set(state.itemModifier, payload.key, {itemsList: [], activeItem: null});
             }
             Vue.set(state.itemModifier[payload.key], 'itemsList', payload.data);
         }
     },
 
-    EDIT_ITEM_CLASS (state, payload) {
+    EDIT_ITEM_CLASS(state, payload) {
         if (state.itemModifier[payload.formName].itemsList[payload.index]['classData'] === undefined) Vue.set(state.itemModifier[payload.formName].itemsList[payload.index], 'classData', {});
         for (let key in payload.classData) {
             if (!payload.classData.hasOwnProperty(key)) continue;
@@ -125,38 +143,45 @@ const mutations = {
         }
     },
 
-    UPDATE_STATE (state, payload) {
-        Vue.set(state.data, payload.key, payload.data);
+    UPDATE_STATE(state, payload) {
+        if (typeof payload.data === 'object' && payload.key === null) {
+            state = Object.assign(state, payload.data)
+        }
+        else {
+            Vue.set(state.data, payload.key, (payload.data || []));
+        }
     },
 
-    UPDATE_STORE_VALUE (state, payload) {
+    UPDATE_STORE_VALUE(state, payload) {
         state[payload.key] = payload.data;
     },
 
-    UPDATE_BOTWINDER_COMMANDS (state, value) {
+    UPDATE_BOTWINDER_COMMANDS(state, value) {
         state.botwinderCommands = value
     }
 };
 
 const getters = {
-    roles: state => (attribute) => {
+    /*roles: state => {
         let selected = state.roles.filter(function (e) {
-            return state.data[attribute].includes(e['id']);
+            return state.rolesData.includes(e['roleid']);
         });
         let available = state.roles.filter(function (e) {
-            return !state.data[attribute].includes(e['id']);
+            return !state.rolesData.includes(e['roleid']);
         });
+        console.log(state.roles);
+        console.log(state.rolesData);
         return {selected: selected, available: available};
     },
-    channels: state => (attribute) => {
+    channels: state => {
         let selected = state.channels.filter(function (e) {
-            return state.data[attribute].includes(e['id']);
+            return state.channelsData.includes(e['channelid']);
         });
         let available = state.channels.filter(function (e) {
-            return !state.data[attribute].includes(e['id']);
+            return !state.channelsData.includes(e['channelid']);
         });
         return {selected: selected, available: available};
-    },
+    },*/
     item_modifier: state => (attribute) => {
         let whitelist = state.itemModifier[attribute.formName].itemsList[attribute.index][attribute.roleName];
         if (whitelist === null) whitelist = [];

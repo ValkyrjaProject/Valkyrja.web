@@ -24,7 +24,7 @@
         },
         data: function () {
             return {
-                selected: this.defaultValue || ''
+                selected: this.defaultValue || 0
             }
         },
         components: {
@@ -35,7 +35,7 @@
                 // getter
                 get: function () {
                     //Calculate which is the selected one
-                    if (typeof this.selected['id'] === 'undefined') return '';
+                    if (typeof this.selected['id'] === 'undefined') return 0;
                     return this.selected['id']
                 },
                 // setter

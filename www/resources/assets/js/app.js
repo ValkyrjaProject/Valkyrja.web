@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import store from './vuex/store.js'
-import {updateBotwinderCommands, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
+import {updateCustomCommands, updateBotwinderCommands, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
 
 import {mapGetters, mapState} from 'vuex'
 import Sticky from './sticky'
@@ -10,7 +10,6 @@ import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
 import Modal from './components/Modal.vue'
-
 
 new Vue({
     store,
@@ -44,7 +43,7 @@ new Vue({
             'anyLoading',
         ]),
         ...mapState([
-            'CommandCharacter',
+            'command_prefix',
             'SpambotBanLimit',
             'roles',
             'channels',
@@ -63,11 +62,15 @@ new Vue({
     },
     created() {
         const partArray = window.location.pathname.split( '/' );
-        if (partArray[2] === 'edit') {
-            this.$store.dispatch('editServerId', partArray[3]);
-            this.$store.dispatch('updateRoles');
-            this.$store.dispatch('updateChannels');
-            this.$store.dispatch('updateBotwinderCommands');
+        if (partArray[3] === 'edit') {
+            let state = JSON.parse(window.__INITIAL_STATE__);
+            this.$store.dispatch('updateRoles', state['roles']);
+            this.$store.dispatch('updateChannels', state['channels']);
+            this.$store.dispatch('updateCustomCommands', state['custom_commands']);
+            //this.$store.dispatch('editServerId', partArray[3]);
+            /**/
+            /*this.$store.dispatch('initialState', (JSON.parse(window.__INITIAL_STATE__) || {})); // TODO: channels and roles need to be changed similar to API (or something)
+            this.$store.dispatch('updateBotwinderCommands');*/
         }
     }
 });
@@ -105,14 +108,14 @@ $(function() {
     }
 });
 $(window).resize(function () {
-    if (window.location.pathname === '/features'){
+    if (window.location.pathname === '/features' || window.location.pathname === '/docs'){
         const $toc = $('#toc');
         setStickySize($toc);
     }
 });
 
 $(document).scroll(function () {
-    if (window.location.pathname === '/features'){
+    if (window.location.pathname === '/features' || window.location.pathname === '/docs'){
         const $toc = $('#toc');
         setStickySize($toc);
     }

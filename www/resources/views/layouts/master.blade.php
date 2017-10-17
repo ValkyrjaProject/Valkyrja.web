@@ -11,8 +11,14 @@
     <meta property="og:image" content="http://botwinder.info/img/jefi-mirror.png">
     <meta property="og:url" content="{{ Request::path() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    {{--<link rel="stylesheet" href="/css/app.css">--}}
     <link href='https://fonts.googleapis.com/css?family=Alegreya+SC|Alegreya|Alegreya+Sans|Source+Code+Pro' rel='stylesheet' type='text/css'>
+    @section('header')
+        {{--<script type="application/javascript">
+            window.__INITIAL_STATE__ = []
+        </script>--}}
+    @show
 </head>
 <body>
     <header>
@@ -43,23 +49,26 @@
                 @endforeach
             </div>
         @elseif (isset($errors) && count($errors) > 0)
-            <div class="middle-container grid-container alert alert-danger">
-              <ul>
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-              </ul>
+            <div class="container">
+                <div class="alert alert-danger">
+                    <h1 class="alert-danger">Errors</h1>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         @endif
         @yield('content')
-        <modal v-if="errors.length > 0" @close="errors = []">
+        {{--<modal v-if="errors.length > 0" @close="errors = []">
             <h2 slot="header">An error occurred</h2>
             <ul slot="body">
                 <li v-for="error in errors">
                     @{{ error }}
                 </li>
             </ul>
-        </modal>
+        </modal>--}}
     </section>
     <footer>
         <section class="middle-container">
@@ -79,7 +88,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
     <script src="/js/vendor.js"></script>
-    <script src="{{ elixir('js/app.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
     @include('layouts.subviews.google-analytics', ['token' => 'UA-87348259-1'])
 </body>
 </html>

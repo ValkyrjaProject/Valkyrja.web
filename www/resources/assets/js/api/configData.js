@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 export default {
-    getRoles (serverId) {
+    /*getRoles (serverId) {
         return instance.get('/roles/'+serverId);
     },
     getChannels (serverId) {
@@ -17,5 +17,5 @@ export default {
     },
     getBotwinderCommands () {
         return instance.get('/botwinderCommands');
-    }
+    }*/
 }

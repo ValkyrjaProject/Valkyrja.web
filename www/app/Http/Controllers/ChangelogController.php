@@ -12,6 +12,7 @@ class ChangelogController extends Controller
 {
     public function index()
     {
+        // TODO make this to database
     	$folder = '../../updates/';
     	$upcoming_features = file_get_contents($folder.'upcoming_features');
     	$changelog = file_get_contents($folder.'changelog');

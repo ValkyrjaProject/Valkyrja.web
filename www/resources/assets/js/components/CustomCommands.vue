@@ -6,15 +6,15 @@
         <item-modifier :form-name="formName"
                        list-name="Custom Commands"
                        :new-item-layout="addCustomCommandTemplate"
-                       item-layout-primary-key="ID">
-            <template scope="props">
+                       item-layout-primary-key="commandid">
+            <template slot-scope="props">
                 <div class="from-group"
-                     :class="{'has-danger': isDuplicate(props.activeItem) || props.activeItem.ID.length === 0 || hasWhitespace(props.activeItem.ID) || isBotwinderCommand(props.activeItem)}">
+                     :class="{'has-danger': isDuplicate(props.activeItem) || props.activeItem.commandid.length === 0 || hasWhitespace(props.activeItem.commandid) || isBotwinderCommand(props.activeItem)}">
                     <label class="form-control-label">
                         <b>Id</b> - Unique command identifier, prefix+this is what you will use to run your command.
                         <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">{{ CommandCharacter }}</span>
-                            <input class="form-control" command-name="ID" :value="props.activeItem.ID"
+                            <span class="input-group-addon" id="basic-addon1">{{ command_prefix }}</span>
+                            <input class="form-control" command-name="commandid" :value="props.activeItem.commandid"
                                    @input="updateActiveItemData">
                         </div>
                     </label>
@@ -22,29 +22,29 @@
                     <div class="form-control-feedback" v-if="isBotwinderCommand(props.activeItem)">
                         Id cannot be the same as a Botwinder command.
                     </div>
-                    <div class="form-control-feedback" v-if="props.activeItem.ID.length === 0">Id cannot be empty.</div>
-                    <div class="form-control-feedback" v-if="hasWhitespace(props.activeItem.ID)">
+                    <div class="form-control-feedback" v-if="props.activeItem.commandid.length === 0">Id cannot be empty.</div>
+                    <div class="form-control-feedback" v-if="hasWhitespace(props.activeItem.commandid)">
                         Id cannot contain whitespaces.
                     </div>
                 </div>
-                <div class="from-group" :class="{'has-danger': props.activeItem.Response.length === 0}">
+                <div class="from-group" :class="{'has-danger': props.activeItem.response.length === 0}">
                     <label class="form-control-label">
                         <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code
                             v-pre>{{mentioned}}</code> variables.
-                        <textarea class="form-control" command-name="Response" :value="props.activeItem.Response"
+                        <textarea class="form-control" command-name="response" :value="props.activeItem.response"
                                   @input="updateActiveItemData"></textarea>
                     </label>
-                    <div class="form-control-feedback" v-if="props.activeItem.Response.length === 0">
+                    <div class="form-control-feedback" v-if="props.activeItem.response.length === 0">
                         Response is required
                     </div>
                 </div>
                 <div class="form-group">
                     <label>
-                        <b>Description</b> - the <code>{{CommandCharacter}}help</code> message.
-                        <input class="form-control" command-name="Description" :value="props.activeItem.Description"
+                        <b>Description</b> - the <code>{{ command_prefix }}help</code> message.
+                        <input class="form-control" command-name="description" :value="props.activeItem.description"
                                @input="updateActiveItemData">
                     </label>
-                    <b>Whitelisted roles</b> - Only these roles can use the command. Leave empty to be unrestricted.
+                    <!--<b>Whitelisted roles</b> - Only these roles can use the command. Leave empty to be unrestricted.
                     <id-selector :value="roles"
                                  @add="addRole($event)"
                                  @remove="removeRole($event)"
@@ -52,14 +52,14 @@
                                  :init-form-name="formName"
                                  :hide-inputs="true"
                                  :state-index="activeItemIndex"
-                                 :use-store="false"></id-selector>
+                                 :use-store="false"></id-selector>-->
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label>
                         <input type="checkbox" v-model="deleteRequest">
                         <b>Delete request</b> - Delete the message issuing the command?
                     </label>
-                </div>
+                </div>-->
             </template>
         </item-modifier>
     </div>
@@ -82,7 +82,7 @@
         },
         data: function() {
             return {
-                itemLayoutPrimaryKey: 'ID',
+                itemLayoutPrimaryKey: 'commandid',
                 loadingText: "Loading config please wait!",
                 roleName: 'RoleWhitelist'
             }
@@ -91,7 +91,7 @@
             ItemModifier,
             IdSelector
         },
-        created() {
+        /*created() {
             this.$startLoading(this.formName);
             this.$store.dispatch('updateItemModifier', this.formName)
                 .then(() => {
@@ -100,15 +100,15 @@
                 .catch(() => {
                     this.loadingText = 'Could not get config values.';
                 });
-        },
+        },*/
         computed: {
-            CommandCharacter() {
-                return this.$store.state.CommandCharacter;
+            command_prefix() {
+                return this.$store.state.command_prefix;
             },
             botwinderCommands() {
                 return this.$store.state.botwinderCommands;
             },
-            deleteRequest: {
+            /*deleteRequest: {
                 get() {
                     return this.$store.state.itemModifier[this.formName].activeItem.DeleteRequest
                 },
@@ -120,14 +120,12 @@
                             data: value
                         })
                 }
-            },
+            },*/
             addCustomCommandTemplate() {
                 return {
-                    ID: 'command',
-                    Response: 'Response',
-                    Description: '',
-                    RoleWhitelist: [],
-                    DeleteRequest: false
+                    commandid: 'command',
+                    response: 'Response',
+                    description: ''
                 };
             },
         },
@@ -135,7 +133,7 @@
             isBotwinderCommand(check) {
                 // Check if command already exists
                 for (let id of this.botwinderCommands) {
-                    if (id === check.ID) {
+                    if (id === check.commandid) {
                         return true;
                     }
                 }
@@ -145,11 +143,10 @@
                 return /^.*\s.*$/.test(input)
             },
             itemIsValid(command) {
-                return !(command.ID.length === 0
-                    || this.hasWhitespace(command.ID)
+                return !(command.commandid.length === 0
+                    || this.hasWhitespace(command.commandid)
                     || this.isBotwinderCommand(command)
-                    || command.Response.length === 0);
-
+                    || command.response.length === 0);
             }
         }
     }

@@ -17,7 +17,7 @@
             itemList() {
                 let items = this.$store.state.itemModifier[this.formName];
                 if (items.hasOwnProperty('itemsList')) {
-                    items = items['itemsList'];
+                    items = items['itemsList'] || [];
                 }
                 else {
                     items = [];
