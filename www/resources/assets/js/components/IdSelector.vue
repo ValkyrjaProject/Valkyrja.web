@@ -1,4 +1,4 @@
-\<template>
+<template>
     <div class="idSelector loadComponent">
         <div class="listContainer">
             <h2>Available {{idType}}s</h2>
@@ -13,31 +13,18 @@
                 <option :value="level" v-for="(level, name) in RolePermissionLevelEnum">{{ name }}</option>
             </select>
             <list-container :value="addedTypesLevel"
-                            @click="removeItem($event)"
+                            @input="removeItem($event)"
                             :form-name="initFormName"
                             :hide-form="true"
                             :include-search="true"></list-container>
         </div>
         <slot :addedTypesLevel="addedTypes"></slot>
-        <!--<span v-if="hideInputs">
-        </span>-->
-        <!--<div class="listContainer">
-            <h2>Selected</h2>
-            <p>{{ selectedType }}</p>
-            <select name="title" id="title" class="form-control" v-model="selectedType.permission_level">
-                <option :value="level" v-for="(level, name) in RolePermissionLevelEnum">{{ name }}</option>
-            </select>
-            <list-container :value="RolePermissionLevelEnum"
-                            :form-name="initFormName"
-                            :hide-form="true"
-                            :include-search="false"></list-container>
-        </div>-->
     </div>
 </template>
 
 <script>
     import ListContainer from '../components/ListContainer.vue'
-    import {editRole, editChannel, removeRole, removeChannel} from '../vuex/actions'
+    import {addItem, removeItem} from '../vuex/actions'
 
     export default {
         components: {
@@ -74,25 +61,23 @@
                 idType: this.initIdType,
                 queryAvailable: '',
                 querySelected: '',
-                addedTypes: [],
-                selectedType: {},
                 RolePermissionLevelEnum: {
-                    //None: 0,
-                    Public: 1,
-                    Member: 2,
-                    SubModerator: 3,
-                    Moderator: 4,
-                    Admin: 5
+                    //None: "0",
+                    Public: "1",
+                    Member: "2",
+                    SubModerator: "3",
+                    Moderator: "4",
+                    Admin: "5"
                 },
-                selectedPermissionLevel: 1
+                selectedPermissionLevel: "1"
             }
         },
         computed: {
+            addedTypes() {
+                return this.$store.state.itemModifier[this.initFormName].itemsList;
+            },
             formInputName () {
                 return this.initFormName + '[]';
-            },
-            types () {
-                return this.$store.getters[this.idType.toLowerCase()+'s'];
             },
             typeAvailable: {
                 get () {
@@ -103,21 +88,27 @@
                 set (value) {
                     let newType = {};
                     newType[this.idType.toLowerCase()+'id'] = value.id;
-                    newType['name'] = value.name;
                     newType['permission_level'] = this.selectedPermissionLevel;
-                    this.addedTypes.push(newType);
-                    if (this.addedTypes.length === 1) {
-                        this.selectedType = newType;
-                    }
+                    this.$store.dispatch('addItem', {
+                        formName: this.initFormName,
+                        item: newType
+                    });
                 }
             },
             addedTypesLevel() {
-                return this.addedTypes.filter(t => t.permission_level === this.selectedPermissionLevel);
+                return this.$store.state[this.idType.toLowerCase()+'s'].filter(e => {
+                    return !(this.addedTypes.filter(t => t[[this.idType.toLowerCase()+'id']] === e.id
+                        && t.permission_level === this.selectedPermissionLevel).length === 0)
+                });
             }
         },
         methods: {
             removeItem(item) {
-                this.addedTypes.splice(this.addedTypes.findIndex(x => x === item), 1);
+                let removeItem = this.addedTypes[this.addedTypes.findIndex(t => t[[this.idType.toLowerCase()+'id']] === item.id)];
+                this.$store.dispatch('removeItem', {
+                    formName: this.initFormName,
+                    item: removeItem
+                });
             }
         }
     }

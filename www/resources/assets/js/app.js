@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import store from './vuex/store.js'
-import {updateCustomCommands, updateBotwinderCommands, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
+import {updateCustomCommands, updateBotwinderCommands, updateRolesData, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
 
 import {mapGetters, mapState} from 'vuex'
 import Sticky from './sticky'
@@ -67,6 +67,7 @@ new Vue({
             this.$store.dispatch('updateRoles', state['roles']);
             this.$store.dispatch('updateChannels', state['channels']);
             this.$store.dispatch('updateCustomCommands', state['custom_commands']);
+            this.$store.dispatch('updateRolesData', state['rolesData']);
             //this.$store.dispatch('editServerId', partArray[3]);
             /**/
             /*this.$store.dispatch('initialState', (JSON.parse(window.__INITIAL_STATE__) || {})); // TODO: channels and roles need to be changed similar to API (or something)

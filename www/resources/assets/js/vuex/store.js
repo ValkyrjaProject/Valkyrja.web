@@ -22,16 +22,23 @@ const state = {
     SpambotBanLimit: 0,
     roles: [],
     channels: [],
-    data: {},
+    data: {
+    },
     botwinderCommands: [],
     itemModifier: {
         custom_commands: {
             itemsList: [], // list of command Objects
             activeItem: null
+        },
+        roles: {
+            itemsList: [], // list of command Objects
+            activeItem: null
+        },
+        channels: {
+            itemsList: [], // list of command Objects
+            activeItem: null
         }
     },
-    /*rolesData: [],
-    channelsData: []*/
 };
 
 // mutations to modify state attributes
@@ -61,31 +68,12 @@ const mutations = {
         state.channels = channels;
     },
 
-    //IdSelector START
-    /*EDIT_ROLE(state, payload) {
-        console.log('test');
-        state.rolesData.push(payload);
-    },
-
-    REMOVE_ROLE(state, payload) {
-        state.rolesData.splice(state.rolesData.findIndex(x => x === payload.data), 1);
-    },
-
-    EDIT_CHANNEL(state, payload) {
-        state.channelsData.push(payload);
-    },
-
-    REMOVE_CHANNEL(state, payload) {
-        state.channelsData.splice(state.channelsData.findIndex(x => x === payload.data), 1);
-    },*/
-    //IdSelector END
-
     EDIT_DATA(state, payload) {
-        state[payload.key].push(payload.data);
+        state.data[payload.key].push(payload.data);
     },
 
     REMOVE_DATA(state, payload) {
-        state[payload.key].splice(state.data[payload.key].findIndex(x => x === payload.data), 1);
+        state.data[payload.key].splice(state.data[payload.key].findIndex(x => x === payload.data), 1);
     },
 
     EDIT_ITEM_ROLES(state, payload) {
@@ -137,9 +125,7 @@ const mutations = {
         if (state.itemModifier[payload.formName].itemsList[payload.index]['classData'] === undefined) Vue.set(state.itemModifier[payload.formName].itemsList[payload.index], 'classData', {});
         for (let key in payload.classData) {
             if (!payload.classData.hasOwnProperty(key)) continue;
-            //state.itemModifier.CustomCommands.commandsList[payload.index]['classData'][key] = payload.classData[key];
             Vue.set(state.itemModifier[payload.formName].itemsList[payload.index]['classData'], key, payload.classData[key]);
-            //state.itemModifier.CustomCommands.commandsList[payload.index]['classData'].splice(key, 1, payload.classData[key]);
         }
     },
 
@@ -162,26 +148,6 @@ const mutations = {
 };
 
 const getters = {
-    /*roles: state => {
-        let selected = state.roles.filter(function (e) {
-            return state.rolesData.includes(e['roleid']);
-        });
-        let available = state.roles.filter(function (e) {
-            return !state.rolesData.includes(e['roleid']);
-        });
-        console.log(state.roles);
-        console.log(state.rolesData);
-        return {selected: selected, available: available};
-    },
-    channels: state => {
-        let selected = state.channels.filter(function (e) {
-            return state.channelsData.includes(e['channelid']);
-        });
-        let available = state.channels.filter(function (e) {
-            return !state.channelsData.includes(e['channelid']);
-        });
-        return {selected: selected, available: available};
-    },*/
     item_modifier: state => (attribute) => {
         let whitelist = state.itemModifier[attribute.formName].itemsList[attribute.index][attribute.roleName];
         if (whitelist === null) whitelist = [];

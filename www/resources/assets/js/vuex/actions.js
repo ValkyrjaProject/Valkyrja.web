@@ -65,6 +65,10 @@ export const updateChannels = ({commit}, attribute) => {
     commit('EDIT_CHANNELS', attribute);
 };
 
+export const updateRolesData = ({commit}, data) => {
+    commit('UPDATE_ITEM_MODIFIER', {key: 'roles', data: data});
+};
+
 export const updateState = ({commit}, attribute) => {
     commit('UPDATE_STATE', {key: attribute, data: []});
     return new Promise((resolve, reject) => {

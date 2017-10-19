@@ -8,7 +8,19 @@ class Roles extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'roleid'
+        'roleid',
+        'permission_level'
+    ];
+
+    protected $casts = [
+        'roleid' => 'string',
+        'public_id' => 'string',
+        'level' => 'string',
+        'permission_level' => 'string'
+    ];
+
+    protected $hidden = [
+        'serverid'
     ];
 
     public function server_config()

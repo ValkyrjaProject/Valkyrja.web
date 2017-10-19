@@ -7,18 +7,15 @@
         window.__INITIAL_STATE__ = "{!! addslashes(json_encode([
 			'channels' => array_values($guild['channels']->all()),
 			'roles' => array_values($guild['roles']->all()),
-			'custom_commands' => old('custom_commands', $customCommands),
+			'custom_commands' => old('custom_commands', (isset($errors) && count($errors) > 0) ? [] : $customCommands->all()),
+			'rolesData' => old('roles', (isset($errors) && count($errors) > 0) ? [] : $roles->all())
         ])) !!}"
     </script>
 @endsection
 
 @section('content')
     {{--<pre>
-        Config:
-        {{ $customCommands }}
-        <br>
-        Old:
-        {{ old('custom_commands') }}
+        {{ dd($customCommands->all())}}
     </pre>--}}
     <div class="container">
         <div class="col-xs-12">

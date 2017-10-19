@@ -78,7 +78,9 @@ class ConfigController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param Request $request
      * @param ServerConfig $serverConfig
+     * @param $serverId
      * @return Response
      */
     public function edit(Request $request, ServerConfig $serverConfig, $serverId)
@@ -157,18 +159,9 @@ class ConfigController extends Controller
         if($serverConfig == null) {
             dd('Server does not exist');
         }
-        if ($data->has('custom_commands'))
-        {
-            $serverConfig->updateCustomCommands($data->get('custom_commands'));
-        }
-        if ($data->has('channels'))
-        {
-            $serverConfig->updateChannels($data->get('channels'));
-        }
-        if ($data->has('roles'))
-        {
-            $serverConfig->updateRoles($data->get('roles'));
-        }
+        $serverConfig->updateCustomCommands($data->get('custom_commands', []));
+        $serverConfig->updateChannels($data->get('channels', []));
+        $serverConfig->updateRoles($data->get('roles', []));
         if ($serverConfig->update($data->except([
             'custom_commands',
             'channels',
