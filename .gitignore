@@ -1,6 +1,10 @@
 *.userprefs
 
 ## Botwinder specific:
+dbConfig.json
+*.deps.json
+*.runtimeconfig.json
+*.runtimeconfig.dev.json
 /config/
 /archives/
 /TimeAtWork/
