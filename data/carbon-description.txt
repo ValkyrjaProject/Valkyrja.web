@@ -68,7 +68,7 @@
     <li>Assign a role to everyone, as soon as they join.</li>
     <li>PM people when they join.</li>
     <li>Set-up welcome / leave messages.</li>
-    <li>Verify members with hidden code within your rules, or with Reddit account and assign them a role</li>
+    <li>Verify members with hidden code within your rules.</li>
   </ul></li>
   
 <br/>
@@ -76,10 +76,7 @@
     <li>Custom Commands - create simple commands with simple parameters.</li>
     <li>Aliases - create an alias from any command, custom or original.</li>
     <li>Polls - simple, custom, and even free types of polls.</li>
-    <li>Events - sign-up, check-in, keep track of score.</li>
-    <li>Giveaways!</li>
     <li>Meetings - ever heard of the meet-bot for IRC? This is similar.</li>
-    <li>Livestream Notifications - set-up a notification for when you go live on Twitch, Hitbox, or Beam.</li>
   </ul></li>
 <br/>
   <li><b>...and much more!</b></li>
