@@ -11,10 +11,10 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "restcord/restcord": "^0.1.4",
-        "team-reflex/oauth2-discord": "^1.0"
+        "team-reflex/oauth2-discord": "^1.0",
+        "barryvdh/laravel-ide-helper": "^2.4"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.4",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
