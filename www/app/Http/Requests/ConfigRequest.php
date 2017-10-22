@@ -77,7 +77,7 @@ class ConfigRequest extends FormRequest
             'command_prefix'                    => 'required|string|max:255',
             'command_prefix_alt'                => 'present|string|max:255',
             'execute_on_edit'                   => 'required|boolean',
-            'antispam_priority'                 => 'required|boolean',
+            //'antispam_priority'                 => 'required|boolean',
             'antispam_invites'                  => 'required|boolean',
             'antispam_invites_ban'              => 'required|boolean',
             'antispam_duplicate'                => 'required|boolean',
@@ -108,7 +108,7 @@ class ConfigRequest extends FormRequest
             'quickban_reason'                   => 'required|string',
             'mute_roleid'                       => 'required|integer',
             'mute_ignore_channelid'             => 'required|integer',
-            'karma_enabled'                     => 'required|boolean',
+            /*'karma_enabled'                     => 'required|boolean',
             'karma_limit_mentions'              => 'required|integer',
             'karma_limit_minutes'               => 'required|integer',
             'karma_limit_response'              => 'required|boolean',
@@ -128,7 +128,7 @@ class ConfigRequest extends FormRequest
             'log_message_join'                  => 'required|string',
             'log_message_leave'                 => 'required|string',
             'log_mention_join'                  => 'required|boolean',
-            'log_mention_leave'                 => 'required|boolean',
+            'log_mention_leave'                 => 'required|boolean',*/
             /*'log_timestamp_join'                => 'required|boolean',
             'log_timestamp_leave'               => 'required|boolean',*/
             'welcome_pm'                        => 'required|boolean',
