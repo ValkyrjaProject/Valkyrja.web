@@ -48,7 +48,7 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Display a list of commands. If used in PM, it will display commands that can be used in PM, if used in-chat, it will display commands that can be used the in-chat.</td>
+                        <td>Display a list of commands.</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
@@ -825,23 +825,6 @@
                     <tr>
                         <td>Parameters</td>
                         <td><code>@user</code> mention or ID (or multiple mentions)</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>SubModerator</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>naughtylist</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Return a list of everyone who has a warning. Warning is a simple message, note in the user database, about a user. This serves to keep track of people, see how many bad things have they done in the past, so you can decide whether to use more severe punishment. Use this command, or whois/find to display info about naughty people and their warnings.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>None</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
