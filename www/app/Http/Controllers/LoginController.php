@@ -52,7 +52,6 @@ class LoginController extends Controller
 
     public function logout(Request $request, $message = 'You are now logged out.')
     {
-        dd('logout LoginController: '.$message);
         if ($request->session()->has('userId')) {
             $userId = $request->session()->get('userId');
             DiscordData::clearCache($userId);
