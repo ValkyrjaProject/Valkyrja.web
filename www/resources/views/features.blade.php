@@ -17,19 +17,18 @@
                     These are some features that are not fully covered by simple commands:
                     <ul>
                         <li><b>Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
-                        <li><b>Configure</b> many aspects of the bot: customize the command character, remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing!) And the Botwinder will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
-                        <li>Use reddit <b>verification system</b>, where the bot will send a user information how to get verified - the user is asked to send a PM over Reddit to the bot. After Botwinder receives this message, it will save the info in the database and assign the user configured role. If they have been verified previously and for some reason left the server (or have been kicked/banned) the bot will simply assign them the verified role without having them re-send the message. (<a href="/config">Can be configured.</a>)</li>
+                        <li><b>Configure</b> many aspects of the bot: customize the command prefix, remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing!) And the Botwinder will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
                         <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. The above also applies. Oh and they can get cookies for verifying, if you configure that as well.
                         <li><b>Log user events</b> like user joining or leaving the server, being promoted or demoted, and PM a new user when they join the server. You can change these messages to your liking, set whether to @mention them, or just use their name as text, etc. (<a href="/config">Can be configured.</a>)</li>
                         <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
+                        <li>Use reddit <b>verification system</b>, where the bot will send a user information how to get verified - the user is asked to send a PM over Reddit to the bot. After Botwinder receives this message, it will save the info in the database and assign the user configured role. If they have been verified previously and for some reason left the server (or have been kicked/banned) the bot will simply assign them the verified role without having them re-send the message. (<a href="/config">Can be configured.</a>)</li>
                         <li>Set up your own <b>custom commands</b>, with a few keywords! (<code>!commands</code>)</li>
                         <li>You can <b>create an alias</b> to <i>any</i> command. (<code>!alias</code>)</li>
                         <li>Did you like <b>temporary channels</b> on TeamSpeak? No problem, we've got you. (<code>!tempChannel</code>)</li>
-                        <li>Create <b>scheduled messages</b> or timers. These can even be <b>scheduled commands</b>, so you can even schedule a daily <code>!nuke</code> of a channel! :D (<code>!timers</code>)</li>
-                        <li>Run a <b>poll</b>! Those can be as simple as with yes/no/abstain options, or you can add anything you desire. You can even choose to run a free poll where the user can vote on literally anything and it will be added as a new option! (<code>!poll</code>)</li>
-                        <li>Run the best <b>events</b> in the universe with signups, checkin, keep track of score, etc... (<code>!event</code>)</li>
-                        <li>Keep track of your <b>meetings</b>, generate nice minutes and logs. (<code>!meeting</code>)</li>
-                        <li>Set-up <b>Livestream notifications</b> (twitch, hitbox and beam) and run giveaways on discord, and much more to come...</li>
+                        <!--li>Create <b>scheduled messages</b> or timers. These can even be <b>scheduled commands</b>, so you can even schedule a daily <code>!nuke</code> of a channel! :D (<code>!timers</code>)</li-->
+                        <!--li>Run a <b>poll</b>! Those can be as simple as with yes/no/abstain options, or you can add anything you desire. You can even choose to run a free poll where the user can vote on literally anything and it will be added as a new option! (<code>!poll</code>)</li-->
+                        <!--li>Run the best <b>events</b> in the universe with signups, checkin, keep track of score, etc... (<code>!event</code>)</li-->
+                        <!--li>Keep track of your <b>meetings</b>, generate nice minutes and logs. (<code>!meeting</code>)</li-->
                         <li>Last but not least, we put a lot of emphasis on <b>security</b>. No server has access to any data from any other server, and no sensitive data is available to public. As you can see below we have different permission levels, and everything somewhat important or sensitive is hidden behind those permissions, including previously known usernames, times, etc etc...</li>
                     </ul>
                 </p>
@@ -61,41 +60,8 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
-                    <h2>botwinder</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Will tell you about the bot.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>None</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Everyone</td>
-                    </tr>
-                    </table>
                 </div>
-                <div class="features-indent">
-                    <h2>author / history</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Will tell you about the history of the bot, and a little bit about the people behind it. (It's a wall of text...)</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>None</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Everyone</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>patchnotes</h2>
                     <table class="command">
                     <tr>
@@ -145,7 +111,7 @@
                         <td>Everyone</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
 
                 <h1 class="features-h1">Commands ~ Admin</h1>
                 <div class="features-indent">
@@ -165,24 +131,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
-                    <h2>config</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Configure Botwinder for your server. <b>This command is obsolete - use the <a href="/config">Configuration</a> page.</b></td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>Use the command without parameters for more details</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>ServerOwner</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>createRole</h2>
                     <table class="command">
                     <tr>
@@ -376,24 +325,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div>
-                <div class="features-indent">
-                    <h2>commands</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Add, edit, or remove CustomCommands on your server.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>Use the command without parameters for more details</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Admin</td>
-                    </tr>
-                    </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>operations</h2>
                     <table class="command">
@@ -428,7 +360,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>archive</h2>
                     <table class="command">
                     <tr>
@@ -478,7 +410,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>verify</h2>
                     <table class="command">
@@ -498,7 +430,7 @@
                 </div>
 
                 <h1 class="features-h1">Commands ~ Moderator</h1>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>timer</h2>
                     <table class="command">
                     <tr>
@@ -552,66 +484,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div>
-                <div class="features-indent">
-                    <h2>livestreamAdd</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Add a channel to watch list, to send a short notification message in "this" channel, whenever they go live. Supported services are: twitch, hitbox & beam. (Use of this command and bot's response will be deleted for your convenience.)</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td><code>service channel</code> where <code>service</code> can be either twitch, hitbox or beam; and <code>channel</code> is what it seems to be..</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Moderator</td>
-                    </tr>
-                    <tr>
-                        <td>Example</td>
-                        <td><code>!livestreamAdd twitch RheaAyase</code></td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>livestreamRemove</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Remove a livestream from notifications (added by <code>livestreamAdd</code>)</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td><code>service channel</code> where <code>service</code> can be either twitch, hitbox or beam; and <code>channel</code> is what it seems to be..</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Moderator</td>
-                    </tr>
-                    <tr>
-                        <td>Example</td>
-                        <td><code>!livestreamRemove twitch RheaAyase</code></td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>livestreamList</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Display list of livestream notifications in the current channel.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>None</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Moderator</td>
-                    </tr>
-                    </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>op</h2>
                     <table class="command">
@@ -731,7 +604,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>muteChannel</h2>
                     <table class="command">
                     <tr>
@@ -764,7 +637,7 @@
                         <td>Moderator</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
 
                 <h1 class="features-h1">Commands ~ SubModerator</h1>
                 <div class="features-indent">
@@ -806,7 +679,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>tempChannel</h2>
                     <table class="command">
                     <tr>
@@ -822,7 +695,7 @@
                         <td>SubModerator</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>permit</h2>
                     <table class="command">
@@ -840,7 +713,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>stats</h2>
                     <table class="command">
                     <tr>
@@ -856,7 +729,7 @@
                         <td>SubModerator</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>whois</h2>
                     <table class="command">
@@ -976,7 +849,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>memberRoles</h2>
                     <table class="command">
                     <tr>
@@ -1077,10 +950,10 @@
                         <td>SubModerator</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
 
                 <h1 class="features-h1">Commands ~ Everyone</h1>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>publicRoles</h2>
                     <table class="command">
                     <tr>
@@ -1215,7 +1088,7 @@
                         <td>Everyone</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
             </div>
         </div>
     </section>
