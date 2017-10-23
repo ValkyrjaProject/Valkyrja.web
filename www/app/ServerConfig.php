@@ -56,14 +56,10 @@ class ServerConfig extends Model
         if (!is_array($commands) && count($commands) == 0) {
             return false;
         }
-        $commandKeys = array_column($commands, 'commandid');
-        $deleteCommands = $this->custom_commands()->whereNotIn('commandid', $commandKeys);
-        if ($deleteCommands->count() > 0) {
-            $deleteCommands->delete();
+        $this->custom_commands()->whereNotIn('commandid', $commands)->delete();
+        foreach ($commands as $command) {
+            $this->custom_commands()->updateOrCreate(['commandid' => $command['commandid']], $command);
         }
-        //dd($commands);
-        $this->custom_commands()->delete();
-        $this->custom_commands()->createMany($commands);
         return true;
     }
 
