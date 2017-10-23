@@ -58,7 +58,11 @@ class ServerConfig extends Model
         }
         $this->custom_commands()->whereNotIn('commandid', $commands)->delete();
         foreach ($commands as $command) {
-            $this->custom_commands()->updateOrCreate(['commandid' => $command['commandid']], $command);
+            $this->custom_commands()->updateOrInsert(
+                [
+                    'serverid' => $this->serverid,
+                    'commandid' => $command['commandid']
+                ], $command);
         }
         return true;
     }
