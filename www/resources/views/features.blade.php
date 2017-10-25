@@ -147,7 +147,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>getRole</h2>
                     <table class="command">
@@ -165,7 +165,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>mentionMembersOf</h2>
                     <table class="command">
                     <tr>
