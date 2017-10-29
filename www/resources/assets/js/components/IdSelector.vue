@@ -13,7 +13,7 @@
                     <span class="input-group-addon itemLeft btn btn-secondary" :class="{'disabled': !publicRoleIsSelected}" @click="addPublicGroup()">+</span>
                     <select name="title" class="form-control" title="" v-model="selectedPublicGroup" :disabled="!publicRoleIsSelected">
                         <!--<option :value="0"></option>-->
-                        <option :value="id" v-for="id in sortedPublicGroups">Group {{ id }}</option>
+                        <option :value="group.id" v-for="group in sortedPublicGroups">{{ group.name }}</option>
                     </select>
                 </div>
             </div>
@@ -88,7 +88,9 @@
                 },
                 selectedPermissionLevel: "1",
                 selectedPublicGroup: "1",
-                publicGroups: []
+                publicGroups: [
+                    "0"
+                ]
             }
         },
         created () {
@@ -100,12 +102,7 @@
                     this.publicGroups.push(type.public_id);
                 }
             }
-            if (this.publicGroups.length === 0) {
-                this.publicGroups.push("1");
-            }
-            this.publicGroups;
             this.selectedPublicGroup = this.publicGroups[0];
-
         },
         computed: {
             addedTypes() {
@@ -146,17 +143,23 @@
                 return this.selectedPermissionLevel === this.RolePermissionLevelEnum.Public;
             },
             sortedPublicGroups() {
-                return this.publicGroups.sort(function(a,b){return a - b});
+                let groups = this.publicGroups.sort(function(a,b){return a - b});
+                let newGroups = [];
+                for (let group of groups) {
+                    let newGroup = [];
+                    newGroup['id'] = group;
+                    newGroup['name'] = this.groupName(group);
+                    newGroups.push(newGroup);
+                }
+                console.log(newGroups);
+                return newGroups;
             }
         },
         methods: {
             addPublicGroup() {
                 if (this.publicRoleIsSelected) {
-                    let start = 1;
-                    console.log(this.publicGroups);
+                    let start = 0;
                     this.publicGroups.every(e => {
-                        console.log(start);
-                        console.log(e);
                         if (parseInt(e) === start) {
                             start = parseInt(e) + 1;
                             return true;
@@ -173,6 +176,12 @@
                     formName: this.initFormName,
                     item: removeItem
                 });
+            },
+            groupName(item) {
+                if (item === "0") {
+                    return "No group";
+                }
+                return "Group " + item;
             }
         }
     }
