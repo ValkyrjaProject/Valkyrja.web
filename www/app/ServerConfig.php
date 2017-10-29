@@ -89,12 +89,12 @@ class ServerConfig extends Model
             return false;
         }
         $commandKeys = array_column($roles, 'roleid');
-        $deleteChannels = $this->roles()->whereNotIn('roleid', $commandKeys);
-        if ($deleteChannels->count() > 0) {
-            $deleteChannels->delete();
+        $deleteRoles = $this->roles()->whereNotIn('roleid', $commandKeys);
+        if ($deleteRoles->count() > 0) {
+            $deleteRoles->delete();
         }
         foreach ($roles as $role) {
-            $this->roles()->updateOrCreate($role);
+            $this->roles()->updateOrCreate(['roleid' => $role['roleid']], $role);
         }
         return true;
     }

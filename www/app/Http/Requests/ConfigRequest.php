@@ -55,7 +55,7 @@ class ConfigRequest extends FormRequest
             if ($this->has('roles')) {
                 $tempArr = [];
                 foreach($this['roles'] as $key => $command) {
-                    $allowed = ['roleid', 'permission_level'];
+                    $allowed = ['roleid', 'permission_level', 'public_id'];
                     $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
                 }
                 $this['roles'] = $tempArr;
@@ -149,6 +149,7 @@ class ConfigRequest extends FormRequest
             'roles.*'                           => 'array',
             'roles.*.roleid'                    => 'required|integer|min:0',
             'roles.*.permission_level'          => 'required|integer|between:1,5',
+            'roles.*.public_id'                 => 'required|integer|min:0',
             'custom_commands'                   => 'array',
             'custom_commands.*'                 => 'required|array',
             'custom_commands.*.commandid'       => 'required|alpha_num|max:127',

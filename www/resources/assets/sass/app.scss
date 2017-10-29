@@ -498,7 +498,7 @@ img {
   }
 }
 
-.idSelector, .inputList, .customCommands {
+.customComponent, .inputList, .customCommands {
   display: table;
   background: #d3eaff;
   border: 1px solid #c0d5e9;
@@ -521,6 +521,9 @@ img {
 }
 .centerText {
   text-align: center;
+}
+.listRow {
+  display: table-row;
 }
 .listContainer {
   display: table-cell;

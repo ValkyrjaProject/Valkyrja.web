@@ -226,6 +226,7 @@
                                 <span v-for="role in props.addedTypesLevel">
                                     <input type="hidden" :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'" :value="role.roleid">
                                     <input type="hidden" :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'" :value="role.permission_level">
+                                    <input type="hidden" :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'" :value="role.public_id">
                                 </span>
                             </template>
                         </id-selector>
