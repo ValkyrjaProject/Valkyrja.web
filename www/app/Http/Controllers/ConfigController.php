@@ -80,7 +80,7 @@ class ConfigController extends Controller
      *
      * @param Request $request
      * @param ServerConfig $serverConfig
-     * @param $serverId
+     * @param String $serverId
      * @return Response
      */
     public function edit(Request $request, ServerConfig $serverConfig, $serverId)
@@ -108,7 +108,7 @@ class ConfigController extends Controller
             $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
             $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$serverId) {
                 // Filter out @everyone
-                return $key !== $serverId;
+                return (string)$key !== $serverId;
             });
         }
         catch (ServerIssueException $e) {
