@@ -101,7 +101,7 @@
                         <br />
                         If you do not want the bot to ban people for spamming, set this to <code>0</code> (zero) otherwise set a number of how many spammy messages should we tolerate before banning them. Spammy messages = links or anything else in this section below, while all the options below do have a ban option for this as well.
                         <br />
-                        <text-field init-id="SpambotBanLimit" init-name="antispam_tolerance" init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
+                        <text-field init-id="antispam_tolerance" init-name="antispam_tolerance" init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
                     </p>
                     <p>
                         <b>Discord Invites</b>
@@ -110,7 +110,7 @@
                         Remove messages that contain discord invites?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_invites_ban", 'data' => old('antispam_invites_ban', $serverConfig["antispam_invites_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> invites have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> invites have been removed?
                     </p>
                     <p>
                         <b>Duplicate messages</b>
@@ -122,7 +122,7 @@
                         We can also remove these cross-server. Imagine that there is someone going through many servers and posting some advertisement everywhere, but only a single message per-server so it doesn't count as standard spam. Botwinder would notice these messages as being duplicates between servers.
                         <br />
                         @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> messages have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
                     </p>
                     <p>
                         <b>Mass-mentions</b>
@@ -132,7 +132,7 @@
                         @include("config.types.int", ['key' => "antispam_mentions_max", 'data' => old('antispam_mentions_max', $serverConfig["antispam_mentions_max"])])
                         <br />
                         @include("config.types.bool", ['key' => "antispam_mentions_ban", 'data' => old('antispam_mentions_ban', $serverConfig["antispam_mentions_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> messages have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
                     </p>
                     <p>
                         <b>Mute fast-message spam</b>
@@ -155,7 +155,7 @@
                         Remove YouTube links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_youtube_ban", 'data' => old('antispam_links_youtube_ban', $serverConfig["antispam_links_youtube_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Twitch links</b>
@@ -164,7 +164,7 @@
                         Remove Twitch links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_twitch_ban", 'data' => old('antispam_links_twitch_ban', $serverConfig["antispam_links_twitch_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Hitbox/Smashcast links</b>
@@ -173,7 +173,7 @@
                         Remove Hitbox and Smashcast links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_hitbox_ban", 'data' => old('antispam_links_hitbox_ban', $serverConfig["antispam_links_hitbox_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Beam/Mixer links</b>
@@ -182,7 +182,7 @@
                         Remove Beam and Mixer links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_beam_ban", 'data' => old('antispam_links_beam_ban', $serverConfig["antispam_links_beam_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Imgur-like links</b>
@@ -191,7 +191,7 @@
                         Remove imgur, gfycat, giphy or tinypic links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_imgur_ban", 'data' => old('antispam_links_imgur_ban', $serverConfig["antispam_links_imgur_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>All standard links</b>
@@ -200,7 +200,7 @@
                         Remove all standard links? This is a list of more-less standard <code>TLD</code>s to be removed, for example <code>.com</code>, <code>.net</code>, and many others... <i>(except the options above (youtube, imgur,..) - enable those if you want them removed as well.)</i>
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_standard_ban", 'data' => old('antispam_links_standard_ban', $serverConfig["antispam_links_standard_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Extended links</b>
@@ -209,7 +209,7 @@
                         Remove Extended links? Extended links are basically <code>anything.anything</code>
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_extended_ban", 'data' => old('antispam_links_extended_ban', $serverConfig["antispam_links_extended_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configModeration" aria-expanded="false" aria-controls="configModeration">
