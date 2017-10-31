@@ -41,7 +41,7 @@
               </ul>
             </p>
             <div class="row">
-                <a href="http://mk2.botwinder.info" class="external">
+                <a href="http://invite.botwinder.info" class="external">
                     <button class="btn btn-primary">Invite</button>
                 </a>
             </div>

@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Roles extends Model
 {
     public $timestamps = false;
+    protected $primaryKey = 'roleid';
     protected $fillable = [
         'roleid',
-        'permission_level'
+        'permission_level',
+        'public_id'
     ];
 
     protected $casts = [

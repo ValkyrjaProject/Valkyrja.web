@@ -55,7 +55,9 @@ class ConfigRequest extends FormRequest
             if ($this->has('roles')) {
                 $tempArr = [];
                 foreach($this['roles'] as $key => $command) {
-                    $allowed = ['roleid', 'permission_level'];
+                    $allowed = ['roleid', 'permission_level', 'public_id'];
+
+                    if ($command['roleid'] === $this->route('serverId')) continue;
                     $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
                 }
                 $this['roles'] = $tempArr;
@@ -77,7 +79,7 @@ class ConfigRequest extends FormRequest
             'command_prefix'                    => 'required|string|max:255',
             'command_prefix_alt'                => 'present|string|max:255',
             'execute_on_edit'                   => 'required|boolean',
-            'antispam_priority'                 => 'required|boolean',
+            //'antispam_priority'                 => 'required|boolean',
             'antispam_invites'                  => 'required|boolean',
             'antispam_invites_ban'              => 'required|boolean',
             'antispam_duplicate'                => 'required|boolean',
@@ -108,7 +110,7 @@ class ConfigRequest extends FormRequest
             'quickban_reason'                   => 'required|string',
             'mute_roleid'                       => 'required|integer',
             'mute_ignore_channelid'             => 'required|integer',
-            'karma_enabled'                     => 'required|boolean',
+            /*'karma_enabled'                     => 'required|boolean',
             'karma_limit_mentions'              => 'required|integer',
             'karma_limit_minutes'               => 'required|integer',
             'karma_limit_response'              => 'required|boolean',
@@ -128,7 +130,7 @@ class ConfigRequest extends FormRequest
             'log_message_join'                  => 'required|string',
             'log_message_leave'                 => 'required|string',
             'log_mention_join'                  => 'required|boolean',
-            'log_mention_leave'                 => 'required|boolean',
+            'log_mention_leave'                 => 'required|boolean',*/
             /*'log_timestamp_join'                => 'required|boolean',
             'log_timestamp_leave'               => 'required|boolean',*/
             'welcome_pm'                        => 'required|boolean',
@@ -149,9 +151,10 @@ class ConfigRequest extends FormRequest
             'roles.*'                           => 'array',
             'roles.*.roleid'                    => 'required|integer|min:0',
             'roles.*.permission_level'          => 'required|integer|between:1,5',
+            'roles.*.public_id'                 => 'required|integer|min:0',
             'custom_commands'                   => 'array',
             'custom_commands.*'                 => 'required|array',
-            'custom_commands.*.commandid'       => 'required|alpha_num|max:255',
+            'custom_commands.*.commandid'       => 'required|alpha_num|max:127',
             'custom_commands.*.response'        => 'required|string',
             'custom_commands.*.description'     => 'string',
         ];

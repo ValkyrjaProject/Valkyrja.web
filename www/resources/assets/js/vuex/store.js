@@ -19,7 +19,7 @@ const state = {
     forbidSubmitForm: false,
     serverId: '',
     command_prefix: '',
-    SpambotBanLimit: 0,
+    antispam_tolerance: 0,
     roles: [],
     channels: [],
     data: {

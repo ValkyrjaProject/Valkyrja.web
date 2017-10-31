@@ -207,7 +207,8 @@ class DiscordData extends Model
                     Log::error('Server channels: '.isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
                     throw new DiscordException('There was an error getting channels from the server. Please try again');
                 }
-                if ($serverChannel['type'] === 'text') {
+                // If type is GUILD_TEXT
+                if ($serverChannel['type'] === 0) {
                     $tempArray = [];
                     $tempArray['id'] = $serverChannel['id'];
                     $tempArray['name'] = '#'.$serverChannel['name'];

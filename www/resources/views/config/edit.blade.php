@@ -82,12 +82,12 @@
                     <p>
                         Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned to post a single link or anything else in this section, for three minutes.
                     </p>
-                    <p>
+                    {{--<p>
                         <b>Prioritize Antispam</b>
                         <br />
                         @include("config.types.bool", ['key' => "antispam_priority", 'data' => old('antispam_priority', $serverConfig["antispam_priority"])])
                         Do you want to run antispam first, before anything else? This will likely cause some false-positives sometimes, when people are legitimately using the same command a few times in a row for example (such as someone eating three cookies.)
-                    </p>
+                    </p>--}}
                     <p>
                         <b>Members ignore Antispam</b>
                         <br />
@@ -101,7 +101,7 @@
                         <br />
                         If you do not want the bot to ban people for spamming, set this to <code>0</code> (zero) otherwise set a number of how many spammy messages should we tolerate before banning them. Spammy messages = links or anything else in this section below, while all the options below do have a ban option for this as well.
                         <br />
-                        <text-field init-id="SpambotBanLimit" init-name="antispam_tolerance" init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
+                        <text-field init-id="antispam_tolerance" init-name="antispam_tolerance" init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
                     </p>
                     <p>
                         <b>Discord Invites</b>
@@ -110,7 +110,7 @@
                         Remove messages that contain discord invites?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_invites_ban", 'data' => old('antispam_invites_ban', $serverConfig["antispam_invites_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> invites have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> invites have been removed?
                     </p>
                     <p>
                         <b>Duplicate messages</b>
@@ -122,7 +122,7 @@
                         We can also remove these cross-server. Imagine that there is someone going through many servers and posting some advertisement everywhere, but only a single message per-server so it doesn't count as standard spam. Botwinder would notice these messages as being duplicates between servers.
                         <br />
                         @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> messages have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
                     </p>
                     <p>
                         <b>Mass-mentions</b>
@@ -132,7 +132,7 @@
                         @include("config.types.int", ['key' => "antispam_mentions_max", 'data' => old('antispam_mentions_max', $serverConfig["antispam_mentions_max"])])
                         <br />
                         @include("config.types.bool", ['key' => "antispam_mentions_ban", 'data' => old('antispam_mentions_ban', $serverConfig["antispam_mentions_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> messages have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
                     </p>
                     <p>
                         <b>Mute fast-message spam</b>
@@ -141,6 +141,12 @@
                         Temporarily mute people if they send too many messages too fast? This is done by assigning them <code>Muted Role</code>, and if they continue spamming after they get muted twice, they get banned, because that's an obvious spambot. Both, the mute and the ban are logged as configured in the <code>Logging</code> section.
                         <br />
                         Requires <code>Muted Role</code> to be configured in the <code>Moderation</code> section, where you can also change the duration of the mute. <i>Scroll down</i>
+                        <br /><br />
+                        <b>Mute</b>
+                        <br />
+                        Duration of the mute.
+                        <br />
+                        @include("config.types.int", ['key' => "antispam_mute_duration", 'data' => old('antispam_mute_duration', $serverConfig["antispam_mute_duration"])]) (minutes)
                     </p>
                     <p>
                         <b>YouTube links</b>
@@ -149,7 +155,7 @@
                         Remove YouTube links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_youtube_ban", 'data' => old('antispam_links_youtube_ban', $serverConfig["antispam_links_youtube_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Twitch links</b>
@@ -158,7 +164,7 @@
                         Remove Twitch links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_twitch_ban", 'data' => old('antispam_links_twitch_ban', $serverConfig["antispam_links_twitch_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Hitbox/Smashcast links</b>
@@ -167,7 +173,7 @@
                         Remove Hitbox and Smashcast links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_hitbox_ban", 'data' => old('antispam_links_hitbox_ban', $serverConfig["antispam_links_hitbox_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Beam/Mixer links</b>
@@ -176,7 +182,7 @@
                         Remove Beam and Mixer links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_beam_ban", 'data' => old('antispam_links_beam_ban', $serverConfig["antispam_links_beam_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Imgur-like links</b>
@@ -185,7 +191,7 @@
                         Remove imgur, gfycat, giphy or tinypic links?
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_imgur_ban", 'data' => old('antispam_links_imgur_ban', $serverConfig["antispam_links_imgur_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>All standard links</b>
@@ -194,7 +200,7 @@
                         Remove all standard links? This is a list of more-less standard <code>TLD</code>s to be removed, for example <code>.com</code>, <code>.net</code>, and many others... <i>(except the options above (youtube, imgur,..) - enable those if you want them removed as well.)</i>
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_standard_ban", 'data' => old('antispam_links_standard_ban', $serverConfig["antispam_links_standard_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                     <p>
                         <b>Extended links</b>
@@ -203,7 +209,7 @@
                         Remove Extended links? Extended links are basically <code>anything.anything</code>
                         <br />
                         @include("config.types.bool", ['key' => "antispam_links_extended_ban", 'data' => old('antispam_links_extended_ban', $serverConfig["antispam_links_extended_ban"])])
-                        Ban people after <code>@{{ SpambotBanLimit }}</code> links have been removed?
+                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configModeration" aria-expanded="false" aria-controls="configModeration">
@@ -220,6 +226,7 @@
                                 <span v-for="role in props.addedTypesLevel">
                                     <input type="hidden" :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'" :value="role.roleid">
                                     <input type="hidden" :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'" :value="role.permission_level">
+                                    <input type="hidden" :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'" :value="role.public_id">
                                 </span>
                             </template>
                         </id-selector>
@@ -242,7 +249,7 @@
                     <p>
                         <b>!op</b>
                         <br />
-                        This feature will act like Operators known from IRC. If configured, it will disable the use of ban/kick/mute commands unless <i>you</i> are <code>@{{ command_prefix }}op</code>-ed (you can still use quickban, if configured, because it's quick!) This helps making it clear to the user, that <i>you</i> are now a acting as a moderator and you are not just joking around. Set the Operator role below to enable it, or use <code>0</code> (zero) to disable.
+                        This feature will act like Operators known from IRC. If configured, it will disable the use of ban/kick/mute commands unless <i>you</i> are <code>@{{ command_prefix }}op</code>-ed (you can still use quickban, if configured, because it's quick!) This helps making it clear to the user, that <i>you</i> are now a acting as a moderator and you are not just joking around. Set the Operator role below to enable it.
                         <br /><br />
                         <b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
                         <br />
@@ -260,12 +267,6 @@
                         @include("config.types.int", ['key' => "quickban_duration", 'data' => old('quickban_duration', $serverConfig["quickban_duration"])]) (hours)
                     </p>
                     <p>
-                        <b>Mute</b>
-                        <br />
-                        Duration of the <code>@{{ command_prefix }}mute @user</code> and <code>@{{ command_prefix }}muteChannel</code> commands (This is hard-capped between 5 and 60 minutes.)
-                        <br />
-                        @include("config.types.int", ['key' => "antispam_mute_duration", 'data' => old('antispam_mute_duration', $serverConfig["antispam_mute_duration"])]) (minutes)
-                        <br /><br />
                         <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels.
                         <br />
                         <type-selector init-id-type="mute_roleid" label="name" :default-value='{{ json_encode($guild['roles']->get(old('mute_roleid',$serverConfig["mute_roleid"]))) }}' :values='roles'></type-selector>
@@ -292,7 +293,7 @@
                         Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by Rhea.)</i>
                     </p>
                 </div>
-                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configLogging" aria-expanded="false" aria-controls="configLogging">
+                {{--<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configLogging" aria-expanded="false" aria-controls="configLogging">
                     Logging
                 </button>
                 <div class="form-inline form-group collapse" id="configLogging"><br />
@@ -314,19 +315,19 @@
                         @include("config.types.bool", ['key' => "log_deletedmessages", 'data' => old('log_deletedmessages', $serverConfig["log_deletedmessages"])])
                         Log deleted messages.
                         <br />
-                        {{--@include("config.types.bool", ['key' => "ModChannelLogAntispam", 'data' => $serverConfig["ModChannelLogAntispam"][0]])
+                        --}}{{--@include("config.types.bool", ['key' => "ModChannelLogAntispam", 'data' => $serverConfig["ModChannelLogAntispam"][0]])
                         Log messages deleted by Antispam.
-                        <br />--}}
+                        <br />--}}{{--
                         @include("config.types.bool", ['key' => "log_promotions", 'data' => old('log_promotions', $serverConfig["log_promotions"])])
                         Log the use of the <code>@{{ command_prefix }}join</code> and <code>@{{ command_prefix }}leave</code> commands, as well as the <code>@{{ command_prefix }}promote</code> & <code>@{{ command_prefix }}demote</code>.
                         <br /><br />
-                        {{--Ignore channels in this list - messages deleted or edited in these channels will not be logged.
+                        --}}{{--Ignore channels in this list - messages deleted or edited in these channels will not be logged.
                         <br />
-                        <id-selector init-form-name="ModChannelIgnore" init-id-type="Channels"></id-selector>--}}
+                        <id-selector init-form-name="ModChannelIgnore" init-id-type="Channels"></id-selector>--}}{{--
                         <br /><br />
-                        {{--Ignore people/bots in this list - messages by these users will not be logged. (User ID - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
+                        --}}{{--Ignore people/bots in this list - messages by these users will not be logged. (User ID - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
                         <br />
-                        <custom-input-list title="Ignore users" form-name="ModChannelIgnoreUsers" :init-values="{{ json_encode($serverConfig["ModChannelIgnoreUsers"][0]) }}"></custom-input-list>--}}
+                        <custom-input-list title="Ignore users" form-name="ModChannelIgnoreUsers" :init-values="{{ json_encode($serverConfig["ModChannelIgnoreUsers"][0]) }}"></custom-input-list>--}}{{--
                     </p><br />
                     <p>
                         <b>User Activity channel</b>
@@ -335,9 +336,9 @@
                         <br />
                         <type-selector init-id-type="activity_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('activity_channelid', $serverConfig["activity_channelid"]))) }}' :values='channels'></type-selector>
                         <br />
-                        {{--@include("config.types.bool", ['key' => "UserActivityLogTimestamp", 'data' => $serverConfig["UserActivityLogTimestamp"][0]])
+                        --}}{{--@include("config.types.bool", ['key' => "UserActivityLogTimestamp", 'data' => $serverConfig["UserActivityLogTimestamp"][0]])
                         Include a Timestamp.
-                        <br /><br />--}}
+                        <br /><br />--}}{{--
                         @include("config.types.bool", ['key' => "log_join", 'data' => old('log_join', $serverConfig["log_join"])])
                         Display the following message when a new user joins your server. Use <code>{0}</code> in the message where their username should be.
                         <br />
@@ -354,7 +355,7 @@
                         @include("config.types.bool", ['key' => "log_mention_leave", 'data' => old('log_mention_leave', $serverConfig["log_mention_leave"])])
                         Mention these people? (Will use only their username if this is <code>false</code>)
                     </p>
-                </div>
+                </div>--}}
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configNewUser" aria-expanded="false" aria-controls="configNewUser">
                     New User / Verification
                 </button>
@@ -372,9 +373,9 @@
                         <type-selector init-id-type="welcome_roleid" label="name" :default-value='{{ json_encode($guild['roles']->get(old('welcome_roleid', $serverConfig["welcome_roleid"]))) }}' :values='roles'></type-selector>
                     </p><br />
                     <p>
-                        <b>Verification systems</b>
-                        <br /><br />
-                        How does this work... The bot will send information how to get verified to the user, they follow the steps and at the end receive Verified Role. We recommend to give this role normal permissions, while the <code>@everyone</code> role should have just basic read permissions and be unable to speak, upload files, etc...
+                        {{--<b>Verification</b>
+                        <br />--}}
+
                         <br /><br />
                         {{--<b>Reddit Verification</b>
                         <br />
@@ -382,7 +383,7 @@
                         <br /><br />--}}
                         <b>Code Verification</b>
                         <br />
-                        The bot will PM the user your rules (configured below) with hidden code within, in order to force the user to read them. They have to find the code, and send it back, to be assigned the Verified Role.
+                        The bot will send information how to get verified to the user via PM together with your rules (configured below) and a hidden code within the text. They will be assigned Verified Role after they find the code and reply with it back to the bot. We recommend to give this role normal permissions, while the <code>@everyone</code> role should have just basic read permissions and be unable to speak, upload files, etc...
                         <br /><br />
                         @include("config.types.bool", ['key' => "verify", 'data' => old('verify', $serverConfig["verify"])])
                         Enable verification system.
@@ -407,16 +408,12 @@
                         <br />
                         @include("config.types.int", ['key' => "verify_karma", 'data' => old('verify_karma', $serverConfig["verify_karma"])])
                         <br /><br />
-                        If you happen to have a user who does not have Reddit account or for some reason can't use our system, you can manually verify them with any other link to any social network, email, or simply use the <code>force</code> keyword to forcefully verify them. Examples follow:
-                        <br />
-                        <code>@{{ command_prefix }}verify @Rhea https://www.reddit.com/user/RheaAyase</code>
-                        <br />
-                        <code>@{{ command_prefix }}verify @Rhea rhea@botwinder.info</code>
+                        If you need to verify someone manually, you can use the verify command with <code>force</code> parameter, such as this:
                         <br />
                         <code>@{{ command_prefix }}verify @Rhea force</code>
                     </p>
                 </div>
-                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
+                {{--<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
                     Social commands
                 </button>
                 <div class="form-inline form-group collapse" id="configSocial"><br />
@@ -458,7 +455,7 @@
                         @include("config.types.bool", ['key' => "karma_limit_response", 'data' => old('karma_limit_response', $serverConfig["karma_limit_response"])])
                         Tell people if they exceed this limit?
                     </p><br />
-                </div>
+                </div>--}}
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#customCommands" aria-expanded="false" aria-controls="customCommands">
                     Custom Commands
                 </button>
@@ -467,7 +464,6 @@
                         <custom-commands form-name="custom_commands"></custom-commands>
                     </p>
                 </div>
-
                 {{ csrf_field() }}
                 <button class="btn btn-primary" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
             </form>
