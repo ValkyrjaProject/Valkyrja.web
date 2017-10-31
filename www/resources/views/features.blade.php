@@ -131,7 +131,7 @@
                     </tr>
                     </table>
                 </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>createRole</h2>
                     <table class="command">
                     <tr>
@@ -147,7 +147,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div-->
+                </div>
                 <div class="features-indent">
                     <h2>getRole</h2>
                     <table class="command">
@@ -832,16 +832,16 @@
                     </tr>
                     </table>
                 </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>memberRoles</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>See what Member Roles can you assign.<b>Set this up in the <a href="/config">configuration</a>.</td>
+                        <td>See what Member Roles can you assign. <b>Set this up in the <a href="/config">configuration</a>.</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td><code>@user</code> user mention or id</td>
+                        <td>None.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -858,7 +858,7 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td><code>@user role</code> where <code>@user</code> = user mention or id (will accept multiple mentions at once); and <code>role</code> = the name of a role to assign.</td>
+                        <td><code>@user role</code> where <code>@user</code> = user mention(s) or id (will accept multiple mentions at once); and <code>role</code> = the name of a role to assign.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -875,7 +875,7 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td><code>@user role</code> where <code>@user</code> = user mention or id (will accept multiple mentions at once); and <code>role</code> = the name of a role to remove.</td>
+                        <td><code>@user role</code> where <code>@user</code> = user mention(s) or id (will accept multiple mentions at once); and <code>role</code> = the name of a role to remove.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -883,7 +883,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>event</h2>
                     <table class="command">
                     <tr>
@@ -953,7 +953,7 @@
                     </tr>
                     </table>
                 </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>join</h2>
                     <table class="command">
                     <tr>
@@ -987,7 +987,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>meeting</h2>
                     <table class="command">
                     <tr>
