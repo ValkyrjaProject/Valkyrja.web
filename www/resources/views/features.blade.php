@@ -12,6 +12,36 @@
     <section class="nav container col-sm-9 scrollspy-elements" style="position:relative;">
         <div class="row col-xs-12">
             <div>
+                <h1>Open Source</h1>
+                <div class="features-indent">
+                    Botwinder is Open Source and you can find it in the below repositories, contribution is welcome.
+                    <table class="command">
+                        <tr>
+                            <td><a href="https://github.com/RheaAyase/Botwinder.core">Botwinder.core</a></td>
+                            <td>Core client code.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/RheaAyase/Botwinder.discord">Botwinder.discord</a></td>
+                            <td>Most of Botwinder's features</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/RheaAyase/Botwinder.secure">Botwinder.secure</a></td>
+                            <td>Private repository containing sensitive code, such as antispam.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/RheaAyase/Botwinder.web">Botwinder.web</a></td>
+                            <td>This website.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/RheaAyase/Botwinder.service">Botwinder.service</a></td>
+                            <td>What you can see as `Skywinder` on Discord, a server cluster management bot.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/RheaAyase/Botwinder.status">Botwinder.status</a></td>
+                            <td>The `status.botwinder.info` page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
+                        </tr>
+                    </table>
+                </div>
                 <h1>Key Features</h1>
                 <p>
                     These are some features that are not fully covered by simple commands:
