@@ -406,17 +406,17 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div>
+                </di--v>
                 <div class="features-indent">
                     <h2>nuke</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Nukes the whole channel (delets all the messages)  You can also mention a user to delete all of their messages.</td>
+                        <td>Nukes the whole channel (delets all the messages) You can also mention a user to delete all of their messages. (Only within the last two weeks.)</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td>None, optional <code>@user</code> mention</td>
+                        <td>None, optional <code>@user</code> mentions or IDs</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -424,7 +424,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>hideChannel</h2>
                     <table class="command">
                     <tr>
@@ -476,21 +476,21 @@
                         <td>Moderator</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>clear</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Deletes specified amount of messages. If you mention someone as well, it will remove only their messages.</td>
+                        <td>Deletes specified amount of messages (within two weeks.) If you mention someone as well, it will remove only their messages.</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td><code>n</code> - number of messages to delete, plus you can optionally mention one <code>@user</code> <i>after</i> the <code>n</code>.</td>
+                        <td><code>[@users] n</code> - optional <code>@user</code> mentions or ID's (this parameter(s) has to be first, if specified.) And mandatory <code>n</code> parameter, the count of how many messages to remove.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
-                        <td>Moderator</td>
+                        <td>SubModerator</td>
                     </tr>
                     <tr>
                         <td>Example</td>
@@ -498,7 +498,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>membersOf</h2>
                     <table class="command">
                     <tr>
