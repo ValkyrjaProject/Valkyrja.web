@@ -34,11 +34,11 @@
                         </tr>
                         <tr>
                             <td><a href="https://github.com/RheaAyase/Botwinder.service">Botwinder.service</a></td>
-                            <td>What you can see as `Skywinder` on Discord, a server cluster management bot.</td>
+                            <td>What you can see as <code>Skywinder</code> on Discord, a server cluster management bot.</td>
                         </tr>
                         <tr>
                             <td><a href="https://github.com/RheaAyase/Botwinder.status">Botwinder.status</a></td>
-                            <td>The `status.botwinder.info` page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
+                            <td>The <code>status.botwinder.info</code> page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
                         </tr>
                     </table>
                 </div>
@@ -46,8 +46,8 @@
                 <p>
                     These are some features that are not fully covered by simple commands:
                     <ul>
-                        <li><b>Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
-                        <li><b>Configure</b> many aspects of the bot: customize the command prefix, remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing!) And the Botwinder will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
+                        <li><b>Encrypted Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
+                        <li><b>Configure</b> many aspects of the bot: customize the command prefix, <b>antispam system</b> to remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing too!) And the Botwinder will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
                         <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. The above also applies. Oh and they can get cookies for verifying, if you configure that as well.
                         <li><b>Log user events</b> like user joining or leaving the server, being promoted or demoted, and PM a new user when they join the server. You can change these messages to your liking, set whether to @mention them, or just use their name as text, etc. (<a href="/config">Can be configured.</a>)</li>
                         <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
@@ -59,7 +59,7 @@
                         <!--li>Run a <b>poll</b>! Those can be as simple as with yes/no/abstain options, or you can add anything you desire. You can even choose to run a free poll where the user can vote on literally anything and it will be added as a new option! (<code>!poll</code>)</li-->
                         <!--li>Run the best <b>events</b> in the universe with signups, checkin, keep track of score, etc... (<code>!event</code>)</li-->
                         <!--li>Keep track of your <b>meetings</b>, generate nice minutes and logs. (<code>!meeting</code>)</li-->
-                        <li>Last but not least, we put a lot of emphasis on <b>security</b>. No server has access to any data from any other server, and no sensitive data is available to public. As you can see below we have different permission levels, and everything somewhat important or sensitive is hidden behind those permissions, including previously known usernames, times, etc etc...</li>
+                        <li>Last but not least, we put a lot of emphasis on <b>security</b>. No server has access to any data from any other server, and no sensitive data is available to public. All the data stored on our servers is encrypted. Further, you can see below we have different permission levels, and everything somewhat important or sensitive is hidden behind those permissions, including previously known usernames, times, etc etc...</li>
                     </ul>
                 </p>
                 <h1 class="features-h1">Command permissions</h1>
