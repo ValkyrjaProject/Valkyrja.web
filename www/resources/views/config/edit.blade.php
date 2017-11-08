@@ -219,7 +219,9 @@
                     <p>
                         <b>Roles</b>
                         <br />
-                        Roles that will have different kind of permissions - refer to the documentation to see what an each permission can do.
+                        Roles that will have different kind of permissions - refer to the documentation to see what can each permission do. (You can also customize that using the <code>@{{ command_prefix }}permissions</code> command.)
+                        <br />
+                        Public Roles default to <code>No group</code> where any user can <code>@{{ command_prefix }}join</code> any of these roles. Any other public role group will be exclusive, and the user can have only one role out of a group at the time. You can have multiple groups.
                         <br />
                         <id-selector init-form-name="roles" init-id-type="Role">
                             <template slot-scope="props">
