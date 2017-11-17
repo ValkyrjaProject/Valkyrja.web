@@ -156,6 +156,7 @@ class ConfigRequest extends FormRequest
             'custom_commands.*.commandid'       => 'required|alpha_num|max:127',
             'custom_commands.*.response'        => 'required|string',
             'custom_commands.*.description'     => 'string',
+            'voice_channelid'                   => 'required|integer',
         ];
     }
 }

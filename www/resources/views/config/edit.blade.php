@@ -295,7 +295,7 @@
                         Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by Rhea.)</i>
                     </p>
                 </div>
-                {{--<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configLogging" aria-expanded="false" aria-controls="configLogging">
+                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configLogging" aria-expanded="false" aria-controls="configLogging">
                     Logging
                 </button>
                 <div class="form-inline form-group collapse" id="configLogging"><br />
@@ -317,20 +317,14 @@
                         @include("config.types.bool", ['key' => "log_deletedmessages", 'data' => old('log_deletedmessages', $serverConfig["log_deletedmessages"])])
                         Log deleted messages.
                         <br />
-                        --}}{{--@include("config.types.bool", ['key' => "ModChannelLogAntispam", 'data' => $serverConfig["ModChannelLogAntispam"][0]])
-                        Log messages deleted by Antispam.
-                        <br />--}}{{--
                         @include("config.types.bool", ['key' => "log_promotions", 'data' => old('log_promotions', $serverConfig["log_promotions"])])
                         Log the use of the <code>@{{ command_prefix }}join</code> and <code>@{{ command_prefix }}leave</code> commands, as well as the <code>@{{ command_prefix }}promote</code> & <code>@{{ command_prefix }}demote</code>.
                         <br /><br />
-                        --}}{{--Ignore channels in this list - messages deleted or edited in these channels will not be logged.
+                        <b>Voice Activity Log Channel</b> - logs users joining and leaving voice channels.
                         <br />
-                        <id-selector init-form-name="ModChannelIgnore" init-id-type="Channels"></id-selector>--}}{{--
-                        <br /><br />
-                        --}}{{--Ignore people/bots in this list - messages by these users will not be logged. (User ID - use <a href="/img/devMode.png" target="_blank">dev mode</a> -> rightclick)
-                        <br />
-                        <custom-input-list title="Ignore users" form-name="ModChannelIgnoreUsers" :init-values="{{ json_encode($serverConfig["ModChannelIgnoreUsers"][0]) }}"></custom-input-list>--}}{{--
-                    </p><br />
+                        <type-selector init-id-type="voice_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('voice_channelid', $serverConfig["voice_channelid"]))) }}' :values='channels'></type-selector>
+                    </p>
+                    <br />
                     <p>
                         <b>User Activity channel</b>
                         <br /><br />
@@ -338,9 +332,6 @@
                         <br />
                         <type-selector init-id-type="activity_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('activity_channelid', $serverConfig["activity_channelid"]))) }}' :values='channels'></type-selector>
                         <br />
-                        --}}{{--@include("config.types.bool", ['key' => "UserActivityLogTimestamp", 'data' => $serverConfig["UserActivityLogTimestamp"][0]])
-                        Include a Timestamp.
-                        <br /><br />--}}{{--
                         @include("config.types.bool", ['key' => "log_join", 'data' => old('log_join', $serverConfig["log_join"])])
                         Display the following message when a new user joins your server. Use <code>{0}</code> in the message where their username should be.
                         <br />
@@ -357,7 +348,7 @@
                         @include("config.types.bool", ['key' => "log_mention_leave", 'data' => old('log_mention_leave', $serverConfig["log_mention_leave"])])
                         Mention these people? (Will use only their username if this is <code>false</code>)
                     </p>
-                </div>--}}
+                </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configNewUser" aria-expanded="false" aria-controls="configNewUser">
                     New User / Verification
                 </button>
