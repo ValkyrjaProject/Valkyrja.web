@@ -34,13 +34,6 @@ class ConfigRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            /*if($validator->failed())
-            {
-                dd($validator->errors());
-                return $this->json($validator->errors());
-            }*/
-            //dd($validator);
-            //$validator['custom_']
             if ($this->has('custom_commands')) {
                 $tempArr = [];
                 foreach($this['custom_commands'] as $key => $command) {
@@ -61,6 +54,12 @@ class ConfigRequest extends FormRequest
                     $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
                 }
                 $this['roles'] = $tempArr;
+            }
+            if ($this->has('quickban_reason') && is_null($this['quickban_reason'])) {
+                $this['quickban_reason'] = '';
+            }
+            if ($this->has('welcome_message') && is_null($this['welcome_message'])) {
+                $this['welcome_message'] = '';
             }
         });
     }
@@ -107,7 +106,7 @@ class ConfigRequest extends FormRequest
             'antispam_ignore_members'           => 'required|boolean',
             'operator_roleid'                   => 'required|integer',
             'quickban_duration'                 => 'required|integer',
-            'quickban_reason'                   => 'required|string',
+            'quickban_reason'                   => 'string|nullable',
             'mute_roleid'                       => 'required|integer',
             'mute_ignore_channelid'             => 'required|integer',
             /*'karma_enabled'                     => 'required|boolean',
@@ -134,7 +133,7 @@ class ConfigRequest extends FormRequest
             /*'log_timestamp_join'                => 'required|boolean',
             'log_timestamp_leave'               => 'required|boolean',*/
             'welcome_pm'                        => 'required|boolean',
-            'welcome_message'                   => 'required|string',
+            'welcome_message'                   => 'string|nullable',
             'welcome_roleid'                    => 'required|integer',
             'verify'                            => 'required|boolean',
             'verify_on_welcome'                 => 'required|boolean',
