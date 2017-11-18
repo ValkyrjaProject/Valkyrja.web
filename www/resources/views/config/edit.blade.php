@@ -326,9 +326,7 @@
                     </p>
                     <br />
                     <p>
-                        <b>User Activity channel</b>
-                        <br /><br />
-                        In which channel would you like to log the below configured events?
+                        <b>User Activity log channel</b> - In which channel would you like to log the below configured events?
                         <br />
                         <type-selector init-id-type="activity_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('activity_channelid', $serverConfig["activity_channelid"]))) }}' :values='channels'></type-selector>
                         <br />
