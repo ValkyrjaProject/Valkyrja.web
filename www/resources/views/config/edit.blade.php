@@ -300,8 +300,6 @@
                 </button>
                 <div class="form-inline form-group collapse" id="configLogging"><br />
                     <p>
-                        <b>Mod channel</b>
-                        <br /><br />
                         @include("config.types.bool", ['key' => "log_bans", 'data' => old('log_bans', $serverConfig["log_bans"])])
                         <b>Moderation Log Channel</b> - Log muted, kicked and banned users into the following channel.
                         <br />
