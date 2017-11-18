@@ -321,6 +321,8 @@
                         <b>Voice Activity Log Channel</b> - logs users joining and leaving voice channels.
                         <br />
                         <type-selector init-id-type="voice_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('voice_channelid', $serverConfig["voice_channelid"]))) }}' :values='channels'></type-selector>
+                        <br />
+                        <i>(This comes with it's own mini-antispam to prevent people from spamming Botwinder by excessively switching voice channels. This will both, warn the user in the channel and PM them, and if they won't stop, ban them for one hour.)</i>
                     </p>
                     <br />
                     <p>
