@@ -303,11 +303,11 @@
                         <b>Mod channel</b>
                         <br /><br />
                         @include("config.types.bool", ['key' => "log_bans", 'data' => old('log_bans', $serverConfig["log_bans"])])
-                        Log banned and kicked users into the following channel, if you don't set one, the other below mentioned channel will be used.
+                        <b>Moderation Log Channel</b> - Log muted, kicked and banned users into the following channel.
                         <br />
                         <type-selector init-id-type="mod_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('mod_channelid', $serverConfig["mod_channelid"]))) }}' :values='channels'></type-selector>
                         <br /><br />
-                        In which channel would you like to log the below configured events?
+                        <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br />
                         <type-selector init-id-type="log_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('log_channelid', $serverConfig["log_channelid"]))) }}' :values='channels'></type-selector>
                         <br /><br />
@@ -339,6 +339,9 @@
                         <br />
                         @include("config.types.bool", ['key' => "log_mention_join", 'data' => old('log_mention_join', $serverConfig["log_mention_join"])])
                         Mention these people? (Will use only their username if this is <code>false</code>)
+                        <br />
+                        @include("config.types.bool", ['key' => "log_timestamp_join", 'data' => old('log_timestamp_join', $serverConfig["log_timestamp_join"])])
+                        Display timestamp.
                         <br /><br />
                         @include("config.types.bool", ['key' => "log_leave", 'data' => old('log_leave', $serverConfig["log_leave"])])
                         Display the following message when someone leaves your server. Use <code>{0}</code> in the message where their username should be.
@@ -347,6 +350,9 @@
                         <br />
                         @include("config.types.bool", ['key' => "log_mention_leave", 'data' => old('log_mention_leave', $serverConfig["log_mention_leave"])])
                         Mention these people? (Will use only their username if this is <code>false</code>)
+                        <br />
+                        @include("config.types.bool", ['key' => "log_timestamp_leave", 'data' => old('log_timestamp_leave', $serverConfig["log_timestamp_leave"])])
+                        Display timestamp.
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configNewUser" aria-expanded="false" aria-controls="configNewUser">

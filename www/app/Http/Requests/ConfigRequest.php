@@ -61,6 +61,12 @@ class ConfigRequest extends FormRequest
             if ($this->has('welcome_message') && is_null($this['welcome_message'])) {
                 $this['welcome_message'] = '';
             }
+            if ($this->has('log_message_join') && is_null($this['log_message_join'])) {
+                $this['log_message_join'] = '';
+            }
+            if ($this->has('log_message_leave') && is_null($this['log_message_leave'])) {
+                $this['log_message_leave'] = '';
+            }
         });
     }
 
@@ -116,7 +122,7 @@ class ConfigRequest extends FormRequest
             'karma_currency'                    => 'required|string|max:255',
             'karma_currency_singular'           => 'required|string|max:255',
             'karma_consume_command'             => 'required|string|max:255',
-            'karma_consume_verb'                => 'required|string|max:255',
+            'karma_consume_verb'                => 'required|string|max:255',*/
             'log_channelid'                     => 'required|integer',
             'mod_channelid'                     => 'required|integer',
             'log_bans'                          => 'required|boolean',
@@ -126,12 +132,12 @@ class ConfigRequest extends FormRequest
             'activity_channelid'                => 'required|integer',
             'log_join'                          => 'required|boolean',
             'log_leave'                         => 'required|boolean',
-            'log_message_join'                  => 'required|string',
-            'log_message_leave'                 => 'required|string',
+            'log_message_join'                  => 'string|nullable',
+            'log_message_leave'                 => 'string|nullable',
             'log_mention_join'                  => 'required|boolean',
-            'log_mention_leave'                 => 'required|boolean',*/
-            /*'log_timestamp_join'                => 'required|boolean',
-            'log_timestamp_leave'               => 'required|boolean',*/
+            'log_mention_leave'                 => 'required|boolean',
+            'log_timestamp_join'                => 'required|boolean',
+            'log_timestamp_leave'               => 'required|boolean',
             'welcome_pm'                        => 'required|boolean',
             'welcome_message'                   => 'string|nullable',
             'welcome_roleid'                    => 'required|integer',
