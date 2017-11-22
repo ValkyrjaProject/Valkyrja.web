@@ -110,6 +110,7 @@ class ConfigRequest extends FormRequest
             'antispam_links_imgur_ban'          => 'required|boolean',
             'antispam_tolerance'                => 'required|integer',
             'antispam_ignore_members'           => 'required|boolean',
+            'antispam_voice_switching'          => 'required|boolean',
             'operator_roleid'                   => 'required|integer',
             'quickban_duration'                 => 'required|integer',
             'quickban_reason'                   => 'string|nullable',
