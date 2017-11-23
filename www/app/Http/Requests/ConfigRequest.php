@@ -164,6 +164,10 @@ class ConfigRequest extends FormRequest
             'custom_commands.*.response'        => 'required|string',
             'custom_commands.*.description'     => 'string',
             'voice_channelid'                   => 'required|integer',
+            'embed_voicechannel'                => 'required|boolean',
+            'embed_activitychannel'             => 'required|boolean',
+            'embed_logchannel'                  => 'required|boolean',
+            'embed_modchannel'                  => 'required|boolean'
         ];
     }
 }

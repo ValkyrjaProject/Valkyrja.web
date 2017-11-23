@@ -310,10 +310,14 @@
                         <b>Moderation Log Channel</b> - Log muted, kicked and banned users into the following channel.
                         <br />
                         <type-selector init-id-type="mod_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('mod_channelid', $serverConfig["mod_channelid"]))) }}' :values='channels'></type-selector>
+                        <br />
+                        @include("config.types.bool", ['key' => "embed_modchannel", 'data' => old('embed_modchannel', $serverConfig["embed_modchannel"])]) Use Embed
                         <br /><br />
                         <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br />
                         <type-selector init-id-type="log_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('log_channelid', $serverConfig["log_channelid"]))) }}' :values='channels'></type-selector>
+                        <br />
+                        @include("config.types.bool", ['key' => "embed_logchannel", 'data' => old('embed_logchannel', $serverConfig["embed_logchannel"])]) Use Embed
                         <br /><br />
                         @include("config.types.bool", ['key' => "log_editedmessages", 'data' => old('log_editedmessages', $serverConfig["log_editedmessages"])])
                         Log edited messages.
@@ -327,12 +331,16 @@
                         <b>Voice Activity Log Channel</b> - logs users joining and leaving voice channels.
                         <br />
                         <type-selector init-id-type="voice_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('voice_channelid', $serverConfig["voice_channelid"]))) }}' :values='channels'></type-selector>
+                        <br />
+                        @include("config.types.bool", ['key' => "embed_voicechannel", 'data' => old('embed_voicechannel', $serverConfig["embed_voicechannel"])]) Use Embed
                     </p>
                     <br />
                     <p>
                         <b>User Activity log channel</b> - In which channel would you like to log the below configured events?
                         <br />
                         <type-selector init-id-type="activity_channelid" label="name" :default-value='{{ json_encode($guild['channels']->get(old('activity_channelid', $serverConfig["activity_channelid"]))) }}' :values='channels'></type-selector>
+                        <br />
+                        @include("config.types.bool", ['key' => "embed_activitychannel", 'data' => old('embed_activitychannel', $serverConfig["embed_activitychannel"])]) Use Embed
                         <br />
                         @include("config.types.bool", ['key' => "log_join", 'data' => old('log_join', $serverConfig["log_join"])])
                         Display the following message when a new user joins your server. Use <code>{0}</code> in the message where their username should be.
