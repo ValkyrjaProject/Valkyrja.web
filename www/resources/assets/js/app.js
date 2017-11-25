@@ -10,6 +10,7 @@ import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
 import Modal from './components/Modal.vue'
+import ColorPicker from './components/ColorPicker.vue'
 
 new Vue({
     store,
@@ -20,7 +21,8 @@ new Vue({
         TypeSelector,
         CustomInputList,
         CustomCommands,
-        Modal
+        Modal,
+        ColorPicker
     },
     computed: {
         errors: {

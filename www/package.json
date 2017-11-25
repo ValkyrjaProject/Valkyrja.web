@@ -20,6 +20,7 @@
     "vue": "^2.3.4",
     "vue-select": "2.2.0",
     "vuex": "^2.3.1",
-    "vuex-loading": "^0.1.12"
+    "vuex-loading": "^0.1.12",
+    "vue-color": "latest"
   }
 }

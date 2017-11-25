@@ -77,7 +77,6 @@ class ConfigRequest extends FormRequest
      */
     public function rules()
     {
-        //dd(request()->all());
         return [
             'ignore_bots'                       => 'required|boolean',
             'ignore_everyone'                   => 'required|boolean',
@@ -167,7 +166,12 @@ class ConfigRequest extends FormRequest
             'embed_voicechannel'                => 'required|boolean',
             'embed_activitychannel'             => 'required|boolean',
             'embed_logchannel'                  => 'required|boolean',
-            'embed_modchannel'                  => 'required|boolean'
+            'embed_modchannel'                  => 'required|boolean',
+            'color_voicechannel'                => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
+            'color_activitychannel'             => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
+            'color_logchannel'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
+            'color_modchannel'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
+            'color_logmessages'                 => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
         ];
     }
 }

@@ -16,15 +16,27 @@ class ServerConfig extends Model
         'localisation_id'
     ];
 
-    /**
-     * Set the user's first name.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setCustomCommandAttribute($value)
+    public function getAttributeValue($key)
     {
-        $this->attributes['first_name'] = strtolower($value);
+        $value = $this->getAttributeFromArray($key);
+        if ($this->isColorAttribute($key)) {
+            return "#".str_pad(dechex($value), 6, "0", STR_PAD_LEFT);
+        }
+
+        return parent::getAttributeValue($key);
+    }
+
+    public function setAttribute($key, $value)
+    {
+        $parent = parent::setAttribute($key, $value);
+        if ($this->isColorAttribute($key)) {
+            $this->attributes[$key] = hexdec($value);
+        }
+        return $parent;
+    }
+
+    protected function isColorAttribute($key) {
+        return preg_match('/^color_/', $key);
     }
 
     public function custom_commands()

@@ -734,3 +734,15 @@ img {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+.vc-compact {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.vc-compact-color-item {
+  box-shadow: inset 0 0 0 1px #ddd !important;
+}
+.vc-compact-dot {
+  border: 1px solid rgba(1, 1, 1, 0.23);
+}
