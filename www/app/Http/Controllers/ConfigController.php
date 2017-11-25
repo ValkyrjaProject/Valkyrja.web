@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Channels;
 use App\CustomCommands;
 use App\Exceptions\ServerIssueException;
@@ -9,7 +10,9 @@ use App\Http\Requests\ConfigRequest;
 use App\Roles;
 use App\ServerConfig;
 use App\DiscordData;
+use Discord\OAuth\Parts\Guild;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 use League\OAuth2\Client\Token\AccessToken;
 use Response;
@@ -38,13 +41,13 @@ class ConfigController extends Controller
     public function index(Request $request)
     {
         $userId = null;
-        if ($request->session()->has('userId')) $userId = $request->session()->get('userId');
+        if ($request->session()->has('userId')) {
+            $userId = $request->session()->get('userId');
+        }
 
         try {
             $discord_data = $this->getDiscordData($request, null, $userId);
-        }
-        catch (Throwable $e) {
-            dd($e);
+        } catch (Throwable $e) {
             $loginController = new LoginController();
             return $loginController->logout($request, 'Unable to authorize you, please login again');
         }
@@ -53,9 +56,20 @@ class ConfigController extends Controller
         $request->session()->put('userId', $user->getId());
 
         $guilds = $discord_data->getUserGuilds();
-
         if ($guilds->isEmpty()) {
-            $request->session()->flash('messages', ['You do not control any servers! If you do, refresh or logout and login again.']);
+            if (App::environment('local')) {
+                $guilds = new Collection();
+                $guilds->push(
+                    $this->provider->buildPart(Guild::class, $this->accessToken($request),
+                        [
+                            'id' => "9223372036854775807",
+                            'name' => "Test server"
+                        ])
+                );
+            } else {
+                $request->session()->flash('messages',
+                    ['You do not control any servers! If you do, refresh or logout and login again.']);
+            }
         }
 
         return view('config.display_servers', [
@@ -87,8 +101,7 @@ class ConfigController extends Controller
     {
         try {
             $discord_data = $this->getDiscordData($request, $serverId);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $loginController = new LoginController();
             return $loginController->logout($request, 'Unable to authorize you, please login again');
         }
@@ -98,7 +111,7 @@ class ConfigController extends Controller
             $request->session()->put('userId', $user->getId());
         }
 
-        if (!$discord_data->canEditConfig($serverId)) {
+        if (!$discord_data->canEditConfig($serverId) && !App::environment('local')) {
             abort(403, "Unauthorized access");
         }
 
@@ -110,11 +123,9 @@ class ConfigController extends Controller
                 // Filter out @everyone
                 return (string)$key !== $serverId;
             });
-        }
-        catch (ServerIssueException $e) {
+        } catch (ServerIssueException $e) {
             abort(404, $e->getMessage());
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             $loginController = new LoginController();
             return $loginController->logout($request, $e->getMessage());
         }
@@ -142,12 +153,11 @@ class ConfigController extends Controller
     {
         try {
             $discord_data = $this->getDiscordData($request);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable $e) {
             return $this->logout($request, 'Unable to authorize you, please login again');
         }
 
-        if (!$discord_data->canEditConfig($serverId)) {
+        if (!$discord_data->canEditConfig($serverId) && !App::environment('local')) {
             abort(403, "Unauthorized access");
         }
 
@@ -155,7 +165,7 @@ class ConfigController extends Controller
         $data = collect($request->validated());
         /** @var ServerConfig $serverConfig */
         $serverConfig = ServerConfig::where('serverid', $serverId)->first();
-        if($serverConfig == null) {
+        if ($serverConfig == null) {
             dd('Server does not exist');
         }
         $serverConfig->updateCustomCommands($data->get('custom_commands', []));
@@ -167,8 +177,7 @@ class ConfigController extends Controller
             'roles'
         ])->all())) {
             return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
-        }
-        else {
+        } else {
             return redirect()->back()->with('errors', collect(['Failed to save config! Unknown error']));
         }
     }
