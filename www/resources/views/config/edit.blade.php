@@ -388,7 +388,7 @@
                                        :values='channels'></type-selector>
                         <br/>
                         @include("config.types.bool", ['key' => "embed_modchannel", 'data' => old('embed_modchannel', $serverConfig["embed_modchannel"])])
-                        Use Embed with this color:
+                        Use Embed with this colour:
                         <color-picker input-name="color_modchannel"
                                       hex-value="{{old('color_modchannel', $serverConfig["color_modchannel"])}}"></color-picker>
                         <br/><br/>
@@ -425,12 +425,11 @@
                                        :values='channels'></type-selector>
                         <br/>
                         @include("config.types.bool", ['key' => "embed_voicechannel", 'data' => old('embed_voicechannel', $serverConfig["embed_voicechannel"])])
-                        Use Embed with this color:
+                        Use Embed with this colour:
                         <color-picker input-name="color_voicechannel"
                                       hex-value="{{old('color_voicechannel', $serverConfig["color_voicechannel"])}}"></color-picker>
                         <br/>
                     </p>
-                    <br/>
                     <p>
                         <b>User Activity log channel</b> - In which channel would you like to log the below configured
                         events?
@@ -440,10 +439,9 @@
                                        :values='channels'></type-selector>
                         <br/>
                         @include("config.types.bool", ['key' => "embed_activitychannel", 'data' => old('embed_activitychannel', $serverConfig["embed_activitychannel"])])
-                        Use Embed with this color:
+                        Use Embed with this colour:
                         <color-picker input-name="color_activitychannel"
                                       hex-value="{{old('color_activitychannel', $serverConfig["color_activitychannel"])}}"></color-picker>
-                        <br/>
                         <br/><br/>
                         @include("config.types.bool", ['key' => "log_join", 'data' => old('log_join', $serverConfig["log_join"])])
                         Display the following message when a new user joins your server. Use <code>{0}</code> in the
