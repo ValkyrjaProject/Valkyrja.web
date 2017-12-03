@@ -37,7 +37,7 @@ const state = {
         channels: {
             itemsList: [], // list of command Objects
             activeItem: null
-        }
+        },
     },
 };
 
@@ -110,6 +110,10 @@ const mutations = {
     REMOVE_ITEM(state, payload) {
         state.itemModifier[payload.formName].itemsList
             .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x === payload.item), 1);
+    },
+
+    UPDATE_ITEM(state, payload) {
+        Vue.set(payload.obj, payload.key, payload.data);
     },
 
     UPDATE_ITEM_MODIFIER(state, payload) {

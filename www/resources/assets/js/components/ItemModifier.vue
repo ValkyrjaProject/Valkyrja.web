@@ -10,7 +10,7 @@
                             :include-search="true"
                             :can-add="true"
                             list-type="doubleInput"
-                            show-attribute="commandid"
+                            display-attribute="commandid"
                             :form-name="formName"
                             class="tallerList"></list-container>
         </div>

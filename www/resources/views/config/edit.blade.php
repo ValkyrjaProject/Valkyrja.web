@@ -8,7 +8,8 @@
 			'channels' => array_values($guild['channels']->all()),
 			'roles' => array_values($guild['roles']->all()),
 			'custom_commands' => old('custom_commands', (isset($errors) && count($errors) > 0) ? [] : $customCommands->all()),
-			'rolesData' => old('roles', (isset($errors) && count($errors) > 0) ? [] : $roles->all())
+			'rolesData' => old('roles', (isset($errors) && count($errors) > 0) ? [] : $roles->all()),
+			'channelsData' => old('channels', (isset($errors) && count($errors) > 0) ? [] : $channels->all()),
         ])) !!}"
     </script>
 @endsection
@@ -99,12 +100,6 @@
                         Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned
                         to post a single link or anything else in this section, for three minutes.
                     </p>
-                    {{--<p>
-                        <b>Prioritize Antispam</b>
-                        <br />
-                        @include("config.types.bool", ['key' => "antispam_priority", 'data' => old('antispam_priority', $serverConfig["antispam_priority"])])
-                        Do you want to run antispam first, before anything else? This will likely cause some false-positives sometimes, when people are legitimately using the same command a few times in a row for example (such as someone eating three cookies.)
-                    </p>--}}
                     <p>
                         <b>Members ignore Antispam</b>
                         <br/>
@@ -269,7 +264,7 @@
                             }}join</code> any of these roles. Any other public role group will be exclusive, and the
                         user can have only one role out of a group at the time. You can have multiple groups.
                         <br/>
-                        <id-selector init-form-name="roles" init-id-type="Role">
+                        <role-selector>
                             <template slot-scope="props">
                                 <span v-for="role in props.addedTypesLevel">
                                     <input type="hidden"
@@ -283,23 +278,8 @@
                                            :value="role.public_id">
                                 </span>
                             </template>
-                        </id-selector>
+                        </role-selector>
                     </p>
-                    {{--<p>
-                        @include("config.types.bool", ['key' => "RemovePromote", 'data' => $serverConfig["RemovePromote"][0]])
-                        Remove all uses of <code>@{{ command_prefix }}promote</code>/<code>@{{ command_prefix }}demote</code> commands from the chat.
-                    </p>--}}
-                    {{--<p>
-                        <b>Public roles</b>
-                        <br />
-                        These roles are public, and anyone can <code>@{{ command_prefix }}join</code> or <code>@{{ command_prefix }}leave</code> them.
-                        <br />
-                        <id-selector init-form-name="PublicRoleIDs" init-id-type="Roles"></id-selector>
-                    </p>--}}
-                    {{--<p>
-                        @include("config.types.bool", ['key' => "RemoveJoin", 'data' => $serverConfig["RemoveJoin"][0]])
-                        Remove all uses of <code>@{{ command_prefix }}join</code>/<code>@{{ command_prefix }}leave</code> commands from the chat.
-                    </p>--}}
                     <p>
                         <b>!op</b>
                         <br/>
@@ -392,6 +372,21 @@
                         <color-picker input-name="color_modchannel"
                                       hex-value="{{old('color_modchannel', $serverConfig["color_modchannel"])}}"></color-picker>
                         <br/><br/>
+                        <b>Ignore channels</b> - messages deleted or edited in these channels will not be logged.
+                        <br />
+                        <ignore-channel-list-selector>
+                            <template slot-scope="added">
+                                <span v-for="channel in added.added">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
+                                           :value="channel.channelid">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][ignored]'"
+                                           :value="Number(channel.ignored)">
+                                </span>
+                            </template>
+                        </ignore-channel-list-selector>
+                        <br/>
                         <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br/>
                         <type-selector init-id-type="log_channelid" label="name"
@@ -409,7 +404,7 @@
                         <br/>
                         <color-picker input-name="color_logmessages"
                                       hex-value="{{old('color_logmessages', $serverConfig["color_logmessages"])}}"></color-picker>
-                        <br/>
+                        <br/><br/>
                         @include("config.types.bool", ['key' => "log_promotions", 'data' => old('log_promotions', $serverConfig["log_promotions"])])
                         Log the use of the <code>@{{ command_prefix }}join</code> and <code>@{{ command_prefix
                             }}leave</code> commands, as well as the <code>@{{ command_prefix }}promote</code> & <code>@{{
@@ -490,14 +485,7 @@
                     </p>
                     <br/>
                     <p>
-                        {{--<b>Verification</b>
-                        <br />--}}
-
                         <br/><br/>
-                        {{--<b>Reddit Verification</b>
-                        <br />
-                        The bot will ask the user to send a message via Reddit, and after receiving it with the right codes, it will assign them the Verified Role.
-                        <br /><br />--}}
                         <b>Code Verification</b>
                         <br/>
                         The bot will send information how to get verified to the user via PM together with your rules
@@ -518,9 +506,6 @@
                         (Recommended permissions: <a href="/img/verifyRole.png" target="_blank">Verified Role</a> and <a
                                 href="/img/verifyEveryone.png" target="_blank">@everyone</a>)
                         <br/><br/>
-                        {{--@include("config.types.bool", ['key' => "VerifyUseReddit", 'data' => $serverConfig["VerifyUseReddit"][0]])
-                        Use Reddit message to verify people? (Set this to <code>false</code> to use "Code Verification.")
-                        <br /><br />--}}
                         This message will be included in the instructions PMed to the user. If you are using Reddit, you
                         can just list the benefits (extra permissions) of the verification, or in case of the Code
                         Verification, we recommend using well crafted rules, such as the ones in the <a

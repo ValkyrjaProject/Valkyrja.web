@@ -67,7 +67,6 @@
 
 <script>
     import ItemModifier from './ItemModifier.vue'
-    import IdSelector from './IdSelector.vue'
     import {
         updateActiveItemData
     } from '../vuex/actions'
@@ -89,7 +88,6 @@
         },
         components: {
             ItemModifier,
-            IdSelector
         },
         /*created() {
             this.$startLoading(this.formName);

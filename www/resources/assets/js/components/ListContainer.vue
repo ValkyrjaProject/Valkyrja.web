@@ -7,19 +7,19 @@
             </span>
         </div>
         <div class="dragArea selectList">
-            <div v-if="listType == 'flat'">
-                <div v-for="item in filterValue" class="listItem" @click="input(item)" :key="item.id" :class="item.classData">
-                    {{item[showAttribute].trim().substring(0, 25)}}
+            <div v-if="listType === 'flat'">
+                <div v-for="item in filterValue" class="listItem" @click="input(item)" :key="item[idAttribute]" :class="item.classData">
+                    {{item[displayAttribute].trim().substring(0, 25)}}
                 </div>
             </div>
-            <div v-else-if="listType == 'doubleInput'">
+            <div v-else-if="listType === 'doubleInput'">
                 <div class="listItem listItemGroup input-group" v-for="item in filterValue" :class="item.classData">
                     <div class="input-group-addon" @click="click(item)">✕</div>
-                    <span class="itemLeft btn" @click="input(item)">{{item[showAttribute].trim().substring(0, 25)}}</span>
+                    <span class="itemLeft btn" @click="input(item)">{{item[displayAttribute].trim().substring(0, 25)}}</span>
                 </div>
             </div>
             <span v-if="!hideForm">
-                <input v-for="item in value" type="hidden" :name="formInputName" :value="item.id" :key="item.id">
+                <input v-for="item in value" type="hidden" :name="formInputName" :value="item[idAttribute]" :key="item[idAttribute]">
             </span>
             <div class="listItem empty" v-if="!value.length">Empty</div>
             <div class="listItem empty" v-if="value.length && !filterValue.length && query">Not found</div>
@@ -38,7 +38,7 @@
              */
             formName: {
                 type: String,
-                required: true
+                required: false
             },
             /**
              * Requires id and name attributes. ID for form inputs. Name for displaying
@@ -82,10 +82,18 @@
             /**
              * For which attribute in input to display and search by.
              */
-            showAttribute: {
+            displayAttribute: {
                 type: String,
                 required: false,
                 default: 'name'
+            },
+            /**
+             * ID name to use as value
+             */
+            idAttribute: {
+                type: String,
+                required: false,
+                default: 'id'
             }
         },
         data: function () {
@@ -99,7 +107,7 @@
             },
             filterValue () {
                 if (this.value.length < 1) return [];
-                return this.findBy(this.value, this.query, this.showAttribute)
+                return this.findBy(this.value, this.query, this.displayAttribute)
             }
         },
         methods: {

@@ -53,6 +53,10 @@ export const removeItem = ({commit}, attribute) => {
     commit('REMOVE_ITEM', attribute);
 };
 
+export const updateItem = ({commit}, attribute) => {
+    commit('UPDATE_ITEM', attribute);
+};
+
 export const editItemClass = ({commit}, attribute) => {
     commit('EDIT_ITEM_CLASS', attribute);
 };
@@ -67,6 +71,10 @@ export const updateChannels = ({commit}, attribute) => {
 
 export const updateRolesData = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'roles', data: data});
+};
+
+export const updateChannelsData = ({commit}, data) => {
+    commit('UPDATE_ITEM_MODIFIER', {key: 'channels', data: data});
 };
 
 export const updateState = ({commit}, attribute) => {

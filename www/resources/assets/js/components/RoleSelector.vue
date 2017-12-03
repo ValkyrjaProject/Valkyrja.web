@@ -20,17 +20,15 @@
         </div>
         <div class="listRow">
             <div class="listContainer">
-                <h2>Available {{idType}}s</h2>
+                <h2>Available roles</h2>
                 <list-container v-model="typeAvailable"
-                                :form-name="initFormName"
                                 :hide-form="true"
                                 :include-search="true"></list-container>
             </div>
             <div class="listContainer">
-                <h2>Added {{idType}}s</h2>
+                <h2>Added roles</h2>
                 <list-container :value="addedTypesLevel"
                                 @input="removeItem($event)"
-                                :form-name="initFormName"
                                 :hide-form="true"
                                 :include-search="true"></list-container>
             </div>
@@ -51,22 +49,11 @@
             value: {
                 type: Object,
                 required: false,
-                default: function () {
-                    return {}
-                }
-            },
-            initFormName: {
-                type: String,
-                required: true
-            },
-            initIdType:  {
-                type: String,
-                required: true
             },
             hideInputs: {
                 type: Boolean,
                 required: false,
-                default: false
+                default: true
             },
             stateIndex: {
                 type: Number,
@@ -75,9 +62,6 @@
         },
         data: function () {
             return {
-                idType: this.initIdType,
-                queryAvailable: '',
-                querySelected: '',
                 RolePermissionLevelEnum: {
                     //None: "0",
                     Public: "1",
@@ -94,7 +78,9 @@
             }
         },
         created () {
+            console.log(this.addedTypes);
             for (let type of this.addedTypes) {
+                console.log(type);
                 if (
                     type.permission_level === this.RolePermissionLevelEnum.Public
                     && this.publicGroups.indexOf(type.public_id) === -1
@@ -106,33 +92,33 @@
         },
         computed: {
             addedTypes() {
-                return this.$store.state.itemModifier[this.initFormName].itemsList;
+                return this.$store.state.itemModifier.roles.itemsList;
             },
             formInputName () {
-                return this.initFormName + '[]';
+                return 'roles[]';
             },
             typeAvailable: {
                 get () {
-                    return this.$store.state[this.idType.toLowerCase()+'s'].filter(e => {
+                    return this.$store.state['roles'].filter(e => {
                         return this.addedTypes.filter(t => {
-                            return t[[this.idType.toLowerCase()+'id']] === e.id
+                            return t[['roleid']] === e.id
                         }).length === 0;
                     });
                 },
                 set (value) {
                     let newType = {};
-                    newType[this.idType.toLowerCase()+'id'] = value.id;
+                    newType['roleid'] = value.id;
                     newType['permission_level'] = this.selectedPermissionLevel;
                     newType['public_id'] = this.publicRoleIsSelected ? this.selectedPublicGroup : 0;
                     this.$store.dispatch('addItem', {
-                        formName: this.initFormName,
+                        formName: 'roles',
                         item: newType
                     });
                 }
             },
             addedTypesLevel() {
-                return this.$store.state[this.idType.toLowerCase()+'s'].filter(e => {
-                    return !(this.addedTypes.filter(t => t[[this.idType.toLowerCase()+'id']] === e.id
+                return this.$store.state['roles'].filter(e => {
+                    return !(this.addedTypes.filter(t => t[['roleid']] === e.id
                         && t.permission_level === this.selectedPermissionLevel
                         && (this.publicRoleIsSelected ? t.public_id === this.selectedPublicGroup : 1)
                         ).length === 0
@@ -171,9 +157,9 @@
                 }
             },
             removeItem(item) {
-                let removeItem = this.addedTypes[this.addedTypes.findIndex(t => t[[this.idType.toLowerCase()+'id']] === item.id)];
+                let removeItem = this.addedTypes[this.addedTypes.findIndex(t => t[['roleid']] === item.id)];
                 this.$store.dispatch('removeItem', {
-                    formName: this.initFormName,
+                    formName: 'roles',
                     item: removeItem
                 });
             },

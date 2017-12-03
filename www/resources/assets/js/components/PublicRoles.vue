@@ -1,5 +1,5 @@
 <template>
-    <div class="publicRoles loadComponent">
+    <div class="inputList loadComponent">
         <div v-if="$isLoading(this.formName)" class="loading">
             <span>{{loadingText}}</span>
         </div>

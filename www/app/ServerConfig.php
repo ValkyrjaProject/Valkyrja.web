@@ -84,13 +84,14 @@ class ServerConfig extends Model
         if (!is_array($channels) && count($channels) == 0) {
             return false;
         }
-        $commandKeys = array_column($channels, 'commandid');
-        $deleteChannels = $this->channels()->whereNotIn('commandid', $commandKeys);
+        $commandKeys = array_column($channels, 'channelid');
+        $deleteChannels = $this->channels()->whereNotIn('channelid', $commandKeys);
         if ($deleteChannels->count() > 0) {
             $deleteChannels->delete();
         }
         foreach ($channels as $channel) {
-            $this->channels()->updateOrCreate($channel);
+            //$this->channels()->updateOrCreate($channel);
+            $this->channels()->updateOrCreate(['channelid' => $channel['channelid']], $channel);
         }
         return true;
     }

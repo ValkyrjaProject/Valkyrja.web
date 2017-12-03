@@ -4,25 +4,29 @@ import {updateCustomCommands, updateBotwinderCommands, updateRolesData, updateRo
 
 import {mapGetters, mapState} from 'vuex'
 import Sticky from './sticky'
-import IdSelector from './components/IdSelector.vue'
+import RoleSelector from './components/RoleSelector.vue'
 import TextField from './components/TextField.vue'
 import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
 import Modal from './components/Modal.vue'
 import ColorPicker from './components/ColorPicker.vue'
+import ListSelector from './components/ListSelector.vue'
+import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
 
 new Vue({
     store,
     el:'#app',
     components:{
-        IdSelector,
+        RoleSelector,
         TextField,
         TypeSelector,
         CustomInputList,
         CustomCommands,
         Modal,
-        ColorPicker
+        ColorPicker,
+        ListSelector,
+        IgnoreChannelListSelector,
     },
     computed: {
         errors: {
@@ -70,10 +74,7 @@ new Vue({
             this.$store.dispatch('updateChannels', state['channels']);
             this.$store.dispatch('updateCustomCommands', state['custom_commands']);
             this.$store.dispatch('updateRolesData', state['rolesData']);
-            //this.$store.dispatch('editServerId', partArray[3]);
-            /**/
-            /*this.$store.dispatch('initialState', (JSON.parse(window.__INITIAL_STATE__) || {})); // TODO: channels and roles need to be changed similar to API (or something)
-            this.$store.dispatch('updateBotwinderCommands');*/
+            this.$store.dispatch('updateChannelsData', state['channelsData']);
         }
     }
 });

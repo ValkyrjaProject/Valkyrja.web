@@ -77,6 +77,7 @@ class ConfigRequest extends FormRequest
      */
     public function rules()
     {
+        // dd(request()->all());
         return [
             'ignore_bots'                       => 'required|boolean',
             'ignore_everyone'                   => 'required|boolean',
@@ -172,6 +173,10 @@ class ConfigRequest extends FormRequest
             'color_logchannel'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_modchannel'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_logmessages'                 => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
+            'channels'                          => 'array',
+            'channels.*'                        => 'array',
+            'channels.*.channelid'              => 'required|integer|min:0',
+            'channels.*.ignored'                => 'boolean',
         ];
     }
 }
