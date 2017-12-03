@@ -372,21 +372,6 @@
                         <color-picker input-name="color_modchannel"
                                       hex-value="{{old('color_modchannel', $serverConfig["color_modchannel"])}}"></color-picker>
                         <br/><br/>
-                        <b>Ignore channels</b> - messages deleted or edited in these channels will not be logged.
-                        <br />
-                        <ignore-channel-list-selector>
-                            <template slot-scope="added">
-                                <span v-for="channel in added.added">
-                                    <input type="hidden"
-                                           :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
-                                           :value="channel.channelid">
-                                    <input type="hidden"
-                                           :name="'channels['+added.added.indexOf(channel)+'][ignored]'"
-                                           :value="Number(channel.ignored)">
-                                </span>
-                            </template>
-                        </ignore-channel-list-selector>
-                        <br/>
                         <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br/>
                         <type-selector init-id-type="log_channelid" label="name"
@@ -461,6 +446,21 @@
                         <br/>
                         @include("config.types.bool", ['key' => "log_timestamp_leave", 'data' => old('log_timestamp_leave', $serverConfig["log_timestamp_leave"])])
                         Display timestamp.
+                        <br/><br/>
+                        <b>Ignore channels</b> - messages deleted or edited in these channels will not be logged.
+                        <br />
+                        <ignore-channel-list-selector>
+                            <template slot-scope="added">
+                                <span v-for="channel in added.added">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
+                                           :value="channel.channelid">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][ignored]'"
+                                           :value="Number(channel.ignored)">
+                                </span>
+                            </template>
+                        </ignore-channel-list-selector>
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
