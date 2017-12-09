@@ -676,7 +676,7 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Temporarily mute mentioned members from both the chat and voice. This command has to be configured in the <a href="/config">configuration</a>.
+                        <td>Temporarily mute mentioned members from the text chat. This command has to be configured in the <a href="/config">configuration</a>.
                         </td>
                     </tr>
                     <tr>
