@@ -635,16 +635,16 @@
                     </tr>
                     </table>
                 </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>muteChannel</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Temporarily mute the current channel, the duration can be set in the <a href="/config">configuration</a>.</td>
+                        <td>Temporarily mute the current channel. (This may block the moderators as well if they don't have explicitly higher <code>SendMessages</code> permissions than <code>@everyone</code>)</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td>None</td>
+                        <td><code>time</code> - duration of the mute (e.g. `7d` or `12h` or `1h30m` - without spaces.)</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -668,7 +668,7 @@
                         <td>Moderator</td>
                     </tr>
                     </table>
-                </div-->
+                </div>
 
                 <h1 class="features-h1">Commands ~ SubModerator</h1>
                 <div class="features-indent">
