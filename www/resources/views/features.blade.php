@@ -356,7 +356,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div
+                </div>
                 <div class="features-indent">
                     <h2>operations</h2>
                     <table class="command">
