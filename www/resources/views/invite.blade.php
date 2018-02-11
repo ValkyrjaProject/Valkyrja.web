@@ -48,7 +48,7 @@
             <br />
             <p class="row">
               <b>Patreon info for subscribers:</b><ul>
-                <li>Please make sure to contact <code>Rhea#0321</code> with your patreon details (patreon username or email)</li>
+                <li>Please make sure to contact <code>Rhea#1234</code> with your patreon details (patreon username or email)</li>
                 <li>Remember that the bot is bound to servers you own, or one extra server you explicitly ask for (Talk to Rhea - PM her the <code>Server ID</code>)</li>
               </ul><br />
               <i>Don't forget to set-up permissions and role hierarchy!</i>
