@@ -1,5 +1,12 @@
 #Changelog
 
+**Botwinder 3.0** - 23rd of October, 2017
+  * This update dropped several of the old features, some of them in favor of dedicated bots (giveaways,) others due to too much work maintaining them (livestream notifications,) etc...
+  * You can self-host Botwinder Mk.III if you're brave enough.
+  * Web-Config got a large update.
+  * Public role groups are included in this update.
+  * Much better command options - you can change permissions of all the commands, including your custom commands and aliases.
+
 **Botwinder 2.4** - 25th of July, 2017
   * Beam renamed to Mixer... and some other changes with Hitbox as well. Weird stuff happening.
   * Command Options: Implemented channel whitelist. You can now use `!cmdChannelWhitelist` to allow a command to be used only in specific channels only.

@@ -1,11 +1,6 @@
 #Upcoming features
 
-* **Botwinder 3.0 beta** - 2017-10-15: Botwinder Mk.III beta will be launched without many of the old Mk.II features, where most of them will be added in at later time within the Q4 2017. We are forced to launch early by Discord deprecating the old version - apologies for the inconvenience. Read the `#news` channel of our support server for more details.
-* **Botwinder 3.0** - Implement code necessary to support redundant clustered environment and horizontal scaling. (Q4)
-* **PublicRoles upgrade** (3.0) - You will be able to create groups of public roles, where the user will have only one of the roles at a time. If they `!join` another, the previous one will be removed. For example the [Elite Dangerous server](https://discord.gg/elite) has public roles for allegiance and factions. These would be two groups, where you can be only either imperial or federal, and you can be part of only one of the factions. (Q4 2017)
-* **Points and ranks** (3.0)  earned with activity, everything should be customizable and you should be able to choose what those points are, how many are needed for a new rank/level, how to announce it, and whether to assign a specific role with it or not. (Q4 2017)
-* **Anti-PMspam** - Rather complex system which may as well end up being separate bot which will include only our standard antispam plus this new feature. (Q4 2017)
-* More **livestream notifications** - Add support for YouTube - going live or uploading a new video. (Q1-Q2 2018)
-* **Livestream integrations** - twitch, hitbox & beam - Merge Discord channel with the stream chat (just like the above irc) and create custom commands, timers, polls and giveaways that will run in both twitch and Discord (or only either one), etc... (2019)
-* **Botwinder 4.0** - Who knows what major news would this one bring? (2019)
+* Re-implement some of the missing features from 2.x - 2018
+* **Anti-PMspam** - Rather complex system which may as well end up being separate bot which will include only our standard antispam plus this new feature. (2019?)
+* **Botwinder 4.0** - Who knows what major news would this one bring? (2019-2020)
 
