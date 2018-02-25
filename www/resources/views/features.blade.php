@@ -212,13 +212,13 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>promoteEveryone</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Assign a role to everyone on your server. Please ensure correct hierarchy before using this command.</td>
+                        <td>Assign a role to everyone in your server. Please ensure correct permisison hierarchy before using this command.</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
@@ -231,6 +231,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>demoteEveryone</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Remove a role from everyone in your server. Please ensure correct permission hierarchy before using this command.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>ID</code> of a role. This does not accept name of the role.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <!--div class="features-indent">
                     <h2>channels</h2>
                     <table class="command">
                     <tr>
