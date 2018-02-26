@@ -496,6 +496,23 @@
                     </table>
                 </div-->
                 <div class="features-indent">
+                    <h2>membersOf</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display a list of members of a role.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>name</code> or <code>id</code> of a role.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Moderator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>clear</h2>
                     <table class="command">
                     <tr>
@@ -513,23 +530,6 @@
                     <tr>
                         <td>Example</td>
                         <td><code>!clear 3 @user</code> - removes the last three messages sent by the user.</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>membersOf</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Display a list of members of a role.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td><code>name</code> or <code>id</code> of a role.</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Admin</td>
                     </tr>
                     </table>
                 </div>
