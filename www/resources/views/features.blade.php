@@ -52,8 +52,7 @@
                         <li><b>Log user events</b> like user joining or leaving the server, being promoted or demoted, and PM a new user when they join the server. You can change these messages to your liking, set whether to @mention them, or just use their name as text, etc. (<a href="/config">Can be configured.</a>)</li>
                         <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
                         <li>You can even <b>log users switching between voice channels.</b></li>
-                        <li>Use reddit <b>verification system</b>, where the bot will send a user information how to get verified - the user is asked to send a PM over Reddit to the bot. After Botwinder receives this message, it will save the info in the database and assign the user configured role. If they have been verified previously and for some reason left the server (or have been kicked/banned) the bot will simply assign them the verified role without having them re-send the message. (<a href="/config">Can be configured.</a>)</li>
-                        <li>Set up your own <b>custom commands</b>, with a few keywords! (<code>!commands</code>)</li>
+                        <li>Set up your own <b>custom commands</b>, with a few keywords! (<a href="/config">Can be configured.</a>)</li>
                         <li>You can <b>create an alias</b> to <i>any</i> command. (<code>!alias</code>)</li>
                         <li>Did you like <b>temporary channels</b> on TeamSpeak? No problem, we've got you. (<code>!tempChannel</code>)</li>
                         <!--li>Create <b>scheduled messages</b> or timers. These can even be <b>scheduled commands</b>, so you can even schedule a daily <code>!nuke</code> of a channel! :D (<code>!timers</code>)</li-->
@@ -70,6 +69,9 @@
                     </p>
                     <p>
                         &nbsp; <code>ServerOwner</code> stands for either server owner, or someone with the <code>ManageServer</code> and <code>Administrator</code> permissions, and <code>Admin</code>, <code>Moderator</code>, <code>SubModerator</code> and <code>Member</code> roles have to be <a href="/config">configured</a>.
+                    </p>
+                    <p>
+                        &nbsp; These permissions can be overriden for each command separately using the <code>!permissions</code> command and commands can also be blocked from specific channels, or allowed to be used in specific channels.
                     </p>
                 </div>
 
