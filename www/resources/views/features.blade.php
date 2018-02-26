@@ -516,7 +516,7 @@
                     </tr>
                     </table>
                 </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>membersOf</h2>
                     <table class="command">
                     <tr>
@@ -532,7 +532,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </div-->
+                </div>
                 <div class="features-indent">
                     <h2>op</h2>
                     <table class="command">
