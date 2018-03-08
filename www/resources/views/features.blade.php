@@ -725,7 +725,7 @@
                     </tr>
                     </table>
                 </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>tempChannel</h2>
                     <table class="command">
                     <tr>
@@ -741,7 +741,7 @@
                         <td>SubModerator</td>
                     </tr>
                     </table>
-                </div-->
+                </div>
                 <div class="features-indent">
                     <h2>permit</h2>
                     <table class="command">
