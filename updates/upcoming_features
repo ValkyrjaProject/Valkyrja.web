@@ -1,6 +1,9 @@
 #Upcoming features
 
+Some of the major future updates will include:
 * Re-implement some of the missing features from 2.x - 2018
 * **Anti-PMspam** - Rather complex system which may as well end up being separate bot which will include only our standard antispam plus this new feature. (2019?)
 * **Botwinder 4.0** - Who knows what major news would this one bring? (2019-2020)
+
+Definitely check out our [github milestones](https://github.com/RheaAyase/Botwinder.core/milestones) and issue tracking to get a better idea!
 
