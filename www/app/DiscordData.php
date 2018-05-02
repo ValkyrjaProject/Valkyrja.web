@@ -203,15 +203,15 @@ class DiscordData extends Model
 
             $serverChannels = collect();
             foreach ($rawServerChannels as $serverChannel) {
-                if (!isset($serverChannel['type'])) {
+                if (!isset($serverChannel->type)) {
                     Log::error('Server channels: '.isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
                     throw new DiscordException('There was an error getting channels from the server. Please try again');
                 }
                 // If type is GUILD_TEXT
-                if ($serverChannel['type'] === 0) {
+                if ($serverChannel->type === 0) {
                     $tempArray = [];
-                    $tempArray['id'] = $serverChannel['id'];
-                    $tempArray['name'] = '#'.$serverChannel['name'];
+                    $tempArray['id'] = $serverChannel->id;
+                    $tempArray['name'] = '#'.$serverChannel->name;
 
                     $serverChannels->push($tempArray);
                 }
