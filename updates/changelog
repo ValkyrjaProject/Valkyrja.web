@@ -1,5 +1,12 @@
 #Changelog
 
+**Botwinder 3.1** - 3rd of May, 2018
+  * Karma - an extra appreciation for those who are helpful. When a user is thanked, they receive a cookie! See the config page to find out all the details.
+  * Experience and levels - users can gain experience for every message (or image) that they send, gain levels and be assigned roles. You can customize every detailed about this as well.
+  * Memo - every user can create a memo and display it as they wish, or display memo of other people. This allows for user profile creation, etc.
+  * Please see the config page and the documentation for more details =)
+
+
 **Botwinder 3.0** - 23rd of October, 2017
   * This update dropped several of the old features, some of them in favor of dedicated bots (giveaways,) others due to too much work maintaining them (livestream notifications,) etc...
   * You can self-host Botwinder Mk.III if you're brave enough.
