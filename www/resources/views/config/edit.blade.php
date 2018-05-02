@@ -530,17 +530,54 @@
                         <code>@{{ command_prefix }}verify @Rhea force</code>
                     </p>
                 </div>
-                {{--<button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
-                    Social commands
+                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
+                    Social (levels & karma)
                 </button>
                 <div class="form-inline form-group collapse" id="configSocial"><br />
                     <p>
-                        <b>Karma system</b>
+                        <b>Experience & levels</b>
+                        <br />Users earn experience based on the below configuration and they are granted levels, which may or may not have roles associated with them.
                         <br />
-                        Karma is an extra appreciation of helpful people. They get thanked, they get a cookie!
+                        <br />You can use this formula to be able get a better idea about the progression curve:
+                        <br /><code>lvl = (sqrt(4*totalExp + base) / sqrt(base) - 1) / 2</code>
+                        <br /><code>totalExp = baseExp * lvl * (lvl + 1)</code>
+                        <br /><code>expToNextLvl = (baseExp * (lvl+1) * ((lvl+1) + 1) - currentTotalExp</code>
+                        <br /><code>messagesToNextLvl = expToNextLvl / expPerMessage</code>
+                        <br /><code>imagesToNextLvl = expToNextLvl / expPerImage</code>
+                        <br /><i>Based on the above complexity we recommend leaving the default values. (Please do not enter stupid (high) numbers, you will only break it on your end.)</i>
+                        <br /><br />
+                        @include("config.types.bool", ['key' => "exp_enabled", 'data' => old('exp_enabled', $serverConfig["exp_enabled"])])
+                        <b>Experience Enabled</b>
+                        <br /><br />
+                        @include("config.types.bool", ['key' => "exp_announce_levelup", 'data' => old('exp_announce_levelup', $serverConfig["exp_announce_levelup"])])
+                        Announce level-up
+                        <br /><br />
+                        Base experience value (<code>baseExp</code>) _Higher value means slower progression, default <code>10</code>._
+                        <br />@include("config.types.int", ['key' => "base_exp_to_levelup", 'data' => old('base_exp_to_levelup', $serverConfig["base_exp_to_levelup"])])
+                        <br /><br />
+                        Experience given per message (<code>expPerMessage</code>) _Higher value means faster progression, default <code>1</code>._
+                        <br />@include("config.types.int", ['key' => "exp_per_message", 'data' => old('exp_per_message', $serverConfig["exp_per_message"])])
+                        <br /><br />
+                        Experience given per image (attachment) (<code>expPerImage</code>) _Higher value means faster progression, default <code>3</code>._
+                        <br />@include("config.types.int", ['key' => "exp_per_attachment", 'data' => old('exp_per_attachment', $serverConfig["exp_per_attachment"])])
+                        <br /><br />
+                        Roles at levels
+                        <br />
+                        <i>TODO: This feature is work in progress!!</i>
+                        <br />
+                        @include("config.types.bool", ['key' => "exp_cumulative_roles", 'data' => old('exp_cumulative_roles', $serverConfig["exp_cumulative_roles"])])
+                        Are these roles cumulative? (<code>true</code> - all the roles are assigned for all the previous levels; <code>false</code> - only one role will be assigned and the previous level roles will be removed.)
+                        <br /><br />
+                        How many {{ $serverConfig["karma_currency"] }} do you want to give them every levle-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
+                        <br />@include("config.types.int", ['key' => "karma_per_level", 'data' => old('karma_per_level', $serverConfig["karma_per_level"])])
+                    </p>
+                    <p>
+                        <b>Karma system</b>
+                        <br />Karma is an extra appreciation of helpful people. They get thanked, they get a cookie!
                         <br /><code>Rhea: Hey thanks for that pull request fixing a typo @freiheit</code>
                         <br /><code>Botwinder: @freiheit received a <i>thank you</i> cookie!</code>
-                        <br />You can also `!give @user` a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
+                        <br />You can also <code>!give @user</code> a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
+                        <br /><i>Hint: Create <code>@{{ command_prefix }}alias<code> for the <code>cookies</code> and <code>nom</code> commands to fit your custom configuration below!</i>
                         <br />
                         @include("config.types.bool", ['key' => "karma_enabled", 'data' => old('karma_enabled', $serverConfig["karma_enabled"])])
                         Use Karma system?
@@ -555,9 +592,7 @@
                         <br /><br />
                         Consume command - eating a cookie is selfish act and will effectively reduce the number you have by one.
                         <br />
-                        @include("config.types.text", ['key' => "karma_consume_command", 'data' => old('karma_consume_command', $serverConfig["karma_consume_command"])])
-                        <br />
-                        Consume verb used in response to the above command. Past tense please.
+                        Consume verb used in response to the <code>@{{ command_prefix }}nom</code> command. Past tense please.
                         <br />
                         @include("config.types.text", ['key' => "karma_consume_verb", 'data' => old('karma_consume_verb', $serverConfig["karma_consume_verb"])])
                         <br /><br />
@@ -571,8 +606,8 @@
                         <br />
                         @include("config.types.bool", ['key' => "karma_limit_response", 'data' => old('karma_limit_response', $serverConfig["karma_limit_response"])])
                         Tell people if they exceed this limit?
-                    </p><br />
-                </div>--}}
+                    <br />
+                </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
                         data-target="#customCommands" aria-expanded="false" aria-controls="customCommands">
                     Custom Commands
