@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App;
 use App\Channels;
 use App\CustomCommands;
+use App\DiscordData;
 use App\Exceptions\ServerIssueException;
 use App\Http\Requests\ConfigRequest;
 use App\Roles;
 use App\ServerConfig;
-use App\DiscordData;
 use Discord\OAuth\Parts\Guild;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -170,11 +170,15 @@ class ConfigController extends Controller
         }
         $serverConfig->updateCustomCommands($data->get('custom_commands', []));
         $serverConfig->updateChannels($data->get('channels', []));
-        $serverConfig->updateRoles($data->get('roles', []));
+
+        $roles = $this->getRoles($data);
+        $serverConfig->updateRoles($roles);
+
         if ($serverConfig->update($data->except([
             'custom_commands',
             'channels',
-            'roles'
+            'roles',
+            'levels'
         ])->all())) {
             return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
         } else {
@@ -219,5 +223,25 @@ class ConfigController extends Controller
             return redirect()->route('displayServers');
         }
         return redirect()->route('editConfig', ['serverID' => $request->input('serverId')]);
+    }
+
+    /**
+     * @param Collection $data
+     * @return array
+     */
+    private function getRoles($data): array
+    {
+        $roles = $data->get('roles', []);
+        $levels = $data->get('levels', []);
+        foreach ($roles as $roleKey => $role) {
+            foreach ($levels as $key => $level) {
+                if ($level['roleid'] === $role['roleid']) {
+                    $roles[$roleKey]['level'] = $level['level'];
+                    array_splice($levels, $key, 1);
+                }
+            }
+        }
+        $roles = array_merge($roles, $levels);
+        return $roles;
     }
 }

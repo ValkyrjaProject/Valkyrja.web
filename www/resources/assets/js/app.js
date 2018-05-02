@@ -12,12 +12,14 @@ import CustomCommands from './components/CustomCommands.vue'
 import Modal from './components/Modal.vue'
 import ColorPicker from './components/ColorPicker.vue'
 import ListSelector from './components/ListSelector.vue'
+import LevelSelector from './components/LevelSelector.vue'
 import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
 
 new Vue({
     store,
     el:'#app',
     components:{
+        LevelSelector,
         RoleSelector,
         TextField,
         TypeSelector,
@@ -74,6 +76,7 @@ new Vue({
             this.$store.dispatch('updateChannels', state['channels']);
             this.$store.dispatch('updateCustomCommands', state['custom_commands']);
             this.$store.dispatch('updateRolesData', state['rolesData']);
+            this.$store.dispatch('updateLevelsData', state['rolesData'].slice());
             this.$store.dispatch('updateChannelsData', state['channelsData']);
         }
     }

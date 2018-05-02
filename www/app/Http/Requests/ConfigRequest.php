@@ -77,7 +77,6 @@ class ConfigRequest extends FormRequest
      */
     public function rules()
     {
-        // dd(request()->all());
         return [
             'ignore_bots'                       => 'required|boolean',
             'ignore_everyone'                   => 'required|boolean',
@@ -158,6 +157,8 @@ class ConfigRequest extends FormRequest
             'roles.*.roleid'                    => 'required|integer|min:0',
             'roles.*.permission_level'          => 'required|integer|between:1,5',
             'roles.*.public_id'                 => 'required|integer|min:0',
+            'levels.*.roleid'                    => 'required|integer|min:0',
+            'levels.*.level'                     => 'required|integer|min:1',
             'custom_commands'                   => 'array',
             'custom_commands.*'                 => 'required|array',
             'custom_commands.*.commandid'       => 'required|alpha_num|max:127',

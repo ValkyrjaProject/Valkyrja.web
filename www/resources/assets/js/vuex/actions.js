@@ -73,6 +73,10 @@ export const updateRolesData = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'roles', data: data});
 };
 
+export const updateLevelsData = ({commit}, data) => {
+    commit('UPDATE_ITEM_MODIFIER', {key: 'roleLevels', data: data});
+};
+
 export const updateChannelsData = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'channels', data: data});
 };

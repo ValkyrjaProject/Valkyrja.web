@@ -22,8 +22,7 @@ const state = {
     antispam_tolerance: 0,
     roles: [],
     channels: [],
-    data: {
-    },
+    data: {},
     botwinderCommands: [],
     itemModifier: {
         custom_commands: {
@@ -31,6 +30,10 @@ const state = {
             activeItem: null
         },
         roles: {
+            itemsList: [], // list of command Objects
+            activeItem: null
+        },
+        roleLevels: {
             itemsList: [], // list of command Objects
             activeItem: null
         },

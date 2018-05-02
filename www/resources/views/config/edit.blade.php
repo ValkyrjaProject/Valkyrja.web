@@ -552,23 +552,33 @@
                         @include("config.types.bool", ['key' => "exp_announce_levelup", 'data' => old('exp_announce_levelup', $serverConfig["exp_announce_levelup"])])
                         Announce level-up
                         <br /><br />
-                        Base experience value (<code>baseExp</code>) _Higher value means slower progression, default <code>10</code>._
+                        Base experience value (<code>baseExp</code>) <i>Higher value means slower progression, default <code>10</code></i>.
                         <br />@include("config.types.int", ['key' => "base_exp_to_levelup", 'data' => old('base_exp_to_levelup', $serverConfig["base_exp_to_levelup"])])
                         <br /><br />
-                        Experience given per message (<code>expPerMessage</code>) _Higher value means faster progression, default <code>1</code>._
+                        Experience given per message (<code>expPerMessage</code>) <i>Higher value means faster progression, default <code>1</code></i>.
                         <br />@include("config.types.int", ['key' => "exp_per_message", 'data' => old('exp_per_message', $serverConfig["exp_per_message"])])
                         <br /><br />
-                        Experience given per image (attachment) (<code>expPerImage</code>) _Higher value means faster progression, default <code>3</code>._
+                        Experience given per image (attachment) (<code>expPerImage</code>) <i>Higher value means faster progression, default <code>3</code></i>.
                         <br />@include("config.types.int", ['key' => "exp_per_attachment", 'data' => old('exp_per_attachment', $serverConfig["exp_per_attachment"])])
                         <br /><br />
                         Roles at levels
                         <br />
-                        <i>TODO: This feature is work in progress!!</i>
-                        <br />
+                        <level-selector>
+                            <template slot-scope="props">
+                                <span v-for="role in props.typeAdded">
+                                    <input type="hidden"
+                                           :name="'levels['+props.typeAdded.indexOf(role)+'][roleid]'"
+                                           :value="role.roleid">
+                                    <input type="hidden"
+                                           :name="'levels['+props.typeAdded.indexOf(role)+'][level]'"
+                                           :value="role.level">
+                                </span>
+                            </template>
+                        </level-selector>
                         @include("config.types.bool", ['key' => "exp_cumulative_roles", 'data' => old('exp_cumulative_roles', $serverConfig["exp_cumulative_roles"])])
                         Are these roles cumulative? (<code>true</code> - all the roles are assigned for all the previous levels; <code>false</code> - only one role will be assigned and the previous level roles will be removed.)
                         <br /><br />
-                        How many {{ $serverConfig["karma_currency"] }} do you want to give them every levle-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
+                        How many {{ $serverConfig["karma_currency"] }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
                         <br />@include("config.types.int", ['key' => "karma_per_level", 'data' => old('karma_per_level', $serverConfig["karma_per_level"])])
                     </p>
                     <p>

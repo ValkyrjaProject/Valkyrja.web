@@ -11,7 +11,8 @@ class Roles extends Model
     protected $fillable = [
         'roleid',
         'permission_level',
-        'public_id'
+        'public_id',
+        'level'
     ];
 
     protected $casts = [

@@ -3,15 +3,18 @@
         <div class="listRow">
             <div class="listContainer">
                 <h2>Role type</h2>
-                <select name="title" class="form-control" title="" style="width:100%;margin-bottom:5px" v-model="selectedPermissionLevel">
+                <select name="title" class="form-control" title="" style="width:100%;margin-bottom:5px"
+                        v-model="selectedPermissionLevel">
                     <option :value="level" v-for="(level, name) in RolePermissionLevelEnum">{{ name }}</option>
                 </select>
             </div>
             <div class="listContainer">
                 <h2>Public Role Group</h2>
                 <div class="input-group">
-                    <span class="input-group-addon itemLeft btn btn-secondary" :class="{'disabled': !publicRoleIsSelected}" @click="addPublicGroup()">+</span>
-                    <select name="title" class="form-control" title="" v-model="selectedPublicGroup" :disabled="!publicRoleIsSelected">
+                    <span class="input-group-addon itemLeft btn btn-secondary"
+                          :class="{'disabled': !publicRoleIsSelected}" @click="addPublicGroup()">+</span>
+                    <select name="title" class="form-control" title="" v-model="selectedPublicGroup"
+                            :disabled="!publicRoleIsSelected">
                         <!--<option :value="0"></option>-->
                         <option :value="group.id" v-for="group in sortedPublicGroups">{{ group.name }}</option>
                     </select>
@@ -39,7 +42,7 @@
 
 <script>
     import ListContainer from '../components/ListContainer.vue'
-    import {addItem, removeItem} from '../vuex/actions'
+    import {addItem} from '../vuex/actions'
 
     export default {
         components: {
@@ -77,11 +80,16 @@
                 ]
             }
         },
-        created () {
+        created() {
             console.log(this.addedTypes);
             for (let type of this.addedTypes) {
-                console.log(type);
-                if (
+                if (typeof(type.permission_level) === "undefined" || typeof(type.public_id) === "undefined") {
+                    this.$store.dispatch('removeItem', {
+                        formName: 'roles',
+                        item: type
+                    });
+                }
+                else if (
                     type.permission_level === this.RolePermissionLevelEnum.Public
                     && this.publicGroups.indexOf(type.public_id) === -1
                 ) {
@@ -94,18 +102,18 @@
             addedTypes() {
                 return this.$store.state.itemModifier.roles.itemsList;
             },
-            formInputName () {
+            formInputName() {
                 return 'roles[]';
             },
             typeAvailable: {
-                get () {
+                get() {
                     return this.$store.state['roles'].filter(e => {
                         return this.addedTypes.filter(t => {
                             return t[['roleid']] === e.id
                         }).length === 0;
                     });
                 },
-                set (value) {
+                set(value) {
                     let newType = {};
                     newType['roleid'] = value.id;
                     newType['permission_level'] = this.selectedPermissionLevel;
@@ -119,8 +127,8 @@
             addedTypesLevel() {
                 return this.$store.state['roles'].filter(e => {
                     return !(this.addedTypes.filter(t => t[['roleid']] === e.id
-                        && t.permission_level === this.selectedPermissionLevel
-                        && (this.publicRoleIsSelected ? t.public_id === this.selectedPublicGroup : 1)
+                            && t.permission_level === this.selectedPermissionLevel
+                            && (this.publicRoleIsSelected ? t.public_id === this.selectedPublicGroup : 1)
                         ).length === 0
                     )
                 });
@@ -129,7 +137,9 @@
                 return this.selectedPermissionLevel === this.RolePermissionLevelEnum.Public;
             },
             sortedPublicGroups() {
-                let groups = this.publicGroups.sort(function(a,b){return a - b});
+                let groups = this.publicGroups.sort(function (a, b) {
+                    return a - b
+                });
                 let newGroups = [];
                 for (let group of groups) {
                     let newGroup = [];
