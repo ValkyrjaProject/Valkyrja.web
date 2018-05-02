@@ -577,7 +577,7 @@
                         <br /><code>Rhea: Hey thanks for that pull request fixing a typo @freiheit</code>
                         <br /><code>Botwinder: @freiheit received a <i>thank you</i> cookie!</code>
                         <br />You can also <code>!give @user</code> a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
-                        <br /><i>Hint: Create <code>@{{ command_prefix }}alias<code> for the <code>cookies</code> and <code>nom</code> commands to fit your custom configuration below!</i>
+                        <br /><i>Hint: Create <code>@{{ command_prefix }}alias</code> for the <code>cookies</code> and <code>nom</code> commands to fit your custom configuration below!</i>
                         <br />
                         @include("config.types.bool", ['key' => "karma_enabled", 'data' => old('karma_enabled', $serverConfig["karma_enabled"])])
                         Use Karma system?
