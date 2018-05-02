@@ -114,7 +114,7 @@
                     <br />Support</p>
                 </div>
                 <p><i>
-                    Engineering student and botwinder enthusiast.
+                    Engineering student and botwinder enthusiast, crafts all the emojis.
                 </i></p>
                 <span class="email"><a href="emailto:dokadoka@botwinder.info">dokadoka@botwinder.info</a></span>
             </div>
