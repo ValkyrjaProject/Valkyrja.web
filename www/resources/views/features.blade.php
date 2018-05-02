@@ -1108,6 +1108,10 @@
                     <h2>memo</h2>
                     <table class="command">
                     <tr>
+                        <td>Alias</td>
+                        <td><code>profile</code>, <code>hw</code></td>
+                    </tr>
+                    <tr>
                         <td>Description</td>
                         <td>Display your saved memo, or the memo of the mentioned user.</td>
                     </tr>
