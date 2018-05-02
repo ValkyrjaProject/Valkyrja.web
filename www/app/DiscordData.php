@@ -259,14 +259,14 @@ class DiscordData extends Model
 
             $serverRoles = collect();
             foreach ($rawServerRoles as $serverRole) {
-                if (!isset($serverRole['id'])) {
+                if (!isset($serverRole->id)) {
                     Log::error('Server roles: '.isset($rawServerRoles['code']) ? $rawServerRoles['code'] : $rawServerRoles);
 
                     throw new DiscordException('There was an error getting roles from the server. Please try again');
                 }
                 $tempArray = [];
-                $tempArray['id'] = $serverRole['id'];
-                $tempArray['name'] = $serverRole['name'];
+                $tempArray['id'] = $serverRole->id;
+                $tempArray['name'] = $serverRole->name;
 
                 $serverRoles->push($tempArray);
             }
