@@ -590,8 +590,10 @@
                         <br />
                         @include("config.types.text", ['key' => "karma_currency_singular", 'data' => old('karma_currency_singular', $serverConfig["karma_currency_singular"])])
                         <br /><br />
-                        Consume command - eating a cookie is selfish act and will effectively reduce the number you have by one.
+                        If you've changed the consume command <code>nom</code> by creating an alias, please specify it here. <i>(Eating a cookie is selfish act and will effectively reduce the number you have by one.)</i>
                         <br />
+                        @include("config.types.text", ['key' => "karma_consume_command", 'data' => old('karma_consume_command', $serverConfig["karma_consume_command"])])
+                        <br /><br />
                         Consume verb used in response to the <code>@{{ command_prefix }}nom</code> command. Past tense please.
                         <br />
                         @include("config.types.text", ['key' => "karma_consume_verb", 'data' => old('karma_consume_verb', $serverConfig["karma_consume_verb"])])
