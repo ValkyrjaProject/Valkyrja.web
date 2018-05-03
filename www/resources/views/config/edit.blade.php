@@ -581,6 +581,9 @@
                         @include("config.types.bool", ['key' => "exp_cumulative_roles", 'data' => old('exp_cumulative_roles', $serverConfig["exp_cumulative_roles"])])
                         Are these roles cumulative? (<code>true</code> - all the roles are assigned for all the previous levels; <code>false</code> - only one role will be assigned and the previous level roles will be removed.)
                         <br /><br />
+                        @include("config.types.bool", ['key' => "exp_advance_users", 'data' => old('exp_advance_users', $serverConfig["exp_advance_users"])])
+                        Botwinder can advance users to the above configured highest role. This means that if a user already has a higher level role, than their level, their level will be increased to match the role. This is useful if you are transitioning from other level systems, this way your users won't lose their progress!
+                        <br /><br />
                         How many {{ $serverConfig["karma_currency"] }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
                         <br />@include("config.types.int", ['key' => "karma_per_level", 'data' => old('karma_per_level', $serverConfig["karma_per_level"])])
                     </p>

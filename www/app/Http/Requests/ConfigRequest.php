@@ -153,6 +153,7 @@ class ConfigRequest extends FormRequest
             'exp_per_attachment'                => 'required|integer',
             'exp_max_level'                     => 'required|integer',
             'exp_cumulative_roles'              => 'required|boolean',
+            'exp_advance_users'                 => 'required|boolean',
             'roles'                             => 'array',
             'roles.*'                           => 'array',
             'roles.*.roleid'                    => 'required|integer|min:0',
