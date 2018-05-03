@@ -1109,11 +1109,11 @@
                     <table class="command">
                     <tr>
                         <td>Alias</td>
-                        <td><code>profile</code>, <code>hw</code></td>
+                        <td><code>profile</code>, </td>
                     </tr>
                     <tr>
                         <td>Description</td>
-                        <td>Display your saved memo, or the memo of the mentioned user.</td>
+                        <td>Display your saved memo, or the memo of the mentioned user. (Use-cases: user profiles, hardware, etc... Create an <code>!alias</code> for your use case!)</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
