@@ -561,6 +561,9 @@
                         Experience given per image (attachment) (<code>expPerImage</code>) <i>Higher value means faster progression, default <code>3</code></i>.
                         <br />@include("config.types.int", ['key' => "exp_per_attachment", 'data' => old('exp_per_attachment', $serverConfig["exp_per_attachment"])])
                         <br /><br />
+                        Maximum level - set to <code>0</code> (zero) to disable.
+                        <br />@include("config.types.int", ['key' => "exp_max_level", 'data' => old('exp_max_level', $serverConfig["exp_max_level"])])
+                        <br /><br />
                         Roles at levels
                         <br />
                         <level-selector>

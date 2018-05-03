@@ -151,6 +151,7 @@ class ConfigRequest extends FormRequest
             'exp_announce_levelup'              => 'required|boolean',
             'exp_per_message'                   => 'required|integer',
             'exp_per_attachment'                => 'required|integer',
+            'exp_max_level'                     => 'required|integer',
             'exp_cumulative_roles'              => 'required|boolean',
             'roles'                             => 'array',
             'roles.*'                           => 'array',
