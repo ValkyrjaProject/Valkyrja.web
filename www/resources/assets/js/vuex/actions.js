@@ -45,6 +45,22 @@ export const updateActiveItemData = ({commit}, attribute) => {
     commit('UPDATE_ACTIVE_ITEM_DATA', attribute);
 };
 
+export const addLevel = ({commit}, attribute) => {
+    commit('ADD_LEVEL', attribute);
+};
+
+export const removeLevel = ({commit}, attribute) => {
+    commit('REMOVE_LEVEL', attribute);
+};
+
+export const addRole = ({commit}, attribute) => {
+    commit('ADD_ROLE', attribute);
+};
+
+export const removeRole = ({commit}, attribute) => {
+    commit('REMOVE_ROLE', attribute);
+};
+
 export const addItem = ({commit}, attribute) => {
     commit('ADD_ITEM', attribute);
 };

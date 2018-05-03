@@ -42,7 +42,7 @@
 
 <script>
     import ListContainer from '../components/ListContainer.vue'
-    import {addItem} from '../vuex/actions'
+    import {addRole, removeRole} from '../vuex/actions'
 
     export default {
         components: {
@@ -110,6 +110,7 @@
                     return this.$store.state['roles'].filter(e => {
                         return this.addedTypes.filter(t => {
                             return t[['roleid']] === e.id
+                            && t[['permission_level']] !== "0";
                         }).length === 0;
                     });
                 },
@@ -118,7 +119,7 @@
                     newType['roleid'] = value.id;
                     newType['permission_level'] = this.selectedPermissionLevel;
                     newType['public_id'] = this.publicRoleIsSelected ? this.selectedPublicGroup : 0;
-                    this.$store.dispatch('addItem', {
+                    this.$store.dispatch('addRole', {
                         formName: 'roles',
                         item: newType
                     });
@@ -168,7 +169,7 @@
             },
             removeItem(item) {
                 let removeItem = this.addedTypes[this.addedTypes.findIndex(t => t[['roleid']] === item.id)];
-                this.$store.dispatch('removeItem', {
+                this.$store.dispatch('removeRole', {
                     formName: 'roles',
                     item: removeItem
                 });

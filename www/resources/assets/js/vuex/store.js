@@ -106,6 +106,42 @@ const mutations = {
         Vue.set(state.itemModifier[payload.formName].activeItem, payload.key, payload.data);
     },
 
+    ADD_LEVEL(state, payload) {
+        if (state.itemModifier[payload.formName].itemsList.findIndex(x => x['roleid'] === payload.item['roleid']) >= 0) {
+            state.itemModifier[payload.formName].itemsList
+                .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x['roleid'] === payload.item['roleid']), 1);
+        }
+        state.itemModifier[payload.formName].itemsList.push(payload.item);
+    },
+
+    REMOVE_LEVEL(state, payload) {
+        let newPayload = {
+            roleid: payload.item['roleid'],
+            level: "0"
+        };
+        state.itemModifier[payload.formName].itemsList
+            .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x === payload.item), 1, newPayload);
+    },
+
+
+    ADD_ROLE(state, payload) {
+        if (state.itemModifier[payload.formName].itemsList.findIndex(x => x['roleid'] === payload.item['roleid']) >= 0) {
+            state.itemModifier[payload.formName].itemsList
+                .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x['roleid'] === payload.item['roleid']), 1);
+        }
+        state.itemModifier[payload.formName].itemsList.push(payload.item);
+    },
+
+    REMOVE_ROLE(state, payload) {
+        let newPayload = {
+            roleid: payload.item['roleid'],
+            public_id: "0",
+            permission_level: "0"
+        };
+        state.itemModifier[payload.formName].itemsList
+            .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x === payload.item), 1, newPayload);
+    },
+
     ADD_ITEM(state, payload) {
         state.itemModifier[payload.formName].itemsList.push(payload.item);
     },

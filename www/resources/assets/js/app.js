@@ -109,7 +109,7 @@ $(function() {
     if (window.location.pathname === '/features' || window.location.pathname === '/docs'){
         setStickySize($myNav);
         new Sticky('.scrollspy');
-        // Fucking ugly code to fix something removing active class FOR SOME FUCKING REASON. Pls fix
+        // Ugly code to fix something removing active class FOR SOME REASON. Pls fix
         // TODO: I'm going to find you, and I'm going to fix you
         $('header nav.navbar a.nav-link').filter('[href="/features"],[href="/docs"]').addClass('active');
     }
