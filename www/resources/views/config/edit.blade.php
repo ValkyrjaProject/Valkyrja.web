@@ -538,13 +538,7 @@
                         <b>Experience & levels</b>
                         <br />Users earn experience based on the below configuration and they are granted levels, which may or may not have roles associated with them.
                         <br />
-                        <br />You can use this formula to be able get a better idea about the progression curve:
-                        <br /><code>lvl = (sqrt(4*totalExp + base) / sqrt(base) - 1) / 2</code>
-                        <br /><code>totalExp = baseExp * lvl * (lvl + 1)</code>
-                        <br /><code>expToNextLvl = (baseExp * (lvl+1) * ((lvl+1) + 1) - currentTotalExp</code>
-                        <br /><code>messagesToNextLvl = expToNextLvl / expPerMessage</code>
-                        <br /><code>imagesToNextLvl = expToNextLvl / expPerImage</code>
-                        <br /><i>Based on the above complexity we recommend leaving the default values. (Please do not enter stupid (high) numbers, you will only break it on your end.)</i>
+                        <br />Take a look at the <a href="https://docs.google.com/spreadsheets/d/1w-eZn3b8FgjQkM6FS1q6q5XU6epvbJbmH74IMgRUke4">progression table</a>. <i>(Please don't enter stupid (high) numbers, you will only break it on your end.)</i>
                         <br /><br />
                         @include("config.types.bool", ['key' => "exp_enabled", 'data' => old('exp_enabled', $serverConfig["exp_enabled"])])
                         <b>Experience Enabled</b>
