@@ -425,7 +425,7 @@
                         <br/><br/>
                         @include("config.types.bool", ['key' => "log_join", 'data' => old('log_join', $serverConfig["log_join"])])
                         Display the following message when a new user joins your server. Use <code>{0}</code> in the
-                        message where their username should be.
+                        message where their username should be. <i>(Message has to be shorter than 200 characters for embeds to work.)</i>
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "log_message_join", 'data' => old('log_message_join', $serverConfig["log_message_join"])])
                         <br/>
@@ -437,7 +437,7 @@
                         <br/><br/>
                         @include("config.types.bool", ['key' => "log_leave", 'data' => old('log_leave', $serverConfig["log_leave"])])
                         Display the following message when someone leaves your server. Use <code>{0}</code> in the
-                        message where their username should be.
+                        message where their username should be. <i>(Message has to be shorter than 200 characters for embeds to work.)</i>
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "log_message_leave", 'data' => old('log_message_leave', $serverConfig["log_message_leave"])])
                         <br/>
