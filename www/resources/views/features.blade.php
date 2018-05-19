@@ -41,6 +41,17 @@
                             <td>The <code>status.botwinder.info</code> page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
                         </tr>
                     </table>
+                    Our hosted instance of Botwinder requires <a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> subscription - a monthly donation towards the cost of maintaining the servers.
+                    <table class="command">
+                        <tr>
+                            <td>$10</td>
+                            <td>Unlimited in any way.</td>
+                        </tr>
+                        <tr>
+                            <td>$3</td>
+                            <td>Antispam, Karma and Experience (as performance heavy) features are disabled at this level.</td>
+                        </tr>
+                    </table>
                 </div>
                 <h1>Key Features</h1>
                 <p>
