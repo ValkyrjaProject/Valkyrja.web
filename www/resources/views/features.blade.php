@@ -196,6 +196,40 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>createTempRole</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Create a role with specified name, which will be destroyed after specified time.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>name time</code> name of the role and the when to delete it, in number of days or hours from now (e.g. <code>7d</code> or <code>12h</code> or <code>1d12h</code>)</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>createTempPublicRole</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Create a <b>public</b> role with specified name, which will be destroyed after specified time.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>name time</code> name of the role and the when to delete it, in number of days or hours from now (e.g. <code>7d</code> or <code>12h</code> or <code>1d12h</code>)</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>getRole</h2>
                     <table class="command">
                     <tr>
