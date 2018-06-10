@@ -1150,11 +1150,45 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>quote</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Get a random quote, or a quote with specific id, oooor search for a quote by a specific user!</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None, or a <code>username</code> or mention, or an <code>id</code> of a specific quote.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>addQuote</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Add a new quote! Use with a username or mention as the first parameter, and the text as second. (Or you can just use a message ID.)";</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>messageID</code> or <code>username text</code></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>memo</h2>
                     <table class="command">
                     <tr>
                         <td>Alias</td>
-                        <td><code>profile</code>, </td>
+                        <td><code>profile</code></td>
                     </tr>
                     <tr>
                         <td>Description</td>
