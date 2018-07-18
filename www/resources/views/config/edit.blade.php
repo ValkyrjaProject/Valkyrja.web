@@ -536,7 +536,7 @@
                 <div class="form-inline form-group collapse" id="configSocial"><br />
                     <p>
                         @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
-                        Enable <code>@{{ command_prefix }}memo</code>
+                        <b>Enable <code>@{{ command_prefix }}memo</code></b>
                     </p>
                     <p>
                         <b>Experience & levels</b>
