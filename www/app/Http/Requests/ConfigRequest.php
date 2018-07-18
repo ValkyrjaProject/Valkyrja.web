@@ -180,6 +180,8 @@ class ConfigRequest extends FormRequest
             'channels.*'                        => 'array',
             'channels.*.channelid'              => 'required|integer|min:0',
             'channels.*.ignored'                => 'boolean',
+            'profile_enabled'                   => 'required|boolean',
+            'memo_enabled'                      => 'required|boolean'
         ];
     }
 }

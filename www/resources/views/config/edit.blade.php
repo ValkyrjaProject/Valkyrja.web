@@ -535,6 +535,10 @@
                 </button>
                 <div class="form-inline form-group collapse" id="configSocial"><br />
                     <p>
+                        @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
+                        Enable <code>@{{ command_prefix }}memo</code>
+                    </p>
+                    <p>
                         <b>Experience & levels</b>
                         <br />Users earn experience based on the below configuration and they are granted levels, which may or may not have roles associated with them.
                         <br />Take a look at the <a href="https://docs.google.com/spreadsheets/d/2w-eZn3b8FgjQkM6FS1q6q5XU6epvbJbmH74IMgRUke4">progression table</a>.
