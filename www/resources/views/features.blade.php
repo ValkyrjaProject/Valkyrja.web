@@ -161,7 +161,7 @@
                 </div-->
 
                 <h1 class="features-h1">Commands ~ Admin</h1>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>shoo</h2>
                     <table class="command">
                     <tr>
@@ -177,7 +177,7 @@
                         <td>ServerOwner</td>
                     </tr>
                     </table>
-                </div>
+                </div-->
                 <div class="features-indent">
                     <h2>createRole</h2>
                     <table class="command">
