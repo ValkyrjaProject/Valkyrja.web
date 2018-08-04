@@ -360,17 +360,25 @@
                 </button>
                 <div class="form-inline form-group collapse" id="configLogging"><br/>
                     <p>
-                        @include("config.types.bool", ['key' => "log_bans", 'data' => old('log_bans', $serverConfig["log_bans"])])
-                        <b>Moderation Log Channel</b> - Log muted, kicked and banned users into the following channel.
+                        <b>Moderation Log Channel</b> - In which channel would you like to log the below configured events?
                         <br/>
                         <type-selector init-id-type="mod_channelid" label="name"
                                        :default-value='{{ json_encode($guild['channels']->get(old('mod_channelid', $serverConfig["mod_channelid"]))) }}'
                                        :values='channels'></type-selector>
                         <br/>
                         @include("config.types.bool", ['key' => "embed_modchannel", 'data' => old('embed_modchannel', $serverConfig["embed_modchannel"])])
-                        Use Embed with this colour:
+                        Use Embed with below configured colours
+                        <br/><br/>
+                        @include("config.types.bool", ['key' => "log_bans", 'data' => old('log_bans', $serverConfig["log_bans"])])
+                        Log muted, kicked and banned users
                         <color-picker input-name="color_modchannel"
                                       hex-value="{{old('color_modchannel', $serverConfig["color_modchannel"])}}"></color-picker>
+                        <br/><br/>
+                        @include("config.types.bool", ['key' => "log_warnings", 'data' => old('log_warnings', $serverConfig["log_warnings"])])
+                        Log warnings (<code>@{{ command_prefix }}addWarning</code> and <code>@{{ command_prefix }}issueWarning</code> commands)
+                        <br/>
+                        <color-picker input-name="color_logwarning"
+                                      hex-value="{{old('color_logwarning', $serverConfig["color_logwarning"])}}"></color-picker>
                         <br/><br/>
                         <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br/>
@@ -379,8 +387,8 @@
                                        :values='channels'></type-selector>
                         <br/>
                         @include("config.types.bool", ['key' => "embed_logchannel", 'data' => old('embed_logchannel', $serverConfig["embed_logchannel"])])
-                        Use Embed
-                        <br/>
+                        Use Embed with below configured colours
+                        <br/><br/>
                         @include("config.types.bool", ['key' => "log_editedmessages", 'data' => old('log_editedmessages', $serverConfig["log_editedmessages"])])
                         Log edited messages.
                         <br/>
