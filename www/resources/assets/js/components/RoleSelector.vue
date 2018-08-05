@@ -110,19 +110,31 @@
                     return this.$store.state['roles'].filter(e => {
                         return this.addedTypes.filter(t => {
                             return t[['roleid']] === e.id
-                            && t[['permission_level']] !== "0";
+                            && parseInt(t[['permission_level']]) > 0;
                         }).length === 0;
                     });
                 },
-                set(value) {
-                    let newType = {};
-                    newType['roleid'] = value.id;
-                    newType['permission_level'] = this.selectedPermissionLevel;
-                    newType['public_id'] = this.publicRoleIsSelected ? this.selectedPublicGroup : 0;
-                    this.$store.dispatch('addRole', {
-                        formName: 'roles',
-                        item: newType
-                    });
+                set(role) {
+                    // Add new role
+                    let roles = this.addedTypes.filter(r => r[['roleid']] === role.id);
+                    let newRole = {};
+                    newRole['roleid'] = role.id;
+                    newRole['permission_level'] = this.selectedPermissionLevel;
+                    newRole['public_id'] = this.publicRoleIsSelected ? this.selectedPublicGroup : 0;
+                    if (roles.length > 0) {
+                        let roleToChange = roles[0];
+                        this.$store.dispatch('updateRole', {
+                            role: roleToChange,
+                            data: newRole
+                        })
+                    }
+                    else {
+                        newRole['antispam_ignored'] = false;
+                        this.$store.dispatch('addRole', {
+                            formName: 'roles',
+                            item: newRole
+                        });
+                    }
                 }
             },
             addedTypesLevel() {

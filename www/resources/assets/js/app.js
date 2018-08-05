@@ -14,6 +14,7 @@ import ColorPicker from './components/ColorPicker.vue'
 import ListSelector from './components/ListSelector.vue'
 import LevelSelector from './components/LevelSelector.vue'
 import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
+import RoleAntispamSelector from "./components/RoleAntispamSelector"
 
 new Vue({
     store,
@@ -29,6 +30,7 @@ new Vue({
         ColorPicker,
         ListSelector,
         IgnoreChannelListSelector,
+        RoleAntispamSelector,
     },
     computed: {
         errors: {

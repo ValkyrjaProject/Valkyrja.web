@@ -12,6 +12,7 @@ class Roles extends Model
         'roleid',
         'permission_level',
         'public_id',
+        'antispam_ignored',
         'level'
     ];
 
@@ -19,7 +20,8 @@ class Roles extends Model
         'roleid' => 'string',
         'public_id' => 'string',
         'level' => 'string',
-        'permission_level' => 'string'
+        'permission_level' => 'string',
+        'antispam_ignored' => 'boolean'
     ];
 
     protected $hidden = [

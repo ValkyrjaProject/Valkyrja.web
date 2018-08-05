@@ -97,6 +97,10 @@
                             <code>ManageMessages</code> & <code>Ban</code> permissions.</i>
                     </p>
                     <p>
+                        <b>Ignored roles by antispam</b>
+                        <role-antispam-selector></role-antispam-selector>
+                    </p>
+                    <p>
                         Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned
                         to post a single link or anything else in this section, for three minutes.
                     </p>
@@ -276,6 +280,9 @@
                                     <input type="hidden"
                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'"
                                            :value="role.public_id">
+                                    <input type="hidden"
+                                           :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
+                                           :value="role.antispam_ignored">
                                 </span>
                             </template>
                         </role-selector>

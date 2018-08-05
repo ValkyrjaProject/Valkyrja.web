@@ -132,14 +132,29 @@ const mutations = {
         state.itemModifier[payload.formName].itemsList.push(payload.item);
     },
 
+    UPDATE_ROLE(state, payload) {
+        for (let property in payload.data) {
+            if (payload.data.hasOwnProperty(property)){
+                Vue.set(payload.role, property, payload.data[property]);
+            }
+        }
+    },
+
     REMOVE_ROLE(state, payload) {
         let newPayload = {
             roleid: payload.item['roleid'],
             public_id: "0",
             permission_level: "0"
         };
-        state.itemModifier[payload.formName].itemsList
-            .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x === payload.item), 1, newPayload);
+        let role = state.itemModifier[payload.formName].itemsList.find(x => x === payload.item);
+        console.log("role", role);
+        if (role) {
+            for (let property in newPayload) {
+                if (role.hasOwnProperty(property)){
+                    Vue.set(role, property, newPayload[property]);
+                }
+            }
+        }
     },
 
     ADD_ITEM(state, payload) {

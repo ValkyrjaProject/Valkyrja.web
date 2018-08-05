@@ -21,8 +21,16 @@ class ConfigRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if ($this->has('command_prefix_alt'))
+        if ($this->has('command_prefix_alt')) {
             $this['command_prefix_alt'] = (string)$this['command_prefix_alt'];
+        }
+        if ($this->has('roles')) {
+            $roles = $this['roles'];
+            for ($i = 0; $i < sizeof($roles); $i++) {
+                $roles[$i]['antispam_ignored'] = ($roles[$i]['antispam_ignored'] === "true" || $roles[$i]['antispam_ignored'] === "1");
+            }
+            $this['roles'] = $roles;
+        }
     }
 
     /**
@@ -160,6 +168,7 @@ class ConfigRequest extends FormRequest
             'roles.*.roleid'                    => 'required|integer|min:0',
             'roles.*.permission_level'          => 'required|integer|between:0,5',
             'roles.*.public_id'                 => 'required|integer|min:0',
+            'roles.*.antispam_ignored'          => 'required|boolean',
             'levels.*.roleid'                   => 'required|integer|min:0',
             'levels.*.level'                    => 'required|integer|min:0',
             'custom_commands'                   => 'array',

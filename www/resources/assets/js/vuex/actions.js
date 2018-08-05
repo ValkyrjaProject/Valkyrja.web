@@ -57,6 +57,10 @@ export const addRole = ({commit}, attribute) => {
     commit('ADD_ROLE', attribute);
 };
 
+export const updateRole = ({commit}, attribute) => {
+    commit('UPDATE_ROLE', attribute);
+};
+
 export const removeRole = ({commit}, attribute) => {
     commit('REMOVE_ROLE', attribute);
 };
@@ -90,6 +94,12 @@ export const updateRolesData = ({commit}, data) => {
 };
 
 export const updateLevelsData = ({commit}, data) => {
+    console.log("data", data);
+    data.forEach((role) =>{
+        if (!role.hasOwnProperty('level')) {
+            role.level = "0";
+        }
+    });
     commit('UPDATE_ITEM_MODIFIER', {key: 'roleLevels', data: data});
 };
 
