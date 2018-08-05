@@ -41,6 +41,10 @@ const state = {
             itemsList: [], // list of command Objects
             activeItem: null
         },
+        profiles: {
+            itemsList: [], // list of command Objects
+            activeItem: null
+        },
     },
 };
 

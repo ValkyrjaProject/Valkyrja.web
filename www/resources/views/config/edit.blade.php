@@ -18,6 +18,7 @@
     <div class="container">
         <div class="col-xs-12">
             <form action="{{ url('config/'.$serverId) }}" method="post" @submit.prevent>
+                <profiles-editor form-name="profiles"></profiles-editor>
                 <h1 class="col-md-8">
                     <v-loading message='Configure Botwinder'>
                     <span slot='spinner' class="align-bottom">

@@ -554,7 +554,7 @@ img {
   }
 }
 
-.customComponent, .inputList, .customCommands {
+.customComponent, .inputList, .customCommands, .profilesEditor {
   display: table;
   background: #d3eaff;
   border: 1px solid #c0d5e9;
@@ -618,7 +618,7 @@ img {
   max-height: 560px;
 }
 
-.customCommands {
+.customCommands, .profilesEditor {
   width: auto;
   max-width: 100%;
   .static {

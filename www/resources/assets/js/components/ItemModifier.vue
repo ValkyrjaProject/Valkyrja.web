@@ -10,7 +10,7 @@
                             :include-search="true"
                             :can-add="true"
                             list-type="doubleInput"
-                            display-attribute="commandid"
+                            :display-attribute="displayAttribute"
                             :form-name="formName"
                             class="tallerList"></list-container>
         </div>
@@ -69,7 +69,12 @@
             itemLayoutPrimaryKey: {
                 required: true,
                 type: String
-            }
+            },
+            displayAttribute: {
+                type: String,
+                required: false,
+                default: 'commandid'
+            },
         },
         components: {
             ListContainer
