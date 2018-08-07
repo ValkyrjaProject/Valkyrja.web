@@ -56,7 +56,7 @@ class ConfigRequest extends FormRequest
             if ($this->has('roles')) {
                 $tempArr = [];
                 foreach($this['roles'] as $key => $command) {
-                    $allowed = ['roleid', 'permission_level', 'public_id'];
+                    $allowed = ['roleid', 'permission_level', 'public_id', 'antispam_ignored'];
 
                     if ($command['roleid'] === $this->route('serverId')) continue;
                     $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
