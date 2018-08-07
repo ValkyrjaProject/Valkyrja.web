@@ -111,4 +111,9 @@ class ServerConfig extends Model
         }
         return true;
     }
+
+    public function updateProfileOptions($profile_options)
+    {
+        //TODO: Implement removing and adding roles
+    }
 }

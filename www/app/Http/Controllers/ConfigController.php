@@ -8,6 +8,7 @@ use App\CustomCommands;
 use App\DiscordData;
 use App\Exceptions\ServerIssueException;
 use App\Http\Requests\ConfigRequest;
+use App\ProfileOptions;
 use App\Roles;
 use App\ServerConfig;
 use Discord\OAuth\Parts\Guild;
@@ -135,6 +136,7 @@ class ConfigController extends Controller
             'customCommands' => CustomCommands::where('serverid', $serverId)->get(),
             'roles' => Roles::where('serverid', $serverId)->get(),
             'channels' => Channels::where('serverid', $serverId)->get(),
+            'profile_options' => ProfileOptions::where('serverid', $serverId)->get(),
             'guild' => [
                 'roles' => $guildRoles,
                 'channels' => $guildChannels
@@ -170,6 +172,7 @@ class ConfigController extends Controller
         }
         $serverConfig->updateCustomCommands($data->get('custom_commands', []));
         $serverConfig->updateChannels($data->get('channels', []));
+        $serverConfig->updateProfileOptions($data->get('profile_options', []));
 
         $roles = $this->getRoles($data);
         $serverConfig->updateRoles($roles);
