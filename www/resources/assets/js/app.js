@@ -15,6 +15,7 @@ import ListSelector from './components/ListSelector.vue'
 import LevelSelector from './components/LevelSelector.vue'
 import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
 import RoleAntispamSelector from "./components/RoleAntispamSelector"
+import ProfilesEditor from "./components/ProfilesEditor"
 
 new Vue({
     store,
@@ -31,6 +32,7 @@ new Vue({
         ListSelector,
         IgnoreChannelListSelector,
         RoleAntispamSelector,
+        ProfilesEditor,
     },
     computed: {
         errors: {
@@ -80,6 +82,7 @@ new Vue({
             this.$store.dispatch('updateRolesData', state['rolesData']);
             this.$store.dispatch('updateLevelsData', state['rolesData'].slice());
             this.$store.dispatch('updateChannelsData', state['channelsData']);
+            this.$store.dispatch('updateProfileOptions', state['profile_options']);
         }
     }
 });

@@ -10,7 +10,7 @@
                             :include-search="true"
                             :can-add="true"
                             list-type="doubleInput"
-                            display-attribute="commandid"
+                            :display-attribute="displayAttribute"
                             :form-name="formName"
                             class="tallerList"></list-container>
         </div>
@@ -36,6 +36,9 @@
                 </span>
                 <span v-else-if="itemType.length > 0">
                     <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || ''">
+                </span>
+                <span v-else>
+                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType">
                 </span>
             </span>
         </span>
@@ -69,7 +72,12 @@
             itemLayoutPrimaryKey: {
                 required: true,
                 type: String
-            }
+            },
+            displayAttribute: {
+                type: String,
+                required: false,
+                default: 'commandid'
+            },
         },
         components: {
             ListContainer

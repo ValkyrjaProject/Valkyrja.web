@@ -54,6 +54,11 @@ class ServerConfig extends Model
         return $this->hasMany('App\Roles');
     }
 
+    public function profile_options()
+    {
+        return $this->hasMany('App\ProfileOptions');
+    }
+
     /**
      * Used for hasMany() relations. Would otherwise default to wrong key
      * @return string
@@ -108,6 +113,22 @@ class ServerConfig extends Model
         }
         foreach ($roles as $role) {
             $this->roles()->updateOrCreate(['roleid' => $role['roleid']], $role);
+        }
+        return true;
+    }
+
+    public function updateProfileOptions($profile_options)
+    {
+        if (!is_array($profile_options) && count($profile_options) == 0) {
+            return false;
+        }
+        $commandKeys = array_column($profile_options, 'option');
+        $toBeDeleted = $this->profile_options()->whereNotIn('option', $commandKeys);
+        if ($toBeDeleted->count() > 0) {
+            $toBeDeleted->delete();
+        }
+        foreach ($profile_options as $profile_option) {
+            $this->profile_options()->updateOrCreate(['option' => $profile_option['option']], $profile_option);
         }
         return true;
     }

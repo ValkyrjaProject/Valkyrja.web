@@ -10,6 +10,7 @@
 			'custom_commands' => old('custom_commands', (isset($errors) && count($errors) > 0) ? [] : $customCommands->all()),
 			'rolesData' => old('roles', (isset($errors) && count($errors) > 0) ? [] : $roles->all()),
 			'channelsData' => old('channels', (isset($errors) && count($errors) > 0) ? [] : $channels->all()),
+			'profile_options' => old('profile_options', (isset($errors) && count($errors) > 0) ? [] : $profile_options->all()),
         ])) !!}"
     </script>
 @endsection
@@ -546,14 +547,26 @@
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
-                    Social (levels & karma)
+                    Social (profiles, levels & karma)
                 </button>
-                <div class="form-inline form-group collapse" id="configSocial"><br />
-                    <p>
+                <div class="form-group collapse" id="configSocial"><br />
+                    <p class="form-inline">
                         @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
                         <b>Enable <code>@{{ command_prefix }}memo</code></b>
                     </p>
                     <p>
+                        <span class="form-inline">
+                           @include("config.types.bool", ['key' => "profile_enabled", 'data' => old('profile_enabled', $serverConfig["profile_enabled"])])
+                        </span>
+                        <b>Enable profiles</b>
+                        <br>
+                        <a href="/img/profiles.png">See profiles in action here.</a>
+                        <br>
+                        Setup profile fields in the editor below.
+                        <br>
+                        <profiles-editor form-name="profile_options"></profiles-editor>
+                    </p>
+                    <p class="form-inline">
                         <b>Experience & levels</b>
                         <br />Users earn experience based on the below configuration and they are granted levels, which may or may not have roles associated with them.
                         <br />Take a look at the <a href="https://docs.google.com/spreadsheets/d/2w-eZn3b8FgjQkM6FS1q6q5XU6epvbJbmH74IMgRUke4">progression table</a>.
@@ -600,7 +613,7 @@
                         How many {{ $serverConfig["karma_currency"] }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
                         <br />@include("config.types.int", ['key' => "karma_per_level", 'data' => old('karma_per_level', $serverConfig["karma_per_level"])])
                     </p>
-                    <p>
+                    <p class="form-inline">
                         <b>Karma system</b>
                         <br />Karma is an extra appreciation of helpful people. They get thanked, they get a cookie!
                         <br /><code>Rhea: Hey thanks for that pull request fixing a typo @freiheit</code>
@@ -638,6 +651,7 @@
                         @include("config.types.bool", ['key' => "karma_limit_response", 'data' => old('karma_limit_response', $serverConfig["karma_limit_response"])])
                         Tell people if they exceed this limit?
                     <br />
+                    </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
                         data-target="#customCommands" aria-expanded="false" aria-controls="customCommands">

@@ -50,7 +50,6 @@
                 });
             },
             isDuplicate(check) {
-                // Check if item already exists
                 for (let item of this.itemList) {
                     if (item[this.itemLayoutPrimaryKey] === check[this.itemLayoutPrimaryKey] && this.itemList.indexOf(item) !== this.itemList.indexOf(check)) {
                         return item;
