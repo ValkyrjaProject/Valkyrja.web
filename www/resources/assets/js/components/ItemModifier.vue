@@ -37,6 +37,9 @@
                 <span v-else-if="itemType.length > 0">
                     <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || ''">
                 </span>
+                <span v-else>
+                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType">
+                </span>
             </span>
         </span>
     </div>

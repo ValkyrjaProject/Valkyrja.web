@@ -63,6 +63,14 @@ class ConfigRequest extends FormRequest
                 }
                 $this['roles'] = $tempArr;
             }
+            if ($this->has('profile_options')) {
+                $tempArr = [];
+                foreach($this['profile_options'] as $key => $profile) {
+                    $allowed = ['option', 'option_alt', 'label', 'property_order'];
+                    $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
+                }
+                $this['profile_options'] = $tempArr;
+            }
             if ($this->has('quickban_reason') && is_null($this['quickban_reason'])) {
                 $this['quickban_reason'] = '';
             }
@@ -195,10 +203,10 @@ class ConfigRequest extends FormRequest
             'profile_enabled'                   => 'required|boolean',
             'profile_options'                   => 'array',
             'profile_options.*'                 => 'array',
-            'profile_options.*.option'          => '',
-            'profile_options.*.option_alt'      => '',
-            'profile_options.*.label'           => '',
-            'profile_options.*.property_order'  => '',
+            'profile_options.*.option'          => 'required|string|max:100',
+            'profile_options.*.option_alt'      => 'required|string|max:100',
+            'profile_options.*.label'           => 'required|string|max:250',
+            'profile_options.*.property_order'  => 'required|integer',
         ];
     }
 }

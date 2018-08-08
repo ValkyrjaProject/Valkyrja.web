@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProfileOptions extends Model
 {
     public $timestamps = false;
+    public $incrementing = false;
     protected $primaryKey = ['serverid', 'option'];
     protected $fillable = [
         'option',

@@ -181,7 +181,8 @@ class ConfigController extends Controller
             'custom_commands',
             'channels',
             'roles',
-            'levels'
+            'levels',
+            'profile_options'
         ])->all())) {
             return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
         } else {

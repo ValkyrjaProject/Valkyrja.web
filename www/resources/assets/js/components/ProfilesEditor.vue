@@ -9,7 +9,7 @@
                 <div class="from-group"
                      :class="{'has-danger': isDuplicate(props.activeItem) || props.activeItem.option.length === 0}">
                     <label class="form-control-label">
-                        <b>Option</b> - Some option
+                        <b>Option</b> - Unique parameter used to set the profile field (example: <code>-b</code>)
                         <div class="input-group">
                             <input class="form-control"
                                    command-name="option"
@@ -23,13 +23,11 @@
                     <div class="form-control-feedback" v-if="props.activeItem.option.length === 0">
                         Option cannot be empty.
                     </div>
-                    <div class="form-control-feedback" v-if="hasWhitespace(props.activeItem.option)">
-                        Option cannot contain whitespaces.
-                    </div>
                 </div>
-                <div class="from-group">
+                <div class="from-group"
+                     :class="{'has-danger': props.activeItem.option_alt.length === 0}">
                     <label class="form-control-label">
-                        <b>Alternative option</b> - Some option
+                        <b>Alternative option</b> - Long version of the above option (example: <code>--bike</code>)
                         <div class="input-group">
                             <input class="form-control"
                                    command-name="option_alt"
@@ -37,29 +35,31 @@
                                    @input="updateActiveItemData">
                         </div>
                     </label>
-                    <div class="form-control-feedback" v-if="isDuplicate(props.activeItem)">
-                        Alternative option must be unique.
-                    </div>
-                    <div class="form-control-feedback" v-if="props.activeItem.option.length === 0">
+                    <div class="form-control-feedback" v-if="props.activeItem.option_alt.length === 0">
                         Alternative option cannot be empty.
                     </div>
-                    <div class="form-control-feedback" v-if="hasWhitespace(props.activeItem.option)">
-                        Alternative option cannot contain whitespaces.
-                    </div>
                 </div>
-                <div class="from-group">
-                    <label class="form-control-label">
-                        <b>Description</b> - Description of option.
-                        <textarea class="form-control" command-name="description" :value="props.activeItem.description"
-                                  @input="updateActiveItemData"></textarea>
-                    </label>
-                </div>
-                <div class="form-group">
+                <div class="form-group"
+                     :class="{'has-danger': props.activeItem.label.length === 0}">
                     <label>
-                        <b>Label</b> - the label.
+                        <b>Label</b> - Field title visible in the profile up to 250 characters (example: <code>Mountain Bike</code>)
                         <input class="form-control" command-name="label" :value="props.activeItem.label"
                                @input="updateActiveItemData">
                     </label>
+                    <div class="form-control-feedback" v-if="props.activeItem.label.length === 0">
+                        Label option cannot be empty.
+                    </div>
+                </div>
+                <div class="form-group"
+                     :class="{'has-danger': props.activeItem.property_order.length === 0}">
+                    <label>
+                        <b>Property Order</b> - The determines the order in which the fields are displayed (example: <code>1</code>)
+                        <input class="form-control" command-name="property_order" :value="props.activeItem.property_order"
+                               @input="updateActiveItemData">
+                    </label>
+                    <div class="form-control-feedback" v-if="props.activeItem.property_order.length === 0">
+                        Label option cannot be empty.
+                    </div>
                 </div>
             </template>
         </item-modifier>
@@ -91,9 +91,10 @@
             },
             addProfileTemplate() {
                 return {
-                    option: '',
-                    option_alt: '',
-                    description: ''
+                    option: 'Option ',
+                    option_alt: 'alt-option',
+                    label: 'Label for option',
+                    property_order: 0
                 };
             },
         },
@@ -102,9 +103,8 @@
                 return /^.*\s.*$/.test(input)
             },
             itemIsValid(command) {
-                return !(command.option.length === 0
-                    || this.hasWhitespace(command.option));
-            }
+                return !(command.option.length === 0);
+            },
         }
     }
 </script>

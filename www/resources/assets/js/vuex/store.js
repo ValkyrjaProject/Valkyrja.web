@@ -41,7 +41,7 @@ const state = {
             itemsList: [], // list of command Objects
             activeItem: null
         },
-        profiles: {
+        profile_options: {
             itemsList: [], // list of command Objects
             activeItem: null
         },

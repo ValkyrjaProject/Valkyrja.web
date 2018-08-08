@@ -130,6 +130,10 @@ export const updateCustomCommands = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'custom_commands', data: data});
 };
 
+export const updateProfileOptions = ({commit}, data) => {
+    commit('UPDATE_ITEM_MODIFIER', {key: 'profile_options', data: data});
+};
+
 export const updateCommandCharacter = ({commit}, data) => {
     commit('EDIT_COMMAND_PREFIX', data);
 };
