@@ -94,7 +94,7 @@
                     option: 'Option ',
                     option_alt: 'alt-option',
                     label: 'Label for option',
-                    property_order: 0
+                    property_order: '0'
                 };
             },
         },

@@ -34,11 +34,8 @@
                 <span v-else-if="typeof(itemType)  === 'boolean'">
                     <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || false">
                 </span>
-                <span v-else-if="itemType.length > 0">
-                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || ''">
-                </span>
-                <span v-else>
-                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType">
+                <span v-else-if="itemType.toString().length > 0">
+                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType.toString() || ''">
                 </span>
             </span>
         </span>
