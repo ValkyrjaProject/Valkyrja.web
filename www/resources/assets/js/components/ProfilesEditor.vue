@@ -91,10 +91,10 @@
             },
             addProfileTemplate() {
                 return {
-                    option: 'Option ',
-                    option_alt: 'alt-option',
-                    label: 'Label for option',
-                    property_order: '0'
+                    option: '-o',
+                    option_alt: '--option',
+                    label: 'Field Title',
+                    property_order: '1'
                 };
             },
         },
