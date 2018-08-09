@@ -14,14 +14,16 @@ class ProfileOptions extends Model
         'option',
         'option_alt',
         'label',
-        'property_order'
+        'property_order',
+        'inline'
     ];
 
     protected $casts = [
         'option' => 'string',
         'option_alt' => 'string',
         'label' => 'string',
-        'property_order' => 'integer'
+        'property_order' => 'integer',
+        'inline' => 'boolean'
     ];
 
     /**

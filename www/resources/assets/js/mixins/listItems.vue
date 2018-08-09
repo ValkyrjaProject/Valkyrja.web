@@ -58,10 +58,17 @@
                 return false;
             },
             updateActiveItemData(e) {
+                let value;
+                if (e.target.type && e.target.type === "checkbox") {
+                    value = e.target.checked ? '1' : 0
+                }
+                else {
+                    value = e.target.value
+                }
                 this.$store.dispatch('updateActiveItemData', {
                     key: e.target.getAttribute('command-name'),
                     formName: this.formName,
-                    data: e.target.value
+                    data: value
                 });
                 this.$store.dispatch('editItemClass', {
                     index: this.activeItemIndex,

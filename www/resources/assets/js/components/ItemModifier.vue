@@ -32,7 +32,7 @@
                     </span>
                 </span>
                 <span v-else-if="typeof(itemType)  === 'boolean'">
-                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType || false">
+                    <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType ? '1' : '0'">
                 </span>
                 <span v-else-if="itemType.toString().length > 0">
                     <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType.toString() || ''">

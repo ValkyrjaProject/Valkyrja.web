@@ -66,7 +66,7 @@ class ConfigRequest extends FormRequest
             if ($this->has('profile_options')) {
                 $tempArr = [];
                 foreach($this['profile_options'] as $key => $profile) {
-                    $allowed = ['option', 'option_alt', 'label', 'property_order'];
+                    $allowed = ['option', 'option_alt', 'label', 'property_order', 'inline'];
                     $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
                 }
                 $this['profile_options'] = $tempArr;
@@ -207,6 +207,7 @@ class ConfigRequest extends FormRequest
             'profile_options.*.option_alt'      => 'required|string|max:100',
             'profile_options.*.label'           => 'required|string|max:250',
             'profile_options.*.property_order'  => 'required|integer',
+            'profile_options.*.inline'          => 'required|boolean',
         ];
     }
 }

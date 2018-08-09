@@ -21,7 +21,7 @@
 			<input type="hidden" name="userId" value="{{ $user->id }}">
 			{{ csrf_field() }}
 			<input type="submit" class="btn btn-primary" value="Select server">
-			<a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+			<a href="{{ route('logout') }}" class="btn btn-danger" style="color: white;">Logout</a>
 		</form>
 		</p>
 	</div>

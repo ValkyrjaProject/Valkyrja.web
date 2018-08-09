@@ -61,6 +61,15 @@
                         Label option cannot be empty.
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" command-name="inline" :checked="props.activeItem.inline"
+                               @input="updateActiveItemData"
+                               :true-value="1"
+                               :false-value="0">
+                        <b>Inline</b> - Inline fields are in multiple columns. Many inline options may cause unexpected formatting!
+                    </label>
+                </div>
             </template>
         </item-modifier>
     </div>
@@ -94,9 +103,18 @@
                     option: '-o',
                     option_alt: '--option',
                     label: 'Field Title',
-                    property_order: '1'
+                    property_order: '1',
+                    inline: 0
                 };
             },
+            inline: {
+                get() {
+                    return props.activeItem.inline
+                },
+                set(value) {
+                    this.updateActiveItemData(value)
+                }
+            }
         },
         methods: {
             hasWhitespace(input) {
