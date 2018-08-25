@@ -1047,6 +1047,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>roleCounts</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display the number of people with every publicRole out of specified group.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Name of the role group.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>join</h2>
                     <table class="command">
                     <tr>
