@@ -23,7 +23,6 @@ class Channels extends Model
 
     protected function performInsert(Builder $query)
     {
-        $this->muted_until = null;
         return parent::performInsert($query);
     }
 
