@@ -97,7 +97,7 @@ class ServerConfig extends Model
         $commandKeys = array_column($channels, 'channelid');
         $deleteChannels = $this->channels()->whereNotIn('channelid', $commandKeys);
         if ($deleteChannels->count() > 0) {
-            $deleteChannels->delete();
+            $deleteChannels->update(['ignored' => 0]);
         }
         foreach ($channels as $channel) {
             //$this->channels()->updateOrCreate($channel);
