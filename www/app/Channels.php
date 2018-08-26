@@ -23,6 +23,7 @@ class Channels extends Model
 
     protected function performInsert(Builder $query)
     {
+        $this->muted_until = (new DateTime())->setDate(1,1,1)->setTime(0,0,0,0);
         return parent::performInsert($query);
     }
 
