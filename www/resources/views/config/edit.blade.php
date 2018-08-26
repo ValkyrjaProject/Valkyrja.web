@@ -11,6 +11,7 @@
 			'rolesData' => old('roles', (isset($errors) && count($errors) > 0) ? [] : $roles->all()),
 			'channelsData' => old('channels', (isset($errors) && count($errors) > 0) ? [] : $channels->all()),
 			'profile_options' => old('profile_options', (isset($errors) && count($errors) > 0) ? [] : $profile_options->all()),
+			'role_groups' => old('role_groups', (isset($errors) && count($errors) > 0) ? [] : $role_groups->all()),
         ])) !!}"
     </script>
 @endsection
@@ -284,6 +285,17 @@
                                     <input type="hidden"
                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
                                            :value="role.antispam_ignored">
+                                </span>
+                                <span v-for="group in props.roleGroups">
+                                    <input type="hidden"
+                                           :name="'role_groups['+props.roleGroups.indexOf(group)+'][groupid]'"
+                                           :value="group.id">
+                                    <input type="hidden"
+                                           :name="'role_groups['+props.roleGroups.indexOf(group)+'][role_limit]'"
+                                           :value="group.role_limit">
+                                    <input type="hidden"
+                                           :name="'role_groups['+props.roleGroups.indexOf(group)+'][name]'"
+                                           :value="group.name">
                                 </span>
                             </template>
                         </role-selector>

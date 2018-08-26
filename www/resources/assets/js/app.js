@@ -83,6 +83,7 @@ new Vue({
             this.$store.dispatch('updateLevelsData', state['rolesData'].slice());
             this.$store.dispatch('updateChannelsData', state['channelsData']);
             this.$store.dispatch('updateProfileOptions', state['profile_options']);
+            this.$store.dispatch('updateRoleGroups', state['role_groups']);
         }
     }
 });

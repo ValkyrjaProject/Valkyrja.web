@@ -16,8 +16,27 @@
                     <select name="title" class="form-control" title="" v-model="selectedPublicGroup"
                             :disabled="!publicRoleIsSelected">
                         <!--<option :value="0"></option>-->
-                        <option :value="group.id" v-for="group in sortedPublicGroups">{{ group.name }}</option>
+                        <option :value="group.id" v-for="group in sortedPublicGroups">{{ group.toString() }}</option>
                     </select>
+                </div>
+                <div class="input-group">
+                    <input type="text"
+                           v-model="name"
+                           class="form-control"
+                           placeholder="Group name"
+                           title="Group name"
+                           :disabled="!publicRoleIsSelected || isEmptyGroupSelected"/>
+                </div>
+                <div class="input-group">
+                    <span class="indent">
+                        Number of roles from this group that the user can take:
+                    </span>
+                    <input type="number"
+                           v-model="roleLimit"
+                           class="form-control"
+                           placeholder="Role limit"
+                           title="Role limit"
+                           :disabled="!publicRoleIsSelected || isEmptyGroupSelected"/>
                 </div>
             </div>
         </div>
@@ -37,13 +56,16 @@
             </div>
         </div>
         <slot :addedTypesLevel="addedTypes"></slot>
+        <slot :roleGroups="publicGroups"></slot>
     </div>
 </template>
 
 <script>
     import ListContainer from '../components/ListContainer.vue'
     import {addRole, removeRole} from '../vuex/actions'
+    import {PublicRoleGroup, EmptyPublicRoleGroup} from '../models/PublicRoleGroup'
 
+    const noGroup = new EmptyPublicRoleGroup(0);
     export default {
         components: {
             ListContainer
@@ -74,14 +96,11 @@
                     Admin: "5"
                 },
                 selectedPermissionLevel: "1",
-                selectedPublicGroup: "1",
-                publicGroups: [
-                    "0"
-                ]
+                selectedPublicGroup: noGroup.id,
+                publicGroups: []
             }
         },
         created() {
-            console.log(this.addedTypes);
             for (let type of this.addedTypes) {
                 if (typeof(type.permission_level) === "undefined" || typeof(type.public_id) === "undefined") {
                     this.$store.dispatch('removeItem', {
@@ -91,16 +110,25 @@
                 }
                 else if (
                     type.permission_level === this.RolePermissionLevelEnum.Public
-                    && this.publicGroups.indexOf(type.public_id) === -1
+                    && type.public_id !== 0
+                    && this.publicGroups.find(g => g.id === type.public_id) === undefined
                 ) {
-                    this.publicGroups.push(type.public_id);
+                    let role_group = this.roleGroups.find(role => role['groupid'].toString() === type.public_id.toString());
+                    let publicRoleGroup = new PublicRoleGroup(type.public_id);
+                    if (role_group) {
+                        publicRoleGroup['name'] = role_group['name'];
+                        publicRoleGroup['role_limit'] = role_group['role_limit'];
+                    }
+                    this.publicGroups.push(publicRoleGroup);
                 }
             }
-            this.selectedPublicGroup = this.publicGroups[0];
         },
         computed: {
             addedTypes() {
                 return this.$store.state.itemModifier.roles.itemsList;
+            },
+            roleGroups() {
+                return this.$store.state.itemModifier.role_groups.itemsList;
             },
             formInputName() {
                 return 'roles[]';
@@ -110,7 +138,7 @@
                     return this.$store.state['roles'].filter(e => {
                         return this.addedTypes.filter(t => {
                             return t[['roleid']] === e.id
-                            && parseInt(t[['permission_level']]) > 0;
+                                && parseInt(t[['permission_level']]) > 0;
                         }).length === 0;
                     });
                 },
@@ -149,34 +177,54 @@
             publicRoleIsSelected() {
                 return this.selectedPermissionLevel === this.RolePermissionLevelEnum.Public;
             },
+            isEmptyGroupSelected() {
+                return this.selectedPublicGroup === noGroup.id;
+            },
             sortedPublicGroups() {
-                let groups = this.publicGroups.sort(function (a, b) {
-                    return a - b
-                });
-                let newGroups = [];
-                for (let group of groups) {
-                    let newGroup = [];
-                    newGroup['id'] = group;
-                    newGroup['name'] = this.groupName(group);
-                    newGroups.push(newGroup);
+                return [noGroup].concat(this.publicGroups.sort(function (a, b) {
+                    return a.id - b.id
+                }));
+            },
+            roleLimit: {
+                get() {
+                    let group = this.getSelectedGroup();
+                    if (!this.isEmptyGroupSelected && group !== undefined) {
+                        return group.role_limit
+                    }
+                },
+                set(limit) {
+                    let group = this.getSelectedGroup();
+                    if (!this.isEmptyGroupSelected && group !== undefined) {
+                        group.role_limit = limit
+                    }
                 }
-                console.log(newGroups);
-                return newGroups;
+            },
+            name: {
+                get() {
+                    let group = this.getSelectedGroup();
+                    if (!this.isEmptyGroupSelected && group !== undefined) {
+                        return group.name
+                    }
+                },
+                set(limit) {
+                    let group = this.getSelectedGroup();
+                    if (!this.isEmptyGroupSelected && group !== undefined) {
+                        group.name = limit
+                    }
+                }
             }
         },
         methods: {
+            getSelectedGroup() {
+                return this.publicGroups.find(g => g.id === this.selectedPublicGroup)
+            },
             addPublicGroup() {
                 if (this.publicRoleIsSelected) {
-                    let start = 0;
-                    this.publicGroups.every(e => {
-                        if (parseInt(e) === start) {
-                            start = parseInt(e) + 1;
-                            return true;
-                        }
-                    });
-                    start = start.toString();
-                    this.publicGroups.push(start);
-                    this.selectedPublicGroup = start;
+                    let start = 1;
+                    while (this.publicGroups.find(g => parseInt(g.id) === start) !== undefined) start++;
+                    let group = new PublicRoleGroup(start);
+                    this.publicGroups.push(group);
+                    this.selectedPublicGroup = start.toString();
                 }
             },
             removeItem(item) {
@@ -185,13 +233,14 @@
                     formName: 'roles',
                     item: removeItem
                 });
-            },
-            groupName(item) {
-                if (item === "0") {
-                    return "No group";
-                }
-                return "Group " + item;
             }
         }
     }
 </script>
+
+<style lang="scss">
+    .indent {
+        display: block;
+        margin-left: 5px;
+    }
+</style>

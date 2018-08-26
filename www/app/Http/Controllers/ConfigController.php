@@ -9,6 +9,7 @@ use App\DiscordData;
 use App\Exceptions\ServerIssueException;
 use App\Http\Requests\ConfigRequest;
 use App\ProfileOptions;
+use App\RoleGroups;
 use App\Roles;
 use App\ServerConfig;
 use Discord\OAuth\Parts\Guild;
@@ -137,6 +138,7 @@ class ConfigController extends Controller
             'roles' => Roles::where('serverid', $serverId)->get(),
             'channels' => Channels::where('serverid', $serverId)->get(),
             'profile_options' => ProfileOptions::where('serverid', $serverId)->get(),
+            'role_groups' => RoleGroups::where('serverid', $serverId)->get(),
             'guild' => [
                 'roles' => $guildRoles,
                 'channels' => $guildChannels
@@ -173,6 +175,7 @@ class ConfigController extends Controller
         $serverConfig->updateCustomCommands($data->get('custom_commands', []));
         $serverConfig->updateChannels($data->get('channels', []));
         $serverConfig->updateProfileOptions($data->get('profile_options', []));
+        $serverConfig->updateRoleGroups($data->get('role_groups', []));
 
         $roles = $this->getRoles($data);
         $serverConfig->updateRoles($roles);
@@ -182,7 +185,8 @@ class ConfigController extends Controller
             'channels',
             'roles',
             'levels',
-            'profile_options'
+            'profile_options',
+            'role_groups',
         ])->all())) {
             return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
         } else {

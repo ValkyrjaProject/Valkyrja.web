@@ -45,6 +45,10 @@ const state = {
             itemsList: [], // list of command Objects
             activeItem: null
         },
+        role_groups: {
+            itemsList: [], // list of command Objects
+            activeItem: null
+        },
     },
 };
 

@@ -71,6 +71,14 @@ class ConfigRequest extends FormRequest
                 }
                 $this['profile_options'] = $tempArr;
             }
+            if ($this->has('role_groups')) {
+                $tempArr = [];
+                foreach($this['role_groups'] as $key => $profile) {
+                    $allowed = ['groupid', 'role_limit', 'name'];
+                    $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
+                }
+                $this['role_groups'] = $tempArr;
+            }
             if ($this->has('quickban_reason') && is_null($this['quickban_reason'])) {
                 $this['quickban_reason'] = '';
             }
@@ -99,7 +107,6 @@ class ConfigRequest extends FormRequest
             'command_prefix'                    => 'required|string|max:255',
             'command_prefix_alt'                => 'present|string|max:255',
             'execute_on_edit'                   => 'required|boolean',
-            //'antispam_priority'                 => 'required|boolean',
             'antispam_invites'                  => 'required|boolean',
             'antispam_invites_ban'              => 'required|boolean',
             'antispam_duplicate'                => 'required|boolean',
@@ -208,6 +215,11 @@ class ConfigRequest extends FormRequest
             'profile_options.*.label'           => 'required|string|max:250',
             'profile_options.*.property_order'  => 'required|integer',
             'profile_options.*.inline'          => 'required|boolean',
+            'role_groups'                       => 'array',
+            'role_groups.*'                     => 'array',
+            'role_groups.*.groupid'             => 'required|integer',
+            'role_groups.*.role_limit'          => 'required|integer',
+            'role_groups.*.name'                => 'present|string|nullable|max:250',
         ];
     }
 }
