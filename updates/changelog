@@ -1,5 +1,20 @@
 #Changelog
 
+**Botwinder 3.2** - 25th of August, 2018
+  * Profiles - configurable embed profiles for users to play with.
+  * Public role groups upgrade - you can now specify the name of the group, and how many roles can someone take out of each group.
+  * `!roleCounts` - get some numbers about public roles for specific group.
+  * Quote feature, add and query quotes, random or for a user.
+  * Temporary roles - create roles that will be deleted at specified time.
+  * Configure ignored roles for antispam.
+  * Warnings can now be logged.
+  * New `!ping` with some server status info.
+  * Banning someone using Discord rightclick and reason will be recorded in Botwinder's database.
+  * Performance optimizations.
+  * Hardware upgrades.
+  * Please see the config page and the documentation for more details =)
+
+
 **Botwinder 3.1** - 3rd of May, 2018
   * Karma - an extra appreciation for those who are helpful. When a user is thanked, they receive a cookie! See the config page to find out all the details.
   * Experience and levels - users can gain experience for every message (or image) that they send, gain levels and be assigned roles. You can customize every detailed about this as well.

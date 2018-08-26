@@ -66,9 +66,8 @@
                         <li>Set up your own <b>custom commands</b>, with a few keywords! (<a href="/config">Can be configured.</a>)</li>
                         <li>You can <b>create an alias</b> to <i>any</i> command. (<code>!alias</code>)</li>
                         <li>Did you like <b>temporary channels</b> on TeamSpeak? No problem, we've got you. (<code>!tempChannel</code>)</li>
-                        <li>Let the members create a simple <code>memo</code> for themselves and display it, or a memo of other members.</li>
                         <li><b>Cookies!</b> We have cookies! The karma system gives cookies to people who get thanked as an extra appreciation of helpful members of your community. (<a href="/config">Can be configured.</a>)</li>
-                        <li>Your members can gain <b>experience</b> for every message and image they send, <b>level up</b> and be assigned roles. All highly customizable. (They also get cookies for levelup.) (<a href="/config">Can be configured.</a>)</li>
+                        <li>Your members can create <b>profiles</b> and gain <b>experience</b> for every message and image they send, <b>level up</b> and be assigned roles. (They also get cookies for levelup.) (<a href="/config">Can be configured.</a>)</li>
                         <!--li>Create <b>scheduled messages</b> or timers. These can even be <b>scheduled commands</b>, so you can even schedule a daily <code>!nuke</code> of a channel! :D (<code>!timers</code>)</li-->
                         <!--li>Run a <b>poll</b>! Those can be as simple as with yes/no/abstain options, or you can add anything you desire. You can even choose to run a free poll where the user can vote on literally anything and it will be added as a new option! (<code>!poll</code>)</li-->
                         <!--li>Run the best <b>events</b> in the universe with signups, checkin, keep track of score, etc... (<code>!event</code>)</li-->
@@ -1048,6 +1047,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>roleCounts</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display the number of people with every publicRole out of specified group.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Name of the role group.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>join</h2>
                     <table class="command">
                     <tr>
@@ -1187,10 +1203,6 @@
                     <h2>memo</h2>
                     <table class="command">
                     <tr>
-                        <td>Alias</td>
-                        <td><code>profile</code></td>
-                    </tr>
-                    <tr>
                         <td>Description</td>
                         <td>Display your saved memo, or the memo of the mentioned user. (Use-cases: user profiles, hardware, etc... Create an <code>!alias</code> for your use case!)</td>
                     </tr>
@@ -1214,6 +1226,57 @@
                     <tr>
                         <td>Parameters</td>
                         <td>None to wipe, otherwise the message to store.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>profile</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display your profile. If used with a username or @mention, it will display someone else' profile.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None, or a <code>username</code></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>setProfile</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Set your profile. (<a href="/config">Can be configured.</a>)</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Configured, see <code>!setProfile --help</code></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>getProfile</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Get the source used to set your profile.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
