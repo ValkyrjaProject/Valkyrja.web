@@ -38,14 +38,14 @@
         "vue-persist": "^0.4.0",
         "vue-router": "^3.0.1",
         "vuelidate": "^0.6.2",
-        "vuex": "^3.0.1"
+        "vuex": "^3.0.1",
+        "vue-sticky-directive": "0.0.6"
     },
     "dependencies": {
         "eslint-loader": "^2.1.0",
         "laravel-mix-eslint": "^0.1.1",
         "loglevel": "^1.6.1",
-        "smoothscroll": "^0.4.0",
-        "vue-smooth-height": "^1.6.2"
+        "smoothscroll": "^0.4.0"
     },
     "node": {
         "fs": "empty"

@@ -2,8 +2,8 @@
     <div class="edit-guild-container column has-background-white has-radius-small">
         <submit-bar :guild="guild"/>
         <div class="columns">
-            <div class="column is-3">
-                <aside class="menu">
+            <div sticky-container class="column is-3">
+                <aside id="editGuildNav" v-sticky sticky-side="top" class="menu">
                     <ul class="menu-list">
                         <li
                             v-for="(tab, i) in tabs"
@@ -30,13 +30,13 @@
 </template>
 
 <script>
-import ConfigNavbarItem from "./ConfigNavbarItem";
 import SubmitBar from "./SubmitBar";
 import BasicConfig from "./Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
 import VueRouter from "vue-router";
-import smoothHeight from "vue-smooth-height";
+import Sticky from 'vue-sticky-directive'
+
 const tabs = [
     {
         name: "Basic Configuration",
@@ -95,10 +95,12 @@ const tabs = [
         }
     },
 ];
+
 let routes = [{
     path: "/",
     redirect: tabs[0].component.url
 }];
+
 for (let tab of tabs) {
     if (tabs.indexOf(tab) === 0) {
         routes.push({ path: tab.component.url, component: tab.component.name });
@@ -107,21 +109,22 @@ for (let tab of tabs) {
         routes.push({ path: tab.component.url, component: tab.component.name });
     }
 }
+
 const router = new VueRouter({
     mode: "hash",
-    routes: routes
+    routes: routes,
 });
+
 export default {
+    directives: {Sticky},
     router,
     name: "EditGuild",
     components: {
-        ConfigNavbarItem,
         SubmitBar,
         BasicConfig,
         AntispamConfig,
         ModerationConfig
     },
-    mixins:[smoothHeight],
     props: {
         guildId: {
             type: String,
@@ -131,7 +134,7 @@ export default {
     data: function () {
         return {
             isLoading: true,
-            tabs: tabs
+            tabs: tabs,
         };
     },
     computed: {
@@ -144,11 +147,6 @@ export default {
     },
     created() {
         this.$store.dispatch("retrieveConfig", this.guildId).finally(() => this.isLoading = false);
-    },
-    mounted(){
-        this.$smoothElement({
-            el: this.$refs.component,
-        });
     },
     methods: {
         setIcon(icon) {
