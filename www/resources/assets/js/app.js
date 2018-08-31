@@ -1,130 +1,64 @@
-import Vue from 'vue'
-import store from './vuex/store.js'
-import {updateCustomCommands, updateBotwinderCommands, updateRolesData, updateRoles, updateChannels, clearAPIError} from './vuex/actions'
+import Vue from "vue";
+window.Vue = Vue;
 
-import {mapGetters, mapState} from 'vuex'
-import Sticky from './sticky'
-import RoleSelector from './components/RoleSelector.vue'
-import TextField from './components/TextField.vue'
-import TypeSelector from './components/TypeSelector.vue'
-import CustomInputList from './components/CustomInputList.vue'
-import CustomCommands from './components/CustomCommands.vue'
-import Modal from './components/Modal.vue'
-import ColorPicker from './components/ColorPicker.vue'
-import ListSelector from './components/ListSelector.vue'
-import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
+import loglevel from "loglevel";
+loglevel.setLevel(loglevel.levels.DEBUG);
+window.log = loglevel;
+
+import initSubHeaders from "./docs";
+
+import DisplayGuilds from "./components/DisplayGuilds/DisplayGuilds";
+import EditGuild from "./components/EditGuild/EditGuild";
+import UserNavigation from "./components/UserNavigation/UserNavigation";
+
+import store from "./store/index.js";
+import Vuelidate from "vuelidate";
+import VueRouter from "vue-router";
+
+initSubHeaders();
+
+Vue.use(Vuelidate);
+Vue.use(VueRouter);
 
 new Vue({
+    el: "#navigation",
     store,
-    el:'#app',
-    components:{
-        RoleSelector,
-        TextField,
-        TypeSelector,
-        CustomInputList,
-        CustomCommands,
-        Modal,
-        ColorPicker,
-        ListSelector,
-        IgnoreChannelListSelector,
-    },
-    computed: {
-        errors: {
-            get () {
-                return this.$store.state.errors;
-            },
-            set () {
-                this.$store.dispatch('clearAPIError')
-            }
-        },
-        ...mapGetters('loading', [
-            /*
-              `isLoading` returns a function with a parameter of loader name.
-              e.g. `isLoading('creating user')` will return you a boolean value.
-            */
-            'isLoading',
-            /*
-              `anyLoading` returns a boolean value if any loader name exists on store.
-            */
-            'anyLoading',
-        ]),
-        ...mapState([
-            'command_prefix',
-            'antispam_tolerance',
-            'roles',
-            'channels',
-            'forbidSubmitForm'
-         ])
-    },
-    methods: {
-        updateCommandCharacter (e) {
-            this.$store.dispatch('updateCommandCharacter', e.target.value)
-        },
-        onSubmit (e) {
-            if (!this.anyLoading) {
-                document.forms[0].submit();
-            }
-        },
-    },
-    created() {
-        const partArray = window.location.pathname.split( '/' );
-        if (partArray[3] === 'edit') {
-            let state = JSON.parse(window.__INITIAL_STATE__);
-            this.$store.dispatch('updateRoles', state['roles']);
-            this.$store.dispatch('updateChannels', state['channels']);
-            this.$store.dispatch('updateCustomCommands', state['custom_commands']);
-            this.$store.dispatch('updateRolesData', state['rolesData']);
-            this.$store.dispatch('updateChannelsData', state['channelsData']);
-        }
+    components: {
+        UserNavigation
     }
 });
 
-function getUrlParameter(sParam) {
-    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-}
-$(function() {
-    const navSelector = '#toc';
-    const $myNav = $(navSelector);
-    let $scope = $('body');
-    $scope.scrollspy({
-        target: navSelector
-    });
-    $myNav.find('a:first').tab('show');
-    $scope.scrollspy('refresh');
-
-    if (window.location.pathname === '/features' || window.location.pathname === '/docs'){
-        setStickySize($myNav);
-        new Sticky('.scrollspy');
-        // Fucking ugly code to fix something removing active class FOR SOME FUCKING REASON. Pls fix
-        // TODO: I'm going to find you, and I'm going to fix you
-        $('header nav.navbar a.nav-link').filter('[href="/features"],[href="/docs"]').addClass('active');
-    }
-});
-$(window).resize(function () {
-    if (window.location.pathname === '/features' || window.location.pathname === '/docs'){
-        const $toc = $('#toc');
-        setStickySize($toc);
+new Vue({
+    el: "#app",
+    store,
+    components: {
+        DisplayGuilds,
+        EditGuild
     }
 });
 
-$(document).scroll(function () {
-    if (window.location.pathname === '/features' || window.location.pathname === '/docs'){
-        const $toc = $('#toc');
-        setStickySize($toc);
-    }
-});
+document.addEventListener("DOMContentLoaded", function () {
 
-function setStickySize($element) {
-    $element.css('height', ($(window).height() - $element.offset().top + $(document).scrollTop()));
-}
+    // Get all "navbar-burger" elements
+    let $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll(".navbar-burger"), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener("click", function () {
+
+                // Get the target from the "data-target" attribute
+                let target = $el.dataset.target;
+                let $target = document.getElementById(target);
+
+                // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                $el.classList.toggle("is-active");
+                $target.classList.toggle("is-active");
+
+            });
+        });
+    }
+
+});

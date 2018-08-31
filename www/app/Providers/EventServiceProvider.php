@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Botwinder\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'Botwinder\Events\Event' => [
+            'Botwinder\Listeners\EventListener',
+        ],
+        'SocialiteProviders\Manager\SocialiteWasCalled' => [
+            'Botwinder\Events\DiscordExtendSocialite@handle',
+            /*'LaravelRestcord\Authentication\AddTokenToSession@handle'*/
         ],
     ];
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Botwinder\Http\Middleware;
 
+use Botwinder\Logic\AuthenticateUser;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
@@ -17,8 +17,8 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        if (AuthenticateUser::hasDiscordToken()) {
+            return redirect('/');
         }
 
         return $next($request);

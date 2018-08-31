@@ -10,6 +10,7 @@ class CreateBotwinderTables extends Migration
      * Run the migrations.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function up()
     {

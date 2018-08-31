@@ -1,4 +1,5 @@
-let mix = require('laravel-mix');
+let mix = require("laravel-mix");
+require("laravel-mix-eslint");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,13 +12,22 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.sass('resources/assets/sass/app.scss', 'public/css').version();
+mix.sass("resources/assets/sass/app.scss", "public/css");
 mix.js(
-    'resources/assets/js/app.js',
-    'public/js'
-)
-    .version();
-mix.scripts([
-    'resources/assets/js/bootstrap.min.js',
-    'resources/assets/js/bootstrap-toc.min.js'
-], 'public/js/vendor.js');
+    "resources/assets/js/app.js",
+    "public/js"
+);
+/*mix.eslint({
+    fix: false,
+    cache: false,
+});*/
+
+if (mix.inProduction()) {
+    mix.version();
+}
+
+mix.webpackConfig({
+    resolve: {
+        modules: [path.resolve(__dirname, "resources/assets/js"), "node_modules",],
+    },
+});

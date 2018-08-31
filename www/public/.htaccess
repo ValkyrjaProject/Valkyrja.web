@@ -1,86 +1,21 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
-        Options -MultiViews
+        Options -MultiViews -Indexes
     </IfModule>
 
     RewriteEngine On
-
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    RewriteCond %{HTTP_HOST} elitedangerous\.events$
-    RewriteRule ^(.*)$ https://discord.gg/0V5hfT4eO8gL6oiw [R=301,L]
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
 
-
-    RewriteCond %{HTTP_HOST} support\.botwinder\.info$
-    RewriteRule ^(.*)$ https://discord.gg/XgVvkXx [R=301,L]
-    RewriteCond %{HTTP_HOST} discord\.botwinder\.info$
-    RewriteRule ^(.*)$ https://discord.gg/XgVvkXx [R=301,L]
-    RewriteCond %{HTTP_HOST} discord\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://discord.gg/XgVvkXx [R=301,L]
-
-    RewriteCond %{HTTP_HOST} api\.botwinder\.info$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder.discord [R=301,L]
-    RewriteCond %{HTTP_HOST} git\.botwinder\.info$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder.discord [R=301,L]
-    RewriteCond %{HTTP_HOST} github\.botwinder\.info$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder.discord [R=301,L]
-    RewriteCond %{HTTP_HOST} botwinder-api\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder.discord [R=301,L]
-
-    RewriteCond %{HTTP_HOST} download\.botwinder\.info$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder_Discord.NET/releases [R=301,L]
-    RewriteCond %{HTTP_HOST} downloads\.botwinder\.info$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder_Discord.NET/releases [R=301,L]
-    RewriteCond %{HTTP_HOST} dll\.botwinder\.info$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder_Discord.NET/releases [R=301,L]
-    RewriteCond %{HTTP_HOST} botwinder-dll\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://github.com/RheaAyase/Botwinder_Discord.NET/releases [R=301,L]
-
-    RewriteCond %{HTTP_HOST} invite\.botwinder\.info$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=278834060053446666&scope=bot&permissions=1950739551 [R=301,L]
-    RewriteCond %{HTTP_HOST} botwinder\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=160478715086635008&scope=bot&permissions=1950739551 [R=301,L]
-    RewriteCond %{HTTP_HOST} inviteb\.botwinder\.info$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=184289712591077377&scope=bot&permissions=1950739551 [R=301,L]
-    RewriteCond %{HTTP_HOST} botwinder-beta\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=184289712591077377&scope=bot&permissions=1950739551 [R=301,L]
-    RewriteCond %{HTTP_HOST} botwinder-user\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://www.dropbox.com/s/533lr3u6tcw6zej/Botwinder_UserBot.exe [R=301,L]
-    RewriteCond %{HTTP_HOST} userbot\.botwinder\.info$
-    RewriteRule ^(.*)$ https://www.dropbox.com/s/533lr3u6tcw6zej/Botwinder_UserBot.exe [R=301,L]
-
-
-    RewriteCond %{HTTP_HOST} server\.botwinder\.info$
-    RewriteRule ^(.*)$ http://rhea-ayase.mynetgear.com [R=301,L]
-    RewriteCond %{HTTP_HOST} server\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ http://rhea-ayase.mynetgear.com [R=301,L]
-    RewriteCond %{HTTP_HOST} botwinder-info\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ http://botwinder.info [R=301,L]
-
-
-    RewriteCond %{HTTP_HOST} twitter\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://twitter.com/RheaAyase [R=301,L]
-    RewriteCond %{HTTP_HOST} twitch\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://twitch.tv/RheaAyase [R=301,L]
-    RewriteCond %{HTTP_HOST} youtube\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://youtube.com/RheaAyase [R=301,L]
-    RewriteCond %{HTTP_HOST} steam\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ http://steamcommunity.com/id/rhea-ayase [R=301,L]
-
-    RewriteCond %{HTTP_HOST} cookies\.rhea-ayase\.eu$
-    RewriteRule ^(.*)$ https://www.dropbox.com/sh/rfhmj1xmferkipx/AABS1HgPR5Hz_Y-KHFQPCf0da [R=301,L]
-    RewriteCond %{HTTP_HOST} cookies\.botwinder\.info$
-    RewriteRule ^(.*)$ https://www.dropbox.com/sh/rfhmj1xmferkipx/AABS1HgPR5Hz_Y-KHFQPCf0da [R=301,L]
-
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 </IfModule>

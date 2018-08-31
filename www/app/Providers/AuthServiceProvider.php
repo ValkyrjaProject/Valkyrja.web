@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Botwinder\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        //\Botwinder\ServerConfig::class => \Botwinder\Policies\ServerConfigPolicy::class,
     ];
 
     /**

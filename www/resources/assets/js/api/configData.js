@@ -1,21 +1,19 @@
-import axios from 'axios'
+import axios from "axios";
+import {createGuild} from "../models/Guild";
 
 const instance = axios.create({
-    baseURL: '/api/',
+    baseURL: "/api/",
     withCredentials: true
 });
 
 export default {
-    /*getRoles (serverId) {
-        return instance.get('/roles/'+serverId);
+    getServerConfig(serverId) {
+        return instance.get(`/server/${serverId}`);
     },
-    getChannels (serverId) {
-        return instance.get('/channels/'+serverId);
+    getGuilds() {
+        return instance.get("/guilds");
     },
-    getValues (serverId, attribute) {
-        return instance.get('/data/'+serverId+'/'+attribute);
-    },
-    getBotwinderCommands () {
-        return instance.get('/botwinderCommands');
-    }*/
-}
+    getUser() {
+        return instance.get("/user");
+    }
+};
