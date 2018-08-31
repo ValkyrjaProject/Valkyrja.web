@@ -9,6 +9,10 @@ php:
 notifications:
   email: false
 
+branches:
+  only:
+  - dev
+
 before_script:
   - cd www
   - cp .env.example .env
