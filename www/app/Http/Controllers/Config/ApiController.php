@@ -54,8 +54,8 @@ class ApiController extends Controller
                     return $policy->update($user, $config);
                 }
             }
-            return false;
-        });
+            return true;
+        })->sortBy('name');
         return $userGuilds;
     }
 

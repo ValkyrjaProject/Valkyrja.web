@@ -1,6 +1,6 @@
 <template>
-    <transition 
-        name="fade" 
+    <transition
+        name="fade"
         mode="out-in">
         <router-view/>
     </transition>
@@ -11,7 +11,6 @@ import VueRouter from "vue-router";
 import EditGuild from "../EditGuild/EditGuild";
 import Guilds from "./Guilds";
 
-// TODO: Change invite from text to Botwinder button
 const router = new VueRouter({
     mode: "history",
     scrollBehavior (to, from, savedPosition) {

@@ -8,10 +8,8 @@ import SubmitBar from "components/EditGuild/SubmitBar";
 import ConfigNavbarItem from "components/EditGuild/ConfigNavbarItem";
 import BasicConfig from "components/EditGuild/Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "components/EditGuild/Sections/Antispam/AntispamConfig";
-import VueRouter from "vue-router";
 
 let localVue = Vue.use(Vuex);
-localVue.use(VueRouter);
 
 describe("EditGuild", function () {
     let wrapper;
@@ -39,7 +37,9 @@ describe("EditGuild", function () {
             state,
             actions,
         });
-        wrapper = shallowMount(EditGuild, {store, localVue});
+        wrapper = shallowMount(EditGuild, {store, localVue,
+            stubs: ['router-link', 'router-view']
+        });
     });
 
     it("should have submit-bar component", function () {
@@ -63,13 +63,6 @@ describe("EditGuild", function () {
         console.log(wrapper.html());
         expect(wrapper.findAll("router-link-stub").length).to.equal(allTabs);
     });
-
-    it("should have tab index be within range of tabs", function () {
-        const currentTabIndex = wrapper.vm.currentTab;
-        const tabsLength = wrapper.vm.tabs.length;
-        assert(currentTabIndex >= 0 && currentTabIndex < tabsLength);
-    });
-
     it("should display is-active attribute for current tab in menu-list", function () {
         const currentTabIndex = wrapper.vm.currentTab;
         let tabs = wrapper.findAll(ConfigNavbarItem);
@@ -77,6 +70,10 @@ describe("EditGuild", function () {
         for (let i = 0; i < tabs.length; i++) {
             expect(tabs.at(i).props().isActive).to.equal(currentTabIndex === i);
         }
+    });
+
+    it("should redirect to default view", function () {
+        expect(false).to.equal(true);
     });
 
     it("should change current tab on click", function () {

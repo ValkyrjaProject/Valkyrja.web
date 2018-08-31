@@ -52,10 +52,7 @@ export default {
                 return this.getters["roleSelector/availableRoles"];
             },
             set(role) {
-                // TODO: Emit new role
-                console.log("role", role);
-                let publicRole = createPublicRole(role, 1, 1);
-                this.$store.dispatch("roleSelector/addRole", publicRole);
+                this.$store.dispatch("roleSelector/addRole", role);
             },
         },
         addedRoles: {
@@ -63,8 +60,6 @@ export default {
                 return this.getters["roleSelector/addedRoles"];
             },
             set(role) {
-                // TODO: Emit new role
-                console.log("role", role);
                 this.$store.dispatch("roleSelector/removeRole", role);
             },
         },

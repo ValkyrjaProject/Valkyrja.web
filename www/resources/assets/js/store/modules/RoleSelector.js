@@ -57,6 +57,7 @@ const actions = {
         commit("CHANGE_ACTIVE_GROUP", group);
     },
     addRole({commit, dispatch}, role) {
+        // TODO: Not implemented
         if (!(role instanceof PublicRole)) {
             throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
         }
@@ -69,6 +70,7 @@ const actions = {
         });
     },
     removeRole({commit, dispatch}, role) {
+        // TODO: Not implemented
         if (!(role instanceof PublicRole)) {
             throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
         }
@@ -92,7 +94,6 @@ const getters = {
                 return addedRole.id === role.id
                     && addedRole.permission_level > 0;
             }).length === 0;
-            //return role.permission_level === 0;
         });
     },
     addedRoles: (state, getters, rootState, rootGetters) => {

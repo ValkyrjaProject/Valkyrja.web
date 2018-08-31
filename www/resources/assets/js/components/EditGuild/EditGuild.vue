@@ -5,11 +5,11 @@
             <div class="column is-3">
                 <aside class="menu">
                     <ul class="menu-list">
-                        <li 
+                        <li
                             v-for="(tab, i) in tabs"
                             :key="i">
-                            <router-link 
-                                :to="tab.component.url" 
+                            <router-link
+                                :to="tab.component.url"
                                 active-class="is-active">
                                 <span :class="setIcon(tab.icon)"/>
                                 {{ tab.name }}
@@ -18,11 +18,11 @@
                     </ul>
                 </aside>
             </div>
-            <div 
-                ref="component" 
+            <div
+                ref="component"
                 class="column content">
                 <keep-alive>
-                    <router-view/>
+                    <router-view class="component"/>
                 </keep-alive>
             </div>
         </div>
