@@ -10,12 +10,12 @@
                         class="is-circular image is-96x96 is-unselectable is-guild">
                 </template>
                 <template v-else>
-                    <div class="is-circular image is-96x96 loading is-unselectable skeleton-circle"/>
+                    <div class="is-circular image is-96x96 is-unselectable is-guild no-icon">{{ imageName }}</div>
                 </template>
             </figure>
         </template>
         <template v-else>
-            <div class="is-circular image is-96x96 loading is-unselectable skeleton-circle-animated"/>
+            <div class="is-circular image is-96x96 loading is-unselectable skeleton-circle-animated"></div>
         </template>
     </span>
 </template>
@@ -33,17 +33,37 @@ export default {
             type: String,
             required: false,
             default: null
-        }
+        },
     },
     computed: {
         hasImage() {
             return this.image !== null || this.imageText !== null;
-        }
+        },
+        imageName() {
+            let imageName = "";
+            let splits = this.imageText.split(" ");
+            for (let split of splits) {
+                imageName += split[0];
+            }
+            return imageName;
+        },
     }
 };
 </script>
 
 <style scoped lang="scss">
+    .no-icon {
+        background-color: #2f3136;
+        font-size: 40px;
+        overflow: hidden;
+        color: white;
+        line-height: 200%;
+        text-align: center;
+        font-family: Whitney, Apple SD Gothic Neo, NanumBarunGothic, Malgun Gothic,Gulim,Dotum,Helvetica Neue,Helvetica,Arial,sans-serif;
+        &:hover, &:focus{
+            color: white;
+        }
+    }
     .skeleton-circle {
         background-color: #abb1b6;
     }

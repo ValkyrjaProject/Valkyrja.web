@@ -3658,59 +3658,23 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return PublicRoleFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PublicRole; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return PublicRoleFactory; });
 /* unused harmony export createPublicRole */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConfigData__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Config__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Guild__ = __webpack_require__(5);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 
 
-
-
-var PublicRoleFactory = function () {
-    function PublicRoleFactory() {
-        _classCallCheck(this, PublicRoleFactory);
-    }
-
-    _createClass(PublicRoleFactory, null, [{
-        key: "getConfigData",
-
-        /**
-         * @param {Array} values
-         * @returns {Array<PublicRole>}
-         */
-        value: function getConfigData(values) {
-            var config_data = [];
-            for (var i in values) {
-                if (values[i] instanceof Array) {
-                    config_data.push(__WEBPACK_IMPORTED_MODULE_1__Config__["a" /* Config */].getConfigData(values[i]));
-                } else {
-                    (function () {
-                        /** @type {PublicRole} */
-                        var public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
-                        // TODO: add role to be deleted if corresponding GuildRole doesn't exist
-                        public_role.guild_role = __WEBPACK_IMPORTED_MODULE_2__Guild__["a" /* Guild */].instance.roles.find(function (role) {
-                            return role.id === public_role.id;
-                        });
-                        config_data.push(public_role);
-                    })();
-                }
-            }
-            return config_data;
-        }
-    }]);
-
-    return PublicRoleFactory;
-}();
 
 var PublicRole = function (_ConfigData) {
     _inherits(PublicRole, _ConfigData);
@@ -3778,6 +3742,42 @@ var PublicRole = function (_ConfigData) {
 
     return PublicRole;
 }(__WEBPACK_IMPORTED_MODULE_0__ConfigData__["a" /* ConfigData */]);
+
+var PublicRoleFactory = function () {
+    function PublicRoleFactory() {
+        _classCallCheck(this, PublicRoleFactory);
+    }
+
+    _createClass(PublicRoleFactory, null, [{
+        key: "getConfigData",
+
+        /**
+         * @param {Array} values
+         * @returns {Array<PublicRole>}
+         */
+        value: function getConfigData(values) {
+            var config_data = [];
+            for (var i in values) {
+                if (values[i] instanceof Array) {
+                    config_data.push(__WEBPACK_IMPORTED_MODULE_1__Config__["a" /* Config */].getConfigData(values[i]));
+                } else {
+                    (function () {
+                        /** @type {PublicRole} */
+                        var public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
+                        // TODO: add role to be deleted if corresponding GuildRole doesn't exist
+                        public_role.guild_role = __WEBPACK_IMPORTED_MODULE_2__Guild__["a" /* Guild */].instance.roles.find(function (role) {
+                            return role.id === public_role.id;
+                        });
+                        config_data.push(public_role);
+                    })();
+                }
+            }
+            return config_data;
+        }
+    }]);
+
+    return PublicRoleFactory;
+}();
 
 /**
  *
@@ -21622,7 +21622,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -21635,8 +21635,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GuildImage__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GuildImage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__GuildImage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__GuildHeader__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__GuildHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__GuildHeader__);
 //
 //
 //
@@ -21699,8 +21697,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Guilds",
     components: {
-        GuildImage: __WEBPACK_IMPORTED_MODULE_0__GuildImage___default.a,
-        GuildHeader: __WEBPACK_IMPORTED_MODULE_1__GuildHeader___default.a
+        GuildImage: __WEBPACK_IMPORTED_MODULE_0__GuildImage___default.a
     },
     props: {
         skeletonCount: {
@@ -21857,7 +21854,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.skeleton-circle[data-v-49bff299] {\n  background-color: #abb1b6;\n}\n.skeleton-circle-animated[data-v-49bff299] {\n  background-color: #abb1b6;\n}\n.skeleton-circle-animated.loading[data-v-49bff299] {\n    background: linear-gradient(135deg, #aaa 35%, #b4b4b4 50%, #aaa 65%);\n    background-size: 600% 600%;\n    -webkit-animation: load-guild-data-v-49bff299 2s linear infinite;\n            animation: load-guild-data-v-49bff299 2s linear infinite;\n}\n.is-guild[data-v-49bff299]:not(.active) {\n  -webkit-animation: server-hover-out-data-v-49bff299 0.6s ease;\n          animation: server-hover-out-data-v-49bff299 0.6s ease;\n}\n.is-guild[data-v-49bff299]:not(.active):hover, .is-guild[data-v-49bff299]:not(.active):focus {\n    -webkit-animation: server-hover-in-data-v-49bff299 0.8s ease forwards;\n            animation: server-hover-in-data-v-49bff299 0.8s ease forwards;\n}\n@-webkit-keyframes load-guild-data-v-49bff299 {\n0% {\n    background-position: 0 0;\n}\n55% {\n    background-position: 0 0;\n}\n100% {\n    background-position: 100% 100%;\n}\n}\n@keyframes load-guild-data-v-49bff299 {\n0% {\n    background-position: 0 0;\n}\n55% {\n    background-position: 0 0;\n}\n100% {\n    background-position: 100% 100%;\n}\n}\n@-webkit-keyframes server-hover-in-data-v-49bff299 {\n0% {\n    border-radius: 50%;\n}\n40% {\n    border-radius: 28%;\n}\n70% {\n    border-radius: 35%;\n}\n100% {\n    border-radius: 33%;\n}\n}\n@keyframes server-hover-in-data-v-49bff299 {\n0% {\n    border-radius: 50%;\n}\n40% {\n    border-radius: 28%;\n}\n70% {\n    border-radius: 35%;\n}\n100% {\n    border-radius: 33%;\n}\n}\n@-webkit-keyframes server-hover-out-data-v-49bff299 {\n0% {\n    border-radius: 33%;\n}\n45% {\n    border-radius: 50%;\n}\n65% {\n    border-radius: 50%;\n}\n75% {\n    border-radius: 49%;\n}\n100% {\n    border-radius: 50%;\n}\n}\n@keyframes server-hover-out-data-v-49bff299 {\n0% {\n    border-radius: 33%;\n}\n45% {\n    border-radius: 50%;\n}\n65% {\n    border-radius: 50%;\n}\n75% {\n    border-radius: 49%;\n}\n100% {\n    border-radius: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.no-icon[data-v-49bff299] {\n  background-color: #2f3136;\n  font-size: 40px;\n  overflow: hidden;\n  color: white;\n  line-height: 200%;\n  text-align: center;\n  font-family: Whitney, Apple SD Gothic Neo, NanumBarunGothic, Malgun Gothic,Gulim,Dotum,Helvetica Neue,Helvetica,Arial,sans-serif;\n}\n.no-icon[data-v-49bff299]:hover, .no-icon[data-v-49bff299]:focus {\n    color: white;\n}\n.skeleton-circle[data-v-49bff299] {\n  background-color: #abb1b6;\n}\n.skeleton-circle-animated[data-v-49bff299] {\n  background-color: #abb1b6;\n}\n.skeleton-circle-animated.loading[data-v-49bff299] {\n    background: linear-gradient(135deg, #aaa 35%, #b4b4b4 50%, #aaa 65%);\n    background-size: 600% 600%;\n    -webkit-animation: load-guild-data-v-49bff299 2s linear infinite;\n            animation: load-guild-data-v-49bff299 2s linear infinite;\n}\n.is-guild[data-v-49bff299]:not(.active) {\n  -webkit-animation: server-hover-out-data-v-49bff299 0.6s ease;\n          animation: server-hover-out-data-v-49bff299 0.6s ease;\n}\n.is-guild[data-v-49bff299]:not(.active):hover, .is-guild[data-v-49bff299]:not(.active):focus {\n    -webkit-animation: server-hover-in-data-v-49bff299 0.8s ease forwards;\n            animation: server-hover-in-data-v-49bff299 0.8s ease forwards;\n}\n@-webkit-keyframes load-guild-data-v-49bff299 {\n0% {\n    background-position: 0 0;\n}\n55% {\n    background-position: 0 0;\n}\n100% {\n    background-position: 100% 100%;\n}\n}\n@keyframes load-guild-data-v-49bff299 {\n0% {\n    background-position: 0 0;\n}\n55% {\n    background-position: 0 0;\n}\n100% {\n    background-position: 100% 100%;\n}\n}\n@-webkit-keyframes server-hover-in-data-v-49bff299 {\n0% {\n    border-radius: 50%;\n}\n40% {\n    border-radius: 28%;\n}\n70% {\n    border-radius: 35%;\n}\n100% {\n    border-radius: 33%;\n}\n}\n@keyframes server-hover-in-data-v-49bff299 {\n0% {\n    border-radius: 50%;\n}\n40% {\n    border-radius: 28%;\n}\n70% {\n    border-radius: 35%;\n}\n100% {\n    border-radius: 33%;\n}\n}\n@-webkit-keyframes server-hover-out-data-v-49bff299 {\n0% {\n    border-radius: 33%;\n}\n45% {\n    border-radius: 50%;\n}\n65% {\n    border-radius: 50%;\n}\n75% {\n    border-radius: 49%;\n}\n100% {\n    border-radius: 50%;\n}\n}\n@keyframes server-hover-out-data-v-49bff299 {\n0% {\n    border-radius: 33%;\n}\n45% {\n    border-radius: 50%;\n}\n65% {\n    border-radius: 50%;\n}\n75% {\n    border-radius: 49%;\n}\n100% {\n    border-radius: 50%;\n}\n}\n", ""]);
 
 // exports
 
@@ -21908,6 +21905,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         hasImage: function hasImage() {
             return this.image !== null || this.imageText !== null;
+        },
+        imageName: function imageName() {
+            var imageName = "";
+            var splits = this.imageText.split(" ");
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = splits[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var split = _step.value;
+
+                    imageName += split[0];
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return imageName;
         }
     }
 });
@@ -21941,10 +21968,14 @@ var render = function() {
                       })
                     ]
                   : [
-                      _c("div", {
-                        staticClass:
-                          "is-circular image is-96x96 loading is-unselectable skeleton-circle"
-                      })
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "is-circular image is-96x96 is-unselectable is-guild no-icon"
+                        },
+                        [_vm._v(_vm._s(_vm.imageName))]
+                      )
                     ]
               ],
               2
@@ -21971,163 +22002,11 @@ if (false) {
 }
 
 /***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(111)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(113)
-/* template */
-var __vue_template__ = __webpack_require__(114)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-86876182"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\DisplayGuilds\\GuildHeader.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-86876182", Component.options)
-  } else {
-    hotAPI.reload("data-v-86876182", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(112);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("86e973e2", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-86876182\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./GuildHeader.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-86876182\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./GuildHeader.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 112 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.guild-header[data-v-86876182] {\n  height: 26pt;\n}\n.guild-header.skeleton[data-v-86876182] {\n    width: 180px;\n    background-color: #abb1b6;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 113 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: "GuildHeader",
-    props: {
-        text: {
-            type: String,
-            required: false,
-            default: null
-        }
-    },
-    computed: {
-        hasText: function hasText() {
-            return this.text !== null;
-        }
-    }
-});
-
-/***/ }),
-/* 114 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "span",
-    [
-      _vm.hasText
-        ? [
-            _c("h2", { staticClass: "guild-header" }, [
-              _vm._v(_vm._s(_vm.text))
-            ])
-          ]
-        : [_c("div", { staticClass: "guild-header skeleton" })]
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-86876182", module.exports)
-  }
-}
-
-/***/ }),
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 

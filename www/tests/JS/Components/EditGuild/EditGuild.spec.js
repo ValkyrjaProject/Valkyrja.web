@@ -5,7 +5,6 @@ import Vuex from "vuex";
 import {expect, assert} from "chai";
 import EditGuild from "components/EditGuild/EditGuild";
 import SubmitBar from "components/EditGuild/SubmitBar";
-import ConfigNavbarItem from "components/EditGuild/ConfigNavbarItem";
 import BasicConfig from "components/EditGuild/Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "components/EditGuild/Sections/Antispam/AntispamConfig";
 
@@ -38,7 +37,7 @@ describe("EditGuild", function () {
             actions,
         });
         wrapper = shallowMount(EditGuild, {store, localVue,
-            stubs: ['router-link', 'router-view']
+            stubs: ["router-link", "router-view"]
         });
     });
 
@@ -65,7 +64,7 @@ describe("EditGuild", function () {
     });
     it("should display is-active attribute for current tab in menu-list", function () {
         const currentTabIndex = wrapper.vm.currentTab;
-        let tabs = wrapper.findAll(ConfigNavbarItem);
+        let tabs = wrapper.findAll("ConfigNavbarItem");
 
         for (let i = 0; i < tabs.length; i++) {
             expect(tabs.at(i).props().isActive).to.equal(currentTabIndex === i);
@@ -92,7 +91,7 @@ describe("EditGuild", function () {
 
     it("should switch current tab component on menu-list item click", function (done) {
         expect(wrapper.find(BasicConfig).exists(), "BasicConfig should be visible before click").to.equal(true);
-        wrapper.findAll(ConfigNavbarItem).at(1).trigger("click");
+        wrapper.findAll("ConfigNavbarItem").at(1).trigger("click");
 
         wrapper.vm.$nextTick(() => {
             expect(wrapper.find(AntispamConfig).exists(), "AntispamConfig should be visible after click").to.equal(true);

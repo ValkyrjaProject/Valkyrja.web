@@ -2,29 +2,6 @@ import {ConfigData} from "./ConfigData";
 import {Config} from "./Config";
 import {Guild} from "./Guild";
 
-export class PublicRoleFactory {
-    /**
-     * @param {Array} values
-     * @returns {Array<PublicRole>}
-     */
-    static getConfigData(values) {
-        let config_data = [];
-        for (let i in values) {
-            if (values[i] instanceof Array) {
-                config_data.push(Config.getConfigData(values[i]));
-            }
-            else {
-                /** @type {PublicRole} */
-                let public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
-                // TODO: add role to be deleted if corresponding GuildRole doesn't exist
-                public_role.guild_role = Guild.instance.roles.find(role => role.id === public_role.id);
-                config_data.push(public_role);
-            }
-        }
-        return config_data;
-    }
-}
-
 export class PublicRole extends ConfigData {
 
     /**
@@ -72,6 +49,29 @@ export class PublicRole extends ConfigData {
             return this.guild_role.name;
         }
         return "Not a valid role";
+    }
+}
+
+export class PublicRoleFactory {
+    /**
+     * @param {Array} values
+     * @returns {Array<PublicRole>}
+     */
+    static getConfigData(values) {
+        let config_data = [];
+        for (let i in values) {
+            if (values[i] instanceof Array) {
+                config_data.push(Config.getConfigData(values[i]));
+            }
+            else {
+                /** @type {PublicRole} */
+                let public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
+                // TODO: add role to be deleted if corresponding GuildRole doesn't exist
+                public_role.guild_role = Guild.instance.roles.find(role => role.id === public_role.id);
+                config_data.push(public_role);
+            }
+        }
+        return config_data;
     }
 }
 

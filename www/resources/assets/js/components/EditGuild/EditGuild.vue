@@ -35,7 +35,7 @@ import BasicConfig from "./Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
 import VueRouter from "vue-router";
-import Sticky from 'vue-sticky-directive'
+import Sticky from "vue-sticky-directive"
 
 const tabs = [
     {

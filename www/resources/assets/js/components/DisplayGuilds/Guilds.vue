@@ -56,12 +56,11 @@
 
 <script>
 import GuildImage from "./GuildImage";
-import GuildHeader from "./GuildHeader";
+
 export default {
     name: "Guilds",
     components: {
         GuildImage,
-        GuildHeader
     },
     props: {
         skeletonCount: {
