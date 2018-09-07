@@ -101,10 +101,11 @@ const getters = {
             return [];
         }
         return rootGetters.configInput("roles").value.filter((addedRole) => {
-            return !(rootState.guild.roles.filter((role) => {
+            return rootState.guild.roles.filter((role) => {
                 return addedRole.id === role.id
-                    && addedRole.permission_level === 1;
-            }).length === 0);
+                    && addedRole.permission_level === state.selectedType
+                    && (state.selectedType === types.Public ? role.public_id === this.selectedPublicGroup : 1);
+            }).length !== 0;
         });
     }
 };

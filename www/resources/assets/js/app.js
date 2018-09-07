@@ -2,23 +2,24 @@ import Vue from "vue";
 window.Vue = Vue;
 
 import loglevel from "loglevel";
-loglevel.setLevel(loglevel.levels.DEBUG);
-window.log = loglevel;
-
 import initSubHeaders from "./docs";
 
 import DisplayGuilds from "./components/DisplayGuilds/DisplayGuilds";
+
 import EditGuild from "./components/EditGuild/EditGuild";
 import UserNavigation from "./components/UserNavigation/UserNavigation";
-
 import store from "./store/index.js";
+
 import Vuelidate from "vuelidate";
 import VueRouter from "vue-router";
 
-initSubHeaders();
-
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
+
+loglevel.setLevel(loglevel.levels.DEBUG);
+window.log = loglevel;
+
+initSubHeaders();
 
 new Vue({
     el: "#navigation",

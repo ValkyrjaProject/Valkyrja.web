@@ -66,7 +66,7 @@ class DiscordData
     private function getDummyRoles(ServerConfig $serverConfig, $serverId)
     {
         $roles = [];
-        $configRoles = $serverConfig->where('serverId', $serverId)->first()->roles();
+        $configRoles = $serverConfig->with('roles')->where('serverId', $serverId)->first()->roles()->get();
         foreach ($configRoles as $role) {
             array_push($roles, $role = new Role([
                 'id' => $role->roleid,
@@ -89,7 +89,7 @@ class DiscordData
     private function getDummyChannels(ServerConfig $serverConfig, $serverId)
     {
         $channels = [];
-        $configChannels = $serverConfig->where('serverId', $serverId)->first()->channels();
+        $configChannels = $serverConfig->with('channels')->where('serverId', $serverId)->first()->channels()->get();
         foreach ($configChannels as $channel) {
             array_push($channels, $channel = new Channel([
                 'id' => $channel->roleid,

@@ -27,13 +27,13 @@ describe("GuildImage", function () {
         expect(wrapper.find(".skeleton-circle-animated").exists()).to.equal(true);
     });
 
-    it("should display skeleton image if imageText prop is given", function () {
+    it("should display no icon if imageText prop is given but not image prop", function () {
         wrapper.setProps({
             imageText: "imageText"
         });
         expect(wrapper.find("img").exists()).to.equal(false);
-        expect(wrapper.find(".skeleton-circle").exists()).to.equal(true);
-        expect(wrapper.find(".skeleton-circle-animated").exists()).to.equal(false);
+        expect(wrapper.find(".is-guild.no-icon").exists()).to.equal(true);
+        expect(wrapper.find(".is-guild.with-icon").exists()).to.equal(false);
     });
 
     it("should display tooltip if imageText is given", function () {

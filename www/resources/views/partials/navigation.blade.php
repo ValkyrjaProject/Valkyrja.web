@@ -42,7 +42,6 @@
                     The&nbsp;Team
                 </a>
             </div>
-
             <div class="navbar-end">
                 <user-navigation></user-navigation>
             </div>

@@ -1,13 +1,13 @@
 <template>
     <span>
         <template v-if="hasImage">
-            <figure 
-                :data-tooltip="imageText" 
+            <figure
+                :data-tooltip="imageText"
                 class="tooltip">
                 <template v-if="image !== null">
-                    <img 
-                        :src="image" 
-                        class="is-circular image is-96x96 is-unselectable is-guild">
+                    <img
+                        :src="image"
+                        class="is-circular image is-96x96 is-unselectable is-guild with-icon">
                 </template>
                 <template v-else>
                     <div class="is-circular image is-96x96 is-unselectable is-guild no-icon">{{ imageName }}</div>

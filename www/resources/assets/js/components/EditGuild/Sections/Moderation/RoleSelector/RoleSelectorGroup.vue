@@ -31,6 +31,27 @@
                     </div>
                 </div>
             </div>
+            <div class="panel-block">
+                <div class="control field">
+                    <div class="control is-expanded">
+                        <div class="is-fullwidth">
+                            <label>
+                                Number of roles from this group that the user can take
+                                <input type="text" class="input" placeholder="Group name">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-block">
+                <div class="control field">
+                    <div class="control is-expanded">
+                        <div class="is-fullwidth">
+                            <input type="number" class="input" placeholder="Role limit">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
     </div>
 </template>
@@ -59,6 +80,7 @@ export default {
             return this.state.publicGroups;
         },
         sortedPublicGroups() {
+            // Clone list to sort it
             let groups = [...this.publicGroups];
             return groups.sort((a, b) => {
                 return a.id - b.id;

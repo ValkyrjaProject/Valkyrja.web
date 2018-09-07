@@ -1,25 +1,25 @@
 <template>
     <div class="box has-background-white-bis">
         <div class="columns">
-            <role-selector-type
-                title="test"
-                class="column"
-            />
-            <role-selector-group
-                :is-active="publicRoleSelected"
-                title="test"
-                class="column"
-            />
-        </div>
-        <div class="columns roles">
+            <div class="column">
+                <role-selector-type
+                        title="Role type"
+                        class="content"
+                />
+                <role-selector-group
+                        :is-active="publicRoleSelected"
+                        title="Public Role Group"
+                        class="content"
+                />
+            </div>
             <panel-list
                 v-model="availableRoles"
-                class="column"
+                class="column roles"
                 title="Available Roles"
             />
             <panel-list
                 v-model="addedRoles"
-                class="column"
+                class="column roles"
                 title="Added Roles"
             />
         </div>
@@ -72,10 +72,10 @@ export default {
 
 <style scoped>
 
-    .roles .column {
+    .roles.column {
         min-height: 270px;
     }
-    .roles .column >>> .panel:last-child {
+    .roles.column >>> .panel:last-child {
         min-height: inherit !important;
     }
 </style>

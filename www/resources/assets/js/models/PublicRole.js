@@ -18,7 +18,7 @@ export class PublicRole extends ConfigData {
     }
 
     get permission_level() {
-        return this.value["permission_level"];
+        return parseInt(this.value["permission_level"]);
     }
 
     set permission_level(level) {
