@@ -37,7 +37,10 @@
                         <div class="is-fullwidth">
                             <label>
                                 Number of roles from this group that the user can take
-                                <input type="text" class="input" placeholder="Group name">
+                                <input 
+                                    type="text" 
+                                    class="input" 
+                                    placeholder="Group name">
                             </label>
                         </div>
                     </div>
@@ -47,7 +50,10 @@
                 <div class="control field">
                     <div class="control is-expanded">
                         <div class="is-fullwidth">
-                            <input type="number" class="input" placeholder="Role limit">
+                            <input 
+                                type="number" 
+                                class="input" 
+                                placeholder="Role limit">
                         </div>
                     </div>
                 </div>

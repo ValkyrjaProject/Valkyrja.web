@@ -29,6 +29,7 @@ export const mutations = {
         state.guild = createGuild(guild, true);
         log.debug("Adding config data");
         state.config = Config.instanceFromApi(config);
+        state.config.addGuildData(state.guild);
         console.log("state.config", state.config);
     },
 

@@ -12,8 +12,11 @@ Route::get('/logout', 'LoginController@logout')->name('logout');
 
 Route::prefix('config')->namespace('Config')->middleware(['sessionHasDiscordToken'])->group(function () {
     Route::get('/', 'ConfigController@index')->name('displayServers')->middleware('auth.discord');
-    Route::get('/{serverId}', 'ConfigController@edit')->name('editConfig');
-    Route::post('/{serverId}', 'ConfigController@update');
+    Route::get('/{serverId}/{name?}', 'ConfigController@edit')
+        ->name('editConfig')
+        ->where('serverId', '[0-9]+');
+    Route::post('/{serverId}', 'ConfigController@update')
+        ->where('serverId', '[0-9]+');
 });
 
 Route::prefix('api')->namespace('Config')->middleware(['sessionHasDiscordToken', 'auth.discord'])->group(function () {

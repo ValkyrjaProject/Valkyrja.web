@@ -3,13 +3,13 @@
         <div class="columns">
             <div class="column">
                 <role-selector-type
-                        title="Role type"
-                        class="content"
+                    title="Role type"
+                    class="content"
                 />
                 <role-selector-group
-                        :is-active="publicRoleSelected"
-                        title="Public Role Group"
-                        class="content"
+                    :is-active="publicRoleSelected"
+                    title="Public Role Group"
+                    class="content"
                 />
             </div>
             <panel-list
@@ -31,7 +31,6 @@ import PanelList from "../../../../shared/structure/PanelList/PanelList";
 import RoleSelectorType from "./RoleSelectorType";
 import RoleSelectorGroup from "./RoleSelectorGroup";
 import types from "../../../../../store/modules/RoleSelector";
-import {createPublicRole} from "../../../../../models/PublicRole";
 
 export default {
     name: "RoleSelector",

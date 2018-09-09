@@ -17,6 +17,23 @@ export class PublicRole extends ConfigData {
         return configData;
     }
 
+    static createNewRole(id, guild_role = null) {
+        let newRole = new PublicRole();
+        newRole.id = id;
+        newRole.value = {
+            roleid: id,
+            permission_level: 0,
+            public_id: "0",
+            logging_ignored: 0,
+            antispam_ignored: 0,
+            level: "0",
+        };
+        if (guild_role) {
+            newRole.value["guild_role"] = guild_role;
+        }
+        return newRole;
+    }
+
     get permission_level() {
         return parseInt(this.value["permission_level"]);
     }
@@ -37,11 +54,11 @@ export class PublicRole extends ConfigData {
      * @returns {GuildRole}
      */
     get guild_role() {
-        return this._guild_role;
+        return this.value["guild_role"];
     }
 
     set guild_role(role) {
-        this._guild_role = role;
+        this.value["guild_role"] = role;
     }
 
     toString() {
@@ -73,19 +90,4 @@ export class PublicRoleFactory {
         }
         return config_data;
     }
-}
-
-/**
- *
- * @param {ConfigData} configData
- * @param {Integer} permission_level
- * @param {String} public_id
- * @returns {PublicRole}
- */
-export function createPublicRole({id, value}, permission_level, public_id) {
-    let role = PublicRole.createInstance(id, value);
-    role.permission_level = permission_level;
-    role.public_id = public_id;
-    console.log("PublicRole", role);
-    return role;
 }

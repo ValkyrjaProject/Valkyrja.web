@@ -1,5 +1,8 @@
 import {ConfigData} from "./ConfigData";
-import {PublicRole, PublicRoleFactory} from "./PublicRole";
+import {createPublicRole, PublicRole, PublicRoleFactory} from "./PublicRole";
+import configData from "../api/configData";
+import RoleSelector from "../store/modules/RoleSelector";
+import {types} from "../store/modules/RoleSelector";
 
 // Main class containing a list of only ConfigData instances and lists of ConfigData instances
 export class Config {
@@ -42,6 +45,35 @@ export class Config {
     }
 
     /**
+     *
+     * @param {Guild} guild
+     * @returns {Config}
+     */
+    addGuildData(guild) {
+        let roles = this.find("roles");
+        if (roles !== undefined && roles.value instanceof Array) {
+            // retrieves all roles that does not exist in config
+            let rolesToAdd = guild.roles.filter(guildRole => {
+                return roles.value.filter(role => role.id === guildRole.id).length === 0;
+            });
+            for (let role of rolesToAdd) {
+                roles.value.push(PublicRole.createNewRole(role.id, role));
+            }
+        }
+        let channels = this.find("channels");
+        if (channels !== undefined && channels.value instanceof Array) {
+            /*// retrieves all roles that does not exist in config
+            let channelsToAdd = guild.channels.filter(guildChannel => {
+                return channels.value.filter(channel => channel.id === guildChannel.id).length === 0;
+            });
+            for (let channel of channelsToAdd) {
+                channels.value.push(ConfigData.createNewRole(channel.id, channel));
+            }*/
+        }
+        return this;
+    }
+
+    /**
      * Change value from a specific config data createInstance
      * @param id
      * @param value
@@ -60,6 +92,11 @@ export class Config {
         return this.find(id);
     }
 
+    /**
+     * Retrieves the config matching a specific data
+     * @param id
+     * @returns {ConfigData}
+     */
     find(id) {
         return this.config_data.find(config => config.id === id);
     }
