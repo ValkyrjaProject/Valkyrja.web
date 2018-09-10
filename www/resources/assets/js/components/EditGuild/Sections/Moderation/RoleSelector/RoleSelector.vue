@@ -63,8 +63,6 @@ export default {
             },
         },
         publicRoleSelected() {
-            log.warn("this.state.selectedType", this.state.selectedType);
-            log.warn("types.Public", types.Public);
             return this.state.selectedType === types.Public;
         },
     },
