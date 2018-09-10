@@ -5,20 +5,22 @@ import {Config} from "../../models/Config";
 
 const NoGroup = PublicGroup.createNameInstance(0, "No group");
 export const types = {
+    NotAdded: 0,
     Public: 1,
     Member: 2,
     SubModerator: 3,
     Moderator: 4,
     Admin: 5
 };
+let stateTypes = Object.assign({}, types);
+delete stateTypes.NotAdded;
 const state = {
     selectedType: types.Public,
-    types,
+    types: stateTypes,
     selectedPublicGroup: NoGroup,
     publicGroups: [
         NoGroup
-    ],
-    addedRoles: []
+    ]
 };
 
 const mutations = {
@@ -36,19 +38,17 @@ const mutations = {
     CHANGE_ACTIVE_GROUP(state, group) {
         state.selectedPublicGroup = group;
     },
-    ADD_ROLE(state, role) {
+    CHANGE_ROLE_PERMISSION(state, payload) {
         //TODO: Need to add based on selected public group type and group
-        state.addedRoles.push(role);
+        payload.role.permission_level = payload.permission_level;
     },
-    REMOVE_ROLE(state, role) {
-        //TODO: Need to add based on selected public group type and group
-        state.addedRoles.filter(r => r.id !== role.id);
-    }
 };
 
 const actions = {
     changeSelectedType({commit}, selectedType) {
-        commit("CHANGE_TYPE", selectedType);
+        if (selectedType > 0) {
+            commit("CHANGE_TYPE", selectedType);
+        }
     },
     addPublicGroup({commit}, group) {
         commit("ADD_GROUP", group);
@@ -56,30 +56,22 @@ const actions = {
     selectedPublicGroup({commit}, group) {
         commit("CHANGE_ACTIVE_GROUP", group);
     },
-    addRole({commit, dispatch}, role) {
-        // TODO: Not implemented
+    addRole({commit, state, dispatch, rootGetters}, role) {
         if (!(role instanceof PublicRole)) {
             throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
         }
-        commit("ADD_ROLE", role);
-        dispatch("changeConfig", {
-            storeName: "roleSelector",
-            value: this.state.roles
-        }, {
-            root: true
+        commit("CHANGE_ROLE_PERMISSION", {
+            role,
+            permission_level: state.selectedType,
         });
     },
-    removeRole({commit, dispatch}, role) {
-        // TODO: Not implemented
+    removeRole({commit, state, dispatch, rootGetters}, role) {
         if (!(role instanceof PublicRole)) {
             throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
         }
-        commit("REMOVE_ROLE", role);
-        dispatch("changeConfig", {
-            storeName: "roleSelector",
-            value: this.state.roles
-        }, {
-            root: true
+        commit("CHANGE_ROLE_PERMISSION", {
+            role,
+            permission_level: types.NotAdded,
         });
     }
 };

@@ -6,12 +6,12 @@
             </p>
             <div class="panel-block control">
                 <div class="select is-fullwidth">
-                    <select 
+                    <select
                         v-model="selectedType"
                         name="role-type"
                         title="Public role">
-                        <option 
-                            v-for="(level, name) in types" 
+                        <option
+                            v-for="(level, name) in types"
                             :value="level">{{ name }}</option>
                     </select>
                 </div>

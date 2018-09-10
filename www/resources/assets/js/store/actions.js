@@ -1,5 +1,12 @@
 import configData from "../api/configData";
-import {ADD_CONFIG, ADD_GUILDS, ADD_USER, API_ERROR, CHANGE_CONFIG, INITIALIZE_USER} from "./mutation_types";
+import {
+    ADD_CONFIG,
+    ADD_GUILDS,
+    ADD_USER,
+    API_ERROR,
+    CHANGE_CONFIG,
+    INITIALIZE_USER
+} from "./mutation_types";
 
 export const retrieveGuilds = ({commit}) => {
     return new Promise((resolve, reject) => {
@@ -48,5 +55,9 @@ export const initializeUser = ({commit}) => {
 };
 
 export const changeConfig = ({commit}, configData) => {
+    if (!configData.hasOwnProperty("storeName") || !configData.hasOwnProperty("value")) {
+        throw new TypeError([CHANGE_CONFIG] + ": missing property 'storeName' or 'value'");
+    }
+
     commit(CHANGE_CONFIG, configData);
 };

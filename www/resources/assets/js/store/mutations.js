@@ -47,18 +47,6 @@ export const mutations = {
     },
 
     [CHANGE_CONFIG](state, configData) {
-        if (!configData.hasOwnProperty("storeName") || !configData.hasOwnProperty("value")) {
-            throw new TypeError([CHANGE_CONFIG] + ": missing property 'storeName' or 'value'");
-        }
-
         state.config.change(configData.storeName, configData.value);
-        /*if (state.config.unchanged[configData.storeName] === configData.value) {
-            if (state.config.changed.hasOwnProperty(configData.storeName)) {
-                delete state.config.changed[configData.storeName];
-            }
-        }
-        else {
-            Vue.set(state.config.changed, configData.storeName, configData.value);
-        }*/
-    }
+    },
 };

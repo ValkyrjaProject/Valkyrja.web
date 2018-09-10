@@ -70,9 +70,8 @@ export default {
 </script>
 
 <style scoped>
-
     .roles.column {
-        min-height: 270px;
+        min-height: 310px;
     }
     .roles.column >>> .panel:last-child {
         min-height: inherit !important;
