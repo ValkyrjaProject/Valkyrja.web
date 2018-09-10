@@ -6,7 +6,7 @@ Copyright © 2016 Radka Janek, [rhea-ayase.eu](http://rhea-ayase.eu)
 
 
 
-## Botwinder
+## Botwinder ![](https://api.travis-ci.org/RheaAyase/Botwinder.web.svg?branch=dev)
 Please take a look at our website to see what the bot about, full list of features, invite and configuration: [http://botwinder.info](http://botwinder.info)
 
 ## Contributing
