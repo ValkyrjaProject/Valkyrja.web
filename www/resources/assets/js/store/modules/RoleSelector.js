@@ -3,7 +3,7 @@ import {PublicRole} from "../../models/PublicRole";
 import {Guild} from "../../models/Guild";
 import {Config} from "../../models/Config";
 
-const NoGroup = PublicGroup.createNameInstance(0, "No group");
+const NoGroup = PublicGroup.createInstance(0, 1, "No group");
 export const types = {
     NotAdded: 0,
     Public: 1,
@@ -39,8 +39,10 @@ const mutations = {
         state.selectedPublicGroup = group;
     },
     CHANGE_ROLE_PERMISSION(state, payload) {
-        //TODO: Need to add based on selected public group type and group
         payload.role.permission_level = payload.permission_level;
+    },
+    CHANGE_PUBLIC_ID(state, payload) {
+        payload.role.public_id = payload.public_id;
     },
 };
 
@@ -63,6 +65,10 @@ const actions = {
         commit("CHANGE_ROLE_PERMISSION", {
             role,
             permission_level: state.selectedType,
+        });
+        commit("CHANGE_PUBLIC_ID", {
+            role,
+            public_id: state.selectedPublicGroup.id,
         });
     },
     removeRole({commit, state, dispatch, rootGetters}, role) {
@@ -96,7 +102,7 @@ const getters = {
             return rootState.guild.roles.filter((role) => {
                 return addedRole.id === role.id
                     && addedRole.permission_level === state.selectedType
-                    && (state.selectedType === types.Public ? role.public_id === this.selectedPublicGroup : 1);
+                    && (state.selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
             }).length !== 0;
         });
     }

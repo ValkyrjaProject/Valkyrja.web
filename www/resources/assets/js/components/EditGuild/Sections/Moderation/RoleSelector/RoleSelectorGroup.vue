@@ -37,9 +37,9 @@
                         <div class="is-fullwidth">
                             <label>
                                 Number of roles from this group that the user can take
-                                <input 
-                                    type="text" 
-                                    class="input" 
+                                <input
+                                    type="text"
+                                    class="input"
                                     placeholder="Group name">
                             </label>
                         </div>
@@ -50,9 +50,9 @@
                 <div class="control field">
                     <div class="control is-expanded">
                         <div class="is-fullwidth">
-                            <input 
-                                type="number" 
-                                class="input" 
+                            <input
+                                type="number"
+                                class="input"
                                 placeholder="Role limit">
                         </div>
                     </div>
@@ -106,8 +106,8 @@ export default {
             if (this.isActive) {
                 let start = 1;
                 this.publicGroups.forEach((group, index) => {
-                    if (parseInt(group.value) === index) {
-                        start = parseInt(group.value) + 1;
+                    if (parseInt(group.id) === index) {
+                        start = parseInt(group.id) + 1;
                         return true;
                     }
                 });

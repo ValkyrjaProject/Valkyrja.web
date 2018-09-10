@@ -30,7 +30,7 @@
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
 import RoleSelectorType from "./RoleSelectorType";
 import RoleSelectorGroup from "./RoleSelectorGroup";
-import types from "../../../../../store/modules/RoleSelector";
+import { types } from "../../../../../store/modules/RoleSelector";
 
 export default {
     name: "RoleSelector",
@@ -63,6 +63,8 @@ export default {
             },
         },
         publicRoleSelected() {
+            log.warn("this.state.selectedType", this.state.selectedType);
+            log.warn("types.Public", types.Public);
             return this.state.selectedType === types.Public;
         },
     },

@@ -1,26 +1,21 @@
-export default class PublicGroup {
-    static createInstance(id) {
+import {ConfigData} from "./ConfigData";
+
+export default class PublicGroup extends ConfigData {
+    static createInstance(id, role_limit = 1, name = null) {
         let group = new PublicGroup();
-        group.setId(id);
-        return group;
-    }
-    static createNameInstance(id, name) {
-        let group = new PublicGroup();
-        group.setId(id);
+        group.id = id;
         group.name = name;
+        group.value = {};
+        group.role_limit = role_limit;
         return group;
     }
 
-    setId(id) {
-        this.id = parseInt(id);
+    set role_limit(role_limit) {
+        this.value["role_limit"] = role_limit;
     }
 
-    setName(name) {
-        this.name = name;
-    }
-
-    get value() {
-        return this.id;
+    get role_limit() {
+        return this.value["role_limit"];
     }
 
     toString() {

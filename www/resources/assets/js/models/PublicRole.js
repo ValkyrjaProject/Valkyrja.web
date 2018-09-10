@@ -1,6 +1,7 @@
 import {ConfigData} from "./ConfigData";
 import {Config} from "./Config";
 import {Guild} from "./Guild";
+import {GuildRole} from "./GuildRole";
 
 export class PublicRole extends ConfigData {
 
@@ -17,19 +18,24 @@ export class PublicRole extends ConfigData {
         return configData;
     }
 
+    /**
+     * @param id
+     * @param {GuildRole} guild_role
+     * @returns {PublicRole}
+     */
     static createNewRole(id, guild_role = null) {
         let newRole = new PublicRole();
         newRole.id = id;
         newRole.value = {
             roleid: id,
             permission_level: 0,
-            public_id: "0",
+            public_id: 0,
             logging_ignored: 0,
             antispam_ignored: 0,
-            level: "0",
+            level: 0,
         };
         if (guild_role) {
-            newRole.value["guild_role"] = guild_role;
+            newRole.guild_role = guild_role;
         }
         return newRole;
     }
@@ -54,11 +60,17 @@ export class PublicRole extends ConfigData {
      * @returns {GuildRole}
      */
     get guild_role() {
-        return this.value["guild_role"];
+        return this._guild_role;
     }
 
+    /**
+     * @param {GuildRole} role
+     */
     set guild_role(role) {
-        this.value["guild_role"] = role;
+        if (!(role instanceof GuildRole)) {
+            throw new TypeError("Role is not of type GuildRole");
+        }
+        this._guild_role = role;
     }
 
     toString() {
