@@ -11,6 +11,7 @@
                             <select
                                 :title="title"
                                 v-model="selectedPublicGroup"
+                                :disabled="!publicTypeIsSelected()"
                                 name="role-group">
                                 <option
                                     v-for="group in sortedPublicGroups"
@@ -22,6 +23,7 @@
                     </div>
                     <div class="control">
                         <a
+                            :disabled="!publicTypeIsSelected()"
                             class="button is-info"
                             @click="addPublicGroup()">
                             <i
@@ -35,13 +37,12 @@
                 <div class="control field">
                     <div class="control is-expanded">
                         <div class="is-fullwidth">
-                            <label>
-                                Number of roles from this group that the user can take
-                                <input
-                                    type="text"
-                                    class="input"
-                                    placeholder="Group name">
-                            </label>
+                            <input
+                                v-model="groupName"
+                                :disabled="!publicGroupIsSelected"
+                                type="text"
+                                class="input"
+                                placeholder="Group name">
                         </div>
                     </div>
                 </div>
@@ -50,10 +51,15 @@
                 <div class="control field">
                     <div class="control is-expanded">
                         <div class="is-fullwidth">
-                            <input
-                                type="number"
-                                class="input"
-                                placeholder="Role limit">
+                            <label>
+                                Number of roles from this group that the user can take
+                                <input
+                                    v-model="roleLimit"
+                                    :disabled="!publicGroupIsSelected"
+                                    type="number"
+                                    class="input"
+                                    placeholder="Role limit">
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -82,6 +88,12 @@ export default {
         state() {
             return this.$store.state.roleSelector;
         },
+        types() {
+            return this.state.types;
+        },
+        selectedType() {
+            return this.state.selectedType;
+        },
         publicGroups() {
             return this.state.publicGroups;
         },
@@ -100,10 +112,36 @@ export default {
                 this.$store.dispatch("roleSelector/selectedPublicGroup", group);
             },
         },
+        groupName: {
+            get() {
+                if (this.objectIsPublicGroup(this.selectedPublicGroup)) {
+                    return this.selectedPublicGroup.name;
+                }
+            },
+            set(name) {
+                this.$store.dispatch("roleSelector/changeGroupName", name);
+            }
+        },
+        roleLimit: {
+            get() {
+                if (this.objectIsPublicGroup(this.selectedPublicGroup)) {
+                    return this.selectedPublicGroup.role_limit;
+                }
+            },
+            set(limit) {
+                this.$store.dispatch("roleSelector/changeRoleLimit", limit);
+            },
+        },
+        publicGroupIsSelected() {
+            if (this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected()) {
+                return true;
+            }
+            return false;
+        },
     },
     methods: {
         addPublicGroup() {
-            if (this.isActive) {
+            if (this.isActive && this.publicTypeIsSelected()) {
                 let start = 1;
                 this.publicGroups.forEach((group, index) => {
                     if (parseInt(group.id) === index) {
@@ -115,6 +153,12 @@ export default {
                 this.$store.dispatch("roleSelector/addPublicGroup", group);
                 this.$store.dispatch("roleSelector/selectedPublicGroup", group);
             }
+        },
+        objectIsPublicGroup(object) {
+            return object instanceof PublicGroup;
+        },
+        publicTypeIsSelected(){
+            return this.selectedType === this.types.Public;
         },
     },
 };

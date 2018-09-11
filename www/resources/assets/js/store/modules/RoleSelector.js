@@ -1,9 +1,10 @@
 import PublicGroup from "../../models/PublicGroup";
 import {PublicRole} from "../../models/PublicRole";
+import {BlankPublicGroup} from "../../models/BlankPublicGroup";
 import {Guild} from "../../models/Guild";
 import {Config} from "../../models/Config";
 
-const NoGroup = PublicGroup.createInstance(0, 1, "No group");
+const NoGroup = new BlankPublicGroup;
 export const types = {
     NotAdded: 0,
     Public: 1,
@@ -18,6 +19,7 @@ const state = {
     selectedType: types.Public,
     types: stateTypes,
     selectedPublicGroup: NoGroup,
+    // TODO: Move PublicGroups to Config
     publicGroups: [
         NoGroup
     ]
@@ -44,6 +46,12 @@ const mutations = {
     CHANGE_PUBLIC_ID(state, payload) {
         payload.role.public_id = payload.public_id;
     },
+    CHANGE_GROUP_NAME(state, name) {
+        state.selectedPublicGroup.name = name;
+    },
+    CHANGE_ROLE_LIMIT(state, limit) {
+        state.selectedPublicGroup.role_limit = limit;
+    },
 };
 
 const actions = {
@@ -58,7 +66,7 @@ const actions = {
     selectedPublicGroup({commit}, group) {
         commit("CHANGE_ACTIVE_GROUP", group);
     },
-    addRole({commit, state, dispatch, rootGetters}, role) {
+    addRole({commit, state}, role) {
         if (!(role instanceof PublicRole)) {
             throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
         }
@@ -71,7 +79,7 @@ const actions = {
             public_id: state.selectedPublicGroup.id,
         });
     },
-    removeRole({commit, state, dispatch, rootGetters}, role) {
+    removeRole({commit, state}, role) {
         if (!(role instanceof PublicRole)) {
             throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
         }
@@ -79,7 +87,19 @@ const actions = {
             role,
             permission_level: types.NotAdded,
         });
-    }
+    },
+    changeGroupName({commit, state}, name) {
+        if (!(state.selectedPublicGroup instanceof PublicGroup)) {
+            return;
+        }
+        commit("CHANGE_GROUP_NAME", name);
+    },
+    changeRoleLimit({commit}, limit) {
+        if (!(state.selectedPublicGroup instanceof PublicGroup)) {
+            return;
+        }
+        commit("CHANGE_ROLE_LIMIT", limit);
+    },
 };
 
 const getters = {
@@ -105,7 +125,19 @@ const getters = {
                     && (state.selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
             }).length !== 0;
         });
-    }
+    },
+    addedRoles: (state, getters, rootState, rootGetters) => {
+        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
+            return [];
+        }
+        return rootGetters.configInput("role_groups").value.filter((addedRole) => {
+            return rootState.guild.roles.filter((role) => {
+                return addedRole.id === role.id
+                    && addedRole.permission_level === state.selectedType
+                    && (state.selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
+            }).length !== 0;
+        });
+    },
 };
 
 export default {

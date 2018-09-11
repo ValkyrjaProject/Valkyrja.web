@@ -857,14 +857,18 @@ var ConfigData = function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return types; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_PublicRole__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Guild__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Config__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_BlankPublicGroup__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Guild__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Config__ = __webpack_require__(6);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-var NoGroup = __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__["a" /* default */].createInstance(0, 1, "No group");
+
+
+var NoGroup = new __WEBPACK_IMPORTED_MODULE_2__models_BlankPublicGroup__["a" /* BlankPublicGroup */]();
 var types = {
     NotAdded: 0,
     Public: 1,
@@ -879,6 +883,7 @@ var state = {
     selectedType: types.Public,
     types: stateTypes,
     selectedPublicGroup: NoGroup,
+    // TODO: Move PublicGroups to Config
     publicGroups: [NoGroup]
 };
 
@@ -923,6 +928,12 @@ var mutations = {
     },
     CHANGE_PUBLIC_ID: function CHANGE_PUBLIC_ID(state, payload) {
         payload.role.public_id = payload.public_id;
+    },
+    CHANGE_GROUP_NAME: function CHANGE_GROUP_NAME(state, name) {
+        state.selectedPublicGroup.name = name;
+    },
+    CHANGE_ROLE_LIMIT: function CHANGE_ROLE_LIMIT(state, limit) {
+        state.selectedPublicGroup.role_limit = limit;
     }
 };
 
@@ -946,9 +957,7 @@ var actions = {
     },
     addRole: function addRole(_ref4, role) {
         var commit = _ref4.commit,
-            state = _ref4.state,
-            dispatch = _ref4.dispatch,
-            rootGetters = _ref4.rootGetters;
+            state = _ref4.state;
 
         if (!(role instanceof __WEBPACK_IMPORTED_MODULE_1__models_PublicRole__["a" /* PublicRole */])) {
             throw new TypeError("Object is not of type PublicRole, it is of type " + role.constructor.name);
@@ -964,9 +973,7 @@ var actions = {
     },
     removeRole: function removeRole(_ref5, role) {
         var commit = _ref5.commit,
-            state = _ref5.state,
-            dispatch = _ref5.dispatch,
-            rootGetters = _ref5.rootGetters;
+            state = _ref5.state;
 
         if (!(role instanceof __WEBPACK_IMPORTED_MODULE_1__models_PublicRole__["a" /* PublicRole */])) {
             throw new TypeError("Object is not of type PublicRole, it is of type " + role.constructor.name);
@@ -975,12 +982,29 @@ var actions = {
             role: role,
             permission_level: types.NotAdded
         });
+    },
+    changeGroupName: function changeGroupName(_ref6, name) {
+        var commit = _ref6.commit,
+            state = _ref6.state;
+
+        if (!(state.selectedPublicGroup instanceof __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__["a" /* default */])) {
+            return;
+        }
+        commit("CHANGE_GROUP_NAME", name);
+    },
+    changeRoleLimit: function changeRoleLimit(_ref7, limit) {
+        var commit = _ref7.commit;
+
+        if (!(state.selectedPublicGroup instanceof __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__["a" /* default */])) {
+            return;
+        }
+        commit("CHANGE_ROLE_LIMIT", limit);
     }
 };
 
-var getters = {
+var getters = _defineProperty({
     availableRoles: function availableRoles(state, getters, rootState, rootGetters) {
-        if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_3__models_Config__["a" /* Config */]) || !(rootState.guild instanceof __WEBPACK_IMPORTED_MODULE_2__models_Guild__["a" /* Guild */])) {
+        if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_4__models_Config__["a" /* Config */]) || !(rootState.guild instanceof __WEBPACK_IMPORTED_MODULE_3__models_Guild__["a" /* Guild */])) {
             return [];
         }
         return rootGetters.configInput("roles").value.filter(function (addedRole) {
@@ -990,7 +1014,7 @@ var getters = {
         });
     },
     addedRoles: function addedRoles(state, getters, rootState, rootGetters) {
-        if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_3__models_Config__["a" /* Config */]) || !(rootState.guild instanceof __WEBPACK_IMPORTED_MODULE_2__models_Guild__["a" /* Guild */])) {
+        if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_4__models_Config__["a" /* Config */]) || !(rootState.guild instanceof __WEBPACK_IMPORTED_MODULE_3__models_Guild__["a" /* Guild */])) {
             return [];
         }
         return rootGetters.configInput("roles").value.filter(function (addedRole) {
@@ -999,7 +1023,16 @@ var getters = {
             }).length !== 0;
         });
     }
-};
+}, "addedRoles", function addedRoles(state, getters, rootState, rootGetters) {
+    if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_4__models_Config__["a" /* Config */]) || !(rootState.guild instanceof __WEBPACK_IMPORTED_MODULE_3__models_Guild__["a" /* Guild */])) {
+        return [];
+    }
+    return rootGetters.configInput("role_groups").value.filter(function (addedRole) {
+        return rootState.guild.roles.filter(function (role) {
+            return addedRole.id === role.id && addedRole.permission_level === state.selectedType && (state.selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
+        }).length !== 0;
+    });
+});
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     namespaced: true,
@@ -15224,7 +15257,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(40)
 /* template */
-var __vue_template__ = __webpack_require__(120)
+var __vue_template__ = __webpack_require__(121)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -15460,8 +15493,8 @@ var PublicGroup = function (_ConfigData) {
 
             var group = new PublicGroup();
             group.id = id;
-            group.name = name;
             group.value = {};
+            group.name = name;
             group.role_limit = role_limit;
             return group;
         }
@@ -16362,7 +16395,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(29);
-module.exports = __webpack_require__(156);
+module.exports = __webpack_require__(157);
 
 
 /***/ }),
@@ -16380,10 +16413,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_DisplayGuilds_DisplayGuilds___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_DisplayGuilds_DisplayGuilds__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_EditGuild_EditGuild__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_EditGuild_EditGuild___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_EditGuild_EditGuild__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_UserNavigation_UserNavigation__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_UserNavigation_UserNavigation__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_UserNavigation_UserNavigation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_UserNavigation_UserNavigation__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store_index_js__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vuelidate__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store_index_js__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vuelidate__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_vuelidate__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_router__ = __webpack_require__(9);
 
@@ -17353,7 +17386,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(39)
 /* template */
-var __vue_template__ = __webpack_require__(131)
+var __vue_template__ = __webpack_require__(132)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17473,7 +17506,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EditGuild_EditGuild__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EditGuild_EditGuild___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__EditGuild_EditGuild__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Guilds__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Guilds__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Guilds___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Guilds__);
 //
 //
@@ -17531,7 +17564,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Sections_Moderation_ModerationConfig__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Sections_Moderation_ModerationConfig___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Sections_Moderation_ModerationConfig__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_router__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_sticky_directive__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_sticky_directive__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_sticky_directive___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_sticky_directive__);
 //
 //
@@ -19416,7 +19449,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(69)
 /* template */
-var __vue_template__ = __webpack_require__(118)
+var __vue_template__ = __webpack_require__(119)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19633,7 +19666,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(117)
+var __vue_template__ = __webpack_require__(118)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19790,8 +19823,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         publicRoleSelected: function publicRoleSelected() {
-            log.warn("this.state.selectedType", this.state.selectedType);
-            log.warn("types.Public", __WEBPACK_IMPORTED_MODULE_3__store_modules_RoleSelector__["b" /* types */].Public);
             return this.state.selectedType === __WEBPACK_IMPORTED_MODULE_3__store_modules_RoleSelector__["b" /* types */].Public;
         }
     }
@@ -20777,6 +20808,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20797,6 +20834,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         state: function state() {
             return this.$store.state.roleSelector;
         },
+        types: function types() {
+            return this.state.types;
+        },
+        selectedType: function selectedType() {
+            return this.state.selectedType;
+        },
         publicGroups: function publicGroups() {
             return this.state.publicGroups;
         },
@@ -20815,11 +20858,37 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             set: function set(group) {
                 this.$store.dispatch("roleSelector/selectedPublicGroup", group);
             }
+        },
+        groupName: {
+            get: function get() {
+                if (this.objectIsPublicGroup(this.selectedPublicGroup)) {
+                    return this.selectedPublicGroup.name;
+                }
+            },
+            set: function set(name) {
+                this.$store.dispatch("roleSelector/changeGroupName", name);
+            }
+        },
+        roleLimit: {
+            get: function get() {
+                if (this.objectIsPublicGroup(this.selectedPublicGroup)) {
+                    return this.selectedPublicGroup.role_limit;
+                }
+            },
+            set: function set(limit) {
+                this.$store.dispatch("roleSelector/changeRoleLimit", limit);
+            }
+        },
+        publicGroupIsSelected: function publicGroupIsSelected() {
+            if (this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected()) {
+                return true;
+            }
+            return false;
         }
     },
     methods: {
         addPublicGroup: function addPublicGroup() {
-            if (this.isActive) {
+            if (this.isActive && this.publicTypeIsSelected()) {
                 var start = 1;
                 this.publicGroups.forEach(function (group, index) {
                     if (parseInt(group.id) === index) {
@@ -20831,6 +20900,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 this.$store.dispatch("roleSelector/addPublicGroup", group);
                 this.$store.dispatch("roleSelector/selectedPublicGroup", group);
             }
+        },
+        objectIsPublicGroup: function objectIsPublicGroup(object) {
+            return object instanceof __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__["a" /* default */];
+        },
+        publicTypeIsSelected: function publicTypeIsSelected() {
+            return this.selectedType === this.types.Public;
         }
     }
 });
@@ -20864,7 +20939,11 @@ var render = function() {
                       expression: "selectedPublicGroup"
                     }
                   ],
-                  attrs: { title: _vm.title, name: "role-group" },
+                  attrs: {
+                    title: _vm.title,
+                    disabled: !_vm.publicTypeIsSelected(),
+                    name: "role-group"
+                  },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -20902,6 +20981,7 @@ var render = function() {
               "a",
               {
                 staticClass: "button is-info",
+                attrs: { disabled: !_vm.publicTypeIsSelected() },
                 on: {
                   click: function($event) {
                     _vm.addPublicGroup()
@@ -20919,53 +20999,82 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1)
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-block" }, [
-      _c("div", { staticClass: "control field" }, [
-        _c("div", { staticClass: "control is-expanded" }, [
-          _c("div", { staticClass: "is-fullwidth" }, [
-            _c("label", [
-              _vm._v(
-                "\n                            Number of roles from this group that the user can take\n                            "
-              ),
+      _c("div", { staticClass: "panel-block" }, [
+        _c("div", { staticClass: "control field" }, [
+          _c("div", { staticClass: "control is-expanded" }, [
+            _c("div", { staticClass: "is-fullwidth" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.groupName,
+                    expression: "groupName"
+                  }
+                ],
                 staticClass: "input",
-                attrs: { type: "text", placeholder: "Group name" }
+                attrs: {
+                  disabled: !_vm.publicGroupIsSelected,
+                  type: "text",
+                  placeholder: "Group name"
+                },
+                domProps: { value: _vm.groupName },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.groupName = $event.target.value
+                  }
+                }
               })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-block" }, [
+        _c("div", { staticClass: "control field" }, [
+          _c("div", { staticClass: "control is-expanded" }, [
+            _c("div", { staticClass: "is-fullwidth" }, [
+              _c("label", [
+                _vm._v(
+                  "\n                            Number of roles from this group that the user can take\n                            "
+                ),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.roleLimit,
+                      expression: "roleLimit"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: {
+                    disabled: !_vm.publicGroupIsSelected,
+                    type: "number",
+                    placeholder: "Role limit"
+                  },
+                  domProps: { value: _vm.roleLimit },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.roleLimit = $event.target.value
+                    }
+                  }
+                })
+              ])
             ])
           ])
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-block" }, [
-      _c("div", { staticClass: "control field" }, [
-        _c("div", { staticClass: "control is-expanded" }, [
-          _c("div", { staticClass: "is-fullwidth" }, [
-            _c("input", {
-              staticClass: "input",
-              attrs: { type: "number", placeholder: "Role limit" }
-            })
-          ])
-        ])
-      ])
-    ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -21906,6 +22015,42 @@ function createGuildChannel(_ref) {
 
 /***/ }),
 /* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BlankPublicGroup; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BlankPublicGroup = function () {
+    function BlankPublicGroup() {
+        _classCallCheck(this, BlankPublicGroup);
+
+        if (!BlankPublicGroup.instance) {
+            BlankPublicGroup.instance = this;
+        }
+
+        return BlankPublicGroup.instance;
+    }
+
+    _createClass(BlankPublicGroup, [{
+        key: "toString",
+        value: function toString() {
+            return "No group";
+        }
+    }, {
+        key: "id",
+        get: function get() {
+            return 0;
+        }
+    }]);
+
+    return BlankPublicGroup;
+}();
+
+/***/ }),
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -21976,7 +22121,7 @@ if (false) {
 }
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -22206,7 +22351,7 @@ if (false) {
 }
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
@@ -22524,7 +22669,7 @@ return Sticky$2;
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -22616,19 +22761,19 @@ if (false) {
 }
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(122)
+  __webpack_require__(123)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(124)
+var __vue_script__ = __webpack_require__(125)
 /* template */
-var __vue_template__ = __webpack_require__(130)
+var __vue_template__ = __webpack_require__(131)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -22667,13 +22812,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(123);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -22693,7 +22838,7 @@ if(false) {
 }
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -22707,12 +22852,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GuildImage__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GuildImage__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GuildImage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__GuildImage__);
 //
 //
@@ -22848,19 +22993,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(126)
+  __webpack_require__(127)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(128)
+var __vue_script__ = __webpack_require__(129)
 /* template */
-var __vue_template__ = __webpack_require__(129)
+var __vue_template__ = __webpack_require__(130)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -22899,13 +23044,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(127);
+var content = __webpack_require__(128);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -22925,7 +23070,7 @@ if(false) {
 }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -22939,7 +23084,7 @@ exports.push([module.i, "\n.no-icon[data-v-49bff299] {\n  background-color: #2f3
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23019,7 +23164,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -23081,7 +23226,7 @@ if (false) {
 }
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -23193,7 +23338,7 @@ if (false) {
 }
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -23218,19 +23363,19 @@ if (false) {
 }
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(133)
+  __webpack_require__(134)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(135)
+var __vue_script__ = __webpack_require__(136)
 /* template */
-var __vue_template__ = __webpack_require__(146)
+var __vue_template__ = __webpack_require__(147)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -23269,13 +23414,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(134);
+var content = __webpack_require__(135);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23295,7 +23440,7 @@ if(false) {
 }
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -23309,14 +23454,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoggedIn__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoggedIn__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoggedIn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoggedIn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoggedOut__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoggedOut__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoggedOut___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__LoggedOut__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lscache__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lscache___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lscache__);
@@ -23374,19 +23519,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(137)
+  __webpack_require__(138)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(139)
+var __vue_script__ = __webpack_require__(140)
 /* template */
-var __vue_template__ = __webpack_require__(140)
+var __vue_template__ = __webpack_require__(141)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -23425,13 +23570,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(138);
+var content = __webpack_require__(139);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23451,7 +23596,7 @@ if(false) {
 }
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -23465,7 +23610,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23503,7 +23648,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -23553,19 +23698,19 @@ if (false) {
 }
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(142)
+  __webpack_require__(143)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(144)
+var __vue_script__ = __webpack_require__(145)
 /* template */
-var __vue_template__ = __webpack_require__(145)
+var __vue_template__ = __webpack_require__(146)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -23604,13 +23749,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(143);
+var content = __webpack_require__(144);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -23630,7 +23775,7 @@ if(false) {
 }
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -23644,7 +23789,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23664,7 +23809,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -23700,7 +23845,7 @@ if (false) {
 }
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -23725,16 +23870,16 @@ if (false) {
 }
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(148);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getters__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mutations__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getters__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mutations__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_RoleSelector__ = __webpack_require__(5);
 
 
@@ -23757,7 +23902,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 }));
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24702,7 +24847,7 @@ var index_esm = {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24776,12 +24921,12 @@ var changeConfig = function changeConfig(_ref5, configData) {
 };
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getters; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getter_types__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getter_types__ = __webpack_require__(152);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getter_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__getter_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Config__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_ConfigData__ = __webpack_require__(4);
@@ -24801,13 +24946,13 @@ var getters = {
 };
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24890,7 +25035,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 }), _mutations);
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24903,9 +25048,9 @@ exports.withParams = exports.validationMixin = exports.Vuelidate = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _vval = __webpack_require__(154);
+var _vval = __webpack_require__(155);
 
-var _params = __webpack_require__(155);
+var _params = __webpack_require__(156);
 
 var NUL = function NUL() {
   return null;
@@ -25435,7 +25580,7 @@ exports.withParams = _params.withParams;
 exports.default = Vuelidate;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25590,7 +25735,7 @@ function h(tag, key, args) {
 }
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25679,7 +25824,7 @@ function withParams(paramsOrClosure, maybeValidator) {
 }
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

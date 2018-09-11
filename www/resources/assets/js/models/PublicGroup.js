@@ -4,8 +4,8 @@ export default class PublicGroup extends ConfigData {
     static createInstance(id, role_limit = 1, name = null) {
         let group = new PublicGroup();
         group.id = id;
-        group.name = name;
         group.value = {};
+        group.name = name;
         group.role_limit = role_limit;
         return group;
     }
