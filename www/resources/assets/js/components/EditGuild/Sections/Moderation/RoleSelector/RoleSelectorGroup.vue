@@ -70,6 +70,7 @@
 
 <script>
 import PublicGroup from "../../../../../models/PublicGroup";
+import {NoGroup} from "../../../../../store/modules/RoleSelector";
 
 export default {
     name: "RoleSelectorGroup",
@@ -99,7 +100,7 @@ export default {
         },
         sortedPublicGroups() {
             // Clone list to sort it
-            let groups = [...this.publicGroups];
+            let groups = [NoGroup,...this.publicGroups];
             return groups.sort((a, b) => {
                 return a.id - b.id;
             });
@@ -133,10 +134,8 @@ export default {
             },
         },
         publicGroupIsSelected() {
-            if (this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected()) {
-                return true;
-            }
-            return false;
+            return !!(this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected());
+
         },
     },
     methods: {

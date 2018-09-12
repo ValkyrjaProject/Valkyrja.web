@@ -5,7 +5,7 @@ import {Guild} from "../../models/Guild";
 import {Config} from "../../models/Config";
 import {ADD_ARRAY_OBJECT} from "../mutation_types";
 
-const NoGroup = new BlankPublicGroup;
+export const NoGroup = new BlankPublicGroup;
 export const types = {
     NotAdded: 0,
     Public: 1,
@@ -20,7 +20,9 @@ const state = {
     selectedType: types.Public,
     types: stateTypes,
     selectedPublicGroup: NoGroup,
-    publicGroups: null
+    publicGroups: [
+        NoGroup
+    ]
 };
 
 const mutations = {
@@ -65,7 +67,7 @@ const actions = {
         commit(ADD_ARRAY_OBJECT, {
             id: "role_groups",
             value: group,
-        }, {root: true});
+        }, { root: true });
     },
     selectedPublicGroup({commit}, group) {
         commit("CHANGE_ACTIVE_GROUP", group);
@@ -102,7 +104,7 @@ const actions = {
         if (!(state.selectedPublicGroup instanceof PublicGroup)) {
             return;
         }
-        commit("CHANGE_ROLE_LIMIT", limit);
+        commit("CHANGE_ROLE_LIMIT", parseInt(limit));
     },
 };
 
@@ -131,14 +133,11 @@ const getters = {
         });
     },
     publicGroups: (state, getters, rootState, rootGetters) => {
-        let groups = [NoGroup];
-        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
-            return groups;
+        let groups = rootGetters.configInput("role_groups");
+        if (!(rootState.config instanceof Config) || !groups) {
+            return [];
         }
-        if (state.publicGroups === null) {
-            return groups;
-        }
-        return groups.concat(state.publicGroups);
+        return groups;
     },
 };
 

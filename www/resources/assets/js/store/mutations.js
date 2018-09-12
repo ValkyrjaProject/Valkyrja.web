@@ -53,8 +53,13 @@ export const mutations = {
 
     [ADD_ARRAY_OBJECT](state, payload) {
         let array = state.config.find(payload.id);
+
         if (array instanceof ConfigData && array.value instanceof Array) {
-            array.value.push(payload.value)
+            array.value.push(payload.value);
+            //Vue.set(array, "value", array.value.push(payload.value));
+        }
+        else {
+            state.config.add(payload.id, ConfigData.newInstance(payload.id, [payload.value]));
         }
     }
 };

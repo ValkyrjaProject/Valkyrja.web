@@ -20,6 +20,18 @@ export class ConfigData {
     }
 
     /**
+     * @param id
+     * @param value
+     * @returns {this}
+     */
+    static newInstance(id, value) {
+        let configData = new this;
+        configData.id = id;
+        configData.value = value;
+        return configData;
+    }
+
+    /**
      * @returns {boolean} if value has changed since createInstance was created.
      */
     hasChanged() {

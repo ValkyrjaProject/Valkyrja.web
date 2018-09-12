@@ -910,9 +910,24 @@ var Config = function () {
     }, {
         key: "find",
         value: function find(id) {
-            return this.config_data.find(function (config) {
-                return config.id === id;
-            });
+            if (this.config_data.hasOwnProperty(id)) {
+                return this.config_data[id];
+            }
+            return null;
+        }
+
+        /**
+         * @param id
+         * @param {ConfigData} configData
+         */
+
+    }, {
+        key: "add",
+        value: function add(id, configData) {
+            if (!(configData instanceof __WEBPACK_IMPORTED_MODULE_0__ConfigData__["a" /* ConfigData */])) {
+                throw new TypeError("Adding new config values must be of type ConfigData");
+            }
+            this.config_data[configData.id] = configData;
         }
     }], [{
         key: "instanceFromApi",
@@ -923,7 +938,7 @@ var Config = function () {
          * @returns {Config}
          */
 
-        /** @type {Array<ConfigData>} */
+        /** @type {Object<ConfigData>} */
         value: function instanceFromApi(values) {
             var config = new Config();
             config.config_data = Config.getConfigData(values);
@@ -932,7 +947,7 @@ var Config = function () {
 
         /**
          * @param {Array} values
-         * @returns {Array<ConfigData>}
+         * @returns {Object<ConfigData>}
          */
 
 
@@ -941,8 +956,9 @@ var Config = function () {
     }, {
         key: "getConfigData",
         value: function getConfigData(values) {
-            var config_data = [];
+            var config_data = {};
             for (var i in values) {
+                /** @member {ConfigData}*/
                 var arrayConfig = void 0;
                 if (i === "roles") {
                     arrayConfig = __WEBPACK_IMPORTED_MODULE_0__ConfigData__["a" /* ConfigData */].instanceFromApi(i, __WEBPACK_IMPORTED_MODULE_1__PublicRole__["b" /* PublicRoleFactory */].getConfigData(values[i]));
@@ -953,7 +969,7 @@ var Config = function () {
                 } else {
                     arrayConfig = __WEBPACK_IMPORTED_MODULE_0__ConfigData__["a" /* ConfigData */].instanceFromApi(i, values[i]);
                 }
-                config_data.push(arrayConfig);
+                config_data[arrayConfig.id] = arrayConfig;
             }
             return config_data;
         }
@@ -1124,6 +1140,21 @@ var ConfigData = function () {
             configData.original_value = _.cloneDeep(value);
             return configData;
         }
+
+        /**
+         * @param id
+         * @param value
+         * @returns {this}
+         */
+
+    }, {
+        key: "newInstance",
+        value: function newInstance(id, value) {
+            var configData = new this();
+            configData.id = id;
+            configData.value = value;
+            return configData;
+        }
     }]);
 
     return ConfigData;
@@ -1134,7 +1165,8 @@ var ConfigData = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return types; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NoGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return types; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_PublicRole__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_BlankPublicGroup__ = __webpack_require__(117);
@@ -1165,7 +1197,7 @@ var state = {
     selectedType: types.Public,
     types: stateTypes,
     selectedPublicGroup: NoGroup,
-    publicGroups: null
+    publicGroups: [NoGroup]
 };
 
 var mutations = {
@@ -1285,7 +1317,7 @@ var actions = {
         if (!(state.selectedPublicGroup instanceof __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__["b" /* default */])) {
             return;
         }
-        commit("CHANGE_ROLE_LIMIT", limit);
+        commit("CHANGE_ROLE_LIMIT", parseInt(limit));
     }
 };
 
@@ -1311,18 +1343,15 @@ var getters = {
         });
     },
     publicGroups: function publicGroups(state, getters, rootState, rootGetters) {
-        var groups = [NoGroup];
-        if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_4__models_Config__["a" /* Config */]) || !(rootState.guild instanceof __WEBPACK_IMPORTED_MODULE_3__models_Guild__["a" /* Guild */])) {
-            return groups;
+        var groups = rootGetters.configInput("role_groups");
+        if (!(rootState.config instanceof __WEBPACK_IMPORTED_MODULE_4__models_Config__["a" /* Config */]) || !groups) {
+            return [];
         }
-        if (state.publicGroups === null) {
-            return groups;
-        }
-        return groups.concat(state.publicGroups);
+        return groups;
     }
 };
 
-/* harmony default export */ __webpack_exports__["a"] = ({
+/* harmony default export */ __webpack_exports__["b"] = ({
     namespaced: true,
     state: state,
     actions: actions,
@@ -19893,7 +19922,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         publicRoleSelected: function publicRoleSelected() {
-            return this.state.selectedType === __WEBPACK_IMPORTED_MODULE_3__store_modules_RoleSelector__["b" /* types */].Public;
+            return this.state.selectedType === __WEBPACK_IMPORTED_MODULE_3__store_modules_RoleSelector__["c" /* types */].Public;
         }
     }
 });
@@ -20812,6 +20841,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_PublicGroup__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_modules_RoleSelector__ = __webpack_require__(7);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 //
@@ -20884,6 +20914,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+
 
 
 
@@ -20915,7 +20947,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         },
         sortedPublicGroups: function sortedPublicGroups() {
             // Clone list to sort it
-            var groups = [].concat(_toConsumableArray(this.publicGroups));
+            var groups = [__WEBPACK_IMPORTED_MODULE_1__store_modules_RoleSelector__["a" /* NoGroup */]].concat(_toConsumableArray(this.publicGroups));
             return groups.sort(function (a, b) {
                 return a.id - b.id;
             });
@@ -20950,10 +20982,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             }
         },
         publicGroupIsSelected: function publicGroupIsSelected() {
-            if (this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected()) {
-                return true;
-            }
-            return false;
+            return !!(this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected());
         }
     },
     methods: {
@@ -22137,7 +22166,8 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v("\n    " + _vm._s(this.publicGroups) + "\n")
   ])
 }
 var staticRenderFns = []
@@ -23998,7 +24028,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
     actions: __WEBPACK_IMPORTED_MODULE_2__actions__,
     getters: __WEBPACK_IMPORTED_MODULE_3__getters__["a" /* getters */],
     modules: {
-        roleSelector: __WEBPACK_IMPORTED_MODULE_5__modules_RoleSelector__["a" /* default */]
+        roleSelector: __WEBPACK_IMPORTED_MODULE_5__modules_RoleSelector__["b" /* default */]
     }
 }));
 
@@ -25137,8 +25167,12 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
     state.config.change(configData.storeName, configData.value);
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* ADD_ARRAY_OBJECT */], function (state, payload) {
     var array = state.config.find(payload.id);
+
     if (array instanceof __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */] && array.value instanceof Array) {
         array.value.push(payload.value);
+        //Vue.set(array, "value", array.value.push(payload.value));
+    } else {
+        state.config.add(payload.id, __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */].newInstance(payload.id, [payload.value]));
     }
 }), _mutations);
 

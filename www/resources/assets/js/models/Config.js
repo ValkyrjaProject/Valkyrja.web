@@ -7,7 +7,7 @@ import {PublicGroupFactory} from "./PublicGroup";
 
 // Main class containing a list of only ConfigData instances and lists of ConfigData instances
 export class Config {
-    /** @type {Array<ConfigData>} */
+    /** @type {Object<ConfigData>} */
     config_data;
 
     /** @type {Array<ConfigErrors>} */
@@ -25,11 +25,12 @@ export class Config {
 
     /**
      * @param {Array} values
-     * @returns {Array<ConfigData>}
+     * @returns {Object<ConfigData>}
      */
     static getConfigData(values) {
-        let config_data = [];
+        let config_data = {};
         for (let i in values) {
+            /** @member {ConfigData}*/
             let arrayConfig;
             if (i === "roles") {
                 arrayConfig = ConfigData.instanceFromApi(i, PublicRoleFactory.getConfigData(values[i]));
@@ -43,7 +44,7 @@ export class Config {
             else {
                 arrayConfig = ConfigData.instanceFromApi(i, values[i]);
             }
-            config_data.push(arrayConfig);
+            config_data[arrayConfig.id] = arrayConfig;
         }
         return config_data;
     }
@@ -102,7 +103,21 @@ export class Config {
      * @returns {ConfigData}
      */
     find(id) {
-        return this.config_data.find(config => config.id === id);
+        if (this.config_data.hasOwnProperty(id)) {
+            return this.config_data[id];
+        }
+        return null;
+    }
+
+    /**
+     * @param id
+     * @param {ConfigData} configData
+     */
+    add(id, configData) {
+        if (!(configData instanceof ConfigData)) {
+            throw new TypeError("Adding new config values must be of type ConfigData");
+        }
+        this.config_data[configData.id] = configData;
     }
 }
 
