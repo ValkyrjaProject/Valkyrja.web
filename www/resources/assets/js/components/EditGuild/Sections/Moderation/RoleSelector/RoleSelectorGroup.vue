@@ -95,7 +95,7 @@ export default {
             return this.state.selectedType;
         },
         publicGroups() {
-            return this.state.publicGroups;
+            return this.$store.getters["roleSelector/publicGroups"];
         },
         sortedPublicGroups() {
             // Clone list to sort it

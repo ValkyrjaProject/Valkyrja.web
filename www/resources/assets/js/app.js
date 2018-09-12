@@ -1,5 +1,7 @@
 import Vue from "vue";
 window.Vue = Vue;
+import lodash from "lodash";
+window._ = lodash;
 
 import loglevel from "loglevel";
 import initSubHeaders from "./docs";

@@ -3,6 +3,7 @@ import {createPublicRole, PublicRole, PublicRoleFactory} from "./PublicRole";
 import configData from "../api/configData";
 import RoleSelector from "../store/modules/RoleSelector";
 import {types} from "../store/modules/RoleSelector";
+import {PublicGroupFactory} from "./PublicGroup";
 
 // Main class containing a list of only ConfigData instances and lists of ConfigData instances
 export class Config {
@@ -32,6 +33,9 @@ export class Config {
             let arrayConfig;
             if (i === "roles") {
                 arrayConfig = ConfigData.instanceFromApi(i, PublicRoleFactory.getConfigData(values[i]));
+            }
+            else if (i === "role_groups") {
+                arrayConfig = ConfigData.instanceFromApi(i, PublicGroupFactory.getConfigData(values[i]));
             }
             else if (values[i] instanceof Array) {
                 arrayConfig = ConfigData.instanceFromApi(i, this.getConfigData(values[i]));

@@ -1,8 +1,9 @@
 import "./mutation_types";
 import {createGuild} from "../models/Guild";
 import lscache from "lscache";
-import {ADD_CONFIG, ADD_GUILDS, ADD_USER, CHANGE_CONFIG, INITIALIZE_USER} from "./mutation_types";
+import {ADD_ARRAY_OBJECT, ADD_CONFIG, ADD_GUILDS, ADD_USER, CHANGE_CONFIG, INITIALIZE_USER} from "./mutation_types";
 import {Config} from "../models/Config";
+import {ConfigData} from "../models/ConfigData";
 
 export const state = {
     guilds: [],
@@ -49,4 +50,11 @@ export const mutations = {
     [CHANGE_CONFIG](state, configData) {
         state.config.change(configData.storeName, configData.value);
     },
+
+    [ADD_ARRAY_OBJECT](state, payload) {
+        let array = state.config.find(payload.id);
+        if (array instanceof ConfigData && array.value instanceof Array) {
+            array.value.push(payload.value)
+        }
+    }
 };

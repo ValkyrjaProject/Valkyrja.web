@@ -14,7 +14,7 @@ export class PublicRole extends ConfigData {
         let configData = new PublicRole;
         configData.id = id;
         configData.value = value;
-        configData.original_value = value;
+        configData.original_value = {...value};
         return configData;
     }
 
@@ -37,6 +37,7 @@ export class PublicRole extends ConfigData {
         if (guild_role) {
             newRole.guild_role = guild_role;
         }
+        newRole.original_value = {...newRole};
         return newRole;
     }
 

@@ -3,6 +3,7 @@ import {PublicRole} from "../../models/PublicRole";
 import {BlankPublicGroup} from "../../models/BlankPublicGroup";
 import {Guild} from "../../models/Guild";
 import {Config} from "../../models/Config";
+import {ADD_ARRAY_OBJECT} from "../mutation_types";
 
 const NoGroup = new BlankPublicGroup;
 export const types = {
@@ -13,16 +14,13 @@ export const types = {
     Moderator: 4,
     Admin: 5
 };
-let stateTypes = Object.assign({}, types);
+let stateTypes = {...types};
 delete stateTypes.NotAdded;
 const state = {
     selectedType: types.Public,
     types: stateTypes,
     selectedPublicGroup: NoGroup,
-    // TODO: Move PublicGroups to Config
-    publicGroups: [
-        NoGroup
-    ]
+    publicGroups: null
 };
 
 const mutations = {
@@ -61,7 +59,13 @@ const actions = {
         }
     },
     addPublicGroup({commit}, group) {
-        commit("ADD_GROUP", group);
+        if (!(group instanceof PublicGroup)) {
+            throw new TypeError(`Object is not of type PublicGroup, it is of type ${group.constructor.name}`);
+        }
+        commit(ADD_ARRAY_OBJECT, {
+            id: "role_groups",
+            value: group,
+        }, {root: true});
     },
     selectedPublicGroup({commit}, group) {
         commit("CHANGE_ACTIVE_GROUP", group);
@@ -126,17 +130,15 @@ const getters = {
             }).length !== 0;
         });
     },
-    addedRoles: (state, getters, rootState, rootGetters) => {
+    publicGroups: (state, getters, rootState, rootGetters) => {
+        let groups = [NoGroup];
         if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
-            return [];
+            return groups;
         }
-        return rootGetters.configInput("role_groups").value.filter((addedRole) => {
-            return rootState.guild.roles.filter((role) => {
-                return addedRole.id === role.id
-                    && addedRole.permission_level === state.selectedType
-                    && (state.selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
-            }).length !== 0;
-        });
+        if (state.publicGroups === null) {
+            return groups;
+        }
+        return groups.concat(state.publicGroups);
     },
 };
 

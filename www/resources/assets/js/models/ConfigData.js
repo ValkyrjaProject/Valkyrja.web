@@ -1,7 +1,9 @@
+import {EmptyData} from "./EmptyData";
+
 export class ConfigData {
     id;
     value; // either value of field or a list of ConfigData instances
-    original_value;
+    original_value = EmptyData.singleton();
     error_data; // Same ErrorData createInstance as in ConfigErrors
 
     /**
@@ -13,7 +15,7 @@ export class ConfigData {
         let configData = new this;
         configData.id = id;
         configData.value = value;
-        configData.original_value = value;
+        configData.original_value = _.cloneDeep(value);
         return configData;
     }
 
