@@ -65,6 +65,7 @@
                 </div>
             </div>
         </nav>
+        {{ this.publicGroups }}
     </div>
 </template>
 
@@ -143,7 +144,7 @@ export default {
             if (this.isActive && this.publicTypeIsSelected()) {
                 let start = 1;
                 this.publicGroups.forEach((group, index) => {
-                    if (parseInt(group.id) === index) {
+                    if (parseInt(group.id) === (parseInt(index) + 1)) {
                         start = parseInt(group.id) + 1;
                         return true;
                     }

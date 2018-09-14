@@ -134,10 +134,10 @@ const getters = {
     },
     publicGroups: (state, getters, rootState, rootGetters) => {
         let groups = rootGetters.configInput("role_groups");
-        if (!(rootState.config instanceof Config) || !groups) {
+        if (!(rootState.config instanceof Config) || !groups || !(groups.value instanceof Array)) {
             return [];
         }
-        return groups;
+        return groups.value;
     },
 };
 
