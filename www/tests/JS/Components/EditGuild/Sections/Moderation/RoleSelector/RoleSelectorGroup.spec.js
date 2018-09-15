@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import {expect} from "chai";
 import RoleSelectorGroup from "components/EditGuild/Sections/Moderation/RoleSelector/RoleSelectorGroup";
 import PublicGroup from "../../../../../../../resources/assets/js/models/PublicGroup";
+import {BlankPublicGroup} from "../../../../../../../resources/assets/js/models/BlankPublicGroup";
 
 let localVue = Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ describe("RoleSelectorGroup", function () {
     let getters;
     let propsData;
     let heading;
+    let types;
 
     beforeEach(function () {
         heading = "example header";
@@ -27,11 +29,28 @@ describe("RoleSelectorGroup", function () {
             addPublicGroup: sinon.mock(),
             selectedPublicGroup: sinon.mock()
         };
-        state = {
-            publicGroups: [],
-            selectedPublicGroup: null
+        types =  {
+            Public: 1,
+            Member: 2,
+            SubModerator: 3,
+            Moderator: 4,
+            Admin: 5
         };
-        getters = {};
+        state = {
+            selectedType: types.Public,
+            publicGroups: [],
+            selectedPublicGroup: BlankPublicGroup.instance,
+            types: {
+                Public: 1,
+                Member: 2,
+                SubModerator: 3,
+                Moderator: 4,
+                Admin: 5
+            },
+        };
+        getters = {
+            publicGroups: () => state.publicGroups
+        };
         store = new Vuex.Store({
             modules: {
                 roleSelector: {
@@ -61,27 +80,36 @@ describe("RoleSelectorGroup", function () {
         expect(wrapper.find("a.button .mdi.mdi-plus").exists()).to.equal(true);
     });
 
-    it("should dispatch addPublicGroup when add button is clicked", function () {
-        wrapper.find(".button .mdi").trigger("click");
+    it("should dispatch addPublicGroup when add button is clicked when Public type is selected", function () {
+        state.selectedType = types.Public;
+        wrapper.find(".add-public-group").trigger("click");
         expect(actions.addPublicGroup.calledOnce).to.equal(true);
     });
 
-    it("should dispatch selectedPublicGroup when add button is clicked", function () {
-        wrapper.find(".button .mdi").trigger("click");
+    it("should dispatch selectedPublicGroup when add button is clicked when Public type is selected", function () {
+        state.selectedType = types.Public;
+        wrapper.find(".add-public-group").trigger("click");
         expect(actions.selectedPublicGroup.calledOnce).to.equal(true);
     });
 
-    it("should display all groups from Vuex with name and value", function () {
+    it("should not dispatch actions when add button is clicked when non-Public types are selected", function () {
+        for (let typesKey in types) {
+            if (types[typesKey] === types.Public) continue;
+
+            state.selectedType = types[typesKey];
+            wrapper.find(".add-public-group").trigger("click");
+
+            expect(actions.addPublicGroup.called).to.equal(false);
+            expect(actions.selectedPublicGroup.called).to.equal(false);
+        }
+    });
+
+    it("should display all groups with name and value", function () {
         state.publicGroups.push(PublicGroup.createInstance(1));
         state.publicGroups.push(PublicGroup.createInstance(2));
         state.publicGroups.push(PublicGroup.createInstance(3));
-        console.log(wrapper.find("select").html());
-        for (let group of state.publicGroups) {
-            console.log(group.id);
-        }
-        console.log(state.publicGroups);
         let groupsWrapper = wrapper.findAll("option");
-        expect(groupsWrapper.length).to.equal(state.publicGroups.length);
+        expect(groupsWrapper.length).to.equal(state.publicGroups.length + 1);
 
         for (let group of state.publicGroups) {
             let filteredWrapper = groupsWrapper.filter((groupWrapper) => {
@@ -100,7 +128,7 @@ describe("RoleSelectorGroup", function () {
         wrapper.setProps({
             isActive: false
         });
-        wrapper.find(".button .mdi").trigger("click");
+        wrapper.find(".add-public-group").trigger("click");
         expect(actions.selectedPublicGroup.notCalled).to.equal(true);
     });
 
@@ -120,14 +148,81 @@ describe("RoleSelectorGroup", function () {
         expect(wrapper.find("select").element.value).to.equal(selectedGroup.toString());
     });
 
-    it("should display groups in rising group-id order", function () {
+    it("should display groups in rising group-id order with No Group at top of list", function () {
         state.publicGroups.push(PublicGroup.createInstance(2));
         state.publicGroups.push(PublicGroup.createInstance(1));
         state.publicGroups.push(PublicGroup.createInstance(3));
 
         let groupsWrapper = wrapper.findAll("option");
-        expect(state.publicGroups[0].toString()).to.equal(groupsWrapper.at(1).text());
-        expect(state.publicGroups[1].toString()).to.equal(groupsWrapper.at(0).text());
-        expect(state.publicGroups[2].toString()).to.equal(groupsWrapper.at(2).text());
+        expect(groupsWrapper.at(0).text()).to.equal(BlankPublicGroup.instance.toString());
+        expect(groupsWrapper.at(1).text()).to.equal(state.publicGroups[1].toString());
+        expect(groupsWrapper.at(2).text()).to.equal(state.publicGroups[0].toString());
+        expect(groupsWrapper.at(3).text()).to.equal(state.publicGroups[2].toString());
+    });
+
+    it("should display group name input", function () {
+        expect(wrapper.find("input.groupName").exists()).to.equal(true);
+    });
+
+    it("should display role limit input", function () {
+        expect(wrapper.find("input.roleLimit").exists()).to.equal(true);
+    });
+
+    it("should disable group name input when non-Public type is selected", function () {
+        for (let typesKey in types) {
+            if (types[typesKey] === types.Public) continue;
+
+            state.selectedType = types[typesKey];
+            expect(wrapper.find("input.groupName").element.disabled).to.equal(true);
+        }
+    });
+
+    it("should disable role limit input when non-Public type is selected", function () {
+        for (let typesKey in types) {
+            if (types[typesKey] === types.Public) continue;
+
+            state.selectedType = types[typesKey];
+            expect(wrapper.find("input.roleLimit").element.disabled).to.equal(true);
+        }
+    });
+
+    it("should disable group name when Public type and No Group is selected", function () {
+        state.selectedType = types.Public;
+        expect(state.selectedPublicGroup).to.equal(BlankPublicGroup.instance);
+        expect(wrapper.find("input.groupName").element.disabled).to.equal(true);
+    });
+
+    it("should disable role limit when Public type and No Group is selected", function () {
+        state.selectedType = types.Public;
+        expect(state.selectedPublicGroup).to.equal(BlankPublicGroup.instance);
+        expect(wrapper.find("input.roleLimit").element.disabled).to.equal(true);
+    });
+
+    it("should enable group name when Public type and a public group is selected", function () {
+        state.selectedType = types.Public;
+        state.publicGroups.push(PublicGroup.createInstance(1));
+        state.selectedPublicGroup = state.publicGroups[0];
+        expect(wrapper.find("input.groupName").element.disabled).to.equal(false);
+    });
+
+    it("should enable role limit when Public type and a public group is selected", function () {
+        state.selectedType = types.Public;
+        state.publicGroups.push(PublicGroup.createInstance(1));
+        state.selectedPublicGroup = state.publicGroups[0];
+        expect(wrapper.find("input.roleLimit").element.disabled).to.equal(false);
+    });
+
+    it("should show empty group name when non-PublicGroup instance is added", function () {
+        state.selectedType = types.Public;
+        state.publicGroups.push({name: "name"});
+        state.selectedPublicGroup = state.publicGroups[0];
+        expect(wrapper.find("input.groupName").text()).to.equal("");
+    });
+
+    it("should show empty role limit when non-PublicGroup instance is added", function () {
+        state.selectedType = types.Public;
+        state.publicGroups.push({name: "name"});
+        state.selectedPublicGroup = state.publicGroups[0];
+        expect(wrapper.find("input.roleLimit").text()).to.equal("");
     });
 });

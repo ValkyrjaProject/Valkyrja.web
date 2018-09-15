@@ -24,7 +24,7 @@
                     <div class="control">
                         <a
                             :disabled="!publicTypeIsSelected()"
-                            class="button is-info"
+                            class="button add-public-group is-info"
                             @click="addPublicGroup()">
                             <i
                                 class="mdi mdi-plus"
@@ -41,7 +41,7 @@
                                 v-model="groupName"
                                 :disabled="!publicGroupIsSelected"
                                 type="text"
-                                class="input"
+                                class="input groupName"
                                 placeholder="Group name">
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                     v-model="roleLimit"
                                     :disabled="!publicGroupIsSelected"
                                     type="number"
-                                    class="input"
+                                    class="input roleLimit"
                                     placeholder="Role limit">
                             </label>
                         </div>
@@ -65,7 +65,6 @@
                 </div>
             </div>
         </nav>
-        {{ this.publicGroups }}
     </div>
 </template>
 

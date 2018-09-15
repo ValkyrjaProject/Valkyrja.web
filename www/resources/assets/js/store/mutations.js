@@ -58,7 +58,6 @@ export const mutations = {
             array.value.push(payload.value);
         }
         else if (payload.value instanceof ConfigData) {
-            //state.config.add(payload.id, );
             Vue.set(state.config.config_data, payload.id, ConfigData.newInstance(payload.id, [payload.value]));
         }
     }
