@@ -8,7 +8,7 @@ services:
       - MYSQL_DATABASE=botwinder
       - MYSQL_USER=root
       - MYSQL_PASSWORD=
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes # Development only Docker
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes # This is a development only Docker
   web:
     build: .
     restart: always
@@ -17,7 +17,7 @@ services:
     ports:
       - "8000:8000"
     dns:
-      - 8.8.8.8
-      - 8.8.4.4
+      - 1.1.1.1
+      - 1.0.0.1
     depends_on:
       - db
