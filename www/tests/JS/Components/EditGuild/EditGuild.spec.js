@@ -1,5 +1,5 @@
 import sinon from "sinon";
-import {shallowMount} from "@vue/test-utils";
+import {shallowMount, RouterLinkStub} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect, assert} from "chai";
@@ -19,7 +19,7 @@ describe("EditGuild", function () {
 
     beforeEach(function () {
         propsData = {
-            guildId: "guildId"
+            guildId: "guildId",
         };
 
         let retrieveConfig = sinon.stub();
@@ -37,7 +37,10 @@ describe("EditGuild", function () {
             actions,
         });
         wrapper = shallowMount(EditGuild, {store, localVue,
-            stubs: ["router-link", "router-view"]
+            stubs: {
+                RouterLink: RouterLinkStub,
+                RouterView: "<div class=\"RouterView\"></div>",
+            }
         });
     });
 
@@ -58,10 +61,10 @@ describe("EditGuild", function () {
     });
 
     it("should display menu-list items of all tabs", function () {
-        const allTabs = wrapper.vm.tabs.length;
-        console.log(wrapper.html());
-        expect(wrapper.findAll("router-link-stub").length).to.equal(allTabs);
+        const allTabs = wrapper.vm.$data.tabs.length;
+        expect(wrapper.findAll(RouterLinkStub).length).to.equal(allTabs);
     });
+
     it("should display is-active attribute for current tab in menu-list", function () {
         const currentTabIndex = wrapper.vm.currentTab;
         let tabs = wrapper.findAll("ConfigNavbarItem");
@@ -71,32 +74,8 @@ describe("EditGuild", function () {
         }
     });
 
-    it("should redirect to default view", function () {
-        expect(false).to.equal(true);
-    });
-
-    it("should change current tab on click", function () {
-        let routerView = wrapper.find("router-view-stub");
-        expect(routerView, "previous tab should be active").to.equal(true);
-    });
-
     it("should have fluid right column", function () {
         expect(wrapper.findAll(".columns .column").at(1).exists()).to.equal(true);
-    });
-
-    it("should display component for only the current tab", function () {
-        expect(wrapper.findAll(".column.content .component").length).to.equal(1);
-        expect(wrapper.find(BasicConfig).exists()).to.equal(true);
-    });
-
-    it("should switch current tab component on menu-list item click", function (done) {
-        expect(wrapper.find(BasicConfig).exists(), "BasicConfig should be visible before click").to.equal(true);
-        wrapper.findAll("ConfigNavbarItem").at(1).trigger("click");
-
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.find(AntispamConfig).exists(), "AntispamConfig should be visible after click").to.equal(true);
-            done();
-        });
     });
 
     it("should have name, icon and component properties for all tabs", function () {

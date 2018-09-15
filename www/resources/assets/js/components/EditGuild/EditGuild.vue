@@ -2,8 +2,14 @@
     <div class="edit-guild-container column has-background-white has-radius-small">
         <submit-bar :guild="guild"/>
         <div class="columns">
-            <div sticky-container class="column is-3">
-                <aside id="editGuildNav" v-sticky sticky-side="top" class="menu">
+            <div 
+                sticky-container 
+                class="column is-3">
+                <aside 
+                    v-sticky 
+                    id="editGuildNav" 
+                    sticky-side="top" 
+                    class="menu">
                     <ul class="menu-list">
                         <li
                             v-for="(tab, i) in tabs"
@@ -11,7 +17,7 @@
                             <router-link
                                 :to="tab.component.url"
                                 active-class="is-active">
-                                <span :class="setIcon(tab.icon)"/>
+                                <span :class="setIcon(tab.icon)"></span>
                                 {{ tab.name }}
                             </router-link>
                         </li>
@@ -35,7 +41,7 @@ import BasicConfig from "./Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
 import VueRouter from "vue-router";
-import Sticky from "vue-sticky-directive"
+import Sticky from "vue-sticky-directive";
 
 const tabs = [
     {
@@ -116,9 +122,9 @@ const router = new VueRouter({
 });
 
 export default {
+    name: "EditGuild",
     directives: {Sticky},
     router,
-    name: "EditGuild",
     components: {
         SubmitBar,
         BasicConfig,
