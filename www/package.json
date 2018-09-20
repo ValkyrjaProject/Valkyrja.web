@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.20",
-    "axios": "^0.18",
+    "axios": "^0.18.0",
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "bulma": "^0.7.1",
@@ -20,7 +20,7 @@
     "bulma-tooltip": "^1.0.4",
     "chai": "^4.1.2",
     "cross-env": "^5.1.5",
-    "eslint": "^5.3.0",
+    "eslint": "^5.6.0",
     "eslint-plugin-vue": "^4.7.1",
     "jsdom": "^11.11.0",
     "jsdom-global": "^3.0.2",
@@ -30,16 +30,15 @@
     "mdi": "^2.2.43",
     "mocha": "^5.2.0",
     "mocha-webpack": "^1.1.0",
-    "popper.js": "^1.12",
     "sass-loader": "^7.0.3",
     "sinon": "^6.0.1",
     "typescript": "^2.8.3",
     "vue": "^2.5.7",
     "vue-persist": "^0.4.0",
     "vue-router": "^3.0.1",
+    "vue-sticky-directive": "0.0.6",
     "vuelidate": "^0.6.2",
-    "vuex": "^3.0.1",
-    "vue-sticky-directive": "0.0.6"
+    "vuex": "^3.0.1"
   },
   "dependencies": {
     "eslint-loader": "^2.1.0",

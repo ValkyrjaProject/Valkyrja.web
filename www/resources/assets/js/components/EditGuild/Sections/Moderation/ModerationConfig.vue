@@ -14,8 +14,7 @@
             <br>
             This feature will act like Operators known from IRC. If configured, it will disable the use of ban/kick/mute commands unless <i>you</i> are <code>{{ command_prefix }}op</code>-ed (you can still use quickban, if configured, because it's quick!) This helps making it clear to the user, that <i>you</i> are now a acting as a moderator and you are not just joking around. Set the Operator role below to enable it.
             <br><br>
-            <b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a
-            clear message to everyone that a moderator is there.
+            <b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
             <br>
             <type-selector
                 :default-value="{{ json_encode($guild["
@@ -29,20 +28,17 @@
             <br>
             Should you wish to use the <code>{{ command_prefix }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>@{{ command_prefix }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
             <br>
-            @include("config.types.multi-line-text", ['key' => "quickban_reason", 'data' => old('quickban_reason', $serverConfig["quickban_reason"])])
+            <vuex-textarea
+                store-name="quickban_reason"/>
             <br><br>
-            And for how long do you want to ban them using this command? Set <code>0</code> (zero) for
-            permanent ban.
+            And for how long do you want to ban them using this command? Set <code>0</code> (zero) for permanent ban.
             <br>
-            @include("config.types.int", ['key' => "quickban_duration", 'data' => old('quickban_duration', $serverConfig["quickban_duration"])])
-            (hours)
             <vuex-number
                 :min="0"
                 store-name="quickban_duration">(hours)</vuex-number>
         </p>
         <p>
-            <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role
-            will be configured by Botwinder to prevent people from talking in all your channels.
+            <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels.
             <br>
             <type-selector
                 :default-value="{{ json_encode($guild["
@@ -51,8 +47,7 @@
                 roles']->get(old('mute_roleid',$serverConfig["mute_roleid"]))) }}'
                 :values='roles'></type-selector>
             <br><br>
-            The above role will not be configured in the following channel, allowing you to talk to muted
-            people in it.
+            The above role will not be configured in the following channel, allowing you to talk to muted people in it.
             <br>
             <type-selector
                 :default-value="{{ json_encode($guild["
@@ -69,25 +64,27 @@
                 target="_blank">these
             permissions</a>.
             <br><br>
-            <b>How does the Mute system work</b>
-            <br>
-            It is important that you understand how does the Muting system work:<br> Regardless of how is the user muted, they get unmuted next time the bot restarts, this is to ensure that nobody is left hanging, because it is supposed to be a timed feature. Now if someone leaves and then rejoins the server, they will be Muted again, and this time it is treated as an antispam mute, which means that the third one will get you banned. So cheating to get rid of the "mute" role is really bad idea and if the <i>victim</i> leaves and joins the server twice while they are muted, they get banned.
         </p>
+        <article class="message is-info">
+            <div class="message-header">
+                <p>How does the Mute system work</p>
+            </div>
+            <div class="message-body">
+                It is important that you understand how does the Muting system work:<br> Regardless of how is the user muted, they get unmuted next time the bot restarts, this is to ensure that nobody is left hanging, because it is supposed to be a timed feature. Now if someone leaves and then rejoins the server, they will be Muted again, and this time it is treated as an antispam mute, which means that the third one will get you banned. So cheating to get rid of the "mute" role is really bad idea and if the <i>victim</i> leaves and joins the server twice while they are muted, they get banned.
+            </div>
+        </article>
         <p>
             <b><a
                 href="http://rhea-ayase.eu/articles/2017-04/Moderation-guidelines"
-                target="_blank">Moderation
-                Guidelines</a></b>
+                target="_blank">Moderation Guidelines</a></b>
             <br>
             Moderation guidelines for inclusive community. <i>(Written by Rhea.)</i>
             <br>
             <b><a
                 href="http://rhea-ayase.eu/articles/2016-11/On-the-topic-of-moderation"
-                target="_blank">On
-                the topic of Moderation</a></b>
+                target="_blank">On the topic of Moderation</a></b>
             <br>
-            Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by
-            Rhea.)</i>
+            Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by Rhea.)</i>
         </p>
     </div>
 </template>
@@ -95,12 +92,14 @@
 <script>
 import RoleSelector from "./RoleSelector/RoleSelector";
 import VuexNumber from "../../Vuex/VuexNumber";
+import VuexTextarea from "../../Vuex/VuexTextarea";
 
 export default {
     name: "ModerationConfig",
     components: {
+        VuexTextarea,
         RoleSelector,
-        VuexNumber
+        VuexNumber,
     },
     computed: {
         command_prefix() {

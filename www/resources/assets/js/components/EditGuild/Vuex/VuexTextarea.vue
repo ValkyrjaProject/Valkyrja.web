@@ -1,15 +1,15 @@
 <template>
-    <input
+    <textarea 
         :id="storeName"
         :name="storeName"
         v-model="inputValue"
-        type="text"
-        class="input">
+        class="textarea"
+        type="text"></textarea>
 </template>
 
 <script>
 export default {
-    name: "VuexText",
+    name: "VuexTextarea",
     props: {
         storeName: {
             type: String,
