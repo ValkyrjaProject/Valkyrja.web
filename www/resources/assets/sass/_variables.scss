@@ -7,3 +7,35 @@ $font-family-sans-serif: Alegreya Sans,sans-serif;
 $font-family-serif: Alegreya SC,serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+@import "~bulma/sass/utilities/initial-variables";
+
+$botwinder-blue: #206694;
+$is_info: #3273dc;
+$lightest-blue: #d4e9ff;
+$lighter-blue: #c4e1ff;
+$light-blue: #afd1f4;
+$dark-blue: #0f5583;
+$blue-bg: #8fc8ff;
+$botwinder-red: #bd4147;
+
+$primary: $lighter-blue;
+$primary-invert: white;
+
+//$background: $lightest-blue;
+$code: $botwinder-red;
+
+$family-primary: $font-family-sans-serif;
+
+$title-color: $botwinder-blue;
+
+$navbar-height: 5.9rem;
+$navbar-background-color: $white;
+$navbar-item-img-max-height: 3.75rem;
+$navbar-item-color: $dark-blue;
+$navbar-item-hover-background-color: $light-blue;
+$navbar-item-active-background-color: $lighter-blue;
+$navbar-tab-hover-background-color: $light-blue;
+
+$panel-heading-background-color: white;
+$panel-block-hover-background-color: $white-ter;

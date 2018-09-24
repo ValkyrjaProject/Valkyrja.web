@@ -34,6 +34,7 @@
     "sinon": "^6.0.1",
     "typescript": "^2.8.3",
     "vue": "^2.5.7",
+    "vue-multiselect": "^2.1.0",
     "vue-persist": "^0.4.0",
     "vue-router": "^3.0.1",
     "vue-sticky-directive": "0.0.6",
@@ -44,6 +45,7 @@
     "eslint-loader": "^2.1.0",
     "laravel-mix-eslint": "^0.1.1",
     "loglevel": "^1.6.1",
+    "npm": "^6.4.1",
     "smoothscroll": "^0.4.0"
   },
   "node": {

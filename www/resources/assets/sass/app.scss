@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 // Variables
 @import "variables";
+@import "~bulma/sass/utilities/functions";
+@import "~mdi/scss/materialdesignicons";
+@import "~vue-multiselect/dist/vue-multiselect.min.css";
 
 input[type=number], input[type=text], textarea {
   font-size: 1rem;
@@ -20,38 +23,6 @@ input[type=number], input[type=text], textarea {
 .section-link.is-active {
 }
 
-@import "~bulma/sass/utilities/initial-variables";
-@import "~bulma/sass/utilities/functions";
-@import "~mdi/scss/materialdesignicons";
-
-$botwinder-blue: #206694;
-$lightest-blue: #d4e9ff;
-$lighter-blue: #c4e1ff;
-$light-blue: #afd1f4;
-$dark-blue: #0f5583;
-$blue-bg: #8fc8ff;
-$botwinder-red: #bd4147;
-
-$primary: $lighter-blue;
-$primary-invert: white;
-
-//$background: $lightest-blue;
-$code: $botwinder-red;
-
-$family-primary: $font-family-sans-serif;
-
-$title-color: $botwinder-blue;
-
-$navbar-height: 5.9rem;
-$navbar-background-color: $white;
-$navbar-item-img-max-height: 3.75rem;
-$navbar-item-color: $dark-blue;
-$navbar-item-hover-background-color: $light-blue;
-$navbar-item-active-background-color: $lighter-blue;
-$navbar-tab-hover-background-color: $light-blue;
-
-$panel-heading-background-color: white;
-$panel-block-hover-background-color: $white-ter;
 
 @import "~bulma/bulma";
 @import "~bulma-tooltip/dist/bulma-tooltip";
@@ -130,5 +101,22 @@ a.navbar-item.is-active,
   }
   .panel-tabs {
     border: none !important;
+  }
+}
+
+.vue-multiselect {
+  & ul.multiselect__content {
+    list-style: none;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  & .multiselect__option--highlight{
+    background-color: $is_info;
+    &:after{
+      background:inherit
+    }
+  }
+  & .multiselect__select::before {
+    @extend .select:not(.is-multiple):not(.is-loading)::after
   }
 }

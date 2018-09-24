@@ -16,6 +16,7 @@
             <br><br>
             <b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
             <br>
+            <vuex-multiselect v-model="testing" :options="['list', 'of', 'options']"/>
             <type-selector
                 :default-value="{{ json_encode($guild["
                 init-id-type="operator_roleid"
@@ -93,6 +94,7 @@
 import RoleSelector from "./RoleSelector/RoleSelector";
 import VuexNumber from "../../Vuex/VuexNumber";
 import VuexTextarea from "../../Vuex/VuexTextarea";
+import VuexMultiselect from "../../Vuex/VuexMultiselect";
 
 export default {
     name: "ModerationConfig",
@@ -100,6 +102,12 @@ export default {
         VuexTextarea,
         RoleSelector,
         VuexNumber,
+        VuexMultiselect,
+    },
+    data: function() {
+        return {
+            "testing": null
+        };
     },
     computed: {
         command_prefix() {
@@ -113,7 +121,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-
-</style>
