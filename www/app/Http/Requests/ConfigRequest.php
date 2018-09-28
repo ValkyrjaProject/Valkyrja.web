@@ -178,6 +178,8 @@ class ConfigRequest extends FormRequest
             'exp_max_level'                     => 'required|integer',
             'exp_cumulative_roles'              => 'required|boolean',
             'exp_advance_users'                 => 'required|boolean',
+            'exp_member_roleid'                 => 'required|integer',
+            'exp_member_messages'               => 'required|integer',
             'roles'                             => 'array',
             'roles.*'                           => 'array',
             'roles.*.roleid'                    => 'required|integer|min:0',

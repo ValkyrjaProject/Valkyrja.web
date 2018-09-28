@@ -579,6 +579,18 @@
                         <profiles-editor form-name="profile_options"></profiles-editor>
                     </p>
                     <p class="form-inline">
+                        <b>Activity Member role</b>
+                        <br />Some servers prefer to (mis)use experience system to merely assign a member role after user shows some activity - sends a few messages. Please consider using the above verification system, and if that is not what you're after, use this instead of the experience system.
+                        <br />Member role to be assigned:
+                        <br />
+                        <type-selector init-id-type="exp_member_roleid" label="name"
+                                       :default-value='{{ json_encode($guild['roles']->get(old('exp_member_roleid', $serverConfig["exp_member_roleid"]))) }}'
+                                       :values='roles'></type-selector>
+                        <br /><br />
+                        Number of messages a user has to send to get the above Member role (<i>Leave this at zero to disable it.</i>)
+                        <br />@include("config.types.int", ['key' => "exp_member_messages", 'data' => old('exp_member_messages', $serverConfig["exp_member_messages"])])
+                    </p>
+                    <p class="form-inline">
                         <b>Experience & levels</b>
                         <br />Users earn experience based on the below configuration and they are granted levels, which may or may not have roles associated with them.
                         <br />Take a look at the <a href="https://docs.google.com/spreadsheets/d/2w-eZn3b8FgjQkM6FS1q6q5XU6epvbJbmH74IMgRUke4">progression table</a>.
