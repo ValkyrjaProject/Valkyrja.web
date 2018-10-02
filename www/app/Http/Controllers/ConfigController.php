@@ -11,8 +11,11 @@ use App\Http\Requests\ConfigRequest;
 use App\ProfileOptions;
 use App\RoleGroups;
 use App\Roles;
+use App\Partners;
+use App\Subscribers;
 use App\ServerConfig;
 use Discord\OAuth\Parts\Guild;
+use Discord\OAuth\Parts\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
@@ -131,6 +134,8 @@ class ConfigController extends Controller
             $loginController = new LoginController();
             return $loginController->logout($request, $e->getMessage());
         }
+
+        $isPremium = $this->serverOrUserIsPremium($serverId, $discord_data->getCurrentUser());
         return view('config.edit', [
             'serverId' => $serverId,
             'serverConfig' => $serverConfig->find($serverId),
@@ -142,8 +147,22 @@ class ConfigController extends Controller
             'guild' => [
                 'roles' => $guildRoles,
                 'channels' => $guildChannels
-            ]
+            ],
+            'isPremium' => $isPremium,
         ]);
+    }
+
+    /**
+     * @param $serverId
+     * @param User $user
+     */
+    protected function serverOrUserIsPremium($serverId, $user){
+        $partner = Partners::find($serverId);
+        $userIsPremium = Subscribers::find($user->getId());
+        if (($partner && $partner->premium) || ($userIsPremium && $userIsPremium->premium)) {
+            return true;
+        }
+        return false;
     }
 
     /**

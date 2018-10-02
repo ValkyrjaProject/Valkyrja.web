@@ -81,11 +81,14 @@
                         <br/>
                     </p>
                 </div>
-                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
-                        data-target="#configAntispam" aria-expanded="false" aria-controls="configAntispam">
+                <button class="btn btn-fading btn-full-width"  type="button" data-toggle="collapse"
+                        data-target="{{ $isPremium ? "#configAntispam" : "#subscribeConfigAntispam"}}" aria-expanded="false" aria-controls="{{ $isPremium ? "configAntispam" : "subscribeConfigAntispam"}}">
                     Antispam
                 </button>
-                <div class="form-inline form-group collapse" id="configAntispam"><br/>
+                <div class="form-inline form-group collapse" id="subscribeConfigAntispam">
+                    <a class="d-block text-center" href="https://www.patreon.com/botwinder" target="_blank">Subscribe to utilize Antispam features.</a>
+                </div>
+                <div class="form-inline form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configAntispam"><br/>
                     <p>
                         Botwinder will act as configured below, if it takes any action, it will PM the naughty user
                         letting them know about it. If you configure it to also ban for excessive spam, it will let the
@@ -558,10 +561,14 @@
                         <code>@{{ command_prefix }}verify @Rhea force</code>
                     </p>
                 </div>
-                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse" data-target="#configSocial" aria-expanded="false" aria-controls="configSocial">
+                <button class="btn btn-fading btn-full-width"  type="button" data-toggle="collapse"
+                        data-target="{{ $isPremium ? "#configSocial" : "#subscribeConfigSocial"}}" aria-expanded="false" aria-controls="{{ $isPremium ? "configSocial" : "subscribeConfigSocial"}}">
                     Social (profiles, levels & karma)
                 </button>
-                <div class="form-group collapse" id="configSocial"><br />
+                <div class="form-inline form-group collapse" id="subscribeConfigSocial">
+                    <a class="d-block text-center" href="https://www.patreon.com/botwinder" target="_blank">Subscribe to utilize Social features.</a>
+                </div>
+                <div class="form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configSocial"><br />
                     <p class="form-inline">
                         @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
                         <b>Enable <code>@{{ command_prefix }}memo</code></b>
