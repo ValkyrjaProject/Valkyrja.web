@@ -4,7 +4,7 @@
 
 @section('content')
 <section class="container">
-    {{--<div class="col-xs-12">
+    {{--<!--div class="col-xs-12">
         <div class="row">
             <h1>Botwinder</h1>
             <div>
@@ -23,7 +23,7 @@
         </div>
     </div>
 </section>
-<section class="main-body blue">--}}
+<section class="main-body blue"-->--}}
     <section class="container">
         <div class="col-xs-12">
             <div class="row">
@@ -33,28 +33,31 @@
                 </div>--}}
             </div>
             <p class="row">
-              You can use Botwinder Mk.III for <b>one day trial period</b>, after which the bot will automatically leave your server if you do not meet at least <b>one of the requirements</b> below.
-              <br />
-              <b>Requirements</b> <i>(one of)</i><ul>
-                <li><a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> Subscribers</li><ul>
-                  <li>$10 - Unlimited in any way.</li>
-                  <li>$3 - Antispam, Karma and Experience (as performance heavy) features are disabled at this level.</li>
-                </ul>
-                <li>Handpicked partners - unique communities with worthy cause, such as open source projects, Linux or other geeky places, and any Elite Dangerous server. <u>No gaming communities!</u> <i>(talk to <a href="/team">Rhea</a>)</i></li>
-              </ul>
+              Anyone can use our hosted instance of Botwinder for free, however only <b>Subscribers</b> will get performance-heavy Antispam and Social features (Profiles, Karma and Experience.)
             </p>
             <div class="row">
                 <a href="http://invite.botwinder.info" class="external">
                     <button class="btn btn-primary">Invite</button>
                 </a>
             </div>
+            <p class="row">
+              <br />
+              <b><a href="https://www.patreon.com/Botwinder" target="_blank">Subscribe</a></b> to support the project and unlock the premium features!
+              <ul>
+                  <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
+                  <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
+                  <li><b>Karma</b> - People receive cookies (you can change that) when they get thanked.</li>
+                  <li><b>Experience</b> and levels. Send messages to gain experience, send images to gain more experience. Level up to unlock fancy roles and karma cookies!</li>
+                </ul>
+              Handpicked partners get premium features without subscription. Only unique communities with worthy cause qualify, such as open source projects, Linux or other geeky places. <u>No gaming communities!</u> <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
+            </p>
             <br />
             <p class="row">
               <b>Patreon info for subscribers:</b><ul>
                 <li>Please make sure to contact <code>Rhea#1234</code> with your patreon details (patreon username or email)</li>
-                <li>Remember that the bot is bound to servers you own, or one extra server you explicitly ask for (Talk to Rhea - PM her the <code>Server ID</code>)</li>
+                <li>Remember that the bot is bound to the servers you own, or one extra server you explicitly ask for (talk to Rhea - PM her the <code>Server ID</code>)</li>
               </ul>
-              <i>Don't forget to set-up permissions and role hierarchy!</i>
+              <br /><i>Don't forget to set-up permissions and role hierarchy!</i>
             </p>
         </div>
     </section>
