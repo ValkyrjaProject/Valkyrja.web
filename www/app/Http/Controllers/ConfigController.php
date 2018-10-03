@@ -131,8 +131,9 @@ class ConfigController extends Controller
         } catch (ServerIssueException $e) {
             abort(404, $e->getMessage());
         } catch (Throwable $e) {
-            $loginController = new LoginController();
-            return $loginController->logout($request, $e->getMessage());
+            return redirect()->route("displayServers")->with('messages', [
+                'Could not retrieve Discord information. Is Botwinder on the selected server?'
+            ]);
         }
 
         $isPremium = $this->serverOrUserIsPremium($serverId, $discord_data->getCurrentUser());
