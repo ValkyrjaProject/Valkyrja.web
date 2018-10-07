@@ -9,7 +9,7 @@ export class GuildChannel {
     }
 
     toString() {
-        return this._name;
+        return this.name;
     }
 }
 

@@ -1,13 +1,13 @@
 import sinon from "sinon";
-import {shallowMount} from '@vue/test-utils'
-import Vue from 'vue';
+import {shallowMount} from "@vue/test-utils";
+import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
-import VuexNumber from "components/EditGuild/Vuex/VuexNumber"
+import VuexNumber from "components/EditGuild/Vuex/VuexNumber";
 
 let localVue = Vue.use(Vuex);
 
-describe('VuexNumber', function () {
+describe("VuexNumber", function () {
     let wrapper;
     let actions;
     let store;
@@ -41,49 +41,49 @@ describe('VuexNumber', function () {
         wrapper = shallowMount(VuexNumber, {propsData, store, localVue});
     });
 
-    it('should have input field of type number by default', function () {
-        expect(wrapper.find('input[type="number"]').exists()).to.equal(true);
+    it("should have input field of type number by default", function () {
+        expect(wrapper.find("input[type=\"number\"]").exists()).to.equal(true);
     });
 
-    it('should have input field of type number if typeInteger is true', function () {
+    it("should have input field of type number if typeInteger is true", function () {
         wrapper.setProps({typeInteger: true});
-        expect(wrapper.find('input[type="number"]').exists()).to.equal(true);
+        expect(wrapper.find("input[type=\"number\"]").exists()).to.equal(true);
     });
 
-    it('should have input field of type text if typeInteger is false', function () {
+    it("should have input field of type text if typeInteger is false", function () {
         wrapper.setProps({typeInteger: false});
-        expect(wrapper.find('input[type="text"]').exists()).to.equal(true);
+        expect(wrapper.find("input[type=\"text\"]").exists()).to.equal(true);
     });
 
-    it('should have id with storeName value', function () {
+    it("should have id with storeName value", function () {
         expect(wrapper.find(`input[id="${propsData.storeName}"]`).exists()).to.equal(true);
     });
 
-    it('should have name attribute for storeName', function () {
+    it("should have name attribute for storeName", function () {
         expect(wrapper.find(`input[name="${propsData.storeName}"]`).exists()).to.equal(true);
     });
 
-    it('should display value in input', function () {
-        expect(wrapper.find('input').element.value).to.equal(inputValue);
+    it("should display value in input", function () {
+        expect(wrapper.find("input").element.value).to.equal(inputValue);
     });
 
-    it('should dispatch changeConfig on input change', function () {
+    it("should dispatch changeConfig on input change", function () {
         wrapper.find("input").setValue("4");
         sinon.assert.calledOnce(actions.changeConfig);
     });
 
-    it('should retrieve value from configInput getter', function () {
+    it("should retrieve value from configInput getter", function () {
         sinon.assert.calledOnce(getters.configInput());
     });
 
-    it('should have min field if min prop is set', function () {
+    it("should have min field if min prop is set", function () {
         let number = 5;
         expect(wrapper.find(`input[min="${number}"`).exists()).to.equal(false);
         wrapper.setProps({min: number});
         expect(wrapper.find(`input[min="${number}"`).exists()).to.equal(true);
     });
 
-    it('should have max field if max prop is set', function () {
+    it("should have max field if max prop is set", function () {
         let number = 5;
         expect(wrapper.find(`input[max="${number}"`).exists()).to.equal(false);
         wrapper.setProps({max: number});

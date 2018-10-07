@@ -6,6 +6,7 @@ describe("BlankPublicGroup", function () {
         let group = new BlankPublicGroup;
         expect(group).to.equal(new BlankPublicGroup);
         expect(group).to.equal(BlankPublicGroup.instance);
+        expect(group).to.equal(BlankPublicGroup.singleton());
     });
 
     it("should return 0 for id field", function () {

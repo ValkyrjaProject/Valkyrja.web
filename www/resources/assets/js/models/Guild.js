@@ -10,6 +10,12 @@ export class Guild {
         Guild._instance = guild;
     }
 
+    /**
+     *
+     * @param {Array<GuildRole>} roles
+     * @param {Array<GuildChannel>} channels
+     * @param data
+     */
     constructor(roles, channels, data) {
         this._roles = roles;
         this._channels = channels;

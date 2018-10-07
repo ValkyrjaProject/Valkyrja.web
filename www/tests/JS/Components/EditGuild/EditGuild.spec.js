@@ -62,7 +62,7 @@ describe("EditGuild", function () {
 
     it("should display menu-list items of all tabs", function () {
         const allTabs = wrapper.vm.$data.tabs.length;
-        expect(wrapper.findAll(RouterLinkStub).length).to.equal(allTabs);
+        expect(wrapper.findAll("ul.menu-list > li").length).to.equal(allTabs);
     });
 
     it("should display is-active attribute for current tab in menu-list", function () {
@@ -91,11 +91,7 @@ describe("EditGuild", function () {
         expect(actions.retrieveConfig.calledOnce).to.equal(true);
     });
 
-    it("should show loading indicator when created", function () {
-        expect(false, "should show loading screen").to.equal(true);
-    });
+    it("should show loading indicator when created");
 
-    it("should remove loading indicator when retrieveConfig Promise returns", function () {
-        expect(false, "should show loading screen").to.equal(true);
-    });
+    it("should remove loading indicator when retrieveConfig Promise returns");
 });

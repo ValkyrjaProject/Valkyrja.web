@@ -112,6 +112,8 @@ class CreateServerConfigTable extends Migration {
 			$table->boolean('memo_enabled')->default(0);
 			$table->boolean('log_warnings')->default(0);
 			$table->integer('color_logwarning')->unsigned()->default(16489984);
+            $table->bigInteger('exp_member_messages')->default(0);
+            $table->bigInteger('exp_member_roleid')->unsigned()->default(0);
 		});
 	}
 

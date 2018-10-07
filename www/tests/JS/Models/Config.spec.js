@@ -72,12 +72,10 @@ describe("Config", function () {
         let pgFactory = sinon.stub(PublicGroupFactory, "getConfigData");
         pgFactory.returns(configValues["role_groups"]);
 
-        for (let i in configValues) {
-            let obj = {id: i, value: configValues[i]};
-            stub.withArgs(i.toString(), configValues[i]).returns(obj);
-        }
+        stubConfigValues();
         Config.getConfigData(configValues);
         expect(pgFactory.calledOnce).to.equal(true);
+        pgFactory.restore();
     });
 
     it("should create a PublicRole if index is 'roles'", function () {
@@ -85,12 +83,10 @@ describe("Config", function () {
         let prFactory = sinon.stub(PublicRoleFactory, "getConfigData");
         prFactory.returns(configValues["roles"]);
 
-        for (let i in configValues) {
-            let obj = {id: i, value: configValues[i]};
-            stub.withArgs(i.toString(), configValues[i]).returns(obj);
-        }
+        stubConfigValues();
         Config.getConfigData(configValues);
         expect(prFactory.calledOnce).to.equal(true);
+        prFactory.restore();
     });
 
     it("should create and store configData in 'config_data' variable", function () {
@@ -100,5 +96,50 @@ describe("Config", function () {
         let response = Config.instanceFromApi(configValues);
         expect(getConfigDataMock.calledOnce).to.equal(true);
         expect(response.config_data).to.equal(testData);
+        getConfigDataMock.restore();
     });
+
+    it("should find stored config data", function () {
+        configValues["testData"] = "testValue";
+
+        stubConfigValues();
+        let config = Config.instanceFromApi(configValues);
+        expect(config.find("testData")).to.deep.equal({id: "testData", value: configValues["testData"]});
+    });
+
+    it("should return null if no data is found", function () {
+        stubConfigValues();
+        let config = Config.instanceFromApi(configValues);
+        expect(config.find("non-existant id")).to.equal(null);
+    });
+
+    it("should have retrieve function be an alias for find", function () {
+        stubConfigValues();
+        let config = Config.instanceFromApi(configValues);
+        let find = sinon.stub(config, "find");
+        config.retrieve("test");
+        expect(find.withArgs("test").calledOnce).to.equal(true);
+        find.restore();
+    });
+
+    function stubConfigValues() {
+        for (let i in configValues) {
+            let obj = {id: i, value: configValues[i]};
+            stub.withArgs(i.toString(), configValues[i]).returns(obj);
+        }
+    }
+
+    it("should add data to config_data through add function");
+
+    it("should throw TypeError when calling add function without ConfigData instance");
+
+    it("should add ConfigErrors to error array field");
+
+    it("should associate ConfigErrors with ConfigData of the same id");
+
+    it("should have same ConfigError instance in errors array field as a specific config data's errors field");
+
+    it("should return specific ConfigErrors based on id");
+
+    it("should be able to remove specific ConfigError instance");
 });

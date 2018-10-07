@@ -2,19 +2,14 @@ export class GuildRole {
     constructor(id, name) {
         this.id = id;
         this.name = name;
-        // TODO: Add all GuildRole fields
-        /*this.permission_level = permission_level;
-        this.public_id = public_id;
-        this.logging_ignored = logging_ignored;
-        this.antispam_ignored = antispam_ignored;*/
     }
 
     get permission_level() {
-        return this._permissionLevel;
+        return this._permission_level;
     }
 
     set permission_level(level) {
-        this._permissionLevel = parseInt(level);
+        this._permission_level = parseInt(level);
     }
 
     toString() {

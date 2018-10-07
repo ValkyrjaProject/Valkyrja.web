@@ -117,7 +117,7 @@ export class Config {
         if (!(configData instanceof ConfigData)) {
             throw new TypeError("Adding new config values must be of type ConfigData");
         }
-        this.config_data[configData.id] = configData;
+        this.config_data[id] = configData;
     }
 }
 

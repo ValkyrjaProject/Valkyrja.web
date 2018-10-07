@@ -3,11 +3,11 @@ import {shallowMount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
-import VuexText from "components/EditGuild/Vuex/VuexText";
+import VuexTextarea from "components/EditGuild/Vuex/VuexTextarea";
 
 let localVue = Vue.use(Vuex);
 
-describe("VuexText", function () {
+describe("VuexTextarea", function () {
     let wrapper;
     let actions;
     let store;
@@ -37,27 +37,27 @@ describe("VuexText", function () {
             actions,
             getters
         });
-        wrapper = shallowMount(VuexText, {propsData, store, localVue});
+        wrapper = shallowMount(VuexTextarea, {propsData, store, localVue});
     });
 
-    it("should have input field of type text", function () {
-        expect(wrapper.find("input[type=\"text\"]").exists()).to.equal(true);
+    it("should have textarea field", function () {
+        expect(wrapper.find("textarea").exists()).to.equal(true);
     });
 
     it("should have name attribute for storeName", function () {
-        expect(wrapper.find(`input[name="${propsData.storeName}"]`).exists()).to.equal(true);
+        expect(wrapper.find(`textarea[name="${propsData.storeName}"]`).exists()).to.equal(true);
     });
 
     it("should have id with storeName value", function () {
-        expect(wrapper.find(`input[id="${propsData.storeName}"]`).exists()).to.equal(true);
+        expect(wrapper.find(`textarea[id="${propsData.storeName}"]`).exists()).to.equal(true);
     });
 
     it("should display value in input", function () {
-        expect(wrapper.find("input").element.value).to.equal(inputValue);
+        expect(wrapper.find("textarea").element.value).to.equal(inputValue);
     });
 
     it("should dispatch changeConfig on input change", function () {
-        wrapper.find("input").setValue("new value");
+        wrapper.find("textarea").setValue("new value");
         sinon.assert.calledOnce(actions.changeConfig);
     });
 

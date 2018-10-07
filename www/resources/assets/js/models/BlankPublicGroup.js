@@ -8,6 +8,10 @@ export class BlankPublicGroup {
         return BlankPublicGroup.instance;
     }
 
+    static singleton() {
+        return new BlankPublicGroup;
+    }
+
     get id() {
         return 0;
     }
