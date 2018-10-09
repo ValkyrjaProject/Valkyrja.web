@@ -8,7 +8,7 @@
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "test": "cross-env NODE_ENV=testing node_modules/mocha-webpack/bin/_mocha --reporter=min --webpack-config=node_modules/laravel-mix/setup/webpack.config.js --require tests/JS/setup.js 'tests/JS/**/*.spec.js'"
+    "test": "cross-env NODE_ENV=testing node_modules/mocha-webpack/bin/_mocha --reporter=dot --webpack-config=node_modules/laravel-mix/setup/webpack.config.js --require tests/JS/setup.js 'tests/JS/**/*.spec.js'"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.21",

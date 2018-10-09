@@ -1,13 +1,13 @@
 <template>
-    <a 
-        class="panel-block" 
+    <a
+        class="panel-block"
         @click="$emit('click', item)">
-        <span 
-            v-if="itemIcon" 
+        <span
+            v-if="itemIcon"
             class="panel-icon">
-            <i 
-                :class="'mdi mdi-' + itemIcon" 
-                aria-hidden="true"/>
+            <i
+                :class="'mdi mdi-' + itemIcon"
+                aria-hidden="true"></i>
         </span>
         {{ shorten(item) }}
     </a>
@@ -18,10 +18,12 @@ export default {
     name: "PanelListItem",
     props: {
         item: {
-            type: Object
+            type: Object,
+            required: true,
         },
         itemIcon: {
             type: String,
+            default: null,
             required: false
         }
     },

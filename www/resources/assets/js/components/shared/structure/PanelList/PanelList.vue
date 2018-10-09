@@ -9,14 +9,14 @@
                 @clear="searchQuery = ''"/>
         </nav>
         <nav class="panel is-fixed-height has-background-white">
-            <transition 
-                name="fade" 
+            <transition
+                name="fade"
                 mode="out-in">
-                <div 
-                    v-if="searchedList.length" 
+                <div
+                    v-if="searchedList.length"
                     :key="1">
-                    <transition-group 
-                        name="fade" 
+                    <transition-group
+                        name="fade"
                         mode="out-in">
                         <panel-list-item
                             v-for="(item, idx) in searchedList"
@@ -26,11 +26,11 @@
                             @click="$emit('input', item)"/>
                     </transition-group>
                 </div>
-                <div 
-                    v-else 
+                <div
+                    v-else
                     :key="2">
-                    <p 
-                        :key="3" 
+                    <p
+                        :key="3"
                         class="panel-tabs">
                         Not found
                     </p>
@@ -52,14 +52,17 @@ export default {
     },
     props: {
         title: {
-            type: String
+            type: String,
+            required: true,
         },
         value: {
-            type: Array
+            type: Array,
+            required: true,
         },
         itemIcon: {
             type: String,
-            required: false
+            required: false,
+            default: null,
         }
     },
     data() {
