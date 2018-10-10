@@ -35,17 +35,15 @@ describe("PublicRole", function () {
 });
 
 describe("PublicRoleFactory", function () {
-    describe("getConfigData", function () {
-        it("should throw TypeError 'values' parameter is not an Array");
+    it("should throw TypeError if getConfigData() 'values' parameter is not an Array");
 
-        it("should create an array of PublicRoles");
+    it("should create an array of PublicRoles from getConfigData()");
 
-        it("should throw exception if 'values' parameter doesn't have 'roleid' field when creating PublicRole");
+    it("should create a Config instance instead of PublicRole instance if specific array entry is an array itself");
 
-        it("should associate Guild role with newly created PublicRole instance");
+    it("should throw exception if 'values' parameter for getConfigData() doesn't have 'roleid' field when creating PublicRole");
 
-        it("should set role as deleted if Guild role cannot be found for PublicRole");
+    it("should associate Guild role in getConfigData() with newly created PublicRole instance");
 
-        it("should create a Config instance instead of PublicRole instance if specific array entry is an array itself");
-    });
+    it("should set role as deleted in getConfigData() if Guild role cannot be found for PublicRole");
 });
