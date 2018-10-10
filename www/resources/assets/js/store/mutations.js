@@ -31,7 +31,6 @@ export const mutations = {
         log.debug("Adding config data");
         state.config = Config.instanceFromApi(config);
         state.config.addGuildData(state.guild);
-        console.log("state.config", state.config);
     },
 
     [ADD_USER](state, user) {

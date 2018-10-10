@@ -16,7 +16,7 @@ export const retrieveGuilds = ({commit}) => {
                 resolve();
             })
             .catch(error => {
-                commit(API_ERROR, error["response"]["data"]);
+                commit(API_ERROR, error);
                 reject();
             });
     });
@@ -30,7 +30,7 @@ export const retrieveConfig = ({commit}, serverId) => {
                 resolve();
             })
             .catch(error => {
-                commit(API_ERROR, error["response"]["data"]);
+                commit(API_ERROR, error);
                 reject();
             });
     });
@@ -44,7 +44,7 @@ export const retrieveUser = ({commit}) => {
                 resolve(response.data);
             })
             .catch(error => {
-                commit(API_ERROR, error["response"]["data"]);
+                commit(API_ERROR, error);
                 reject();
             });
     });

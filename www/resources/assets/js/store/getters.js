@@ -1,4 +1,3 @@
-import "./getter_types";
 import {Config} from "../models/Config";
 import {ConfigData} from "../models/ConfigData";
 
