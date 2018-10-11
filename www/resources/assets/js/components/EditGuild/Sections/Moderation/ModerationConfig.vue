@@ -16,15 +16,9 @@
             <br><br>
             <b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
             <br>
-            <vuex-multiselect 
-                store-name="operator_roleid" 
+            <vuex-multiselect
+                store-name="operator_roleid"
                 option-name="roles"/>
-            <type-selector
-                :default-value="{{ json_encode($guild["
-                init-id-type="operator_roleid"
-                label="name"
-                roles']->get(old('operator_roleid', $serverConfig["operator_roleid"]))) }}'
-                :values='roles'></type-selector>
         </p>
         <p>
             <b>Quickban</b>
@@ -43,29 +37,21 @@
         <p>
             <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels.
             <br>
-            <type-selector
-                :default-value="{{ json_encode($guild["
-                init-id-type="mute_roleid"
-                label="name"
-                roles']->get(old('mute_roleid',$serverConfig["mute_roleid"]))) }}'
-                :values='roles'></type-selector>
+            <vuex-multiselect
+                store-name="mute_roleid"
+                option-name="roles"/>
             <br><br>
             The above role will not be configured in the following channel, allowing you to talk to muted people in it.
             <br>
-            <type-selector
-                :default-value="{{ json_encode($guild["
-                init-id-type="mute_ignore_channelid"
-                label="name"
-                channels']->get(old('mute_ignore_channelid', $serverConfig["mute_ignore_channelid"]))) }}'
-                :values='channels'></type-selector>
+            <vuex-multiselect
+                store-name="mute_ignore_channelid"
+                option-name="channels"/>
             <br>
             Example usage of this <i>chill-zone</i> channel: <a
                 href="/img/mute.gif"
-                target="_blank">gif</a>
-            which can be configured with <a
-                href="/img/mute-permissions.gif"
-                target="_blank">these
-            permissions</a>.
+                target="_blank">gif</a> which can be configured with <a
+                    href="/img/mute-permissions.gif"
+                    target="_blank">these permissions</a>.
             <br><br>
         </p>
         <article class="message is-info">
