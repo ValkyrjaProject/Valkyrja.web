@@ -1,12 +1,11 @@
 <template>
     <vue-multiselect
-        :options="options"
-        :track-by="trackBy"
-        :label="label"
-        :value="value"
+        v-model="inputValue"
         :placeholder="placeholder"
-        class="vue-multiselect"
-        @input="$emit('input', $event)"/>
+        :options="options"
+        label="name"
+        track-by="id"
+        class="vue-multiselect"/>
 </template>
 
 <script>
@@ -18,31 +17,43 @@ export default {
         VueMultiselect,
     },
     props: {
-        options: {
-            type: Array,
+        storeName: {
+            type: String,
             required: true
         },
-        trackBy: {
+        optionName: {
             type: String,
-        },
-        label: {
-            type: String,
+            required: true
         },
         placeholder: {
             type: String,
             default: "Select option",
         },
-        value: {
-            type: null,
-            default () {
-                return [];
-            }
+    },
+    data: function () {
+        return {
+        };
+    },
+    computed: {
+        options() {
+            let guildInfo = this.$store.state.guild[this.optionName];
+            return [].concat(guildInfo ? guildInfo : []);
         },
-    }
+        inputValue: {
+            get() {
+                return this.options.find(obj => obj.id === this.$store.getters.configInput(this.storeName).value);
+            },
+            set(value) {
+                this.$store.dispatch("changeConfig", {
+                    storeName: this.storeName,
+                    value: value ? value.id : value
+                });
+            },
+        }
+    },
 };
 </script>
 
+<style scoped>
 
-<style lang="scss">
-    @import "../../../../sass/_variables.scss";
 </style>

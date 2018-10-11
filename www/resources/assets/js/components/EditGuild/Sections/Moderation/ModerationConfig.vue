@@ -16,7 +16,9 @@
             <br><br>
             <b>Operator</b> role. Hint: You can configure this role to have nice vibrant colour, to send a clear message to everyone that a moderator is there.
             <br>
-            <vuex-multiselect v-model="testing" :options="['list', 'of', 'options']"/>
+            <vuex-multiselect 
+                store-name="operator_roleid" 
+                option-name="roles"/>
             <type-selector
                 :default-value="{{ json_encode($guild["
                 init-id-type="operator_roleid"

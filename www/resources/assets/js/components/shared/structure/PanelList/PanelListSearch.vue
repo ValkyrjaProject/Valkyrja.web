@@ -3,7 +3,7 @@
         <div class="field has-addons control">
             <p class="control has-icons-left is-expanded">
                 <input
-                    :value="searchQuery"
+                    :value="value"
                     class="input is-small"
                     type="text"
                     placeholder="Search"
@@ -32,7 +32,7 @@
 export default {
     name: "PanelListSearch",
     props: {
-        searchQuery: {
+        value: {
             type: String,
             required: true,
         }

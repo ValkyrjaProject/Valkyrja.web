@@ -6,8 +6,11 @@ import {Config} from "../models/Config";
 import {ConfigData} from "../models/ConfigData";
 
 export const state = {
+    /** @member {Array<Guild>} **/
     guilds: [],
+    /** @member {Guild} **/
     guild: {},
+    /** @member {Config} **/
     config: {},
     user: {
         name: null,
@@ -47,7 +50,10 @@ export const mutations = {
     },
 
     [CHANGE_CONFIG](state, configData) {
-        state.config.change(configData.storeName, configData.value);
+        let conf = state.config.find(configData.storeName);
+        if (conf instanceof ConfigData) {
+            Vue.set(conf, "value", configData.value);
+        }
     },
 
     [ADD_ARRAY_OBJECT](state, payload) {
