@@ -23,7 +23,7 @@
         <p>
             <b>Quickban</b>
             <br>
-            Should you wish to use the <code>{{ command_prefix }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>@{{ command_prefix }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
+            Should you wish to use the <code>{{ command_prefix }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>{{ command_prefix }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
             <br>
             <vuex-textarea
                 store-name="quickban_reason"/>

@@ -2,13 +2,13 @@
     <div class="edit-guild-container column has-background-white has-radius-small">
         <submit-bar :guild="guild"/>
         <div class="columns">
-            <div 
-                sticky-container 
+            <div
+                sticky-container
                 class="column is-3">
-                <aside 
-                    v-sticky 
-                    id="editGuildNav" 
-                    sticky-side="top" 
+                <aside
+                    v-sticky
+                    id="editGuildNav"
+                    sticky-side="top"
                     class="menu">
                     <ul class="menu-list">
                         <li
@@ -40,6 +40,7 @@ import SubmitBar from "./SubmitBar";
 import BasicConfig from "./Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
+import LoggingConfig from "./Sections/Logging/LoggingConfig";
 import VueRouter from "vue-router";
 import Sticky from "vue-sticky-directive";
 
@@ -73,7 +74,7 @@ const tabs = [
         icon: "playlist-plus",
         component: {
             url: "/logging",
-            name: null
+            name: LoggingConfig
         }
     },
     {
@@ -129,7 +130,8 @@ export default {
         SubmitBar,
         BasicConfig,
         AntispamConfig,
-        ModerationConfig
+        ModerationConfig,
+        LoggingConfig,
     },
     props: {
         guildId: {
