@@ -1,6 +1,5 @@
 <template>
-    <!--:class="isInput ? 'input' : ''"-->
-    <input 
+    <input
         :type="type"
         :id="storeName"
         :name="storeName"

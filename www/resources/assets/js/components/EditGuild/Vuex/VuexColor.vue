@@ -1,5 +1,6 @@
 <template>
     <compact-picker
+        :id="storeName"
         v-model="color"
         :palette="defaultColors"/>
 </template>

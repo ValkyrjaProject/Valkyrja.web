@@ -1,5 +1,6 @@
 <template>
     <vue-multiselect
+        :id="storeName"
         v-model="inputValue"
         :placeholder="placeholder"
         :options="options"

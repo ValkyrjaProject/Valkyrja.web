@@ -92,11 +92,6 @@ export default {
         VuexNumber,
         VuexMultiselect,
     },
-    data: function() {
-        return {
-            "testing": null
-        };
-    },
     computed: {
         command_prefix() {
             return this.config("command_prefix");
