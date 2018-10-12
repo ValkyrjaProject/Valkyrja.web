@@ -98,20 +98,7 @@
             <br>
             <b>Ignore channels</b> - messages deleted or edited in these channels will not be logged.
             <br>
-            <ignore-channel-list-selector>
-                <template slot-scope="added">
-                    <span v-for="channel in added.added">
-                        <input
-                            :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
-                            :value="channel.channelid"
-                            type="hidden">
-                        <input
-                            :name="'channels['+added.added.indexOf(channel)+'][ignored]'"
-                            :value="Number(channel.ignored)"
-                            type="hidden">
-                    </span>
-                </template>
-            </ignore-channel-list-selector>
+            <ignored-channels />
         </p>
     </div>
 </template>
@@ -121,6 +108,7 @@ import VuexMultiselect from "../../Vuex/VuexMultiselect";
 import VuexSwitch from "../../Vuex/VuexSwitch";
 import VuexTextarea from "../../Vuex/VuexTextarea";
 import VuexColor from "../../Vuex/VuexColor";
+import IgnoredChannels from "./IgnoredChannels/IgnoredChannels";
 
 export default {
     name: "LoggingConfig",
@@ -129,6 +117,7 @@ export default {
         VuexSwitch,
         VuexTextarea,
         VuexColor,
+        IgnoredChannels,
     },
     computed: {
         command_prefix() {

@@ -4,6 +4,7 @@ import * as actions from "./actions";
 import { getters } from "./getters";
 import { state, mutations } from "./mutations";
 import roleSelector from "./modules/RoleSelector";
+import ignoredChannels from "./modules/IgnoredChannels";
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     actions,
     getters,
     modules: {
-        roleSelector
+        roleSelector,
+        ignoredChannels,
     }
 });

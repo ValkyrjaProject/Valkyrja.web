@@ -4,6 +4,7 @@ import configData from "../api/configData";
 import RoleSelector from "../store/modules/RoleSelector";
 import {types} from "../store/modules/RoleSelector";
 import {PublicGroupFactory} from "./PublicGroup";
+import {Channel, ChannelFactory} from "./Channel";
 
 // Main class containing a list of only ConfigData instances and lists of ConfigData instances
 export class Config {
@@ -34,6 +35,9 @@ export class Config {
             let arrayConfig;
             if (i === "roles") {
                 arrayConfig = ConfigData.instanceFromApi(i, PublicRoleFactory.getConfigData(values[i]));
+            }
+            else if (i === "channels") {
+                arrayConfig = ConfigData.instanceFromApi(i, ChannelFactory.getConfigData(values[i]));
             }
             else if (i === "role_groups") {
                 arrayConfig = ConfigData.instanceFromApi(i, PublicGroupFactory.getConfigData(values[i]));
@@ -67,13 +71,13 @@ export class Config {
         }
         let channels = this.find("channels");
         if (channels !== undefined && channels.value instanceof Array) {
-            /*// retrieves all roles that does not exist in config
+            // retrieves all roles that does not exist in config
             let channelsToAdd = guild.channels.filter(guildChannel => {
                 return channels.value.filter(channel => channel.id === guildChannel.id).length === 0;
             });
             for (let channel of channelsToAdd) {
-                channels.value.push(ConfigData.createNewRole(channel.id, channel));
-            }*/
+                channels.value.push(Channel.createNewChannel(channel.id, channel));
+            }
         }
         return this;
     }

@@ -68,7 +68,8 @@ export class PublicRole extends ConfigData {
      * @param {GuildRole} role
      */
     set guild_role(role) {
-        if (!(role instanceof GuildRole)) {
+        if (role === undefined || !(role instanceof GuildRole)) {
+            log.warn("Role is not of type GuildRole:", role);
             throw new TypeError("Role is not of type GuildRole");
         }
         this._guild_role = role;
@@ -96,8 +97,12 @@ export class PublicRoleFactory {
             else {
                 /** @type {PublicRole} */
                 let public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
-                // TODO: add role to be deleted if corresponding GuildRole doesn't exist
-                public_role.guild_role = Guild.instance.roles.find(role => role.id === public_role.id);
+                // TODO: set role to be deleted if corresponding GuildRole doesn't exist
+                log.error("PublicRole is not marked for deletion if GuildRole doesn't exist");
+                let guildRole = Guild.instance.roles.find(role => role.id === public_role.id);
+                if (guildRole) {
+                    public_role.guild_role = guildRole;
+                }
                 config_data.push(public_role);
             }
         }

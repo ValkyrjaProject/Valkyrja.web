@@ -74,7 +74,9 @@ const actions = {
     },
     addRole({commit, state}, role) {
         if (!(role instanceof PublicRole)) {
-            throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
+            let error = `Object is not of type PublicRole, it is of type ${role.constructor.name}`;
+            log.error(error);
+            throw new TypeError(error);
         }
         commit("CHANGE_ROLE_PERMISSION", {
             role,
@@ -87,7 +89,9 @@ const actions = {
     },
     removeRole({commit, state}, role) {
         if (!(role instanceof PublicRole)) {
-            throw new TypeError(`Object is not of type PublicRole, it is of type ${role.constructor.name}`);
+            let error = `Object is not of type PublicRole, it is of type ${role.constructor.name}`;
+            log.error(error);
+            throw new TypeError(error);
         }
         commit("CHANGE_ROLE_PERMISSION", {
             role,
