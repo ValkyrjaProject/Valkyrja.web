@@ -5,7 +5,7 @@ export class GuildChannel {
     }
 
     get name() {
-        return "#" + this._name;
+        return this._name;
     }
 
     toString() {

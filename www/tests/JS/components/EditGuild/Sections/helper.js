@@ -11,6 +11,6 @@ export function expectInput(wrapper, selector, storeName) {
             break;
         }
     }
-    expect(hasElement, `should have ${selector.name} with storeName ${storeName}`).to.equal(true);
+    expect(hasElement, `should have ${selector.name} with storeName ${storeName}`).to.be.true;
     return nextWrapper;
 }

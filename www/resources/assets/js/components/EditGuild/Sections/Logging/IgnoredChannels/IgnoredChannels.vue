@@ -5,11 +5,13 @@
                 v-model="availableChannels"
                 class="column channels"
                 title="Available Channels"
+                item-icon="pound"
             />
             <panel-list
                 v-model="ignoredChannels"
                 class="column channels"
                 title="Ignored Channels"
+                item-icon="pound"
             />
         </div>
     </div>
