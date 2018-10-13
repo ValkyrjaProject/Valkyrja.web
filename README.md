@@ -28,10 +28,17 @@ If you are self-hosting the Botwinder bot and want configuration dashboard, you'
 
 1. `git clone https://github.com/RheaAyase/Botwinder.web.git` or download as zip
 1. Copy `www/.env.example` to `www/.env`
-1. Configure `.env` with MariaDB/MySQL database connection and OAuth2 variables and bot tokens
-1. Point web server of choice to `www/public/`. For further information on configuring check-out Laravel's installation guide
+1. Configure `.env` with database connection and OAuth2 variables and bot tokens
+1. Run `docker-compose up`
 
-If you want to run website locally without the bot, do this after step 3:
+If you want to run website locally without the bot, do the following:
 
-1. In `www/` do `php artisan migrate:install`
+With docker:
+1. `docker-compose exec app php artisan key:generate`
+1. `docker-compose exec app php artisan migrate:fresh`
+1. `docker-compose exec app php artisan db:seed`
+
+Without Docker:
+1. In `www/` do `php artisan key:generate`
+1. In `www/` do `php artisan migrate:fresh`
 1. In `www/` do `php artisan db:seed`

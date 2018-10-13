@@ -21,6 +21,7 @@ services:
     - app
   app:
     image: php:7.2-fpm
+    working_dir: /app/www
     volumes:
     - ./:/app
     depends_on:
