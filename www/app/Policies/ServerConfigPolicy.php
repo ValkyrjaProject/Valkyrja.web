@@ -30,7 +30,7 @@ class ServerConfigPolicy
     }
 
     /**
-     * Determine if the given post can be updated by the user.
+     * Determine if the given config can be updated by the user.
      *
      * @param AuthenticateUser $user
      * @param ServerConfig $config
