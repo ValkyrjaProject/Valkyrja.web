@@ -31,10 +31,6 @@ export default {
             default: "Select option",
         },
     },
-    data: function () {
-        return {
-        };
-    },
     computed: {
         options() {
             let guildInfo = this.$store.state.guild[this.optionName];
