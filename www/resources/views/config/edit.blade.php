@@ -139,6 +139,7 @@
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_invites_ban", 'data' => old('antispam_invites_ban', $serverConfig["antispam_invites_ban"])])
                         Ban people after <code>@{{ antispam_tolerance }}</code> invites have been removed?
+                        <br/>This will also ban all those cute bots with invites in their name as soon as they join.
                     </p>
                     <p>
                         <b>Duplicate messages</b>
