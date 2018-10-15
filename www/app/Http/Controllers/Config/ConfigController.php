@@ -3,7 +3,7 @@
 namespace Botwinder\Http\Controllers\Config;
 
 use Botwinder\Http\Controllers\Controller;
-use Botwinder\ServerConfig;
+use Botwinder\Models\ServerConfig;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller

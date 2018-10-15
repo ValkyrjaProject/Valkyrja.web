@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder;
+namespace Botwinder\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

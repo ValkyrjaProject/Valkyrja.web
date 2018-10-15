@@ -4,9 +4,9 @@ namespace Botwinder\Http\Controllers\Config;
 
 use Botwinder\Http\Controllers\Controller;
 use Botwinder\Logic\AuthenticateUser;
-use Botwinder\Logic\DiscordData;
+use Botwinder\Logic\DiscordDataInterface;
 use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\ServerConfig;
+use Botwinder\Models\ServerConfig;
 use LaravelRestcord\Discord\Guild;
 
 class ApiController extends Controller
@@ -60,12 +60,12 @@ class ApiController extends Controller
     }
 
     /**
-     * @param DiscordData $discord
+     * @param DiscordDataInterface $discord
      * @param ServerConfig $serverConfig
      * @param string $serverId
      * @return array
      */
-    public function config(DiscordData $discord, ServerConfig $serverConfig, $serverId)
+    public function config(DiscordDataInterface $discord, ServerConfig $serverConfig, $serverId)
     {
         $server = $serverConfig->where('serverid', $serverId)->first();
         $guild = $discord->getGuild($serverId);

@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Botwinder\ServerConfig::class, function (Faker $faker) {
+$factory->define(\Botwinder\Models\ServerConfig::class, function (Faker $faker) {
     return [
         'serverid' => PHP_INT_MAX,
         'name' => str_random(10),

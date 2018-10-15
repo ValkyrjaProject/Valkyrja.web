@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Botwinder\Role::class, function (Faker $faker) {
+$factory->define(\Botwinder\Models\Role::class, function (Faker $faker) {
     return [
         'serverid' => PHP_INT_MAX,
         'roleid' => $faker->unique()->randomNumber(18),

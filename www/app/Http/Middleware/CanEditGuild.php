@@ -4,7 +4,7 @@ namespace Botwinder\Http\Middleware;
 
 use Botwinder\Logic\AuthenticateUser;
 use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\ServerConfig;
+use Botwinder\Models\ServerConfig;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 

@@ -10,7 +10,7 @@ use Laravel\Socialite\Two\User;
 use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use LaravelRestcord\Discord;
 
-class AuthenticateUser
+class AuthenticateUser implements AuthenticateUserInterface
 {
     use CachesUser;
 
@@ -34,14 +34,20 @@ class AuthenticateUser
      */
     private $discord;
 
+    public function __construct()
+    {
+        $this->setSocialite(resolve(Socialite::class));
+    }
+
     /**
      * AuthenticateUser constructor.
      * @param Socialite $socialite
      */
-    public function __construct(Socialite $socialite)
+    public function setSocialite(Socialite $socialite): void
     {
         $this->socialite = $socialite->driver('discord');
     }
+
 
     public static function logout(): void
     {
@@ -49,15 +55,14 @@ class AuthenticateUser
     }
 
     /**
-     * @param Socialite $socialite
      * @return AuthenticateUser
      */
-    public static function create(Socialite $socialite = null)
+    public static function create()
     {
-        if (is_null($socialite)) {
-            $socialite = resolve(Socialite::class);
-        }
-        return new AuthenticateUser($socialite);
+        $socialite = resolve(Socialite::class);
+        $user = new AuthenticateUser;
+        $user->setSocialite($socialite);
+        return $user;
     }
 
     /**
@@ -185,5 +190,4 @@ class AuthenticateUser
         $this->setCachedGuilds(self::getDiscordToken(), $guilds);
         self::$guilds = $guilds;
     }
-
 }

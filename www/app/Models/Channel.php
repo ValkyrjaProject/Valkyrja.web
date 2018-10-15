@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder;
+namespace Botwinder\Models;
 
 use DateTime;
 use Illuminate\Database\Eloquent\Builder;
