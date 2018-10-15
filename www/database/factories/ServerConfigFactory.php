@@ -6,19 +6,19 @@ use Faker\Generator as Faker;
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(\Botwinder\Models\ServerConfig::class, function (Faker $faker) {
     return [
-        'serverid' => PHP_INT_MAX,
+        'serverid' => $faker->unique()->randomNumber(18),
         'name' => str_random(10),
-        'invite_url' => str_random(255),
+        'invite_url' => $faker->url,
         'command_prefix_alt' => '',
-        'quickban_reason' => str_random(16),
-        'log_message_join' => str_random(16),
-        'log_message_leave' => str_random(16),
-        'welcome_message' => str_random(16),
-        'verify_message' => str_random(16),
-        'base_exp_to_levelup' => random_int(0, PHP_INT_MAX),
+        'quickban_reason' => $faker->text(16),
+        'log_message_join' => $faker->text(16),
+        'log_message_leave' => $faker->text(16),
+        'welcome_message' => $faker->text(16),
+        'verify_message' => $faker->text(16),
+        'base_exp_to_levelup' => $faker->numberBetween(0, PHP_INT_MAX),
         'exp_announce_levelup' => $faker->boolean(),
-        'exp_per_message' => random_int(0, PHP_INT_MAX),
-        'exp_per_attachment' => random_int(0, PHP_INT_MAX),
+        'exp_per_message' => $faker->numberBetween(0, PHP_INT_MAX),
+        'exp_per_attachment' => $faker->numberBetween(0, PHP_INT_MAX),
         'exp_cumulative_roles' => $faker->boolean()
     ];
 });

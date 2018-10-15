@@ -3,10 +3,10 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Botwinder\Models\CustomCommand::class, function (Faker $faker) {
+$factory->define(\Botwinder\Models\Channel::class, function (Faker $faker) {
     return [
-        'serverid' => PHP_INT_MAX,
-        'commandid' =>  $faker->unique()->regexify('[a-z]{5,16}'),
+        'serverid' => $faker->unique()->randomNumber(18),
+        'commandid' =>  $faker->text(16),
         'response' => $faker->sentence(10),
         'description' => $faker->sentence(10)
     ];
