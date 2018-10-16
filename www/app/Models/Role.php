@@ -27,7 +27,7 @@ class Role extends Model
 
     public function serverConfig()
     {
-        return $this->belongsTo('Botwinder\ServerConfig');
+        return $this->belongsTo('Botwinder\Models\ServerConfig');
     }
 
     public function getForeignKey()

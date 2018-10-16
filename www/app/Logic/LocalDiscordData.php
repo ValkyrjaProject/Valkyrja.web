@@ -4,6 +4,7 @@ namespace Botwinder\Logic;
 
 use Botwinder\Models\Channel;
 use Botwinder\Models\Role;
+use Botwinder\Models\Sample\DiscordGuild;
 use Botwinder\Models\ServerConfig;
 use Illuminate\Support\Collection;
 use LaravelRestcord\Discord\Guild;
@@ -15,7 +16,9 @@ class LocalDiscordData implements DiscordDataInterface
      */
     public function getGuild($serverId)
     {
-        return $this->createMockGuildData($serverId);
+        $guild = collect();
+        $guild->put('guild', new Guild(DiscordGuild::with(['roles', 'channels'])->find($serverId)->toArray()));
+        return $guild;
     }
 
     /**

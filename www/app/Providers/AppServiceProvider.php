@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $app->bind('Botwinder\Logic\AuthenticateUserInterface', 'Botwinder\Logic\AuthenticateUser');
             $app->bind('Botwinder\Logic\DiscordDataInterface', 'Botwinder\Logic\DiscordData');
         } else {
-            $app->bind('Botwinder\Logic\AuthenticateUserInterface', 'Botwinder\Logic\AuthenticateUser');
+            $app->bind('Botwinder\Logic\AuthenticateUserInterface', 'Botwinder\Logic\LocalAuthenticateUser');
             $app->bind('Botwinder\Logic\DiscordDataInterface', 'Botwinder\Logic\LocalDiscordData');
         }
     }

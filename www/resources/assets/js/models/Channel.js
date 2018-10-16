@@ -103,7 +103,7 @@ export class ChannelFactory {
                 /** @type {Channel} */
                 let channel = Channel.instanceFromApi(values[i]["channelid"], values[i]);
                 // TODO: set channel to be deleted if corresponding GuildChannel doesn't exist
-                log.error("Channel is not being marked for deletion if GuildChannel doesn't exist");
+                log.info("Channel is not being marked for deletion if GuildChannel doesn't exist");
                 let guildChannel = Guild.instance.channels.find(guildChannel => guildChannel.id === channel.id);
                 if (guildChannel) {
                     channel.guild_channel = guildChannel;

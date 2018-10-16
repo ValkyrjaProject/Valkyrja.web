@@ -10,7 +10,7 @@ interface AuthenticateUserInterface
     public static function logout(): void;
 
     /**
-     * @return AuthenticateUser
+     * @return AuthenticateUserInterface
      */
     public static function create();
 

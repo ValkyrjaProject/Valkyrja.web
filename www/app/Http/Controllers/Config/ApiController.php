@@ -3,7 +3,7 @@
 namespace Botwinder\Http\Controllers\Config;
 
 use Botwinder\Http\Controllers\Controller;
-use Botwinder\Logic\AuthenticateUser;
+use Botwinder\Logic\AuthenticateUserInterface;
 use Botwinder\Logic\DiscordDataInterface;
 use Botwinder\Policies\ServerConfigPolicy;
 use Botwinder\Models\ServerConfig;
@@ -26,22 +26,22 @@ class ApiController extends Controller
     }
 
     /**
-     * @param AuthenticateUser $user
+     * @param AuthenticateUserInterface $user
      * @param ServerConfig $config
      * @return string
      */
-    public function guilds(AuthenticateUser $user, ServerConfig $config)
+    public function guilds(AuthenticateUserInterface $user, ServerConfig $config)
     {
         $guilds = $this->getAuthorizedGuilds($user, $config);
         return $guilds->values()->toJson();
     }
 
     /**
-     * @param AuthenticateUser $user
+     * @param AuthenticateUserInterface $user
      * @param ServerConfig $serverConfig
      * @return \Illuminate\Support\Collection
      */
-    protected function getAuthorizedGuilds(AuthenticateUser $user, ServerConfig $serverConfig)
+    protected function getAuthorizedGuilds(AuthenticateUserInterface $user, ServerConfig $serverConfig)
     {
         $policy = &$this->policy;
 
@@ -78,10 +78,10 @@ class ApiController extends Controller
     }
 
     /**
-     * @param AuthenticateUser $user
+     * @param AuthenticateUserInterface $user
      * @return array
      */
-    public function user(AuthenticateUser $user)
+    public function user(AuthenticateUserInterface $user)
     {
         $user = $user->get();
         return [

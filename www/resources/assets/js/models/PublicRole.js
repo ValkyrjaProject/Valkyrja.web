@@ -98,7 +98,7 @@ export class PublicRoleFactory {
                 /** @type {PublicRole} */
                 let public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
                 // TODO: set role to be deleted if corresponding GuildRole doesn't exist
-                log.error("PublicRole is not marked for deletion if GuildRole doesn't exist");
+                log.info("PublicRole is not marked for deletion if GuildRole doesn't exist");
                 let guildRole = Guild.instance.roles.find(role => role.id === public_role.id);
                 if (guildRole) {
                     public_role.guild_role = guildRole;

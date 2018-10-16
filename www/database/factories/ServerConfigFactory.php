@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(\Botwinder\Models\ServerConfig::class, function (Faker $faker) {
     return [
-        'serverid' => $faker->unique()->randomNumber(18),
+        'serverid' => $faker->unique()->randomNumber(8),
         'name' => str_random(10),
         'invite_url' => $faker->url,
         'command_prefix_alt' => '',

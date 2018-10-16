@@ -8,28 +8,18 @@ class ChannelsSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws Exception
      */
     public function run()
     {
-        DB::table('channels')->insert([
-            'serverid' => 0,
-            'channelid' => random_int(0,PHP_INT_MAX),
-            'muted_until' => now()
-        ]);
-        DB::table('channels')->insert([
-            'serverid' => 0,
-            'channelid' => random_int(0,PHP_INT_MAX),
-            'muted_until' => now()
-        ]);
-        DB::table('channels')->insert([
-            'serverid' => 155821059960995840,
-            'channelid' => random_int(0,PHP_INT_MAX),
-            'muted_until' => now()
-        ]);
-        DB::table('channels')->insert([
-            'serverid' => 155821059960995840,
-            'channelid' => random_int(0,PHP_INT_MAX),
-            'muted_until' => now()
-        ]);
+        /** @var \Illuminate\Support\Collection $channels */
+        $channels = \Botwinder\Models\Sample\DiscordChannel::all();
+        $channels->slice(count($channels)/2)->each(function ($channel) {
+            DB::table('channels')->insert([
+                'serverid' => $channel->guild_id,
+                'channelid' => $channel->id,
+                'muted_until' => now()
+            ]);
+        });
     }
 }

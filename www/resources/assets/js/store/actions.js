@@ -30,6 +30,7 @@ export const retrieveConfig = ({commit}, serverId) => {
                 resolve();
             })
             .catch(error => {
+                log.warn(error);
                 commit(API_ERROR, error);
                 reject();
             });

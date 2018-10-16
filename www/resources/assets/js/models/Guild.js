@@ -40,6 +40,9 @@ export class Guild {
     }
 
     get icon() {
+        if (this._icon.startsWith("http")) {
+            return this._icon;
+        }
         return `https://cdn.discordapp.com/icons/${this.id}/${this._icon}.jpg`;
     }
 

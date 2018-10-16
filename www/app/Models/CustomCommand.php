@@ -18,7 +18,7 @@ class CustomCommand extends Model
 
     public function serverConfig()
     {
-        $this->belongsTo('Botwinder\ServerConfig');
+        $this->belongsTo('Botwinder\Models\ServerConfig');
     }
 
     /**
