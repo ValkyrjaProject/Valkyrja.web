@@ -7,7 +7,7 @@ $factory->define(Botwinder\Models\Sample\DiscordRole::class, function (Faker $fa
     $id = $faker->unique()->randomNumber(8);
     return [
         'id' => $id,
-        'name' => $faker->lastName,
+        'name' => $faker->jobTitle,
         'color' => hexdec($faker->colorName),
         'position' => $faker->unique()->randomNumber(2),
         'guild_id' => $id,

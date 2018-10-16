@@ -2,7 +2,7 @@
 
 namespace Botwinder\Http\Middleware;
 
-use Botwinder\Logic\AuthenticateUser;
+use Botwinder\Logic\AuthenticateUserInterface;
 use Closure;
 use Illuminate\Http\Request;
 use Throwable;
@@ -18,7 +18,7 @@ class IsAuthenticatedUser
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = AuthenticateUser::create();
+        $user = resolve(AuthenticateUserInterface::class)::create();
         try {
             $user->get();
         }

@@ -7,7 +7,7 @@ $factory->define(Botwinder\Models\Sample\DiscordChannel::class, function (Faker 
     $id = $faker->unique()->randomNumber(8);
     return [
         'id' => $id,
-        'name' => str_replace(" ", "-", strtolower($faker->jobTitle)),
+        'name' => str_replace(" ", "-", strtolower($faker->lastName)),
         'type' => 0,
         'guild_id' => $id,
     ];

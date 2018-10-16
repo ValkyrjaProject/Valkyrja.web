@@ -49,7 +49,7 @@ class LocalAuthenticateUser implements AuthenticateUserInterface
      */
     public function execute(bool $hasCode)
     {
-        session()->set('discord_token', 'discord_token');
+        session()->put('discord_token', 'discord_token');
         return redirect('/');
     }
 
