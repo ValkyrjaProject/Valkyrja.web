@@ -25,12 +25,17 @@ describe("SubmitBar", function () {
         expect(button.exists()).to.equal(true);
         expect(button.text()).to.equal("Submit");
     });
+
     it("should have navigation level", function () {
         expect(wrapper.find("nav.level").exists()).to.equal(true);
     });
 
     it("should have image on left level", function () {
         expect(wrapper.find(".level-left img").exists()).to.equal(true);
+    });
+
+    it("should have circular image", function () {
+        expect(wrapper.find(".image.is-circular img.is-circular").exists()).to.equal(true);
     });
 
     it("should have heading on left level", function () {
