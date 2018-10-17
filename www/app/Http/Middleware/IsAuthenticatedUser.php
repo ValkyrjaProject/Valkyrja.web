@@ -18,6 +18,7 @@ class IsAuthenticatedUser
      */
     public function handle(Request $request, Closure $next)
     {
+        /** @var AuthenticateUserInterface $user */
         $user = resolve(AuthenticateUserInterface::class)::create();
         try {
             $user->get();

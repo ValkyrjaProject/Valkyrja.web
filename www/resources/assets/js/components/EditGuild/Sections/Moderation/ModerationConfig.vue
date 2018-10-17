@@ -45,7 +45,8 @@
             <br>
             <vuex-multiselect
                 store-name="mute_ignore_channelid"
-                option-name="channels"/>
+                option-name="channels"
+                item-icon="pound"/>
             <br>
             Example usage of this <i>chill-zone</i> channel: <a
                 href="/img/mute.gif"

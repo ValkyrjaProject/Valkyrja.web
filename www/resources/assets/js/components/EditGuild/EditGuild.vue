@@ -41,6 +41,7 @@ import BasicConfig from "./Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
 import LoggingConfig from "./Sections/Logging/LoggingConfig";
+import SocialConfig from "./Sections/Social/SocialConfig";
 import VueRouter from "vue-router";
 import Sticky from "vue-sticky-directive";
 
@@ -90,7 +91,7 @@ const tabs = [
         icon: "comment",
         component: {
             url: "/social",
-            name: null
+            name: SocialConfig
         }
     },
     {
@@ -132,6 +133,7 @@ export default {
         AntispamConfig,
         ModerationConfig,
         LoggingConfig,
+        SocialConfig,
     },
     props: {
         guildId: {

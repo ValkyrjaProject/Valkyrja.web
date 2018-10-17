@@ -6,7 +6,32 @@
         :options="options"
         label="name"
         track-by="id"
-        class="vue-multiselect"/>
+        class="vue-multiselect">
+        <template
+            slot="option"
+            slot-scope="props">
+            <span
+                v-if="itemIcon"
+                class="icon is-small">
+                <i
+                    :class="'mdi mdi-' + itemIcon"
+                    aria-hidden="true"></i>
+            </span>
+            {{ props.option.toString() }}
+        </template>
+        <template
+            slot="singleLabel"
+            slot-scope="props">
+            <span
+                v-if="itemIcon"
+                class="icon is-small">
+                <i
+                    :class="'mdi mdi-' + itemIcon"
+                    aria-hidden="true"></i>
+            </span>
+            {{ props.option.toString() }}
+        </template>
+    </vue-multiselect>
 </template>
 
 <script>
@@ -29,6 +54,11 @@ export default {
         placeholder: {
             type: String,
             default: "Select option",
+        },
+        itemIcon: {
+            type: String,
+            default: null,
+            required: false
         },
     },
     computed: {

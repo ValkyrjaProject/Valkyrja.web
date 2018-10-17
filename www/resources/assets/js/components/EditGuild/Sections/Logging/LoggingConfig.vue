@@ -1,12 +1,12 @@
 <template>
     <div>
-
         <p>
             <b>Moderation Log Channel</b> - In which channel would you like to log the below configured events?
             <br>
             <vuex-multiselect
                 store-name="mod_channelid"
-                option-name="channels"/>
+                option-name="channels"
+                item-icon="pound"/>
             <br>
             <vuex-switch store-name="embed_modchannel">
                 Use Embed with below configured colours
@@ -25,7 +25,8 @@
             <br>
             <vuex-multiselect
                 store-name="log_channelid"
-                option-name="channels"/>
+                option-name="channels"
+                item-icon="pound"/>
             <br>
             <vuex-switch store-name="embed_logchannel">
                 Use Embed with below configured colours
@@ -49,7 +50,8 @@
             <br>
             <vuex-multiselect
                 store-name="voice_channelid"
-                option-name="channels"/>
+                option-name="channels"
+                item-icon="pound"/>
             <br>
             <vuex-switch store-name="embed_voicechannel">
                 Use Embed with this colour:
@@ -63,7 +65,8 @@
             <br>
             <vuex-multiselect
                 store-name="activity_channelid"
-                option-name="channels"/>
+                option-name="channels"
+                item-icon="pound"/>
             <br>
             <vuex-switch store-name="embed_activitychannel">
                 Use Embed with this colour:
