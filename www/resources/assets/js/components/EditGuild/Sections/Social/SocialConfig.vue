@@ -13,7 +13,7 @@
             <br>
             Setup profile fields in the editor below.
             <br>
-            <profiles-editor />
+            <profile-editor />
         </p>
         <p>
             <b>Activity Member role</b>
@@ -115,6 +115,8 @@ import VuexText from "../../Vuex/VuexText";
 import VuexNumber from "../../Vuex/VuexNumber";
 import VuexMultiselect from "../../Vuex/VuexMultiselect";
 import VuexTextarea from "../../Vuex/VuexTextarea";
+import ProfileEditor from "./ProfileEditor/ProfileEditor";
+import LevelSelector from "./LevelSelector/LevelSelector";
 
 export default {
     name: "SocialConfig",
@@ -123,6 +125,8 @@ export default {
         VuexText,
         VuexNumber,
         VuexMultiselect,
+        ProfileEditor,
+        LevelSelector,
     },
     computed: {
         command_prefix() {
