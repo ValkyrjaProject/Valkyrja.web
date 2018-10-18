@@ -86,19 +86,26 @@ a.navbar-item.is-active,
 .panel p {
   margin-bottom: 0 !important;
 }
-.panel.is-fixed-height {
-  max-height: 270px;
-  overflow-y: auto;
-  border-left: 1px solid $border;
-  border-right: 1px solid $border;
-  border-bottom: 1px solid $border;
-  * {
+.panel.is-bordered{
+  *:not(.is-active) {
     border-left: 0;
     border-right: 0;
   }
+}
+.panel.is-bordered {
+  border-top: 0;
+  border-left: 1px solid $border;
+  border-right: 1px solid $border;
   :first-child {
     border-top: 0;
   }
+}
+.panel.is-bordered-bottom {
+  border-bottom: 1px solid $border;
+}
+.panel.is-fixed-height {
+  max-height: 270px;
+  overflow-y: auto;
   .panel-tabs {
     border: none !important;
   }

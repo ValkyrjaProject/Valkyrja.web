@@ -8,21 +8,25 @@
                 v-model="searchQuery"
                 @clear="searchQuery = ''"/>
         </nav>
-        <nav class="panel is-fixed-height has-background-white">
+        <nav
+            :class="{ 'is-bordered-bottom': !addButton }"
+            class="panel panel-parent is-fixed-height is-bordered has-background-white">
             <transition
-                name="fade"
                 mode="out-in">
                 <div
                     v-if="searchedList.length"
                     :key="1">
                     <transition-group
-                        name="fade"
                         mode="out-in">
-                        <panel-list-item
+                        <component
                             v-for="(item, idx) in searchedList"
+                            :is="listItem"
                             :key="idx"
                             :item="item"
                             :item-icon="itemIcon"
+                            :class="{'is-active': item === selectedItem}"
+                            class="listItem"
+                            @remove="$emit('remove', item)"
                             @click="$emit('input', item)"/>
                     </transition-group>
                 </div>
@@ -37,18 +41,32 @@
                 </div>
             </transition>
         </nav>
+        <nav
+            v-if="addButton"
+            class="panel">
+            <div class="panel-block">
+                <button class="button is-info is-outlined is-fullwidth">
+                    <i
+                        class="mdi mdi-plus"
+                        aria-hidden="true"
+                        @click="$emit('add', $event)"></i>
+                </button>
+            </div>
+        </nav>
     </div>
 </template>
 
 <script>
 import PanelListSearch from "./PanelListSearch";
 import PanelListItem from "./PanelListItem";
+import PanelListItemRemovable from "./PanelListItemRemovable";
 
 export default {
     name: "PanelList",
     components: {
         PanelListSearch,
-        PanelListItem
+        PanelListItem,
+        PanelListItemRemovable,
     },
     props: {
         title: {
@@ -63,6 +81,21 @@ export default {
             type: String,
             required: false,
             default: null,
+        },
+        listItem: {
+            type: String,
+            required: false,
+            default: "PanelListItem"
+        },
+        addButton: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        selectedItem: {
+            type: Object||null,
+            required: false,
+            default: null
         }
     },
     data() {
