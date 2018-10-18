@@ -40,9 +40,9 @@
             </i></p>
             <span class="email"><a href="emailto:spytec@botwinder.info">spytec@botwinder.info</a></span>
             <div class="icons spaced">
-                <a href="http://www.edassets.org"><img src="/img/external.png" alt="SpyTec's EDAssets website"></a>
+                <a href="https://edassets.org"><img src="/img/external.png" alt="SpyTec's EDAssets website"></a>
                 <a href="https://github.com/SpyTec"><img src="/img/github.png" alt="github.com/SpyTec"></a>
-                <a href="https://twitter.com/SpyTec13"><img src="/img/twitter.png" alt="twitter.com/SpyTec13"></a>
+                <a href="https://twitter.com/SpyTec"><img src="/img/twitter.png" alt="twitter.com/SpyTec"></a>
             </div>
         </div>
     </div>
