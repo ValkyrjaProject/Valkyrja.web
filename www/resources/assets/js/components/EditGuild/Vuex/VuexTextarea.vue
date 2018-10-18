@@ -1,10 +1,13 @@
 <template>
-    <textarea 
-        :id="storeName"
-        :name="storeName"
-        v-model="inputValue"
-        class="textarea"
-        type="text"></textarea>
+    <label :for="storeName">
+        <slot></slot>
+        <textarea
+            :id="storeName"
+            :name="storeName"
+            v-model="inputValue"
+            class="textarea"
+            type="text"></textarea>
+    </label>
 </template>
 
 <script>

@@ -62,12 +62,13 @@
         <p>
             <b>Mass-mentions</b>
             <br>
-            Remove messages that mention more than <code>n</code> people? Set to <code>0</code> (zero) to
-            disable, otherwise set the <code>n</code> amount.
             <br>
             <vuex-number
                 :min="0"
-                store-name="antispam_mentions_max"/>
+                store-name="antispam_mentions_max">
+                Remove messages that mention more than <code>n</code> people? Set to <code>0</code> (zero) to
+                disable, otherwise set the <code>n</code> amount.
+            </vuex-number>
             <br>
             <vuex-switch store-name="antispam_mentions_ban">
                 Ban people after <code>{{ antispam_tolerance }}</code> messages have been removed?
@@ -174,6 +175,7 @@
 import VuexSwitch from "../../Vuex/VuexSwitch";
 import VuexText from "../../Vuex/VuexText";
 import VuexNumber from "../../Vuex/VuexNumber";
+
 export default {
     name: "AntispamConfig",
     components: {

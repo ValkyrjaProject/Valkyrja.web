@@ -1,10 +1,13 @@
 <template>
-    <input
-        :id="storeName"
-        :name="storeName"
-        v-model="inputValue"
-        type="text"
-        class="input">
+    <label :for="storeName">
+        <slot></slot>
+        <input
+            :id="storeName"
+            :name="storeName"
+            v-model="inputValue"
+            type="text"
+            class="input">
+    </label>
 </template>
 
 <script>
