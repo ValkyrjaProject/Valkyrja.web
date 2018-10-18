@@ -5,6 +5,7 @@ import { getters } from "./getters";
 import { state, mutations } from "./mutations";
 import roleSelector from "./modules/RoleSelector";
 import ignoredChannels from "./modules/IgnoredChannels";
+import profileEditor from "./modules/ProfileEditor";
 
 Vue.use(Vuex);
 
@@ -17,5 +18,6 @@ export default new Vuex.Store({
     modules: {
         roleSelector,
         ignoredChannels,
+        profileEditor,
     }
 });

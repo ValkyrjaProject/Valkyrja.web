@@ -3,8 +3,8 @@
         <div class="level-left">
             <div class="level-item">
                 <figure class="image is-32x32 is-circular">
-                    <img 
-                        :src="guild.icon" 
+                    <img
+                        :src="guild.icon"
                         class="is-circular">
                 </figure>
             </div>

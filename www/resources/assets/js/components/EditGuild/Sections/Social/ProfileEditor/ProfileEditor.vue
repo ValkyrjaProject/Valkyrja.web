@@ -2,7 +2,7 @@
     <div class="box has-background-white-bis">
         <div class="columns">
             <panel-list
-                :value="[{'test':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}, {'test2':2}]"
+                :value="profiles"
                 :add-button="true"
                 list-item="PanelListItemRemovable"
                 class="column is-two-fifths options"
@@ -12,7 +12,7 @@
             <div class="column">
                 <div class="panel panel-parent">
                     <nav class="panel-heading">
-                        Fields
+                        Selected profile
                     </nav>
                     <div class="panel-block">
                         <label>
@@ -83,7 +83,7 @@ export default {
     },
     computed: {
         profiles() {
-            return this.$store.state.profileEditor.profiles;
+            return this.$store.getters["profileEditor/profiles"];
         },
         selectedProfile: {
             get() {
@@ -95,7 +95,7 @@ export default {
         },
         option: {
             get() {
-                return this.selectedProfile.option;
+                return this.selectedProfile ? this.selectedProfile.option : "";
             },
             set(option) {
                 this.$store.dispatch("profileEditor/changeField", {
@@ -106,7 +106,7 @@ export default {
         },
         option_alt: {
             get() {
-                return this.selectedProfile.option_alt;
+                return this.selectedProfile ? this.selectedProfile.option_alt : "";
             },
             set(option_alt) {
                 this.$store.dispatch("profileEditor/changeField", {
@@ -117,7 +117,7 @@ export default {
         },
         label: {
             get() {
-                return this.selectedProfile.label;
+                return this.selectedProfile ? this.selectedProfile.label : "";
             },
             set(label) {
                 this.$store.dispatch("profileEditor/changeField", {
@@ -128,7 +128,7 @@ export default {
         },
         property_order: {
             get() {
-                return this.selectedProfile.property_order;
+                return this.selectedProfile ? this.selectedProfile.property_order : "";
             },
             set(property_order) {
                 this.$store.dispatch("profileEditor/changeField", {
@@ -139,7 +139,7 @@ export default {
         },
         inline: {
             get() {
-                return this.selectedProfile.inline;
+                return this.selectedProfile ? this.selectedProfile.inline : "";
             },
             set(inline) {
                 this.$store.dispatch("profileEditor/changeField", {
