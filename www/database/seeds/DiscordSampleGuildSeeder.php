@@ -12,7 +12,7 @@ class DiscordSampleGuildSeeder extends Seeder
     public function run()
     {
         /** @var \Illuminate\Support\Collection $guilds */
-        $guilds = factory(Botwinder\Models\Sample\DiscordGuild::class, 3)
+        factory(Botwinder\Models\Sample\DiscordGuild::class, 3)
             ->create()
             ->each(function($guild) {
                 $guild->channels()->saveMany(factory(Botwinder\Models\Sample\DiscordChannel::class, 10)->create([

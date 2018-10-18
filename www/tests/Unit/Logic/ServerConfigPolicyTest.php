@@ -1,16 +1,9 @@
 <?php /** @noinspection ALL */
 
-/**
- * Created by PhpStorm.
- * User: Eric
- * Date: 2018-04-18
- * Time: 21:34
- */
-
 namespace Tests\Unit\Logic;
 
 use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\ServerConfig;
+use Botwinder\Models\ServerConfig;
 use Illuminate\Support\Collection;
 use Laravel\Socialite\Two\User;
 use LaravelRestcord\Discord;

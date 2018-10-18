@@ -9,6 +9,7 @@
 namespace Tests\Unit\Logic;
 
 use Botwinder\Logic\AuthenticateUser;
+use Botwinder\Logic\AuthenticateUserInterface;
 use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use Illuminate\Support\Facades\Session;
 use LaravelRestcord\Discord;
@@ -33,6 +34,22 @@ class AuthenticateUserTest extends TestCase
     public function tearDown()
     {
         Mockery::close();
+    }
+
+    public function testImplementsAuthenticateUserInterface()
+    {
+        $this->assertInstanceOf(AuthenticateUserInterface::class, new AuthenticateUser());
+    }
+
+    public function testSetSocialiteCallsDriver()
+    {
+        $socialite = Mockery::mock(\Laravel\Socialite\Contracts\Factory::class);
+
+        $socialite->expects('driver');
+        $this->addToAssertionCount(1);
+
+        $user = new AuthenticateUser;
+        $user->setSocialite($socialite);
     }
 
     public function testUserCanLogout()
@@ -84,11 +101,14 @@ class AuthenticateUserTest extends TestCase
 
         $socialite->expects('driver')
             ->andReturn($discordProvider);
+        $this->addToAssertionCount(1);
 
         $discordProvider->expects('user')
             ->andReturn(new \Laravel\Socialite\Two\User);
+        $this->addToAssertionCount(1);
 
-        $user = AuthenticateUser::create($socialite);
+        $user = new AuthenticateUser;
+        $user->setSocialite($socialite);
 
         $user->setUser(null);
         $this->assertInstanceOf(\Laravel\Socialite\AbstractUser::class, $user->get(true));
@@ -110,18 +130,21 @@ class AuthenticateUserTest extends TestCase
         $socialite->shouldReceive('driver')
             ->once()
             ->andReturn($discordProvider);
+        $this->addToAssertionCount(1);
 
         $scopes = ['identify', 'guilds'];
         $discordProvider->shouldReceive('setScopes')
             ->withArgs([$scopes])
             ->once()
             ->andReturn($socialite);
+        $this->addToAssertionCount(1);
 
         $socialite->shouldReceive('redirect')
             ->once()
             ->andReturn(\Symfony\Component\HttpFoundation\RedirectResponse::create('/'));
 
-        $user = AuthenticateUser::create($socialite);
+        $user = new AuthenticateUser;
+        $user->setSocialite($socialite);
         $response = $user->execute(false);
         $this->assertInstanceOf(\Symfony\Component\HttpFoundation\RedirectResponse::class, $response);
     }
@@ -134,12 +157,15 @@ class AuthenticateUserTest extends TestCase
         $socialite->shouldReceive('driver')
             ->once()
             ->andReturn($discordProvider);
+        $this->addToAssertionCount(1);
 
         $discordProvider->shouldReceive('user')
             ->once()
             ->andReturn(new \Laravel\Socialite\Two\User);
+        $this->addToAssertionCount(1);
 
-        $user = AuthenticateUser::create($socialite);
+        $user = new AuthenticateUser;
+        $user->setSocialite($socialite);
         $response = $user->execute(true);
 
         $this->assertInstanceOf(\Symfony\Component\HttpFoundation\RedirectResponse::class, $response);
