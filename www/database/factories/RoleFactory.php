@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Botwinder\Models\Role::class, function (Faker $faker) {
+$factory->define(\Valkyrja\Models\Role::class, function (Faker $faker) {
     return [
         'serverid' => $faker->unique()->randomNumber(8),
         'roleid' => $faker->unique()->randomNumber(8),

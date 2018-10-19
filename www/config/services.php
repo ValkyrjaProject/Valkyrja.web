@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Botwinder\DiscordUser::class,
+        'model' => Valkyrja\Models\DiscordUser::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

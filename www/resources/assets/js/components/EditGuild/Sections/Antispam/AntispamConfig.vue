@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>
-            Botwinder will act as configured below, if it takes any action, it will PM the naughty user letting them know about it. If you configure it to also ban for excessive spam, it will let the user know one message before banning them. Removed messages and banned users will be logged as configured in the <code>Moderation Log</code> section.
+            Valkyrja will act as configured below, if it takes any action, it will PM the naughty user letting them know about it. If you configure it to also ban for excessive spam, it will let the user know one message before banning them. Removed messages and banned users will be logged as configured in the <code>Moderation Log</code> section.
             <br>
             Antispam will not take any action against Admins or Moderators. You should also configure <code>Ignore
             Channels</code> in the Logging section - Antispam will not be active in these channels.
@@ -52,7 +52,7 @@
             <vuex-switch store-name="antispam_duplicate_crossserver">
                 We can also remove these cross-server. Imagine that there is someone going through many servers
                 and posting some advertisement everywhere, but only a single message per-server so it doesn't
-                count as standard spam. Botwinder would notice these messages as being duplicates between
+                count as standard spam. Valkyrja would notice these messages as being duplicates between
                 servers.
             </vuex-switch>
             <vuex-switch store-name="antispam_duplicate_ban">

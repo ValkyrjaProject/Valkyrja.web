@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Models\Sample;
+namespace Valkyrja\Models\Sample;
 
 use Illuminate\Database\Eloquent\Model;
 

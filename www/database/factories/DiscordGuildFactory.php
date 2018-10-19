@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Botwinder\Models\Sample\DiscordGuild::class, function (Faker $faker) {
+$factory->define(Valkyrja\Models\Sample\DiscordGuild::class, function (Faker $faker) {
     return [
         'id' => $faker->unique()->randomNumber(8),
         'name' => $faker->company,

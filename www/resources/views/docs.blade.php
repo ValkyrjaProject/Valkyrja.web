@@ -13,31 +13,31 @@
                 <div>
                     <h1>Open Source</h1>
                     <div class="features-indent">
-                        Botwinder is Open Source and you can find it in the below repositories, contribution is welcome.
+                        Valkyrja is Open Source and you can find it in the below repositories, contribution is welcome.
                         <table class="command">
                             <tr>
-                                <td><a href="https://github.com/RheaAyase/Botwinder.core">Botwinder.core</a></td>
+                                <td><a href="https://github.com/RheaAyase/Valkyrja.core">Valkyrja.core</a></td>
                                 <td>Core client code.</td>
                             </tr>
                             <tr>
-                                <td><a href="https://github.com/RheaAyase/Botwinder.discord">Botwinder.discord</a></td>
-                                <td>Most of Botwinder's features</td>
+                                <td><a href="https://github.com/RheaAyase/Valkyrja.discord">Valkyrja.discord</a></td>
+                                <td>Most of Valkyrja's features</td>
                             </tr>
                             <tr>
-                                <td><a href="https://github.com/RheaAyase/Botwinder.secure">Botwinder.secure</a></td>
+                                <td><a href="https://github.com/RheaAyase/Valkyrja.secure">Valkyrja.secure</a></td>
                                 <td>Private repository containing sensitive code, such as antispam.</td>
                             </tr>
                             <tr>
-                                <td><a href="https://github.com/RheaAyase/Botwinder.web">Botwinder.web</a></td>
+                                <td><a href="https://github.com/RheaAyase/Valkyrja.web">Valkyrja.web</a></td>
                                 <td>This website.</td>
                             </tr>
                             <tr>
-                                <td><a href="https://github.com/RheaAyase/Botwinder.service">Botwinder.service</a></td>
+                                <td><a href="https://github.com/RheaAyase/Valkyrja.service">Valkyrja.service</a></td>
                                 <td>What you can see as <code>Skywinder</code> on Discord, a server cluster management bot.</td>
                             </tr>
                             <tr>
-                                <td><a href="https://github.com/RheaAyase/Botwinder.status">Botwinder.status</a></td>
-                                <td>The <code>status.botwinder.info</code> page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
+                                <td><a href="https://github.com/RheaAyase/Valkyrja.status">Valkyrja.status</a></td>
+                                <td>The <code>status.valkyrja.app</code> page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
                             </tr>
                         </table>
                     </div>
@@ -46,7 +46,7 @@
                         These are some features that are not fully covered by simple commands:
                     <ul>
                         <li><b>Encrypted Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
-                        <li><b>Configure</b> many aspects of the bot: customize the command prefix, <b>antispam system</b> to remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing too!) And the Botwinder will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
+                        <li><b>Configure</b> many aspects of the bot: customize the command prefix, <b>antispam system</b> to remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing too!) And the Valkyrja will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
                         <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. The above also applies. Oh and they can get cookies for verifying, if you configure that as well.
                         <li><b>Log user events</b> like user joining or leaving the server, being promoted or demoted, and PM a new user when they join the server. You can change these messages to your liking, set whether to @mention them, or just use their name as text, etc. (<a href="/config">Can be configured.</a>)</li>
                         <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
@@ -151,7 +151,7 @@
                     <table class="command">
                         <tr>
                             <td>Description</td>
-                            <td>Botwinder will leave your server.</td>
+                            <td>Valkyrja will leave your server.</td>
                         </tr>
                         <tr>
                             <td>Parameters</td>
@@ -1037,7 +1037,7 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Manage a meeting that will create nice logs and meeting minutes on our website. <a href="http://botwinder.info/meetings/244607894165651457/Example%20meeting">Example here.</a></td>
+                        <td>Manage a meeting that will create nice logs and meeting minutes on our website. <a href="http://valkyrja.app/meetings/244607894165651457/Example%20meeting">Example here.</a></td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
@@ -1088,7 +1088,7 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Botwinder will keep track of your time at work (uses GMT for calculations of the month)</td>
+                        <td>Valkyrja will keep track of your time at work (uses GMT for calculations of the month)</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>

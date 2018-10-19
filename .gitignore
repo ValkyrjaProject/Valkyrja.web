@@ -1,6 +1,6 @@
 *.userprefs
 
-## Botwinder specific:
+## Valkyrja specific:
 dbConfig.json
 *.deps.json
 *.runtimeconfig.json

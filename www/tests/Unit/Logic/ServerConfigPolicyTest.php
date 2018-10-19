@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Logic;
 
-use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\Models\ServerConfig;
+use Valkyrja\Policies\ServerConfigPolicy;
+use Valkyrja\Models\ServerConfig;
 use Illuminate\Support\Collection;
 use Laravel\Socialite\Two\User;
 use LaravelRestcord\Discord;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Providers;
+namespace Valkyrja\Providers;
 
 class DiscordProvider extends \LaravelRestcord\Authentication\Socialite\DiscordProvider
 {

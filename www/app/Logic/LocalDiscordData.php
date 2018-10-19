@@ -1,11 +1,11 @@
 <?php
 
-namespace Botwinder\Logic;
+namespace Valkyrja\Logic;
 
-use Botwinder\Models\Channel;
-use Botwinder\Models\Role;
-use Botwinder\Models\Sample\DiscordGuild;
-use Botwinder\Models\ServerConfig;
+use Valkyrja\Models\Channel;
+use Valkyrja\Models\Role;
+use Valkyrja\Models\Sample\DiscordGuild;
+use Valkyrja\Models\ServerConfig;
 use Illuminate\Support\Collection;
 use LaravelRestcord\Discord\Guild;
 

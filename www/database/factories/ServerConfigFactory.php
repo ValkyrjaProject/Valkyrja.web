@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Botwinder\Models\ServerConfig::class, function (Faker $faker) {
+$factory->define(\Valkyrja\Models\ServerConfig::class, function (Faker $faker) {
     return [
         'serverid' => $faker->unique()->randomNumber(8),
         'name' => str_random(10),

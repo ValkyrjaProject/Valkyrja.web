@@ -8,10 +8,10 @@
 
 namespace Tests\Unit\Logic;
 
-use Botwinder\Http\Middleware\CanEditGuild;
-use Botwinder\Logic\AuthenticateUser;
-use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\Models\ServerConfig;
+use Valkyrja\Http\Middleware\CanEditGuild;
+use Valkyrja\Logic\AuthenticateUser;
+use Valkyrja\Policies\ServerConfigPolicy;
+use Valkyrja\Models\ServerConfig;
 use Illuminate\Auth\Access\AuthorizationException;
 use Mockery;
 use Closure;

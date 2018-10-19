@@ -29,7 +29,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "Botwinder\\": "app/"
+            "Valkyrja\\": "app/"
         }
     },
     "autoload-dev": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Http;
+namespace Valkyrja\Http;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Models\Sample;
+namespace Valkyrja\Models\Sample;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +23,7 @@ class DiscordChannel extends Model
 
     public function guild()
     {
-        return $this->belongsTo('Botwinder\Models\Sample\DiscordGuild');
+        return $this->belongsTo('Valkyrja\Models\Sample\DiscordGuild');
     }
 
     public function getForeignKey()

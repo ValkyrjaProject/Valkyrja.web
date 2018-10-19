@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Providers;
+namespace Valkyrja\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,11 +13,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Botwinder\Events\Event' => [
-            'Botwinder\Listeners\EventListener',
+        'Valkyrja\Events\Event' => [
+            'Valkyrja\Listeners\EventListener',
         ],
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
-            'Botwinder\Events\DiscordExtendSocialite@handle',
+            'Valkyrja\Events\DiscordExtendSocialite@handle',
             /*'LaravelRestcord\Authentication\AddTokenToSession@handle'*/
         ],
     ];

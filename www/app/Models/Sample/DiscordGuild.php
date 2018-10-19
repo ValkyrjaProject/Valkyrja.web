@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Models\Sample;
+namespace Valkyrja\Models\Sample;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,12 +35,12 @@ class DiscordGuild extends Model
 
     public function roles()
     {
-        return $this->hasMany('Botwinder\Models\Sample\DiscordRole');
+        return $this->hasMany('Valkyrja\Models\Sample\DiscordRole');
     }
 
     public function channels()
     {
-        return $this->hasMany('Botwinder\Models\Sample\DiscordChannel');
+        return $this->hasMany('Valkyrja\Models\Sample\DiscordChannel');
     }
 
     public function getForeignKey()

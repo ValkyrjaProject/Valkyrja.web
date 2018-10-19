@@ -61,7 +61,7 @@
             </vuex-switch>
             <br>
             <vuex-switch store-name="exp_advance_users">
-                Botwinder can advance users to the above configured highest role. This means that if a user already has a higher level role, than their level, their level will be increased to match the role. This is useful if you are transitioning from other level systems, this way your users won't lose their progress!
+                Valkyrja can advance users to the above configured highest role. This means that if a user already has a higher level role, than their level, their level will be increased to match the role. This is useful if you are transitioning from other level systems, this way your users won't lose their progress!
             </vuex-switch>
             <br>
             How many {{ karma_currency }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
@@ -74,7 +74,7 @@
             <div class="message-body">
                 Karma is an extra appreciation of helpful people. They get thanked, they get a cookie!
                 <br><code>Rhea: Hey thanks for that pull request fixing a typo @freiheit</code>
-                <br><code>Botwinder: @freiheit received a <i>thank you</i> cookie!</code>
+                <br><code>Valkyrja: @freiheit received a <i>thank you</i> cookie!</code>
                 <br>You can also <code>!give @user</code> a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
                 <br><i>Hint: Create <code>{{ command_prefix }}alias</code> for the <code>cookies</code> and <code>nom</code> commands to fit your custom configuration below!</i>
             </div>

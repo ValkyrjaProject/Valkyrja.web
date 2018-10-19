@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Logic;
+namespace Valkyrja\Logic;
 
 use Event;
 use Illuminate\Auth\Events\Login;
@@ -174,7 +174,7 @@ class AuthenticateUser implements AuthenticateUserInterface
 
     public static function admins(): Collection
     {
-        return collect(explode(',', env('BOTWINDER_ADMINS')));
+        return collect(explode(',', env('VALKYRJA_ADMINS')));
     }
 
     private function discord()

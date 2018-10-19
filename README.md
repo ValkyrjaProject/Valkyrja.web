@@ -6,18 +6,18 @@ Copyright © 2016 Radka Janek, [rhea-ayase.eu](http://rhea-ayase.eu)
 
 
 
-## Botwinder ![](https://api.travis-ci.org/RheaAyase/Botwinder.web.svg?branch=dev)
-Please take a look at our website to see what the bot about, full list of features, invite and configuration: [http://botwinder.info](http://botwinder.info)
+## Valkyrja ![](https://api.travis-ci.org/RheaAyase/Valkyrja.web.svg?branch=dev)
+Please take a look at our website to see what the bot about, full list of features, invite and configuration: [https://valkyrja.app](https://valkyrja.app)
 
 ## Contributing
 
 Please read the [Contributing file](CONTRIBUTING.md) before you start =)
 
-If there is a security issue, contact `SpyTec#1329` on Discord or email spytec13+botwinder@gmail.com
+If there is a security issue, contact `SpyTec#1329` on Discord or email spytec13+valkyrja@gmail.com
 
 ## Self hosting
 
-If you are self-hosting the Botwinder bot and want configuration dashboard, you'd have to run our website on a server that can connect to the self-hosted Botwinder's database.
+If you are self-hosting the Valkyrja bot and want configuration dashboard, you'd have to run our website on a server that can connect to the self-hosted Valkyrja's database.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ If you are self-hosting the Botwinder bot and want configuration dashboard, you'
 
 ## Installation
 
-1. `git clone https://github.com/RheaAyase/Botwinder.web.git` or download as zip
+1. `git clone https://github.com/RheaAyase/Valkyrja.web.git` or download as zip
 1. Copy `www/.env.example` to `www/.env`
 1. Configure `.env` with database connection and OAuth2 variables and bot tokens
 1. Run `docker-compose up`

@@ -33,7 +33,7 @@
                     <img class="is-hidden-touch" src="{{ asset('/img/discord-small.png') }}" alt="Help"/>
                     Help
                 </a>
-                <a class="navbar-item external" href="//status.botwinder.info">
+                <a class="navbar-item external" href="//status.valkyrja.app">
                     <img class="is-hidden-touch" src="{{ asset('/img/satellite.png') }}" alt="Status"/>
                     Status
                 </a>

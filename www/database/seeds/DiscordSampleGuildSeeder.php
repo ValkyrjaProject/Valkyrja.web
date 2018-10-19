@@ -12,13 +12,13 @@ class DiscordSampleGuildSeeder extends Seeder
     public function run()
     {
         /** @var \Illuminate\Support\Collection $guilds */
-        factory(Botwinder\Models\Sample\DiscordGuild::class, 3)
+        factory(Valkyrja\Models\Sample\DiscordGuild::class, 3)
             ->create()
             ->each(function($guild) {
-                $guild->channels()->saveMany(factory(Botwinder\Models\Sample\DiscordChannel::class, 10)->create([
+                $guild->channels()->saveMany(factory(Valkyrja\Models\Sample\DiscordChannel::class, 10)->create([
                     'guild_id' => $guild->id
                 ]));
-                $guild->roles()->saveMany(factory(Botwinder\Models\Sample\DiscordRole::class, 15)->create([
+                $guild->roles()->saveMany(factory(Valkyrja\Models\Sample\DiscordRole::class, 15)->create([
                     'guild_id' => $guild->id
                 ]));
         });

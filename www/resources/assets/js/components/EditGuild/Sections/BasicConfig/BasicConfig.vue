@@ -3,7 +3,7 @@
         <p>
             <b>Permissions</b>
             <br>
-            Botwinder expects server and channel permissions to be correct and some functions may not work if you do not pay enough attention to this topic.
+            Valkyrja expects server and channel permissions to be correct and some functions may not work if you do not pay enough attention to this topic.
             <br>
             First permissions of the bot - you have to not only give it the permissions but also <a
                 href="http://i.imgur.com/T8MPvME.png"

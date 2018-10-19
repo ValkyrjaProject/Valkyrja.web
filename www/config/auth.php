@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Botwinder\DiscordUser::class,
+            'model' => Valkyrja\Models\DiscordUser::class,
         ],
 
         // 'users' => [

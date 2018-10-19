@@ -8,39 +8,39 @@
  */
 
 
-namespace Botwinder{
+namespace Valkyrja{
 /**
- * Botwinder\Channel
+ * Valkyrja\Channel
  *
- * @property-read \Botwinder\ServerConfig $serverConfig
+ * @property-read \Valkyrja\ServerConfig $serverConfig
  */
 	class Channel extends \Eloquent {}
 }
 
-namespace Botwinder{
+namespace Valkyrja{
 /**
- * Botwinder\CustomCommand
+ * Valkyrja\CustomCommand
  *
  */
 	class CustomCommand extends \Eloquent {}
 }
 
-namespace Botwinder{
+namespace Valkyrja{
 /**
- * Botwinder\Role
+ * Valkyrja\Role
  *
- * @property-read \Botwinder\ServerConfig $serverConfig
+ * @property-read \Valkyrja\ServerConfig $serverConfig
  */
 	class Role extends \Eloquent {}
 }
 
-namespace Botwinder{
+namespace Valkyrja{
 /**
- * Botwinder\ServerConfig
+ * Valkyrja\ServerConfig
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\Botwinder\Channel[] $channels
- * @property-read \Illuminate\Database\Eloquent\Collection|\Botwinder\CustomCommand[] $customCommands
- * @property-read \Illuminate\Database\Eloquent\Collection|\Botwinder\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Valkyrja\Channel[] $channels
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Valkyrja\CustomCommand[] $customCommands
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Valkyrja\Role[] $roles
  */
 	class ServerConfig extends \Eloquent {}
 }

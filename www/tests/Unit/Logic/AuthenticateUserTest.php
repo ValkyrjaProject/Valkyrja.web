@@ -8,8 +8,8 @@
 
 namespace Tests\Unit\Logic;
 
-use Botwinder\Logic\AuthenticateUser;
-use Botwinder\Logic\AuthenticateUserInterface;
+use Valkyrja\Logic\AuthenticateUser;
+use Valkyrja\Logic\AuthenticateUserInterface;
 use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use Illuminate\Support\Facades\Session;
 use LaravelRestcord\Discord;

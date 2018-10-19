@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Exceptions;
+namespace Valkyrja\Exceptions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;

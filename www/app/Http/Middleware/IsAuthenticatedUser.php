@@ -1,8 +1,8 @@
 <?php
 
-namespace Botwinder\Http\Middleware;
+namespace Valkyrja\Http\Middleware;
 
-use Botwinder\Logic\AuthenticateUserInterface;
+use Valkyrja\Logic\AuthenticateUserInterface;
 use Closure;
 use Illuminate\Http\Request;
 use Throwable;

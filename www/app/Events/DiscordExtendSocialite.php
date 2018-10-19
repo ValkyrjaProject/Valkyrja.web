@@ -1,8 +1,8 @@
 <?php
 
-namespace Botwinder\Events;
+namespace Valkyrja\Events;
 
-use Botwinder\Providers\DiscordProvider;
+use Valkyrja\Providers\DiscordProvider;
 
 class DiscordExtendSocialite extends \LaravelRestcord\Authentication\Socialite\DiscordExtendSocialite
 {

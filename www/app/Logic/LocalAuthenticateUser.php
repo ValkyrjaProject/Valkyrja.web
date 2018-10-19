@@ -6,11 +6,11 @@
  * Time: 1:29 PM
  */
 
-namespace Botwinder\Logic;
+namespace Valkyrja\Logic;
 
 
-use Botwinder\Models\Sample\DiscordGuild;
-use Botwinder\Models\Sample\DiscordUser;
+use Valkyrja\Models\Sample\DiscordGuild;
+use Valkyrja\Models\Sample\DiscordUser;
 use Illuminate\Support\Collection;
 use Laravel\Socialite\Two\User;
 use LaravelRestcord\Discord\Guild;
@@ -100,6 +100,6 @@ class LocalAuthenticateUser implements AuthenticateUserInterface
 
     public static function admins(): Collection
     {
-        return collect(explode(',', env('BOTWINDER_ADMINS')));
+        return collect(explode(',', env('VALKYRJA_ADMINS')));
     }
 }

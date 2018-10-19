@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Console;
+namespace Valkyrja\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

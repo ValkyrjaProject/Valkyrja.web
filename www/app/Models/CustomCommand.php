@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Models;
+namespace Valkyrja\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +18,7 @@ class CustomCommand extends Model
 
     public function serverConfig()
     {
-        $this->belongsTo('Botwinder\Models\ServerConfig');
+        $this->belongsTo('Valkyrja\Models\ServerConfig');
     }
 
     /**

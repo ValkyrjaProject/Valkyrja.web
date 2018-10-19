@@ -5,7 +5,7 @@ services:
     image: mariadb
     restart: always
     environment:
-    - MYSQL_DATABASE=botwinder
+    - MYSQL_DATABASE=valkyrja
     - MYSQL_USER=root
     - MYSQL_PASSWORD=
     - MYSQL_ALLOW_EMPTY_PASSWORD=yes # This is a development only Docker

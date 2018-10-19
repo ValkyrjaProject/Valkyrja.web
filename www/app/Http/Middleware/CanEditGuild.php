@@ -1,10 +1,10 @@
 <?php
 
-namespace Botwinder\Http\Middleware;
+namespace Valkyrja\Http\Middleware;
 
-use Botwinder\Logic\AuthenticateUser;
-use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\Models\ServerConfig;
+use Valkyrja\Logic\AuthenticateUser;
+use Valkyrja\Policies\ServerConfigPolicy;
+use Valkyrja\Models\ServerConfig;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 

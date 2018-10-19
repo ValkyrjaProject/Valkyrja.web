@@ -156,11 +156,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Botwinder\Providers\AppServiceProvider::class,
-        Botwinder\Providers\AuthServiceProvider::class,
-        // Botwinder\Providers\BroadcastServiceProvider::class,
-        Botwinder\Providers\EventServiceProvider::class,
-        Botwinder\Providers\RouteServiceProvider::class,
+        Valkyrja\Providers\AppServiceProvider::class,
+        Valkyrja\Providers\AuthServiceProvider::class,
+        // Valkyrja\Providers\BroadcastServiceProvider::class,
+        Valkyrja\Providers\EventServiceProvider::class,
+        Valkyrja\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -210,7 +210,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Helper' => Botwinder\Http\Helpers::class,
+        'Helper' => Valkyrja\Http\Helpers::class,
     ],
 
 ];

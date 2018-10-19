@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Providers;
+namespace Valkyrja\Providers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -27,11 +27,11 @@ class AppServiceProvider extends ServiceProvider
         $app = $this->app;
 
         if (App::environment('production')) {
-            $app->bind('Botwinder\Logic\AuthenticateUserInterface', 'Botwinder\Logic\AuthenticateUser');
-            $app->bind('Botwinder\Logic\DiscordDataInterface', 'Botwinder\Logic\DiscordData');
+            $app->bind('Valkyrja\Logic\AuthenticateUserInterface', 'Valkyrja\Logic\AuthenticateUser');
+            $app->bind('Valkyrja\Logic\DiscordDataInterface', 'Valkyrja\Logic\DiscordData');
         } else {
-            $app->bind('Botwinder\Logic\AuthenticateUserInterface', 'Botwinder\Logic\LocalAuthenticateUser');
-            $app->bind('Botwinder\Logic\DiscordDataInterface', 'Botwinder\Logic\LocalDiscordData');
+            $app->bind('Valkyrja\Logic\AuthenticateUserInterface', 'Valkyrja\Logic\LocalAuthenticateUser');
+            $app->bind('Valkyrja\Logic\DiscordDataInterface', 'Valkyrja\Logic\LocalDiscordData');
         }
     }
 }

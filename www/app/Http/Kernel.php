@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Http;
+namespace Valkyrja\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Botwinder\Http\Middleware\TrimStrings::class,
+        \Valkyrja\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Botwinder\Http\Middleware\TrustProxies::class,
+        \Valkyrja\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -28,12 +28,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Botwinder\Http\Middleware\EncryptCookies::class,
+            \Valkyrja\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Botwinder\Http\Middleware\VerifyCsrfToken::class,
+            \Valkyrja\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
         ],
@@ -57,10 +57,10 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Botwinder\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Valkyrja\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'auth.discord' => \Botwinder\Http\Middleware\IsAuthenticatedUser::class,
-        'canEditGuild' => \Botwinder\Http\Middleware\CanEditGuild::class,
+        'auth.discord' => \Valkyrja\Http\Middleware\IsAuthenticatedUser::class,
+        'canEditGuild' => \Valkyrja\Http\Middleware\CanEditGuild::class,
     ];
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Botwinder\Http\Controllers\Config;
+namespace Valkyrja\Http\Controllers\Config;
 
-use Botwinder\Http\Controllers\Controller;
-use Botwinder\Models\ServerConfig;
+use Valkyrja\Http\Controllers\Controller;
+use Valkyrja\Models\ServerConfig;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller
@@ -37,7 +37,7 @@ class ConfigController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Botwinder\ServerConfig $serverConfig
+     * @param  \Valkyrja\ServerConfig $serverConfig
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ServerConfig $serverConfig)

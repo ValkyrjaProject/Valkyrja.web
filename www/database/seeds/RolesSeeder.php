@@ -13,7 +13,7 @@ class RolesSeeder extends Seeder
     public function run()
     {
         /** @var \Illuminate\Support\Collection $roles */
-        $roles = \Botwinder\Models\Sample\DiscordRole::all();
+        $roles = \Valkyrja\Models\Sample\DiscordRole::all();
         $roles->slice(count($roles)/2)->each(function ($role) {
             DB::table('roles')->insert([
                 'serverid' => $role->guild_id,

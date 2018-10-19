@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Providers;
+namespace Valkyrja\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //\Botwinder\ServerConfig::class => \Botwinder\Policies\ServerConfigPolicy::class,
+        //\Valkyrja\ServerConfig::class => \Valkyrja\Policies\ServerConfigPolicy::class,
     ];
 
     /**

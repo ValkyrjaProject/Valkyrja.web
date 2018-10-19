@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Models;
+namespace Valkyrja\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +27,7 @@ class Role extends Model
 
     public function serverConfig()
     {
-        return $this->belongsTo('Botwinder\Models\ServerConfig');
+        return $this->belongsTo('Valkyrja\Models\ServerConfig');
     }
 
     public function getForeignKey()

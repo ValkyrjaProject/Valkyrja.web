@@ -1,9 +1,9 @@
 <?php
 
-namespace Botwinder\Policies;
+namespace Valkyrja\Policies;
 
-use Botwinder\Logic\AuthenticateUser;
-use Botwinder\ServerConfig;
+use Valkyrja\Logic\AuthenticateUser;
+use Valkyrja\ServerConfig;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\Guild;
 use LaravelRestcord\Discord\Permissions\Permission;

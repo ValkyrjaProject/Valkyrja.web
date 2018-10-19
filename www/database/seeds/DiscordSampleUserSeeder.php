@@ -11,6 +11,6 @@ class DiscordSampleUserSeeder extends Seeder
      */
     public function run()
     {
-        factory(Botwinder\Models\Sample\DiscordUser::class)->create();
+        factory(Valkyrja\Models\Sample\DiscordUser::class)->create();
     }
 }

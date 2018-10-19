@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Http\Controllers;
+namespace Valkyrja\Http\Controllers;
 
 use Illuminate\Http\Request;
 

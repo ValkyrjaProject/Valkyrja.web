@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Models;
+namespace Valkyrja\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -66,17 +66,17 @@ class ServerConfig extends Model
 
     public function customCommands()
     {
-        return $this->hasMany('Botwinder\Models\CustomCommand');
+        return $this->hasMany('Valkyrja\Models\CustomCommand');
     }
 
     public function channels()
     {
-        return $this->hasMany('Botwinder\Models\Channel');
+        return $this->hasMany('Valkyrja\Models\Channel');
     }
 
     public function roles()
     {
-        return $this->hasMany('Botwinder\Models\Role');
+        return $this->hasMany('Valkyrja\Models\Role');
     }
 
     /**

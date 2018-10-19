@@ -1,5 +1,5 @@
 <?php
-namespace Botwinder\Logic;
+namespace Valkyrja\Logic;
 
 use Illuminate\Support\Collection;
 use Laravel\Socialite\Two\User;

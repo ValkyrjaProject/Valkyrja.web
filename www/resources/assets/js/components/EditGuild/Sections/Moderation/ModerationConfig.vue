@@ -35,7 +35,7 @@
                 store-name="quickban_duration">(hours)</vuex-number>
         </p>
         <p>
-            <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Botwinder to prevent people from talking in all your channels.
+            <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role will be configured by Valkyrja to prevent people from talking in all your channels.
             <br>
             <vuex-multiselect
                 store-name="mute_roleid"
@@ -76,7 +76,7 @@
                 href="http://rhea-ayase.eu/articles/2016-11/On-the-topic-of-moderation"
                 target="_blank">On the topic of Moderation</a></b>
             <br>
-            Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by Rhea.)</i>
+            Another article about moderating a community, full of Discord/Valkyrja examples. <i>(Written by Rhea.)</i>
         </p>
     </div>
 </template>

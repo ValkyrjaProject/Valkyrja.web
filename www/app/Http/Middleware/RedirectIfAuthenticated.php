@@ -1,8 +1,8 @@
 <?php
 
-namespace Botwinder\Http\Middleware;
+namespace Valkyrja\Http\Middleware;
 
-use Botwinder\Logic\AuthenticateUser;
+use Valkyrja\Logic\AuthenticateUser;
 use Closure;
 
 class RedirectIfAuthenticated

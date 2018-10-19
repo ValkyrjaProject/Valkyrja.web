@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
-@section('title', 'Invite Botwinder')
+@section('title', 'Invite Valkyrja')
 
 @section('content')
     <section class="container">
     <!--div class="col-xs-12">
         <div class="row">
-            <h1>Botwinder</h1>
+            <h1>Valkyrja</h1>
             {{--<div>
-                <img src="/img/jefi-discord.jpg" alt="Botwinder" class="square rounded-circle img-thumbnail" width="150px">
+                <img src="/img/jefi-discord.jpg" alt="Valkyrja" class="square rounded-circle img-thumbnail" width="150px">
             </div>--}}
             </div>
             <p class="row">
@@ -17,7 +17,7 @@
               Both bots are identical, and there are no special features in either one.
             </p><br />
             <div class="row">
-                <a href="http://invite.botwinder.info" class="external">
+                <a href="http://invite.valkyrja.app" class="external">
                     <button class="btn btn-primary">Invite</button>
                 </a>
             </div>
@@ -27,18 +27,18 @@
         <section class="container">
             <div class="col-xs-12">
                 <div class="row">
-                    <h1>Botwinder Mk.III</h1>
+                    <h1>Valkyrja</h1>
                     {{--<div>
-                        <img src="/img/jefi-discord.jpg" alt="Botwinder" class="square rounded-circle img-thumbnail" width="150px">
+                        <img src="/img/jefi-discord.jpg" alt="Valkyrja" class="square rounded-circle img-thumbnail" width="150px">
                     </div>--}}
                 </div>
                 <p class="row">
-                    You can use Botwinder Mk.III for <b>one day trial period</b>, after which the bot will automatically
+                    You can use Valkyrja for <b>one day trial period</b>, after which the bot will automatically
                     leave your server, if you do not meet at least <b>one of the requirements</b> below.
                     <br/>
                     <b>Requirements</b> <i>(one of)</i>
                 <ul>
-                    <li><a href="https://www.patreon.com/Botwinder" target="_blank">Patreon</a> Subscribers at 10$ or
+                    <li><a href="https://www.patreon.com/Valkyrja" target="_blank">Patreon</a> Subscribers at 10$ or
                         more
                     </li>
                     <li>Handpicked partners - unique communities with worthy cause, such as open source projects, Linux
@@ -47,7 +47,7 @@
                 </ul>
                 </p>
                 <div class="row">
-                    <a href="http://invite.botwinder.info" class="external">
+                    <a href="http://invite.valkyrja.app" class="external">
                         <button class="btn btn-primary">Invite</button>
                     </a>
                 </div>

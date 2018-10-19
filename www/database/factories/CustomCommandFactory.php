@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Botwinder\Models\CustomCommand::class, function (Faker $faker) {
+$factory->define(\Valkyrja\Models\CustomCommand::class, function (Faker $faker) {
     return [
         'serverid' => $faker->unique()->randomNumber(8),
         'commandid' =>  $faker->text(16),

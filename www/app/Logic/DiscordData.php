@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Logic;
+namespace Valkyrja\Logic;
 
 use App;
 use Illuminate\Support\Collection;

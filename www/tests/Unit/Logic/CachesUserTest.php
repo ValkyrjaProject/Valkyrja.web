@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Logic;
 
-use Botwinder\Logic\CachesUser;
+use Valkyrja\Logic\CachesUser;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Socialite\Two\User;
 use Mockery;

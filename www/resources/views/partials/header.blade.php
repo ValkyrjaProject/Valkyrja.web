@@ -1,12 +1,12 @@
-<title>@yield('title') - Botwinder.info</title>
+<title>@yield('title') - Valkyrja.app</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta property="og:title" content="Botwinder Discord Bot - @yield('title')">
+<meta property="og:title" content="Valkyrja Discord Bot - @yield('title')">
 <meta property="og:description"
       content="Highly customizable Community Management bot, provides advanced moderation tools, advanced role assignment, temporary channels, user verification, antispam, polls, custom commands & aliases, scheduled messages & commands, and even meeting management systems. Comes with cookies!">
 <meta property="og:type" content="website">
-<meta property="og:image" content="http://botwinder.info/img/jefi-mirror.png">
+<meta property="og:image" content="https://www.valkyrja.app/img/jefi-mirror.png">
 <meta property="og:url" content="{{ Request::path() }}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"

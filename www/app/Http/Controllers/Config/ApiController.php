@@ -1,12 +1,12 @@
 <?php
 
-namespace Botwinder\Http\Controllers\Config;
+namespace Valkyrja\Http\Controllers\Config;
 
-use Botwinder\Http\Controllers\Controller;
-use Botwinder\Logic\AuthenticateUserInterface;
-use Botwinder\Logic\DiscordDataInterface;
-use Botwinder\Policies\ServerConfigPolicy;
-use Botwinder\Models\ServerConfig;
+use Valkyrja\Http\Controllers\Controller;
+use Valkyrja\Logic\AuthenticateUserInterface;
+use Valkyrja\Logic\DiscordDataInterface;
+use Valkyrja\Policies\ServerConfigPolicy;
+use Valkyrja\Models\ServerConfig;
 use LaravelRestcord\Discord\Guild;
 
 class ApiController extends Controller
@@ -71,7 +71,7 @@ class ApiController extends Controller
         $guild = $discord->getGuild($serverId);
 
         if (is_null($guild)) {
-            return response()->json(["error" => "Botwinder cannot retrieve guild details!"]);
+            return response()->json(["error" => "Valkyrja cannot retrieve guild details!"]);
         }
         $guild->put('config', $server->jsonSerializeApi());
         return $guild->jsonSerialize();

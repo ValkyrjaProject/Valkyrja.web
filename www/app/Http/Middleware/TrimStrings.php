@@ -1,6 +1,6 @@
 <?php
 
-namespace Botwinder\Http\Middleware;
+namespace Valkyrja\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 

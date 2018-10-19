@@ -13,7 +13,7 @@ class ChannelsSeeder extends Seeder
     public function run()
     {
         /** @var \Illuminate\Support\Collection $channels */
-        $channels = \Botwinder\Models\Sample\DiscordChannel::all();
+        $channels = \Valkyrja\Models\Sample\DiscordChannel::all();
         $channels->slice(count($channels)/2)->each(function ($channel) {
             DB::table('channels')->insert([
                 'serverid' => $channel->guild_id,

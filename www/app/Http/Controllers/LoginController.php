@@ -1,8 +1,8 @@
 <?php
 
-namespace Botwinder\Http\Controllers;
+namespace Valkyrja\Http\Controllers;
 
-use Botwinder\Logic\AuthenticateUserInterface;
+use Valkyrja\Logic\AuthenticateUserInterface;
 use Cache;
 use Illuminate\Http\Request;
 use LaravelRestcord\Discord;

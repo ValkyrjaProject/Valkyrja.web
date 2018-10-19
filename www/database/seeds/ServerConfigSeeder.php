@@ -13,7 +13,7 @@ class ServerConfigSeeder extends Seeder
     public function run()
     {
         /** @var \Illuminate\Support\Collection $guilds */
-        $guilds = \Botwinder\Models\Sample\DiscordGuild::all();
+        $guilds = \Valkyrja\Models\Sample\DiscordGuild::all();
         $guilds->each(function ($guild) {
             DB::table('server_config')->insert([
                 'serverid' => $guild->id,
