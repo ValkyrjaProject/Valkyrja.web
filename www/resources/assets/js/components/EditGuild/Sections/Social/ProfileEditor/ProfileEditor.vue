@@ -8,6 +8,7 @@
                 class="column is-two-fifths options"
                 title="Profiles"
                 @input="selectedProfile = $event"
+                @add="addProfile()"
             />
             <div class="column">
                 <div class="panel panel-parent">
@@ -152,7 +153,10 @@ export default {
     methods: {
         hasSelectedProfile() {
             return this.selectedProfile === null || this.selectedProfile === undefined;
-        }
+        },
+        addProfile() {
+            this.$store.dispatch("profileEditor/addProfile", Profile.newInstance());
+        },
     }
 };
 </script>

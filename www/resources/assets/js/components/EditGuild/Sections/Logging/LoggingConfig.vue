@@ -76,7 +76,6 @@
             <vuex-switch store-name="log_join">
                 Display the following message when a new user joins your server. Use <code>{0}</code> in the message where their username should be. <i>(Message has to be shorter than 200 characters for embeds to work.)</i>
             </vuex-switch>
-            <br>
             <vuex-textarea store-name="log_message_join"/>
             <br>
             <vuex-switch store-name="log_mention_join">
@@ -89,7 +88,6 @@
             <vuex-switch store-name="log_leave">
                 Display the following message when someone leaves your server. Use <code>{0}</code> in the message where their username should be. <i>(Message has to be shorter than 200 characters for embeds to work.)</i>
             </vuex-switch>
-            <br>
             <vuex-textarea store-name="log_message_leave"/>
             <br>
             <vuex-switch store-name="log_mention_leave">
