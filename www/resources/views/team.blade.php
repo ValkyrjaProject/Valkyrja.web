@@ -16,9 +16,9 @@
                 <br />Project and Code Lead</p>
             </div>
             <p><i>
-                Former game programmer, Community Manager, .NET & OpenShift Engineer. Currently wearing her Red Hat, playing with the delicate C# letters in Linux.
+                Former Game Programmer, .NET Core Quality Engineering Lead & Community Manager, MountainBiker and an Evul Chick wearing her Red Hat, inspiring the desolate whitespace of Linux world with the delicate C# letters of simplified artificial intelligence.
             </i></p>
-            <span class="email"><a href="emailto:rhea@botwinder.info">rhea@botwinder.info</a></span>
+            <span class="email"><a href="emailto:rhea@valkyrja.app">rhea@valkyrja.app</a></span>
             <div class="icons spaced">
                 <a href="http://rhea-ayase.eu"><img src="/img/external.png" alt="Rhea's website"></a>
                 <a href="https://github.com/RheaAyase"><img src="/img/github.png" alt="github.com/RheaAyase"></a>
@@ -38,7 +38,7 @@
             <p><i>
                 Crafts websites. Also a professional slacker.
             </i></p>
-            <span class="email"><a href="emailto:spytec@botwinder.info">spytec@botwinder.info</a></span>
+            <span class="email"><a href="emailto:spytec@valkyrja.app">spytec@valkyrja.app</a></span>
             <div class="icons spaced">
                 <a href="https://edassets.org"><img src="/img/external.png" alt="SpyTec's EDAssets website"></a>
                 <a href="https://github.com/SpyTec"><img src="/img/github.png" alt="github.com/SpyTec"></a>
@@ -64,7 +64,6 @@
                 <p><i>
                     He's just this guy, you know? And a Linux sysadmin.
                 </i></p>
-                <span class="email"><a href="emailto:freiheit@botwinder.info">freiheit@botwinder.info</a></span>
                 <div class="icons spaced">
                     <a href="http://eric.eisenhart.com"><img src="/img/external.png" alt="freiheit's website"></a>
                     <a href="https://github.com/freiheit"><img src="/img/github.png" alt="github.com/freiheit"></a>
@@ -87,7 +86,6 @@
                 <p><i>
                     Programmer in study, also a weirdo.
                 </i></p>
-                <span class="email"><a href="emailto:masterchief_john-117team@botwinder.info">mastercheif_john-117@botwinder.info</a></span>
             </div>
             <!-- Alice -->
             <div class="col-md-6 team-member padding-bottom">
@@ -100,7 +98,6 @@
                 <p><i>
                     System admin and technology enthusiast, supports the religion of cookies.
                 </i></p>
-                <span class="email"><a href="emailto:alice@botwinder.info">alice@botwinder.info</a></span>
             </div>
             <div class="clearfix hidden-sm-down">
                 <!-- endline -->
@@ -114,9 +111,8 @@
                     <br />Support</p>
                 </div>
                 <p><i>
-                    Engineering student and botwinder enthusiast, crafts all the emojis.
+                    Engineering student and valkyrja enthusiast, crafts all the emojis.
                 </i></p>
-                <span class="email"><a href="emailto:dokadoka@botwinder.info">dokadoka@botwinder.info</a></span>
             </div>
         </div>
     </section>

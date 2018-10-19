@@ -8,7 +8,7 @@
 		<h1>Select server</h1>
 		<p>
 			Hi {{ $user->username }}!<br />
-			Required permissions to be able to configure Botwinder are <code>Administrator</code> & <code>ManageServer</code>, and you need to already have it on your server, before you can configure anything. <a href="/invite">Invite the bot!</a></p>
+			Required permissions to be able to configure Valkyrja are <code>Administrator</code> & <code>ManageServer</code>, and you need to already have it on your server, before you can configure anything. <a href="/invite">Invite the bot!</a></p>
 		</p>
 			Which server would you like to configure?
 		</p>

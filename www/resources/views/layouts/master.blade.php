@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@yield('title') - Botwinder.info</title>
+    <title>@yield('title') - Valkyrja.app</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Botwinder Discord Bot - @yield('title')">
+    <meta property="og:title" content="Valkyrja project - @yield('title')">
     <meta property="og:description" content="Highly customizable Community Management bot, provides advanced moderation tools, advanced role assignment, user verification, powerful antispam and much more. Comes with cookies!">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="http://botwinder.info/img/jefi-mirror.png">
+    <meta property="og:image" content="http://valkyrja.app/img/jefi-mirror.png">
     <meta property="og:url" content="{{ Request::path() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
@@ -34,9 +34,8 @@
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('invite') }}" href="{{ url('invite') }}"><img class="media hidden-sm-down" src="/img/rocket.png" alt="Invite" /><br class="hidden-sm-down" />Invite</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('updates') }}" href="{{ url('updates') }}"><img class="media hidden-sm-down" src="/img/updates.png" alt="Updates" /><br class="hidden-sm-down" />Updates</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('help') }}" href="{{ url('help') }}"><img class="media hidden-sm-down" src="/img/discord-small.png" alt="Help" /><br class="hidden-sm-down" />Help</a></li>
-                    <li class="nav-item"><a class="nav-link external" href="//status.botwinder.info"><img class="media hidden-sm-down" src="/img/satellite.png" alt="Status" /><br class="hidden-sm-down" />Status</a></li>
+                    <li class="nav-item"><a class="nav-link external" href="//status.valkyrja.app"><img class="media hidden-sm-down" src="/img/satellite.png" alt="Status" /><br class="hidden-sm-down" />Status</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('team') }}" href="{{ url('team') }}"><img class="media hidden-sm-down" src="/img/heart.png" alt="The Team" /><br class="hidden-sm-down" />The&nbsp;Team</a></li>
-                    {{-- <li class="nav-item"><a class="nav-link {{ Helper::setActive('contribute') }}" href="/contribute"><img class="media hidden-sm-down" src="/img/cookie.png" alt="Contribute" /><br class="hidden-sm-down" />Contribute</a></li> --}}
                 </ul>
             </div>
         </nav>
@@ -74,7 +73,7 @@
         <section class="middle-container">
             <!--div>
                 <small>
-                    <a href="https://www.patreon.com/Botwinder" target="_blank">Help us cover the server costs - subscribe just $1 on Patreon!</a>
+                    <a href="https://www.patreon.com/Valkyrja" target="_blank">Help us cover the server costs - subscribe just $1 on Patreon!</a>
                 </small>
             </div-->
             <div class="gray-links">

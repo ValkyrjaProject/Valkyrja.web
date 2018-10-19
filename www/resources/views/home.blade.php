@@ -8,11 +8,17 @@
         <img src="/img/jefi.png" alt="Jefi icon" class="media-object"/>
     </div>
     <div class="col-md-6 col-lg-8">
-        <h1>Botwinder - The Discord Bot</h1>
         <p>
-            Botwinder is highly customizable Community Management bot, a large package of advanced moderation tools, role assignment, temporary channels, antispam, user verification, custom commands & aliases, user profiles and many other community related features. Botwinder will keep track of your users and their naughty activities, it can log all kinds of things and get rid of spambots. Comes with <b>cookies</b> and friendly dev team, who will always help and answer your questions with a smile!
-            <br /><br />
-            Stability and 99.95% uptime guaranteed!
+            <h2>Kára</h2>
+            Bunny Kára is reincarnated Valkyrie <a href="https://en.wikipedia.org/wiki/Sigr%C3%BAn">Sigrún</a>, leader of nine Valkyries. Kára helps with community management, administration and moderation tasks to help create safe spaces for inclusive communities.
+        </p>
+        <p>
+            <h2>How?</h2>
+            Valkyrja is highly customizable Community Management bot for Discord, with powerful antispam, and advanced administration and moderation features. It also provides some social features such as levels, karma, or user profiles. Create custom commands, aliases, and control the permissions to the detail not only on roles, but also per-channel.
+        </p>
+        <p>
+            <h2>Valkyrja project</h2>
+            This project exists thanks to an awesome team of contributors and volunteers who are not financially compensated. All the expenses are covered by <a href="https://www.patreon.com/Valkyrja">Patreon</a> donations, and our own wallet, you know what to do should you wish to help out!
         </p>
     </div>
 </section>

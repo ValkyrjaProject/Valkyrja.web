@@ -16,7 +16,6 @@ Route::get('/docs', 'FeaturesController@index');
 Route::redirect('/features', '/docs');
 //Route::get('/features', 'FeaturesController@index');
 Route::get('/updates', 'ChangelogController@index');
-Route::get('/contribute', 'ContributeController@index');
 Route::get('/help', 'HelpController@index');
 Route::get('/team', 'TeamController@index');
 Route::get('/invite', 'InviteController@index');

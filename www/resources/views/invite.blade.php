@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
-@section('title', 'Invite Botwinder')
+@section('title', 'Invite Valkyrja')
 
 @section('content')
 <section class="container">
     {{--<!--div class="col-xs-12">
         <div class="row">
-            <h1>Botwinder</h1>
+            <h1>Valkyrja</h1>
             <div>
-                <img src="/img/jefi-discord.jpg" alt="Botwinder" class="square rounded-circle img-thumbnail" width="150px">
+                <img src="/img/jefi-discord.jpg" alt="Valkyrja" class="square rounded-circle img-thumbnail" width="150px">
             </div>
         </div>
         <p class="row">
@@ -17,7 +17,7 @@
           Both bots are identical, and there are no special features in either one.
         </p><br />
         <div class="row">
-            <a href="http://invite.botwinder.info" class="external">
+            <a href="http://invite.valkyrja.app" class="external">
                 <button class="btn btn-primary">Invite</button>
             </a>
         </div>
@@ -27,22 +27,22 @@
     <section class="container">
         <div class="col-xs-12">
             <div class="row">
-                <h1>Botwinder Mk.III</h1>
+                <h1>Valkyrja</h1>
                 {{--<div>
-                    <img src="/img/jefi-discord.jpg" alt="Botwinder" class="square rounded-circle img-thumbnail" width="150px">
+                    <img src="/img/jefi-discord.jpg" alt="Valkyrja" class="square rounded-circle img-thumbnail" width="150px">
                 </div>--}}
             </div>
             <p class="row">
-              Anyone can use our hosted instance of Botwinder for free, however only <b>Subscribers</b> will get performance-heavy Antispam and Social features (Profiles, Karma and Experience.)
+              Anyone can use our hosted instance of Valkyrja for free, however only <b>Subscribers</b> will get performance-heavy Antispam and Social features (Profiles, Karma and Experience.)
             </p>
             <div class="row">
-                <a href="http://invite.botwinder.info" class="external">
+                <a href="http://invite.valkyrja.app" class="external">
                     <button class="btn btn-primary">Invite</button>
                 </a>
             </div>
             <p class="row">
               <br />
-              <b><a href="https://www.patreon.com/Botwinder" target="_blank">Subscribe</a></b> to support the project and unlock the premium features!
+              <b><a href="https://www.patreon.com/Valkyrja" target="_blank">Subscribe</a></b> to support the project and unlock the premium features!
               <ul>
                   <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>

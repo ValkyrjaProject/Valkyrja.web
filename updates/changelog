@@ -1,5 +1,12 @@
 #Changelog
 
+**Valkyrja 3.3** - 20th of August, 2018
+  * Botwinder was rebranded to Valkyrja! See the announcement post in the our `#news` channel.
+  * Reaction-assigned roles are out!
+  * Mute will also deny reactions.
+  * Member role assigned after n-messages (see config.)
+  * Antispam will now also ban people (if configured) who have discord invites in their username or game status.
+
 **Botwinder 3.2** - 25th of August, 2018
   * Profiles - configurable embed profiles for users to play with.
   * Public role groups upgrade - you can now specify the name of the group, and how many roles can someone take out of each group.

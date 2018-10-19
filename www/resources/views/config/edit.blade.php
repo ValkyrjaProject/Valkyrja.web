@@ -21,11 +21,11 @@
         <div class="col-xs-12">
             <form action="{{ url('config/'.$serverId) }}" method="post" @submit.prevent>
                 <h1 class="col-md-8">
-                    <v-loading message='Configure Botwinder'>
+                    <v-loading message='Configure Valkyrja'>
                     <span slot='spinner' class="align-bottom">
                         <v-loading-spinner width='1em' height='1em'></v-loading-spinner>
                     </span>
-                        <span>Configure Botwinder</span>
+                        <span>Configure Valkyrja</span>
                     </v-loading>
                 </h1>
                 <span class="col-md-4">
@@ -40,7 +40,7 @@
                     <p>
                         <b>Permissions</b>
                         <br/>
-                        Botwinder expects server and channel permissions to be correct and some functions may not work
+                        Valkyrja expects server and channel permissions to be correct and some functions may not work
                         if you do not pay enough attention to this topic.
                         <br/>
                         First permissions of the bot - you have to not only give it the permissions but also <a
@@ -86,11 +86,11 @@
                     Antispam
                 </button>
                 <div class="form-inline form-group collapse" id="subscribeConfigAntispam">
-                    <a class="d-block text-center" href="https://www.patreon.com/botwinder" target="_blank">Subscribe to utilize Antispam features.</a>
+                    <a class="d-block text-center" href="https://www.patreon.com/valkyrja" target="_blank">Subscribe to utilize Antispam features.</a>
                 </div>
                 <div class="form-inline form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configAntispam"><br/>
                     <p>
-                        Botwinder will act as configured below, if it takes any action, it will PM the naughty user
+                        Valkyrja will act as configured below, if it takes any action, it will PM the naughty user
                         letting them know about it. If you configure it to also ban for excessive spam, it will let the
                         user know one message before banning them. Removed messages and banned users will be logged as
                         configured in the <code>Moderation Log</code> section.
@@ -150,7 +150,7 @@
                         @include("config.types.bool", ['key' => "antispam_duplicate_crossserver", 'data' => old('antispam_duplicate_crossserver', $serverConfig["antispam_duplicate_crossserver"])])
                         We can also remove these cross-server. Imagine that there is someone going through many servers
                         and posting some advertisement everywhere, but only a single message per-server so it doesn't
-                        count as standard spam. Botwinder would notice these messages as being duplicates between
+                        count as standard spam. Valkyrja would notice these messages as being duplicates between
                         servers.
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
@@ -338,7 +338,7 @@
                     </p>
                     <p>
                         <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role
-                        will be configured by Botwinder to prevent people from talking in all your channels.
+                        will be configured by Valkyrja to prevent people from talking in all your channels.
                         <br/>
                         <type-selector init-id-type="mute_roleid" label="name"
                                        :default-value='{{ json_encode($guild['roles']->get(old('mute_roleid',$serverConfig["mute_roleid"]))) }}'
@@ -374,7 +374,7 @@
                         <b><a href="http://rhea-ayase.eu/articles/2016-11/On-the-topic-of-moderation" target="_blank">On
                                 the topic of Moderation</a></b>
                         <br/>
-                        Another article about moderating a community, full of Discord/Botwinder examples. <i>(Written by
+                        Another article about moderating a community, full of Discord/Valkyrja examples. <i>(Written by
                             Rhea.)</i>
                     </p>
                 </div>
@@ -567,7 +567,7 @@
                     Social (profiles, levels & karma)
                 </button>
                 <div class="form-inline form-group collapse" id="subscribeConfigSocial">
-                    <a class="d-block text-center" href="https://www.patreon.com/botwinder" target="_blank">Subscribe to utilize Social features.</a>
+                    <a class="d-block text-center" href="https://www.patreon.com/valkyrja" target="_blank">Subscribe to utilize Social features.</a>
                 </div>
                 <div class="form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configSocial"><br />
                     <p class="form-inline">
@@ -640,7 +640,7 @@
                         Are these roles cumulative? (<code>true</code> - all the roles are assigned for all the previous levels; <code>false</code> - only one role will be assigned and the previous level roles will be removed.)
                         <br /><br />
                         @include("config.types.bool", ['key' => "exp_advance_users", 'data' => old('exp_advance_users', $serverConfig["exp_advance_users"])])
-                        Botwinder can advance users to the above configured highest role. This means that if a user already has a higher level role, than their level, their level will be increased to match the role. This is useful if you are transitioning from other level systems, this way your users won't lose their progress!
+                        Valkyrja can advance users to the above configured highest role. This means that if a user already has a higher level role, than their level, their level will be increased to match the role. This is useful if you are transitioning from other level systems, this way your users won't lose their progress!
                         <br /><br />
                         How many {{ $serverConfig["karma_currency"] }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
                         <br />@include("config.types.int", ['key' => "karma_per_level", 'data' => old('karma_per_level', $serverConfig["karma_per_level"])])
@@ -649,7 +649,7 @@
                         <b>Karma system</b>
                         <br />Karma is an extra appreciation of helpful people. They get thanked, they get a cookie!
                         <br /><code>Rhea: Hey thanks for that pull request fixing a typo @freiheit</code>
-                        <br /><code>Botwinder: @freiheit received a <i>thank you</i> cookie!</code>
+                        <br /><code>Valkyrja: @freiheit received a <i>thank you</i> cookie!</code>
                         <br />You can also <code>!give @user</code> a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
                         <br /><i>Hint: Create <code>@{{ command_prefix }}alias</code> for the <code>cookies</code> and <code>nom</code> commands to fit your custom configuration below!</i>
                         <br />
