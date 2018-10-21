@@ -106,13 +106,12 @@
                     </tr>
                     </table>
                 </div>
-                </div>
-                <!--div class="features-indent">
+                <div class="features-indent">
                     <h2>patchnotes</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Display some info about latest updates.</td>
+                        <td>Display some info about latest updates to the project.</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
@@ -124,7 +123,7 @@
                     </tr>
                     </table>
                 </div>
-                <div class="features-indent">
+                <!--div class="features-indent">
                     <h2>subscribe</h2>
                     <table class="command">
                     <tr>
