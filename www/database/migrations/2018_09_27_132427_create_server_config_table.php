@@ -27,6 +27,7 @@ class CreateServerConfigTable extends Migration {
 			$table->string('command_prefix_alt');
 			$table->boolean('execute_on_edit')->default(1);
 			$table->boolean('antispam_priority')->default(0);
+			$table->boolean('antispam_username')->default(0);
 			$table->boolean('antispam_invites')->default(0);
 			$table->boolean('antispam_invites_ban')->default(0);
 			$table->boolean('antispam_duplicate')->default(0);

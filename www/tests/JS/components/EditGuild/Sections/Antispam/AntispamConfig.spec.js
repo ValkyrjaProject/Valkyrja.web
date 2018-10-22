@@ -44,6 +44,10 @@ describe("AntispamConfig", function () {
         expectInput(wrapper, VuexNumber, "antispam_tolerance");
     });
 
+    it("should display antispam_username as vuex-switch", function () {
+        expectInput(wrapper, VuexSwitch, "antispam_username");
+    });
+
     it("should display antispam_invites as vuex-switch", function () {
         expectInput(wrapper, VuexSwitch, "antispam_invites");
     });

@@ -35,6 +35,12 @@
                 store-name="antispam_tolerance"/>
         </p>
         <p>
+            <b>Ban username-spammers as they join</b>
+            <vuex-switch store-name="antispam_username">
+                This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username.
+            </vuex-switch>
+        </p>
+        <p>
             <b>Discord Invites</b>
             <vuex-switch store-name="antispam_invites">
                 Remove messages that contain discord invites?
