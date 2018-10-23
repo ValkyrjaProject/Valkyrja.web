@@ -50,7 +50,7 @@ const state = {
             activeItem: null
         },
         reaction_roles: {
-            itemsList: [{name:'test'}, {name:'test'}], // list of command Objects
+            itemsList: [{messageid:'test'}, {messageid:'test2'}], // list of command Objects
             activeItem: null
         },
     },

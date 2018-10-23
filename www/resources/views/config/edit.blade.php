@@ -20,6 +20,7 @@
     <div class="container">
         <div class="col-xs-12">
             <form action="{{ url('config/'.$serverId) }}" method="post" @submit.prevent>
+                <reaction-roles form-name="reaction_roles"></reaction-roles>
                 <h1 class="col-md-8">
                     <v-loading message='Configure Valkyrja'>
                     <span slot='spinner' class="align-bottom">
