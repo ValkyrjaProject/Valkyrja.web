@@ -1,9 +1,13 @@
 import {ConfigData} from "./ConfigData";
+import {Config} from "./Config";
 
+/**
+ * Describes Profile Options for Valkyrja
+ */
 export class Profile extends ConfigData {
     /**
-     * @param id
-     * @param value
+     * Returns new instance with default values
+     * @param option Name of the profile
      * @returns {this}
      */
     static newInstance(option = "") {
@@ -47,10 +51,32 @@ export class Profile extends ConfigData {
     }
 
     set inline(value) {
-        this.value["inline"] = (value == true ? 1 : 0);
+        this.value["inline"] = value ? 1 : 0;
     }
 
     toString() {
         return this.option;
+    }
+}
+
+
+export class ProfileFactory {
+    /**
+     * @param {Array} values
+     * @returns {Array<Profile>}
+     */
+    static getConfigData(values) {
+        let config_data = [];
+        for (let i in values) {
+            if (values[i] instanceof Array) {
+                config_data.push(Config.getConfigData(values[i]));
+            }
+            else {
+                /** @type {Profile} */
+                let public_role = Profile.instanceFromApi(values[i]["option"], values[i]);
+                config_data.push(public_role);
+            }
+        }
+        return config_data;
     }
 }

@@ -84,6 +84,7 @@ export default {
     },
     computed: {
         profiles() {
+            log.warn(this.$store.getters["profileEditor/profiles"]);
             return this.$store.getters["profileEditor/profiles"];
         },
         selectedProfile: {

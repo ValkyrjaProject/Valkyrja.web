@@ -1,12 +1,12 @@
 import {ConfigData} from "./ConfigData";
-import {createPublicRole, PublicRole, PublicRoleFactory} from "./PublicRole";
-import configData from "../api/configData";
-import RoleSelector from "../store/modules/RoleSelector";
-import {types} from "../store/modules/RoleSelector";
+import {PublicRole, PublicRoleFactory} from "./PublicRole";
 import {PublicGroupFactory} from "./PublicGroup";
 import {Channel, ChannelFactory} from "./Channel";
+import {ProfileFactory} from "./Profile";
 
-// Main class containing a list of only ConfigData instances and lists of ConfigData instances
+/**
+ * Main class containing a list of only ConfigData instances and lists of ConfigData instances
+ */
 export class Config {
     /** @type {Object<ConfigData>} */
     config_data;
@@ -41,6 +41,9 @@ export class Config {
             }
             else if (i === "role_groups") {
                 arrayConfig = ConfigData.instanceFromApi(i, PublicGroupFactory.getConfigData(values[i]));
+            }
+            else if (i === "profile_options") {
+                arrayConfig = ConfigData.instanceFromApi(i, ProfileFactory.getConfigData(values[i]));
             }
             else if (values[i] instanceof Array) {
                 arrayConfig = ConfigData.instanceFromApi(i, this.getConfigData(values[i]));

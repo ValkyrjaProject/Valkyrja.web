@@ -11,10 +11,6 @@ const mutations = {
     PUSH_PROFILES(state, profile) {
         state.selectedProfile = profile;
     },
-
-    CHANGE_IGNORED(state, payload) {
-        payload.channel.ignored = payload.ignored;
-    },
 };
 
 const actions = {
@@ -26,23 +22,16 @@ const actions = {
         }
         commit("PUSH_PROFILES", profile);
     },
-    changeField({commit, state}, channel) {
-        if (!(channel instanceof Profile)) {
-            let error = `Object is not of type Profile, it is of type ${channel.constructor.name}`;
-            log.error(error);
-            throw new TypeError(error);
-        }
-        commit("CHANGE_IGNORED", {
-            channel: channel,
-            ignored: 1,
-        });
-    },
 };
 
 
 const getters = {
     profiles: (state, getters, rootState, rootGetters) => {
-        return [];
+        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
+            return [];
+        }
+        let profiles = rootGetters.configInput("profile_options");
+        return profiles ? profiles : [];
     },
 };
 
