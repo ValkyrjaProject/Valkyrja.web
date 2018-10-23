@@ -18,7 +18,7 @@
         </p>
         <p>
             <h2>Valkyrja project</h2>
-            This project exists thanks to an awesome team of contributors and volunteers who are not financially compensated. All the expenses are covered by <a href="https://www.patreon.com/Valkyrja">Patreon</a> donations, and our own wallet, you know what to do should you wish to help out!
+            This project exists thanks to an awesome team of contributors and volunteers who are not financially compensated. All the expenses are covered by <a href="https://www.patreon.com/ValkyrjaProject">Patreon</a> donations, and our own wallet, you know what to do should you wish to help out!
         </p>
     </div>
 </section>

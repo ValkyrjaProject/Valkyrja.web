@@ -73,7 +73,7 @@
         <section class="middle-container">
             <!--div>
                 <small>
-                    <a href="https://www.patreon.com/Valkyrja" target="_blank">Help us cover the server costs - subscribe just $1 on Patreon!</a>
+                    <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Help us cover the server costs - subscribe just $1 on Patreon!</a>
                 </small>
             </div-->
             <div class="gray-links">

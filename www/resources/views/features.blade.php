@@ -41,7 +41,7 @@
                             <td>The <code>status.valkyrja.app</code> page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
                         </tr>
                     </table>
-                    While our hosted instance of Valkyrja is free for everyone, it requires a $10 subscription to access power-hungry features (Antispam, Profiles, Karma and Experience) on <a href="https://www.patreon.com/Valkyrja" target="_blank">Patreon</a> - a monthly donation towards the cost of maintaining the servers.
+                    While our hosted instance of Valkyrja is free for everyone, it requires a $10 subscription to access power-hungry features (Antispam, Profiles, Karma and Experience) on <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> - a monthly donation towards the cost of maintaining the servers.
                     {{--<!--table class="command">
                         <tr>
                             <td>$10</td>

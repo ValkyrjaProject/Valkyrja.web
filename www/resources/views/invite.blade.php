@@ -42,7 +42,7 @@
             </div>
             <p class="row">
               <br />
-              <b><a href="https://www.patreon.com/Valkyrja" target="_blank">Subscribe</a></b> to support the project and unlock the premium features!
+              <b><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe</a></b> to support the project and unlock the premium features!
               <ul>
                   <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
