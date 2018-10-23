@@ -16,6 +16,7 @@ import LevelSelector from './components/LevelSelector.vue'
 import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
 import RoleAntispamSelector from "./components/RoleAntispamSelector"
 import ProfilesEditor from "./components/ProfilesEditor"
+import ReactionRoles from "./components/ReactionRoles"
 
 new Vue({
     store,
@@ -33,6 +34,7 @@ new Vue({
         IgnoreChannelListSelector,
         RoleAntispamSelector,
         ProfilesEditor,
+        ReactionRoles,
     },
     computed: {
         errors: {

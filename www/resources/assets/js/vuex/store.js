@@ -49,6 +49,10 @@ const state = {
             itemsList: [], // list of command Objects
             activeItem: null
         },
+        reaction_roles: {
+            itemsList: [{name:'test'}, {name:'test'}], // list of command Objects
+            activeItem: null
+        },
     },
 };
 

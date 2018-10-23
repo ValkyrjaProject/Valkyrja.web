@@ -1,8 +1,5 @@
 <template>
     <div class="customCommands loadComponent">
-        <div v-if="$isLoading(this.formName)" class="loading">
-            <span>{{loadingText}}</span>
-        </div>
         <item-modifier :form-name="formName"
                        list-name="Custom Commands"
                        :new-item-layout="addCustomCommandTemplate"
