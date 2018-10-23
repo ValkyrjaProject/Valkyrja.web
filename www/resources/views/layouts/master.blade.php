@@ -14,7 +14,9 @@
     @if (session('messages') && is_array(session('messages')))
         <div class="container">
             @foreach (session('messages') as $message)
-                <p class="alert alert-info">{{ $message }}</p>
+                <div class="notification is-success">
+                    <p class="alert alert-info">{{ $message }}</p>
+                </div>
             @endforeach
         </div>
     @elseif (isset($errors) && count($errors) > 0)

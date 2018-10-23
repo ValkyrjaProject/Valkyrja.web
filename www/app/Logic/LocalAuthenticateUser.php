@@ -50,7 +50,7 @@ class LocalAuthenticateUser implements AuthenticateUserInterface
     public function execute(bool $hasCode)
     {
         session()->put('discord_token', 'discord_token');
-        return redirect('/');
+        return redirect('/config')->with(['messages' => ['You have logged in!']]);
     }
 
     /**

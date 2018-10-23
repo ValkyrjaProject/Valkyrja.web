@@ -101,7 +101,7 @@ class AuthenticateUser implements AuthenticateUserInterface
         // TODO: Check if other event can be dispatched - Login wants Authenticatable
         Event::dispatch(new Login($this->getUser(), true));
 
-        return redirect('/');
+        return redirect('/config')->with(['messages' => ['You have logged in!']]);
     }
 
     private function authorizeWithDiscord()
