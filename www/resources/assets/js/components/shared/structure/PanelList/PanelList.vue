@@ -35,7 +35,7 @@
                     :key="2">
                     <p
                         :key="3"
-                        class="panel-tabs">
+                        class="panel-tabs not-found">
                         Not found
                     </p>
                 </div>
@@ -45,11 +45,12 @@
             v-if="addButton"
             class="panel">
             <div class="panel-block">
-                <button class="button is-info is-outlined is-fullwidth">
+                <button 
+                    class="button is-info is-outlined is-fullwidth"
+                    @click="$emit('add', $event)">
                     <i
                         class="mdi mdi-plus"
-                        aria-hidden="true"
-                        @click="$emit('add', $event)"></i>
+                        aria-hidden="true"></i>
                 </button>
             </div>
         </nav>
@@ -59,14 +60,12 @@
 <script>
 import PanelListSearch from "./PanelListSearch";
 import PanelListItem from "./PanelListItem";
-import PanelListItemRemovable from "./PanelListItemRemovable";
 
 export default {
     name: "PanelList",
     components: {
         PanelListSearch,
         PanelListItem,
-        PanelListItemRemovable,
     },
     props: {
         title: {
