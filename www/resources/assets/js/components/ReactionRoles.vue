@@ -15,51 +15,51 @@
                         :form-name="formName"
                         class="tallerList"></list-container>
             </div>
-            <div class="listContainer">
-                <div class="from-group"
-                        :class="{'has-danger': false}">
-                    <label class="form-control-label">
-                        <b>Id</b> - Message ID
-                        <input class="form-control" command-name="messageid" value=""
-                                @input="updateActiveItemData">
-                    </label>
-                </div>
-                <div class="listContainer">
-                    <h2>Available Roles</h2>
-                    <list-container :value="itemList"
-                            @click="addEmojiRole($event)"
-                            :hide-form="true"
-                            :include-search="true"
-                            :display-attribute="displayAttribute"
-                            :form-name="formName"
-                            class="tallerList"></list-container>
-                </div>
-                <div class="listContainer">
-                    <h2>Added roles</h2>
-                    <list-container :value="itemList"
-                            @input="setActiveRole($event)"
-                            @click="removeEmojiRole($event)"
-                            :hide-form="true"
-                            :include-search="true"
-                            list-type="doubleInput"
-                            :display-attribute="displayAttribute"
-                            :form-name="formName"
-                            class="tallerList"></list-container>
-                </div>
                 <div class="listContainer">
                     <div v-if="activeItem != null">
                         <div class="from-group"
                                 :class="{'has-danger': false}">
                             <label class="form-control-label">
-                                <b>Emoji</b> - Can be normal emoji or <code>server_emoji</code>.
-                                    <input class="form-control" command-name="emoji" value=""
-                                            @input="updateActiveItemData">
+                                <b>Id</b> - Message ID
+                                <input class="form-control" command-name="messageid" :value="activeItem.messageid"
+                                        @input="updateActiveItemData">
                             </label>
+                        </div>
+                        <div class="listContainer">
+                            <h2>Available Roles</h2>
+                            <list-container :value="itemList"
+                                    @click="addEmojiRole($event)"
+                                    :hide-form="true"
+                                    :include-search="true"
+                                    :display-attribute="displayAttribute"
+                                    :form-name="formName"
+                                    class="tallerList"></list-container>
+                        </div>
+                        <div class="listContainer">
+                            <h2>Added roles</h2>
+                            <list-container :value="itemList"
+                                    @input="setActiveRole($event)"
+                                    @click="removeEmojiRole($event)"
+                                    :hide-form="true"
+                                    :include-search="true"
+                                    list-type="doubleInput"
+                                    :display-attribute="displayAttribute"
+                                    :form-name="formName"
+                                    class="tallerList"></list-container>
+                        </div>
+                        <div class="listContainer">
+                            <div class="from-group"
+                                    :class="{'has-danger': false}">
+                                <label class="form-control-label">
+                                    <b>Emoji</b> - Can be normal emoji or <code>server_emoji</code>.
+                                        <input class="form-control" command-name="emoji" value=""
+                                                @input="updateActiveItemData">
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div v-else>Nothing selected</div>
                 </div>
-            </div>
             <span v-for="item in itemList">
                 <span v-for="(itemType, itemTypeKey) in item" v-if="itemType !== null">
                     <span v-if="itemType instanceof Array">
@@ -105,7 +105,8 @@
         },
         data() {
             return {
-                displayAttribute: "name"
+                itemLayoutPrimaryKey: "messageid",
+                displayAttribute: "messageid"
             }
         },
         beforeUpdate() {
@@ -151,7 +152,7 @@
             },
             newItem() {
                 let item = {
-                    messageid: this.itemList.length.toString(),
+                    messageid: "",
                     emoji: "",
                     roleid: [],
                 };
@@ -181,6 +182,9 @@
             },
             roleName(attribute, item) {
                 return this.inputName(attribute, item) + '[]';
+            },
+            itemIsValid(item) {
+                return true;
             }
         }
     }
