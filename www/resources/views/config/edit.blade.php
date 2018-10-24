@@ -362,16 +362,6 @@
                         Example usage of this <i>chill-zone</i> channel: <a href="/img/mute.gif" target="_blank">gif</a>
                         which can be configured with <a href="/img/mute-permissions.gif" target="_blank">these
                             permissions</a>.
-                        <br/><br/>
-                        <b>How does the Mute system work</b>
-                        <br/>
-                        It is important that you understand how does the Muting system work:<br/>
-                        Regardless of how is the user muted, they get unmuted next time the bot restarts, this is to
-                        ensure that nobody is left hanging, because it is supposed to be a timed feature.
-                        Now if someone leaves and then rejoins the server, they will be Muted again, and this time it is
-                        treated as an antispam mute, which means that the third one will get you banned. So cheating to
-                        get rid of the "mute" role is really bad idea and if the <i>victim</i> leaves and joins the
-                        server twice while they are muted, they get banned.
                     </p>
                     <p>
                         <b><a href="http://rhea-ayase.eu/articles/2017-04/Moderation-guidelines" target="_blank">Moderation
