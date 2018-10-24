@@ -115,7 +115,7 @@
             addedRoles() {
                 return this.$store.state['roles'].filter(role => {
                     return this.activeItem.roles.filter(item => {
-                        if (role.id === this.activeRole.id)
+                        if (this.activeRole && role.id === this.activeRole.id)
                             role.classData = {'active': true};
                         else
                             role.classData = {'active': false};

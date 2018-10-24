@@ -9,6 +9,7 @@ use App\DiscordData;
 use App\Exceptions\ServerIssueException;
 use App\Http\Requests\ConfigRequest;
 use App\ProfileOptions;
+use App\ReactionRoles;
 use App\RoleGroups;
 use App\Roles;
 use App\Partners;
@@ -145,6 +146,7 @@ class ConfigController extends Controller
             'channels' => Channels::where('serverid', $serverId)->get(),
             'profile_options' => ProfileOptions::where('serverid', $serverId)->get(),
             'role_groups' => RoleGroups::where('serverid', $serverId)->get(),
+            'reaction_roles' => ReactionRoles::where('serverid', $serverId)->get(),
             'guild' => [
                 'roles' => $guildRoles,
                 'channels' => $guildChannels
@@ -156,6 +158,7 @@ class ConfigController extends Controller
     /**
      * @param $serverId
      * @param User $user
+     * @return bool
      */
     protected function serverOrUserIsPremium($serverId, $user){
         $partner = Partners::find($serverId);
@@ -196,6 +199,7 @@ class ConfigController extends Controller
         $serverConfig->updateChannels($data->get('channels', []));
         $serverConfig->updateProfileOptions($data->get('profile_options', []));
         $serverConfig->updateRoleGroups($data->get('role_groups', []));
+        $serverConfig->updateReactionRoles($data->get('reaction_roles', []));
 
         $roles = $this->getRoles($data);
         $serverConfig->updateRoles($roles);
@@ -207,6 +211,7 @@ class ConfigController extends Controller
             'levels',
             'profile_options',
             'role_groups',
+            'reaction_roles',
         ])->all())) {
             return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
         } else {

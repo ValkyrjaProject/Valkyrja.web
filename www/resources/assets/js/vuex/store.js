@@ -50,13 +50,7 @@ const state = {
             activeItem: null
         },
         reaction_roles: {
-            itemsList: [{
-                messageid:'test',
-                roles: [],
-            }, {
-                messageid:'test2',
-                roles: [],
-            }], // list of command Objects
+            itemsList: [], // list of command Objects
             activeItem: null
         },
     },
@@ -207,6 +201,25 @@ const mutations = {
                 Vue.set(state.itemModifier, payload.key, {itemsList: [], activeItem: null});
             }
             Vue.set(state.itemModifier[payload.key], 'itemsList', payload.data);
+        }
+    },
+
+    UPDATE_REACTION_ROLES(state, payload) {
+        if (payload !== null) {
+            if (!state.itemModifier.hasOwnProperty(payload.key) || payload.data === null) {
+                Vue.set(state.itemModifier, payload.key, {itemsList: [], activeItem: null});
+            }
+            let roles = [];
+            for (let i = 0; i < payload.data.length; i++) {
+                let find = roles.find(role => role.messageid === payload.data[i].messageid);
+                if (find) {
+                    find.roles.push({id: payload.data[i].roleid, emoji: payload.data[i].emoji})
+                }
+                else {
+                    roles.push({messageid: payload.data[i].messageid, roles: [{id: payload.data[i].roleid, emoji: payload.data[i].emoji}] })
+                }
+            }
+            Vue.set(state.itemModifier[payload.key], 'itemsList', roles);
         }
     },
 
