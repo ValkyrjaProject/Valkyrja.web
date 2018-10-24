@@ -101,7 +101,6 @@ class ConfigRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->all());
         return [
             'ignore_bots'                       => 'required|boolean',
             'ignore_everyone'                   => 'required|boolean',
@@ -224,6 +223,11 @@ class ConfigRequest extends FormRequest
             'role_groups.*.groupid'             => 'required|integer',
             'role_groups.*.role_limit'          => 'required|integer',
             'role_groups.*.name'                => 'present|string|nullable|max:250',
+            'reaction_roles'                    => 'array',
+            'reaction_roles.*'                  => 'array',
+            'reaction_roles.*.messageid'        => 'required|integer',
+            'reaction_roles.*.roleid'           => 'required|integer',
+            'reaction_roles.*.emoji'            => 'required|string|max:250',
         ];
     }
 }

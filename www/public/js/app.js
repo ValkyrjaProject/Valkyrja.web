@@ -2871,7 +2871,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return this.$store.state['roles'].filter(function (role) {
                 return _this2.activeItem.roles.filter(function (item) {
-                    if (role.id === _this2.activeRole.id) role.classData = { 'active': true };else role.classData = { 'active': false };
+                    if (_this2.activeRole && role.id === _this2.activeRole.id) role.classData = { 'active': true };else role.classData = { 'active': false };
                     return item.id === role.id;
                 }).length !== 0;
             });
@@ -18671,6 +18671,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             this.$store.dispatch('updateChannelsData', state['channelsData']);
             this.$store.dispatch('updateProfileOptions', state['profile_options']);
             this.$store.dispatch('updateRoleGroups', state['role_groups']);
+            this.$store.dispatch('updateReactionRoles', state['reaction_roles']);
         }
     }
 });
@@ -19666,6 +19667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCustomCommands", function() { return updateCustomCommands; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProfileOptions", function() { return updateProfileOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRoleGroups", function() { return updateRoleGroups; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateReactionRoles", function() { return updateReactionRoles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCommandCharacter", function() { return updateCommandCharacter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateItemModifier", function() { return updateItemModifier; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateStoreValue", function() { return updateStoreValue; });
@@ -19868,20 +19870,27 @@ var updateProfileOptions = function updateProfileOptions(_ref27, data) {
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'profile_options', data: data });
 };
+
 var updateRoleGroups = function updateRoleGroups(_ref28, data) {
     var commit = _ref28.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'role_groups', data: data });
 };
 
-var updateCommandCharacter = function updateCommandCharacter(_ref29, data) {
+var updateReactionRoles = function updateReactionRoles(_ref29, data) {
     var commit = _ref29.commit;
+
+    commit('UPDATE_REACTION_ROLES', { key: 'reaction_roles', data: data });
+};
+
+var updateCommandCharacter = function updateCommandCharacter(_ref30, data) {
+    var commit = _ref30.commit;
 
     commit('EDIT_COMMAND_PREFIX', data);
 };
 
-var updateItemModifier = function updateItemModifier(_ref30, attribute) {
-    var commit = _ref30.commit;
+var updateItemModifier = function updateItemModifier(_ref31, attribute) {
+    var commit = _ref31.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: attribute, data: [] });
     return new Promise(function (resolve, reject) {
@@ -19895,14 +19904,14 @@ var updateItemModifier = function updateItemModifier(_ref30, attribute) {
     });
 };
 
-var updateStoreValue = function updateStoreValue(_ref31, attribute) {
-    var commit = _ref31.commit;
+var updateStoreValue = function updateStoreValue(_ref32, attribute) {
+    var commit = _ref32.commit;
 
     commit('UPDATE_STORE_VALUE', attribute);
 };
 
-var updateBotwinderCommands = function updateBotwinderCommands(_ref32) {
-    var commit = _ref32.commit;
+var updateBotwinderCommands = function updateBotwinderCommands(_ref33) {
+    var commit = _ref33.commit;
 
     __WEBPACK_IMPORTED_MODULE_0__api_configData__["a" /* default */].getBotwinderCommands().then(function (response) {
         commit('UPDATE_BOTWINDER_COMMANDS', response['data']);
@@ -19911,8 +19920,8 @@ var updateBotwinderCommands = function updateBotwinderCommands(_ref32) {
     });
 };
 
-var clearAPIError = function clearAPIError(_ref33) {
-    var commit = _ref33.commit;
+var clearAPIError = function clearAPIError(_ref34) {
+    var commit = _ref34.commit;
 
     commit('CLEAR_API_ERROR');
 };
@@ -19983,13 +19992,7 @@ var state = {
             activeItem: null
         },
         reaction_roles: {
-            itemsList: [{
-                messageid: 'test',
-                roles: []
-            }, {
-                messageid: 'test2',
-                roles: []
-            }], // list of command Objects
+            itemsList: [], // list of command Objects
             activeItem: null
         }
     }
@@ -20125,6 +20128,30 @@ var mutations = {
                 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.set(state.itemModifier, payload.key, { itemsList: [], activeItem: null });
             }
             __WEBPACK_IMPORTED_MODULE_0_vue___default.a.set(state.itemModifier[payload.key], 'itemsList', payload.data);
+        }
+    },
+    UPDATE_REACTION_ROLES: function UPDATE_REACTION_ROLES(state, payload) {
+        if (payload !== null) {
+            if (!state.itemModifier.hasOwnProperty(payload.key) || payload.data === null) {
+                __WEBPACK_IMPORTED_MODULE_0_vue___default.a.set(state.itemModifier, payload.key, { itemsList: [], activeItem: null });
+            }
+            var roles = [];
+
+            var _loop = function _loop(i) {
+                var find = roles.find(function (role) {
+                    return role.messageid === payload.data[i].messageid;
+                });
+                if (find) {
+                    find.roles.push({ id: payload.data[i].roleid, emoji: payload.data[i].emoji });
+                } else {
+                    roles.push({ messageid: payload.data[i].messageid, roles: [{ id: payload.data[i].roleid, emoji: payload.data[i].emoji }] });
+                }
+            };
+
+            for (var i = 0; i < payload.data.length; i++) {
+                _loop(i);
+            }
+            __WEBPACK_IMPORTED_MODULE_0_vue___default.a.set(state.itemModifier[payload.key], 'itemsList', roles);
         }
     },
     EDIT_ITEM_CLASS: function EDIT_ITEM_CLASS(state, payload) {

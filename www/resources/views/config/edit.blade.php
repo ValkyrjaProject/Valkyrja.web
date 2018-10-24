@@ -12,6 +12,7 @@
 			'channelsData' => old('channels', (isset($errors) && count($errors) > 0) ? [] : $channels->all()),
 			'profile_options' => old('profile_options', (isset($errors) && count($errors) > 0) ? [] : $profile_options->all()),
 			'role_groups' => old('role_groups', (isset($errors) && count($errors) > 0) ? [] : $role_groups->all()),
+			'reaction_roles' => old('reaction_roles', (isset($errors) && count($errors) > 0) ? [] : $reaction_roles->all()),
         ])) !!}"
     </script>
 @endsection

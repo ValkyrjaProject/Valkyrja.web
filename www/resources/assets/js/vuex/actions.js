@@ -141,8 +141,13 @@ export const updateCustomCommands = ({commit}, data) => {
 export const updateProfileOptions = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'profile_options', data: data});
 };
+
 export const updateRoleGroups = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'role_groups', data: data});
+};
+
+export const updateReactionRoles = ({commit}, data) => {
+    commit('UPDATE_REACTION_ROLES', {key: 'reaction_roles', data: data});
 };
 
 export const updateCommandCharacter = ({commit}, data) => {

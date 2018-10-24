@@ -64,6 +64,11 @@ class ServerConfig extends Model
         return $this->hasMany('App\RoleGroups');
     }
 
+    public function reaction_roles()
+    {
+        return $this->hasMany('App\ReactionRoles');
+    }
+
     /**
      * Used for hasMany() relations. Would otherwise default to wrong key
      * @return string
@@ -150,6 +155,23 @@ class ServerConfig extends Model
         }
         foreach ($role_groups as $role_group) {
             $this->role_groups()->updateOrCreate(['groupid' => $role_group['groupid']], $role_group);
+        }
+        return true;
+    }
+
+    public function updateReactionRoles($reaction_roles)
+    {
+        if (!is_array($reaction_roles) && count($reaction_roles) == 0) {
+            return false;
+        }
+        // FIXME: Does not add or remove correctly
+        $commandKeys = array_column($reaction_roles, 'messageid');
+        $toBeDeleted = $this->reaction_roles()->whereNotIn('messageid', $commandKeys);
+        if ($toBeDeleted->count() > 0) {
+            $toBeDeleted->delete();
+        }
+        foreach ($reaction_roles as $reaction_role) {
+            $this->reaction_roles()->updateOrCreate(['messageid' => $reaction_role['messageid']], $reaction_role);
         }
         return true;
     }
