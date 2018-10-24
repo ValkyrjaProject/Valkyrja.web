@@ -101,6 +101,7 @@ class ConfigRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->all());
         return [
             'ignore_bots'                       => 'required|boolean',
             'ignore_everyone'                   => 'required|boolean',

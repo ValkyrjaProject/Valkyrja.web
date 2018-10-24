@@ -21,6 +21,14 @@ export const removeChannel = ({commit}, data) => {
     commit('REMOVE_CHANNEL', data);
 };*/
 
+export const addEmojiRole = ({commit}, payload) => {
+    commit('ADD_EMOJI_ROLE', {formName: payload.formName, item: payload.item});
+};
+
+export const removeEmojiRole = ({commit}, payload) => {
+    commit('REMOVE_EMOJI_ROLE', {formName: payload.formName, item: payload.item});
+};
+
 export const editData = ({commit}, payload) => {
     commit('EDIT_DATA', {key: payload.key, data: payload.data});
 };

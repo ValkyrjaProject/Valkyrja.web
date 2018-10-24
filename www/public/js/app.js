@@ -2824,21 +2824,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2856,7 +2841,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            displayAttribute: "name"
+            itemLayoutPrimaryKey: "messageid",
+            displayAttribute: "messageid",
+            activeRole: null
         };
     },
     beforeUpdate: function beforeUpdate() {
@@ -2869,6 +2856,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         command_prefix: function command_prefix() {
             return this.$store.state.command_prefix;
+        },
+        availableRoles: function availableRoles() {
+            var _this = this;
+
+            return this.$store.state['roles'].filter(function (role) {
+                return _this.activeItem.roles.filter(function (item) {
+                    return item.id === role.id;
+                }).length === 0;
+            });
+        },
+        addedRoles: function addedRoles() {
+            var _this2 = this;
+
+            return this.$store.state['roles'].filter(function (role) {
+                return _this2.activeItem.roles.filter(function (item) {
+                    if (role.id === _this2.activeRole.id) role.classData = { 'active': true };else role.classData = { 'active': false };
+                    return item.id === role.id;
+                }).length !== 0;
+            });
         }
     },
     methods: {
@@ -2892,14 +2898,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        setActiveRole: function setActiveRole() {},
-        addEmojiRole: function addEmojiRole() {},
-        removeEmojiRole: function removeEmojiRole() {},
+        setActiveRole: function setActiveRole(item) {
+            this.activeRole = this.$store.state.itemModifier[this.formName].activeItem.roles.find(function (role) {
+                return role.id === item.id;
+            });
+        },
+        addEmojiRole: function addEmojiRole(role) {
+            var item = {
+                id: role.id,
+                emoji: ""
+            };
+            this.$store.dispatch("addEmojiRole", {
+                formName: this.formName,
+                item: item
+            });
+            this.activeRole = item;
+        },
+        removeEmojiRole: function removeEmojiRole(role) {
+            this.$store.dispatch("removeEmojiRole", {
+                formName: this.formName,
+                item: role.id
+            });
+            var activeItem = this.$store.state.itemModifier[this.formName].activeItem;
+            if (activeItem && activeItem.roles.length) {
+                this.activeRole = activeItem.roles[0];
+            } else {
+                this.activeRole = null;
+            }
+        },
         newItem: function newItem() {
             var item = {
-                messageid: this.itemList.length.toString(),
-                emoji: "",
-                roleid: []
+                messageid: "",
+                roles: []
             };
 
             this.$store.dispatch('addItem', {
@@ -2921,11 +2951,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         },
-        inputName: function inputName(attribute, item) {
-            return this.formName + '[' + this.itemList.indexOf(item) + ']' + '[' + attribute + ']';
+        inputName: function inputName(attribute, role) {
+            if (this.$store.state.itemModifier[this.formName].activeItem) {
+                return this.formName + '[' + this.$store.state.itemModifier[this.formName].activeItem.roles.indexOf(role) + ']' + '[' + attribute + ']';
+            }
         },
         roleName: function roleName(attribute, item) {
             return this.inputName(attribute, item) + '[]';
+        },
+        itemIsValid: function itemIsValid(item) {
+            return true;
         }
     }
 });
@@ -4555,7 +4590,6 @@ var render = function() {
             _c("h2", [_vm._v("Messages")]),
             _vm._v(" "),
             _c("list-container", {
-              staticClass: "tallerList",
               attrs: {
                 value: _vm.itemList,
                 "hide-form": true,
@@ -4582,158 +4616,151 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "listContainer" }, [
-          _c(
-            "div",
-            { staticClass: "from-group", class: { "has-danger": false } },
-            [
-              _c("label", { staticClass: "form-control-label" }, [
-                _c("b", [_vm._v("Id")]),
-                _vm._v(" - Message ID\n                    "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { "command-name": "messageid", value: "" },
-                  on: { input: _vm.updateActiveItemData }
-                })
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "listContainer" },
-            [
-              _c("h2", [_vm._v("Available Roles")]),
-              _vm._v(" "),
-              _c("list-container", {
-                staticClass: "tallerList",
-                attrs: {
-                  value: _vm.itemList,
-                  "hide-form": true,
-                  "include-search": true,
-                  "display-attribute": _vm.displayAttribute,
-                  "form-name": _vm.formName
-                },
-                on: {
-                  click: function($event) {
-                    _vm.addEmojiRole($event)
-                  }
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "listContainer" },
-            [
-              _c("h2", [_vm._v("Added roles")]),
-              _vm._v(" "),
-              _c("list-container", {
-                staticClass: "tallerList",
-                attrs: {
-                  value: _vm.itemList,
-                  "hide-form": true,
-                  "include-search": true,
-                  "list-type": "doubleInput",
-                  "display-attribute": _vm.displayAttribute,
-                  "form-name": _vm.formName
-                },
-                on: {
-                  input: function($event) {
-                    _vm.setActiveRole($event)
-                  },
-                  click: function($event) {
-                    _vm.removeEmojiRole($event)
-                  }
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "listContainer" }, [
-            _vm.activeItem != null
-              ? _c("div", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "from-group",
-                      class: { "has-danger": false }
-                    },
-                    [
-                      _c("label", { staticClass: "form-control-label" }, [
-                        _c("b", [_vm._v("Emoji")]),
-                        _vm._v(" - Can be normal emoji or "),
-                        _c("code", [_vm._v("server_emoji")]),
-                        _vm._v(".\n                                "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: { "command-name": "emoji", value: "" },
-                          on: { input: _vm.updateActiveItemData }
-                        })
-                      ])
-                    ]
-                  )
-                ])
-              : _c("div", [_vm._v("Nothing selected")])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.itemList, function(item) {
-          return _c(
-            "span",
-            _vm._l(item, function(itemType, itemTypeKey) {
-              return itemType !== null
-                ? _c("span", [
-                    itemType instanceof Array
-                      ? _c("span", [
-                          itemType.length === 0
-                            ? _c("span", [
-                                _c("input", {
-                                  attrs: {
-                                    type: "hidden",
-                                    name: _vm.inputName(itemTypeKey, item),
-                                    value: ""
-                                  }
-                                })
-                              ])
-                            : _c(
-                                "span",
-                                _vm._l(itemType, function(role, roleKey) {
-                                  return _c("input", {
-                                    attrs: {
-                                      type: "hidden",
-                                      name: _vm.roleName(itemTypeKey, item)
-                                    },
-                                    domProps: { value: role }
-                                  })
-                                })
-                              )
-                        ])
-                      : typeof itemType === "boolean"
-                        ? _c("span", [
-                            _c("input", {
-                              attrs: {
-                                type: "hidden",
-                                name: _vm.inputName(itemTypeKey, item)
-                              },
-                              domProps: { value: itemType ? "1" : "0" }
-                            })
-                          ])
-                        : itemType.toString().length > 0
-                          ? _c("span", [
+          _vm.activeItem != null
+            ? _c("div", [
+                _c(
+                  "div",
+                  { staticClass: "from-group", class: { "has-danger": false } },
+                  [
+                    _c("label", { staticClass: "form-control-label" }, [
+                      _c("b", [_vm._v("Id")]),
+                      _vm._v(" - Message ID\n                        "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { "command-name": "messageid" },
+                        domProps: { value: _vm.activeItem.messageid },
+                        on: { input: _vm.updateActiveItemData }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "listContainer" },
+                  [
+                    _c("h2", [_vm._v("Available Roles")]),
+                    _vm._v(" "),
+                    _c("list-container", {
+                      attrs: {
+                        value: _vm.availableRoles,
+                        "hide-form": true,
+                        "include-search": true,
+                        "form-name": _vm.formName
+                      },
+                      on: {
+                        input: function($event) {
+                          _vm.addEmojiRole($event)
+                        }
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "listContainer" },
+                  [
+                    _c("h2", [_vm._v("Added roles")]),
+                    _vm._v(" "),
+                    _c("list-container", {
+                      attrs: {
+                        value: _vm.addedRoles,
+                        "hide-form": true,
+                        "include-search": true,
+                        "list-type": "doubleInput",
+                        "form-name": _vm.formName
+                      },
+                      on: {
+                        input: function($event) {
+                          _vm.setActiveRole($event)
+                        },
+                        click: function($event) {
+                          _vm.removeEmojiRole($event)
+                        }
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "listContainer" }, [
+                  _vm.activeRole != null
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "from-group",
+                            class: { "has-danger": false }
+                          },
+                          [
+                            _c("label", { staticClass: "form-control-label" }, [
+                              _c("b", [_vm._v("Emoji")]),
+                              _vm._v(" - Can be normal emoji or "),
+                              _c("code", [_vm._v("server_emoji")]),
+                              _vm._v(".\n                                    "),
                               _c("input", {
-                                attrs: {
-                                  type: "hidden",
-                                  name: _vm.inputName(itemTypeKey, item)
-                                },
-                                domProps: { value: itemType.toString() || "" }
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.activeRole.emoji,
+                                    expression: "activeRole.emoji"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { "command-name": "emoji" },
+                                domProps: { value: _vm.activeRole.emoji },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.activeRole,
+                                      "emoji",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
                               })
                             ])
-                          : _vm._e()
-                  ])
-                : _vm._e()
+                          ]
+                        )
+                      ])
+                    : _c("div", [_vm._v("No role selected")])
+                ])
+              ])
+            : _c("div", [_vm._v("No message selected")])
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.itemList, function(message) {
+          return _c(
+            "span",
+            _vm._l(message.roles, function(role) {
+              return _c("span", [
+                _c("input", {
+                  attrs: {
+                    type: "hidden",
+                    name: _vm.inputName("messageid", role)
+                  },
+                  domProps: { value: message.messageid }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: {
+                    type: "hidden",
+                    name: _vm.inputName("roleid", role)
+                  },
+                  domProps: { value: role.id }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "hidden", name: _vm.inputName("emoji", role) },
+                  domProps: { value: role.emoji }
+                })
+              ])
             })
           )
         })
@@ -19612,6 +19639,8 @@ function _classCallCheck(t, i) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editServerId", function() { return editServerId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEmojiRole", function() { return addEmojiRole; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeEmojiRole", function() { return removeEmojiRole; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editData", function() { return editData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeData", function() { return removeData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editItemRoles", function() { return editItemRoles; });
@@ -19669,116 +19698,128 @@ export const removeChannel = ({commit}, data) => {
     commit('REMOVE_CHANNEL', data);
 };*/
 
-var editData = function editData(_ref2, payload) {
+var addEmojiRole = function addEmojiRole(_ref2, payload) {
     var commit = _ref2.commit;
+
+    commit('ADD_EMOJI_ROLE', { formName: payload.formName, item: payload.item });
+};
+
+var removeEmojiRole = function removeEmojiRole(_ref3, payload) {
+    var commit = _ref3.commit;
+
+    commit('REMOVE_EMOJI_ROLE', { formName: payload.formName, item: payload.item });
+};
+
+var editData = function editData(_ref4, payload) {
+    var commit = _ref4.commit;
 
     commit('EDIT_DATA', { key: payload.key, data: payload.data });
 };
 
-var removeData = function removeData(_ref3, payload) {
-    var commit = _ref3.commit;
+var removeData = function removeData(_ref5, payload) {
+    var commit = _ref5.commit;
 
     commit('REMOVE_DATA', { key: payload.key, data: payload.data });
 };
 
-var editItemRoles = function editItemRoles(_ref4, payload) {
-    var commit = _ref4.commit;
+var editItemRoles = function editItemRoles(_ref6, payload) {
+    var commit = _ref6.commit;
 
     commit('EDIT_ITEM_ROLES', payload);
 };
 
-var removeItemRoles = function removeItemRoles(_ref5, payload) {
-    var commit = _ref5.commit;
+var removeItemRoles = function removeItemRoles(_ref7, payload) {
+    var commit = _ref7.commit;
 
     commit('REMOVE_ITEM_ROLES', payload);
 };
 
-var updateActiveItem = function updateActiveItem(_ref6, attribute) {
-    var commit = _ref6.commit;
+var updateActiveItem = function updateActiveItem(_ref8, attribute) {
+    var commit = _ref8.commit;
 
     commit('UPDATE_ACTIVE_ITEM', attribute);
 };
 
-var updateActiveItemData = function updateActiveItemData(_ref7, attribute) {
-    var commit = _ref7.commit;
+var updateActiveItemData = function updateActiveItemData(_ref9, attribute) {
+    var commit = _ref9.commit;
 
     commit('UPDATE_ACTIVE_ITEM_DATA', attribute);
 };
 
-var addLevel = function addLevel(_ref8, attribute) {
-    var commit = _ref8.commit;
+var addLevel = function addLevel(_ref10, attribute) {
+    var commit = _ref10.commit;
 
     commit('ADD_LEVEL', attribute);
 };
 
-var removeLevel = function removeLevel(_ref9, attribute) {
-    var commit = _ref9.commit;
+var removeLevel = function removeLevel(_ref11, attribute) {
+    var commit = _ref11.commit;
 
     commit('REMOVE_LEVEL', attribute);
 };
 
-var addRole = function addRole(_ref10, attribute) {
-    var commit = _ref10.commit;
+var addRole = function addRole(_ref12, attribute) {
+    var commit = _ref12.commit;
 
     commit('ADD_ROLE', attribute);
 };
 
-var updateRole = function updateRole(_ref11, attribute) {
-    var commit = _ref11.commit;
+var updateRole = function updateRole(_ref13, attribute) {
+    var commit = _ref13.commit;
 
     commit('UPDATE_ROLE', attribute);
 };
 
-var removeRole = function removeRole(_ref12, attribute) {
-    var commit = _ref12.commit;
+var removeRole = function removeRole(_ref14, attribute) {
+    var commit = _ref14.commit;
 
     commit('REMOVE_ROLE', attribute);
 };
 
-var addItem = function addItem(_ref13, attribute) {
-    var commit = _ref13.commit;
+var addItem = function addItem(_ref15, attribute) {
+    var commit = _ref15.commit;
 
     commit('ADD_ITEM', attribute);
 };
 
-var removeItem = function removeItem(_ref14, attribute) {
-    var commit = _ref14.commit;
+var removeItem = function removeItem(_ref16, attribute) {
+    var commit = _ref16.commit;
 
     commit('REMOVE_ITEM', attribute);
 };
 
-var updateItem = function updateItem(_ref15, attribute) {
-    var commit = _ref15.commit;
+var updateItem = function updateItem(_ref17, attribute) {
+    var commit = _ref17.commit;
 
     commit('UPDATE_ITEM', attribute);
 };
 
-var editItemClass = function editItemClass(_ref16, attribute) {
-    var commit = _ref16.commit;
+var editItemClass = function editItemClass(_ref18, attribute) {
+    var commit = _ref18.commit;
 
     commit('EDIT_ITEM_CLASS', attribute);
 };
 
-var updateRoles = function updateRoles(_ref17, attribute) {
-    var commit = _ref17.commit;
+var updateRoles = function updateRoles(_ref19, attribute) {
+    var commit = _ref19.commit;
 
     commit('EDIT_ROLES', attribute);
 };
 
-var updateChannels = function updateChannels(_ref18, attribute) {
-    var commit = _ref18.commit;
+var updateChannels = function updateChannels(_ref20, attribute) {
+    var commit = _ref20.commit;
 
     commit('EDIT_CHANNELS', attribute);
 };
 
-var updateRolesData = function updateRolesData(_ref19, data) {
-    var commit = _ref19.commit;
+var updateRolesData = function updateRolesData(_ref21, data) {
+    var commit = _ref21.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'roles', data: data });
 };
 
-var updateLevelsData = function updateLevelsData(_ref20, data) {
-    var commit = _ref20.commit;
+var updateLevelsData = function updateLevelsData(_ref22, data) {
+    var commit = _ref22.commit;
 
     console.log("data", data);
     data.forEach(function (role) {
@@ -19789,14 +19830,14 @@ var updateLevelsData = function updateLevelsData(_ref20, data) {
     commit('UPDATE_ITEM_MODIFIER', { key: 'roleLevels', data: data });
 };
 
-var updateChannelsData = function updateChannelsData(_ref21, data) {
-    var commit = _ref21.commit;
+var updateChannelsData = function updateChannelsData(_ref23, data) {
+    var commit = _ref23.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'channels', data: data });
 };
 
-var updateState = function updateState(_ref22, attribute) {
-    var commit = _ref22.commit;
+var updateState = function updateState(_ref24, attribute) {
+    var commit = _ref24.commit;
 
     commit('UPDATE_STATE', { key: attribute, data: [] });
     return new Promise(function (resolve, reject) {
@@ -19810,37 +19851,37 @@ var updateState = function updateState(_ref22, attribute) {
     });
 };
 
-var initialState = function initialState(_ref23, data) {
-    var commit = _ref23.commit;
+var initialState = function initialState(_ref25, data) {
+    var commit = _ref25.commit;
 
     commit('UPDATE_STATE', { key: null, data: data });
 };
 
-var updateCustomCommands = function updateCustomCommands(_ref24, data) {
-    var commit = _ref24.commit;
+var updateCustomCommands = function updateCustomCommands(_ref26, data) {
+    var commit = _ref26.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'custom_commands', data: data });
 };
 
-var updateProfileOptions = function updateProfileOptions(_ref25, data) {
-    var commit = _ref25.commit;
+var updateProfileOptions = function updateProfileOptions(_ref27, data) {
+    var commit = _ref27.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'profile_options', data: data });
 };
-var updateRoleGroups = function updateRoleGroups(_ref26, data) {
-    var commit = _ref26.commit;
+var updateRoleGroups = function updateRoleGroups(_ref28, data) {
+    var commit = _ref28.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: 'role_groups', data: data });
 };
 
-var updateCommandCharacter = function updateCommandCharacter(_ref27, data) {
-    var commit = _ref27.commit;
+var updateCommandCharacter = function updateCommandCharacter(_ref29, data) {
+    var commit = _ref29.commit;
 
     commit('EDIT_COMMAND_PREFIX', data);
 };
 
-var updateItemModifier = function updateItemModifier(_ref28, attribute) {
-    var commit = _ref28.commit;
+var updateItemModifier = function updateItemModifier(_ref30, attribute) {
+    var commit = _ref30.commit;
 
     commit('UPDATE_ITEM_MODIFIER', { key: attribute, data: [] });
     return new Promise(function (resolve, reject) {
@@ -19854,14 +19895,14 @@ var updateItemModifier = function updateItemModifier(_ref28, attribute) {
     });
 };
 
-var updateStoreValue = function updateStoreValue(_ref29, attribute) {
-    var commit = _ref29.commit;
+var updateStoreValue = function updateStoreValue(_ref31, attribute) {
+    var commit = _ref31.commit;
 
     commit('UPDATE_STORE_VALUE', attribute);
 };
 
-var updateBotwinderCommands = function updateBotwinderCommands(_ref30) {
-    var commit = _ref30.commit;
+var updateBotwinderCommands = function updateBotwinderCommands(_ref32) {
+    var commit = _ref32.commit;
 
     __WEBPACK_IMPORTED_MODULE_0__api_configData__["a" /* default */].getBotwinderCommands().then(function (response) {
         commit('UPDATE_BOTWINDER_COMMANDS', response['data']);
@@ -19870,8 +19911,8 @@ var updateBotwinderCommands = function updateBotwinderCommands(_ref30) {
     });
 };
 
-var clearAPIError = function clearAPIError(_ref31) {
-    var commit = _ref31.commit;
+var clearAPIError = function clearAPIError(_ref33) {
+    var commit = _ref33.commit;
 
     commit('CLEAR_API_ERROR');
 };
@@ -19942,7 +19983,13 @@ var state = {
             activeItem: null
         },
         reaction_roles: {
-            itemsList: [{ name: 'test' }, { name: 'test' }], // list of command Objects
+            itemsList: [{
+                messageid: 'test',
+                roles: []
+            }, {
+                messageid: 'test2',
+                roles: []
+            }], // list of command Objects
             activeItem: null
         }
     }
@@ -20004,6 +20051,18 @@ var mutations = {
             }), 1);
         }
         state.itemModifier[payload.formName].itemsList.push(payload.item);
+    },
+    ADD_EMOJI_ROLE: function ADD_EMOJI_ROLE(state, payload) {
+        if (state.itemModifier[payload.formName].activeItem) {
+            state.itemModifier[payload.formName].activeItem.roles.push(payload.item);
+        }
+    },
+    REMOVE_EMOJI_ROLE: function REMOVE_EMOJI_ROLE(state, payload) {
+        if (state.itemModifier[payload.formName].activeItem) {
+            state.itemModifier[payload.formName].activeItem.roles.splice(state.itemModifier[payload.formName].activeItem.roles.findIndex(function (x) {
+                return x.id === payload.item;
+            }), 1);
+        }
     },
     REMOVE_LEVEL: function REMOVE_LEVEL(state, payload) {
         var newPayload = {

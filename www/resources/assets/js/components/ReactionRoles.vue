@@ -12,71 +12,56 @@
                         list-type="doubleInput"
                         :can-add="true"
                         :display-attribute="displayAttribute"
-                        :form-name="formName"
-                        class="tallerList"></list-container>
+                        :form-name="formName"></list-container>
             </div>
-                <div class="listContainer">
-                    <div v-if="activeItem != null">
-                        <div class="from-group"
-                                :class="{'has-danger': false}">
-                            <label class="form-control-label">
-                                <b>Id</b> - Message ID
-                                <input class="form-control" command-name="messageid" :value="activeItem.messageid"
-                                        @input="updateActiveItemData">
-                            </label>
-                        </div>
-                        <div class="listContainer">
-                            <h2>Available Roles</h2>
-                            <list-container :value="itemList"
-                                    @click="addEmojiRole($event)"
-                                    :hide-form="true"
-                                    :include-search="true"
-                                    :display-attribute="displayAttribute"
-                                    :form-name="formName"
-                                    class="tallerList"></list-container>
-                        </div>
-                        <div class="listContainer">
-                            <h2>Added roles</h2>
-                            <list-container :value="itemList"
-                                    @input="setActiveRole($event)"
-                                    @click="removeEmojiRole($event)"
-                                    :hide-form="true"
-                                    :include-search="true"
-                                    list-type="doubleInput"
-                                    :display-attribute="displayAttribute"
-                                    :form-name="formName"
-                                    class="tallerList"></list-container>
-                        </div>
-                        <div class="listContainer">
+            <div class="listContainer">
+                <div v-if="activeItem != null">
+                    <div class="from-group"
+                            :class="{'has-danger': false}">
+                        <label class="form-control-label">
+                            <b>Id</b> - Message ID
+                            <input class="form-control" command-name="messageid" :value="activeItem.messageid"
+                                    @input="updateActiveItemData">
+                        </label>
+                    </div>
+                    <div class="listContainer">
+                        <h2>Available Roles</h2>
+                        <list-container :value="availableRoles"
+                                @input="addEmojiRole($event)"
+                                :hide-form="true"
+                                :include-search="true"
+                                :form-name="formName"></list-container>
+                    </div>
+                    <div class="listContainer">
+                        <h2>Added roles</h2>
+                        <list-container :value="addedRoles"
+                                @input="setActiveRole($event)"
+                                @click="removeEmojiRole($event)"
+                                :hide-form="true"
+                                :include-search="true"
+                                list-type="doubleInput"
+                                :form-name="formName"></list-container>
+                    </div>
+                    <div class="listContainer">
+                        <div v-if="activeRole != null">
                             <div class="from-group"
                                     :class="{'has-danger': false}">
                                 <label class="form-control-label">
                                     <b>Emoji</b> - Can be normal emoji or <code>server_emoji</code>.
-                                        <input class="form-control" command-name="emoji" value=""
-                                                @input="updateActiveItemData">
+                                        <input class="form-control" command-name="emoji" v-model="activeRole.emoji">
                                 </label>
                             </div>
                         </div>
+                        <div v-else>No role selected</div>
                     </div>
-                    <div v-else>Nothing selected</div>
                 </div>
-            <span v-for="item in itemList">
-                <span v-for="(itemType, itemTypeKey) in item" v-if="itemType !== null">
-                    <span v-if="itemType instanceof Array">
-                        <span v-if="itemType.length === 0">
-                            <input type="hidden" :name="inputName(itemTypeKey, item)" value="">
-                        </span>
-                        <span v-else>
-                            <input v-for="(role, roleKey) in itemType" type="hidden"
-                                    :name="roleName(itemTypeKey, item)" :value="role">
-                        </span>
-                    </span>
-                    <span v-else-if="typeof(itemType)  === 'boolean'">
-                        <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType ? '1' : '0'">
-                    </span>
-                    <span v-else-if="itemType.toString().length > 0">
-                        <input type="hidden" :name="inputName(itemTypeKey, item)" :value="itemType.toString() || ''">
-                    </span>
+                <div v-else>No message selected</div>
+            </div>
+            <span v-for="message in itemList">
+                <span v-for="role in message.roles">
+                    <input type="hidden" :name="inputName('messageid', role)" :value="message.messageid">
+                    <input type="hidden" :name="inputName('roleid', role)" :value="role.id">
+                    <input type="hidden" :name="inputName('emoji', role)" :value="role.emoji">
                 </span>
             </span>
         </div>
@@ -106,7 +91,8 @@
         data() {
             return {
                 itemLayoutPrimaryKey: "messageid",
-                displayAttribute: "messageid"
+                displayAttribute: "messageid",
+                activeRole: null,
             }
         },
         beforeUpdate() {
@@ -118,6 +104,24 @@
         computed: {
             command_prefix() {
                 return this.$store.state.command_prefix;
+            },
+            availableRoles() {
+                return this.$store.state['roles'].filter(role => {
+                    return this.activeItem.roles.filter(item => {
+                        return item.id === role.id;
+                    }).length === 0;
+                });
+            },
+            addedRoles() {
+                return this.$store.state['roles'].filter(role => {
+                    return this.activeItem.roles.filter(item => {
+                        if (role.id === this.activeRole.id)
+                            role.classData = {'active': true};
+                        else
+                            role.classData = {'active': false};
+                        return item.id === role.id;
+                    }).length !== 0;
+                });
             },
         },
         methods: {
@@ -141,20 +145,39 @@
                     });
                 }
             },
-            setActiveRole() {
-
+            setActiveRole(item) {
+                this.activeRole = this.$store.state.itemModifier[this.formName].activeItem.roles.find(role => {
+                    return role.id === item.id
+                });
             },
-            addEmojiRole() {
-
+            addEmojiRole(role) {
+                let item = {
+                    id: role.id,
+                    emoji: "",
+                };
+                this.$store.dispatch("addEmojiRole", {
+                    formName: this.formName,
+                    item: item,
+                });
+                this.activeRole = item;
             },
-            removeEmojiRole() {
-
+            removeEmojiRole(role) {
+                this.$store.dispatch("removeEmojiRole", {
+                    formName: this.formName,
+                    item: role.id,
+                });
+                let activeItem = this.$store.state.itemModifier[this.formName].activeItem;
+                if (activeItem && activeItem.roles.length) {
+                    this.activeRole = activeItem.roles[0];
+                }
+                else {
+                    this.activeRole = null;
+                }
             },
             newItem() {
                 let item = {
                     messageid: "",
-                    emoji: "",
-                    roleid: [],
+                    roles: [],
                 };
 
                 this.$store.dispatch('addItem', {
@@ -177,8 +200,10 @@
                     }
                 }
             },
-            inputName(attribute, item) {
-                return this.formName + '[' + this.itemList.indexOf(item) + ']' + '[' + attribute + ']'
+            inputName(attribute, role) {
+                if (this.$store.state.itemModifier[this.formName].activeItem) {
+                    return this.formName + '[' + this.$store.state.itemModifier[this.formName].activeItem.roles.indexOf(role) + ']' + '[' + attribute + ']'
+                }
             },
             roleName(attribute, item) {
                 return this.inputName(attribute, item) + '[]';

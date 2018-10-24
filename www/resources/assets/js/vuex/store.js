@@ -50,7 +50,13 @@ const state = {
             activeItem: null
         },
         reaction_roles: {
-            itemsList: [{messageid:'test'}, {messageid:'test2'}], // list of command Objects
+            itemsList: [{
+                messageid:'test',
+                roles: [],
+            }, {
+                messageid:'test2',
+                roles: [],
+            }], // list of command Objects
             activeItem: null
         },
     },
@@ -124,6 +130,19 @@ const mutations = {
                 .splice(state.itemModifier[payload.formName].itemsList.findIndex(x => x['roleid'] === payload.item['roleid']), 1);
         }
         state.itemModifier[payload.formName].itemsList.push(payload.item);
+    },
+
+    ADD_EMOJI_ROLE(state, payload) {
+        if (state.itemModifier[payload.formName].activeItem) {
+            state.itemModifier[payload.formName].activeItem.roles.push(payload.item);
+        }
+    },
+
+    REMOVE_EMOJI_ROLE(state, payload) {
+        if (state.itemModifier[payload.formName].activeItem) {
+            state.itemModifier[payload.formName].activeItem.roles
+                .splice(state.itemModifier[payload.formName].activeItem.roles.findIndex(x => x.id === payload.item), 1);
+        }
     },
 
     REMOVE_LEVEL(state, payload) {
