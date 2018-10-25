@@ -25,7 +25,12 @@ describe("UserVerificationConfig", function () {
 
         actions = {};
         state = {};
-        getters = {};
+
+        let stub = sinon.stub();
+        stub.returnsThis();
+        getters = {
+            configInput: () => stub
+        };
         store = new Vuex.Store({
             state,
             actions,

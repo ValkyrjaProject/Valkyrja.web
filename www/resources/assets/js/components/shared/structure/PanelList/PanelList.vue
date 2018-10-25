@@ -45,7 +45,7 @@
             v-if="addButton"
             class="panel">
             <div class="panel-block">
-                <button 
+                <button
                     class="button is-info is-outlined is-fullwidth"
                     @click="$emit('add', $event)">
                     <i
@@ -60,12 +60,14 @@
 <script>
 import PanelListSearch from "./PanelListSearch";
 import PanelListItem from "./PanelListItem";
+import PanelListItemRemovable from "./PanelListItemRemovable";
 
 export default {
     name: "PanelList",
     components: {
         PanelListSearch,
         PanelListItem,
+        PanelListItemRemovable,
     },
     props: {
         title: {

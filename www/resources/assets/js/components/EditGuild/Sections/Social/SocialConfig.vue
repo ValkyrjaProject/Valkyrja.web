@@ -114,7 +114,6 @@ import VuexSwitch from "../../Vuex/VuexSwitch";
 import VuexText from "../../Vuex/VuexText";
 import VuexNumber from "../../Vuex/VuexNumber";
 import VuexMultiselect from "../../Vuex/VuexMultiselect";
-import VuexTextarea from "../../Vuex/VuexTextarea";
 import ProfileEditor from "./ProfileEditor/ProfileEditor";
 import LevelSelector from "./LevelSelector/LevelSelector";
 

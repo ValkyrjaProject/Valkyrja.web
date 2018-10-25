@@ -3,7 +3,7 @@ import {shallowMount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
-import ProfileEditor from "components/";
+import ProfileEditor from "components/EditGuild/Sections/Social/ProfileEditor/ProfileEditor";
 
 let localVue = Vue.use(Vuex);
 

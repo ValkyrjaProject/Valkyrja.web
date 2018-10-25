@@ -20,7 +20,7 @@
                             <b>Option</b> - Unique parameter used to set the profile field (example: <code>-b</code>)
                             <input
                                 v-model="option"
-                                :disabled="hasSelectedProfile()"
+                                :disabled="!hasSelectedProfile()"
                                 type="text"
                                 class="input">
                         </label>
@@ -30,7 +30,7 @@
                             <b>Alternative option</b> - Long version of the above option (example: <code>--bike</code>)
                             <input
                                 v-model="option_alt"
-                                :disabled="hasSelectedProfile()"
+                                :disabled="!hasSelectedProfile()"
                                 type="text"
                                 class="input">
                         </label>
@@ -40,7 +40,7 @@
                             <b>Label</b> - Field title visible in the profile up to 250 characters (example: <code>Mountain Bike</code>)
                             <input
                                 v-model="label"
-                                :disabled="hasSelectedProfile()"
+                                :disabled="!hasSelectedProfile()"
                                 type="text"
                                 class="input">
                         </label>
@@ -50,7 +50,7 @@
                             <b>Property Order</b> - The determines the order in which the fields are displayed (example: <code>1</code>)
                             <input
                                 v-model="property_order"
-                                :disabled="hasSelectedProfile()"
+                                :disabled="!hasSelectedProfile()"
                                 type="number"
                                 class="input">
                         </label>
@@ -59,7 +59,7 @@
                         <input
                             id="profile__inline"
                             v-model="inline"
-                            :disabled="hasSelectedProfile()"
+                            :disabled="!hasSelectedProfile()"
                             :true-value="1"
                             :false-value="0"
                             type="checkbox"
@@ -76,6 +76,7 @@
 
 <script>
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
+import {Profile} from "../../../../../models/Profile";
 
 export default {
     name: "ProfileEditor",
@@ -84,7 +85,6 @@ export default {
     },
     computed: {
         profiles() {
-            log.warn(this.$store.getters["profileEditor/profiles"]);
             return this.$store.getters["profileEditor/profiles"];
         },
         selectedProfile: {
@@ -92,7 +92,7 @@ export default {
                 return this.$store.state.profileEditor.selectedProfile;
             },
             set(profile) {
-                this.$store.dispatch("profileEditor/changeField", profile);
+                this.$store.dispatch("profileEditor/setSelectedProfile", profile);
             }
         },
         option: {
@@ -153,10 +153,11 @@ export default {
     },
     methods: {
         hasSelectedProfile() {
-            return this.selectedProfile === null || this.selectedProfile === undefined;
+            return this.selectedProfile !== null && this.selectedProfile !== undefined;
         },
         addProfile() {
-            this.$store.dispatch("profileEditor/addProfile", Profile.newInstance());
+            let option = `Profile ${this.profiles.length + 1}`;
+            this.$store.dispatch("profileEditor/addProfile", Profile.newInstance(option));
         },
     }
 };

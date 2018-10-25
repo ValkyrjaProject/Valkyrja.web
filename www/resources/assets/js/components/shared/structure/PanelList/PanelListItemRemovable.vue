@@ -52,4 +52,8 @@ export default {
     .is-fullwidth {
         width: 100%;
     }
+    .level-left {
+        max-width: 70%;
+        overflow: hidden;
+    }
 </style>

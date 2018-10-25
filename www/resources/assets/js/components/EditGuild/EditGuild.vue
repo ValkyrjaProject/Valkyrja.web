@@ -122,6 +122,15 @@ for (let tab of tabs) {
 const router = new VueRouter({
     mode: "hash",
     routes: routes,
+    scrollBehavior (to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+        else {
+            let el = document.getElementsByClassName("edit-guild-container")[0].getBoundingClientRect();
+            return { x: 0, y: el.top + window.scrollY };
+        }
+    }
 });
 
 export default {

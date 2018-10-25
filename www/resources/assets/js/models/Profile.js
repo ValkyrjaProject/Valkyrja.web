@@ -12,7 +12,7 @@ export class Profile extends ConfigData {
      */
     static newInstance(option = "") {
         let profile = new this;
-        profile.id = id;
+        profile.id = option;
         profile.value = {
             option: option,
             option_alt: "",

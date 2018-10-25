@@ -62,7 +62,9 @@ const actions = {
     },
     addPublicGroup({commit}, group) {
         if (!(group instanceof PublicGroup)) {
-            throw new TypeError(`Object is not of type PublicGroup, it is of type ${group.constructor.name}`);
+            let error = `Object is not of type PublicGroup, it is of type ${group.constructor.name}`;
+            log.error(error);
+            throw new TypeError(error);
         }
         commit(ADD_ARRAY_OBJECT, {
             id: "role_groups",

@@ -9,7 +9,9 @@
                 </figure>
             </div>
             <div class="level-item">
-                <h1 class="title is-spaced">Editing {{ name }}</h1>
+                <h1 
+                    id="guild-heading" 
+                    class="title is-spaced">Editing {{ name }}</h1>
             </div>
         </div>
         <div class="level-right">
