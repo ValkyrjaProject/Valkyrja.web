@@ -3,13 +3,13 @@
         <div class="columns">
             <panel-list
                 v-model="availableChannels"
-                class="column channels"
+                class="column channels is-half"
                 title="Available Channels"
                 item-icon="pound"
             />
             <panel-list
                 v-model="ignoredChannels"
-                class="column channels"
+                class="column channels is-half"
                 title="Ignored Channels"
                 item-icon="pound"
             />

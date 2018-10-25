@@ -1,7 +1,7 @@
 <template>
     <div class="box has-background-white-bis">
         <div class="columns">
-            <div class="column">
+            <div class="column is-one-third">
                 <role-selector-type
                     title="Role type"
                     class="content"
@@ -14,12 +14,12 @@
             </div>
             <panel-list
                 v-model="availableRoles"
-                class="column roles"
+                class="column roles is-one-third"
                 title="Available Roles"
             />
             <panel-list
                 v-model="addedRoles"
-                class="column roles"
+                class="column roles is-one-third"
                 title="Added Roles"
             />
         </div>
