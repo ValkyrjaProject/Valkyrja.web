@@ -165,13 +165,22 @@ class ServerConfig extends Model
             return false;
         }
         // FIXME: Does not add or remove correctly
-        $commandKeys = array_column($reaction_roles, 'messageid');
-        $toBeDeleted = $this->reaction_roles()->whereNotIn('messageid', $commandKeys);
+        $messageids = array_column($reaction_roles, 'messageid');
+        $emojis = array_column($reaction_roles, 'emoji');
+        $roles = array_column($reaction_roles, 'roleid');
+        $toBeDeleted = $this->reaction_roles()
+            ->whereNotIn('messageid', $messageids)
+            ->orWhereNotIn('emoji', $emojis)
+            ->orWhereNotIn('roleid', $roles);
         if ($toBeDeleted->count() > 0) {
             $toBeDeleted->delete();
         }
         foreach ($reaction_roles as $reaction_role) {
-            $this->reaction_roles()->updateOrCreate(['messageid' => $reaction_role['messageid']], $reaction_role);
+            $this->reaction_roles()->updateOrCreate([
+                'messageid' => $reaction_role['messageid'],
+                'emoji' => $reaction_role['emoji'],
+                'roleid' => $reaction_role['roleid'],
+            ], $reaction_role);
         }
         return true;
     }
