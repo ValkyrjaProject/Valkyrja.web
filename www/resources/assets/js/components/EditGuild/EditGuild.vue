@@ -42,6 +42,7 @@ import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
 import LoggingConfig from "./Sections/Logging/LoggingConfig";
 import SocialConfig from "./Sections/Social/SocialConfig";
+import UserVerificationConfig from "./Sections/UserVerification/UserVerificationConfig";
 import VueRouter from "vue-router";
 import Sticky from "vue-sticky-directive";
 
@@ -83,7 +84,7 @@ const tabs = [
         icon: "account-check",
         component: {
             url: "/user-verification",
-            name: null
+            name: UserVerificationConfig
         }
     },
     {
@@ -134,6 +135,7 @@ export default {
         ModerationConfig,
         LoggingConfig,
         SocialConfig,
+        UserVerificationConfig,
     },
     props: {
         guildId: {
