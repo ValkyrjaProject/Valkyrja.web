@@ -8,9 +8,9 @@ import {ConfigData} from "../models/ConfigData";
 export const state = {
     /** @member {Array<Guild>} **/
     guilds: [],
-    /** @member {Guild} **/
+    /** @member {Guild|Object} **/
     guild: {},
-    /** @member {Config} **/
+    /** @member {Config|Object} **/
     config: {},
     user: {
         name: null,

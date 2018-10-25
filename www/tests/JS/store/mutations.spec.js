@@ -3,15 +3,25 @@ import {expect} from "chai";
 import {state, mutations} from "store/mutations";
 
 describe("state", function () {
-    it("should have empty array 'guilds'");
+    it("should have empty array 'guilds'", function () {
+        expect(state.guilds).to.deep.equal([]);
+    });
 
-    it("should have empty object 'guild'");
+    it("should have empty object 'guild'", function () {
+        expect(state.guild).to.deep.equal({});
+    });
 
-    it("should have object 'user' with name and avatar fields");
+    it("should have object 'user' with name and avatar fields", function () {
+        expect(state.user).to.have.all.keys("name", "avatar");
+    });
 
-    it("should user.name field be null");
+    it("should user.name field be null", function () {
+        expect(state.user.name).to.be.null;
+    });
 
-    it("should user.avatar field be null");
+    it("should user.avatar field be null", function () {
+        expect(state.user.avatar).to.be.null;
+    });
 });
 
 describe("mutations", function () {
