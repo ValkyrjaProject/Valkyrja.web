@@ -1,5 +1,5 @@
 import "./mutation_types";
-import {createGuild} from "../models/Guild";
+import {createGuild, Guild} from "../models/Guild";
 import lscache from "lscache";
 import {ADD_ARRAY_OBJECT, ADD_CONFIG, ADD_GUILDS, ADD_USER, CHANGE_CONFIG, INITIALIZE_USER} from "./mutation_types";
 import {Config} from "../models/Config";
@@ -22,7 +22,7 @@ export const mutations = {
     [ADD_GUILDS](state, guilds) {
         let formattedGuilds = [];
         for (const guild of guilds) {
-            formattedGuilds.push(createGuild(guild));
+            formattedGuilds.push(Guild.createGuild(guild));
         }
         state.guilds = formattedGuilds;
     },
@@ -30,7 +30,7 @@ export const mutations = {
     [ADD_CONFIG](state, configData) {
         const {guild, config} = configData;
         log.debug("Creating Guild model and adding to store");
-        state.guild = createGuild(guild, true);
+        state.guild = Guild.createGuild(guild, true);
         log.debug("Adding config data");
         state.config = Config.instanceFromApi(config);
         state.config.addGuildData(state.guild);

@@ -57,25 +57,26 @@ export class Guild {
     toString() {
         return this.name;
     }
-}
 
-export function createGuild(data, global = false) {
-    let roles = [];
-    if (data.hasOwnProperty("roles")) {
-        data.roles.forEach(role => {
-            roles.push(createGuildRole(role));
-        });
+    static createGuild(data, global = false) {
+        let roles = [];
+        if (data.hasOwnProperty("roles")) {
+            data.roles.forEach(role => {
+                roles.push(createGuildRole(role));
+            });
+        }
+
+        let channels = [];
+        if (data.hasOwnProperty("channels")) {
+            data.channels.forEach(channel => {
+                channels.push(createGuildChannel(channel));
+            });
+        }
+        const guild = Object.freeze(new Guild(roles, channels, data));
+        if (global) {
+            Guild.instance = guild;
+        }
+        return guild;
     }
 
-    let channels = [];
-    if (data.hasOwnProperty("channels")) {
-        data.channels.forEach(channel => {
-            channels.push(createGuildChannel(channel));
-        });
-    }
-    const guild = Object.freeze(new Guild(roles, channels, data));
-    if (global) {
-        Guild.instance = guild;
-    }
-    return guild;
 }
