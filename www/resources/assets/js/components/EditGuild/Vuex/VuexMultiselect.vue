@@ -37,6 +37,7 @@
 <script>
 /* eslint-disable vue/require-default-prop */
 import VueMultiselect from "vue-multiselect";
+
 export default {
     name: "VuexMultiselect",
     components: {
