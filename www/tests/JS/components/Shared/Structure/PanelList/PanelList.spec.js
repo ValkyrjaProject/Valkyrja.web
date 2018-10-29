@@ -52,6 +52,11 @@ describe("PanelList", function () {
         expect(wrapper.find(".panel-parent > .panel-heading").text()).to.equal(propsData.title);
     });
 
+    it("should not display '.panel-heading' if title prop is null", function () {
+        wrapper.setProps({title:null});
+        expect(wrapper.find(".panel-heading").exists()).to.equal(false);
+    });
+
     it("should display PanelListSearch component under first '.panel-parent'", function () {
         expect(wrapper.findAll(".panel-parent").at(0).find(PanelListSearch).exists()).to.be.true;
     });

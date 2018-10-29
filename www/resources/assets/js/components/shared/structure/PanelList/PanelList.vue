@@ -1,7 +1,9 @@
 <template>
     <div>
         <nav class="panel panel-parent">
-            <p class="panel-heading">
+            <p
+                v-if="title"
+                class="panel-heading">
                 {{ title }}
             </p>
             <panel-list-search
@@ -72,7 +74,8 @@ export default {
     props: {
         title: {
             type: String,
-            required: true,
+            required: false,
+            default: null
         },
         value: {
             type: Array,
