@@ -26,7 +26,6 @@ const actions = {
             log.error(error);
             throw new TypeError(error);
         }
-        commit("SET_SELECTED_PROFILE", profile);
         commit(ADD_ARRAY_OBJECT, {
             id: "profile_options",
             value: profile,
