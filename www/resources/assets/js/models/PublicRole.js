@@ -42,11 +42,19 @@ export class PublicRole extends ConfigData {
     }
 
     get permission_level() {
-        return parseInt(this.value["permission_level"]);
+        return this.value["permission_level"];
     }
 
     set permission_level(level) {
         this.value["permission_level"] = parseInt(level);
+    }
+
+    get level() {
+        return this.value["level"];
+    }
+
+    set level(level) {
+        this.value["level"] = parseInt(level);
     }
 
     get public_id() {
