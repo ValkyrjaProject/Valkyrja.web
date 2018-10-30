@@ -8,6 +8,9 @@
             </p>
             <panel-list-search
                 v-model="searchQuery"
+                @enter="searchEnter"
+                @down="increaseIndex"
+                @up="decreaseIndex"
                 @clear="searchQuery = ''"/>
         </nav>
         <nav
@@ -26,17 +29,25 @@
                             :key="idx"
                             :item="item"
                             :item-icon="itemIcon"
-                            :class="{'is-active': item === selectedItem}"
+                            :class="itemClass(item, idx)"
                             class="listItem"
                             @remove="$emit('remove', item)"
+                            @keyup.enter="$emit('input', item)"
                             @click="$emit('input', item)"/>
                     </transition-group>
                 </div>
                 <div
-                    v-else
+                    v-else-if="searchQuery.length === 0"
                     :key="2">
                     <p
-                        :key="3"
+                        class="panel-tabs not-found">
+                        Nothing available
+                    </p>
+                </div>
+                <div
+                    v-else
+                    :key="3">
+                    <p
                         class="panel-tabs not-found">
                         Not found
                     </p>
@@ -100,11 +111,12 @@ export default {
             type: Object||null,
             required: false,
             default: null
-        }
+        },
     },
     data() {
         return {
-            searchQuery: ""
+            searchQuery: "",
+            itemIndex: 0,
         };
     },
     computed: {
@@ -119,6 +131,31 @@ export default {
                 return item.toString().toLowerCase().includes(value.toLowerCase());
             });
         },
+        searchEnter() {
+            if (this.searchedList.length && this.searchQuery.length) {
+                let index = this.itemIndex-1 < this.searchedList.length ? Math.max(this.itemIndex-1, 0) : 0;
+                this.$emit("input", this.searchedList[index]);
+                this.searchQuery = "";
+                this.itemIndex = 0;
+            }
+        },
+        increaseIndex() {
+            if (this.searchedList.length > this.itemIndex && this.searchQuery.length) {
+                this.itemIndex++;
+            }
+        },
+        decreaseIndex() {
+            if (this.itemIndex > 1 && this.searchQuery.length) {
+                this.itemIndex--;
+            }
+        },
+        itemClass(item, index){
+            return {
+                "is-active": item === this.selectedItem,
+                "has-background-primary": index+1 === this.itemIndex,
+            };
+
+        }
     }
 };
 </script>

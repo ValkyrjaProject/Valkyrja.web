@@ -8,6 +8,9 @@
                     type="text"
                     placeholder="Search"
                     @input="$emit('input', $event.target.value)"
+                    @keydown.down.prevent="$emit('down')"
+                    @keydown.up.prevent="$emit('up')"
+                    @keyup.enter="$emit('enter')"
                 >
                 <span class="icon is-small is-left">
                     <i
