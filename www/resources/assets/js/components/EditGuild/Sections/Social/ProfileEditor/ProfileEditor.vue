@@ -157,7 +157,9 @@ export default {
         },
         addProfile() {
             let option = `Profile ${this.profiles.length + 1}`;
-            this.$store.dispatch("profileEditor/addProfile", Profile.newInstance(option));
+            let profile = Profile.newInstance(option);
+            this.$store.dispatch("profileEditor/addProfile", profile);
+            this.selectedProfile = profile;
         },
     }
 };

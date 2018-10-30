@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import {expect} from "chai";
 import ProfileEditor from "components/EditGuild/Sections/Social/ProfileEditor/ProfileEditor";
 import PanelList from "components/shared/structure/PanelList/PanelList";
+import {Profile} from "../../../../../../../resources/assets/js/models/Profile";
 
 let localVue = Vue.use(Vuex);
 
@@ -82,15 +83,59 @@ describe("ProfileEditor", function () {
         }
     });
 
-    it("should have 'option' input that changes selected profile");
+    it("should dispatch changeField if 'option' input changes", function () {
+        state.selectedProfile = {};
+        expect(actions.changeField.calledOnce).to.be.false;
+        wrapper.findAll("input").at(0).setValue("value");
+        expect(actions.changeField.calledOnce).to.be.true;
+        expect(actions.changeField.args[0][1]).to.deep.equal({field: "option", value: "value"});
+    });
 
-    it("should have 'option_alt' input that changes selected profile");
+    it("should dispatch changeField if 'option_alt' input changes", function () {
+        state.selectedProfile = {};
+        expect(actions.changeField.calledOnce).to.be.false;
+        wrapper.findAll("input").at(1).setValue("value");
+        expect(actions.changeField.calledOnce).to.be.true;
+        expect(actions.changeField.args[0][1]).to.deep.equal({field: "option_alt", value: "value"});
+    });
 
-    it("should have 'label' input that changes selected profile");
 
-    it("should have 'property_order' input that changes selected profile");
+    it("should dispatch changeField if 'label' input changes", function () {
+        state.selectedProfile = {};
+        expect(actions.changeField.calledOnce).to.be.false;
+        wrapper.findAll("input").at(2).setValue("value");
+        expect(actions.changeField.calledOnce).to.be.true;
+        expect(actions.changeField.args[0][1]).to.deep.equal({field: "label", value: "value"});
+    });
 
-    it("should have 'inline' input that changes selected profile");
+    it("should dispatch changeField if 'property_order' input changes", function () {
+        state.selectedProfile = {};
+        expect(actions.changeField.calledOnce).to.be.false;
+        wrapper.findAll("input").at(3).setValue(5);
+        expect(actions.changeField.calledOnce).to.be.true;
+        expect(actions.changeField.args[0][1]).to.deep.equal({field: "property_order", value: "5"});
+    });
 
-    it("should create ProfileOption class when clicking new profile button");
+    it("should dispatch changeField if 'inline' input changes", function () {
+        state.selectedProfile = {};
+        expect(actions.changeField.calledOnce).to.be.false;
+        wrapper.findAll("input").at(4).trigger("click");
+        expect(actions.changeField.calledOnce).to.be.true;
+        expect(actions.changeField.args[0][1]).to.deep.equal({field: "inline", value: 1});
+    });
+
+    it("should create ProfileOption class when clicking new profile button", function () {
+        expect(actions.addProfile.calledOnce).to.be.false;
+        wrapper.findAll(".box .columns > .column").at(0).vm.$emit("add");
+        expect(actions.addProfile.calledOnce).to.be.true;
+        expect(actions.addProfile.args[0][1]).to.be.instanceof(Profile);
+        expect(actions.addProfile.args[0][1].option).to.equal(`Profile ${profileArray.length + 1}`);
+    });
+
+    it("should make newly created ProfileOption active", function () {
+        expect(actions.setSelectedProfile.calledOnce).to.be.false;
+        wrapper.findAll(".box .columns > .column").at(0).vm.$emit("add");
+        expect(actions.setSelectedProfile.calledOnce).to.be.true;
+        expect(actions.setSelectedProfile.args[0][1]).to.be.instanceof(Profile);
+    });
 });
