@@ -169,7 +169,7 @@ class AuthenticateUserTest extends TestCase
         $response = $user->execute(true);
 
         $this->assertInstanceOf(\Symfony\Component\HttpFoundation\RedirectResponse::class, $response);
-        $this->assertEquals(url('/'), $response->getTargetUrl());
+        $this->assertEquals(url('/config'), $response->getTargetUrl());
     }
 
     private function getUserWithStrict($strict)
