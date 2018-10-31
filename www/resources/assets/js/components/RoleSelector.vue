@@ -2,20 +2,12 @@
     <div class="customComponent loadComponent">
         <div class="listRow">
             <div class="listContainer">
-                <h2>Role type</h2>
-                <select name="title" class="form-control" title="" style="width:100%;margin-bottom:5px"
-                        v-model="selectedPermissionLevel">
-                    <option :value="level" v-for="(level, name) in RolePermissionLevelEnum">{{ name }}</option>
-                </select>
             </div>
             <div class="listContainer">
                 <h2>Public Role Group</h2>
                 <div class="input-group">
-                    <span class="input-group-addon itemLeft btn btn-secondary"
-                          :class="{'disabled': !publicRoleIsSelected}" @click="addPublicGroup()">+</span>
-                    <select name="title" class="form-control" title="" v-model="selectedPublicGroup"
-                            :disabled="!publicRoleIsSelected">
-                        <!--<option :value="0"></option>-->
+                    <span class="input-group-addon itemLeft btn btn-secondary" @click="addPublicGroup()">+</span>
+                    <select name="title" class="form-control" title="" v-model="selectedPublicGroup">
                         <option :value="group.id" v-for="group in sortedPublicGroups">{{ group.toString() }}</option>
                     </select>
                 </div>
@@ -25,7 +17,7 @@
                            class="form-control"
                            placeholder="Group name"
                            title="Group name"
-                           :disabled="!publicRoleIsSelected || isEmptyGroupSelected"/>
+                           :disabled="isEmptyGroupSelected"/>
                 </div>
                 <div class="input-group">
                     <span class="indent">
@@ -36,7 +28,7 @@
                            class="form-control"
                            placeholder="Role limit"
                            title="Role limit"
-                           :disabled="!publicRoleIsSelected || isEmptyGroupSelected"/>
+                           :disabled="!isEmptyGroupSelected"/>
                 </div>
             </div>
         </div>
@@ -70,31 +62,8 @@
         components: {
             ListContainer
         },
-        props: {
-            value: {
-                type: Object,
-                required: false,
-            },
-            hideInputs: {
-                type: Boolean,
-                required: false,
-                default: true
-            },
-            stateIndex: {
-                type: Number,
-                required: false
-            }
-        },
         data: function () {
             return {
-                RolePermissionLevelEnum: {
-                    //None: "0",
-                    Public: "1",
-                    Member: "2",
-                    SubModerator: "3",
-                    Moderator: "4",
-                    Admin: "5"
-                },
                 selectedPermissionLevel: "1",
                 selectedPublicGroup: noGroup.id,
                 publicGroups: []
@@ -148,7 +117,7 @@
                     let newRole = {};
                     newRole['roleid'] = role.id;
                     newRole['permission_level'] = this.selectedPermissionLevel;
-                    newRole['public_id'] = this.publicRoleIsSelected ? this.selectedPublicGroup : 0;
+                    newRole['public_id'] = this.selectedPublicGroup;
                     if (roles.length > 0) {
                         let roleToChange = roles[0];
                         this.$store.dispatch('updateRole', {
@@ -169,13 +138,9 @@
                 return this.$store.state['roles'].filter(e => {
                     return !(this.addedTypes.filter(t => t[['roleid']] === e.id
                             && t.permission_level === this.selectedPermissionLevel
-                            && (this.publicRoleIsSelected ? t.public_id === this.selectedPublicGroup : 1)
                         ).length === 0
                     )
                 });
-            },
-            publicRoleIsSelected() {
-                return this.selectedPermissionLevel === this.RolePermissionLevelEnum.Public;
             },
             isEmptyGroupSelected() {
                 return this.selectedPublicGroup === noGroup.id;
@@ -219,13 +184,11 @@
                 return this.publicGroups.find(g => g.id === this.selectedPublicGroup)
             },
             addPublicGroup() {
-                if (this.publicRoleIsSelected) {
-                    let start = 1;
-                    while (this.publicGroups.find(g => parseInt(g.id) === start) !== undefined) start++;
-                    let group = new PublicRoleGroup(start);
-                    this.publicGroups.push(group);
-                    this.selectedPublicGroup = start.toString();
-                }
+                let start = 1;
+                while (this.publicGroups.find(g => parseInt(g.id) === start) !== undefined) start++;
+                let group = new PublicRoleGroup(start);
+                this.publicGroups.push(group);
+                this.selectedPublicGroup = start.toString();
             },
             removeItem(item) {
                 let removeItem = this.addedTypes[this.addedTypes.findIndex(t => t[['roleid']] === item.id)];
