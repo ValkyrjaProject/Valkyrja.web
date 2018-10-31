@@ -13,7 +13,7 @@ const mutations = {
         state.selectedProfile = profile;
     },
     CHANGE_TYPE(state, option) {
-        if (state.selectedProfile.value.hasOwnProperty(option.field)) {
+        if (state.selectedProfile && state.selectedProfile.value.hasOwnProperty(option.field)) {
             state.selectedProfile.value[option.field] = option.value;
         }
     }
@@ -41,7 +41,7 @@ const actions = {
     },
     changeField({commit}, option) {
         if (!(option.hasOwnProperty("field") && option.hasOwnProperty("value"))) {
-            let error = "Object does not have field and value fields";
+            let error = "Object does not have 'field' and 'value' fields";
             log.error(error);
             throw new TypeError(error);
         }

@@ -29,7 +29,7 @@ describe("state", function () {
 });
 
 describe("mutations", function () {
-    global.log = sinon.stub(loglevel);
+
     describe("ADD_GUILDS", function () {
         it("should create a Guild for each guild in guilds parameter and add the list to state.guilds", function () {
             let guilds = [{id: "1"}, {id: "2"}, {id: "3"}];
