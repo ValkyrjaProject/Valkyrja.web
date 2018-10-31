@@ -1,17 +1,39 @@
 import sinon from "sinon";
 import {expect} from "chai";
-import {mutations, actions, getters} from "store/modules/ProfileEditor";
-
+import profileEditor from "store/modules/ProfileEditor";
+import loglevel from "loglevel";
+import {Profile} from "models/Profile";
 
 describe("ProfileEditor Vuex module", function () {
+    global.log = sinon.stub(loglevel);
     describe("state", function () {
-        it("should set selectedProfile as 'null'");
+        it("should set selectedProfile as 'null'", function () {
+            expect(profileEditor.state.selectedProfile).to.be.null;
+        });
     });
 
-    describe("mutations", function () {
+    describe("actions", function () {
+        let state;
+        beforeEach(function () {
+            state = {
+                selectedProfile: null
+            };
+        });
+
         describe("addProfile", function () {
-            it("commits throws exception if profile param is not instance of Profile");
-            it("commits 'ADD_ARRAY_OBJECT' with Profile object in value field");
+            it("throws exception if profile param is not instance of Profile", function () {
+                expect(() => profileEditor.actions.addProfile(state, {})).to.throw(TypeError, "Object is not of type Profile");
+            });
+            it("commits 'ADD_ARRAY_OBJECT' with Profile object in value field", function () {
+                let profile = new Profile;
+                let commitStub = sinon.stub();
+                let data = {
+                    state,
+                    commit: commitStub
+                };
+                profileEditor.actions.addProfile(data, profile);
+                expect(commitStub.calledOnce).to.be.true;
+            });
             it("commits 'ADD_ARRAY_OBJECT' with field 'profile_options'");
             it("commits 'ADD_ARRAY_OBJECT' as root mutation");
         });

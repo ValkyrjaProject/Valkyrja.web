@@ -4,7 +4,7 @@ import {Profile} from "../../models/Profile";
 import {ADD_ARRAY_OBJECT} from "../mutation_types";
 
 const state = {
-    /** @member {ProfileOption|null} */
+    /** @member {Profile|null} */
     selectedProfile: null
 };
 
