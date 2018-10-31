@@ -16,6 +16,7 @@ export const types = {
 };
 let stateTypes = {...types};
 delete stateTypes.NotAdded;
+
 const state = {
     selectedType: types.Public,
     types: stateTypes,
@@ -106,7 +107,7 @@ const actions = {
         }
         commit("CHANGE_GROUP_NAME", name);
     },
-    changeRoleLimit({commit}, limit) {
+    changeRoleLimit({commit, state}, limit) {
         if (!(state.selectedPublicGroup instanceof PublicGroup)) {
             return;
         }
