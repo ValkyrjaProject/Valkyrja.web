@@ -21,7 +21,6 @@
     <div class="container">
         <div class="col-xs-12">
             <form action="{{ url('config/'.$serverId) }}" method="post" @submit.prevent>
-                <reaction-roles form-name="reaction_roles"></reaction-roles>
                 <h1 class="col-md-8">
                     <v-loading message='Configure Valkyrja'>
                     <span slot='spinner' class="align-bottom">
@@ -270,48 +269,7 @@
                         data-target="#configModeration" aria-expanded="false" aria-controls="configModeration">
                     Moderation
                 </button>
-                <div class="form-inline form-group collapse" id="configModeration"><br/>
-                    <p>
-                        <b>Roles</b>
-                        <br/>
-                        Roles that will have different kind of permissions - refer to the documentation to see what can
-                        each permission do. (You can also customize that using the <code>@{{ command_prefix
-                            }}permissions</code> command.)
-                        <br/>
-                        Public Roles default to <code>No group</code> where any user can <code>@{{ command_prefix
-                            }}join</code> any of these roles. Any other public role group will be exclusive, and the
-                        user can have only one role out of a group at the time. You can have multiple groups.
-                        <br/>
-                        <role-selector>
-                            <template slot-scope="props">
-                                <span v-for="role in props.addedTypesLevel">
-                                    <input type="hidden"
-                                           :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'"
-                                           :value="role.roleid">
-                                    <input type="hidden"
-                                           :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'"
-                                           :value="role.permission_level">
-                                    <input type="hidden"
-                                           :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'"
-                                           :value="role.public_id">
-                                    <input type="hidden"
-                                           :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
-                                           :value="role.antispam_ignored">
-                                </span>
-                                <span v-for="group in props.roleGroups">
-                                    <input type="hidden"
-                                           :name="'role_groups['+props.roleGroups.indexOf(group)+'][groupid]'"
-                                           :value="group.id">
-                                    <input type="hidden"
-                                           :name="'role_groups['+props.roleGroups.indexOf(group)+'][role_limit]'"
-                                           :value="group.role_limit">
-                                    <input type="hidden"
-                                           :name="'role_groups['+props.roleGroups.indexOf(group)+'][name]'"
-                                           :value="group.name">
-                                </span>
-                            </template>
-                        </role-selector>
-                    </p>
+                <div class="form-inline form-group collapse" id="configModeration">
                     <p>
                         <b>!op</b>
                         <br/>
@@ -374,6 +332,59 @@
                         <br/>
                         Another article about moderating a community, full of Discord/Valkyrja examples. <i>(Written by
                             Rhea.)</i>
+                    </p>
+                </div>
+
+                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
+                        data-target="#roleAssignment" aria-expanded="false" aria-controls="roleAssignment">
+                    Role Assignment
+                </button>
+                <div class="form-inline form-group collapse" id="roleAssignment">
+                    <p>
+                        <b>Roles</b>
+                        <br/>
+                        Roles that will have different kind of permissions - refer to the documentation to see what can
+                        each permission do. (You can also customize that using the <code>@{{ command_prefix
+                            }}permissions</code> command.)
+                        <br/>
+                        Public Roles default to <code>No group</code> where any user can <code>@{{ command_prefix
+                            }}join</code> any of these roles. Any other public role group will be exclusive, and the
+                        user can have only one role out of a group at the time. You can have multiple groups.
+                        <br/>
+                        <role-selector>
+                            <template slot-scope="props">
+                                <span v-for="role in props.addedTypesLevel">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'"
+                                            :value="role.roleid">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'"
+                                            :value="role.permission_level">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'"
+                                            :value="role.public_id">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
+                                            :value="role.antispam_ignored">
+                                </span>
+                                <span v-for="group in props.roleGroups">
+                                    <input type="hidden"
+                                            :name="'role_groups['+props.roleGroups.indexOf(group)+'][groupid]'"
+                                            :value="group.id">
+                                    <input type="hidden"
+                                            :name="'role_groups['+props.roleGroups.indexOf(group)+'][role_limit]'"
+                                            :value="group.role_limit">
+                                    <input type="hidden"
+                                            :name="'role_groups['+props.roleGroups.indexOf(group)+'][name]'"
+                                            :value="group.name">
+                                </span>
+                            </template>
+                        </role-selector>
+                    </p>
+                    <p>
+                        Reaction roles
+                        <br>
+                        <reaction-roles form-name="reaction_roles"></reaction-roles>
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
