@@ -12,13 +12,16 @@
                         <div class="field has-addons">
                             <div class="control is-expanded">
                                 <input
+                                    v-model="currentLevelValue"
                                     class="input is-small"
                                     type="number"
                                     min="1"
                                     placeholder="Level">
                             </div>
                             <div class="control">
-                                <a class="button is-small is-success">
+                                <a
+                                    class="button is-small is-success"
+                                    @click="addLevel()">
                                     <i
                                         class="mdi mdi-plus"
                                         aria-hidden="true"></i>
@@ -29,7 +32,8 @@
                 </div>
                 <div class="panel-block has-background-white">
                     <vue-multiselect
-                        :options="[]"
+                        v-model="selectedLevel"
+                        :options="levels"
                         class="vue-multiselect"/>
                 </div>
             </div>
@@ -61,12 +65,36 @@ export default {
         PanelList,
         VueMultiselect,
     },
-    data: function() {
+    data() {
         return {
-            selectedLevel: null,
+            levelValue: 0
         };
     },
     computed: {
+        currentLevelValue: {
+            get() {
+                return this.levelValue;
+            },
+            set(value) {
+                this.levelValue = value;
+            }
+        },
+        levels: {
+            get() {
+                return this.$store.state.levelSelector.levels;
+            },
+            set(level) {
+                this.$store.dispatch("levelSelector/changeLevel", level);
+            }
+        },
+        selectedLevel: {
+            get() {
+                return this.$store.state.levelSelector.selectedLevel;
+            },
+            set(level) {
+                this.$store.dispatch("levelSelector/changeSelectedLevel", level);
+            }
+        },
         availableRoles: {
             get() {
                 return this.$store.getters["levelSelector/availableRoles"];
@@ -90,7 +118,12 @@ export default {
                 });
             }
         }
-    }
+    },
+    methods: {
+        addLevel() {
+
+        }
+    },
 };
 </script>
 
