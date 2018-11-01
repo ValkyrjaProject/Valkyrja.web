@@ -42,13 +42,13 @@
             return {
                 RolePermissionLevelEnum: {
                     //None: "0",
-                    Public: "1",
+                    //Public: "1",
                     Member: "2",
                     SubModerator: "3",
                     Moderator: "4",
                     Admin: "5"
                 },
-                selectedPermissionLevel: "1",
+                selectedPermissionLevel: "2",
             }
         },
         created() {
@@ -83,7 +83,7 @@
                     let newRole = {};
                     newRole['roleid'] = role.id;
                     newRole['permission_level'] = this.selectedPermissionLevel;
-                    newRole['public_id'] = this.publicRoleIsSelected ? this.selectedPublicGroup : 0;
+                    newRole['public_id'] = "0";
                     if (roles.length > 0) {
                         let roleToChange = roles[0];
                         this.$store.dispatch('updateRole', {

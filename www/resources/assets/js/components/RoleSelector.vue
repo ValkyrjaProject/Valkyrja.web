@@ -28,7 +28,7 @@
                            class="form-control"
                            placeholder="Role limit"
                            title="Role limit"
-                           :disabled="!isEmptyGroupSelected"/>
+                           :disabled="isEmptyGroupSelected"/>
                 </div>
             </div>
         </div>
@@ -78,8 +78,7 @@
                     });
                 }
                 else if (
-                    type.permission_level === this.RolePermissionLevelEnum.Public
-                    && type.public_id !== 0
+                    parseInt(type.public_id) !== 0
                     && this.publicGroups.find(g => g.id === type.public_id) === undefined
                 ) {
                     let role_group = this.roleGroups.find(role => role['groupid'].toString() === type.public_id.toString());
@@ -138,6 +137,7 @@
                 return this.$store.state['roles'].filter(e => {
                     return !(this.addedTypes.filter(t => t[['roleid']] === e.id
                             && t.permission_level === this.selectedPermissionLevel
+                            && t.public_id === this.selectedPublicGroup
                         ).length === 0
                     )
                 });
