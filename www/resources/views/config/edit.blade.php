@@ -351,6 +351,24 @@
                             }}join</code> any of these roles. Any other public role group will be exclusive, and the
                         user can have only one role out of a group at the time. You can have multiple groups.
                         <br/>
+                        <role-permission>
+                            <template slot-scope="props">
+                                <span v-for="role in props.addedTypesLevel">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'"
+                                            :value="role.roleid">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'"
+                                            :value="role.permission_level">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'"
+                                            :value="role.public_id">
+                                    <input type="hidden"
+                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
+                                            :value="role.antispam_ignored">
+                                </span>
+                            </template>
+                        </role-permission>
                         <role-selector>
                             <template slot-scope="props">
                                 <span v-for="role in props.addedTypesLevel">

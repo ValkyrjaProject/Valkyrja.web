@@ -5,6 +5,7 @@ import {updateCustomCommands, updateBotwinderCommands, updateRolesData, updateRo
 import {mapGetters, mapState} from 'vuex'
 import Sticky from './sticky'
 import RoleSelector from './components/RoleSelector.vue'
+import RolePermission from './components/RolePermission.vue'
 import TextField from './components/TextField.vue'
 import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
@@ -24,6 +25,7 @@ new Vue({
     components:{
         LevelSelector,
         RoleSelector,
+        RolePermission,
         TextField,
         TypeSelector,
         CustomInputList,
