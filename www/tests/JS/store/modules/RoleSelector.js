@@ -4,6 +4,9 @@ import roleSelector from "store/modules/RoleSelector";
 import {BlankPublicGroup} from "../../../../resources/assets/js/models/BlankPublicGroup";
 import PublicGroup from "../../../../resources/assets/js/models/PublicGroup";
 import {PublicRole} from "../../../../resources/assets/js/models/PublicRole";
+import {Guild} from "../../../../resources/assets/js/models/Guild";
+import ignoredChannels from "../../../../resources/assets/js/store/modules/IgnoredChannels";
+import {Config} from "../../../../resources/assets/js/models/Config";
 
 describe("RoleSelector", function () {
     const allTypes = {
@@ -284,6 +287,187 @@ describe("RoleSelector", function () {
     });
 
     describe("getters", function () {
-        // TODO;
+        let commitStub = sinon.stub();
+        let data;
+        let state;
+
+        beforeEach(function () {
+            let storeTypes = {...allTypes};
+            delete storeTypes.NotAdded;
+            state = {
+                types: storeTypes,
+                selectedType: null,
+                selectedPublicGroup: {id: ""},
+                publicGroups: [],
+            };
+
+            commitStub.reset();
+
+            data = {
+                state,
+                commit: commitStub,
+            };
+        });
+
+        describe("availableRoles", function () {
+            it("returns empty array if rootState.config is not an instance of Config", function () {
+                let rootState = {
+                    config: null,
+                    guild: new Guild([], [], {id:"", name:"", icon:""}),
+                };
+                expect(roleSelector.getters.availableRoles(data, {}, rootState, {})).to.deep.equal([]);
+            });
+
+            it("returns empty array if rootState.guild is not an instance of Guild", function () {
+                let rootState = {
+                    config: new Config,
+                    guild: null,
+                };
+                expect(roleSelector.getters.availableRoles(data, {}, rootState, {})).to.deep.equal([]);
+            });
+
+            it("calls 'configInput' root getter with 'roles'", function () {
+                let rootState = {
+                    config: new Config,
+                    guild: new Guild([], [], {id:"", name:"", icon:""}),
+                };
+                let rootGetters = {
+                    configInput: sinon.stub()
+                };
+                rootGetters.configInput.returns({value:[]});
+
+                expect(rootGetters.configInput.calledOnce, "configInput is not called before test").to.be.false;
+                roleSelector.getters.availableRoles(state, {}, rootState, rootGetters);
+                expect(rootGetters.configInput.calledWith("roles"), "configInput was called").to.be.true;
+            });
+
+            it("should return list of configInput arrays that match guild roles with permission level below 1", function () {
+                let guildRoles = [];
+                for (let i = 0; i < 50; i++) {
+                    guildRoles.push({id: i.toString()});
+                }
+
+                let configInputRoles = [];
+                for (let i = 10; i < 30; i++) {
+                    configInputRoles.push({
+                        id: i.toString(),
+                        permission_level: Math.floor(Math.random()*(7)-3),
+                    });
+                }
+
+                let rootState = {
+                    config: new Config,
+                    guild: new Guild(guildRoles, [], {id:"", name:"", icon:""}),
+                };
+                let rootGetters = {
+                    configInput: sinon.stub()
+                };
+                let value = {value: configInputRoles};
+                rootGetters.configInput.returns(value);
+                let response = roleSelector.getters.availableRoles(state, {}, rootState, rootGetters);
+                expect(response, "should only have negative permission_level roles").to.have.members(configInputRoles.filter(r => r.permission_level < 1));
+                expect(response, "should not have positive permission_level roles").to.not.have.members(configInputRoles.filter(r => r.permission_level > 0));
+            });
+        });
+
+        describe("addedRoles", function () {
+
+            it("returns empty array if rootState.config is not an instance of Config", function () {
+                let rootState = {
+                    config: null,
+                    guild: new Guild([], [], {id:"", name:"", icon:""}),
+                };
+                expect(roleSelector.getters.addedRoles(data, {}, rootState, {})).to.deep.equal([]);
+            });
+
+            it("returns empty array if rootState.guild is not an instance of Guild", function () {
+                let rootState = {
+                    config: new Config,
+                    guild: null,
+                };
+                expect(roleSelector.getters.addedRoles(data, {}, rootState, {})).to.deep.equal([]);
+            });
+
+            it("calls 'configInput' root getter with 'roles'", function () {
+                let rootState = {
+                    config: new Config,
+                    guild: new Guild([], [], {id:"", name:"", icon:""}),
+                };
+                let rootGetters = {
+                    configInput: sinon.stub()
+                };
+                rootGetters.configInput.returns({value:[]});
+
+                expect(rootGetters.configInput.calledOnce, "configInput is not called before test").to.be.false;
+                roleSelector.getters.addedRoles(state, {}, rootState, rootGetters);
+                expect(rootGetters.configInput.calledWith("roles"), "configInput was called").to.be.true;
+            });
+
+            it("should return list of configInput arrays that match guild roles with non-Public type regardless of selectedPublicGroup", function () {
+                state.selectedType = allTypes.Member;
+                state.selectedPublicGroup = {id: 5};
+                let guildRoles = [];
+                for (let i = 0; i < 50; i++) {
+                    guildRoles.push({id: i.toString()});
+                }
+
+                let configInputRoles = [];
+                for (let i = 10; i < 30; i++) {
+                    configInputRoles.push({
+                        id: i.toString(),
+                        permission_level: Math.floor(Math.random()*(allTypes.length)),
+                        public_id: Math.floor(Math.random()*(7)),
+                    });
+                }
+
+                let rootState = {
+                    config: new Config,
+                    guild: new Guild(guildRoles, [], {id:"", name:"", icon:""}),
+                };
+                let rootGetters = {
+                    configInput: sinon.stub()
+                };
+                let value = {value: configInputRoles};
+                rootGetters.configInput.returns(value);
+                let response = roleSelector.getters.addedRoles(state, {}, rootState, rootGetters);
+                expect(response, "should only have roles with selected permission level regardless of public group").to.have.members(configInputRoles.filter(r => r.permission_level === state.selectedType));
+                expect(response, "should not include roles roles outside selected permission level regardless of public group").to.not.have.members(configInputRoles.filter(r => r.permission_level !== state.selectedType));
+            });
+
+            it("should return list of configInput arrays that match guild roles with Public and selected PublicGroup", function () {
+                state.selectedType = allTypes.Public;
+                state.selectedPublicGroup = {id: 5};
+                let guildRoles = [];
+                for (let i = 0; i < 50; i++) {
+                    guildRoles.push({id: i.toString()});
+                }
+
+                let configInputRoles = [];
+                for (let i = 10; i < 30; i++) {
+                    configInputRoles.push({
+                        id: i.toString(),
+                        permission_level: Math.floor(Math.random()*(allTypes.length)),
+                        public_id: Math.floor(Math.random()*(7)),
+                    });
+                }
+
+                let rootState = {
+                    config: new Config,
+                    guild: new Guild(guildRoles, [], {id:"", name:"", icon:""}),
+                };
+                let rootGetters = {
+                    configInput: sinon.stub()
+                };
+                let value = {value: configInputRoles};
+                rootGetters.configInput.returns(value);
+                let response = roleSelector.getters.addedRoles(state, {}, rootState, rootGetters);
+                expect(response, "should only have roles with selected permission level and public group").to.have.members(configInputRoles.filter(r => {
+                    return r.permission_level === state.selectedType && r.public_id === state.selectedPublicGroup
+                }));
+                expect(response, "should not include roles roles outside selected permission level and public group").to.not.have.members(configInputRoles.filter(r => {
+                    return r.permission_level !== state.selectedType && r.public_id !== state.selectedPublicGroup
+                }));
+            });
+        });
     });
 });
