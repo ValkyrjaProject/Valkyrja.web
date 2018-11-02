@@ -164,8 +164,15 @@ class ServerConfig extends Model
         if (!is_array($reaction_roles) && count($reaction_roles) == 0) {
             return false;
         }
-        // FIXME: Does not add or remove correctly
-        $messageids = array_column($reaction_roles, 'messageid');
+        $messageids = $reaction_roles;
+        $reaction_roles = [];
+        foreach ($messageids as $key => $reaction_role) {
+            foreach ($reaction_role as $role) {
+                $newRole = $role;
+                $newRole['messageid'] = $key;
+                array_push($reaction_roles, $newRole);
+            }
+        }
         $emojis = array_column($reaction_roles, 'emoji');
         $roles = array_column($reaction_roles, 'roleid');
         $toBeDeleted = $this->reaction_roles()
