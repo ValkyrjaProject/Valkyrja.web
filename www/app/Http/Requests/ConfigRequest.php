@@ -225,9 +225,9 @@ class ConfigRequest extends FormRequest
             'role_groups.*.name'                => 'present|string|nullable|max:250',
             'reaction_roles'                    => 'array',
             'reaction_roles.*'                  => 'array',
-            'reaction_roles.*.messageid'        => 'required|integer',
-            'reaction_roles.*.roleid'           => 'required|integer',
-            'reaction_roles.*.emoji'            => 'required|string|max:250',
+            'reaction_roles.*.*'                => 'array',
+            'reaction_roles.*.*.roleid'         => 'required|integer',
+            'reaction_roles.*.*.emoji'          => 'required|string|max:250',
         ];
     }
 }

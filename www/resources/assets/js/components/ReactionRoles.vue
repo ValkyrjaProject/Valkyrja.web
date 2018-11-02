@@ -58,10 +58,9 @@
                 <div v-else>No message selected</div>
             </div>
             <span v-for="message in itemList">
-                <span v-for="role in message.roles">
-                    <input type="hidden" :name="inputName('messageid', role)" :value="message.messageid">
-                    <input type="hidden" :name="inputName('roleid', role)" :value="role.id">
-                    <input type="hidden" :name="inputName('emoji', role)" :value="role.emoji">
+                <span v-for="role, index in message.roles">
+                    <input type="hidden" :name="inputName('roleid', message.messageid, index)" :value="role.id">
+                    <input type="hidden" :name="inputName('emoji', message.messageid, index)" :value="role.emoji">
                 </span>
             </span>
         </div>
@@ -144,6 +143,7 @@
                         classData: {'active': true}
                     });
                 }
+                this.activeRole = null;
             },
             setActiveRole(item) {
                 this.activeRole = this.$store.state.itemModifier[this.formName].activeItem.roles.find(role => {
@@ -200,13 +200,8 @@
                     }
                 }
             },
-            inputName(attribute, role) {
-                if (this.$store.state.itemModifier[this.formName].activeItem) {
-                    return this.formName + '[' + this.$store.state.itemModifier[this.formName].activeItem.roles.indexOf(role) + ']' + '[' + attribute + ']'
-                }
-            },
-            roleName(attribute, item) {
-                return this.inputName(attribute, item) + '[]';
+            inputName(attribute, id, index) {
+                return this.formName + '[' + id + ']' + '[' + index + ']' +  '[' + attribute + ']'
             },
             itemIsValid(item) {
                 return true;
