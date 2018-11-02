@@ -1186,11 +1186,28 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Add a new quote! Use with a username or mention as the first parameter, and the text as second. (Or you can just use a message ID.)";</td>
+                        <td>Add a new quote! Use with a username or mention as the first parameter, and the text as second. (Or you can just use a message ID.)</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
                         <td><code>messageID</code> or <code>username text</code></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>removeQuote</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Remove the last created quote.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
