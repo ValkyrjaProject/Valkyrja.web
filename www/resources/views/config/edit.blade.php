@@ -271,6 +271,30 @@
                 </button>
                 <div class="form-inline form-group collapse" id="configModeration">
                     <p>
+                        <b>Roles</b>
+                        <br/>
+                        Assign roles different permission levels - refer to the documentation to see what each permission level can do. (You can also customize that per-command using the <code>@{{ command_prefix }}permissions</code> command.)
+                        <br/>
+                        <role-permission>
+                            <template slot-scope="props">
+                                    <span v-for="role in props.addedTypesLevel">
+                                        <input type="hidden"
+                                                :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'"
+                                                :value="role.roleid">
+                                        <input type="hidden"
+                                                :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'"
+                                                :value="role.permission_level">
+                                        <input type="hidden"
+                                                :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'"
+                                                :value="role.public_id">
+                                        <input type="hidden"
+                                                :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
+                                                :value="role.antispam_ignored">
+                                    </span>
+                            </template>
+                        </role-permission>
+                    </p>
+                    <p>
                         <b>!op</b>
                         <br/>
                         This feature will act like Operators known from IRC. If configured, it will disable the use of
@@ -341,34 +365,11 @@
                 </button>
                 <div class="form-inline form-group collapse" id="roleAssignment">
                     <p>
-                        <b>Roles</b>
+                        <b>Public Roles</b>
                         <br/>
-                        Roles that will have different kind of permissions - refer to the documentation to see what can
-                        each permission do. (You can also customize that using the <code>@{{ command_prefix
-                            }}permissions</code> command.)
+                        Public Roles can be taken by anyone using the <code>@{{ command_prefix }}join</code> command. Please see the documentation for detailed command reference.
                         <br/>
-                        Public Roles default to <code>No group</code> where any user can <code>@{{ command_prefix
-                            }}join</code> any of these roles. Any other public role group will be exclusive, and the
-                        user can have only one role out of a group at the time. You can have multiple groups.
-                        <br/>
-                        <role-permission>
-                            <template slot-scope="props">
-                                <span v-for="role in props.addedTypesLevel">
-                                    <input type="hidden"
-                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][roleid]'"
-                                            :value="role.roleid">
-                                    <input type="hidden"
-                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][permission_level]'"
-                                            :value="role.permission_level">
-                                    <input type="hidden"
-                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][public_id]'"
-                                            :value="role.public_id">
-                                    <input type="hidden"
-                                            :name="'roles['+props.addedTypesLevel.indexOf(role)+'][antispam_ignored]'"
-                                            :value="role.antispam_ignored">
-                                </span>
-                            </template>
-                        </role-permission>
+                        These default to <code>No group</code> where any user can <code>@{{ command_prefix }}join</code> any of these roles. Any other public role group will be exclusive, and the user can have only one role out of a group at the time. You can have multiple groups.
                         <role-selector>
                             <template slot-scope="props">
                                 <span v-for="role in props.addedTypesLevel">
@@ -400,8 +401,7 @@
                         </role-selector>
                     </p>
                     <p>
-                        Reaction roles
-                        <br>
+                        <b>Reaction Assigned Roles</b>
                         <reaction-roles form-name="reaction_roles"></reaction-roles>
                     </p>
                 </div>
