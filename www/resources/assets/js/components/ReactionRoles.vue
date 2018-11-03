@@ -19,9 +19,9 @@
                     <div class="from-group"
                             :class="{'has-danger': false}">
                         <label class="form-control-label">
-                            <b>Id</b> - Message ID
-                            <input class="form-control" command-name="messageid" :value="activeItem.messageid"
-                                    @input="updateActiveItemData">
+                            <b>Message ID</b>
+                            <input class="form-control" command-name="messageid" :value="activeItem.messageid" @input="updateActiveItemData">
+                            <br/>ID of a message where to watch for reactions. (Use DevMode enabled in the settings of Discord client, right-click a message and <code>copy ID</code>.)
                         </label>
                     </div>
                     <div class="listContainer">
@@ -47,7 +47,7 @@
                             <div class="from-group"
                                     :class="{'has-danger': false}">
                                 <label class="form-control-label">
-                                    <b>Emoji</b> - Can be normal emoji or <code>server_emoji</code>.
+                                    <b>Emoji</b> - Either a :<code>CustomEmoji</code>: without colons, or a standard unicode emoji <code>🙃</code>
                                         <input class="form-control" command-name="emoji" v-model="activeRole.emoji">
                                 </label>
                             </div>
