@@ -47,8 +47,8 @@
                             <div class="from-group"
                                     :class="{'has-danger': false}">
                                 <label class="form-control-label">
-                                    <b>Emoji</b> - Either a :<code>CustomEmoji</code>: without colons, or a standard unicode emoji <code>🙃</code>
-                                        <input class="form-control" command-name="emoji" v-model="activeRole.emoji">
+                                    <b>Emoji</b> - Either a :<code>CustomEmoji</code>: without colons, or a <a target="_blank" href="https://emojipedia.org">standard unicode emoji</a> <code>🙃</code>
+                                    <input class="form-control" command-name="emoji" v-model="activeRole.emoji">
                                 </label>
                             </div>
                         </div>
