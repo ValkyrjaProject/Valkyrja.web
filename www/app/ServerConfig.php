@@ -175,13 +175,13 @@ class ServerConfig extends Model
         }
         $emojis = array_column($reaction_roles, 'emoji');
         $roles = array_column($reaction_roles, 'roleid');
-        $toBeDeleted = $this->reaction_roles()
+        /*$toBeDeleted = $this->reaction_roles()
             ->whereNotIn('messageid', $messageids)
-            ->orWhereNotIn('emoji', $emojis)
-            ->orWhereNotIn('roleid', $roles);
+            ->whereNotIn('emoji', $emojis)
+            ->whereNotIn('roleid', $roles);
         if ($toBeDeleted->count() > 0) {
             $toBeDeleted->delete();
-        }
+        }*/
         foreach ($reaction_roles as $reaction_role) {
             $this->reaction_roles()->updateOrCreate([
                 'messageid' => $reaction_role['messageid'],
