@@ -5,7 +5,7 @@
 @section('content')
 <section class="container">
     <div class="media col-md-6 col-lg-4">
-        <img src="/img/jefi.png" alt="Jefi icon" class="media-object"/>
+        <img src="/img/jefi.png" alt="Jefi icon" class="media-object" style="width: 100%;"/>
     </div>
     <div class="col-md-6 col-lg-8">
         <p>
