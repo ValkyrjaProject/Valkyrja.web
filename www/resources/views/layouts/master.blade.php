@@ -8,7 +8,7 @@
     <meta property="og:title" content="Valkyrja project - @yield('title')">
     <meta property="og:description" content="Highly customizable Community Management bot, provides advanced moderation tools, advanced role assignment, user verification, powerful antispam and much more. Comes with cookies!">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="http://valkyrja.app/img/jefi-mirror.png">
+    <meta property="og:image" content="http://valkyrja.app/img/valkyrja-geared-517p.png">
     <meta property="og:url" content="{{ Request::path() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
@@ -28,7 +28,7 @@
             </button>
             <div id="collapsingNavbar" class="collapse navbar-toggleable-sm">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item"><a class="nav-link {{ Request::path() == '/' ? "active" : "" }}" href="/"><img class="media hidden-sm-down" src="/img/jefi-small.png" alt="Home" /><br class="hidden-sm-down" />Home</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Request::path() == '/' ? "active" : "" }}" href="/"><img class="media hidden-sm-down" src="/img/valkyrja-geared-50p.png" alt="Home" /><br class="hidden-sm-down" />Home</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('docs') }}" href="{{ url('docs') }}"><img class="media hidden-sm-down" src="/img/book.png" alt="Docs" /><br class="hidden-sm-down" />Docs</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('config') }}" href="{{ url('config') }}"><img class="media hidden-sm-down" src="/img/wrench.png" alt="Config" /><br class="hidden-sm-down" />Config</a></li>
                     <li class="nav-item"><a class="nav-link {{ Helper::setActive('invite') }}" href="{{ url('invite') }}"><img class="media hidden-sm-down" src="/img/rocket.png" alt="Invite" /><br class="hidden-sm-down" />Invite</a></li>
