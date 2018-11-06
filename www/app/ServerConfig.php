@@ -158,31 +158,29 @@ class ServerConfig extends Model
         }
         return true;
     }
-
     public function updateReactionRoles($reaction_roles)
     {
         if (!is_array($reaction_roles) && count($reaction_roles) == 0) {
             return false;
         }
-        $messageids = $reaction_roles;
-        $reaction_roles = [];
-        foreach ($messageids as $key => $reaction_role) {
-            foreach ($reaction_role as $role) {
-                $newRole = $role;
-                $newRole['messageid'] = $key;
-                array_push($reaction_roles, $newRole);
+        $data_reaction_roles = collect();
+        foreach ($reaction_roles as $messageid => $values) {
+            foreach ($values as $value) {
+                $newRole = $value;
+                $newRole['messageid'] = (string) $messageid;
+                $data_reaction_roles->push($newRole);
             }
         }
-        $emojis = array_column($reaction_roles, 'emoji');
-        $roles = array_column($reaction_roles, 'roleid');
-        /*$toBeDeleted = $this->reaction_roles()
-            ->whereNotIn('messageid', $messageids)
-            ->whereNotIn('emoji', $emojis)
-            ->whereNotIn('roleid', $roles);
-        if ($toBeDeleted->count() > 0) {
-            $toBeDeleted->delete();
-        }*/
-        foreach ($reaction_roles as $reaction_role) {
+
+        $toBeDeleted = $this->reaction_roles()->get()->reject(function ($role) use(&$data_reaction_roles){
+            return $data_reaction_roles->contains(function ($request_role) use(&$role){
+                if ($request_role['messageid'] === $role['messageid'] && $request_role['roleid'] === $role['roleid'])
+                    return true;
+            });
+        });
+        $this->reaction_roles()->delete($toBeDeleted);
+
+        foreach ($data_reaction_roles as $reaction_role) {
             $this->reaction_roles()->updateOrCreate([
                 'messageid' => $reaction_role['messageid'],
                 'emoji' => $reaction_role['emoji'],
