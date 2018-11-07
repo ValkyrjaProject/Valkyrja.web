@@ -87,7 +87,7 @@
                     Antispam
                 </button>
                 <div class="form-inline form-group collapse" id="subscribeConfigAntispam">
-                    <a class="d-block text-center" href="https://www.patreon.com/valkyrja" target="_blank">Subscribe to utilize Antispam features.</a>
+                    <a class="d-block text-center" href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe to utilize Antispam features.</a>
                 </div>
                 <div class="form-inline form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configAntispam"><br/>
                     <p>
@@ -594,7 +594,7 @@
                     Social (profiles, levels & karma)
                 </button>
                 <div class="form-inline form-group collapse" id="subscribeConfigSocial">
-                    <a class="d-block text-center" href="https://www.patreon.com/valkyrja" target="_blank">Subscribe to utilize Social features.</a>
+                    <a class="d-block text-center" href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe to utilize Social features.</a>
                 </div>
                 <div class="form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configSocial"><br />
                     <p class="form-inline">
