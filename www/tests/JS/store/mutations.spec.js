@@ -5,6 +5,7 @@ import {ConfigData} from "../../../resources/assets/js/models/ConfigData";
 import {Guild} from "../../../resources/assets/js/models/Guild";
 import {Config} from "../../../resources/assets/js/models/Config";
 import loglevel from "loglevel";
+import lscache from "lscache";
 
 describe("state", function () {
     it("should have empty array 'guilds'", function () {
@@ -132,9 +133,25 @@ describe("mutations", function () {
     });
 
     describe("INITIALIZE_USER", function () {
-        it("should set unserialized JSON data to state.user from lscache.get('user') if it exists");
+        let lscache_stub = sinon.stub(lscache, "get");
 
-        it("should not set data to state.user if lscache.get('user') does not exist");
+        it("should set unserialized JSON data to state.user from lscache.get('user') if it exists", function () {
+            let user = {username: "name"};
+            let state = {user: null};
+            lscache_stub.withArgs("user").returns(JSON.stringify(user));
+            mutations.INITIALIZE_USER(state, user);
+            expect(lscache_stub.withArgs("user").calledTwice, "lscache.get('user') was called").to.be.true;
+            expect(state.user).to.eql(user);
+        });
+
+        it("should not set data to state.user if lscache.get('user') does not exist", function () {
+            let user = {username: "name"};
+            let state = {user: null};
+            lscache_stub.withArgs("user").returns(undefined);
+            mutations.INITIALIZE_USER(state, user);
+            expect(lscache_stub.withArgs("user").calledOnce, "lscache.get('user') was called").to.be.true;
+            expect(state.user).to.be.null;
+        });
     });
 
     describe("CHANGE_CONFIG", function () {
