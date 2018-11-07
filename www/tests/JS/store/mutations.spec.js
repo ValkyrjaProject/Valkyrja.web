@@ -6,6 +6,7 @@ import {Guild} from "../../../resources/assets/js/models/Guild";
 import {Config} from "../../../resources/assets/js/models/Config";
 import loglevel from "loglevel";
 import lscache from "lscache";
+import {Vue} from "vue";
 
 describe("state", function () {
     it("should have empty array 'guilds'", function () {
@@ -155,7 +156,25 @@ describe("mutations", function () {
     });
 
     describe("CHANGE_CONFIG", function () {
-        it("should have configData parameter with storeName and value fields");
+        let vue_stub = sinon.stub(Vue);
+
+        before(function () {
+            global.Vue = vue_stub;
+        });
+
+        it("should have configData parameter with storeName and value fields", function () {
+            let state = {
+                config: {
+                    find: sinon.stub()
+                }
+            };
+            const configData = {
+                storeName: "name"
+            };
+            state.config.find.returns({});
+            mutations.CHANGE_CONFIG(state, configData);
+            expect(state.config.find.calledOnceWith(configData.storeName)).to.be.true;
+        });
 
         it("should throw TypeError if storeName and value fields doesn't exist");
 
