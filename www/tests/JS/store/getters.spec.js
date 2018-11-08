@@ -1,17 +1,40 @@
 import sinon from "sinon";
 import {expect} from "chai";
 import {getters} from "store/getters";
+import {Config} from "models/Config";
+import {ConfigData} from "models/ConfigData";
 
 describe("getters", function () {
     describe("configInput", function () {
-        it("should return as a function that takes in storeName");
+        let state;
+        const storeName = "name";
+        const response = "return value";
 
-        it("should retrieve from state.config with storeName parameter if state.config is a Config instance");
+        before(function () {
+            state = {
+                config: new Config()
+            }
+        });
 
-        it("should create ConfigData instance with null value if state.config is not a Config instance");
+        it("should return as a function", function () {
+            expect(getters.configInput(state)).to.be.instanceOf(Function);
+        });
 
-        it("should return null if ConfigData does not exist in state.config");
+        it("should retrieve from state.config with storeName parameter if state.config is a Config instance", function () {
+            let retrieveStub = sinon.stub(state.config, "retrieve");
+            retrieveStub.withArgs(storeName).returns(response);
 
-        it("should return ConfigData instance if it exists in state.config");
+            expect(getters.configInput(state)(storeName)).to.equal(response);
+            expect(retrieveStub.calledOnceWith(storeName)).to.be.true;
+        });
+
+        it("should create ConfigData instance with null value if state.config is not a Config instance", function () {
+            state.config = {};
+            let configData = sinon.stub(ConfigData, "instanceFromApi");
+            configData.withArgs(storeName, null).returns(response);
+
+            expect(getters.configInput(state)(storeName)).to.equal(response);
+            expect(configData.calledOnceWith(storeName, null)).to.be.true;
+        });
     });
 });
