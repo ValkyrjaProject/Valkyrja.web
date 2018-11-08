@@ -13,11 +13,11 @@ export const retrieveGuilds = ({commit}) => {
         configData.getGuilds()
             .then(response => {
                 commit(ADD_GUILDS, response.data);
-                resolve();
+                resolve(response);
             })
             .catch(error => {
                 commit(API_ERROR, error);
-                reject();
+                reject(error);
             });
     });
 };
@@ -32,7 +32,7 @@ export const retrieveConfig = ({commit}, serverId) => {
             .catch(error => {
                 log.warn(error);
                 commit(API_ERROR, error);
-                reject();
+                reject(error);
             });
     });
 };
