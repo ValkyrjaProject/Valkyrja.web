@@ -161,13 +161,19 @@ describe("mutations", function () {
 
     describe("CHANGE_CONFIG", function () {
         let vue_stub = sinon.stub();
-
+        let state;
         before(function () {
             global.Vue = {set: vue_stub};
+            state = {
+                config: {
+                    find: sinon.stub(),
+                }
+            };
         });
 
         beforeEach(function () {
             vue_stub.reset();
+            state.config.find.reset();
         });
 
         it("should have configData parameter with storeName and value fields", function () {
@@ -230,20 +236,89 @@ describe("mutations", function () {
     });
 
     describe("ADD_ARRAY_OBJECT", function () {
-        it("should find array from state.config based on payload.id parameter");
+        let state;
+        let vue_stub = sinon.stub();
 
-        it("should push payload.value to the array's value field if it is a ConfigData and it's value field is an Array");
+        before(function () {
+            global.Vue = {set: vue_stub};
+            state = {
+                config: {
+                    find: sinon.stub(),
+                    config_data: []
+                },
+            };
+        });
 
-        it("should create a new ConfigData instance from newInstance() function if payload.value is a ConfigData field");
+        beforeEach(function () {
+            vue_stub.reset();
+            state.config.find.reset();
+        });
 
-        it("should not create a new ConfigData instance if the array's value field if it is a ConfigData and it's value field is an Array");
+        it("should find ConfigData from state.config based on payload.id parameter", function () {
+            let payload = ConfigData.newInstance(
+                "id",
+                "value"
+            );
+            let returnObject = new ConfigData();
+            returnObject.value = [];
+            state.config.find.withArgs(payload.id).returns(returnObject);
+            mutations.ADD_ARRAY_OBJECT(state, payload);
+            expect(state.config.find.calledOnceWith(payload.id)).to.be.true;
+            expect(vue_stub.called, "doesn't call Vue.set()").to.be.false;
+        });
 
-        it("should save new ConfigData instance to state.config.config_data with key being payload.id");
+        it("should push payload.value to the array's value field if it is a ConfigData and it's value field is an Array", function () {
+            let payload = ConfigData.newInstance(
+                "id",
+                "value"
+            );
+            let returnObject = new ConfigData();
+            returnObject.value = [];
+            state.config.find.withArgs(payload.id).returns(returnObject);
+            mutations.ADD_ARRAY_OBJECT(state, payload);
+            expect(returnObject.value).to.eql([payload.value]);
+            expect(vue_stub.called, "doesn't call Vue.set()").to.be.false;
+        });
 
-        it("should fail silently if array can't be found and payload.value isn't a ConfigData instance");
+        it("should create a new ConfigData instance from newInstance() function if payload.value is a ConfigData field", function () {
+            let payload = ConfigData.newInstance(
+                "id",
+                new ConfigData
+            );
+            let returnObject = {};
+            state.config.find.withArgs(payload.id).returns(returnObject);
+            mutations.ADD_ARRAY_OBJECT(state, payload);
+            expect(vue_stub.calledOnceWith(state.config.config_data, payload.id, sinon.match.instanceOf(ConfigData)), "calls Vue.set() with state.config.config_data, payload.id, and new ConfigData instance").to.be.true;
+            expect(vue_stub.args[0][2].value, "sets new ConfigData value field to array with payload value as only entry").to.eql([payload.value]);
+        });
 
-        it("should fail silently if array.value is not an Array and payload.value isn't a ConfigData instance");
+        it("should throw TypeError if config.find() can't be found and payload.value isn't a ConfigData instance", function () {
+            let payload = ConfigData.newInstance(
+                "id",
+                "value"
+            );
+            state.config.find.withArgs(payload.id).returns(null);
+            expect(() => mutations.ADD_ARRAY_OBJECT(state, payload)).to.throw(Error, "Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
+        });
 
-        it("should fail silently if array is not a ConfigData instance and payload.value isn't a ConfigData instance");
+        it("should throw TypeError if payload.value is not an Array and payload.value isn't a ConfigData instance", function () {
+            let payload = ConfigData.newInstance(
+                "id",
+                "value"
+            );
+            let returnObject = {};
+            state.config.find.withArgs(payload.id).returns(returnObject);
+            expect(() => mutations.ADD_ARRAY_OBJECT(state, payload)).to.throw(Error, "Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
+        });
+
+        it("should throw TypeError if payload is not a ConfigData instance and payload.value isn't a ConfigData instance", function () {
+            let payload = {
+                id: "id",
+                value: "value"
+            };
+            let returnObject = {};
+            state.config.find.withArgs(payload.id).returns(returnObject);
+            expect(() => mutations.ADD_ARRAY_OBJECT(state, payload)).to.throw(TypeError, "Object is not of type ConfigData, it is of type Object");
+        });
     });
 });

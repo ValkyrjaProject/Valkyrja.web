@@ -71,16 +71,21 @@ export const mutations = {
     },
 
     [ADD_ARRAY_OBJECT](state, payload) {
-        let array = state.config.find(payload.id);
+        let data = state.config.find(payload.id);
+        if (!(payload instanceof ConfigData)) {
+            let error = new TypeError(`Object is not of type ConfigData, it is of type ${payload.constructor.name}`);
+            log.error(error);
+            throw error;
+        }
 
-        if (array instanceof ConfigData && array.value instanceof Array) {
-            array.value.push(payload.value);
+        if (data instanceof ConfigData && data.value instanceof Array) {
+            data.value.push(payload.value);
         }
         else if (payload.value instanceof ConfigData) {
             Vue.set(state.config.config_data, payload.id, ConfigData.newInstance(payload.id, [payload.value]));
         }
         else {
-            let error = new Error("Array does not exist, cannot add object.");
+            let error = new Error("Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
             log.error(error);
             throw error;
         }
