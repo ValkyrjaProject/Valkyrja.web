@@ -1,7 +1,15 @@
 import "./mutation_types";
 import {createGuild, Guild} from "../models/Guild";
 import lscache from "lscache";
-import {ADD_ARRAY_OBJECT, ADD_CONFIG, ADD_GUILDS, ADD_USER, CHANGE_CONFIG, INITIALIZE_USER} from "./mutation_types";
+import {
+    ADD_ARRAY_OBJECT,
+    ADD_CONFIG,
+    ADD_GUILDS,
+    ADD_USER,
+    API_ERROR,
+    CHANGE_CONFIG,
+    INITIALIZE_USER
+} from "./mutation_types";
 import {Config} from "../models/Config";
 import {ConfigData} from "../models/ConfigData";
 
@@ -50,6 +58,12 @@ export const mutations = {
     },
 
     [CHANGE_CONFIG](state, configData) {
+        if (!(configData.hasOwnProperty("storeName") && configData.hasOwnProperty("value"))) {
+            let error = new TypeError("Object does not have 'storeName' and 'value' fields");
+            log.error(error);
+            throw error;
+        }
+
         let conf = state.config.find(configData.storeName);
         if (conf instanceof ConfigData) {
             Vue.set(conf, "value", configData.value);
@@ -64,6 +78,11 @@ export const mutations = {
         }
         else if (payload.value instanceof ConfigData) {
             Vue.set(state.config.config_data, payload.id, ConfigData.newInstance(payload.id, [payload.value]));
+        }
+        else {
+            let error = new Error("Array does not exist, cannot add object.");
+            log.error(error);
+            throw error;
         }
     }
 };

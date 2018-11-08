@@ -136,6 +136,10 @@ describe("mutations", function () {
     describe("INITIALIZE_USER", function () {
         let lscache_stub = sinon.stub(lscache, "get");
 
+        beforeEach(function () {
+            lscache_stub.reset();
+        });
+
         it("should set unserialized JSON data to state.user from lscache.get('user') if it exists", function () {
             let user = {username: "name"};
             let state = {user: null};
@@ -156,29 +160,73 @@ describe("mutations", function () {
     });
 
     describe("CHANGE_CONFIG", function () {
-        let vue_stub = sinon.stub(Vue);
+        let vue_stub = sinon.stub();
 
         before(function () {
-            global.Vue = vue_stub;
+            global.Vue = {set: vue_stub};
+        });
+
+        beforeEach(function () {
+            vue_stub.reset();
         });
 
         it("should have configData parameter with storeName and value fields", function () {
             let state = {
                 config: {
-                    find: sinon.stub()
+                    find: sinon.stub(),
                 }
             };
             const configData = {
-                storeName: "name"
+                storeName: "name",
+                value: "value"
             };
-            state.config.find.returns({});
+            let returnValue = new ConfigData;
+            state.config.find.returns(returnValue);
             mutations.CHANGE_CONFIG(state, configData);
-            expect(state.config.find.calledOnceWith(configData.storeName)).to.be.true;
+            expect(state.config.find.calledOnceWith(configData.storeName), "calls config.find() once").to.be.true;
+            expect(vue_stub.calledWithMatch(sinon.match.any, sinon.match.any, configData.value), "calls Vue.set() with configData.value field").to.be.true;
         });
 
-        it("should throw TypeError if storeName and value fields doesn't exist");
+        it("should throw TypeError if storeName and value fields doesn't exist", function () {
+            let state = {
+                config: {
+                    find: sinon.stub(),
+                }
+            };
 
-        it("should call state.config.change with configData.storeName as first parameter and configData.value as second parameter");
+            let configData = {};
+            expect(() => mutations.CHANGE_CONFIG(state, configData)).to.throw(TypeError, "Object does not have 'storeName' and 'value' fields");
+
+            configData = {
+                storeName: "name"
+            };
+            expect(() => mutations.CHANGE_CONFIG(state, configData)).to.throw(TypeError, "Object does not have 'storeName' and 'value' fields");
+            configData = {
+                value: "value"
+            };
+            expect(() => mutations.CHANGE_CONFIG(state, configData)).to.throw(TypeError, "Object does not have 'storeName' and 'value' fields");
+            configData = {
+                storeName: "name",
+                value: "value"
+            };
+            expect(() => mutations.CHANGE_CONFIG(state, configData)).to.not.throw();
+        });
+
+        it("should call Vue.set with returned config.find, 'value', and configData.value parameters", function () {
+            let state = {
+                config: {
+                    find: sinon.stub(),
+                }
+            };
+            const configData = {
+                storeName: "name",
+                value: "value"
+            };
+            let returnValue = new ConfigData;
+            state.config.find.returns(returnValue);
+            mutations.CHANGE_CONFIG(state, configData);
+            expect(vue_stub.calledOnceWith(returnValue, "value", configData.value), "calls Vue.set() with config.find, 'value', and configData.value parameters").to.be.true;
+        });
     });
 
     describe("ADD_ARRAY_OBJECT", function () {
