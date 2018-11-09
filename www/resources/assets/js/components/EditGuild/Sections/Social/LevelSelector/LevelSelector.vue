@@ -21,7 +21,7 @@
                             <div class="control">
                                 <a
                                     class="button is-small is-success"
-                                    @click="addLevel()">
+                                    @click="addLevel(currentLevelValue)">
                                     <i
                                         class="mdi mdi-plus"
                                         aria-hidden="true"></i>
@@ -67,18 +67,10 @@ export default {
     },
     data() {
         return {
-            levelValue: 0
+            currentLevelValue: 0
         };
     },
     computed: {
-        currentLevelValue: {
-            get() {
-                return this.levelValue;
-            },
-            set(value) {
-                this.levelValue = value;
-            }
-        },
         levels: {
             get() {
                 return this.$store.state.levelSelector.levels;
@@ -120,7 +112,7 @@ export default {
         }
     },
     methods: {
-        addLevel() {
+        addLevel(level) {
 
         }
     },

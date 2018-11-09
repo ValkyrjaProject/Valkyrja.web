@@ -41762,19 +41762,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            levelValue: 0
+            currentLevelValue: 0
         };
     },
 
     computed: {
-        currentLevelValue: {
-            get: function get() {
-                return this.levelValue;
-            },
-            set: function set(value) {
-                this.levelValue = value;
-            }
-        },
         levels: {
             get: function get() {
                 return this.$store.state.levelSelector.levels;
@@ -41816,7 +41808,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        addLevel: function addLevel() {}
+        addLevel: function addLevel(level) {}
     }
 });
 
@@ -41867,7 +41859,7 @@ var render = function() {
                     staticClass: "button is-small is-success",
                     on: {
                       click: function($event) {
-                        _vm.addLevel()
+                        _vm.addLevel(_vm.currentLevelValue)
                       }
                     }
                   },
@@ -45166,10 +45158,11 @@ var retrieveGuilds = function retrieveGuilds(_ref) {
     return new Promise(function (resolve, reject) {
         __WEBPACK_IMPORTED_MODULE_0__api_configData__["a" /* default */].getGuilds().then(function (response) {
             commit(__WEBPACK_IMPORTED_MODULE_1__mutation_types__["c" /* ADD_GUILDS */], response.data);
-            resolve();
+            resolve(response);
         }).catch(function (error) {
+            log.warn(error);
             commit(__WEBPACK_IMPORTED_MODULE_1__mutation_types__["e" /* API_ERROR */], error);
-            reject();
+            reject(error);
         });
     });
 };
@@ -45184,7 +45177,7 @@ var retrieveConfig = function retrieveConfig(_ref2, serverId) {
         }).catch(function (error) {
             log.warn(error);
             commit(__WEBPACK_IMPORTED_MODULE_1__mutation_types__["e" /* API_ERROR */], error);
-            reject();
+            reject(error);
         });
     });
 };
@@ -46247,17 +46240,27 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
         state.user = JSON.parse(__WEBPACK_IMPORTED_MODULE_2_lscache___default.a.get("user"));
     }
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* CHANGE_CONFIG */], function (state, configData) {
+    if (!(configData.hasOwnProperty("storeName") && configData.hasOwnProperty("value"))) {
+        var error = new TypeError("Object does not have 'storeName' and 'value' fields");
+        log.error(error);
+        throw error;
+    }
+
     var conf = state.config.find(configData.storeName);
     if (conf instanceof __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */]) {
         Vue.set(conf, "value", configData.value);
     }
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* ADD_ARRAY_OBJECT */], function (state, payload) {
-    var array = state.config.find(payload.id);
+    var data = state.config.find(payload.id);
 
-    if (array instanceof __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */] && array.value instanceof Array) {
-        array.value.push(payload.value);
+    if (data instanceof __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */] && data.value instanceof Array) {
+        data.value.push(payload.value);
     } else if (payload.value instanceof __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */]) {
         Vue.set(state.config.config_data, payload.id, __WEBPACK_IMPORTED_MODULE_4__models_ConfigData__["a" /* ConfigData */].newInstance(payload.id, [payload.value]));
+    } else {
+        var error = new Error("Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
+        log.error(error);
+        throw error;
     }
 }), _mutations);
 
@@ -46355,7 +46358,10 @@ var getters = {
 
 
 
-var state = {};
+var state = {
+    /** @member {Array} levels */
+    levels: []
+};
 
 var mutations = {
     CHANGE_LEVEL: function CHANGE_LEVEL(state, payload) {
@@ -46374,11 +46380,11 @@ var actions = {
             throw new TypeError(error);
         }
         if (!(payload.role instanceof __WEBPACK_IMPORTED_MODULE_2__models_PublicRole__["a" /* PublicRole */])) {
-            var _error = "Object is not of type Channel, it is of type " + payload.role.constructor.name;
+            var _error = "Object is not of type PublicRole, it is of type " + payload.role.constructor.name;
             log.error(_error);
             throw new TypeError(_error);
         }
-        commit("CHANGE_FIELD", {
+        commit("CHANGE_LEVEL", {
             role: payload.role,
             level: payload.level
         });

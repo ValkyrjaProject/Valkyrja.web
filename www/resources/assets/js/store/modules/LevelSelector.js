@@ -3,6 +3,8 @@ import {Config} from "../../models/Config";
 import {PublicRole} from "../../models/PublicRole";
 
 const state = {
+    /** @member {Array} levels */
+    levels: []
 };
 
 const mutations = {
@@ -19,11 +21,11 @@ const actions = {
             throw new TypeError(error);
         }
         if (!(payload.role instanceof PublicRole)) {
-            let error = `Object is not of type Channel, it is of type ${payload.role.constructor.name}`;
+            let error = `Object is not of type PublicRole, it is of type ${payload.role.constructor.name}`;
             log.error(error);
             throw new TypeError(error);
         }
-        commit("CHANGE_FIELD", {
+        commit("CHANGE_LEVEL", {
             role: payload.role,
             level: payload.level,
         });
