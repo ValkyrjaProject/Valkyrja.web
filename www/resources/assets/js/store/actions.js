@@ -16,6 +16,7 @@ export const retrieveGuilds = ({commit}) => {
                 resolve(response);
             })
             .catch(error => {
+                log.warn(error);
                 commit(API_ERROR, error);
                 reject(error);
             });
