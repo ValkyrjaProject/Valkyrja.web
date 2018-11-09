@@ -71,13 +71,8 @@ export default {
         };
     },
     computed: {
-        levels: {
-            get() {
-                return this.$store.state.levelSelector.levels;
-            },
-            set(level) {
-                this.$store.dispatch("levelSelector/changeLevel", level);
-            }
+        levels() {
+            return this.$store.state.levelSelector.levels;
         },
         selectedLevel: {
             get() {
@@ -93,7 +88,7 @@ export default {
             },
             set(role) {
                 if (!this.selectedLevel) return;
-                this.$store.dispatch("levelSelector/changeLevel", {
+                this.$store.dispatch("levelSelector/changeRoleLevel", {
                     role,
                     level: this.selectedLevel,
                 });
@@ -113,7 +108,10 @@ export default {
     },
     methods: {
         addLevel(level) {
-
+            if (this.levels.indexOf(level) === -1) {
+                this.$store.dispatch("levelSelector/addLevel", level);
+                this.selectedLevel = level;
+            }
         }
     },
 };
