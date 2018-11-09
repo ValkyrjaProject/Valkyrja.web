@@ -72,11 +72,6 @@ export const mutations = {
 
     [ADD_ARRAY_OBJECT](state, payload) {
         let data = state.config.find(payload.id);
-        if (!(payload instanceof ConfigData)) {
-            let error = new TypeError(`Object is not of type ConfigData, it is of type ${payload.constructor.name}`);
-            log.error(error);
-            throw error;
-        }
 
         if (data instanceof ConfigData && data.value instanceof Array) {
             data.value.push(payload.value);

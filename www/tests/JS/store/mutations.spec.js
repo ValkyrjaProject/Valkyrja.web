@@ -310,15 +310,5 @@ describe("mutations", function () {
             state.config.find.withArgs(payload.id).returns(returnObject);
             expect(() => mutations.ADD_ARRAY_OBJECT(state, payload)).to.throw(Error, "Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
         });
-
-        it("should throw TypeError if payload is not a ConfigData instance and payload.value isn't a ConfigData instance", function () {
-            let payload = {
-                id: "id",
-                value: "value"
-            };
-            let returnObject = {};
-            state.config.find.withArgs(payload.id).returns(returnObject);
-            expect(() => mutations.ADD_ARRAY_OBJECT(state, payload)).to.throw(TypeError, "Object is not of type ConfigData, it is of type Object");
-        });
     });
 });
