@@ -1,18 +1,40 @@
 import sinon from "sinon";
 import {expect} from "chai";
-import GuildChannel from "../../../resources/assets/js/models/GuildChannel";
+import {GuildChannel, createGuildChannel} from "../../../resources/assets/js/models/GuildChannel";
 
 describe("GuildChannel", function () {
-    it("should take 'id' and 'name' parameters in constructor");
+    const id = "id";
+    const name = "name";
 
-    it("returns appended '#' when calling name field");
+    describe("constructor", function () {
+        it("should take 'id' and 'name' parameters in constructor", function () {
+            let channel = new GuildChannel(id, name);
+            expect(channel.id).to.equal(id);
+            expect(channel.name).to.equal(name);
+        });
+    });
 
-    it("should return name field when calling toString()");
+    describe("toString()", function () {
+        it("should return name field when calling toString()", function () {
+            let channel = new GuildChannel(id, name);
+            expect(channel.toString()).to.equal(name);
+        });
+    });
 });
 
 describe("createGuildChannel", function () {
-    it("creates GuildChannel as freezed object");
+    const id = "id";
+    const name = "name";
 
-    it("returns created GuildChannel");
+    it("creates GuildChannel as freezed object", function () {
+        let channel = createGuildChannel({id, name});
+        expect(Object.isFrozen(channel)).to.be.true;
+        expect(channel).to.be.instanceof(GuildChannel);
+    });
+
+    it("sets GuildChannel id and name correctly", function () {
+        let channel = createGuildChannel({id, name});
+        expect(channel.id).to.equal(id);
+        expect(channel.name).to.equal(name);
+    });
 });
-
