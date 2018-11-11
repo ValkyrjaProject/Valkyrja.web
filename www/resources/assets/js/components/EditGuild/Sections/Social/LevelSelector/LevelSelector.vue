@@ -2,40 +2,11 @@
     <div class="box has-background-white-bis">
         <div class="columns">
             <div class="column is-one-third">
-                <nav class="panel is-marginless panel-parent">
-                    <p class="panel-heading">
-                        Levels
-                    </p>
-                </nav>
-                <div class="panel-block has-background-white">
-                    <div class="is-fullwidth">
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input
-                                    v-model="currentLevelValue"
-                                    class="input is-small"
-                                    type="number"
-                                    min="1"
-                                    placeholder="Level">
-                            </div>
-                            <div class="control">
-                                <a
-                                    class="button is-small is-success"
-                                    @click="addLevel(currentLevelValue)">
-                                    <i
-                                        class="mdi mdi-plus"
-                                        aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-block has-background-white">
-                    <vue-multiselect
-                        v-model="selectedLevel"
-                        :options="levels"
-                        class="vue-multiselect"/>
-                </div>
+                <level-selector-input
+                    :current-level-value="currentLevelValue"
+                    :levels="levels"
+                    :selected-level="selectedLevel"
+                    @add-level="addLevel(currentLevelValue)" />
             </div>
             <div class="column is-one-third">
                 <panel-list
@@ -57,13 +28,13 @@
 
 <script>
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
-import VueMultiselect from "vue-multiselect";
+import LevelSelectorInput from "./LevelSelectorInput";
 
 export default {
     name: "LevelSelector",
     components: {
+        LevelSelectorInput,
         PanelList,
-        VueMultiselect,
     },
     data() {
         return {

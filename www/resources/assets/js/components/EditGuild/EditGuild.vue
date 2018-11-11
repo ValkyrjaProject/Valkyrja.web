@@ -72,6 +72,14 @@ const tabs = [
         }
     },
     {
+        name: "Role Assignment",
+        icon: "plus-circle-multiple-outline",
+        component: {
+            url: "/role-assignment",
+            name: null
+        }
+    },
+    {
         name: "Logging",
         icon: "playlist-plus",
         component: {
