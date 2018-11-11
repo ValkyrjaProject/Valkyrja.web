@@ -1,5 +1,7 @@
 import {createGuildRole} from "./GuildRole";
 import {createGuildChannel} from "./GuildChannel";
+import {GuildRole} from "./GuildRole";
+import {GuildChannel} from "./GuildChannel";
 
 export class Guild {
     static get instance() {
@@ -17,6 +19,18 @@ export class Guild {
      * @param data
      */
     constructor(roles, channels, data) {
+        if (!Array.isArray(roles) || (roles.length > 0 && roles.some(r => !(r instanceof GuildRole)))) {
+            let error = new TypeError("roles parameter is not an Array of GuildRoles");
+            throw error;
+        }
+        if (!Array.isArray(channels) || (channels.length > 0 && channels.some(r => !(r instanceof GuildChannel)))) {
+            let error = new TypeError("channels parameter is not an Array of GuildChannels");
+            throw error;
+        }
+        if (!(data instanceof Object) || !data.hasOwnProperty("id") || !data.hasOwnProperty("name") || !data.hasOwnProperty("icon")) {
+            let error = new TypeError("data parameter does not have id, name and icon fields");
+            throw error;
+        }
         this._roles = roles;
         this._channels = channels;
         this._id = data.id;
