@@ -37,13 +37,18 @@ describe("mutations", function () {
             let guilds = [{id: "1"}, {id: "2"}, {id: "3"}];
             let state = {guilds: []};
 
+            let mock = sinon.stub(Guild, "createGuild");
+            mock.withArgs(guilds[0]).returns(guilds[0]);
+            mock.withArgs(guilds[1]).returns(guilds[1]);
+            mock.withArgs(guilds[2]).returns(guilds[2]);
+
             mutations.ADD_GUILDS(state, guilds);
 
             expect(state.guilds.length).to.equal(guilds.length);
             for (let i = 0; i < state.length; i++) {
-                expect(state.guilds[i]).to.be.instanceOf(Guild);
                 expect(state.guilds[i].id).to.equal(guilds[i].id);
             }
+            Guild.createGuild.restore();
         });
 
         it("should set empty list to state.guilds if no guilds exists", function () {

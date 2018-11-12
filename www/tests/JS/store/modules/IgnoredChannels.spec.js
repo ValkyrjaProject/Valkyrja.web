@@ -4,6 +4,7 @@ import ignoredChannels from "store/modules/IgnoredChannels";
 import {Channel} from "../../../../resources/assets/js/models/Channel";
 import {Guild} from "../../../../resources/assets/js/models/Guild";
 import {Config} from "../../../../resources/assets/js/models/Config";
+import {GuildChannel} from "../../../../resources/assets/js/models/GuildChannel";
 
 describe("IgnoredChannels Vuex module", function () {
     let state = {};
@@ -106,7 +107,7 @@ describe("IgnoredChannels Vuex module", function () {
             it("should return list of configInput arrays if they exist in rootState.guild.channels and is not ignored", function () {
                 let guildChannels = [];
                 for (let i = 0; i < 50; i++) {
-                    guildChannels.push({id: i.toString()});
+                    guildChannels.push(new GuildChannel(i.toString(), "name"));
                 }
 
                 let configInputChannels = [];
@@ -170,7 +171,7 @@ describe("IgnoredChannels Vuex module", function () {
             it("should return list of configInput arrays if they exist in rootState.guild.channels and is not ignored", function () {
                 let guildChannels = [];
                 for (let i = 0; i < 50; i++) {
-                    guildChannels.push({id: i.toString()});
+                    guildChannels.push(new GuildChannel(i.toString(), "name"));
                 }
 
                 let configInputChannels = [];
