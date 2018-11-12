@@ -43,10 +43,16 @@ export class PublicGroupFactory {
      * @returns {Array<PublicGroup>}
      */
     static getConfigData(values) {
+        if (!Array.isArray(values)) {
+            throw new TypeError("'values' parameter is not an array");
+        }
         let config_data = [];
         for (let i in values) {
             if (values[i] instanceof Array) {
                 config_data.push(Config.getConfigData(values[i]));
+            }
+            else if (!(values[i] instanceof Object) || !values[i].hasOwnProperty("roleid")) {
+                throw new TypeError("'values' entry does not have roleid field");
             }
             else {
                 /** @type {PublicGroup} */
