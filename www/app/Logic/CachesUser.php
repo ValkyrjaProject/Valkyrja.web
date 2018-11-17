@@ -49,14 +49,14 @@ trait CachesUser
      * @param $token
      * @param Collection $guilds
      */
-    private function setCachedGuilds($token, $guilds)
+    public function setCachedGuilds($token, $guilds)
     {
         $this->resolveDependencies();
         $this->cache::add("guilds_" . hash('sha256', $token), $guilds->jsonSerialize(), 2);
     }
 
 
-    private function getCachedGuilds($token)
+    public function getCachedGuilds($token)
     {
         $this->resolveDependencies();
         $hash = "guilds_" . hash('sha256', $token);
