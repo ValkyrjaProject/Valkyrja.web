@@ -350,10 +350,6 @@
                     <h2>cmdChannelBlacklist</h2>
                     <table class="command">
                     <tr>
-                        <td>Alias</td>
-                        <td><code>cmdChannelBlock</code></td>
-                    </tr>
-                    <tr>
                         <td>Description</td>
                         <td>Block a command from certain channels. <i>(This is mutually exclusive with the whitelist)</i></td>
                     </tr>
@@ -370,10 +366,6 @@
                 <div class="features-indent">
                     <h2>cmdChannelWhitelist</h2>
                     <table class="command">
-                    <tr>
-                        <td>Alias</td>
-                        <td><code>cmdChannelAllow</code></td>
-                    </tr>
                     <tr>
                         <td>Description</td>
                         <td>Allow a command only in certain channels. <i>(This is mutually exclusive with the blacklist)</i></td>
