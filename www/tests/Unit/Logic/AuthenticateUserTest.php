@@ -172,6 +172,26 @@ class AuthenticateUserTest extends TestCase
         $this->assertEquals(url('/config'), $response->getTargetUrl());
     }
 
+    public function testReturnsTrueIfSuperAdmin()
+    {
+        $user = AuthenticateUser::create();
+        $socialiteUser = new \Laravel\Socialite\Two\User;
+        $socialiteUser->id = "admin";
+        putenv('VALKYRJA_ADMINS=notadmin,'.$socialiteUser->getId());
+        $user->setUser($socialiteUser);
+        $this->assertTrue($user->isSuperAdmin());
+    }
+
+    public function testReturnsFalseIfNotSuperAdmin()
+    {
+        $user = AuthenticateUser::create();
+        $socialiteUser = new \Laravel\Socialite\Two\User;
+        $socialiteUser->id = "admin";
+        putenv('VALKYRJA_ADMINS=notadmin');
+        $user->setUser($socialiteUser);
+        $this->assertFalse($user->isSuperAdmin());
+    }
+
     private function getUserWithStrict($strict)
     {
         $user = AuthenticateUser::create();
