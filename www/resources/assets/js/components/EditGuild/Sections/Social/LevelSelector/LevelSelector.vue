@@ -72,7 +72,7 @@ export default {
             set(role) {
                 this.$store.dispatch("levelSelector/changeLevel", {
                     role,
-                    level: "0"
+                    level: 0
                 });
             }
         }

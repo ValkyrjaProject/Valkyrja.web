@@ -7,11 +7,17 @@ import roleSelector from "./modules/RoleSelector";
 import ignoredChannels from "./modules/IgnoredChannels";
 import levelSelector from "./modules/LevelSelector";
 import profileEditor from "./modules/ProfileEditor";
+import customCommands from "./modules/CustomCommands";
+import createLogger from "vuex/dist/logger";
 
 Vue.use(Vuex);
 
+// noinspection JSCheckFunctionSignatures
 export default new Vuex.Store({
     strict: process.env.NODE_ENV !== "production",
+    plugins: [createLogger({
+        logger: window.log
+    })],
     state,
     mutations,
     actions,
@@ -21,5 +27,6 @@ export default new Vuex.Store({
         roleSelector,
         ignoredChannels,
         profileEditor,
+        customCommands,
     }
 });

@@ -3,6 +3,7 @@ import {PublicRole, PublicRoleFactory} from "./PublicRole";
 import {PublicGroupFactory} from "./PublicGroup";
 import {Channel, ChannelFactory} from "./Channel";
 import {ProfileFactory} from "./Profile";
+import {CustomCommandFactory} from "./CustomCommand";
 
 /**
  * Main class containing a list of only ConfigData instances and lists of ConfigData instances
@@ -44,6 +45,9 @@ export class Config {
             }
             else if (i === "profile_options") {
                 arrayConfig = ConfigData.instanceFromApi(i, ProfileFactory.getConfigData(values[i]));
+            }
+            else if (i === "custom_commands") {
+                arrayConfig = ConfigData.instanceFromApi(i, CustomCommandFactory.getConfigData(values[i]));
             }
             else if (values[i] instanceof Array) {
                 arrayConfig = ConfigData.instanceFromApi(i, this.getConfigData(values[i]));

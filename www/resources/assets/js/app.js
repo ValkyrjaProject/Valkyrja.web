@@ -4,6 +4,9 @@ import lodash from "lodash";
 window._ = lodash;
 
 import loglevel from "loglevel";
+loglevel.setLevel(loglevel.levels.DEBUG);
+window.log = loglevel;
+
 import initSubHeaders from "./docs";
 
 import DisplayGuilds from "./components/DisplayGuilds/DisplayGuilds";
@@ -17,9 +20,6 @@ import VueRouter from "vue-router";
 
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
-
-loglevel.setLevel(loglevel.levels.DEBUG);
-window.log = loglevel;
 
 initSubHeaders();
 

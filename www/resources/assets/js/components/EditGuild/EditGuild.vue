@@ -45,6 +45,7 @@ import SocialConfig from "./Sections/Social/SocialConfig";
 import UserVerificationConfig from "./Sections/UserVerification/UserVerificationConfig";
 import VueRouter from "vue-router";
 import Sticky from "vue-sticky-directive";
+import CustomCommandsConfig from "./Sections/CustomCommands/CustomCommandsConfig";
 
 const tabs = [
     {
@@ -108,7 +109,7 @@ const tabs = [
         icon: "star",
         component: {
             url: "/custom-commands",
-            name: null
+            name: CustomCommandsConfig
         }
     },
 ];
@@ -153,6 +154,7 @@ export default {
         LoggingConfig,
         SocialConfig,
         UserVerificationConfig,
+        CustomCommandsConfig,
     },
     props: {
         guildId: {
