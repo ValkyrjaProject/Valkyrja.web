@@ -16,6 +16,7 @@ export class Profile extends ConfigData {
         profile.value = {
             option: option,
             option_alt: "",
+            label: "",
             property_order: 0,
             inline: 0,
         };
@@ -27,6 +28,7 @@ export class Profile extends ConfigData {
     }
 
     set option(value) {
+        this.value["id"] = value;
         this.value["option"] = value;
     }
 
@@ -38,12 +40,20 @@ export class Profile extends ConfigData {
         this.value["option_alt"] = value;
     }
 
+    get label() {
+        return this.value["label"];
+    }
+
+    set label(value) {
+        this.value["label"] = value;
+    }
+
     get property_order() {
         return this.value["property_order"];
     }
 
     set property_order(value) {
-        this.value["option_alt"] = parseInt(value);
+        this.value["property_order"] = parseInt(value);
     }
 
     get inline() {
