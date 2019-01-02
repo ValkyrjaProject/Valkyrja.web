@@ -10,11 +10,14 @@ const state = {
 };
 
 const mutations = {
-    SET_SELECTED_COMMAND(state, profile) {
-        state.selectedCommand = profile;
+    SET_SELECTED_COMMAND(state, command) {
+        state.selectedCommand = command;
     },
     CHANGE_TYPE(state, option) {
-        if (state.selectedCommand && state.selectedCommand instanceof CustomCommand) {
+        if (state.selectedCommand
+            && state.selectedCommand instanceof CustomCommand
+            && option.hasOwnProperty("field")
+            && option.hasOwnProperty("value")) {
             state.selectedCommand[option.field] = option.value;
         }
     }
@@ -25,21 +28,23 @@ const actions = {
         commit(ADD_ARRAY_OBJECT, {
             id: "custom_commands",
             value: command,
-        }, { root: true });
+        }, {root: true});
         commit("SET_SELECTED_COMMAND", command);
     },
-    deleteCommand({commit, state, getters, rootState}, command) {
+    deleteCommand({commit, state, rootState}, command) {
         let commands = rootState.config.find("custom_commands");
         let index = commands.value.indexOf(command);
         if (index >= 0) {
-            delete commands[index];
+            commands.value.splice(index, 1);
         }
         if (command === state.selectedCommand) {
             commit("SET_SELECTED_COMMAND", commands[0]);
         }
     },
-    changeCommand({commit, state, getters, rootState}, command) {
-        commit("SET_SELECTED_COMMAND", command);
+    changeCommand({commit}, command) {
+        if (command instanceof CustomCommand) {
+            commit("SET_SELECTED_COMMAND", command);
+        }
     },
     changeField({commit}, option) {
         if (!(option.hasOwnProperty("field") && option.hasOwnProperty("value"))) {
