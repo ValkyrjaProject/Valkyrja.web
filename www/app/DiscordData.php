@@ -164,6 +164,17 @@ class DiscordData extends Model
         });
     }
 
+    public function isOwner($serverId)
+    {
+        if (!isset($this->guilds)) {
+            $this->guilds = $this->getUserGuilds();
+        }
+
+        return collect($this->guilds)->contains(function ($guild)  {
+            return $serverId == $guild->id && $guild->owner;
+        });
+    }
+
     /**
      * @return RedirectResponse|Collection
      * @throws EmptyPropertyException

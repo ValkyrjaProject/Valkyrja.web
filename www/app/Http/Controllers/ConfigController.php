@@ -137,7 +137,7 @@ class ConfigController extends Controller
             ]);
         }
 
-        $isPremium = $this->serverOrUserIsPremium($serverId, $discord_data->getCurrentUser());
+        $isPremium = $this->serverOrUserIsPremium($serverId, $discord_data);
         return view('config.edit', [
             'serverId' => $serverId,
             'serverConfig' => $serverConfig->find($serverId),
@@ -157,13 +157,13 @@ class ConfigController extends Controller
 
     /**
      * @param $serverId
-     * @param User $user
+     * @param DiscordData $discordData
      * @return bool
      */
-    protected function serverOrUserIsPremium($serverId, $user){
+    protected function serverOrUserIsPremium($serverId, $discordData){
         $partner = Partners::find($serverId);
-        $userIsPremium = Subscribers::find($user->getId());
-        if (($partner && $partner->premium) || ($userIsPremium && $userIsPremium->premium)) {
+        $userIsPremium = Subscribers::find($discordData->getCurrentUser()->getId());
+        if (($partner && $partner->premium) || ($userIsPremium && $userIsPremium->premium && $discordData->isOwner())) {
             return true;
         }
         return false;
