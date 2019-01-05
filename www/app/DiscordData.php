@@ -164,15 +164,9 @@ class DiscordData extends Model
         });
     }
 
-    public function isOwner($serverId)
+    public function getGuildOwnerId()
     {
-        if (!isset($this->guilds)) {
-            $this->guilds = $this->getUserGuilds();
-        }
-
-        return collect($this->guilds)->contains(function ($guild)  {
-            return $serverId == $guild->id && $guild->owner;
-        });
+        return $this->discord->guild->getGuild()->owner_id;
     }
 
     /**

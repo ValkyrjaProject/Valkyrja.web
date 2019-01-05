@@ -162,11 +162,8 @@ class ConfigController extends Controller
      */
     protected function serverOrUserIsPremium($serverId, $discordData){
         $partner = Partners::find($serverId);
-        $userIsPremium = Subscribers::find($discordData->getCurrentUser()->getId());
-        if (($partner && $partner->premium) || ($userIsPremium && $userIsPremium->premium && $discordData->isOwner())) {
-            return true;
-        }
-        return false;
+        $ownerIsPremium = Subscribers::find($discordData->getGuildOwnerId());
+        return ($partner && $partner->premium) || ($ownerIsPremium && $ownerIsPremium->premium);
     }
 
     /**
