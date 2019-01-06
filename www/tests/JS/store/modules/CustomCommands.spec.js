@@ -3,9 +3,12 @@ import {shallowMount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
+import loglevel from "loglevel";
 import {CustomCommand} from "models/CustomCommand";
 import customCommands from "../../../../resources/assets/js/store/modules/CustomCommands";
 import {ConfigData} from "../../../../resources/assets/js/models/ConfigData";
+import {Guild} from "../../../../resources/assets/js/models/Guild";
+import {Config} from "../../../../resources/assets/js/models/Config";
 
 describe("CustomCommands Vuex module", function () {
     let state = {
@@ -319,23 +322,110 @@ describe("CustomCommands Vuex module", function () {
         });
 
         describe("changeField", function () {
-            it("should throw error if field and value properties does not exist on option parameter");
+            it("should throw error if field property does not exist on option parameter", function () {
+                let commitStub = sinon.stub();
+                let data = {
+                    commit: commitStub,
+                };
+                let option = {
+                    value: "value"
+                };
+                expect(() => customCommands.actions.changeField(data, option)).to.throw(TypeError, "Object does not have 'field' and 'value' fields");
+            });
 
-            it("should log an error if field and value properties does not exist on option parameter");
+            it("should throw error if value property does not exist on option parameter", function () {
+                let commitStub = sinon.stub();
+                let data = {
+                    commit: commitStub,
+                };
+                let option = {
+                    field: "field"
+                };
+                expect(() => customCommands.actions.changeField(data, option)).to.throw(TypeError, "Object does not have 'field' and 'value' fields");
+            });
 
-            it("should commit CHANGE_TYPE with option parameter as value");
+            it("should throw error if field and value properties does not exist on option parameter", function () {
+                let commitStub = sinon.stub();
+                let data = {
+                    commit: commitStub,
+                };
+                let option = {};
+                expect(() => customCommands.actions.changeField(data, option)).to.throw(TypeError, "Object does not have 'field' and 'value' fields");
+            });
+
+            it("should commit CHANGE_TYPE with option parameter as value", function () {
+                let commitStub = sinon.stub();
+                let data = {
+                    commit: commitStub,
+                };
+                let option = {
+                    field: "field",
+                    value: "value"
+                };
+                customCommands.actions.changeField(data, option);
+                expect(commitStub.args[0][0]).to.equal("CHANGE_TYPE");
+                expect(commitStub.args[0][1]).to.equal(option);
+            });
         });
     });
 
     describe("getters", function () {
         describe("commands", function () {
-            it("should return empty array if rootState.config is not a Config instance or if rootState.guild is not a Guild instance");
+            let state = {};
+            let getters = {};
+            let rootState = {
+                config: null,
+                guild: null
+            };
+            let rootGetters = {
+                configInput: sinon.stub()
+            };
 
-            it("should call rootGetters.configInput with 'custom_commands' as parameter");
+            beforeEach(function () {
+                rootState.config = new Config;
+                rootState.guild = new Guild([],[], {id: "id", name: "name", icon: "icon"});
+            });
 
-            it("should return empty list if rootGetters.configInput with 'custom_commands' has null value property");
+            afterEach(function () {
+                rootGetters.configInput.reset();
+            });
 
-            it("should return the value property of rootGetters.configInput call with 'custom_commands' as parameter");
+            it("should return empty array if rootState.config not a Config instance", function () {
+                rootState.config = null;
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.be.an("array").that.is.empty;
+                rootState.config = {};
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.be.an("array").that.is.empty;
+            });
+
+            it("should return empty array if rootState.guild is not a Guild instance", function () {
+                rootState.guild = null;
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.be.an("array").that.is.empty;
+                rootState.guild = {};
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.be.an("array").that.is.empty;
+            });
+
+            it("should return empty array if rootState.config is not a Config instance or if rootState.guild is not a Guild instance", function () {
+                rootState.config = null;
+                rootState.guild = null;
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.be.an("array").that.is.empty;
+            });
+
+            it("should call rootGetters.configInput with 'custom_commands' as parameter", function () {
+                rootGetters.configInput.returns({value: null});
+                customCommands.getters.commands(state, getters, rootState, rootGetters);
+                expect(rootGetters.configInput.calledOnceWith("custom_commands"));
+            });
+
+            it("should return empty list if rootGetters.configInput with 'custom_commands' has null value property", function () {
+                rootGetters.configInput.returns({value: null});
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.be.an("array").that.is.empty;
+            });
+
+            it("should return the value property of rootGetters.configInput call with 'custom_commands' as parameter", function () {
+                let value = "return value";
+                rootGetters.configInput.returns({value: value});
+                expect(customCommands.getters.commands(state, getters, rootState, rootGetters)).to.equal(value);
+            });
         });
     });
 });
