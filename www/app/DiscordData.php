@@ -166,7 +166,10 @@ class DiscordData extends Model
 
     public function getGuildOwnerId()
     {
-        return $this->discord->guild->getGuild()->owner_id;
+        if (!isset($this->serverId)) {
+            return false;
+        }
+        return $this->discord->guild->getGuild(['guild.id' => (int)$this->serverId])->owner_id;
     }
 
     /**
