@@ -8,18 +8,22 @@
         <div class="panel-block has-background-white">
             <div class="is-fullwidth">
                 <div class="field has-addons">
+                    <div class="control">
+                        <a class="button is-static">
+                            Level
+                        </a>
+                    </div>
                     <div class="control is-expanded">
                         <input
-                            :value="currentLevelValue"
-                            class="input is-small"
+                            v-model="currentLevelValue"
+                            class="input"
                             type="number"
                             min="1"
-                            placeholder="Level"
-                            @input="$emit('input', $event.target.value)">
+                            placeholder="Level">
                     </div>
                     <div class="control">
                         <a
-                            class="button is-small is-success"
+                            class="button is-success"
                             @click="$emit('add-level', currentLevelValue)">
                             <i
                                 class="mdi mdi-plus"
@@ -31,10 +35,12 @@
         </div>
         <div class="panel-block has-background-white">
             <vue-multiselect
-                :value="selectedLevel"
                 :options="levels"
+                :value="selectedLevel"
+                :custom-label="levelName"
+                placeholder="Select level"
                 class="vue-multiselect"
-                @input="$emit('input', $event.target.value)" />
+                @input="$emit('input', $event)" />
         </div>
     </div>
 </template>
@@ -49,15 +55,29 @@ export default {
             validator: prop => typeof prop === "number" || prop === null,
             required: true,
         },
-        currentLevelValue: {
-            type: Number,
-            required: true,
-        },
         levels: {
             type: Array,
             required: true,
         }
-    }
+    },
+    data() {
+        return {
+            currentLevelValue: 0
+        };
+    },
+    watch: {
+        selectedLevel(newValue, oldValue) {
+            console.log("new value", newValue, oldValue);
+        }
+    },
+    methods: {
+        name(value) {
+            console.log(value);
+        },
+        levelName (value) {
+            return `Level ${value}`;
+        }
+    },
 };
 </script>
 <style scoped>

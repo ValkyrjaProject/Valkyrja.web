@@ -11,10 +11,10 @@ const state = {
 
 const mutations = {
     ADD_LEVEL(state, level) {
-        state.levels.push(level);
+        state.levels.push(parseInt(level));
     },
     CHANGE_SELECTED_LEVEL(state, level) {
-        state.selectedLevel = level;
+        state.selectedLevel = parseInt(level);
     },
     CHANGE_ROLE_LEVEL(state, payload) {
         payload.role.level = payload.level;

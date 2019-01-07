@@ -3,10 +3,9 @@
         <div class="columns">
             <div class="column is-one-third">
                 <level-selector-input
-                    :current-level-value="currentLevelValue"
                     :levels="levels"
                     :selected-level="selectedLevel"
-                    @add-level="addLevel(currentLevelValue)" />
+                    @add-level="addLevel" />
             </div>
             <div class="column is-one-third">
                 <panel-list
@@ -29,17 +28,13 @@
 <script>
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
 import LevelSelectorInput from "./LevelSelectorInput";
+import {Level} from "../../../../../models/Level";
 
 export default {
     name: "LevelSelector",
     components: {
         LevelSelectorInput,
         PanelList,
-    },
-    data() {
-        return {
-            currentLevelValue: 0
-        };
     },
     computed: {
         levels() {
@@ -79,6 +74,8 @@ export default {
     },
     methods: {
         addLevel(level) {
+            console.log("level", level);
+
             if (this.levels.indexOf(level) === -1) {
                 this.$store.dispatch("levelSelector/addLevel", level);
                 this.selectedLevel = level;
