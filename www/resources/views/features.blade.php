@@ -194,6 +194,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>createColourRoles</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Create 9 roles with various colours, you can find emoji representations of these colours in Valhalla - the Valkyrja support server. Use case - <a href="img/colourReactions.png">reaction assigned colour roles</a> </td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>createTempRole</h2>
                     <table class="command">
                     <tr>
