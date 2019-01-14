@@ -24,7 +24,7 @@
                     <div class="control">
                         <a
                             class="button is-success"
-                            @click="$emit('add-level', currentLevelValue)">
+                            @click="addLevel(currentLevelValue)">
                             <i
                                 class="mdi mdi-plus"
                                 aria-hidden="true"></i>
@@ -36,11 +36,10 @@
         <div class="panel-block has-background-white">
             <vue-multiselect
                 :options="levels"
-                :value="selectedLevel"
+                v-model="selectedLevel"
                 :custom-label="levelName"
                 placeholder="Select level"
-                class="vue-multiselect"
-                @input="$emit('input', $event)" />
+                class="vue-multiselect"/>
         </div>
     </div>
 </template>
@@ -50,20 +49,23 @@ import VueMultiselect from "vue-multiselect";
 export default {
     name: "LevelSelectorInput",
     components: {VueMultiselect},
-    props: {
-        selectedLevel:{
-            validator: prop => typeof prop === "number" || prop === null,
-            required: true,
-        },
-        levels: {
-            type: Array,
-            required: true,
-        }
-    },
     data() {
         return {
-            currentLevelValue: 0
+            currentLevelValue: 1
         };
+    },
+    computed: {
+        levels() {
+            return this.$store.state.levelSelector.levels;
+        },
+        selectedLevel: {
+            get() {
+                return this.$store.state.levelSelector.selectedLevel;
+            },
+            set(level) {
+                this.$store.dispatch("levelSelector/changeSelectedLevel", level);
+            }
+        }
     },
     watch: {
         selectedLevel(newValue, oldValue) {
@@ -76,8 +78,15 @@ export default {
         },
         levelName (value) {
             return `Level ${value}`;
+        },
+        addLevel(level) {
+            level = parseInt(level);
+            if (this.levels.indexOf(level) === -1) {
+                this.$store.dispatch("levelSelector/addLevel", level);
+                this.selectedLevel = level;
+            }
         }
-    },
+    }
 };
 </script>
 <style scoped>

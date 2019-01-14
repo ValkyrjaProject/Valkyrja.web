@@ -68,7 +68,7 @@ const getters = {
             console.log(addedRole.level);
             return rootState.guild.roles.filter((role) => {
                 return addedRole.id === role.id
-                    && addedRole.level > 0;
+                    && addedRole.level === state.selectedLevel;
             }).length !== 0;
         });
     },

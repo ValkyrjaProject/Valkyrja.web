@@ -2,10 +2,7 @@
     <div class="box has-background-white-bis">
         <div class="columns">
             <div class="column is-one-third">
-                <level-selector-input
-                    :levels="levels"
-                    :selected-level="selectedLevel"
-                    @add-level="addLevel" />
+                <level-selector-input/>
             </div>
             <div class="column is-one-third">
                 <panel-list
@@ -37,16 +34,8 @@ export default {
         PanelList,
     },
     computed: {
-        levels() {
-            return this.$store.state.levelSelector.levels;
-        },
-        selectedLevel: {
-            get() {
-                return this.$store.state.levelSelector.selectedLevel;
-            },
-            set(level) {
-                this.$store.dispatch("levelSelector/changeSelectedLevel", level);
-            }
+        selectedLevel() {
+            return this.$store.state.levelSelector.selectedLevel;
         },
         availableRoles: {
             get() {
@@ -65,23 +54,13 @@ export default {
                 return this.$store.getters["levelSelector/addedRoles"];
             },
             set(role) {
-                this.$store.dispatch("levelSelector/changeLevel", {
+                this.$store.dispatch("levelSelector/changeRoleLevel", {
                     role,
                     level: 0
                 });
             }
         }
-    },
-    methods: {
-        addLevel(level) {
-            console.log("level", level);
-
-            if (this.levels.indexOf(level) === -1) {
-                this.$store.dispatch("levelSelector/addLevel", level);
-                this.selectedLevel = level;
-            }
-        }
-    },
+    }
 };
 </script>
 
