@@ -4,9 +4,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import LevelSelector from "components/EditGuild/Sections/Social/LevelSelector/LevelSelector";
-import PanelList from "../../../../../../../resources/assets/js/components/shared/structure/PanelList/PanelList";
-import LevelSelectorInput
-    from "../../../../../../../resources/assets/js/components/EditGuild/Sections/Social/LevelSelector/LevelSelectorInput";
+import PanelList from "components/shared/structure/PanelList/PanelList";
+import LevelSelectorInput from "components/EditGuild/Sections/Social/LevelSelector/LevelSelectorInput";
 
 let localVue = Vue.use(Vuex);
 
@@ -84,6 +83,16 @@ describe("LevelSelector", function () {
 
     it("should have a PanelList in third column", function () {
         expect(wrapper.findAll(".column").at(2).find(PanelList).exists()).to.be.true;
+    });
+
+    it("should send in 'Available roles' as title to second column's PanelList", function () {
+        let panelList = wrapper.findAll(".column").at(1).find(PanelList);
+        expect(panelList.props().title).to.equal("Available roles");
+    });
+
+    it("should send in 'Roles added to level' as title to third column's PanelList", function () {
+        let panelList = wrapper.findAll(".column").at(2).find(PanelList);
+        expect(panelList.props().title).to.equal("Roles added to level");
     });
 
     it("should send getter levelSelector/availableRoles to second column's PanelList", function () {

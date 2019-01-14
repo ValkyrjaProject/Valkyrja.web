@@ -1,9 +1,7 @@
 <template>
     <div class="panel">
-        <nav class="panel is-marginless panel-parent">
-            <p class="panel-heading">
-                Levels
-            </p>
+        <nav class="panel-heading">
+            Levels
         </nav>
         <div class="panel-block has-background-white">
             <div class="is-fullwidth">
@@ -51,7 +49,7 @@ export default {
     components: {VueMultiselect},
     data() {
         return {
-            currentLevelValue: 1
+            currentLevelValue: "1"
         };
     },
     computed: {
@@ -67,15 +65,7 @@ export default {
             }
         }
     },
-    watch: {
-        selectedLevel(newValue, oldValue) {
-            console.log("new value", newValue, oldValue);
-        }
-    },
     methods: {
-        name(value) {
-            console.log(value);
-        },
         levelName (value) {
             return `Level ${value}`;
         },
