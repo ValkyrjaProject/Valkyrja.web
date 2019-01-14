@@ -32,8 +32,7 @@
                             :class="itemClass(item, idx)"
                             class="listItem"
                             @remove="$emit('remove', item)"
-                            @keyup.enter="$emit('input', item)"
-                            @click="$emit('input', item)"/>
+                            @click="itemClicked(item)"/>
                     </transition-group>
                 </div>
                 <div
@@ -151,10 +150,13 @@ export default {
         },
         itemClass(item, index){
             return {
-                "is-active": item === this.selectedItem,
-                "has-background-primary": index+1 === this.itemIndex,
+                "is-active": item === this.selectedItem && this.searchQuery !== "",
+                "has-background-primary": index+1 === this.itemIndex && this.searchQuery !== "",
             };
-
+        },
+        itemClicked(item) {
+            this.$emit("input", item);
+            this.searchQuery = "";
         }
     }
 };

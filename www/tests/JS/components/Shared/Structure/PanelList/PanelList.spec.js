@@ -20,7 +20,19 @@ describe("PanelList", function () {
     beforeEach(function () {
         propsData = {
             title: "title",
-            value: [{name: "value1"}, {name: "value2"}]
+            value: [
+                {
+                    name: "value1",
+                    toString() {
+                        return this.name;
+                    }
+                },
+                {
+                    name: "value2",
+                    toString() {
+                        return this.name;
+                    }
+                }]
         };
 
         actions = {};
@@ -115,6 +127,28 @@ describe("PanelList", function () {
         expect(wrapper.emitted().input.length).to.equal(1);
     });
 
+    it("should emit 'input' if list item component emits 'enter' and search query has value", function () {
+        expect(wrapper.emitted().input).to.be.undefined;
+        wrapper.setData({searchQuery: propsData.value[0].toString()});
+        wrapper.find(PanelListSearch).vm.$emit("enter");
+        expect(wrapper.emitted().input).to.not.be.undefined;
+        expect(wrapper.emitted().input.length).to.equal(1);
+    });
+
+    it("should set search query to empty if item component emits 'click'", function () {
+        wrapper.setData({searchQuery: propsData.value[0].toString()});
+        expect(wrapper.vm.searchQuery).to.equal(propsData.value[0].toString());
+        wrapper.find(PanelListItem).vm.$emit("click");
+        expect(wrapper.vm.searchQuery).to.be.empty;
+    });
+
+    it("should set search query to empty if item component emits 'enter'", function () {
+        wrapper.setData({searchQuery: propsData.value[0].toString()});
+        expect(wrapper.vm.searchQuery).to.equal(propsData.value[0].toString());
+        wrapper.find(PanelListSearch).vm.$emit("enter");
+        expect(wrapper.vm.searchQuery).to.be.empty;
+    });
+
     it("should pass itemIcon prop to all PanelListItem", function () {
         wrapper.setProps({itemIcon: "icon"});
         let wrappers = wrapper.findAll(PanelListItem);
@@ -131,10 +165,24 @@ describe("PanelList", function () {
         expect(wrapper.findAll(item).length).to.equal(propsData.value.length);
     });
 
-    it("should set is-active class if selectedItem prop equals item in item list", function () {
+    it("should set is-active class if selectedItem prop equals item in item list and search query is not empty", function () {
+        wrapper.setData({searchQuery: propsData.value[0].toString()});
         wrapper.setProps({selectedItem: propsData.value[0]});
         let actives = wrapper.findAll(".is-active");
-        expect(actives.length).to.equal(1);
+        expect(actives).to.have.length(1);
         expect(actives.at(0).props().item).to.equal(propsData.value[0]);
+    });
+
+    it("should not set is-active class if selectedItem prop equals item in item list and no search query was entered", function () {
+        wrapper.setProps({selectedItem: propsData.value[0]});
+        let actives = wrapper.findAll(".is-active");
+        expect(actives).to.have.length(0);
+    });
+
+    it("should not set is-active class if selectedItem prop equals item in item list and search query is empty", function () {
+        wrapper.setData({searchQuery: ""});
+        wrapper.setProps({selectedItem: propsData.value[0]});
+        let actives = wrapper.findAll(".is-active");
+        expect(actives).to.have.length(0);
     });
 });
