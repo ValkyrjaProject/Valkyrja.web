@@ -1,5 +1,5 @@
 import sinon from "sinon";
-import {shallowMount, mount} from "@vue/test-utils";
+import {mount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
@@ -38,7 +38,7 @@ describe("LevelSelectorInput", function () {
                 }
             }
         });
-        wrapper = shallowMount(LevelSelectorInput, {propsData, store, localVue});
+        wrapper = mount(LevelSelectorInput, {propsData, store, localVue});
     });
 
     it("should have a panel-heading with 'Levels' text", function () {
@@ -135,7 +135,7 @@ describe("LevelSelectorInput", function () {
 
     it("should set 'Select level' as placeholder for VueMultiselect in second panel block", function () {
         let select = wrapper.findAll(".panel-block").at(1).find(VueMultiselect);
-        expect(select.attributes("placeholder")).to.equal("Select level");
+        expect(select.props("placeholder")).to.equal("Select level");
     });
 
     it("should set 'vue-multiselect' as class for VueMultiselect in second panel block", function () {
@@ -151,11 +151,6 @@ describe("LevelSelectorInput", function () {
 
     it("should prepend 'Level ' to VueMultiselect in second panel block when number is selected", function () {
         expect(wrapper.vm.levelName(5)).to.equal("Level 5");
-        let levelNameSpy = sinon.spy(LevelSelectorInput.methods, "levelName");
-        wrapper = mount(LevelSelectorInput, {propsData, store, localVue});
-        let select = wrapper.findAll(".panel-block").at(1).find(VueMultiselect);
-        state.selectedLevel = 5;
-        expect(levelNameSpy.calledOnceWith(state.selectedLevel)).to.be.true;
-        levelNameSpy.restore();
+        expect(wrapper.find(VueMultiselect).props("customLabel")).to.equal(wrapper.vm.levelName);
     });
 });
