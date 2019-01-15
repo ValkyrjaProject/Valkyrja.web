@@ -65,7 +65,6 @@ const getters = {
             return [];
         }
         return rootGetters.configInput("roles").value.filter((addedRole) => {
-            console.log(addedRole.level);
             return rootState.guild.roles.filter((role) => {
                 return addedRole.id === role.id
                     && addedRole.level === state.selectedLevel;
