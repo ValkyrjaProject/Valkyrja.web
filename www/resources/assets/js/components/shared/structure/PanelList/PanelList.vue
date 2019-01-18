@@ -3,6 +3,7 @@
         <nav class="panel panel-parent">
             <p
                 v-if="title"
+                :class="{ 'is-radiusless': removeRadius }"
                 class="panel-heading">
                 {{ title }}
             </p>
@@ -110,6 +111,11 @@ export default {
             type: Object||null,
             required: false,
             default: null
+        },
+        removeRadius: {
+            type: Boolean,
+            required: false,
+            default: false
         },
     },
     data() {

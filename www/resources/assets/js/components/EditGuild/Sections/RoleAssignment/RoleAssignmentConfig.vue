@@ -12,19 +12,23 @@
             </p>
             <public-role-selector />
         </div>
+        <br>
         <div>
-
+            <b>Reaction Assigned Roles</b>
+            <reaction-roles />
         </div>
     </div>
 </template>
 
 <script>
 import PublicRoleSelector from "./PublicRoleSelector/PublicRoleSelector";
+import ReactionRoles from "./ReactionRoles/ReactionRoles";
 
 export default {
     name: "RoleAssignmentConfig",
     components: {
         PublicRoleSelector,
+        ReactionRoles,
     },
     computed: {
         command_prefix() {
