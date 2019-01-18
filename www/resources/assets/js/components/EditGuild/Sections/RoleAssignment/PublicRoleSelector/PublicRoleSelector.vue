@@ -2,8 +2,8 @@
     <div class="box has-background-white-bis">
         <div class="columns">
             <div class="column is-one-third">
-                <role-selector-type
-                    title="Role type"
+                <public-role-selector-group
+                    title="Public Role Group"
                     class="content"
                 />
             </div>
@@ -23,12 +23,13 @@
 
 <script>
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
-import RoleSelectorType from "./RoleSelectorType";
+import PublicRoleSelectorGroup from "./PublicRoleSelectorGroup";
+import {types} from "../../../../../store/modules/RoleSelector";
 
 export default {
-    name: "RoleSelector",
+    name: "PublicRoleSelector",
     components: {
-        RoleSelectorType,
+        PublicRoleSelectorGroup,
         PanelList,
     },
     computed: {
@@ -43,17 +44,17 @@ export default {
                 return this.getters["roleSelector/availableRoles"];
             },
             set(role) {
-                this.$store.dispatch("roleSelector/addRole", role);
+                this.$store.dispatch("roleSelector/addPublicRole", role);
             },
         },
         addedRoles: {
             get() {
-                return this.getters["roleSelector/addedRoles"](this.state.selectedType);
+                return this.getters["roleSelector/addedRoles"](types.Public);
             },
             set(role) {
                 this.$store.dispatch("roleSelector/removeRole", role);
             },
-        }
+        },
     },
 };
 </script>

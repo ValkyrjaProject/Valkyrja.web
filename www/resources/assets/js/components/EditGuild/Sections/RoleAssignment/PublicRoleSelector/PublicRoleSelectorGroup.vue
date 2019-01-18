@@ -11,7 +11,6 @@
                             <select
                                 :title="title"
                                 v-model="selectedPublicGroup"
-                                :disabled="!publicTypeIsSelected()"
                                 name="role-group">
                                 <option
                                     v-for="group in sortedPublicGroups"
@@ -23,7 +22,6 @@
                     </div>
                     <div class="control">
                         <a
-                            :disabled="!publicTypeIsSelected()"
                             class="button add-public-group is-info"
                             @click="addPublicGroup()">
                             <i
@@ -73,7 +71,7 @@ import PublicGroup from "../../../../../models/PublicGroup";
 import {NoGroup} from "../../../../../store/modules/RoleSelector";
 
 export default {
-    name: "RoleSelectorGroup",
+    name: "PublicRoleSelectorGroup",
     props: {
         title: {
             type: String,
@@ -91,9 +89,6 @@ export default {
         },
         types() {
             return this.state.types;
-        },
-        selectedType() {
-            return this.state.selectedType;
         },
         publicGroups() {
             return this.$store.getters["roleSelector/publicGroups"];
@@ -134,13 +129,13 @@ export default {
             },
         },
         publicGroupIsSelected() {
-            return !!(this.objectIsPublicGroup(this.selectedPublicGroup) && this.publicTypeIsSelected());
+            return !!(this.objectIsPublicGroup(this.selectedPublicGroup));
 
         },
     },
     methods: {
         addPublicGroup() {
-            if (this.isActive && this.publicTypeIsSelected()) {
+            if (this.isActive) {
                 let start = 1;
                 this.publicGroups.forEach((group, index) => {
                     if (parseInt(group.id) === (parseInt(index) + 1)) {
@@ -155,10 +150,7 @@ export default {
         },
         objectIsPublicGroup(object) {
             return object instanceof PublicGroup;
-        },
-        publicTypeIsSelected(){
-            return this.selectedType === this.types.Public;
-        },
+        }
     },
 };
 </script>

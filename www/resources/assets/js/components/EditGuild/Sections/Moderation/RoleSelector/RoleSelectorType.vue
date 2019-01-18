@@ -12,6 +12,7 @@
                         title="Public role">
                         <option
                             v-for="(level, name) in types"
+                            :key="level"
                             :value="level">{{ name }}</option>
                     </select>
                 </div>

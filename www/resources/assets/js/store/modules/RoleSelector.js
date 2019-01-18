@@ -16,9 +16,10 @@ export const types = {
 };
 let stateTypes = {...types};
 delete stateTypes.NotAdded;
+delete stateTypes.Public;
 
 const state = {
-    selectedType: types.Public,
+    selectedType: types.Member,
     types: stateTypes,
     selectedPublicGroup: NoGroup,
     publicGroups: [
@@ -90,6 +91,21 @@ const actions = {
             public_id: state.selectedPublicGroup.id,
         });
     },
+    addPublicRole({commit, state}, role) {
+        if (!(role instanceof PublicRole)) {
+            let error = `Object is not of type PublicRole, it is of type ${role.constructor.name}`;
+            log.error(error);
+            throw new TypeError(error);
+        }
+        commit("CHANGE_ROLE_PERMISSION", {
+            role,
+            permission_level: types.Public,
+        });
+        commit("CHANGE_PUBLIC_ID", {
+            role,
+            public_id: state.selectedPublicGroup.id,
+        });
+    },
     removeRole({commit, state}, role) {
         if (!(role instanceof PublicRole)) {
             let error = `Object is not of type PublicRole, it is of type ${role.constructor.name}`;
@@ -127,15 +143,15 @@ const getters = {
             }).length === 0;
         });
     },
-    addedRoles: (state, getters, rootState, rootGetters) => {
+    addedRoles: (state, getters, rootState, rootGetters) => (selectedType) => {
         if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
             return [];
         }
         return rootGetters.configInput("roles").value.filter((addedRole) => {
             return rootState.guild.roles.filter((role) => {
                 return addedRole.id === role.id
-                    && addedRole.permission_level === state.selectedType
-                    && (state.selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
+                    && addedRole.permission_level === selectedType
+                    && (selectedType === types.Public ? addedRole.public_id === state.selectedPublicGroup.id : 1);
             }).length !== 0;
         });
     },

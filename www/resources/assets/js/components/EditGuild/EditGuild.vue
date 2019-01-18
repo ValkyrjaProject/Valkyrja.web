@@ -46,6 +46,7 @@ import UserVerificationConfig from "./Sections/UserVerification/UserVerification
 import VueRouter from "vue-router";
 import Sticky from "vue-sticky-directive";
 import CustomCommandsConfig from "./Sections/CustomCommands/CustomCommandsConfig";
+import RoleAssignmentConfig from "./Sections/RoleAssignment/RoleAssignmentConfig";
 
 const tabs = [
     {
@@ -77,7 +78,7 @@ const tabs = [
         icon: "plus-circle-multiple-outline",
         component: {
             url: "/role-assignment",
-            name: null
+            name: RoleAssignmentConfig
         }
     },
     {
