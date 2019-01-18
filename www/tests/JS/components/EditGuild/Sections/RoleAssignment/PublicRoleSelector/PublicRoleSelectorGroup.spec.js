@@ -3,13 +3,13 @@ import {shallowMount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
-import RoleSelectorGroup from "components/EditGuild/Sections/Moderation/RoleSelector/RoleSelectorGroup";
-import PublicGroup from "../../../../../../../resources/assets/js/models/PublicGroup";
-import {BlankPublicGroup} from "../../../../../../../resources/assets/js/models/BlankPublicGroup";
+import PublicRoleSelectorGroup from "components/EditGuild/Sections/RoleAssignment/PublicRoleSelector/PublicRoleSelectorGroup";
+import PublicGroup from "models/PublicGroup";
+import {BlankPublicGroup} from "models/BlankPublicGroup";
 
 let localVue = Vue.use(Vuex);
 
-describe("RoleSelectorGroup", function () {
+describe("PublicRoleSelectorGroup", function () {
     let wrapper;
     let actions;
     let store;
@@ -61,7 +61,7 @@ describe("RoleSelectorGroup", function () {
                 }
             }
         });
-        wrapper = shallowMount(RoleSelectorGroup, {propsData, store, localVue});
+        wrapper = shallowMount(PublicRoleSelectorGroup, {propsData, store, localVue});
     });
 
     it("should display panel", function () {
