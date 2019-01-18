@@ -6,7 +6,7 @@ Copyright © 2016 Radka Janek, [rhea-ayase.eu](http://rhea-ayase.eu)
 
 
 
-## Valkyrja ![](https://api.travis-ci.org/RheaAyase/Valkyrja.web.svg?branch=dev)
+## Valkyrja [![Build Status](https://travis-ci.org/RheaAyase/Valkyrja.web.svg?branch=dev)](https://travis-ci.org/RheaAyase/Valkyrja.web)
 Please take a look at our website to see what the bot about, full list of features, invite and configuration: [https://valkyrja.app](https://valkyrja.app)
 
 ## Contributing
