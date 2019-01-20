@@ -92,15 +92,17 @@ describe("PublicRoleSelectorGroup", function () {
         expect(actions.selectedPublicGroup.calledOnce).to.equal(true);
     });
 
-    it("should not dispatch actions when add button is clicked when non-Public types are selected", function () {
+    it("should dispatch actions when add button is clicked when non-Public types are selected in Vuex module state", function () {
         for (let typesKey in types) {
             if (types[typesKey] === types.Public) continue;
 
             state.selectedType = types[typesKey];
             wrapper.find(".add-public-group").trigger("click");
 
-            expect(actions.addPublicGroup.called).to.equal(false);
-            expect(actions.selectedPublicGroup.called).to.equal(false);
+            expect(actions.addPublicGroup.calledOnce, "addPublicGroup was called").to.equal(true);
+            expect(actions.selectedPublicGroup.calledOnce, "selectedPublicGroup was called").to.equal(true);
+            actions.addPublicGroup.resetHistory();
+            actions.selectedPublicGroup.resetHistory();
         }
     });
 

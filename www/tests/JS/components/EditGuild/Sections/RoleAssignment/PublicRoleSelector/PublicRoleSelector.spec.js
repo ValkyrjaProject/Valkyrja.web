@@ -4,8 +4,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import PublicRoleSelector from "components/EditGuild/Sections/RoleAssignment/PublicRoleSelector/PublicRoleSelector";
-import {PublicRole} from "models/PublicRole";
 import PublicRoleSelectorGroup from "components/EditGuild/Sections/RoleAssignment/PublicRoleSelector/PublicRoleSelectorGroup";
+import {PublicRole} from "models/PublicRole";
 import PanelList from "components/shared/structure/PanelList/PanelList";
 
 let localVue = Vue.use(Vuex);
@@ -22,7 +22,7 @@ describe("PublicRoleSelector", function () {
     beforeEach(function () {
         propsData = {};
         actions = {
-            addRole: sinon.stub(),
+            addPublicRole: sinon.stub(),
             removeRole: sinon.stub(),
         };
         types =  {
@@ -74,7 +74,7 @@ describe("PublicRoleSelector", function () {
         for (let typesKey in types) {
             if (state.selectedType === types.Public) continue;
             state.selectedType = types[typesKey];
-            expect(wrapper.find(".RoleSelectorGroup").props().isActive).to.equal(false);
+            expect(wrapper.find(RoleSelectorGroup).props().isActive).to.equal(false);
         }
     });
 
@@ -93,12 +93,12 @@ describe("PublicRoleSelector", function () {
     });
 
     it("should not dispatch add role when availableRoles is not called", function () {
-        expect(actions.addRole.calledOnce).to.equal(false);
+        expect(actions.addPublicRole.calledOnce).to.equal(false);
     });
 
     it("should dispatch add role when availableRoles is called", function () {
         wrapper.vm.availableRoles = "Test";
-        expect(actions.addRole.calledOnce).to.equal(true);
+        expect(actions.addPublicRole.calledOnce).to.equal(true);
     });
 
     it("should dispatch remove role when addedRoles is called", function () {
@@ -118,7 +118,7 @@ describe("PublicRoleSelector", function () {
         expect(wrapper.find(".box").findAll(".columns > .column").length).to.equal(3);
     });
 
-    it("should have name of RoleSelector", function () {
-        expect(wrapper.name()).to.equal("RoleSelector");
+    it("should have name of PublicRoleSelector", function () {
+        expect(wrapper.name()).to.equal("PublicRoleSelector");
     });
 });
