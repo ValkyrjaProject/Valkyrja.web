@@ -22,13 +22,16 @@ export default {
         ReactionRolesForm
     },
     computed: {
+        getters() {
+            return this.$store.getters;
+        },
         reactionRoles: {
             get() {
-                return [];
+                return this.getters["reactionRoles/roles"];
             },
             set(role) {
-
-            }
+                this.$store.dispatch("reactionRoles/addReactionRole", role);
+            },
         }
     },
 };

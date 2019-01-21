@@ -1,13 +1,13 @@
 <template>
-    <div class="columns is-desktop is-gapless">
+    <div class="columns is-desktop is-root is-gapless">
         <div class="columns column is-marginless is-gapless">
             <panel-list
-                v-model="reactionRoles"
+                v-model="availableRoles"
                 :remove-radius="true"
                 title="Available Roles"
                 class="column is-half" />
             <panel-list
-                v-model="reactionRoles"
+                v-model="addedRoles"
                 :remove-radius="true"
                 title="Added Roles"
                 class="column is-half is-radiusless" />
@@ -16,7 +16,6 @@
             class="column is-one-third is-full-touch">
             <div class="panel">
                 <div class="panel-block">
-
                     <div class="control field">
                         <label for="reaction_emoji">
                             <b>Emoji</b> - Either a <code>CustomEmoji</code> without colons, or a <a
@@ -25,6 +24,7 @@
                         </label>
                         <input
                             id="reaction_emoji"
+                            v-model="emoji"
                             type="text"
                             class="input">
                     </div>
@@ -42,13 +42,35 @@ export default {
         PanelList
     },
     computed: {
-        reactionRoles: {
+        state() {
+            return this.$store.state.reactionRoles;
+        },
+        getters() {
+            return this.$store.getters;
+        },
+        emoji: {
             get() {
-                return [];
+                return this.state.emoji;
             },
             set(role) {
-
-            }
+                this.$store.dispatch("reactionRoles/changeEmoji", role);
+            },
+        },
+        availableRoles: {
+            get() {
+                return this.getters["reactionRoles/availableRoles"];
+            },
+            set(role) {
+                this.$store.dispatch("reactionRoles/addRole", role);
+            },
+        },
+        addedRoles: {
+            get() {
+                return this.getters["reactionRoles/addedRoles"];
+            },
+            set(role) {
+                this.$store.dispatch("reactionRoles/removeRole", role);
+            },
         }
     }
 };
