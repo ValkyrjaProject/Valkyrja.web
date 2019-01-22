@@ -12,7 +12,12 @@
                         :class="'mdi mdi-' + itemIcon"
                         aria-hidden="true"></i>
                 </span>
-                {{ shorten(item) }}
+                <span v-if="item.toString()">
+                    {{ shorten(item) }}
+                </span>
+                <span v-else>
+                    <i>Empty name</i>
+                </span>
             </div>
             <div
                 class="delete level-right level-item"

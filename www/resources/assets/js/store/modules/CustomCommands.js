@@ -20,6 +20,9 @@ const mutations = {
             && option.hasOwnProperty("value")) {
             state.selectedCommand[option.field] = option.value;
         }
+    },
+    DELETE_COMMAND_FROM_INDEX(state, obj) {
+        obj.array.splice(obj.index, 1);
     }
 };
 
@@ -35,10 +38,18 @@ const actions = {
         let commands = rootState.config.find("custom_commands");
         let index = commands.value.indexOf(command);
         if (index >= 0) {
-            commands.value.splice(index, 1);
+            commit("DELETE_COMMAND_FROM_INDEX", {
+                array: commands.value,
+                index: index
+            });
         }
         if (command === state.selectedCommand) {
-            commit("SET_SELECTED_COMMAND", commands[0]);
+            if (commands.length >= 0) {
+                commit("SET_SELECTED_COMMAND", commands[0]);
+            }
+            else {
+                commit("SET_SELECTED_COMMAND", null);
+            }
         }
     },
     changeCommand({commit}, command) {

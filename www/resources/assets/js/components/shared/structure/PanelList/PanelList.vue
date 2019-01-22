@@ -156,7 +156,7 @@ export default {
         },
         itemClass(item, index){
             return {
-                "is-active": item === this.selectedItem && this.searchQuery !== "",
+                "is-active": item === this.selectedItem,
                 "has-background-primary": index+1 === this.itemIndex && this.searchQuery !== "",
             };
         },

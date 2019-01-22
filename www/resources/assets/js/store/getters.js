@@ -10,7 +10,10 @@ export const getters = {
      */
     configInput: state => storeName => {
         if (state.config instanceof Config) {
-            return state.config.retrieve(storeName);
+            let instance = state.config.retrieve(storeName);
+            if (instance) {
+                return instance;
+            }
         }
         return ConfigData.instanceFromApi(storeName, null);
     }

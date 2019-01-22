@@ -3,6 +3,8 @@
         <panel-list
             :value="commands"
             :add-button="true"
+            :selected-item="selectedCommand"
+            list-item="PanelListItemRemovable"
             class="column is-one-third"
             title="Available commands"
             @remove="deleteCommand"
@@ -26,6 +28,9 @@ export default {
     computed: {
         commands() {
             return this.$store.getters["customCommands/commands"];
+        },
+        selectedCommand() {
+            return this.$store.state.customCommands.selectedCommand;
         }
     },
     methods: {
@@ -38,7 +43,7 @@ export default {
         },
         deleteCommand(command) {
             this.$store.dispatch("customCommands/deleteCommand", command);
-        }
+        },
     }
 };
 </script>
