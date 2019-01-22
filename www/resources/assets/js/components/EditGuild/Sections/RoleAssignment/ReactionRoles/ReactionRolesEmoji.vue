@@ -50,10 +50,13 @@ export default {
         },
         emoji: {
             get() {
-                return this.state.emoji;
+                return this.state.selectedRole.emoji;
             },
-            set(role) {
-                this.$store.dispatch("reactionRoles/changeEmoji", role);
+            set(emoji) {
+                this.$store.dispatch("reactionRoles/changeField", {
+                    field: "emoji",
+                    value: emoji
+                });
             },
         },
         availableRoles: {

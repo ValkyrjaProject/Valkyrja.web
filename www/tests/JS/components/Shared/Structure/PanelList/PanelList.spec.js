@@ -173,16 +173,16 @@ describe("PanelList", function () {
         expect(actives.at(0).props().item).to.equal(propsData.value[0]);
     });
 
-    it("should not set is-active class if selectedItem prop equals item in item list and no search query was entered", function () {
+    it("should set is-active class if selectedItem prop equals item in item list and no search query was entered", function () {
         wrapper.setProps({selectedItem: propsData.value[0]});
         let actives = wrapper.findAll(".is-active");
-        expect(actives).to.have.length(0);
+        expect(actives).to.have.length(1);
     });
 
-    it("should not set is-active class if selectedItem prop equals item in item list and search query is empty", function () {
+    it("should set is-active class if selectedItem prop equals item in item list and search query is empty", function () {
         wrapper.setData({searchQuery: ""});
         wrapper.setProps({selectedItem: propsData.value[0]});
         let actives = wrapper.findAll(".is-active");
-        expect(actives).to.have.length(0);
+        expect(actives).to.have.length(1);
     });
 });

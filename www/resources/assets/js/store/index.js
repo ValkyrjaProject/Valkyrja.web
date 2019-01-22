@@ -8,6 +8,7 @@ import ignoredChannels from "./modules/IgnoredChannels";
 import levelSelector from "./modules/LevelSelector";
 import profileEditor from "./modules/ProfileEditor";
 import customCommands from "./modules/CustomCommands";
+import reactionRoles from "./modules/ReactionRoles";
 import createLogger from "vuex/dist/logger";
 
 Vue.use(Vuex);
@@ -28,5 +29,6 @@ export default new Vuex.Store({
         ignoredChannels,
         profileEditor,
         customCommands,
+        reactionRoles,
     }
 });

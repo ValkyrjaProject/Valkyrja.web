@@ -8,6 +8,8 @@
                 <div class="control is-expanded">
                     <input
                         id="reaction_id"
+                        :disabled="disabled"
+                        v-model="messageId"
                         placeholder="Message ID"
                         type="text"
                         class="input">
@@ -20,7 +22,7 @@
             </div>
         </div>
         <div class="panel-block is-paddingless">
-            <reaction-roles-emoji />
+            <reaction-roles-emoji v-if="!disabled"/>
         </div>
     </div>
 </template>
@@ -32,7 +34,30 @@ export default {
     name: "ReactionRolesForm",
     components: {
         ReactionRolesEmoji,
-    }
+    },
+    props: {
+        disabled: {
+            type: Boolean,
+            default: false,
+            required: false,
+        },
+    },
+    computed: {
+        state() {
+            return this.$store.state.reactionRoles;
+        },
+        messageId: {
+            get() {
+                return this.state.selectedRole;
+            },
+            set(id) {
+                this.$store.dispatch("reactionRoles/changeField", {
+                    field: "messageId",
+                    value: id
+                });
+            },
+        }
+    },
 };
 </script>
 

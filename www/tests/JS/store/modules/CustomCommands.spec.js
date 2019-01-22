@@ -210,7 +210,7 @@ describe("CustomCommands Vuex module", function () {
                 expect(findStub.args[0][0]).to.equal("custom_commands");
             });
 
-            it("should delete a command if it is the selected one", function () {
+            it("should commit DELETE_COMMAND_FROM_INDEX delete a command if it is the selected one", function () {
                 let commands = [
                     CustomCommand.newInstance("1"),
                     CustomCommand.newInstance("2"),
@@ -231,9 +231,13 @@ describe("CustomCommands Vuex module", function () {
                         }
                     }
                 };
-                let command = CustomCommand.newInstance();
                 customCommands.actions.deleteCommand(data, commands[1]);
-                expect(configData.value.length).to.equal(2);
+                expect(commitStub.args[0][0]).to.equal("DELETE_COMMAND_FROM_INDEX");
+                expect(commitStub.args[0][1]).to.eql({
+                    array: commands,
+                    index: 1
+                });
+
             });
 
             it("should commit SET_SELECTED_COMMAND if it is the selected command", function () {
@@ -258,7 +262,7 @@ describe("CustomCommands Vuex module", function () {
                 };
                 let command = CustomCommand.newInstance();
                 customCommands.actions.deleteCommand(data, commands[1]);
-                expect(commitStub.args[0][0]).to.equal("SET_SELECTED_COMMAND");
+                expect(commitStub.args[1][0]).to.equal("SET_SELECTED_COMMAND");
             });
 
             it("should not commit SET_SELECTED_COMMAND if it not is the selected command", function () {
@@ -282,10 +286,8 @@ describe("CustomCommands Vuex module", function () {
                         }
                     }
                 };
-                let command = CustomCommand.newInstance();
                 customCommands.actions.deleteCommand(data, commands[1]);
-                expect(configData.value.length).to.equal(2);
-                expect(commitStub.args[0]).to.be.undefined;
+                expect(commitStub.args[1]).to.be.undefined;
             });
         });
 

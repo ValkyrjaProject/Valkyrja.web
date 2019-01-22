@@ -4,9 +4,14 @@
             <panel-list
                 v-model="reactionRoles"
                 :add-button="true"
+                list-item="PanelListItemRemovable"
                 title="Messages"
-                class="column is-one-third"/>
-            <reaction-roles-form class="column is-two-thirds" />
+                class="column is-one-third"
+                @remove="deleteRole"
+                @add="addRole"/>
+            <reaction-roles-form
+                :disabled="!hasSelectedRole()"
+                class="column is-two-thirds" />
         </div>
     </div>
 </template>
@@ -14,6 +19,7 @@
 <script>
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
 import ReactionRolesForm from "./ReactionRolesForm";
+import ReactionRole from "../../../../../models/ReactionRole";
 
 export default {
     name: "ReactionRoles",
@@ -22,16 +28,32 @@ export default {
         ReactionRolesForm
     },
     computed: {
+        state() {
+            return this.$store.state.reactionRoles;
+        },
         getters() {
             return this.$store.getters;
         },
         reactionRoles: {
             get() {
+                console.log("this.getters", this.getters["reactionRoles/roles"]);
                 return this.getters["reactionRoles/roles"];
             },
             set(role) {
-                this.$store.dispatch("reactionRoles/addReactionRole", role);
+                this.$store.dispatch("reactionRoles/setActiveRole", role);
             },
+        }
+    },
+    methods: {
+        addRole() {
+            let role = ReactionRole.newInstance("", []);
+            this.$store.dispatch("reactionRoles/addReactionRole", role);
+        },
+        deleteRole(role) {
+            this.$store.dispatch("reactionRoles/removeReactionRole", role);
+        },
+        hasSelectedRole() {
+            return this.state.selectedRole !== null;
         }
     },
 };
