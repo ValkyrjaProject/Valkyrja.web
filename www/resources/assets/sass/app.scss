@@ -28,6 +28,7 @@ input[type=number], input[type=text], textarea {
 @import "~bulma/bulma";
 @import "~bulma-tooltip/dist/bulma-tooltip";
 @import "~bulma-switch/dist/bulma-switch";
+@import "~buefy/dist/buefy.css";
 
 .navbar, h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-serif;

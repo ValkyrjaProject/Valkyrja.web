@@ -26,10 +26,13 @@
             </div>
             <div
                 ref="component"
-                class="column content">
+                class="column content loading-parent">
                 <keep-alive>
                     <router-view class="component"/>
                 </keep-alive>
+                <!--<b-loading
+                    :active="isLoading"
+                    :is-full-page="false"/>-->
             </div>
         </div>
     </div>
@@ -167,6 +170,7 @@ export default {
         return {
             isLoading: true,
             tabs: tabs,
+            loadingElement: null,
         };
     },
     computed: {
@@ -177,13 +181,28 @@ export default {
             return this.store.guild;
         },
     },
-    created() {
+    watch: {
+        isLoading(newValue) {
+            if (!newValue && this.loadingElement) {
+                this.loadingElement.close();
+            }
+        }
+    },
+    mounted() {
+        this.loadingElement = this.$loading.open({
+            container: this.$refs.component
+        });
         this.$store.dispatch("retrieveConfig", this.guildId).finally(() => this.isLoading = false);
     },
     methods: {
         setIcon(icon) {
             return "icon mdi mdi-" + icon;
         }
-    }
+    },
 };
 </script>
+
+<style lang="sass">
+    .loading-parent
+        position: relative
+</style>

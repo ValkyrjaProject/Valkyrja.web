@@ -17,7 +17,10 @@ import store from "./store/index.js";
 
 import Vuelidate from "vuelidate";
 import VueRouter from "vue-router";
+import Buefy from "buefy";
 
+
+Vue.use(Buefy);
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
 

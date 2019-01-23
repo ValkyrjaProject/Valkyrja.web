@@ -42,15 +42,15 @@ export default {
         PanelList
     },
     computed: {
-        state() {
-            return this.$store.state.reactionRoles;
+        selectedRole() {
+            return this.$store.state.reactionRoles.selectedRole;
         },
         getters() {
             return this.$store.getters;
         },
         emoji: {
             get() {
-                return this.state.selectedRole.emoji;
+                return this.selectedRole.emoji;
             },
             set(emoji) {
                 this.$store.dispatch("reactionRoles/changeField", {
