@@ -84,11 +84,11 @@ describe("PanelList", function () {
         expect(wrapper.find(".panel-tabs.not-found").text()).to.equal("Not found");
     });
 
-    it("should display 'Nothing available' if available list of items is empty", function () {
+    it("should display 'Nothing here' if available list of items is empty", function () {
         wrapper.setProps({value: []});
         expect(wrapper.findAll(PanelListItem).length).to.equal(0);
         expect(wrapper.find(".panel-tabs.not-found").exists()).to.be.true;
-        expect(wrapper.find(".panel-tabs.not-found").text()).to.equal("Nothing available");
+        expect(wrapper.find(".panel-tabs.not-found").text()).to.equal("Nothing here");
     });
 
     it("should display add button as third nav item if addButton prop is true", function () {

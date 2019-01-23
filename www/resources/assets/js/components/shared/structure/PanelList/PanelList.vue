@@ -41,7 +41,7 @@
                     :key="2">
                     <p
                         class="panel-tabs not-found">
-                        Nothing available
+                        Nothing here
                     </p>
                 </div>
                 <div
