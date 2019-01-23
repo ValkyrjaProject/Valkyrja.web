@@ -4,6 +4,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import ReactionRolesEmoji from "components/EditGuild/Sections/RoleAssignment/ReactionRoles/ReactionRolesEmoji";
+import ReactionRole from "../../../../../../../resources/assets/js/models/ReactionRole";
 
 let localVue = Vue.use(Vuex);
 
@@ -26,7 +27,7 @@ describe("ReactionRolesEmoji", function () {
         state = {
             availableRoles: [],
             addedRoles: [],
-            emoji: "",
+            selectedRole: ReactionRole.newInstance("id", []),
         };
         getters = {
             availableRoles: () => state.availableRoles,
@@ -156,7 +157,7 @@ describe("ReactionRolesEmoji", function () {
     });
 
     it("should retrieve emoji from state's emoji field", function () {
-        state.emoji = "value";
-        expect(wrapper.vm.emoji).to.equal(state.emoji);
+        state.selectedRole.emoji = "value";
+        expect(wrapper.vm.emoji).to.equal(state.selectedRole.emoji);
     });
 });
