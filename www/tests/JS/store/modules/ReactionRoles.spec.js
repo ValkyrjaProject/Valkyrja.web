@@ -3,6 +3,8 @@ import {expect} from "chai";
 import reactionRoles from "store/modules/ReactionRoles";
 import ReactionRole from "../../../../resources/assets/js/models/ReactionRole";
 import {GuildRole} from "../../../../resources/assets/js/models/GuildRole";
+import {Guild} from "../../../../resources/assets/js/models/Guild";
+import {Config} from "../../../../resources/assets/js/models/Config";
 
 describe("ReactionRoles Vuex module", function () {
 
@@ -294,32 +296,97 @@ describe("ReactionRoles Vuex module", function () {
     });
 
     describe("getters", function () {
+        let configStub = sinon.stub();
+        let data;
+        beforeEach(function () {
+            configStub.resetHistory();
+            data = {
+                state,
+                rootState: {
+                    config: new Config,
+                    guild: new Guild([
+                        new GuildRole("1", "name"),
+                        new GuildRole("2", "name"),
+                        new GuildRole("3", "name"),
+                        new GuildRole("4", "name")
+                    ], [], {
+                        id: "id",
+                        name: "name",
+                        icon: "icon",
+                    })
+                },
+                rootGetters: {
+                    configInput: configStub
+                }
+            };
+        });
         describe("roles", function () {
-            it("should return empty array if rootState.config is not a Config instance");
+            it("should return empty array if rootState.config is not a Config instance", function () {
+                data.rootState.config = {};
+                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return empty array if rootState.guild is not a Guild instance");
+            it("should return empty array if rootState.guild is not a Guild instance", function () {
+                data.rootState.guild = {};
+                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return empty array if reactionRoles from rootGetters.configInput is null");
+            it("should return empty array if reactionRoles from rootGetters.configInput is null", function () {
+                configStub.returns(null);
+                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return empty array if reactionRoles.value from rootGetters.configInput is null");
+            it("should return empty array if reactionRoles.value from rootGetters.configInput is null", function () {
+                configStub.returns({value: null});
+                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return reactionRoles.value from rootGetters.configInput if it exists");
+            it("should return reactionRoles.value from rootGetters.configInput if it exists", function () {
+                configStub.returns({value: "value"});
+                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.equal("value");
+            });
         });
 
         describe("availableRoles", function () {
-            it("should return empty array if rootState.config is not a Config instance");
+            it("should return empty array if rootState.config is not a Config instance", function () {
+                data.rootState.config = {};
+                expect(reactionRoles.getters.availableRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return empty array if rootState.guild is not a Guild instance");
+            it("should return empty array if rootState.guild is not a Guild instance", function () {
+                data.rootState.guild = {};
+                expect(reactionRoles.getters.availableRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return GuildRoles which id's do not exist in selectedRole's role field");
+            it("should return GuildRoles which id's do not exist in selectedRole's role field", function () {
+                let roles = [...data.rootState.guild.roles];
+                roles.splice(1, 1);
+                data.state.selectedRole.roles = roles;
+                let response = reactionRoles.getters.availableRoles(data.state, data.rootState);
+                expect(response).to.have.members([data.rootState.guild.roles[1]]);
+                expect(response).to.not.have.members(roles);
+            });
         });
 
         describe("addedRoles", function () {
-            it("should return empty array if rootState.config is not a Config instance");
+            it("should return empty array if rootState.config is not a Config instance", function () {
+                data.rootState.config = {};
+                expect(reactionRoles.getters.addedRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return empty array if rootState.guild is not a Guild instance");
+            it("should return empty array if rootState.guild is not a Guild instance", function () {
+                data.rootState.guild = {};
+                expect(reactionRoles.getters.addedRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+            });
 
-            it("should return GuildRoles which id's exist in selectedRole's role field");
+            it("should return GuildRoles which id's exist in selectedRole's role field", function () {
+                let roles = [...data.rootState.guild.roles];
+                roles.splice(1, 1);
+                data.state.selectedRole.roles = roles;
+                let response = reactionRoles.getters.addedRoles(data.state, data.rootState);
+                expect(response).to.have.members(roles);
+                expect(response).to.not.have.members([data.rootState.guild.roles[1]]);
+            });
         });
     });
 });
