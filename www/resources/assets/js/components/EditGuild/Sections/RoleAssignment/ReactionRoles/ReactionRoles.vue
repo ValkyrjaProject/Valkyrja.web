@@ -36,7 +36,6 @@ export default {
         },
         reactionRoles: {
             get() {
-                console.log("this.getters", this.getters["reactionRoles/roles"]);
                 return this.getters["reactionRoles/roles"];
             },
             set(role) {

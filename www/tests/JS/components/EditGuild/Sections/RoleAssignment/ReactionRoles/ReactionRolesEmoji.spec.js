@@ -1,10 +1,9 @@
 import sinon from "sinon";
-import {mount} from "@vue/test-utils";
+import {shallowMount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import ReactionRolesEmoji from "components/EditGuild/Sections/RoleAssignment/ReactionRoles/ReactionRolesEmoji";
-import PanelList from "../../../../../../../resources/assets/js/components/shared/structure/PanelList/PanelList";
 
 let localVue = Vue.use(Vuex);
 
@@ -20,9 +19,9 @@ describe("ReactionRolesEmoji", function () {
         propsData = {};
 
         actions = {
+            changeField: sinon.stub(),
             addRole: sinon.stub(),
             removeRole: sinon.stub(),
-            changeEmoji: sinon.stub(),
         };
         state = {
             availableRoles: [],
@@ -43,7 +42,7 @@ describe("ReactionRolesEmoji", function () {
                 }
             }
         });
-        wrapper = mount(ReactionRolesEmoji, {propsData, store, localVue});
+        wrapper = shallowMount(ReactionRolesEmoji, {propsData, store, localVue});
     });
 
     describe("styling", function () {
@@ -65,7 +64,7 @@ describe("ReactionRolesEmoji", function () {
             });
 
             it("should have two PanelList columns", function () {
-                let panelLists = wrapper.findAll(PanelList);
+                let panelLists = wrapper.findAll("panellist-stub");
                 expect(panelLists).to.have.length(2);
                 expect(panelLists.at(0).classes()).to.contain("column");
                 expect(panelLists.at(1).classes()).to.contain("column");
@@ -84,11 +83,11 @@ describe("ReactionRolesEmoji", function () {
             });
 
             it("should have title 'Available Roles' for first PanelList", function () {
-                expect(wrapper.findAll(PanelList).at(0).props("title")).to.equal("Available Roles");
+                expect(wrapper.findAll("panellist-stub").at(0).props("title")).to.equal("Available Roles");
             });
 
             it("should have title 'Added Roles' for second PanelList", function () {
-                expect(wrapper.findAll(PanelList).at(1).props("title")).to.equal("Added Roles");
+                expect(wrapper.findAll("panellist-stub").at(1).props("title")).to.equal("Added Roles");
             });
         });
 
@@ -133,27 +132,15 @@ describe("ReactionRolesEmoji", function () {
         });
     });
 
-    it("should send availableRoles getter value from ReactionRoles Vuex module into first PanelList", function () {
-        let panelList = wrapper.findAll(PanelList).at(0);
-        state.availableRoles = [{role: "test role"}];
-        expect(panelList.props().value).to.eql(state.availableRoles);
-    });
-
-    it("should send addedRoles getter value from ReactionRoles Vuex module into second PanelList", function () {
-        let panelList = wrapper.findAll(PanelList).at(1);
-        state.addedRoles = [{role: "test role"}];
-        expect(panelList.props().value).to.eql(state.addedRoles);
-    });
-
     it("should dispatch reactionRoles/addRole when first PanelList emits input", function () {
-        let panelList = wrapper.findAll(PanelList).at(0);
+        let panelList = wrapper.findAll("panellist-stub").at(0);
         panelList.vm.$emit("input", "new value");
         expect(actions.addRole.calledOnce).to.be.true;
         expect(actions.addRole.getCall(0).args[1]).to.equal("new value");
     });
 
     it("should dispatch reactionRoles/removeRole when second PanelList emits input", function () {
-        let panelList = wrapper.findAll(PanelList).at(1);
+        let panelList = wrapper.findAll("panellist-stub").at(1);
         panelList.vm.$emit("input", "new value");
         expect(actions.removeRole.calledOnce).to.be.true;
         expect(actions.removeRole.getCall(0).args[1]).to.equal("new value");
@@ -161,8 +148,11 @@ describe("ReactionRolesEmoji", function () {
 
     it("should dispatch reactionRoles/changeEmoji when emoji is called", function () {
         wrapper.vm.emoji = "new value";
-        expect(actions.changeEmoji.calledOnce, "changeEmoji called once").to.be.true;
-        expect(actions.changeEmoji.getCall(0).args[1], "changeEmoji was called with new value").to.equal("new value");
+        expect(actions.changeField.calledOnce, "changeEmoji called once").to.be.true;
+        expect(actions.changeField.getCall(0).args[1], "changeEmoji was called with new value").to.eql({
+            field: "emoji",
+            value: "new value"
+        });
     });
 
     it("should retrieve emoji from state's emoji field", function () {

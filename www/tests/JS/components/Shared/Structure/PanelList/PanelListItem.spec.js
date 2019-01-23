@@ -10,7 +10,7 @@ describe("PanelListItem", function () {
         propsData = {
             item: {
                 toString() {
-                    return "Lorem ipsum dolor sit amet."
+                    return "Lorem ipsum dolor sit amet.";
                 }
             }
         };
@@ -30,18 +30,18 @@ describe("PanelListItem", function () {
 
     it("should have Material Design icon on left side if itemIcon prop is set", function () {
         wrapper.setProps({itemIcon: "test"});
-        expect(wrapper.find("a .panel-icon i").classes()).to.contain("mdi-test")
+        expect(wrapper.find("a .panel-icon i").classes()).to.contain("mdi-test");
     });
 
     it("should shorten 'item' toString value to 25 characters directly under root-element", function () {
-        expect(wrapper.find("a.panel-block").text()).to.equal(propsData.item.toString().substring(0, 25))
+        expect(wrapper.find("a.panel-block").text()).to.equal(propsData.item.toString().substring(0, 25));
     });
 
     it("should trim whitespace of 'item' toString", function () {
         wrapper.setProps({
             item: {
                 toString() {
-                    return " test "
+                    return " test ";
                 }
             }
         });

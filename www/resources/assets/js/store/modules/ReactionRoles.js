@@ -38,7 +38,13 @@ const mutations = {
 const actions = {
     addRole({commit}, role) {
         if (!(role instanceof GuildRole)) {
-            let error = `Object is not of type GuildRole, it is of type ${role.constructor.name}`;
+            let error;
+            if (role instanceof Object){
+                error = `Object is not of type GuildRole, it is of type ${role.constructor.name}`;
+            }
+            else {
+                error = `Object is not of type GuildRole, it is of type ${role}`;
+            }
             log.error(error);
             throw new TypeError(error);
         }
@@ -46,7 +52,13 @@ const actions = {
     },
     removeRole({commit}, role) {
         if (!(role instanceof GuildRole)) {
-            let error = `Object is not of type GuildRole, it is of type ${role.constructor.name}`;
+            let error;
+            if (role instanceof Object){
+                error = `Object is not of type GuildRole, it is of type ${role.constructor.name}`;
+            }
+            else {
+                error = `Object is not of type GuildRole, it is of type ${role}`;
+            }
             log.error(error);
             throw new TypeError(error);
         }
@@ -54,7 +66,13 @@ const actions = {
     },
     addReactionRole({commit}, role) {
         if (!(role instanceof ReactionRole)) {
-            let error = `Object is not of type ReactionRole, it is of type ${role.constructor.name}`;
+            let error;
+            if (role instanceof Object){
+                error = `Object is not of type ReactionRole, it is of type ${role.constructor.name}`;
+            }
+            else {
+                error = `Object is not of type ReactionRole, it is of type ${role}`;
+            }
             log.error(error);
             throw new TypeError(error);
         }
@@ -64,9 +82,15 @@ const actions = {
         }, {root: true});
         commit("SET_SELECTED_ROLE", role);
     },
-    removeReactionRole({commit, rootState}, role) {
+    removeReactionRole({state, commit, rootState}, role) {
         if (!(role instanceof ReactionRole)) {
-            let error = `Object is not of type ReactionRole, it is of type ${role.constructor.name}`;
+            let error;
+            if (role instanceof Object){
+                error = `Object is not of type ReactionRole, it is of type ${role.constructor.name}`;
+            }
+            else {
+                error = `Object is not of type ReactionRole, it is of type ${role}`;
+            }
             log.error(error);
             throw new TypeError(error);
         }
@@ -77,19 +101,25 @@ const actions = {
                 array: reactionRoles.value,
                 index: index
             });
-        }
-        if (role === state.selectedRole) {
-            if (reactionRoles.length >= 0) {
-                commit("SET_SELECTED_ROLE", reactionRoles[0]);
-            }
-            else {
-                commit("SET_SELECTED_ROLE", null);
+            if (role === state.selectedRole) {
+                if (reactionRoles.value.length > 0) {
+                    commit("SET_SELECTED_ROLE", reactionRoles.value[0]);
+                }
+                else {
+                    commit("SET_SELECTED_ROLE", null);
+                }
             }
         }
     },
     setActiveRole({commit}, role) {
         if (!(role instanceof ReactionRole)) {
-            let error = `Object is not of type ReactionRole, it is of type ${role.constructor.name}`;
+            let error;
+            if (role instanceof Object){
+                error = `Object is not of type ReactionRole, it is of type ${role.constructor.name}`;
+            }
+            else {
+                error = `Object is not of type ReactionRole, it is of type ${role}`;
+            }
             log.error(error);
             throw new TypeError(error);
         }

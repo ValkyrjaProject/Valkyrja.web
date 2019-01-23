@@ -11,19 +11,25 @@ describe("ReactionRolesForm", function () {
     let actions;
     let store;
     let state;
-    let getters;
     let propsData;
 
     beforeEach(function () {
         propsData = {};
 
-        actions = {};
-        state = {};
-        getters = {};
+        actions = {
+            changeField: sinon.stub()
+        };
+        state = {
+            selectedRole: null,
+        };
         store = new Vuex.Store({
-            state,
-            actions,
-            getters
+            modules: {
+                reactionRoles: {
+                    namespaced: true,
+                    state,
+                    actions
+                }
+            }
         });
         wrapper = shallowMount(ReactionRolesForm, {propsData, store, localVue});
     });
@@ -63,9 +69,30 @@ describe("ReactionRolesForm", function () {
         it("should have a paddingless panel-block with reaction-roles-emoji", function () {
             expect(wrapper.find(".panel-block.is-paddingless > reactionrolesemoji-stub").exists()).to.be.true;
         });
+
+        it("should hide reaction-roles-emoji if disabled prop", function () {
+            wrapper.setProps({disabled: true});
+            expect(wrapper.find("reactionrolesemoji-stub").exists()).to.be.false;
+        });
     });
 
     it("should have name of 'ReactionRolesForm'", function () {
         expect(wrapper.name()).to.equal("ReactionRolesForm");
+    });
+
+    describe("messageId", function () {
+        it("should retrieve value from state.selectedRole", function () {
+            state.selectedRole = "Testing";
+            expect(wrapper.vm.messageId).to.equal(state.selectedRole);
+        });
+
+        it("should dispatch changeField with when changed", function () {
+            wrapper.vm.messageId = "new value";
+            expect(actions.changeField.calledOnce).to.be.true;
+            expect(actions.changeField.getCall(0).args[1]).to.eql({
+                field: "messageId",
+                value: "new value"
+            });
+        });
     });
 });

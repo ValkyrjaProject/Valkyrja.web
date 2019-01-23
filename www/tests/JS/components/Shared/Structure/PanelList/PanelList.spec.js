@@ -74,7 +74,7 @@ describe("PanelList", function () {
     });
 
     it("should display PanelListItem component for each entry in searchedList by default", function () {
-        expect(wrapper.findAll(PanelListItem).length).to.equal(propsData.value.length);
+        expect(wrapper.findAll("panellistitem-stub").length).to.equal(propsData.value.length);
     });
 
     it("should display 'Not found' in '.panel-tabs' class if search query returns 0 entries", function () {
@@ -86,7 +86,7 @@ describe("PanelList", function () {
 
     it("should display 'Nothing here' if available list of items is empty", function () {
         wrapper.setProps({value: []});
-        expect(wrapper.findAll(PanelListItem).length).to.equal(0);
+        expect(wrapper.findAll("panellistitem-stub").length).to.equal(0);
         expect(wrapper.find(".panel-tabs.not-found").exists()).to.be.true;
         expect(wrapper.find(".panel-tabs.not-found").text()).to.equal("Nothing here");
     });
@@ -117,20 +117,20 @@ describe("PanelList", function () {
 
     it("should emit 'remove' if list item component emits 'remove'", function () {
         expect(wrapper.emitted().remove).to.be.undefined;
-        wrapper.find(PanelListItem).vm.$emit("remove");
+        wrapper.find("panellistitem-stub").vm.$emit("remove");
         expect(wrapper.emitted().remove.length).to.equal(1);
     });
 
     it("should emit 'input' if list item component emits 'click'", function () {
         expect(wrapper.emitted().input).to.be.undefined;
-        wrapper.find(PanelListItem).vm.$emit("click");
+        wrapper.find("panellistitem-stub").vm.$emit("click");
         expect(wrapper.emitted().input.length).to.equal(1);
     });
 
     it("should emit 'input' if list item component emits 'enter' and search query has value", function () {
         expect(wrapper.emitted().input).to.be.undefined;
         wrapper.setData({searchQuery: propsData.value[0].toString()});
-        wrapper.find(PanelListSearch).vm.$emit("enter");
+        wrapper.find("panellistsearch-stub").vm.$emit("enter");
         expect(wrapper.emitted().input).to.not.be.undefined;
         expect(wrapper.emitted().input.length).to.equal(1);
     });
@@ -145,7 +145,7 @@ describe("PanelList", function () {
     it("should set search query to empty if item component emits 'enter'", function () {
         wrapper.setData({searchQuery: propsData.value[0].toString()});
         expect(wrapper.vm.searchQuery).to.equal(propsData.value[0].toString());
-        wrapper.find(PanelListSearch).vm.$emit("enter");
+        wrapper.find("panellistsearch-stub").vm.$emit("enter");
         expect(wrapper.vm.searchQuery).to.be.empty;
     });
 

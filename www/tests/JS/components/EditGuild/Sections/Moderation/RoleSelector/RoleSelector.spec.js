@@ -50,34 +50,29 @@ describe("RoleSelector", function () {
                 }
             }
         });
-        wrapper = shallowMount(RoleSelector, {propsData, store, localVue,
-            stubs: {
-                RoleSelectorType: "<div class=\"RoleSelectorType\"></div>",
-                PanelList: "<div class=\"PanelList\"></div>",
-            }
-        });
+        wrapper = shallowMount(RoleSelector, {propsData, store, localVue});
     });
 
     it("should have 1 RoleSelectorType", function () {
-        expect(wrapper.findAll(".RoleSelectorType").length).to.equal(1);
+        expect(wrapper.findAll("roleselectortype-stub").length).to.equal(1);
     });
 
     it("should have 2 PanelLists", function () {
-        expect(wrapper.findAll(".PanelList").length).to.equal(2);
+        expect(wrapper.findAll("panellist-stub").length).to.equal(2);
     });
 
     it("sends available roles to left panel-list", function () {
-        expect(wrapper.findAll(".PanelList").at(0).props().value).to.equal(getters.availableRoles());
+        expect(wrapper.findAll("panellist-stub").at(0).props().value).to.equal(getters.availableRoles());
         state.availableRoles.push(PublicRole.createNewRole(1));
         state.availableRoles.push(PublicRole.createNewRole(2));
-        expect(wrapper.findAll(".PanelList").at(0).props().value).to.equal(getters.availableRoles());
+        expect(wrapper.findAll("panellist-stub").at(0).props().value).to.equal(getters.availableRoles());
     });
 
     it("sends added roles to right panel-list", function () {
-        expect(wrapper.findAll(".PanelList").at(1).props().value).to.equal(getters.addedRoles()());
+        expect(wrapper.findAll("panellist-stub").at(1).props().value).to.equal(getters.addedRoles()());
         state.addedRoles.push(PublicRole.createNewRole(1));
         state.addedRoles.push(PublicRole.createNewRole(2));
-        expect(wrapper.findAll(".PanelList").at(1).props().value).to.equal(getters.addedRoles()());
+        expect(wrapper.findAll("panellist-stub").at(1).props().value).to.equal(getters.addedRoles()());
     });
 
     it("should not dispatch add role when availableRoles is not called", function () {
