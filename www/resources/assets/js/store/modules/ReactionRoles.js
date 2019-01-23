@@ -136,7 +136,7 @@ const actions = {
 };
 
 const getters = {
-    roles: (state, rootState, rootGetters) => {
+    roles: (state, getters, rootState, rootGetters) => {
         if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
             return [];
         }
@@ -144,7 +144,7 @@ const getters = {
         let reactionRoles = rootGetters.configInput("reaction_roles");
         return reactionRoles && reactionRoles.value ? reactionRoles.value : [];
     },
-    availableRoles: (state, rootState) => {
+    availableRoles: (state, getters, rootState) => {
         if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
             return [];
         }
@@ -155,7 +155,7 @@ const getters = {
             }).length === 0;
         });
     },
-    addedRoles: (state, rootState) => {
+    addedRoles: (state, getters, rootState) => {
         if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
             return [];
         }

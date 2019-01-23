@@ -323,46 +323,46 @@ describe("ReactionRoles Vuex module", function () {
         describe("roles", function () {
             it("should return empty array if rootState.config is not a Config instance", function () {
                 data.rootState.config = {};
-                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.roles(data.state, {}, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
             });
 
             it("should return empty array if rootState.guild is not a Guild instance", function () {
                 data.rootState.guild = {};
-                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.roles(data.state, {}, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
             });
 
             it("should return empty array if reactionRoles from rootGetters.configInput is null", function () {
                 configStub.returns(null);
-                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.roles(data.state, {}, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
             });
 
             it("should return empty array if reactionRoles.value from rootGetters.configInput is null", function () {
                 configStub.returns({value: null});
-                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.roles(data.state, {}, data.rootState, data.rootGetters)).to.be.an("array").that.is.empty;
             });
 
             it("should return reactionRoles.value from rootGetters.configInput if it exists", function () {
                 configStub.returns({value: "value"});
-                expect(reactionRoles.getters.roles(data.state, data.rootState, data.rootGetters)).to.equal("value");
+                expect(reactionRoles.getters.roles(data.state, {}, data.rootState, data.rootGetters)).to.equal("value");
             });
         });
 
         describe("availableRoles", function () {
             it("should return empty array if rootState.config is not a Config instance", function () {
                 data.rootState.config = {};
-                expect(reactionRoles.getters.availableRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.availableRoles(data.state, {}, data.rootState)).to.be.an("array").that.is.empty;
             });
 
             it("should return empty array if rootState.guild is not a Guild instance", function () {
                 data.rootState.guild = {};
-                expect(reactionRoles.getters.availableRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.availableRoles(data.state, {}, data.rootState)).to.be.an("array").that.is.empty;
             });
 
             it("should return GuildRoles which id's do not exist in selectedRole's role field", function () {
                 let roles = [...data.rootState.guild.roles];
                 roles.splice(1, 1);
                 data.state.selectedRole.roles = roles;
-                let response = reactionRoles.getters.availableRoles(data.state, data.rootState);
+                let response = reactionRoles.getters.availableRoles(data.state, {}, data.rootState);
                 expect(response).to.have.members([data.rootState.guild.roles[1]]);
                 expect(response).to.not.have.members(roles);
             });
@@ -371,19 +371,19 @@ describe("ReactionRoles Vuex module", function () {
         describe("addedRoles", function () {
             it("should return empty array if rootState.config is not a Config instance", function () {
                 data.rootState.config = {};
-                expect(reactionRoles.getters.addedRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.addedRoles(data.state, {}, data.rootState)).to.be.an("array").that.is.empty;
             });
 
             it("should return empty array if rootState.guild is not a Guild instance", function () {
                 data.rootState.guild = {};
-                expect(reactionRoles.getters.addedRoles(data.state, data.rootState)).to.be.an("array").that.is.empty;
+                expect(reactionRoles.getters.addedRoles(data.state, {}, data.rootState)).to.be.an("array").that.is.empty;
             });
 
             it("should return GuildRoles which id's exist in selectedRole's role field", function () {
                 let roles = [...data.rootState.guild.roles];
                 roles.splice(1, 1);
                 data.state.selectedRole.roles = roles;
-                let response = reactionRoles.getters.addedRoles(data.state, data.rootState);
+                let response = reactionRoles.getters.addedRoles(data.state, {}, data.rootState);
                 expect(response).to.have.members(roles);
                 expect(response).to.not.have.members([data.rootState.guild.roles[1]]);
             });
