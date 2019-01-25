@@ -26,6 +26,7 @@ describe("ReactionRoles", function () {
         };
         state = {
             roles: [],
+            selectedRole: {}
         };
         getters = {
             roles: () => state.roles,
@@ -40,7 +41,9 @@ describe("ReactionRoles", function () {
                 }
             }
         });
-        wrapper = shallowMount(ReactionRoles, {propsData, store, localVue});
+        wrapper = shallowMount(ReactionRoles, {propsData, store, localVue, stubs: {
+            "PanelList": "<div class='panellist-stub'></div>"
+        }});
     });
 
     describe("styling", function () {
@@ -53,15 +56,15 @@ describe("ReactionRoles", function () {
         });
 
         it("should have PanelList as first column", function () {
-            expect(wrapper.findAll(".columns > .column").at(0).find("panellist-stub").exists()).to.be.true;
+            expect(wrapper.findAll(".columns > .column").at(0).find(".panellist-stub").exists()).to.be.true;
         });
 
         it("should send 'Messages' into PanelList's title field", function () {
-            expect(wrapper.find("panellist-stub").attributes("title")).to.equal("Messages");
+            expect(wrapper.find(".panellist-stub").props("title")).to.equal("Messages");
         });
 
         it("should send 'PanelListItemRemovable' to PanelList's list-item field", function () {
-            expect(wrapper.find("panellist-stub").attributes("listitem")).to.equal("PanelListItemRemovable");
+            expect(wrapper.find(".panellist-stub").props("listItem")).to.equal("PanelListItemRemovable");
         });
 
         it("should have ReactionRolesForm as second column", function () {
@@ -74,6 +77,10 @@ describe("ReactionRoles", function () {
 
         it("should have two third's on second  column", function () {
             expect(wrapper.findAll(".columns > .column").at(1).classes()).to.contain("is-two-thirds");
+        });
+
+        it("should send selectedRole to PanelList", function () {
+            expect(wrapper.find(".panellist-stub").props("selectedItem")).to.equal(state.selectedRole);
         });
     });
 
@@ -88,6 +95,12 @@ describe("ReactionRoles", function () {
                 wrapper.vm.reactionRoles = "new value";
                 expect(actions.setActiveRole.calledOnce).to.be.true;
                 expect(actions.setActiveRole.getCall(0).args[1]).to.equal("new value");
+            });
+        });
+
+        describe("selectedRole", function () {
+            it("should return state.selectedRole", function () {
+                expect(wrapper.vm.selectedRole).to.equal(state.selectedRole);
             });
         });
     });

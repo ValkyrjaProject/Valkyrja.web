@@ -4,6 +4,7 @@
             <panel-list
                 v-model="reactionRoles"
                 :add-button="true"
+                :selected-item="selectedRole"
                 list-item="PanelListItemRemovable"
                 title="Messages"
                 class="column is-one-third"
@@ -34,6 +35,9 @@ export default {
         getters() {
             return this.$store.getters;
         },
+        selectedRole() {
+            return this.state.selectedRole;
+        },
         reactionRoles: {
             get() {
                 return this.getters["reactionRoles/roles"];
@@ -52,7 +56,7 @@ export default {
             this.$store.dispatch("reactionRoles/removeReactionRole", role);
         },
         hasSelectedRole() {
-            return this.state.selectedRole !== null;
+            return this.selectedRole !== null;
         }
     },
 };

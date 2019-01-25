@@ -5,10 +5,10 @@ import Vuex from "vuex";
 import {expect, assert} from "chai";
 import EditGuild from "components/EditGuild/EditGuild";
 import SubmitBar from "components/EditGuild/SubmitBar";
-import buefy from "buefy";
+import Buefy from "buefy";
 
 let localVue = Vue.use(Vuex);
-localVue.use(buefy);
+localVue.use(Buefy);
 
 describe("EditGuild", function () {
     let wrapper;
