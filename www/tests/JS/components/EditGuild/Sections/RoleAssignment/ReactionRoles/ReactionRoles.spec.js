@@ -53,7 +53,6 @@ describe("ReactionRoles", function () {
         });
 
         it("should have PanelList as first column", function () {
-            console.log(wrapper.findAll(".columns > .column").at(0).html());
             expect(wrapper.findAll(".columns > .column").at(0).find("panellist-stub").exists()).to.be.true;
         });
 

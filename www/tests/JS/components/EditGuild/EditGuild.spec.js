@@ -5,10 +5,10 @@ import Vuex from "vuex";
 import {expect, assert} from "chai";
 import EditGuild from "components/EditGuild/EditGuild";
 import SubmitBar from "components/EditGuild/SubmitBar";
-import BasicConfig from "components/EditGuild/Sections/BasicConfig/BasicConfig";
-import AntispamConfig from "components/EditGuild/Sections/Antispam/AntispamConfig";
+import buefy from "buefy";
 
 let localVue = Vue.use(Vuex);
+localVue.use(buefy);
 
 describe("EditGuild", function () {
     let wrapper;
@@ -23,7 +23,7 @@ describe("EditGuild", function () {
         };
 
         let retrieveConfig = sinon.stub();
-        retrieveConfig.resolves();
+        retrieveConfig.resolves("test");
         actions = {
             retrieveConfig: retrieveConfig
         };
@@ -36,7 +36,7 @@ describe("EditGuild", function () {
             state,
             actions,
         });
-        wrapper = shallowMount(EditGuild, {store, localVue,
+        wrapper = shallowMount(EditGuild, {store, propsData, localVue,
             stubs: {
                 RouterLink: RouterLinkStub,
                 RouterView: "<div class=\"RouterView\"></div>",
@@ -87,11 +87,18 @@ describe("EditGuild", function () {
         }
     });
 
-    it("should dispatch retrieveConfig", function () {
+    it("should dispatch retrieveConfig with guildId", function () {
         expect(actions.retrieveConfig.calledOnce).to.equal(true);
+        expect(actions.retrieveConfig.getCall(0).args[1]).to.equal(propsData.guildId);
     });
 
-    it("should show loading indicator when created");
+    it("should show loading indicator when created", function () {
+        expect(wrapper.vm.loadingElement.isActive).to.be.true;
+    });
 
-    it("should remove loading indicator when retrieveConfig Promise returns");
+    it("should remove loading indicator when retrieveConfig Promise returns", async () => {
+        expect(wrapper.vm.loadingElement.isActive).to.be.true;
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.loadingElement.isActive).to.be.false;
+    });
 });

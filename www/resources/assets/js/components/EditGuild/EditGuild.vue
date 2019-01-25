@@ -30,9 +30,6 @@
                 <keep-alive>
                     <router-view class="component"/>
                 </keep-alive>
-                <!--<b-loading
-                    :active="isLoading"
-                    :is-full-page="false"/>-->
             </div>
         </div>
     </div>
@@ -168,7 +165,6 @@ export default {
     },
     data: function () {
         return {
-            isLoading: true,
             tabs: tabs,
             loadingElement: null,
         };
@@ -181,18 +177,11 @@ export default {
             return this.store.guild;
         },
     },
-    watch: {
-        isLoading(newValue) {
-            if (!newValue && this.loadingElement) {
-                this.loadingElement.close();
-            }
-        }
-    },
     mounted() {
         this.loadingElement = this.$loading.open({
             container: this.$refs.component
         });
-        this.$store.dispatch("retrieveConfig", this.guildId).finally(() => this.isLoading = false);
+        this.$store.dispatch("retrieveConfig", this.guildId).finally(() => this.loadingElement.close());
     },
     methods: {
         setIcon(icon) {
