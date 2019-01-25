@@ -4,6 +4,7 @@
             <panel-list
                 :value="profiles"
                 :add-button="true"
+                :selected-item="selectedProfile"
                 list-item="PanelListItemRemovable"
                 class="column is-two-fifths options"
                 title="Profiles"

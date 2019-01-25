@@ -138,4 +138,9 @@ describe("ProfileEditor", function () {
         expect(actions.setSelectedProfile.calledOnce).to.be.true;
         expect(actions.setSelectedProfile.args[0][1]).to.be.instanceof(Profile);
     });
+
+    it("should send selected profile to PanelList", function () {
+        state.selectedProfile = {};
+        expect(wrapper.find(PanelList).props().selectedItem).to.equal(state.selectedProfile);
+    });
 });
