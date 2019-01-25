@@ -36,8 +36,8 @@ export default {
         color: {
             get() {
                 let hex = this.$store.getters.configInput(this.storeName);
-                if (hex) {
-                    hex = hex.toString(16).padStart(6, "0");
+                if (hex && hex.value) {
+                    hex = hex.value.toString(16).padStart(6, "0");
                 }
                 return {
                     hex: "#" + hex

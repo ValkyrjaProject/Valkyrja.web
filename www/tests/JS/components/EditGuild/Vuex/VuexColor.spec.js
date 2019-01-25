@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import {expect} from "chai";
 import VuexColor from "components/EditGuild/Vuex/VuexColor";
 import {Compact} from "vue-color";
+import {ConfigData} from "../../../../../resources/assets/js/models/ConfigData";
 
 let localVue = Vue.use(Vuex);
 
@@ -15,7 +16,7 @@ describe("VuexColor", function () {
     let state;
     let getters;
     let propsData;
-    let inputValue = 255;
+    let inputValue = 16776960; // #ffff00 - arbitrary value
     let configInput;
 
     beforeEach(function () {
@@ -27,7 +28,7 @@ describe("VuexColor", function () {
         };
         state = {};
         configInput = sinon.stub();
-        configInput.returns(inputValue);
+        configInput.returns(ConfigData.newInstance("id", inputValue));
         getters = {
             configInput: () => configInput,
         };
