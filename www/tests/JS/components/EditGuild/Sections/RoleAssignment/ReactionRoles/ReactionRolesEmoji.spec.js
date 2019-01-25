@@ -43,7 +43,7 @@ describe("ReactionRolesEmoji", function () {
                 }
             }
         });
-        wrapper = shallowMount(ReactionRolesEmoji, {propsData, store, localVue});
+        wrapper = shallowMount(ReactionRolesEmoji, {propsData, store, localVue, stubs: ["PanelList"]});
     });
 
     describe("styling", function () {
