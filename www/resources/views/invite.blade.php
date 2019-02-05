@@ -49,7 +49,7 @@
                   <li><b>Karma</b> - People receive cookies (you can change that) when they get thanked.</li>
                   <li><b>Experience</b> and levels. Send messages to gain experience, send images to gain more experience. Level up to unlock fancy roles and karma cookies!</li>
                 </ul>
-              Handpicked partners get premium features without subscription. Only unique communities with worthy cause qualify, such as open source projects, Linux or other geeky places. <u>No gaming communities!</u> <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
+              Handpicked <b>partners</b> get premium features without subscription. Only unique communities with worthy cause qualify, such as <b>open source</b> projects, Linux or other geeky places. <u>No gaming communities!</u> <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
             </p>
             <br />
             <p class="row">
