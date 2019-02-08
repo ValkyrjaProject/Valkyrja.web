@@ -134,6 +134,19 @@ export class Config {
         }
         this.config_data[id] = configData;
     }
+
+    getChanges() {
+        let changes = {};
+        /** @member {ConfigData} config */
+        for(let key of Object.keys(this.config_data)) {
+            let obj = this.config_data[key].getChanged();
+            if (obj && obj.hasOwnProperty(key)) {
+                console.log(key, obj[key]);
+                changes[key] = obj[key];
+            }
+        }
+        return changes;
+    }
 }
 
 

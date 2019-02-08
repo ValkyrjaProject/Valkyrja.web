@@ -1,6 +1,8 @@
 <template>
     <div class="edit-guild-container column has-background-white has-radius-small">
-        <submit-bar :guild="guild"/>
+        <submit-bar
+            :guild="guild"
+            @submit="submitForm"/>
         <div class="columns">
             <div
                 sticky-container
@@ -47,6 +49,7 @@ import VueRouter from "vue-router";
 import Sticky from "vue-sticky-directive";
 import CustomCommandsConfig from "./Sections/CustomCommands/CustomCommandsConfig";
 import RoleAssignmentConfig from "./Sections/RoleAssignment/RoleAssignmentConfig";
+import {Config} from "../../models/Config";
 
 const tabs = [
     {
@@ -186,6 +189,14 @@ export default {
     methods: {
         setIcon(icon) {
             return "icon mdi mdi-" + icon;
+        },
+        submitForm() {
+            let config = this.store.config;
+            if (!this.loadingElement._isDestroyed || !(config instanceof Config)) {
+                return;
+            }
+            console.log(config.getChanges());
+            console.log(JSON.stringify(config.getChanges()));
         }
     },
 };

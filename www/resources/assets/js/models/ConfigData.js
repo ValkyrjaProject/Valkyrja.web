@@ -31,11 +31,50 @@ export class ConfigData {
         return configData;
     }
 
-    /**
-     * @returns {boolean} if value has changed since createInstance was created.
-     */
-    hasChanged() {
-        return this.value === this.original_value;
+    getChanged() {
+        let returnArr = {};
+        if (this.value instanceof ConfigData) {
+            let changed = this.value.getChanged();
+            if (changed) {
+                returnArr[this.id] = changed;
+            }
+        }
+        else if (this.value instanceof Array) {
+            let objArr = {};
+            for (let i = 0; i < this.value.length; i++) {
+                if (this.value[i] instanceof ConfigData) {
+                    let changed = this.value[i].getChanged();
+                    if (changed && changed[this.value[i].id]) {
+                        objArr[this.value[i].id] = changed[this.value[i].id];
+                    }
+                }
+            }
+            if (objArr) {
+                returnArr[this.id] = objArr;
+            }
+        }
+        else if (this.value instanceof Object) {
+            for (let field of Object.keys(this.value)) {
+                if (this.value[field] instanceof ConfigData) {
+                    let changed = this.value[field].getChanged();
+                    if (changed && changed[this.id]) {
+                        returnArr[this.id] = changed[this.id];
+                        break;
+                    }
+                }
+                else if (this.original_value instanceof EmptyData && this.value[field] || this.value[field] !== this.original_value[field]) {
+                    returnArr[this.id] = {...this.value};
+                    break;
+                }
+            }
+        }
+        else if (this.original_value instanceof EmptyData && this.value) {
+            returnArr[this.id] = this.value;
+        }
+        else if (this.value !== this.original_value && this.value) {
+            returnArr[this.id] = this.value;
+        }
+        return returnArr ? returnArr : null;
     }
 
     /**

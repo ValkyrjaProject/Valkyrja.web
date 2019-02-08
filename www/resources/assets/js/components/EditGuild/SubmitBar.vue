@@ -9,13 +9,15 @@
                 </figure>
             </div>
             <div class="level-item">
-                <h1 
-                    id="guild-heading" 
+                <h1
+                    id="guild-heading"
                     class="title is-spaced">Editing {{ name }}</h1>
             </div>
         </div>
         <div class="level-right">
-            <button class="level-item button is-link">Submit</button>
+            <button
+                class="level-item button is-link"
+                @click="$emit('submit')">Submit</button>
         </div>
     </nav>
 </template>

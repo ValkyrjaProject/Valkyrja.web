@@ -145,7 +145,7 @@ const getters = {
         return reactionRoles && reactionRoles.value ? reactionRoles.value : [];
     },
     availableRoles: (state, getters, rootState) => {
-        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
+        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedRole === null) {
             return [];
         }
 
@@ -156,7 +156,7 @@ const getters = {
         });
     },
     addedRoles: (state, getters, rootState) => {
-        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild)) {
+        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedRole === null) {
             return [];
         }
 

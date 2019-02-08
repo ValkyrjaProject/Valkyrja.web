@@ -7,19 +7,6 @@ export class PublicRole extends ConfigData {
 
     /**
      * @param id
-     * @param value
-     * @returns {PublicRole}
-     */
-    static createInstance(id, value) {
-        let configData = new PublicRole;
-        configData.id = id;
-        configData.value = value;
-        configData.original_value = {...value};
-        return configData;
-    }
-
-    /**
-     * @param id
      * @param {GuildRole} guild_role
      * @returns {PublicRole}
      */
@@ -106,7 +93,7 @@ export class PublicRoleFactory {
                 /** @type {PublicRole} */
                 let public_role = PublicRole.instanceFromApi(values[i]["roleid"], values[i]);
                 // TODO: set role to be deleted if corresponding GuildRole doesn't exist
-                log.info("PublicRole is not marked for deletion if GuildRole doesn't exist");
+                log.warn("PublicRole is not marked for deletion if GuildRole doesn't exist");
                 let guildRole = Guild.instance.roles.find(role => role.id === public_role.id);
                 if (guildRole) {
                     public_role.guild_role = guildRole;

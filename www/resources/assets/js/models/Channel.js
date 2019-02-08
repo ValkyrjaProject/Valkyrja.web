@@ -7,19 +7,6 @@ export class Channel extends ConfigData {
 
     /**
      * @param id
-     * @param value
-     * @returns {Channel}
-     */
-    static createInstance(id, value) {
-        let configData = new Channel;
-        configData.id = id;
-        configData.value = value;
-        configData.original_value = {...value};
-        return configData;
-    }
-
-    /**
-     * @param id
      * @param {GuildChannel} guild_channel
      * @returns {Channel}
      */
@@ -34,7 +21,6 @@ export class Channel extends ConfigData {
         if (guild_channel) {
             newChannel.guild_channel = guild_channel;
         }
-        newChannel.original_value = {...newChannel};
         return newChannel;
     }
 
@@ -103,7 +89,7 @@ export class ChannelFactory {
                 /** @type {Channel} */
                 let channel = Channel.instanceFromApi(values[i]["channelid"], values[i]);
                 // TODO: set channel to be deleted if corresponding GuildChannel doesn't exist
-                log.info("Channel is not being marked for deletion if GuildChannel doesn't exist");
+                log.warn("Channel is not being marked for deletion if GuildChannel doesn't exist");
                 let guildChannel = Guild.instance.channels.find(guildChannel => guildChannel.id === channel.id);
                 if (guildChannel) {
                     channel.guild_channel = guildChannel;
