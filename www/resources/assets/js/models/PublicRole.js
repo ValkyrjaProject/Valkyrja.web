@@ -11,7 +11,7 @@ export class PublicRole extends ConfigData {
      * @returns {PublicRole}
      */
     static createNewRole(id, guild_role = null) {
-        let newRole = new PublicRole();
+        let newRole = new this();
         newRole.id = id;
         newRole.value = {
             roleid: id,
@@ -24,7 +24,7 @@ export class PublicRole extends ConfigData {
         if (guild_role) {
             newRole.guild_role = guild_role;
         }
-        newRole.original_value = {...newRole};
+        newRole.original_value = _.cloneDeep(newRole.value);
         return newRole;
     }
 

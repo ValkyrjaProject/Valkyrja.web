@@ -21,6 +21,7 @@ export class Channel extends ConfigData {
         if (guild_channel) {
             newChannel.guild_channel = guild_channel;
         }
+        newChannel.original_value = _.cloneDeep(newChannel.value);
         return newChannel;
     }
 
@@ -64,6 +65,7 @@ export class Channel extends ConfigData {
             throw new TypeError("Channel is not of type GuildChannel");
         }
         this._guild_channel = channel;
+        return this;
     }
 
     toString() {

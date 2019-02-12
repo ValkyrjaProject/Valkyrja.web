@@ -49,7 +49,7 @@ export class ConfigData {
                     }
                 }
             }
-            if (objArr) {
+            if (!_.isEmpty(objArr)) {
                 returnArr[this.id] = objArr;
             }
         }
@@ -74,7 +74,7 @@ export class ConfigData {
         else if (this.value !== this.original_value && this.value) {
             returnArr[this.id] = this.value;
         }
-        return returnArr ? returnArr : null;
+        return returnArr;
     }
 
     /**

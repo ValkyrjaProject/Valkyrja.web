@@ -33,32 +33,33 @@ export class Config {
     static getConfigData(values) {
         let config_data = {};
         for (let i in values) {
-            /** @member {ConfigData}*/
-            let arrayConfig;
+            let configInstance;
             if (i === "roles") {
-                arrayConfig = ConfigData.instanceFromApi(i, PublicRoleFactory.getConfigData(values[i]));
+                configInstance = PublicRoleFactory.getConfigData(values[i]);
             }
             else if (i === "channels") {
-                arrayConfig = ConfigData.instanceFromApi(i, ChannelFactory.getConfigData(values[i]));
+                configInstance = ChannelFactory.getConfigData(values[i]);
             }
             else if (i === "role_groups") {
-                arrayConfig = ConfigData.instanceFromApi(i, PublicGroupFactory.getConfigData(values[i]));
+                configInstance = PublicGroupFactory.getConfigData(values[i]);
             }
             else if (i === "profile_options") {
-                arrayConfig = ConfigData.instanceFromApi(i, ProfileFactory.getConfigData(values[i]));
+                configInstance = ProfileFactory.getConfigData(values[i]);
             }
             else if (i === "custom_commands") {
-                arrayConfig = ConfigData.instanceFromApi(i, CustomCommandFactory.getConfigData(values[i]));
+                configInstance = CustomCommandFactory.getConfigData(values[i]);
             }
             else if (i === "reaction_roles") {
-                arrayConfig = ConfigData.instanceFromApi(i, ReactionRoleFactory.getConfigData(values[i]));
+                configInstance = ReactionRoleFactory.getConfigData(values[i]);
             }
             else if (values[i] instanceof Array) {
-                arrayConfig = ConfigData.instanceFromApi(i, this.getConfigData(values[i]));
+                configInstance = this.getConfigData(values[i]);
             }
             else {
-                arrayConfig = ConfigData.instanceFromApi(i, values[i]);
+                configInstance = values[i];
             }
+            /** @member {ConfigData}*/
+            let arrayConfig = ConfigData.instanceFromApi(i, configInstance);
             config_data[arrayConfig.id] = arrayConfig;
         }
         return config_data;
