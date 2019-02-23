@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="http://valkyrja.app/img/valkyrja-geared-517p.png">
     <meta property="og:url" content="{{ Request::path() }}">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     {{--<link rel="stylesheet" href="/css/app.css">--}}
