@@ -789,7 +789,7 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td>Name of the new channel.</td>
+                        <td><code>limit name</code> (or just <code>name</code> for unlimited) - Limit how many people can enter, and name of the channel.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
