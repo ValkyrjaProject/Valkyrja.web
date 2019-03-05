@@ -402,6 +402,7 @@
                     </p>
                     <p>
                         <b>Reaction Assigned Roles</b>
+                        <i>(Hint: Public Role Groups configured above will also affect Reaction Assigned Roles.)</i>
                         <reaction-roles form-name="reaction_roles"></reaction-roles>
                     </p>
                 </div>
