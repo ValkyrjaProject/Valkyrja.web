@@ -401,7 +401,7 @@
                         </role-selector>
                     </p>
                     <p>
-                        <b>Reaction Assigned Roles</b></ br>
+                        <b>Reaction Assigned Roles</b><br/>
                         <i>(Hint: Public Role Groups configured above will also affect Reaction Assigned Roles.)</i>
                         <reaction-roles form-name="reaction_roles"></reaction-roles>
                     </p>
