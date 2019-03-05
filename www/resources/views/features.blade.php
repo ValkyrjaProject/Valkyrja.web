@@ -642,7 +642,7 @@
                     </table>
                 </div>
                 <div class="features-indent">
-                    <h2>silentBan</h2>
+                    <h2>silentban</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
@@ -659,7 +659,7 @@
                     </table>
                 </div>
                 <div class="features-indent">
-                    <h2>purgeBan</h2>
+                    <h2>purgeban</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
@@ -676,7 +676,7 @@
                     </table>
                 </div>
                 <div class="features-indent">
-                    <h2>quickBan</h2>
+                    <h2>quickban</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
