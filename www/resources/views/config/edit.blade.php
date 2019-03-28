@@ -432,6 +432,19 @@
                         <color-picker input-name="color_logwarning"
                                       hex-value="{{old('color_logwarning', $serverConfig["color_logwarning"])}}"></color-picker>
                         <br/><br/>
+                        <b>Alert Channel</b> - Log all the message that match below configured regular expression. (Leave empty to disable.)
+                        <br/>
+                        <type-selector init-id-type="alert_channelid" label="name"
+                                       :default-value='{{ json_encode($guild['channels']->get(old('alert_channelid', $serverConfig["alert_channelid"]))) }}'
+                                       :values='channels'></type-selector>
+                        <br/>
+                        <color-picker input-name="color_alertchannel"
+                                      hex-value="{{old('color_alertchannel', $serverConfig["color_alertchannel"])}}"></color-picker>
+                        <br/>
+                        Use <a href="https://regex101.com">regular expression</a> to match messages, for example <code>gay|nigger|retard</code>
+                        <br/>
+                        @include("config.types.multi-line-text", ['key' => "log_alert_regex", 'data' => old('log_alert_regex', $serverConfig["log_alert_regex"])])
+                        <br/><br/>
                         <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br/>
                         <type-selector init-id-type="log_channelid" label="name"

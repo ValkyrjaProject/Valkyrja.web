@@ -202,6 +202,7 @@ class ConfigRequest extends FormRequest
             'color_voicechannel'                => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_activitychannel'             => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_logchannel'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
+            'color_alertchannel'                => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_modchannel'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_logmessages'                 => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
             'color_logwarning'                  => 'required|regex:/^#([a-f0-9]{3}){1,2}\b/i',
