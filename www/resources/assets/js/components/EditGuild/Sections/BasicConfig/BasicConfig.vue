@@ -14,12 +14,17 @@
                 target="_blank">this guide about permissions</a>.
         </p>
         <p>
-            <vuex-text store-name="command_prefix">
+            <vuex-text
+                :required="true"
+                :max-length="255"
+                store-name="command_prefix">
                 <b>Command Prefix</b> - required option, do not leave this empty!<br>
             </vuex-text>
         </p>
         <p>
-            <vuex-text store-name="command_prefix_alt">
+            <vuex-text
+                :max-length="255"
+                store-name="command_prefix_alt">
                 <b>Alternative Command Prefix</b> - will be used as well as the above, you can leave this one empty.
             </vuex-text>
         </p>

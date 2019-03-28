@@ -43,7 +43,7 @@
     "vue-persist": "^0.4.0",
     "vue-router": "^3.0.1",
     "vue-sticky-directive": "0.0.6",
-    "vuelidate": "^0.6.2",
+    "vuelidate": "^0.7.4",
     "vuex": "^3.0.1"
   },
   "dependencies": {

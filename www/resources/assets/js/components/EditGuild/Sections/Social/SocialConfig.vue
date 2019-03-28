@@ -24,8 +24,9 @@
                 store-name="exp_member_roleid"
                 option-name="roles"/>
             <br><br>
-            Number of messages a user has to send to get the above Member role (<i>Leave this at zero to disable it.</i>)
-            <vuex-number store-name="exp_member_messages" />
+            <vuex-number store-name="exp_member_messages">
+                Number of messages a user has to send to get the above Member role (<i>Leave this at zero to disable it.</i>)
+            </vuex-number>
         </p>
         <p>
             <b>Experience & levels</b>
@@ -41,17 +42,21 @@
                 Announce level-up
             </vuex-switch>
             <br>
-            Base experience value (<code>baseExp</code>) <i>Higher value means slower progression, default <code>10</code></i>.
-            <vuex-number store-name="base_exp_to_levelup" />
+            <vuex-number store-name="base_exp_to_levelup">
+                Base experience value (<code>baseExp</code>) <i>Higher value means slower progression, default <code>10</code></i>.
+            </vuex-number>
             <br><br>
-            Experience given per message (<code>expPerMessage</code>) <i>Higher value means faster progression, default <code>1</code></i>.
-            <vuex-number store-name="exp_per_message" />
+            <vuex-number store-name="exp_per_message">
+                Experience given per message (<code>expPerMessage</code>) <i>Higher value means faster progression, default <code>1</code></i>.
+            </vuex-number>
             <br><br>
-            Experience given per image (attachment) (<code>expPerImage</code>) <i>Higher value means faster progression, default <code>3</code></i>.
-            <vuex-number store-name="exp_per_attachment" />
+            <vuex-number store-name="exp_per_attachment">
+                Experience given per image (attachment) (<code>expPerImage</code>) <i>Higher value means faster progression, default <code>3</code></i>.
+            </vuex-number>
             <br><br>
-            Maximum level - set to <code>0</code> (zero) to disable.
-            <vuex-number store-name="exp_max_level" />
+            <vuex-number store-name="exp_max_level">
+                Maximum level - set to <code>0</code> (zero) to disable.
+            </vuex-number>
             <br><br>
             Roles at levels
             <br>
@@ -64,8 +69,9 @@
                 Valkyrja can advance users to the above configured highest role. This means that if a user already has a higher level role, than their level, their level will be increased to match the role. This is useful if you are transitioning from other level systems, this way your users won't lose their progress!
             </vuex-switch>
             <br>
-            How many {{ karma_currency }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
-            <vuex-number store-name="karma_per_level" />
+            <vuex-number store-name="karma_per_level">
+                How many {{ karma_currency }} do you want to give them every level-up? (this will scale up for higher levels.) Use <code>0</code> (zero) to disable. This also depends on whether your karma system is enabled or not.
+            </vuex-number>
         </p>
         <article class="message is-info">
             <div class="message-header">
@@ -84,24 +90,38 @@
                 Use Karma system?
             </vuex-switch>
             <br>
-            Currency plural (Definitely cookies!)
-            <vuex-text store-name="karma_currency" />
+            <vuex-text
+                :max-length="255"
+                store-name="karma_currency">
+                Currency plural (Definitely cookies!)
+            </vuex-text>
+            <br>
+            <vuex-text
+                :max-length="255"
+                store-name="karma_currency_singular">
+                Currency singular
+            </vuex-text>
+            <br>
+            <vuex-text
+                :max-length="255"
+                store-name="karma_consume_command">
+                If you've changed the consume command <code>nom</code> by creating an alias, please specify it here. <i>(Eating a cookie is selfish act and will effectively reduce the number you have by one.)</i>
+            </vuex-text>
+            <br>
+            <vuex-text
+                :max-length="255"
+                store-name="karma_consume_verb">
+                Consume verb used in response to the <code>{{ command_prefix }}nom</code> command. Past tense please.
+            </vuex-text>
+            <br>
+            <vuex-number store-name="karma_limit_mentions">
+                How many people can be mentioned at the same time, to give them <i>cookies</i>?
+            </vuex-number>
             <br><br>
-            Currency singular
-            <vuex-text store-name="karma_currency_singular" />
-            <br><br>
-            If you've changed the consume command <code>nom</code> by creating an alias, please specify it here. <i>(Eating a cookie is selfish act and will effectively reduce the number you have by one.)</i>
-            <vuex-text store-name="karma_consume_command" />
-            <br><br>
-            Consume verb used in response to the <code>{{ command_prefix }}nom</code> command. Past tense please.
-            <vuex-text store-name="karma_consume_verb" />
-            <br><br>
-            How many people can be mentioned at the same time, to give them <i>cookies</i>?
-            <vuex-number store-name="karma_limit_mentions" />
-            <br><br>
-            How often can someone <i>thank</i> others to give them <i>cookies</i>? (Consider this number a thankyou-cooldown in minutes.)
-            <vuex-number store-name="karma_limit_minutes" />
-            <br><br>
+            <vuex-number store-name="karma_limit_minutes">
+                How often can someone <i>thank</i> others to give them <i>cookies</i>? (Consider this number a thankyou-cooldown in minutes.)
+            </vuex-number>
+            <br>
             <vuex-switch store-name="karma_limit_response">
                 Tell people if they exceed this limit?
             </vuex-switch>
