@@ -1,5 +1,12 @@
 #Changelog
 
+**Valkyrja 3.4** - 28th of March, 2019
+  * New Alert logging feature that will notify you for messages that contain anything you specify via regular expression.
+  * Public Group Roles now also apply to Reaction Assigned Roles. This means that you will be able to specify some roles, such as colour, where the user can only have one at a time and the rest will be automatically removed.
+  * Temporary voice channels now take a parameter to limit the number of users that can enter. (e.g. !tempChannel 2 nameOfTheChannel)
+  * The permissions command will now output all the info about specified command if used without permission assignment. (e.g. `!permissions nuke`)
+  * All kinds of tweaks and fixes, as usual.
+
 **Valkyrja 3.3** - 20th of August, 2018
   * Botwinder was rebranded to Valkyrja! See the announcement post in the our `#news` channel.
   * Reaction-assigned roles are out!
