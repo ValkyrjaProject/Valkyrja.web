@@ -23,6 +23,7 @@ use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 use League\OAuth2\Client\Token\AccessToken;
 use Response;
 use Throwable;
+use App\TokenSingleton;
 
 class ConfigController extends Controller
 {
@@ -43,6 +44,7 @@ class ConfigController extends Controller
      *
      * @param Request $request
      * @return Response
+     * @throws App\Exceptions\EmptyUserException
      */
     public function index(Request $request)
     {
@@ -52,7 +54,7 @@ class ConfigController extends Controller
         }
 
         try {
-            $discord_data = $this->getDiscordData($request, null, $userId);
+            $discord_data = $this->getDiscordData(null, $userId);
         } catch (Throwable $e) {
             $loginController = new LoginController();
             return $loginController->logout($request, 'Unable to authorize you, please login again');
@@ -66,7 +68,7 @@ class ConfigController extends Controller
             if (App::environment('local')) {
                 $guilds = new Collection();
                 $guilds->push(
-                    $this->provider->buildPart(Guild::class, $this->accessToken($request),
+                    $this->provider->buildPart(Guild::class, TokenSingleton::getToken(),
                         [
                             'id' => "9223372036854775807",
                             'name' => "Test server"
@@ -102,11 +104,12 @@ class ConfigController extends Controller
      * @param ServerConfig $serverConfig
      * @param String $serverId
      * @return Response
+     * @throws App\Exceptions\EmptyUserException
      */
     public function edit(Request $request, ServerConfig $serverConfig, $serverId)
     {
         try {
-            $discord_data = $this->getDiscordData($request, $serverId);
+            $discord_data = $this->getDiscordData($serverId);
         } catch (Throwable $e) {
             $loginController = new LoginController();
             return $loginController->logout($request, 'Unable to authorize you, please login again');
@@ -176,7 +179,7 @@ class ConfigController extends Controller
     public function update(ConfigRequest $request, $serverId)
     {
         try {
-            $discord_data = $this->getDiscordData($request);
+            $discord_data = $this->getDiscordData();
         } catch (Throwable $e) {
             return $this->logout($request, 'Unable to authorize you, please login again');
         }
@@ -217,32 +220,15 @@ class ConfigController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return array|\League\OAuth2\Client\Token\AccessToken|string
-     */
-    private function accessToken(Request $request)
-    {
-        $access_token = $request->cookie('access_token');
-        $access_token = $this->provider->getAccessToken('refresh_token', [
-            'refresh_token' => $access_token->getRefreshToken()
-        ]);
-        return $access_token;
-    }
-
-    /**
-     * @param Request $request
      * @param null $serverId
      * @param null $userId
      * @throws InvalidGrantException
      * @return DiscordData
      */
-    public function getDiscordData(Request $request, $serverId = null, $userId = null)
+    public function getDiscordData($serverId = null, $userId = null)
     {
         /** @var AccessToken $access_token */
-        $access_token = $request->cookie('access_token');
-        $access_token = $this->provider->getAccessToken('refresh_token', [
-            'refresh_token' => $access_token->getRefreshToken()
-        ]);
+        $access_token = TokenSingleton::getToken();
 
         return new DiscordData($this->provider, $access_token, $serverId, $userId);
     }

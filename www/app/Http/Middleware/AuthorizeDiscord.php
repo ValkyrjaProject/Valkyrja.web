@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
 use Illuminate\Http\Response;
 use Log;
+use App\TokenSingleton;
 
 class AuthorizeDiscord
 {
@@ -57,6 +58,8 @@ class AuthorizeDiscord
             $response = $response instanceof Response ? $response : response($response);
             return $response->cookie('access_token', $access_token);
         }
+
+        TokenSingleton::setToken($access_token);
 
         return $next($request);
     }
