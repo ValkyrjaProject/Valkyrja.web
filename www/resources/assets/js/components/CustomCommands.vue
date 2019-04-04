@@ -27,7 +27,7 @@
                 <div class="from-group" :class="{'has-danger': props.activeItem.response.length === 0}">
                     <label class="form-control-label">
                         <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code
-                            v-pre>{{mentioned}}</code> variables.
+                            v-pre>{{mentioned}}</code> variables. To PM the mentioned user, add <code v-pre>{{pm}}</code> to the beginning, and to PM the one that issued the command, add <code v-pre>{{pm-sender}}</code>
                         <textarea class="form-control" command-name="response" :value="props.activeItem.response"
                                   @input="updateActiveItemData"></textarea>
                     </label>
