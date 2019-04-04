@@ -26,8 +26,7 @@
                 </div>
                 <div class="from-group" :class="{'has-danger': props.activeItem.response.length === 0}">
                     <label class="form-control-label">
-                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code
-                            v-pre>{{mentioned}}</code> variables. To PM the mentioned user, add <code v-pre>{{pm}}</code> to the beginning, and to PM the one that issued the command, add <code v-pre>{{pm-sender}}</code>
+                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code v-pre>{{mentioned}}</code> variables. To PM the mentioned user, add <code>&lt;pm&gt;</code> to the beginning, and to PM the one that issued the command, add <code>&lt;pm-sender&gt;</code>
                         <textarea class="form-control" command-name="response" :value="props.activeItem.response"
                                   @input="updateActiveItemData"></textarea>
                     </label>
@@ -41,22 +40,7 @@
                         <input class="form-control" command-name="description" :value="props.activeItem.description"
                                @input="updateActiveItemData">
                     </label>
-                    <!--<b>Whitelisted roles</b> - Only these roles can use the command. Leave empty to be unrestricted.
-                    <id-selector :value="roles"
-                                 @add="addRole($event)"
-                                 @remove="removeRole($event)"
-                                 init-id-type="Roles"
-                                 :init-form-name="formName"
-                                 :hide-inputs="true"
-                                 :state-index="activeItemIndex"
-                                 :use-store="false"></id-selector>-->
                 </div>
-                <!--<div class="form-group">
-                    <label>
-                        <input type="checkbox" v-model="deleteRequest">
-                        <b>Delete request</b> - Delete the message issuing the command?
-                    </label>
-                </div>-->
             </template>
         </item-modifier>
     </div>
@@ -86,16 +70,6 @@
         components: {
             ItemModifier,
         },
-        /*created() {
-            this.$startLoading(this.formName);
-            this.$store.dispatch('updateItemModifier', this.formName)
-                .then(() => {
-                    this.$endLoading(this.formName);
-                })
-                .catch(() => {
-                    this.loadingText = 'Could not get config values.';
-                });
-        },*/
         computed: {
             command_prefix() {
                 return this.$store.state.command_prefix;
@@ -103,19 +77,6 @@
             botwinderCommands() {
                 return this.$store.state.botwinderCommands;
             },
-            /*deleteRequest: {
-                get() {
-                    return this.$store.state.itemModifier[this.formName].activeItem.DeleteRequest
-                },
-                set(value) {
-                    this.$store.dispatch('updateActiveItemData',
-                        {
-                            key: 'DeleteRequest',
-                            formName: this.formName,
-                            data: value
-                        })
-                }
-            },*/
             addCustomCommandTemplate() {
                 return {
                     commandid: 'command',
