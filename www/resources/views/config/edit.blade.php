@@ -441,7 +441,7 @@
                         <color-picker input-name="color_alertchannel"
                                       hex-value="{{old('color_alertchannel', $serverConfig["color_alertchannel"])}}"></color-picker>
                         <br/>
-                        Use <a href="https://regex101.com">regular expression</a> to match messages, for example <code>gh?a+y|fag|nigger</code>
+                        Use <a href="https://regex101.com">regular expression</a> to match messages, for example <code>gh?a+y|fag|nigger</code>. (Up to 20 RegEx ORs <code>|</code>)
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "log_alert_regex", 'data' => old('log_alert_regex', $serverConfig["log_alert_regex"])])
                         <br/><br/>

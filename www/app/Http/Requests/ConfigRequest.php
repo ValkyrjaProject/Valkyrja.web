@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\LimitedRegExOrs;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ConfigRequest extends FormRequest
@@ -157,7 +158,7 @@ class ConfigRequest extends FormRequest
             'activity_channelid'                => 'required|integer',
             'log_join'                          => 'required|boolean',
             'log_leave'                         => 'required|boolean',
-            'log_alert_regex'                   => 'string|nullable',
+            'log_alert_regex'                   => ['string', 'nullable', new LimitedRegExOrs(20)],
             'log_message_join'                  => 'string|nullable',
             'log_message_leave'                 => 'string|nullable',
             'log_mention_join'                  => 'required|boolean',
