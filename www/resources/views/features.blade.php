@@ -279,6 +279,40 @@
                     </table>
                 </div-->
                 <div class="features-indent">
+                    <h2>countWithoutRole</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Count how many users do not have any role.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>kickWithoutRole</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Kick all the users who do not have any role. Know what you're doing!</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>promoteEveryone</h2>
                     <table class="command">
                     <tr>
