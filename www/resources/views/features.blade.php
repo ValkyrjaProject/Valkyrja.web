@@ -308,7 +308,7 @@
                     </tr>
                     <tr>
                         <td>Permissions</td>
-                        <td>Admin</td>
+                        <td>ServerOwner</td>
                     </tr>
                     </table>
                 </div>
