@@ -107,6 +107,7 @@ class ConfigRequest extends FormRequest
             'command_prefix'                    => 'required|string|max:255',
             'command_prefix_alt'                => 'present|string|max:255',
             'execute_on_edit'                   => 'required|boolean',
+            'antispam_norole'                 => 'required|boolean',
             'antispam_username'                 => 'required|boolean',
             'antispam_invites'                  => 'required|boolean',
             'antispam_invites_ban'              => 'required|boolean',

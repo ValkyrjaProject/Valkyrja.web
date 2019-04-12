@@ -133,6 +133,12 @@
                                     init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
                     </p>
                     <p>
+                        <b>Kick Without Role</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
+                        Kick users if they do not get a role (by verifying via a command, reaction role, or our code verification) a little while after joining.
+                    </p>
+                    <p>
                         <b>Ban username-spammers as they join</b>
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_username", 'data' => old('antispam_username', $serverConfig["antispam_username"])])
