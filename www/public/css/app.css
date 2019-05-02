@@ -21956,6 +21956,10 @@ a.navbar-item.is-active,
   background: white;
 }
 
+.panel .panel-block.is-active {
+  border-right: none;
+}
+
 .has-radius-small {
   border-radius: 2px;
 }

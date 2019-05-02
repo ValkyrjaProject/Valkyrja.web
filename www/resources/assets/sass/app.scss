@@ -66,6 +66,9 @@ a.navbar-item.is-active,
   .panel-block, .panel-tabs {
     background: white;
   }
+  .panel-block.is-active {
+    border-right:none;
+  }
 }
 
 .has-radius-small {
