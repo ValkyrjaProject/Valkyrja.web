@@ -8,11 +8,11 @@ describe("Config page", function () {
             cy.url().should("match", /config/);
         });
 
-        it("should display servers", function () {
+        it("displays servers", function () {
             cy.get(".guild-column").find("img.image").should("have.class", "is-circular");
         });
 
-        it("visits the config page", async () =>  {
+        it("can visit the config page", async () =>  {
             let secondServer = await cy.get(".guild-column:nth-child(2) .tooltip");
             cy.get(".guild-column:nth-child(2)").click();
             cy.contains(`Editing ${secondServer.attr("data-tooltip")}`);
@@ -20,7 +20,11 @@ describe("Config page", function () {
     });
 
     describe("without server response", function () {
-        beforeEach(function () {
+        let guildResponse;
+        let commandPrefix = "%%";
+
+        beforeEach(async () => {
+            guildResponse = await cy.fixture("editGuildResponse");
             cy.server();
             cy.route({
                 method: "GET",
@@ -30,29 +34,31 @@ describe("Config page", function () {
             cy.route({
                 method: "GET",
                 url: "/api/server/1",
-                response: {
-                    guild: {
-                        "id":"1",
-                        "name":"Test",
-                        "icon":null,
-                        "owner":1,
-                        "owner_id":"2263975",
-                        "permissions":32,
-                        "roles": [],
-                        "channels": [],
-                    },
-                    config: {
-                        "serverId": "1",
-                    }
-                }
-            });
+                response: guildResponse
+            }).as("getConfig");
             cy.visit("/config/1");
         });
 
-        it("visits the config page", async () => {
-            let secondServer = await cy.get(".guild-column:nth-child(2) .tooltip");
-            cy.get(".guild-column:nth-child(2)").click();
-            cy.contains("Editing Test");
+        it.skip("visits the config page", async () => {
+            cy.contains(`Editing ${guildResponse["guild"]["name"]}`);
+        });
+
+        it("should display newly changed command prefix on all config pages", function () {
+            cy.wait("@getConfig");
+            let prefix = cy.get("#command_prefix");
+            prefix.clear();
+            prefix.parent().siblings().contains("Cannot be empty");
+            cy.get("#command_prefix").type(commandPrefix).type("1{backspace}");
+
+            cy.get("#editGuildNav").contains("Antispam").click();
+            cy.contains(`${commandPrefix}permit @people`);
+
+            cy.get("#editGuildNav").contains("Moderation").click();
+            cy.contains(`${commandPrefix}permissions`);
+            cy.contains(`${commandPrefix}join`);
+            cy.contains(`${commandPrefix}op`);
+            cy.contains(`${commandPrefix}quickban`);
+            cy.contains(`${commandPrefix}ban`);
         });
     });
 });

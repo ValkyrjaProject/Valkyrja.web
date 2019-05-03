@@ -1,0 +1,489 @@
+{
+  "guild": {
+    "id": "1",
+    "name": "Test Guild",
+    "icon": "https:\/\/lorempixel.com\/640\/640\/?79817",
+    "owner": 0,
+    "owner_id": "40663639",
+    "permissions": 32,
+    "roles": [
+      {
+        "id": "71420240",
+        "name": "Loan Officer",
+        "color": 238,
+        "position": 26,
+        "guild_id": "1"
+      },
+      {
+        "id": "32916446",
+        "name": "Product Management Leader",
+        "color": 60910,
+        "position": 92,
+        "guild_id": "1"
+      },
+      {
+        "id": "8197542",
+        "name": "Counseling Psychologist",
+        "color": 3758,
+        "position": 34,
+        "guild_id": "1"
+      },
+      {
+        "id": "54792166",
+        "name": "Engineer",
+        "color": 2798,
+        "position": 33,
+        "guild_id": "1"
+      },
+      {
+        "id": "127111",
+        "name": "Mechanical Engineer",
+        "color": 10,
+        "position": 95,
+        "guild_id": "1"
+      },
+      {
+        "id": "17710063",
+        "name": "Brattice Builder",
+        "color": 57022,
+        "position": 15,
+        "guild_id": "1"
+      },
+      {
+        "id": "59077545",
+        "name": "CEO",
+        "color": 14,
+        "position": 18,
+        "guild_id": "1"
+      },
+      {
+        "id": "36379585",
+        "name": "Dot Etcher",
+        "color": 851646,
+        "position": 98,
+        "guild_id": "1"
+      },
+      {
+        "id": "2357432",
+        "name": "Editor",
+        "color": 0,
+        "position": 22,
+        "guild_id": "1"
+      },
+      {
+        "id": "56739823",
+        "name": "Forest and Conservation Worker",
+        "color": 190,
+        "position": 45,
+        "guild_id": "1"
+      },
+      {
+        "id": "99184333",
+        "name": "Self-Enrichment Education Teacher",
+        "color": 3518,
+        "position": 70,
+        "guild_id": "1"
+      },
+      {
+        "id": "88350955",
+        "name": "Fire Fighter",
+        "color": 2988,
+        "position": 10,
+        "guild_id": "1"
+      },
+      {
+        "id": "10254795",
+        "name": "Orthotist OR Prosthetist",
+        "color": 0,
+        "position": 88,
+        "guild_id": "1"
+      },
+      {
+        "id": "299679",
+        "name": "Credit Authorizer",
+        "color": 56013,
+        "position": 53,
+        "guild_id": "1"
+      },
+      {
+        "id": "93692863",
+        "name": "Data Processing Equipment Repairer",
+        "color": 10,
+        "position": 85,
+        "guild_id": "1"
+      }
+    ],
+    "channels": [
+      {
+        "id": "75192256",
+        "name": "schowalter",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "92971025",
+        "name": "rempel",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "58663988",
+        "name": "boyer",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "74506058",
+        "name": "bartell",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "54440469",
+        "name": "zulauf",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "3096600",
+        "name": "stoltenberg",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "13192014",
+        "name": "kassulke",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "27155839",
+        "name": "ebert",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "65097899",
+        "name": "hammes",
+        "type": 0,
+        "guild_id": "1"
+      },
+      {
+        "id": "71194648",
+        "name": "lockman",
+        "type": 0,
+        "guild_id": "1"
+      }
+    ]
+  },
+  "config": {
+    "serverid": "1",
+    "timezone_utc_relative": 0,
+    "use_database": 1,
+    "ignore_bots": 1,
+    "ignore_everyone": 1,
+    "command_prefix": "!",
+    "command_prefix_alt": "",
+    "execute_on_edit": 1,
+    "antispam_priority": 0,
+    "antispam_username": 0,
+    "antispam_invites": 0,
+    "antispam_invites_ban": 0,
+    "antispam_duplicate": 0,
+    "antispam_duplicate_crossserver": 0,
+    "antispam_duplicate_ban": 0,
+    "antispam_mentions_max": 0,
+    "antispam_mentions_ban": 0,
+    "antispam_mute": 0,
+    "antispam_mute_duration": 5,
+    "antispam_links_extended": 0,
+    "antispam_links_extended_ban": 0,
+    "antispam_links_standard": 0,
+    "antispam_links_standard_ban": 0,
+    "antispam_links_youtube": 0,
+    "antispam_links_youtube_ban": 0,
+    "antispam_links_twitch": 0,
+    "antispam_links_twitch_ban": 0,
+    "antispam_links_hitbox": 0,
+    "antispam_links_hitbox_ban": 0,
+    "antispam_links_beam": 0,
+    "antispam_links_beam_ban": 0,
+    "antispam_links_imgur": 0,
+    "antispam_links_imgur_ban": 0,
+    "antispam_tolerance": 4,
+    "antispam_ignore_members": 0,
+    "operator_roleid": "0",
+    "quickban_duration": 0,
+    "quickban_reason": "o9vdIrAOZTUoor9s",
+    "mute_roleid": "0",
+    "mute_ignore_channelid": "0",
+    "karma_enabled": 0,
+    "karma_limit_mentions": 5,
+    "karma_limit_minutes": 30,
+    "karma_limit_response": 1,
+    "karma_currency": "cookies",
+    "karma_currency_singular": "cookies",
+    "karma_consume_command": "nom",
+    "karma_consume_verb": "nommed",
+    "log_channelid": "0",
+    "mod_channelid": "0",
+    "log_bans": 0,
+    "log_promotions": 0,
+    "log_deletedmessages": 0,
+    "log_editedmessages": 0,
+    "activity_channelid": "0",
+    "log_join": 0,
+    "log_leave": 0,
+    "log_message_join": "5g8fSk6MENeOXN91",
+    "log_message_leave": "rduJ0WFRAVrbXJml",
+    "log_mention_join": 0,
+    "log_mention_leave": 0,
+    "log_timestamp_join": 0,
+    "log_timestamp_leave": 0,
+    "welcome_pm": 0,
+    "welcome_message": "hwQQB6d3pi7Ukl7s",
+    "welcome_roleid": "0",
+    "verify": 0,
+    "verify_on_welcome": 0,
+    "verify_roleid": "0",
+    "verify_karma": 3,
+    "verify_message": "cDUEcU6HqquBuRkn",
+    "exp_enabled": 0,
+    "base_exp_to_levelup": "4750145963822476273",
+    "exp_announce_levelup": 1,
+    "exp_per_message": "2790507386961280104",
+    "exp_per_attachment": "903647564013840393",
+    "exp_cumulative_roles": 1,
+    "voice_channelid": "0",
+    "antispam_voice_switching": 0,
+    "color_logmessages": 16776960,
+    "color_modchannel": "16711680",
+    "color_logchannel": "255",
+    "color_activitychannel": "65535",
+    "color_voicechannel": "65280",
+    "embed_modchannel": "0",
+    "embed_logchannel": "0",
+    "embed_activitychannel": "0",
+    "embed_voicechannel": "0",
+    "karma_per_level": 3,
+    "exp_max_level": 0,
+    "exp_advance_users": 0,
+    "profile_enabled": 0,
+    "memo_enabled": 0,
+    "log_warnings": 0,
+    "color_logwarning": 16489984,
+    "exp_member_messages": 0,
+    "exp_member_roleid": 0,
+    "roles": [
+      {
+        "roleid": "127111",
+        "permission_level": "3",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "299679",
+        "permission_level": "2",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "2357432",
+        "permission_level": "2",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "8197542",
+        "permission_level": "1",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "10254795",
+        "permission_level": "3",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "17710063",
+        "permission_level": "1",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "32916446",
+        "permission_level": "3",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "36379585",
+        "permission_level": "1",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "54792166",
+        "permission_level": "4",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "56739823",
+        "permission_level": "4",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "59077545",
+        "permission_level": "4",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "71420240",
+        "permission_level": "2",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "88350955",
+        "permission_level": "3",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "93692863",
+        "permission_level": "1",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      },
+      {
+        "roleid": "99184333",
+        "permission_level": "1",
+        "public_id": "0",
+        "logging_ignored": 0,
+        "antispam_ignored": 0,
+        "level": "0",
+        "delete_at_time": "1970-01-01 01:00:00"
+      }
+    ],
+    "channels": [
+      {
+        "serverid": 1,
+        "channelid": "3096600",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "13192014",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "27155839",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "54440469",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "58663988",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "65097899",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "71194648",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "74506058",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "75192256",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      },
+      {
+        "serverid": 1,
+        "channelid": "92971025",
+        "ignored": false,
+        "temporary": 0,
+        "muted_until": "2018-11-09 15:29:49"
+      }
+    ],
+    "custom_commands": [],
+    "profile_options": []
+  }
+}
