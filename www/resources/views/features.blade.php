@@ -55,6 +55,10 @@
                 </div>
                 <h1>Key Features</h1>
                 <p>
+                    We recommend server owners to link to, or copy and modify, this disclaimer about how they use the user data for moderation: <a href="http://radka.dev/disclaimer">http://radka.dev/disclaimer</a>
+                </p>
+                <h1>Key Features</h1>
+                <p>
                     These are some features that are not fully covered by simple commands:
                     <ul>
                         <li><b>Encrypted Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
