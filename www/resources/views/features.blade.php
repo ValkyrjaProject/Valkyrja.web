@@ -53,9 +53,9 @@
                         </tr>
                     </table-->--}}
                 </div>
-                <h1>Key Features</h1>
+                <h1>Disclaimer</h1>
                 <p>
-                    We recommend server owners to link to, or copy and modify, this disclaimer about how they use the user data for moderation: <a href="http://radka.dev/disclaimer">http://radka.dev/disclaimer</a>
+                    We recommend that the server owners link to, or copy and modify, this disclaimer about how they use the user data for moderation: <a href="http://radka.dev/disclaimer">http://radka.dev/disclaimer</a>
                 </p>
                 <h1>Key Features</h1>
                 <p>
