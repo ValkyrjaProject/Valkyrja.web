@@ -200,6 +200,12 @@
                         (minutes)
                     </p>
                     <p>
+                        <b>Known Porn links</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "antispam_porn", 'data' => old('antispam_porn', $serverConfig["antispam_porn"])])
+                        Remove known porn links? (This is manually updated, if you see something that's not covered, let us know please!)
+                    </p>
+                    <p>
                         <b>YouTube links</b>
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_links_youtube", 'data' => old('antispam_links_youtube', $serverConfig["antispam_links_youtube"])])
