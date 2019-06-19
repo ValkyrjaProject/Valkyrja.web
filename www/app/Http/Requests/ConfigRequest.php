@@ -112,7 +112,7 @@ class ConfigRequest extends FormRequest
             'antispam_username'                 => 'required|boolean',
             'antispam_invites'                  => 'required|boolean',
             'antispam_invites_ban'              => 'required|boolean',
-            'antispam_invites'                  => 'required|boolean',
+            'antispam_porn'                     => 'required|boolean',
             'antispam_duplicate'                => 'required|boolean',
             'antispam_duplicate_crossserver'    => 'required|boolean',
             'antispam_duplicate_ban'            => 'required|boolean',
