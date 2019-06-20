@@ -283,7 +283,7 @@
                     </table>
                 </div-->
                 <div class="features-indent">
-                    <h2>countWithoutRole</h2>
+                    <h2>countWithoutRoles</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
@@ -300,7 +300,7 @@
                     </table>
                 </div>
                 <div class="features-indent">
-                    <h2>kickWithoutRole</h2>
+                    <h2>kickWithoutRoles</h2>
                     <table class="command">
                     <tr>
                         <td>Description</td>
