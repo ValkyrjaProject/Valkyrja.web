@@ -625,13 +625,6 @@
                 </div>
                 <div class="form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configSocial"><br />
                     <p class="form-inline">
-                        Channel category for the temporary voice channels (<code>@{{ command_prefix }}tempChannel</code> or <code>@{{ command_prefix }}tmp</code>)
-                        <br/>
-                        <type-selector init-id-type="tempchannel_categoryid" label="name"
-                                       :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'
-                                       :values='categories'></type-selector>
-                    </p>
-                    <p class="form-inline">
                         @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
                         <b>Enable <code>@{{ command_prefix }}memo</code></b>
                     </p>
@@ -753,6 +746,19 @@
                 <div class="form-group collapse" id="customCommands">
                     <p>
                         <custom-commands form-name="custom_commands"></custom-commands>
+                    </p>
+                </div>
+                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
+                        data-target="#otherstuff" aria-expanded="false" aria-controls="otherstuff">
+                    Other...
+                </button>
+                <div class="form-inline form-group collapse" id="otherstuff">
+                    <p class="form-inline">
+                        Channel category for the temporary voice channels (<code>@{{ command_prefix }}tempChannel</code> or <code>@{{ command_prefix }}tmp</code>)
+                        <br/>
+                        <type-selector init-id-type="tempchannel_categoryid" label="name"
+                                       :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'
+                                       :values='categories'></type-selector>
                     </p>
                 </div>
                 {{ csrf_field() }}
