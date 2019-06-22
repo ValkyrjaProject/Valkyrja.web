@@ -125,9 +125,11 @@ class ConfigController extends Controller
         }
 
         $guildChannels = collect();
+        $guildCategories = collect();
         $guildRoles = collect();
         try {
             $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
+            $guildCategories = $discord_data->getGuildCategories();
             $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$serverId) {
                 // Filter out @everyone
                 return (string)$key !== $serverId;
@@ -152,7 +154,8 @@ class ConfigController extends Controller
             'reaction_roles' => ReactionRoles::where('serverid', $serverId)->get(),
             'guild' => [
                 'roles' => $guildRoles,
-                'channels' => $guildChannels
+                'channels' => $guildChannels,
+                'categories' => $guildCategories,
             ],
             'isPremium' => $isPremium,
         ]);

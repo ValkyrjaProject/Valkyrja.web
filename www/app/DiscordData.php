@@ -56,6 +56,10 @@ class DiscordData extends Model
      * @var Collection $serverChannels
      */
     private $serverChannels;
+    /**
+     * @var Collection $serverChannels
+     */
+    private $serverCategories;
 
     /**
      * DiscordData constructor.
@@ -185,6 +189,7 @@ class DiscordData extends Model
             // For local debugging
             if (App::environment('local')) {
                 $serverChannels = collect();
+                $serverCategories = collect();
                 if (Cache::has('channels')) {
                     $serverChannels = collect(Cache::get('channels'));
                 }
@@ -195,8 +200,27 @@ class DiscordData extends Model
                         $tempArray['name'] = '#'.str_random(rand(4, 16));
                         $serverChannels->push($tempArray);
                     }
+                    for ($i = 10; $i <= 20; $i++) {
+                        $tempArray = [];
+                        $tempArray['id'] = (string)rand(0, PHP_INT_MAX);
+                        $tempArray['name'] = '#'.str_random(rand(4, 16));
+                        $serverCategories->push($tempArray);
+                    }
                     Cache::add('channels', $serverChannels->all(), 60);
                 }
+                if (Cache::has('categories')) {
+                    $serverCategories = collect(Cache::get('categories'));
+                }
+                else {
+                    for ($i = 10; $i <= 20; $i++) {
+                        $tempArray = [];
+                        $tempArray['id'] = (string)rand(0, PHP_INT_MAX);
+                        $tempArray['name'] = '#'.str_random(rand(4, 16));
+                        $serverCategories->push($tempArray);
+                    }
+                    Cache::add('categories', $serverCategories->all(), 60);
+                }
+                $this->serverCategories = $serverCategories;
                 $this->serverChannels = $serverChannels;
                 return $this->serverChannels;
             }
@@ -210,6 +234,7 @@ class DiscordData extends Model
             }
 
             $serverChannels = collect();
+            $serverCategories = collect();
             foreach ($rawServerChannels as $serverChannel) {
                 if (!isset($serverChannel->type)) {
                     Log::error('Server channels: '.isset($rawServerChannels['code']) ? $rawServerChannels['code'] : $rawServerChannels);
@@ -223,7 +248,15 @@ class DiscordData extends Model
 
                     $serverChannels->push($tempArray);
                 }
+                else if($serverChannel->type === 4) {
+                    $tempArray = [];
+                    $tempArray['id'] = $serverChannel->id;
+                    $tempArray['name'] = $serverChannel->name;
+
+                    $serverCategories->push($tempArray);
+                }
             }
+            $this->serverCategories = $serverCategories;
             $this->serverChannels = $serverChannels;
         }
         return $this->serverChannels;
@@ -322,5 +355,13 @@ class DiscordData extends Model
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getGuildCategories(): Collection
+    {
+        return $this->serverCategories;
     }
 }

@@ -624,6 +624,13 @@
                 </div>
                 <div class="form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configSocial"><br />
                     <p class="form-inline">
+                        Channel category for the temporary voice channels (<code>!tempChannel</code> or <code>!tmp</code>)
+                        <br/>
+                        <type-selector init-id-type="tempchannel_categoryid" label="name"
+                                       :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'
+                                       :values='channels'></type-selector>
+                    </p>
+                    <p class="form-inline">
                         @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
                         <b>Enable <code>@{{ command_prefix }}memo</code></b>
                     </p>

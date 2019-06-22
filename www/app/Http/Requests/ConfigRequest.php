@@ -153,6 +153,7 @@ class ConfigRequest extends FormRequest
             'log_channelid'                     => 'required|integer',
             'alert_channelid'                   => 'required|integer',
             'mod_channelid'                     => 'required|integer',
+            'tempchannel_categoryid'            => 'required|integer',
             'log_bans'                          => 'required|boolean',
             'log_promotions'                    => 'required|boolean',
             'log_deletedmessages'               => 'required|boolean',
