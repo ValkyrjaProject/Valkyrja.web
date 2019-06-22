@@ -129,7 +129,7 @@ class ConfigController extends Controller
         $guildRoles = collect();
         try {
             $guildChannels = $discord_data->getGuildChannels()->keyBy('id');
-            $guildCategories = $discord_data->getGuildCategories();
+            $guildCategories = $discord_data->getGuildCategories()->keyBy('id');
             $guildRoles = $discord_data->getGuildRoles()->keyBy('id')->filter(function ($role, $key) use (&$serverId) {
                 // Filter out @everyone
                 return (string)$key !== $serverId;
