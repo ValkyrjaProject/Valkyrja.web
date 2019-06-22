@@ -625,7 +625,7 @@
                 </div>
                 <div class="form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configSocial"><br />
                     <p class="form-inline">
-                        Channel category for the temporary voice channels (<code>!tempChannel</code> or <code>!tmp</code>)
+                        Channel category for the temporary voice channels (<code>@{{ command_prefix }}tempChannel</code> or <code>@{{ command_prefix }}tmp</code>)
                         <br/>
                         <type-selector init-id-type="tempchannel_categoryid" label="name"
                                        :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'

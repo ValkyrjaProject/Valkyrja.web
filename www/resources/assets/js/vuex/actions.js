@@ -97,6 +97,10 @@ export const updateChannels = ({commit}, attribute) => {
     commit('EDIT_CHANNELS', attribute);
 };
 
+export const updateCategories = ({commit}, attribute) => {
+    commit('EDIT_CATEGORIES', attribute);
+};
+
 export const updateRolesData = ({commit}, data) => {
     commit('UPDATE_ITEM_MODIFIER', {key: 'roles', data: data});
 };

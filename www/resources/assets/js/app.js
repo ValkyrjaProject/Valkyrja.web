@@ -82,6 +82,7 @@ new Vue({
             let state = JSON.parse(window.__INITIAL_STATE__);
             this.$store.dispatch('updateRoles', state['roles']);
             this.$store.dispatch('updateChannels', state['channels']);
+            this.$store.dispatch('updateCategories', state['categories']);
             this.$store.dispatch('updateCustomCommands', state['custom_commands']);
             this.$store.dispatch('updateRolesData', state['rolesData']);
             this.$store.dispatch('updateLevelsData', state['rolesData'].slice());

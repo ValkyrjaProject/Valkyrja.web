@@ -22,6 +22,7 @@ const state = {
     antispam_tolerance: 0,
     roles: [],
     channels: [],
+    categories: [],
     data: {},
     botwinderCommands: [],
     itemModifier: {
@@ -81,6 +82,10 @@ const mutations = {
 
     EDIT_CHANNELS(state, channels) {
         state.channels = channels;
+    },
+
+    EDIT_CATEGORIES(state, categories) {
+        state.categories = categories;
     },
 
     EDIT_DATA(state, payload) {
