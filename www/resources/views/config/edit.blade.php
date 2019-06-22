@@ -6,6 +6,7 @@
     <script type="application/javascript">
         window.__INITIAL_STATE__ = "{!! addslashes(json_encode([
 			'channels' => array_values($guild['channels']->all()),
+			'categories' => array_values($guild['categories']->all()),
 			'roles' => array_values($guild['roles']->all()),
 			'custom_commands' => old('custom_commands', (isset($errors) && count($errors) > 0) ? [] : $customCommands->all()),
 			'rolesData' => old('roles', (isset($errors) && count($errors) > 0) ? [] : $roles->all()),
@@ -628,7 +629,7 @@
                         <br/>
                         <type-selector init-id-type="tempchannel_categoryid" label="name"
                                        :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'
-                                       :values='channels'></type-selector>
+                                       :values='categories'></type-selector>
                     </p>
                     <p class="form-inline">
                         @include("config.types.bool", ['key' => "memo_enabled", 'data' => old('memo_enabled', $serverConfig["memo_enabled"])])
