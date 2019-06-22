@@ -63,6 +63,7 @@ new Vue({
             'antispam_tolerance',
             'roles',
             'channels',
+            'categories',
             'forbidSubmitForm'
          ])
     },
