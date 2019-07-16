@@ -571,6 +571,23 @@
                     </tr>
                     </table>
                 </div>
+                <div class="features-indent">
+                    <h2>membersOf</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display a list of members of a role.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>name</code> or <code>id</code> of a role.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Moderator</td>
+                    </tr>
+                    </table>
+                </div>
 
                 <h1 class="features-h1">Commands ~ Moderator</h1>
                 <!--div class="features-indent">
@@ -590,23 +607,6 @@
                     </tr>
                     </table>
                 </div-->
-                <div class="features-indent">
-                    <h2>membersOf</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Display a list of members of a role.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td><code>name</code> or <code>id</code> of a role.</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Moderator</td>
-                    </tr>
-                    </table>
-                </div>
                 <div class="features-indent">
                     <h2>clear</h2>
                     <table class="command">
