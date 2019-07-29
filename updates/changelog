@@ -1,5 +1,13 @@
 #Changelog
 
+**Valkyrja 3.5** - 29th of July, 2019
+  * New Antispam options:
+    * Remove known Porn links (if you find any new spam, let us know!)
+    * Kick people without roles (also a command) to be couppled with s user verification. Kicks people who fail to get a member role within some time.
+  * `!tmp` - Temporary voice channels now require a configured channel category.
+  * `!mentionRole` aka `!announce` - Changes the role permissions for specified role, to be able to mention it, sends a message that does so, and reverts the role permissions back.
+  * A bunch of fixes and tweaks, and keeping up with Discord's unannounced breaking changes :)
+
 **Valkyrja 3.4** - 28th of March, 2019
   * New Alert logging feature that will notify you for messages that contain anything you specify via regular expression.
   * Public Group Roles now also apply to Reaction Assigned Roles. This means that you will be able to specify some roles, such as colour, where the user can only have one at a time and the rest will be automatically removed.
