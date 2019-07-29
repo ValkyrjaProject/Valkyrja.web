@@ -584,7 +584,24 @@
                     </tr>
                     <tr>
                         <td>Permissions</td>
-                        <td>Moderator</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>mentionRole / announce</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Mention a role with a message.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>name</code> of a role, followed by your message.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
                     </tr>
                     </table>
                 </div>
