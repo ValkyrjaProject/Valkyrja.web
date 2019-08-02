@@ -17,32 +17,37 @@ describe("Config page", function () {
     });
 
     describe("without server response", function () {
-        let guildResponse;
         let commandPrefix = "%%";
 
-        beforeEach(async () => {
-            guildResponse = await cy.fixture("editGuildResponse");
+        beforeEach(function () {
             cy.server();
             cy.route({
                 method: "GET",
                 url: "/api/user",
                 response: {"name":"Amelie O'Hara","avatar":null}
+            }).as("getUser");
+            cy.fixture("editGuildResponse").then(guildRes => {
+                cy.route({
+                    method: "GET",
+                    url: "/api/server/1",
+                    response: guildRes
+                }).as("getConfig");
             });
-            cy.route({
-                method: "GET",
-                url: "/api/server/1",
-                response: guildResponse
-            }).as("getConfig");
         });
 
         it("visits the config page", function () {
             cy.visit("/config/1");
-            cy.contains("h1#guild-heading", `Editing ${guildResponse["guild"]["name"]}`);
+            cy.wait("@getConfig");
+            cy.wait("@getUser");
+            cy.fixture("editGuildResponse").then(guildResponse => {
+                cy.contains("h1#guild-heading", `Editing ${guildResponse["guild"]["name"]}`);
+            });
         });
 
         it("should display newly changed command prefix on all config pages", async () => {
             cy.visit("/config/1");
-            await cy.wait("@getConfig");
+            cy.wait("@getConfig");
+            cy.wait("@getUser");
             let prefix = cy.get("#command_prefix");
             prefix.clear();
             prefix.parent().siblings().contains("Cannot be empty");
