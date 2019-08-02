@@ -1,11 +1,12 @@
 import sinon from "sinon";
-import {shallowMount} from "@vue/test-utils";
+import {mount} from "@vue/test-utils";
 import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import VuexText from "components/EditGuild/Vuex/VuexText";
-
+import Vuelidate from "vuelidate";
 let localVue = Vue.use(Vuex);
+localVue.use(Vuelidate);
 
 describe("VuexText", function () {
     let wrapper;
@@ -37,7 +38,7 @@ describe("VuexText", function () {
             actions,
             getters
         });
-        wrapper = shallowMount(VuexText, {propsData, store, localVue});
+        wrapper = mount(VuexText, {propsData, store, localVue});
     });
 
     it("should have input field of type text", function () {

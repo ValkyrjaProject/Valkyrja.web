@@ -81,8 +81,8 @@
                 Karma is an extra appreciation of helpful people. They get thanked, they get a cookie!
                 <br><code>Rhea: Hey thanks for that pull request fixing a typo @freiheit</code>
                 <br><code>Valkyrja: @freiheit received a <i>thank you</i> cookie!</code>
-                <br>You can also <code>!give @user</code> a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
-                <br><i>Hint: Create <code>{{ command_prefix }}alias</code> for the <code>cookies</code> and <code>nom</code> commands to fit your custom configuration below!</i>
+                <br>You can also <code>{{ command_prefix }}give @user</code> a cookie, however, this will take one of yours. You can eat them as well. Many details can be customized below...
+                <br><i>Hint: Create <code>{{ command_prefix }}alias</code> for the <code>{{ command_prefix }}cookies</code> and <code>{{ command_prefix }}nom</code> commands to fit your custom configuration below!</i>
             </div>
         </article>
         <p>

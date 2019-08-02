@@ -180,11 +180,12 @@ export default {
             return this.store.guild;
         },
     },
-    mounted() {
+    async mounted() {
         this.loadingElement = this.$loading.open({
             container: this.$refs.component
         });
-        this.$store.dispatch("retrieveConfig", this.guildId).finally(() => this.loadingElement.close());
+        await this.$store.dispatch("retrieveConfig", this.guildId);
+        this.loadingElement.close();
     },
     methods: {
         setIcon(icon) {

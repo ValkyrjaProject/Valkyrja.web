@@ -62,7 +62,6 @@ export default {
         if (this.required) {
             inputValue["required"] = required;
         }
-        console.log(this.storeName, inputValue);
         return {
             inputValue
         };

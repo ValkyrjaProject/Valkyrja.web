@@ -1,8 +1,5 @@
 describe("Config page", function () {
-    beforeEach(function () {
-        cy.clearCookies();
-    });
-    describe.skip("with server response", function () {
+    describe("with server response", function () {
         beforeEach(function () {
             cy.visit("/login");
             cy.url().should("match", /config/);
@@ -12,7 +9,7 @@ describe("Config page", function () {
             cy.get(".guild-column").find("img.image").should("have.class", "is-circular");
         });
 
-        it("can visit the config page", async () =>  {
+        it("can visit the config page", async () => {
             let secondServer = await cy.get(".guild-column:nth-child(2) .tooltip");
             cy.get(".guild-column:nth-child(2)").click();
             cy.contains(`Editing ${secondServer.attr("data-tooltip")}`);
@@ -36,29 +33,55 @@ describe("Config page", function () {
                 url: "/api/server/1",
                 response: guildResponse
             }).as("getConfig");
+        });
+
+        it("visits the config page", function () {
             cy.visit("/config/1");
+            cy.contains("h1#guild-heading", `Editing ${guildResponse["guild"]["name"]}`);
         });
 
-        it.skip("visits the config page", async () => {
-            cy.contains(`Editing ${guildResponse["guild"]["name"]}`);
-        });
-
-        it("should display newly changed command prefix on all config pages", function () {
-            cy.wait("@getConfig");
+        it("should display newly changed command prefix on all config pages", async () => {
+            cy.visit("/config/1");
+            await cy.wait("@getConfig");
             let prefix = cy.get("#command_prefix");
             prefix.clear();
             prefix.parent().siblings().contains("Cannot be empty");
+
             cy.get("#command_prefix").type(commandPrefix).type("1{backspace}");
 
             cy.get("#editGuildNav").contains("Antispam").click();
-            cy.contains(`${commandPrefix}permit @people`);
+            cy.contains("code", `${commandPrefix}permit @people`);
 
             cy.get("#editGuildNav").contains("Moderation").click();
-            cy.contains(`${commandPrefix}permissions`);
-            cy.contains(`${commandPrefix}join`);
-            cy.contains(`${commandPrefix}op`);
-            cy.contains(`${commandPrefix}quickban`);
-            cy.contains(`${commandPrefix}ban`);
+            cy.contains("code", `${commandPrefix}permissions`);
+            cy.contains("code", `${commandPrefix}join`);
+            cy.contains("code", `${commandPrefix}op`);
+            cy.contains("code", `${commandPrefix}quickban`);
+            cy.contains("code", `${commandPrefix}ban`);
+
+            cy.get("#editGuildNav").contains("Role Assignment").click();
+            cy.contains("code", `${commandPrefix}join`);
+
+            cy.get("#editGuildNav").contains("Logging").click();
+            cy.contains("code", `${commandPrefix}addWarning`);
+            cy.contains("code", `${commandPrefix}issueWarning`);
+            cy.contains("code", `${commandPrefix}join`);
+            cy.contains("code", `${commandPrefix}leave`);
+            cy.contains("code", `${commandPrefix}promote`);
+            cy.contains("code", `${commandPrefix}demote`);
+
+            cy.get("#editGuildNav").contains("New User / Verification").click();
+            cy.contains("code", `${commandPrefix}verify`);
+
+            cy.get("#editGuildNav").contains("Social (Levels & Karma)").click();
+            cy.contains("code", `${commandPrefix}memo`);
+            cy.contains("code", `${commandPrefix}give`);
+            cy.contains("code", `${commandPrefix}alias`);
+            cy.contains("code", `${commandPrefix}cookies`);
+            cy.contains("code", `${commandPrefix}nom`);
+
+            cy.get("#editGuildNav").contains("Custom Commands").click();
+            cy.contains("code", `${commandPrefix}help`);
         });
     });
 });
