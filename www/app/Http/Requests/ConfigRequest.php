@@ -225,6 +225,7 @@ class ConfigRequest extends FormRequest
             'profile_options.*.label'           => 'required|string|max:250',
             'profile_options.*.property_order'  => 'required|integer',
             'profile_options.*.inline'          => 'required|boolean',
+            'profile_channelid'                 => 'required|integer',
             'role_groups'                       => 'array',
             'role_groups.*'                     => 'array',
             'role_groups.*.groupid'             => 'required|integer',

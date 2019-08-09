@@ -426,7 +426,6 @@
                 <div class="form-inline form-group collapse" id="configLogging"><br/>
                     <p>
                         <b>Moderation Log Channel</b> - In which channel would you like to log the below configured events?
-                        <br/>
                         <type-selector init-id-type="mod_channelid" label="name"
                                        :default-value='{{ json_encode($guild['channels']->get(old('mod_channelid', $serverConfig["mod_channelid"]))) }}'
                                        :values='channels'></type-selector>
@@ -639,6 +638,12 @@
                         Setup profile fields in the editor below.
                         <br>
                         <profiles-editor form-name="profile_options"></profiles-editor>
+                    </p>
+                    <p>
+                        Optional channel for <code>@{{ command_prefix }}sendProfile</code> command, which will allow users to display their profile in this channel.
+                        <type-selector init-id-type="profile_channelid" label="name"
+                                       :default-value='{{ json_encode($guild['channels']->get(old('profile_channelid', $serverConfig["profile_channelid"]))) }}'
+                                       :values='channels'></type-selector>
                     </p>
                     <p class="form-inline">
                         <b>Activity Member role</b>
