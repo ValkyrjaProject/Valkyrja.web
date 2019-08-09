@@ -1331,6 +1331,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>sendProfile</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Send your profile to pre-configured <code>#introductions</code> channel.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>setProfile</h2>
                     <table class="command">
                     <tr>
