@@ -640,7 +640,7 @@
                         <profiles-editor form-name="profile_options"></profiles-editor>
                     </p>
                     <p>
-                        Optional channel for <code>@{{ command_prefix }}sendProfile</code> command, which will allow users to display their profile in this channel.
+                        Optional introduction channel for <code>@{{ command_prefix }}sendProfile</code> command, which will allow users to display their profile in this channel.
                         <type-selector init-id-type="profile_channelid" label="name"
                                        :default-value='{{ json_encode($guild['channels']->get(old('profile_channelid', $serverConfig["profile_channelid"]))) }}'
                                        :values='channels'></type-selector>
