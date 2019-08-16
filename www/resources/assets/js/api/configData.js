@@ -15,5 +15,8 @@ export default {
     },
     getUser() {
         return instance.get("/user");
-    }
+    },
+    postServerConfig(serverId, config) {
+        return instance.post(`/server/${serverId}`, config);
+    },
 };

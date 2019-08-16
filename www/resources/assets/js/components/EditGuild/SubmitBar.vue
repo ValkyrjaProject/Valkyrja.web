@@ -16,6 +16,7 @@
         </div>
         <div class="level-right">
             <button
+                id="submitButton"
                 class="level-item button is-link"
                 @click="$emit('submit')">Submit</button>
         </div>

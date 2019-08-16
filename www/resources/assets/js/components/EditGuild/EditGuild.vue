@@ -50,6 +50,7 @@ import Sticky from "vue-sticky-directive";
 import CustomCommandsConfig from "./Sections/CustomCommands/CustomCommandsConfig";
 import RoleAssignmentConfig from "./Sections/RoleAssignment/RoleAssignmentConfig";
 import {Config} from "../../models/Config";
+import configData from "../../api/configData";
 
 const tabs = [
     {
@@ -196,8 +197,7 @@ export default {
             if (!this.loadingElement._isDestroyed || !(config instanceof Config)) {
                 return;
             }
-            console.log(config.getChanges());
-            console.log(JSON.stringify(config.getChanges()));
+            configData.postServerConfig(this.guildId, JSON.stringify(config.getChanges()));
         }
     },
 };
