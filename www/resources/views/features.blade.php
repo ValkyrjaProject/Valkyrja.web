@@ -605,6 +605,23 @@
                     </tr>
                     </table>
                 </div>
+                <div class="features-indent">
+                    <h2>removeStreamPermission / announce</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Removes the <code>Go Live</code> permission from all the roles. This is a command to mittigate release of a new enabled-by-default Discord feature.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
 
                 <h1 class="features-h1">Commands ~ Moderator</h1>
                 <!--div class="features-indent">
