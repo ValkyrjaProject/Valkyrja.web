@@ -2,9 +2,13 @@
 
 namespace Valkyrja\Http\Controllers\Config;
 
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Valkyrja\Http\Controllers\Controller;
+use Valkyrja\Http\Requests\UpdateServerConfig;
 use Valkyrja\Models\ServerConfig;
 use Illuminate\Http\Request;
+use function MongoDB\BSON\toJSON;
 
 class ConfigController extends Controller
 {
@@ -13,7 +17,7 @@ class ConfigController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -24,7 +28,7 @@ class ConfigController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param $serverId
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit($serverId)
     {
@@ -36,13 +40,13 @@ class ConfigController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Valkyrja\ServerConfig $serverConfig
-     * @return \Illuminate\Http\Response
+     * @param  UpdateServerConfig $request
+     * @param  ServerConfig $serverConfig
+     * @return array
      */
-    public function update(Request $request, ServerConfig $serverConfig)
+    public function update(UpdateServerConfig $request, ServerConfig $serverConfig)
     {
-        echo 'test';
+        return $request->validated();
         // Expect to be authorized
         // replace Request method injection with form validation
         // Save to tables

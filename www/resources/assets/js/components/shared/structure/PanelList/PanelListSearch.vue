@@ -20,7 +20,7 @@
             </p>
             <p class="control">
                 <a
-                    class="button is-info is-small"
+                    class="button is-danger is-outlined is-small"
                     @click="$emit('clear')">
                     <i
                         class="mdi mdi-close"

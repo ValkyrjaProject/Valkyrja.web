@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         addCommand() {
-            let command = CustomCommand.newInstance(`Command ${this.commands.length}`);
+            let command = CustomCommand.newInstance(`command${this.commands.length}`);
             this.$store.dispatch("customCommands/addCommand", command);
         },
         changeCommand(command) {

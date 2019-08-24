@@ -192,12 +192,30 @@ export default {
         setIcon(icon) {
             return "icon mdi mdi-" + icon;
         },
-        submitForm() {
+        async submitForm() {
             let config = this.store.config;
             if (!this.loadingElement._isDestroyed || !(config instanceof Config)) {
                 return;
             }
-            configData.postServerConfig(this.guildId, JSON.stringify(config.getChanges()));
+            try {
+                const response = await configData.postServerConfig(this.guildId, config.getChanges());
+                let body = "";
+                if (response.response.status !== 204) {
+                    body = "";
+                }
+                else {
+
+                }
+                // create toast
+            }
+            catch (e) {
+                // If we have invalid data
+                if (e.response.status === 422) {
+                    // update state with API_VALIDATION_ERROR
+                }
+                // else update with API_SERVER_ERROR message
+                console.warn(e.response);
+            }
         }
     },
 };

@@ -3,6 +3,7 @@
 namespace Valkyrja\Http\Controllers\Config;
 
 use Valkyrja\Http\Controllers\Controller;
+use Valkyrja\Http\Requests\UpdateServerConfig;
 use Valkyrja\Logic\AuthenticateUserInterface;
 use Valkyrja\Logic\DiscordDataInterface;
 use Valkyrja\Policies\ServerConfigPolicy;
@@ -89,4 +90,21 @@ class ApiController extends Controller
             'avatar' => $user->getAvatar()
         ];
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  UpdateServerConfig $request
+     * @param  ServerConfig $serverConfig
+     * @return array
+     */
+    public function update(UpdateServerConfig $request, ServerConfig $serverConfig)
+    {
+        return $request->validated();
+        // Expect to be authorized
+        // replace Request method injection with form validation
+        // Save to tables
+        // Return 204 OK or errors
+    }
+
 }

@@ -23,4 +23,6 @@ Route::prefix('api')->namespace('Config')->middleware(['sessionHasDiscordToken',
     Route::get('/guilds', 'ApiController@guilds');
     Route::get('/user', 'ApiController@user');
     Route::get('/server/{serverId}', 'ApiController@config');
+    Route::post('/server/{serverId}', 'ApiController@update')
+        ->where('serverId', '[0-9]+');
 });
