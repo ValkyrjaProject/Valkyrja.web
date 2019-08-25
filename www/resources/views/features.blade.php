@@ -198,6 +198,40 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>createRoles</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Create roles with specified names.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>List of whitespace delimited <code>names</code>, use quotes to use spaces.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>createPublicRoles</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Create public roles with specified names.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>The first argument will be used as a name for the new role <code>group</code>, followed by a list of whitespace delimited <code>names</code>, use quotes to use spaces.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>createColourRoles</h2>
                     <table class="command">
                     <tr>
