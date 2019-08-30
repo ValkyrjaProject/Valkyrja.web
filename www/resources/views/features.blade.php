@@ -1318,11 +1318,11 @@
                     <table class="command">
                     <tr>
                         <td>Description</td>
-                        <td>Remove the last created quote.</td>
+                        <td>Remove the last created quote, or specify ID to be removed.</td>
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td>None</td>
+                        <td>None or <code>ID</code> of a quote</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
