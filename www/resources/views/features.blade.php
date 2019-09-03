@@ -181,6 +181,40 @@
                     </table>
                 </div-->
                 <div class="features-indent">
+                    <h2>cheatsheet</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Send an embed cheatsheet with various moderation commands and pin it.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>embed</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Build an embed.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Use without arguments for help.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>createRole</h2>
                     <table class="command">
                     <tr>
