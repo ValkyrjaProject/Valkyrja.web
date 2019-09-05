@@ -333,6 +333,23 @@
                     </tr>
                     </table>
                 </div>
+                <div class="features-indent">
+                    <h2>addEmojiRole</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Add an emoji reaction assigned role to a message.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>messageId</code> <code>emoji</code> <code>roleId or name expression</code></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
                 <!--div class="features-indent">
                     <h2>mentionMembersOf</h2>
                     <table class="command">
