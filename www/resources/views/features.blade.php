@@ -1348,6 +1348,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>findQuote</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Search for a quote with a message content expression.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Expression to search for</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>addQuote</h2>
                     <table class="command">
                     <tr>
