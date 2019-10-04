@@ -727,6 +727,23 @@
                     </table>
                 </div-->
                 <div class="features-indent">
+                    <h2>slow</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Enable or disable slowmode in the current channel.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>A number specifying message interval in seconds.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>clear</h2>
                     <table class="command">
                     <tr>
