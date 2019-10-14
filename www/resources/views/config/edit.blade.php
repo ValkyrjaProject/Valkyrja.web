@@ -426,6 +426,7 @@
                 <div class="form-inline form-group collapse" id="configLogging"><br/>
                     <p>
                         <b>Moderation Log Channel</b> - In which channel would you like to log the below configured events?
+                        <br/>
                         <type-selector init-id-type="mod_channelid" label="name"
                                        :default-value='{{ json_encode($guild['channels']->get(old('mod_channelid', $serverConfig["mod_channelid"]))) }}'
                                        :values='channels'></type-selector>
