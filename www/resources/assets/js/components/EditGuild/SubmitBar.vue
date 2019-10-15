@@ -4,7 +4,7 @@
             <div class="level-item">
                 <figure class="image is-32x32 is-circular">
                     <img
-                        :src="guild.icon"
+                        :src="guild ? guild.icon: ''"
                         class="is-circular">
                 </figure>
             </div>

@@ -182,7 +182,7 @@ export default {
         },
     },
     async mounted() {
-        this.loadingElement = this.$loading.open({
+        this.loadingElement = this.$buefy.loading.open({
             container: this.$refs.component
         });
         await this.$store.dispatch("retrieveConfig", this.guildId);
@@ -200,21 +200,34 @@ export default {
             try {
                 const response = await configData.postServerConfig(this.guildId, config.getChanges());
                 let body = "";
-                if (response.response.status !== 204) {
+                if (response.status !== 204) {
                     body = "";
                 }
                 else {
 
                 }
-                // create toast
+                this.$buefy.toast.open({
+                    message: "Config saved!",
+                    type: "is-success"
+                });
             }
             catch (e) {
                 // If we have invalid data
                 if (e.response.status === 422) {
                     // update state with API_VALIDATION_ERROR
+                    this.$buefy.toast.open({
+                        message: "API Validation error!",
+                        type: "is-warning"
+                    });
+                }
+                else {
+                    this.$buefy.toast.open({
+                        message: "Server error!",
+                        type: "is-danger"
+                    });
                 }
                 // else update with API_SERVER_ERROR message
-                console.warn(e.response);
+                console.warn(e);
             }
         }
     },
