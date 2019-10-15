@@ -18,7 +18,6 @@
             <p><i>
                 Former Game Programmer, .NET Core Quality Engineering Lead & Community Manager, MountainBiker and an Evul Chick wearing her Red Hat, inspiring the desolate whitespace of Linux world with the delicate C# letters of simplified artificial intelligence.
             </i></p>
-            <span class="email"><a href="emailto:rhea@valkyrja.app">rhea@valkyrja.app</a></span>
             <div class="icons spaced">
                 <a href="http://rhea-ayase.eu"><img src="/img/external.png" alt="Rhea's website"></a>
                 <a href="https://github.com/RheaAyase"><img src="/img/github.png" alt="github.com/RheaAyase"></a>
@@ -38,7 +37,6 @@
             <p><i>
                 Crafts websites. Also a professional slacker.
             </i></p>
-            <span class="email"><a href="emailto:spytec@valkyrja.app">spytec@valkyrja.app</a></span>
             <div class="icons spaced">
                 <a href="https://edassets.org"><img src="/img/external.png" alt="SpyTec's EDAssets website"></a>
                 <a href="https://github.com/SpyTec"><img src="/img/github.png" alt="github.com/SpyTec"></a>
