@@ -546,7 +546,24 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td><code>CommandID</code> (that long number) and <code>true</code> or <code>false</code>, whether set it to delete or not.</td>
+                        <td><code>CommandID</code> and <code>true</code> or <code>false</code>, whether set it to delete or not.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>deleteReply</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Set a command to have the response message automatically deleted in a few seconds. NOTE that only a few commands actually support this feature!</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>CommandID</code> and <code>true</code> or <code>false</code>, whether set it to delete or not.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -761,6 +778,23 @@
                     <tr>
                         <td>Example</td>
                         <td><code>!clear 3 @user</code> - removes the last three messages sent by the user.</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>nuke</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Deletes all the messages in the channel (within two weeks.)</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Optional <code>@user</code> mentions or ID's to delete only messages from specific users.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
                     </tr>
                     </table>
                 </div>
