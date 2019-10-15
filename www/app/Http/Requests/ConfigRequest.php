@@ -151,6 +151,7 @@ class ConfigRequest extends FormRequest
             'karma_consume_command'             => 'required|string|max:255',
             'karma_consume_verb'                => 'required|string|max:255',
             'log_channelid'                     => 'required|integer',
+            'alert_role_mention'                => 'required|integer',
             'alert_channelid'                   => 'required|integer',
             'mod_channelid'                     => 'required|integer',
             'tempchannel_categoryid'            => 'required|integer',

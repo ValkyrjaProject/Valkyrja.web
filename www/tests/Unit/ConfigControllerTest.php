@@ -161,6 +161,7 @@ class ConfigControllerTest extends TestCase
                 'karma_consume_verb' => str_random(255),
                 'alert_channelid' => random_int(0, PHP_INT_MAX),
                 'log_channelid' => random_int(0, PHP_INT_MAX),
+                'alert_role_mention' => random_int(0, PHP_INT_MAX),
                 'mod_channelid' => random_int(0, PHP_INT_MAX),
                 'log_bans' => random_int(0,1),
                 'log_promotions' => random_int(0,1),
