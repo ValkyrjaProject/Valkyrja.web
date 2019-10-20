@@ -138,6 +138,9 @@
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
                         Kick users if they do not get a role (by verifying via a command, reaction role, or our code verification) a little while after joining.
+                        <br/>
+                        @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
+                        Log these into the moderation channel (requires mod channel to be configured in the Logging section below.)
                     </p>
                     <p>
                         <b>Ban username-spammers as they join</b>
