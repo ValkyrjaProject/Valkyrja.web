@@ -1,5 +1,19 @@
 #Changelog
 
+**Valkyrja 3.6** - 23rd of October, 2019
+  * `!embed` - you can now use a complex embeds for more fancy info channels! (Use it without parameters for more details.)
+  * `!slow` - enable/disable slowmode (use with a number specifying the message interval to enable it.)
+  * `!cheatsheet` - send and pin two embeds with a few basic moderation commands, and moderation communication tips.
+  * `!createRoles` - Create roles with specified names and no permissions.
+  * `!createPublicRoles` - Same as the above, but it will also create a named group of public roles.
+  * `!findQuote` - Search for a quote with a message content expression.
+  * `!removeQuote [id]` - you can now specify an ID of a quote to be removed. (This will effectively replace that ID with the last created quote.)
+  * `!sendProfile` - use to send your prepared profile (with `setProfile`) to a pre-configured introductions channel (see webconfig)
+  * `!removeStreamPermission` - Removes the stream permission from all the roles where Discord enabled it by default. (After which you can enable it for members only as you only wish.)
+  * `Alert` logging feature - you can now configure a role mention for notifications.
+  * `Logging` as whole went through an overhaul to ensure smooth function even under high load (e.g. you're banning 300 spam bots using a single `ban` command. Yes that happened a few times.) This means that you may encounter many groupped logging messages into a single Discord message, or even a file upload from the bot with all of your logs if it's just too much.
+  * We've also upgraded our router, introduced more and more relyability to the servers, and other behind the scenes tweaks!
+
 **Valkyrja 3.5** - 29th of July, 2019
   * New Antispam options:
     * Remove known Porn links (if you find any new spam, let us know!)
