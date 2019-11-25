@@ -1,5 +1,5 @@
 <template>
-    <div class="box has-background-white-bis">
+    <div id="publicRoleSelector" class="box has-background-white-bis">
         <div class="columns">
             <div class="column is-one-third">
                 <public-role-selector-group
@@ -9,12 +9,12 @@
             </div>
             <panel-list
                 v-model="availableRoles"
-                class="column roles is-one-third"
+                class="column roles is-one-third availableRoles"
                 title="Available Roles"
             />
             <panel-list
                 v-model="addedRoles"
-                class="column roles is-one-third"
+                class="column roles is-one-third addedRoles"
                 title="Added Roles"
             />
         </div>

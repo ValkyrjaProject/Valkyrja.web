@@ -7,9 +7,18 @@ export default class PublicGroup extends ConfigData {
         let group = new PublicGroup();
         group.id = id;
         group.value = {};
+        group.groupid = id;
         group.name = name;
         group.role_limit = role_limit;
         return group;
+    }
+
+    set groupid(id) {
+        this.value["groupid"] = id;
+    }
+
+    get groupid() {
+        return this.value["groupid"];
     }
 
     set role_limit(role_limit) {

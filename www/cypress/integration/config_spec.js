@@ -109,6 +109,14 @@ describe("Config page", function () {
             cy.get("#editGuildNav").contains("Logging").click();
             cy.get("#embed_modchannel").siblings("label").click();
 
+            cy.get("#editGuildNav").contains("Role Assignment").click();
+            cy.get("#publicRoleSelector .add-public-group").click();
+            cy.get("#publicRoleSelector").get(".groupName").clear().type("groupName");
+            for (let i = 0; i < 3; i++) {
+                cy.get("#publicRoleSelector").get(".availableRoles .listItem").eq(i).click({force: true});
+            }
+
+
             cy.get("#editGuildNav").contains("Moderation").click();
             let quickBanReason = cy.get("#quickban_reason");
             quickBanReason.clear();
@@ -119,7 +127,40 @@ describe("Config page", function () {
                 expect(xhr.request.body).to.deep.equal({
                     "command_prefix": commandPrefix,
                     "embed_modchannel": 1,
-                    "quickban_reason": "text message"
+                    "quickban_reason": "text message",
+                    "role_groups": {
+                        "1": {
+                            "groupid": 1,
+                            "name": "groupName",
+                            "role_limit": 1
+                        }
+                    },
+                    "roles": {
+                        "8197542": {
+                            "antispam_ignored": 0,
+                            "level": 0,
+                            "logging_ignored": 0,
+                            "permission_level": 1,
+                            "public_id": 1,
+                            "roleid": "8197542"
+                        },
+                        "17710063": {
+                            "antispam_ignored": 0,
+                            "level": 0,
+                            "logging_ignored": 0,
+                            "permission_level": 1,
+                            "public_id": 1,
+                            "roleid": "17710063"
+                        },
+                        "71420240": {
+                            "antispam_ignored": 0,
+                            "level": 0,
+                            "logging_ignored": 0,
+                            "permission_level": 1,
+                            "public_id": 1,
+                            "roleid": "71420240"
+                        }
+                    }
                 });
             });
         });
