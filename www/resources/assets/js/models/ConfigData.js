@@ -6,6 +6,10 @@ export class ConfigData {
     original_value = EmptyData.singleton();
     error_data; // Same ErrorData createInstance as in ConfigErrors
 
+    constructor() {
+        this.unique_id = Date.now().toString(36) + Math.random().toString(36).substr(2);;
+    }
+
     /**
      * @param id
      * @param value

@@ -27,7 +27,7 @@
                         <component
                             v-for="(item, idx) in searchedList"
                             :is="listItem"
-                            :key="idx + item"
+                            :key="item.unique_id"
                             :item="item"
                             :item-icon="itemIcon"
                             :class="itemClass(item, idx)"
