@@ -4,6 +4,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import RoleSelector from "../../../../../../../resources/assets/js/components/EditGuild/Sections/Moderation/RoleSelector/RoleSelector";
+import RoleSelectorType from "../../../../../../../resources/assets/js/components/EditGuild/Sections/Moderation/RoleSelector/RoleSelectorType";
+import PanelList from "../../../../../../../resources/assets/js/components/shared/structure/PanelList/PanelList";
 import {PublicRole} from "../../../../../../../resources/assets/js/models/PublicRole";
 
 let localVue = Vue.use(Vuex);
@@ -54,25 +56,25 @@ describe("RoleSelector", function () {
     });
 
     it("should have 1 RoleSelectorType", function () {
-        expect(wrapper.findAll("roleselectortype-stub").length).to.equal(1);
+        expect(wrapper.findAll(RoleSelectorType).length).to.equal(1);
     });
 
     it("should have 2 PanelLists", function () {
-        expect(wrapper.findAll("panellist-stub").length).to.equal(2);
+        expect(wrapper.findAll(PanelList).length).to.equal(2);
     });
 
     it("sends available roles to left panel-list", function () {
-        expect(wrapper.findAll("panellist-stub").at(0).props().value).to.equal(getters.availableRoles());
+        expect(wrapper.findAll(PanelList).at(0).props().value).to.equal(getters.availableRoles());
         state.availableRoles.push(PublicRole.createNewRole(1));
         state.availableRoles.push(PublicRole.createNewRole(2));
-        expect(wrapper.findAll("panellist-stub").at(0).props().value).to.equal(getters.availableRoles());
+        expect(wrapper.findAll(PanelList).at(0).props().value).to.equal(getters.availableRoles());
     });
 
     it("sends added roles to right panel-list", function () {
-        expect(wrapper.findAll("panellist-stub").at(1).props().value).to.equal(getters.addedRoles()());
+        expect(wrapper.findAll(PanelList).at(1).props().value).to.equal(getters.addedRoles()());
         state.addedRoles.push(PublicRole.createNewRole(1));
         state.addedRoles.push(PublicRole.createNewRole(2));
-        expect(wrapper.findAll("panellist-stub").at(1).props().value).to.equal(getters.addedRoles()());
+        expect(wrapper.findAll(PanelList).at(1).props().value).to.equal(getters.addedRoles()());
     });
 
     it("should not dispatch add role when availableRoles is not called", function () {

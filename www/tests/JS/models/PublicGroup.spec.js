@@ -43,7 +43,7 @@ describe("PublicGroup", function () {
             let name = "name";
             let role_limit = 3;
             let group = PublicGroup.createInstance(id, role_limit, name);
-            expect(group.value).to.eql({name, role_limit});
+            expect(group.value).to.eql({groupid: id, name, role_limit});
         });
     });
 

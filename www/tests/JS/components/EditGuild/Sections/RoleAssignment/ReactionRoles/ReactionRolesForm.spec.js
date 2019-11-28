@@ -4,6 +4,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import ReactionRolesForm from "components/EditGuild/Sections/RoleAssignment/ReactionRoles/ReactionRolesForm";
+import ReactionRolesEmoji from "components/EditGuild/Sections/RoleAssignment/ReactionRoles/ReactionRolesEmoji";
 let localVue = Vue.use(Vuex);
 
 describe("ReactionRolesForm", function () {
@@ -67,7 +68,7 @@ describe("ReactionRolesForm", function () {
         });
 
         it("should have a paddingless panel-block with reaction-roles-emoji", function () {
-            expect(wrapper.find(".panel-block.is-paddingless > reactionrolesemoji-stub").exists()).to.be.true;
+            expect(wrapper.find(".panel-block.is-paddingless").find(ReactionRolesEmoji).exists()).to.be.true;
         });
 
         it("should hide reaction-roles-emoji if disabled prop", function () {

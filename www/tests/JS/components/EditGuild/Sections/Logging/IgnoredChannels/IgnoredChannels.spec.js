@@ -4,6 +4,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {expect} from "chai";
 import IgnoredChannels from "components/EditGuild/Sections/Logging/IgnoredChannels/IgnoredChannels";
+import * as _ from "lodash";
 import PanelList from "components/shared/structure/PanelList/PanelList";
 import {Channel} from "models/Channel";
 

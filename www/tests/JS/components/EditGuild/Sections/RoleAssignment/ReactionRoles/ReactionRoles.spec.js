@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import {expect} from "chai";
 import ReactionRoles from "components/EditGuild/Sections/RoleAssignment/ReactionRoles/ReactionRoles";
 import ReactionRole from "../../../../../../../resources/assets/js/models/ReactionRole";
+import ReactionRolesForm from "../../../../../../../resources/assets/js/components/EditGuild/Sections/RoleAssignment/ReactionRoles/ReactionRolesForm";
 
 let localVue = Vue.use(Vuex);
 
@@ -68,7 +69,7 @@ describe("ReactionRoles", function () {
         });
 
         it("should have ReactionRolesForm as second column", function () {
-            expect(wrapper.findAll(".columns > .column").at(1).find("reactionrolesform-stub").exists()).to.be.true;
+            expect(wrapper.findAll(".columns > .column").at(1).find(ReactionRolesForm).exists()).to.be.true;
         });
 
         it("should have one third on first column", function () {
@@ -109,9 +110,10 @@ describe("ReactionRoles", function () {
         describe("addRole", function () {
             it("should dispatch 'reactionRoles/addReactionRole' with a new ReactionRole instance containing empty id and empty array as value", function () {
                 wrapper.vm.addRole();
-                let role = ReactionRole.newInstance("", []);
+                const role = ReactionRole.newInstance("", []);
                 expect(actions.addReactionRole.calledOnce).to.be.true;
-                expect(actions.addReactionRole.getCall(0).args[1]).to.eql(role);
+                expect(actions.addReactionRole.getCall(0).args[1].id).to.eql(role.id);
+                expect(actions.addReactionRole.getCall(0).args[1].value).to.eql(role.value);
             });
         });
 

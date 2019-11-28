@@ -58,16 +58,16 @@ describe("PublicRoleSelector", function () {
     });
 
     it("should have 1 PublicRoleSelectorGroup", function () {
-        expect(wrapper.findAll("publicroleselectorgroup-stub")).to.have.length(1);
+        expect(wrapper.findAll(PublicRoleSelectorGroup)).to.have.length(1);
     });
 
     it("should have 2 PanelLists", function () {
-        expect(wrapper.findAll("panellist-stub")).to.have.length(2);
+        expect(wrapper.findAll(PanelList)).to.have.length(2);
     });
 
     it("sends true to PublicRoleSelectorGroup isActive prop if Public type is selected", function () {
         state.selectedType = types.Public;
-        expect(wrapper.find("publicroleselectorgroup-stub").attributes("isactive")).to.equal("true");
+        expect(wrapper.find(PublicRoleSelectorGroup).attributes("isactive")).to.equal("true");
     });
 
     it("sends false to PublicRoleSelectorGroup isActive prop if non-Public type is selected", function () {
