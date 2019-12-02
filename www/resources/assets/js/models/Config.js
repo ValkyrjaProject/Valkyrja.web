@@ -144,6 +144,10 @@ export class Config {
         this.config_data[id] = configData;
     }
 
+    hasChanged() {
+        return _.isEmpty(this.getChanges());
+    }
+
     getChanges() {
         let changes = {};
         /** @member {ConfigData} config */

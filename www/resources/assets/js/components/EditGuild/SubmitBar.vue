@@ -15,10 +15,13 @@
             </div>
         </div>
         <div class="level-right">
-            <button
+            <b-button
                 id="submitButton"
-                class="level-item button is-link"
-                @click="$emit('submit')">Submit</button>
+                :loading="isLoading"
+                :disabled="isDisabled"
+                class="level-item"
+                type="is-link"
+                @click="$emit('submit')">Submit</b-button>
         </div>
     </nav>
 </template>
@@ -31,6 +34,16 @@ export default {
             type: Object,
             required: true,
         },
+        isDisabled: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        isLoading: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
     },
     computed: {
         name() {

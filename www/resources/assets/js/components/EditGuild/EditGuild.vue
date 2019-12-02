@@ -2,6 +2,8 @@
     <div class="edit-guild-container column has-background-white has-radius-small">
         <submit-bar
             :guild="guild"
+            :is-disabled="configHasChanged"
+            :is-loading="submitting"
             @submit="submitForm"/>
         <validation-errors-bar v-if="false" />
         <div class="columns">
@@ -174,6 +176,7 @@ export default {
         return {
             tabs: tabs,
             loadingElement: null,
+            submitting: false,
         };
     },
     computed: {
@@ -183,6 +186,13 @@ export default {
         guild() {
             return this.store.guild;
         },
+        configHasChanged() {
+            const config = this.store.config;
+            if (config instanceof Config) {
+                return this.store.config.hasChanged();
+            }
+            return true;
+        }
     },
     async mounted() {
         this.loadingElement = this.$buefy.loading.open({
@@ -197,6 +207,7 @@ export default {
         },
         async submitForm() {
             let config = this.store.config;
+            this.submitting = true;
             if (!this.loadingElement._isDestroyed || !(config instanceof Config)) {
                 return;
             }
@@ -225,6 +236,9 @@ export default {
                 }
                 // else update with API_SERVER_ERROR message
                 console.warn(e);
+            }
+            finally {
+                this.submitting = false;
             }
         }
     },
