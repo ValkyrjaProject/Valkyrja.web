@@ -15,7 +15,7 @@
                 class="icon is-small">
                 <i
                     :class="'mdi mdi-' + itemIcon"
-                    aria-hidden="true"></i>
+                    aria-hidden="true"/>
             </span>
             {{ props.option.toString() }}
         </template>
@@ -27,7 +27,7 @@
                 class="icon is-small">
                 <i
                     :class="'mdi mdi-' + itemIcon"
-                    aria-hidden="true"></i>
+                    aria-hidden="true"/>
             </span>
             {{ props.option.toString() }}
         </template>

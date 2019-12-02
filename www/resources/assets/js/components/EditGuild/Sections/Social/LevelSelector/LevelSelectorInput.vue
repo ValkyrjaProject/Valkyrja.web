@@ -25,7 +25,7 @@
                             @click="addLevel(currentLevelValue)">
                             <i
                                 class="mdi mdi-plus"
-                                aria-hidden="true"></i>
+                                aria-hidden="true"/>
                         </a>
                     </div>
                 </div>

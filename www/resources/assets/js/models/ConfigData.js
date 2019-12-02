@@ -7,7 +7,7 @@ export class ConfigData {
     error_data; // Same ErrorData createInstance as in ConfigErrors
 
     constructor() {
-        this.unique_id = Date.now().toString(36) + Math.random().toString(36).substr(2);;
+        this.unique_id = Date.now().toString(36) + Math.random().toString(36).substr(2);
     }
 
     /**

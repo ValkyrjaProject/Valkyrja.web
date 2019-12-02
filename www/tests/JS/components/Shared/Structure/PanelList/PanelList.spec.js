@@ -130,7 +130,7 @@ describe("PanelList", function () {
     it("should emit 'input' if list item component emits 'enter' and search query has value", function () {
         expect(wrapper.emitted().input).to.be.undefined;
         wrapper.setData({searchQuery: propsData.value[0].toString()});
-        wrapper.find("panellistsearch-stub").vm.$emit("enter");
+        wrapper.find(PanelListSearch).vm.$emit("enter");
         expect(wrapper.emitted().input).to.not.be.undefined;
         expect(wrapper.emitted().input.length).to.equal(1);
     });
@@ -145,7 +145,7 @@ describe("PanelList", function () {
     it("should set search query to empty if item component emits 'enter'", function () {
         wrapper.setData({searchQuery: propsData.value[0].toString()});
         expect(wrapper.vm.searchQuery).to.equal(propsData.value[0].toString());
-        wrapper.find("panellistsearch-stub").vm.$emit("enter");
+        wrapper.find(PanelListSearch).vm.$emit("enter");
         expect(wrapper.vm.searchQuery).to.be.empty;
     });
 
