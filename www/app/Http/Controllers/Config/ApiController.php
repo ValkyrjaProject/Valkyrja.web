@@ -73,12 +73,12 @@ class ApiController extends Controller
         if (is_null($guild)) {
             return response()->json(["error" => "Valkyrja cannot retrieve guild details!"]);
         }
-        $guild->put('config', $serverConfig->with([
+        $guild->put('config', $serverConfig->load([
                 'roles',
                 'channels',
                 'custom_commands',
                 'profile_options'
-            ])->get()->jsonSerialize());
+            ])->jsonSerialize());
         return response()->json($guild->jsonSerialize());
     }
 
