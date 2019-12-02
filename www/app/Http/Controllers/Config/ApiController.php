@@ -2,6 +2,7 @@
 
 namespace Valkyrja\Http\Controllers\Config;
 
+use Illuminate\Http\JsonResponse;
 use Valkyrja\Http\Controllers\Controller;
 use Valkyrja\Http\Requests\UpdateServerConfig;
 use Valkyrja\Logic\AuthenticateUserInterface;
@@ -63,19 +64,22 @@ class ApiController extends Controller
     /**
      * @param DiscordDataInterface $discord
      * @param ServerConfig $serverConfig
-     * @param string $serverId
-     * @return array
+     * @return JsonResponse
      */
-    public function config(DiscordDataInterface $discord, ServerConfig $serverConfig, $serverId)
+    public function config(DiscordDataInterface $discord, ServerConfig $serverConfig)
     {
-        $server = $serverConfig->where('serverid', $serverId)->first();
-        $guild = $discord->getGuild($serverId);
+        $guild = $discord->getGuild($serverConfig->serverid);
 
         if (is_null($guild)) {
             return response()->json(["error" => "Valkyrja cannot retrieve guild details!"]);
         }
-        $guild->put('config', $server->jsonSerializeApi());
-        return $guild->jsonSerialize();
+        $guild->put('config', $serverConfig->with([
+                'roles',
+                'channels',
+                'custom_commands',
+                'profile_options'
+            ])->get()->jsonSerialize());
+        return response()->json($guild->jsonSerialize());
     }
 
     /**
@@ -94,17 +98,17 @@ class ApiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateServerConfig $request
-     * @param  ServerConfig $serverConfig
-     * @return array
+     * @param UpdateServerConfig $request
+     * @param ServerConfig $serverConfig
+     * @return JsonResponse
      */
     public function update(UpdateServerConfig $request, ServerConfig $serverConfig)
     {
-        return $request->validated();
-        // Expect to be authorized
+        $serverConfig->update($request->validated());
+
+        return response()->json(null, 204);
         // replace Request method injection with form validation
         // Save to tables
         // Return 204 OK or errors
     }
-
 }

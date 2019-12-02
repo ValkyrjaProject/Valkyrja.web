@@ -3,6 +3,7 @@
 namespace Valkyrja\Logic;
 
 use App;
+use Exception;
 use Illuminate\Support\Collection;
 use RestCord\DiscordClient;
 
@@ -50,7 +51,7 @@ class DiscordData implements DiscordDataInterface
             $guild->roles = $this->discordClient->guild->getGuildRoles($guildId);
             $guild->channels = $this->discordClient->guild->getGuildChannels($guildId);
             $guildData->put('guild', $guild);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             report($exception);
             $guildData = null;
         }

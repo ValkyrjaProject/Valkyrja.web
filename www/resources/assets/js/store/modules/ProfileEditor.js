@@ -1,7 +1,7 @@
 import {Config} from "../../models/Config";
 import {Guild} from "../../models/Guild";
 import {Profile} from "../../models/Profile";
-import {ADD_ARRAY_OBJECT} from "../mutation_types";
+import {ADD_ARRAY_OBJECT, REMOVE_ARRAY_OBJECT} from "../mutation_types";
 
 const state = {
     /** @member {Profile|null} */
@@ -31,8 +31,19 @@ const actions = {
             value: profile,
         }, { root: true });
     },
-    setSelectedProfile({commit, state}, profile) {
+    deleteProfile({commit, state}, profile) {
         if (!(profile instanceof Profile)) {
+            let error = `Object is not of type Profile, it is of type ${profile.constructor.name}`;
+            log.error(error);
+            throw new TypeError(error);
+        }
+        commit(REMOVE_ARRAY_OBJECT, {
+            id: "profile_options",
+            value: profile,
+        }, { root: true });
+    },
+    setSelectedProfile({commit, state}, profile) {
+        if (!(!profile || profile instanceof Profile)) {
             let error = `Object is not of type Profile, it is of type ${profile.constructor.name}`;
             log.error(error);
             throw new TypeError(error);

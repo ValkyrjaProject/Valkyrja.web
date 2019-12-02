@@ -22,7 +22,7 @@ Route::prefix('config')->namespace('Config')->middleware(['sessionHasDiscordToke
 Route::prefix('api')->namespace('Config')->middleware(['sessionHasDiscordToken', 'auth.discord'])->group(function () {
     Route::get('/guilds', 'ApiController@guilds');
     Route::get('/user', 'ApiController@user');
-    Route::get('/server/{serverId}', 'ApiController@config');
-    Route::post('/server/{serverId}', 'ApiController@update')
+    Route::get('/server/{serverConfig}', 'ApiController@config');
+    Route::post('/server/{serverConfig}', 'ApiController@update')
         ->where('serverId', '[0-9]+');
 });

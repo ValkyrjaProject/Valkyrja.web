@@ -36,21 +36,4 @@ class ConfigController extends Controller
             'serverId' => $serverId
         ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  UpdateServerConfig $request
-     * @param  ServerConfig $serverConfig
-     * @return array
-     */
-    public function update(UpdateServerConfig $request, ServerConfig $serverConfig)
-    {
-        return $request->validated();
-        // Expect to be authorized
-        // replace Request method injection with form validation
-        // Save to tables
-        // Redirect with message
-    }
-
 }

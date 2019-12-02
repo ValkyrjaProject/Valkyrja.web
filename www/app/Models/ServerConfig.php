@@ -15,6 +15,11 @@ class ServerConfig extends Model
         'invite_url',
         'localisation_id'
     ];
+    protected $hidden = [
+        'name',
+        'invite_url',
+        'localisation_id'
+    ];
 
     protected $casts = [
         'serverid' => 'string',
@@ -64,7 +69,7 @@ class ServerConfig extends Model
         return preg_match('/^color_/', $key);
     }
 
-    public function customCommands()
+    public function custom_commands()
     {
         return $this->hasMany('Valkyrja\Models\CustomCommand');
     }
@@ -79,11 +84,20 @@ class ServerConfig extends Model
         return $this->hasMany('Valkyrja\Models\Role');
     }
 
-    public function profileOptions()
+    public function profile_options()
     {
         return $this->hasMany('Valkyrja\Models\ProfileOption');
     }
 
+    public function role_groups()
+    {
+        return $this->hasMany('Valkyrja\Models\RoleGroups');
+    }
+
+    public function reaction_roles()
+    {
+        return $this->hasMany('Valkyrja\Models\ReactionRoles');
+    }
 
     /**
      * Used for hasMany() relations. Would otherwise default to wrong key
@@ -94,14 +108,14 @@ class ServerConfig extends Model
         return $this->primaryKey;
     }
 
-    public function updateCustomCommands($commands)
+    public function setCustomCommandsAttribute($commands)
     {
         if (!is_array($commands) && count($commands) == 0) {
             return false;
         }
-        $this->customCommands()->whereNotIn('commandid', $commands)->delete();
+        $this->custom_commands()->whereNotIn('commandid', $commands)->delete();
         foreach ($commands as $command) {
-            $this->customCommands()->updateOrInsert(
+            $this->custom_commands()->updateOrInsert(
                 [
                     'serverid' => $this->serverid,
                     'commandid' => $command['commandid']
@@ -110,7 +124,7 @@ class ServerConfig extends Model
         return true;
     }
 
-    public function updateChannels($channels)
+    public function setChannelsAttribute($channels)
     {
         if (!is_array($channels) && count($channels) == 0) {
             return false;
@@ -126,7 +140,23 @@ class ServerConfig extends Model
         return true;
     }
 
-    public function updateRoles($roles)
+    public function setRoleAttribute($role_groups)
+    {
+        if (!is_array($role_groups) && count($role_groups) == 0) {
+            return false;
+        }
+        $commandKeys = array_column($role_groups, 'groupid');
+        $toBeDeleted = $this->role_groups()->whereNotIn('groupid', $commandKeys);
+        if ($toBeDeleted->count() > 0) {
+            $toBeDeleted->delete();
+        }
+        foreach ($role_groups as $role_group) {
+            $this->role_groups()->updateOrCreate(['groupid' => $role_group['groupid']], $role_group);
+        }
+        return true;
+    }
+
+    public function setRolesAttribute($roles)
     {
         if (!is_array($roles) && count($roles) == 0) {
             return false;
@@ -142,6 +172,52 @@ class ServerConfig extends Model
         return true;
     }
 
+    public function setProfileOptionsAttribute($profile_options)
+    {
+        if (!is_array($profile_options) && count($profile_options) == 0) {
+            return false;
+        }
+        $commandKeys = array_column($profile_options, 'option');
+        $toBeDeleted = $this->profile_options()->whereNotIn('option', $commandKeys);
+        if ($toBeDeleted->count() > 0) {
+            $toBeDeleted->delete();
+        }
+        foreach ($profile_options as $profile_option) {
+            $this->profile_options()->updateOrCreate(['option' => $profile_option['option']], $profile_option);
+        }
+        return true;
+    }
+
+    public function setReactionRolesAttribute($reaction_roles)
+    {
+        if (!is_array($reaction_roles) && count($reaction_roles) == 0) {
+            return false;
+        }
+        $data_reaction_roles = collect();
+        foreach ($reaction_roles as $messageid => $values) {
+            foreach ($values as $value) {
+                $newRole = $value;
+                $newRole['messageid'] = (string) $messageid;
+                $data_reaction_roles->push($newRole);
+            }
+        }
+        $toBeDeleted = $this->reaction_roles()->get()->reject(function ($role) use(&$data_reaction_roles){
+            return $data_reaction_roles->contains(function ($request_role) use(&$role){
+                if ($request_role['messageid'] === $role['messageid'] && $request_role['roleid'] === $role['roleid'])
+                    return true;
+            });
+        });
+        $this->reaction_roles()->delete($toBeDeleted);
+        foreach ($data_reaction_roles as $reaction_role) {
+            $this->reaction_roles()->updateOrCreate([
+                'messageid' => $reaction_role['messageid'],
+                'emoji' => $reaction_role['emoji'],
+                'roleid' => $reaction_role['roleid'],
+            ], $reaction_role);
+        }
+        return true;
+    }
+
     public function createNew($id)
     {
         return new ServerConfig($id);
@@ -149,13 +225,6 @@ class ServerConfig extends Model
 
     public function jsonSerializeApi()
     {
-        $this->roles = $this->roles()->get()->jsonSerialize();
-        $this->channels = $this->channels()->get()->jsonSerialize();
-        $this->custom_commands = $this->customCommands()->get()->jsonSerialize();
-        $this->profile_options = $this->profileOptions()->get()->jsonSerialize();
-        foreach ($this->guarded as $guard) {
-            unset($this->{$guard});
-        }
         return parent::jsonSerialize(); // TODO: Change the autogenerated stub
     }
 }

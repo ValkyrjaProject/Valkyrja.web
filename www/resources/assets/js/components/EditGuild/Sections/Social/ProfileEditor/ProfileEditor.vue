@@ -9,7 +9,8 @@
                 class="column is-two-fifths options"
                 title="Profiles"
                 @input="selectedProfile = $event"
-                @add="addProfile()"
+                @add="addProfile"
+                @remove="deleteProfile"
             />
             <div class="column">
                 <div class="panel panel-parent">
@@ -162,6 +163,10 @@ export default {
             this.$store.dispatch("profileEditor/addProfile", profile);
             this.selectedProfile = profile;
         },
+        deleteProfile(profile) {
+            this.$store.dispatch("profileEditor/deleteProfile", profile);
+            this.selectedProfile = this.selectedProfile === profile ? null : this.selectedProfile;
+        }
     }
 };
 </script>

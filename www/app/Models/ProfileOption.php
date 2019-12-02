@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfileOption extends Model
 {
+    public $table = "profile_options";
     public $timestamps = false;
     protected $primaryKey = 'option';
     protected $fillable = [

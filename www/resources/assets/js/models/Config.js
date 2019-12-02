@@ -72,26 +72,34 @@ export class Config {
      */
     addGuildData(guild) {
         let roles = this.find("roles");
-        if (roles !== undefined && roles.value instanceof Array) {
-            // retrieves all roles that does not exist in config
-            let rolesToAdd = guild.roles.filter(guildRole => {
-                return roles.value.filter(role => role.id === guildRole.id).length === 0;
-            });
-            for (let role of rolesToAdd) {
-                roles.value.push(PublicRole.createNewRole(role.id, role));
-            }
+        if (roles && roles.value instanceof Array) {
+            this.addRoles(guild, roles);
         }
         let channels = this.find("channels");
-        if (channels !== undefined && channels.value instanceof Array) {
-            // retrieves all roles that does not exist in config
-            let channelsToAdd = guild.channels.filter(guildChannel => {
-                return channels.value.filter(channel => channel.id === guildChannel.id).length === 0;
-            });
-            for (let channel of channelsToAdd) {
-                channels.value.push(Channel.createNewChannel(channel.id, channel));
-            }
+        if (channels && channels.value instanceof Array) {
+            this.addChannels(guild, channels);
         }
         return this;
+    }
+
+    addChannels(guild, channels) {
+        // retrieves all roles that does not exist in config
+        let channelsToAdd = guild.channels.filter(guildChannel => {
+            return channels.value.filter(channel => channel.id === guildChannel.id).length === 0;
+        });
+        for (let channel of channelsToAdd) {
+            channels.value.push(Channel.createNewChannel(channel.id, channel));
+        }
+    }
+
+    addRoles(guild, roles) {
+        // retrieves all roles that does not exist in config
+        let rolesToAdd = guild.roles.filter(guildRole => {
+            return roles.value.filter(role => role.id === guildRole.id).length === 0;
+        });
+        for (let role of rolesToAdd) {
+            roles.value.push(PublicRole.createNewRole(role.id, role));
+        }
     }
 
     /**

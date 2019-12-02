@@ -8,7 +8,8 @@ import {
     ADD_USER,
     API_ERROR,
     CHANGE_CONFIG,
-    INITIALIZE_USER
+    INITIALIZE_USER,
+    REMOVE_ARRAY_OBJECT
 } from "./mutation_types";
 import {Config} from "../models/Config";
 import {ConfigData} from "../models/ConfigData";
@@ -80,6 +81,18 @@ export const mutations = {
             Vue.set(state.config.config_data, payload.id, ConfigData.newInstance(payload.id, [payload.value]));
         }
         else {
+            let error = new Error("Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
+            log.error(error);
+            throw error;
+        }
+    },
+
+    [REMOVE_ARRAY_OBJECT](state, payload) {
+        let data = state.config.find(payload.id);
+
+        if (data instanceof ConfigData && data.value instanceof Array || payload.value instanceof ConfigData) {
+            data.value.splice(data.value.indexOf(payload.value), 1);
+        } else {
             let error = new Error("Cannot add object. Array does not exist or payload.value is not of ConfigData instance.");
             log.error(error);
             throw error;
