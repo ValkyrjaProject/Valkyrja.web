@@ -245,3 +245,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+/www/cypress/videos/
+/www/cypress/screenshots/
