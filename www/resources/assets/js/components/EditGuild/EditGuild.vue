@@ -3,6 +3,7 @@
         <submit-bar
             :guild="guild"
             @submit="submitForm"/>
+        <validation-errors-bar v-if="false" />
         <div class="columns">
             <div
                 sticky-container
@@ -39,6 +40,7 @@
 
 <script>
 import SubmitBar from "./SubmitBar";
+import ValidationErrorsBar from "./ValidationErrorsBar";
 import BasicConfig from "./Sections/BasicConfig/BasicConfig";
 import AntispamConfig from "./Sections/Antispam/AntispamConfig";
 import ModerationConfig from "./Sections/Moderation/ModerationConfig";
@@ -153,6 +155,7 @@ export default {
     router,
     components: {
         SubmitBar,
+        ValidationErrorsBar,
         BasicConfig,
         AntispamConfig,
         ModerationConfig,
@@ -198,14 +201,7 @@ export default {
                 return;
             }
             try {
-                const response = await configData.postServerConfig(this.guildId, config.getChanges());
-                let body = "";
-                if (response.status !== 204) {
-                    body = "";
-                }
-                else {
-
-                }
+                await configData.postServerConfig(this.guildId, config.getChanges());
                 this.$buefy.toast.open({
                     message: "Config saved!",
                     type: "is-success"
@@ -215,8 +211,9 @@ export default {
                 // If we have invalid data
                 if (e.response.status === 422) {
                     // update state with API_VALIDATION_ERROR
+                    await this.$store.dispatch("updateApiErrors", e.response.data);
                     this.$buefy.toast.open({
-                        message: "API Validation error!",
+                        message: "There are some validation errors!",
                         type: "is-warning"
                     });
                 }
