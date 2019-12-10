@@ -155,6 +155,7 @@ class ConfigRequest extends FormRequest
             'alert_role_mention'                => 'required|integer',
             'alert_channelid'                   => 'required|integer',
             'mod_channelid'                     => 'required|integer',
+            'tempchannel_giveadmin'             => 'required|boolean',
             'tempchannel_categoryid'            => 'required|integer',
             'log_bans'                          => 'required|boolean',
             'log_promotions'                    => 'required|boolean',

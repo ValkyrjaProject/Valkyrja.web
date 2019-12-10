@@ -775,6 +775,9 @@
                         <type-selector init-id-type="tempchannel_categoryid" label="name"
                                        :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'
                                        :values='categories'></type-selector>
+                        <br/>
+                        @include("config.types.bool", ['key' => "tempchannel_giveadmin", 'data' => old('tempchannel_giveadmin', $serverConfig["tempchannel_giveadmin"])])
+                        Give the creator of a temporary voice channel permissions to modify the channel, and to move and mute people?
                     </p>
                 </div>
                 {{ csrf_field() }}
