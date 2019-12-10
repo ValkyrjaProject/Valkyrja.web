@@ -770,7 +770,8 @@
                 </button>
                 <div class="form-inline form-group collapse" id="otherstuff">
                     <p class="form-inline">
-                        Channel category for the temporary voice channels (<code>@{{ command_prefix }}tempChannel</code> or <code>@{{ command_prefix }}tmp</code>)
+                        <b>Temporary Voice Channels</b> (<code>@{{ command_prefix }}tempChannel</code> or <code>@{{ command_prefix }}tmp</code>)
+                        Channel category for the temporary voice channels
                         <br/>
                         <type-selector init-id-type="tempchannel_categoryid" label="name"
                                        :default-value='{{ json_encode($guild['categories']->get(old('tempchannel_categoryid', $serverConfig["tempchannel_categoryid"]))) }}'
