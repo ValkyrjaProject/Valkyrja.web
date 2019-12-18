@@ -99,6 +99,7 @@ describe("EditGuild", function () {
     it("should remove loading indicator when retrieveConfig Promise returns", async () => {
         expect(wrapper.vm.loadingElement.isActive).to.be.true;
         await wrapper.vm.$nextTick();
+        await wrapper.vm.$nextTick();
         expect(wrapper.vm.loadingElement.isActive).to.be.false;
     });
 });

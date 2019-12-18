@@ -21,7 +21,7 @@ describe("SubmitBar", function () {
     });
 
     it("should have submit button and display \"Submit\"", function () {
-        let button = wrapper.find("button");
+        let button = wrapper.find("#submitButton");
         expect(button.exists()).to.equal(true);
         expect(button.text()).to.equal("Submit");
     });
@@ -43,7 +43,7 @@ describe("SubmitBar", function () {
     });
 
     it("should have submit on right level", function () {
-        expect(wrapper.find(".level-right button").exists()).to.equal(true);
+        expect(wrapper.find(".level-right #submitButton").exists()).to.equal(true);
     });
 
     it("should display header based on prop", function () {
