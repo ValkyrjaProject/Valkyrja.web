@@ -4,7 +4,7 @@
             <panel-list
                 v-model="reactionRoles"
                 :add-button="true"
-                :selected-item="selectedRole"
+                :selected-item="selectedReactionRole"
                 list-item="PanelListItemRemovable"
                 title="Messages"
                 class="column is-one-third"
@@ -35,15 +35,15 @@ export default {
         getters() {
             return this.$store.getters;
         },
-        selectedRole() {
-            return this.state.selectedRole;
+        selectedReactionRole() {
+            return this.state.selectedReactionRole;
         },
         reactionRoles: {
             get() {
                 return this.getters["reactionRoles/roles"];
             },
             set(role) {
-                this.$store.dispatch("reactionRoles/setActiveRole", role);
+                this.$store.dispatch("reactionRoles/setActiveReactionRole", role);
             },
         }
     },

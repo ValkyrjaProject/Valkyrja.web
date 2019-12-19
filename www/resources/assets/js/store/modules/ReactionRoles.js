@@ -8,30 +8,30 @@ import EmojiRole from "../../models/EmojiRole";
 import {GuildRole} from "../../models/GuildRole";
 
 const state = {
-    selectedRole: null
+    selectedReactionRole: null
 };
 
 const mutations = {
-    SET_SELECTED_ROLE(state, role) {
-        state.selectedRole = role;
+    SET_SELECTED_REACTION_ROLE(state, role) {
+        state.selectedReactionRole = role;
     },
     CHANGE_TYPE(state, option) {
-        if (state.selectedRole
-            && state.selectedRole instanceof ReactionRole
+        if (state.selectedReactionRole
+            && state.selectedReactionRole instanceof ReactionRole
             && option.hasOwnProperty("field")
             && option.hasOwnProperty("value")) {
-            state.selectedRole[option.field] = option.value;
+            state.selectedReactionRole[option.field] = option.value;
         }
     },
     DELETE_ROLE_FROM_INDEX(state, obj) {
         obj.array.splice(obj.index, 1);
     },
     ADD_ROLE(state, role) {
-        state.selectedRole.roles.push(role);
+        state.selectedReactionRole.roles.push(role);
     },
     DELETE_ROLE(state, role) {
-        let index = state.selectedRole.roles.indexOf(role);
-        state.selectedRole.roles.splice(index, 1);
+        let index = state.selectedReactionRole.roles.indexOf(role);
+        state.selectedReactionRole.roles.splice(index, 1);
     }
 };
 
@@ -80,7 +80,7 @@ const actions = {
             id: "reaction_roles",
             value: role,
         }, {root: true});
-        commit("SET_SELECTED_ROLE", role);
+        commit("SET_SELECTED_REACTION_ROLE", role);
     },
     removeReactionRole({state, commit, rootState}, role) {
         if (!(role instanceof ReactionRole)) {
@@ -101,7 +101,7 @@ const actions = {
                 array: reactionRoles.value,
                 index: index
             });
-            if (role === state.selectedRole) {
+            if (role === state.selectedReactionRole) {
                 if (reactionRoles.value.length > 0) {
                     commit("SET_SELECTED_ROLE", reactionRoles.value[0]);
                 }
@@ -111,7 +111,7 @@ const actions = {
             }
         }
     },
-    setActiveRole({commit}, role) {
+    setActiveReactionRole({commit}, role) {
         if (!(role instanceof ReactionRole)) {
             let error;
             if (role instanceof Object){
@@ -123,7 +123,7 @@ const actions = {
             log.error(error);
             throw new TypeError(error);
         }
-        commit("SET_SELECTED_ROLE", role);
+        commit("SET_SELECTED_REACTION_ROLE", role);
     },
     changeField({commit}, option) {
         if (!(option.hasOwnProperty("field") && option.hasOwnProperty("value"))) {
@@ -145,23 +145,23 @@ const getters = {
         return reactionRoles && reactionRoles.value ? reactionRoles.value : [];
     },
     availableRoles: (state, getters, rootState) => {
-        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedRole === null) {
+        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedReactionRole === null) {
             return [];
         }
 
         return rootState.guild.roles.filter((role) => {
-            return state.selectedRole.roles.filter((addedRole) => {
+            return state.selectedReactionRole.roles.filter((addedRole) => {
                 return addedRole.id === role.id;
             }).length === 0;
         });
     },
     addedRoles: (state, getters, rootState) => {
-        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedRole === null) {
+        if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedReactionRole === null) {
             return [];
         }
 
         return rootState.guild.roles.filter((role) => {
-            return state.selectedRole.roles.filter((addedRole) => {
+            return state.selectedReactionRole.roles.filter((addedRole) => {
                 return addedRole.id === role.id;
             }).length !== 0;
         });

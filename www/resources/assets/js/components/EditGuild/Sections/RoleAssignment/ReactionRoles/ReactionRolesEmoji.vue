@@ -10,13 +10,20 @@
             <panel-list
                 v-model="addedRoles"
                 :remove-radius="true"
+                list-item="PanelListItemRemovable"
                 item-key="id"
                 title="Added Roles"
                 class="column is-half is-radiusless" />
         </div>
         <div
             class="column is-one-third is-full-touch">
-            <div class="panel">
+            <div v-if="!selectedRole" class="panel">
+                <div class="panel-block">Select a role to add an emoji.</div>
+            </div>
+            <div v-else class="panel">
+                <p class="panel-heading">
+                    Emoji for {{selectedRole}}
+                </p>
                 <div class="panel-block">
                     <div class="control field">
                         <label for="reaction_emoji">
@@ -46,14 +53,17 @@ export default {
     },
     computed: {
         selectedRole() {
-            return this.$store.state.reactionRoles.selectedRole;
+            return false;
+        },
+        selectedReactionRole() {
+            return this.$store.state.reactionRoles.selectedReactionRole;
         },
         getters() {
             return this.$store.getters;
         },
         emoji: {
             get() {
-                return this.selectedRole.emoji;
+                return this.selectedReactionRole.emoji;
             },
             set(emoji) {
                 this.$store.dispatch("reactionRoles/changeField", {
