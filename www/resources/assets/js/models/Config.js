@@ -154,7 +154,6 @@ export class Config {
         for(let key of Object.keys(this.config_data)) {
             let obj = this.config_data[key].getChanged();
             if (obj && obj.hasOwnProperty(key)) {
-                console.log(key, obj[key]);
                 changes[key] = obj[key];
             }
         }

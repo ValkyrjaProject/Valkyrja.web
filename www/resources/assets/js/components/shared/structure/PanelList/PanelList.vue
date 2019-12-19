@@ -27,7 +27,7 @@
                         <component
                             v-for="(item, idx) in searchedList"
                             :is="listItem"
-                            :key="item.unique_id"
+                            :key="item[itemKey]"
                             :item="item"
                             :item-icon="itemIcon"
                             :class="itemClass(item, idx)"
@@ -117,6 +117,11 @@ export default {
             required: false,
             default: false
         },
+        itemKey: {
+            type: String,
+            required: false,
+            default: "unique_id"
+        }
     },
     data() {
         return {

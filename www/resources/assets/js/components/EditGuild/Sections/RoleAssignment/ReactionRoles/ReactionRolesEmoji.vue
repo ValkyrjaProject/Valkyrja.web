@@ -4,11 +4,13 @@
             <panel-list
                 v-model="availableRoles"
                 :remove-radius="true"
+                item-key="id"
                 title="Available Roles"
                 class="column is-half" />
             <panel-list
                 v-model="addedRoles"
                 :remove-radius="true"
+                item-key="id"
                 title="Added Roles"
                 class="column is-half is-radiusless" />
         </div>
@@ -26,7 +28,8 @@
                             id="reaction_emoji"
                             v-model="emoji"
                             type="text"
-                            class="input">
+                            class="input" 
+                        />
                     </div>
                 </div>
             </div>

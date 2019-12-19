@@ -9,7 +9,7 @@
             <vuex-switch store-name="profile_enabled">
                 <b>Enable profiles</b>
             </vuex-switch>
-            <a href="/img/profiles.png">See profiles in action here.</a>
+            <a href="/img/profiles.png" ref="noopener" target="_blank">See profiles in action here.</a>
             <br>
             Setup profile fields in the editor below.
             <br>
