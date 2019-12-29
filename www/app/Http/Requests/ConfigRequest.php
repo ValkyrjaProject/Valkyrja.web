@@ -200,7 +200,7 @@ class ConfigRequest extends FormRequest
             'levels.*.level'                    => 'required|integer|min:0',
             'custom_commands'                   => 'array',
             'custom_commands.*'                 => 'required|array',
-            'custom_commands.*.commandid'       => 'required|alpha_num|max:127',
+            'custom_commands.*.commandid'       => 'required|alpha_dash|max:127',
             'custom_commands.*.response'        => 'required|string',
             'custom_commands.*.description'     => 'string',
             'voice_channelid'                   => 'required|integer',
