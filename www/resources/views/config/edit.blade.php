@@ -146,7 +146,7 @@
                         <b>Ban username-spammers as they join</b>
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_username", 'data' => old('antispam_username', $serverConfig["antispam_username"])])
-                        This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username.
+                        This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username. This will also ban if multiple people join with identical username within short time period.
                     </p>
                     <p>
                         <b>Discord Invites</b>
