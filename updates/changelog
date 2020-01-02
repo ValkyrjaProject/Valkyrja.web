@@ -1,5 +1,12 @@
 #Changelog
 
+**Valkyrja 3.7** - 2nd of January, 2020
+  * All commands, custom commands and aliases are now case-insensitive.
+  * tempChannel now has a new webconfig option to grant channel admin permission.
+  * Antispam - changed behavior of mention spam protection, if you notice that people have their mentions removed too often, increase the threshold! And please provide feedback :)
+  * Whole lot of other tweaks and fixes.
+  * New even more powerful hardware!
+
 **Valkyrja 3.6** - 23rd of October, 2019
   * `!embed` - you can now use a complex embeds for more fancy info channels! (Use it without parameters for more details.)
   * `!slow` - enable/disable slowmode (use with a number specifying the message interval to enable it.)
