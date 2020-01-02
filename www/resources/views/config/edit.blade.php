@@ -132,6 +132,9 @@
                         <br/>
                         <text-field init-id="antispam_tolerance" init-name="antispam_tolerance"
                                     init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
+                        <br/>
+                        @include("config.types.bool", ['key' => "antispam_mute_insteadof_ban", 'data' => old('antispam_mute_insteadof_ban', $serverConfig["antispam_mute_insteadof_ban"])])
+                        Or would you prefer to just mute them instead?
                     </p>
                     <p>
                         <b>Kick Without Role</b>
