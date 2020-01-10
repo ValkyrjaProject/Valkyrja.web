@@ -4,12 +4,11 @@ import {CustomCommand} from "./CustomCommand";
 
 export default class ReactionRole extends ConfigData {
 
-    static newInstance(id, roles, emoji = "") {
+    static newInstance(id, roles) {
         let configData = new this;
         configData.id = id;
         configData.value = {
-            roles,
-            emoji,
+            roles
         };
         return configData;
     }
@@ -20,14 +19,6 @@ export default class ReactionRole extends ConfigData {
 
     get messageId() {
         return this.id;
-    }
-
-    set emoji(emoji) {
-        this.value["emoji"] = emoji;
-    }
-
-    get emoji() {
-        return this.value["emoji"];
     }
 
     /**

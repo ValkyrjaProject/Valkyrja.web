@@ -37,13 +37,13 @@ const mutations = {
 
 const actions = {
     addRole({commit}, role) {
-        if (!(role instanceof GuildRole)) {
+        if (!(role instanceof EmojiRole)) {
             let error;
             if (role instanceof Object){
-                error = `Object is not of type GuildRole, it is of type ${role.constructor.name}`;
+                error = `Object is not of type EmojiRole, it is of type ${role.constructor.name}`;
             }
             else {
-                error = `Object is not of type GuildRole, it is of type ${role}`;
+                error = `Object is not of type EmojiRole, it is of type ${role}`;
             }
             log.error(error);
             throw new TypeError(error);
@@ -149,22 +149,14 @@ const getters = {
             return [];
         }
 
-        return rootState.guild.roles.filter((role) => {
-            return state.selectedReactionRole.roles.filter((addedRole) => {
-                return addedRole.id === role.id;
-            }).length === 0;
-        });
+        return rootState.guild.roles.filter(r => (state.selectedReactionRole && r !== state.selectedReactionRole.role));
     },
     addedRoles: (state, getters, rootState) => {
         if (!(rootState.config instanceof Config) || !(rootState.guild instanceof Guild) || state.selectedReactionRole === null) {
             return [];
         }
 
-        return rootState.guild.roles.filter((role) => {
-            return state.selectedReactionRole.roles.filter((addedRole) => {
-                return addedRole.id === role.id;
-            }).length !== 0;
-        });
+        return state.selectedReactionRole.roles;
     },
 };
 

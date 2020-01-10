@@ -8,21 +8,29 @@
                 title="Available Roles"
                 class="column is-half" />
             <panel-list
-                v-model="addedRoles"
+                :value="addedRoles"
                 :remove-radius="true"
+                :selected-item="selectedEmojiRole"
                 list-item="PanelListItemRemovable"
                 item-key="id"
                 title="Added Roles"
-                class="column is-half is-radiusless" />
+                class="column is-half is-radiusless"
+                @input="selectEmojiRole"
+                @remove="removeRole"
+            />
         </div>
         <div
             class="column is-one-third is-full-touch">
-            <div v-if="!selectedRole" class="panel">
+            <div
+                v-if="!emojiRole"
+                class="panel">
                 <div class="panel-block">Select a role to add an emoji.</div>
             </div>
-            <div v-else class="panel">
+            <div
+                v-else
+                class="panel">
                 <p class="panel-heading">
-                    Emoji for {{selectedRole}}
+                    Emoji for {{ selectedEmojiRole }}
                 </p>
                 <div class="panel-block">
                     <div class="control field">
@@ -35,8 +43,8 @@
                             id="reaction_emoji"
                             v-model="emoji"
                             type="text"
-                            class="input" 
-                        />
+                            class="input"
+                        >
                     </div>
                 </div>
             </div>
@@ -45,16 +53,19 @@
 </template>
 <script>
 import PanelList from "../../../../shared/structure/PanelList/PanelList";
+import EmojiRole from "../../../../../models/EmojiRole";
 
 export default {
     name: "ReactionRolesEmoji",
     components: {
         PanelList
     },
+    data() {
+        return {
+            emojiRole: null
+        };
+    },
     computed: {
-        selectedRole() {
-            return false;
-        },
         selectedReactionRole() {
             return this.$store.state.reactionRoles.selectedReactionRole;
         },
@@ -63,13 +74,12 @@ export default {
         },
         emoji: {
             get() {
-                return this.selectedReactionRole.emoji;
+                return this.emojiRole ? this.emojiRole.emoji : null;
             },
             set(emoji) {
-                this.$store.dispatch("reactionRoles/changeField", {
-                    field: "emoji",
-                    value: emoji
-                });
+                if (this.emojiRole) {
+                    this.emojiRole.emoji = emoji;
+                }
             },
         },
         availableRoles: {
@@ -77,17 +87,30 @@ export default {
                 return this.getters["reactionRoles/availableRoles"];
             },
             set(role) {
-                this.$store.dispatch("reactionRoles/addRole", role);
+                // Create a new reaction role here
+                let emojiRole = new EmojiRole(role, "");
+                this.$store.dispatch("reactionRoles/addRole", emojiRole);
             },
         },
-        addedRoles: {
-            get() {
-                return this.getters["reactionRoles/addedRoles"];
-            },
-            set(role) {
-                this.$store.dispatch("reactionRoles/removeRole", role);
-            },
+        addedRoles() {
+            return this.getters["reactionRoles/addedRoles"];
+        },
+        selectedEmojiRole() {
+            if (this.emojiRole) {
+                return this.addedRoles.find(r => r.id === this.emojiRole.id);
+            }
         }
-    }
+    },
+    methods: {
+        removeRole(role) {
+            this.$store.dispatch("reactionRoles/removeRole", role);
+            if (!this.addedRoles || role === this.emojiRole) {
+                this.emojiRole = null;
+            }
+        },
+        selectEmojiRole(role) {
+            this.emojiRole = this.selectedReactionRole.roles.find(r => r.id === role.id);
+        },
+    },
 };
 </script>
