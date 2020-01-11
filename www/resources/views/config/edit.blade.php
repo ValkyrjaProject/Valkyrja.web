@@ -39,7 +39,7 @@
                         <input type="hidden" name="tos" value="0">
                         <input class="form-control" style="display: inline" type="checkbox" id="tos" value="1" name="tos" {{ !$serverConfig["tos"] && isset($serverConfig["tos"]) ? "" : "checked"}} >
                     </td>
-                    <td style="vertical-align:middle; width:auto">
+                    <td style="vertical-align:middle; width:auto; font-size:10pt">
                         By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
                     </td>
                   </tr></table>
@@ -809,7 +809,7 @@
                         <input type="hidden" name="tos" value="0">
                         <input class="form-control" style="display: inline" type="checkbox" id="tos" value="1" name="tos" {{ !$serverConfig["tos"] && isset($serverConfig["tos"]) ? "" : "checked"}} >
                     </td>
-                    <td style="vertical-align:middle; width:auto">
+                    <td style="vertical-align:middle; width:auto; font-size:10pt">
                         By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
                     </td>
                   </tr></table>
