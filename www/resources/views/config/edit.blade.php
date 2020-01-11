@@ -22,7 +22,7 @@
     <div class="container">
         <div class="col-xs-12">
             <form action="{{ url('config/'.$serverId) }}" method="post" @submit.prevent>
-                <h1 class="col-md-8">
+                <h1 class="col-md-6">
                     <v-loading message='Configure Valkyrja'>
                     <span slot='spinner' class="align-bottom">
                         <v-loading-spinner width='1em' height='1em'></v-loading-spinner>
@@ -30,13 +30,16 @@
                         <span>Configure Valkyrja</span>
                     </v-loading>
                 </h1>
-                <span class="col-md-4">
-                    <button class="btn btn-primary float-right" type="button" :disabled="anyLoading "
+                <span class="col-md-6">
+                    <button class="col-md-2 btn btn-primary" type="button" :disabled="anyLoading"
                             @click="onSubmit">Save</button>
-                </span>
-                <span class="col-12">
-                    @include("config.types.bool", ['key' => "tos", 'data' => $serverConfig["tos"]])
-                    By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
+                    <div class="col-md-1 btn" style="cursor: default">
+                        <input type="hidden" name="tos" value="0">
+                        <input class="form-control" style="display: inline" type="checkbox" id="tos" value="1" name="tos" {{ !$serverConfig["tos"] && isset($serverConfig["tos"]) ? "" : "checked"}} >
+                    </div>
+                    <div class="col-md-9" style="font-size: 10pt;">
+                        By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
+                    </div>
                 </span>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
                         data-target="#configBasic" aria-expanded="true" aria-controls="configBasic">
@@ -794,7 +797,17 @@
                     </p>
                 </div>
                 {{ csrf_field() }}
-                <button class="btn btn-primary" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
+                <span class="col-md-5">
+                    <button class="col-md-2 btn btn-primary" type="button" :disabled="anyLoading"
+                            @click="onSubmit">Save</button>
+                    <div class="col-md-1 btn" style="cursor: default">
+                        <input type="hidden" name="tos" value="0">
+                        <input class="form-control" style="display: inline" type="checkbox" id="tos" value="1" name="tos" {{ !$serverConfig["tos"] && isset($serverConfig["tos"]) ? "" : "checked"}} >
+                    </div>
+                    <div class="col-md-9" style="font-size: 10pt;">
+                        By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
+                    </div>
+                </span>
             </form>
         </div>
     </div>
