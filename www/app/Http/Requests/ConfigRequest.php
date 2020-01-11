@@ -103,6 +103,7 @@ class ConfigRequest extends FormRequest
     public function rules()
     {
         return [
+            'nicknames'                         => 'required|boolean',
             'ignore_bots'                       => 'required|boolean',
             'ignore_everyone'                   => 'required|boolean',
             'command_prefix'                    => 'required|string|max:255',

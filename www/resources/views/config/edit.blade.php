@@ -72,6 +72,11 @@
                         <br/>
                     </p>
                     <p>
+                        @include("config.types.bool", ['key' => "nicknames", 'data' => old('nicknames', $serverConfig["nicknames"])])
+                        <b>Record Nickname history.</b>
+                        <br/>
+                    </p>
+                    <p>
                         @include("config.types.bool", ['key' => "ignore_bots", 'data' => old('ignore_bots', $serverConfig["ignore_bots"])])
                         <b>Do not execute any commands issued by bots.</b>
                         <br/>
