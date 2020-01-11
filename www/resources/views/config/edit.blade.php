@@ -31,9 +31,13 @@
                     </v-loading>
                 </h1>
                 <span class="col-md-4">
-				<button class="btn btn-primary float-right" type="button" :disabled="anyLoading"
-                        @click="onSubmit">Save</button>
-			</span>
+                    <button class="btn btn-primary float-right" type="button" :disabled="anyLoading "
+                            @click="onSubmit">Save</button>
+                </span>
+                <span class="col-12">
+                    @include("config.types.bool", ['key' => "tos", 'data' => $serverConfig["tos"]])
+                    By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
+                </span>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
                         data-target="#configBasic" aria-expanded="true" aria-controls="configBasic">
                     Basic configuration

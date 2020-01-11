@@ -64,7 +64,8 @@ new Vue({
             'roles',
             'channels',
             'categories',
-            'forbidSubmitForm'
+            'forbidSubmitForm',
+            'tos'
          ])
     },
     methods: {
@@ -72,8 +73,11 @@ new Vue({
             this.$store.dispatch('updateCommandCharacter', e.target.value)
         },
         onSubmit (e) {
-            if (!this.anyLoading) {
+            if (!this.anyLoading && this.tos) {
                 document.forms[0].submit();
+            }
+            else if (!this.tos) {
+                alert("Please accept terms of service");
             }
         },
     },

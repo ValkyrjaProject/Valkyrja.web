@@ -18,6 +18,7 @@ const state = {
     errors: [],
     forbidSubmitForm: false,
     serverId: '',
+    tos: false,
     command_prefix: '',
     antispam_tolerance: 0,
     roles: [],
