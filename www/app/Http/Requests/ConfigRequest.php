@@ -140,6 +140,7 @@ class ConfigRequest extends FormRequest
             'antispam_links_imgur'              => 'required|boolean',
             'antispam_links_imgur_ban'          => 'required|boolean',
             'antispam_tolerance'                => 'required|integer',
+            'antispam_tolerance_ban'            => 'required|integer',
             'antispam_ignore_members'           => 'required|boolean',
             'antispam_voice_switching'          => 'required|boolean',
             'operator_roleid'                   => 'required|integer',

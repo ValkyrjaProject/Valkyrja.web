@@ -20,7 +20,7 @@ const state = {
     serverId: '',
     tos: false,
     command_prefix: '',
-    antispam_tolerance: 0,
+    antispam_tolerance_ban: 0,
     roles: [],
     channels: [],
     categories: [],

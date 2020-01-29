@@ -106,198 +106,217 @@
                     <a class="d-block text-center" href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe to utilize Antispam features.</a>
                 </div>
                 <div class="form-inline form-group collapse {{ !$isPremium ? "hide-section" : ""}}" id="configAntispam"><br/>
-                    <p>
-                        Valkyrja will act as configured below, if it takes any action, it will PM the naughty user
-                        letting them know about it. If you configure it to also ban for excessive spam, it will let the
-                        user know one message before banning them. Removed messages and banned users will be logged as
-                        configured in the <code>Moderation Log</code> section.
-                        <br/>
-                        Antispam will not take any action against Admins or Moderators. You should also configure <code>Ignore
-                            Channels</code> in the Logging section - Antispam will not be active in these channels.
-                        <br/>
-                        <i>Antispam will not even try to do anything if the bot does not have
-                            <code>ManageMessages</code> & <code>Ban</code> permissions.</i>
-                    </p>
-                    <p>
-                        <b>Ignored roles by antispam</b>
-                        <role-antispam-selector></role-antispam-selector>
-                    </p>
-                    <p>
-                        Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned
-                        to post a single link or anything else in this section, for three minutes.
-                    </p>
-                    <p>
-                        <b>Members ignore Antispam</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_ignore_members", 'data' => old('antispam_ignore_members', $serverConfig["antispam_ignore_members"])])
-                        Should members of roles configured on this page as <code>Member Roles</code> ignore this
-                        antispam?
-                        <br/>
-                        <i>Hint - an awesome combo of different features together with this checkbox: You can configure
-                            antispam to be really harsh, use <code>Verification</code> (configured below) and have the
-                            Verified role also be a <code>Member</code> (configured in Moderation section)</i>
-                    </p>
-                    <p>
-                        <b>Automated ban</b>
-                        <br/>
-                        If you do not want the bot to ban people for spamming, set this to <code>0</code> (zero)
-                        otherwise set a number of how many spammy messages should we tolerate before banning them.
-                        Spammy messages = links or anything else in this section below, while all the options below do
-                        have a ban option for this as well.
-                        <br/>
-                        <text-field init-id="antispam_tolerance" init-name="antispam_tolerance"
-                                    init-value="{{ old('antispam_tolerance', $serverConfig["antispam_tolerance"]) }}"></text-field>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_mute_insteadof_ban", 'data' => old('antispam_mute_insteadof_ban', $serverConfig["antispam_mute_insteadof_ban"])])
-                        Or would you prefer to just mute them instead?
-                    </p>
-                    <p>
-                        <b>Kick Without Role</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
-                        Kick users if they do not get a role (by verifying via a command, reaction role, or our code verification) a little while after joining.
-                        <br/>
-                        @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
-                        Log these into the moderation channel (requires mod channel to be configured in the Logging section below.)
-                    </p>
-                    <p>
-                        <b>Ban username-spammers as they join</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_username", 'data' => old('antispam_username', $serverConfig["antispam_username"])])
-                        This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username. This will also ban if multiple people join with identical username within short time period.
-                    </p>
-                    <p>
-                        <b>Discord Invites</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_invites", 'data' => old('antispam_invites', $serverConfig["antispam_invites"])])
-                        Remove messages that contain discord invites?
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_invites_ban", 'data' => old('antispam_invites_ban', $serverConfig["antispam_invites_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> invites have been removed?
-                        <br/>This will also ban all those cute bots with invites in their name as soon as they join.
-                    </p>
-                    <p>
-                        <b>Duplicate messages</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_duplicate", 'data' => old('antispam_duplicate', $serverConfig["antispam_duplicate"])])
-                        Remove duplicate messages? Also known as <i>literally spam</i>.
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_duplicate_multiuser", 'data' => old('antispam_duplicate_multiuser', $serverConfig["antispam_duplicate_multiuser"])])
-                        We can also remove these between people. When spambots join to raid, it's often in large numbers and instead spamming less frequently. This will deal with this case.
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_duplicate_crossserver", 'data' => old('antispam_duplicate_crossserver', $serverConfig["antispam_duplicate_crossserver"])])
-                        We can also remove these cross-server. Imagine that there is someone going through many servers and posting some advertisement everywhere, but only a single message per-server so it doesn't count as standard spam. Valkyrja would notice these messages as being duplicates between servers.
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
-                    </p>
-                    <p>
-                        <b>Mass-mentions</b>
-                        <br/>
-                        Remove messages that mention more than <code>n</code> people? Set to <code>0</code> (zero) to
-                        disable, otherwise set the <code>n</code> amount.
-                        <br/>
-                        @include("config.types.int", ['key' => "antispam_mentions_max", 'data' => old('antispam_mentions_max', $serverConfig["antispam_mentions_max"])])
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_mentions_ban", 'data' => old('antispam_mentions_ban', $serverConfig["antispam_mentions_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
-                    </p>
-                    <p>
-                        <b>Mute fast-message spam</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_mute", 'data' => old('antispam_mute', $serverConfig["antispam_mute"])])
-                        Temporarily mute people if they send too many messages too fast? This is done by assigning them
-                        <code>Muted Role</code>, and if they continue spamming after they get muted twice, they get
-                        banned, because that's an obvious spambot. Both, the mute and the ban are logged as configured
-                        in the <code>Logging</code> section.
-                        <br/>
-                        Requires <code>Muted Role</code> to be configured in the <code>Moderation</code> section, where
-                        you can also change the duration of the mute. <i>Scroll down</i>
-                        <br/><br/>
-                        <b>Mute</b>
-                        <br/>
-                        Duration of the mute.
-                        <br/>
-                        @include("config.types.int", ['key' => "antispam_mute_duration", 'data' => old('antispam_mute_duration', $serverConfig["antispam_mute_duration"])])
-                        (minutes)
-                    </p>
-                    <p>
-                        <b>Known Porn links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_porn", 'data' => old('antispam_porn', $serverConfig["antispam_porn"])])
-                        Remove known porn links? (This is manually updated, if you see something that's not covered, let us know please!)
-                    </p>
-                    <p>
-                        <b>YouTube links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_youtube", 'data' => old('antispam_links_youtube', $serverConfig["antispam_links_youtube"])])
-                        Remove YouTube links?
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_youtube_ban", 'data' => old('antispam_links_youtube_ban', $serverConfig["antispam_links_youtube_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>Twitch links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_twitch", 'data' => old('antispam_links_twitch', $serverConfig["antispam_links_twitch"])])
-                        Remove Twitch links?
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_twitch_ban", 'data' => old('antispam_links_twitch_ban', $serverConfig["antispam_links_twitch_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>Hitbox/Smashcast links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_hitbox", 'data' => old('antispam_links_hitbox', $serverConfig["antispam_links_hitbox"])])
-                        Remove Hitbox and Smashcast links?
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_hitbox_ban", 'data' => old('antispam_links_hitbox_ban', $serverConfig["antispam_links_hitbox_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>Beam/Mixer links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_beam", 'data' => old('antispam_links_beam', $serverConfig["antispam_links_beam"])])
-                        Remove Beam and Mixer links?
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_beam_ban", 'data' => old('antispam_links_beam_ban', $serverConfig["antispam_links_beam_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>Imgur-like links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_imgur", 'data' => old('antispam_links_imgur', $serverConfig["antispam_links_imgur"])])
-                        Remove imgur, gfycat, giphy or tinypic links?
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_imgur_ban", 'data' => old('antispam_links_imgur_ban', $serverConfig["antispam_links_imgur_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>All standard links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_standard", 'data' => old('antispam_links_standard', $serverConfig["antispam_links_standard"])])
-                        Remove all standard links? This is a list of more-less standard <code>TLD</code>s to be removed,
-                        for example <code>.com</code>, <code>.net</code>, and many others... <i>(except the options
-                            above (youtube, imgur,..) - enable those if you want them removed as well.)</i>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_standard_ban", 'data' => old('antispam_links_standard_ban', $serverConfig["antispam_links_standard_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>Extended links</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_extended", 'data' => old('antispam_links_extended', $serverConfig["antispam_links_extended"])])
-                        Remove Extended links? Extended links are basically <code>anything.anything</code>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_links_extended_ban", 'data' => old('antispam_links_extended_ban', $serverConfig["antispam_links_extended_ban"])])
-                        Ban people after <code>@{{ antispam_tolerance }}</code> links have been removed?
-                    </p>
-                    <p>
-                        <b>Voice Channel switching</b>
-                        <br/>
-                        @include("config.types.bool", ['key' => "antispam_voice_switching", 'data' => old('antispam_voice_switching', $serverConfig["antispam_voice_switching"])])
-                        Warn and ban (for one hour) people who spam-switch voice channels.
-                    </p>
+                    <h2>Info</h2>
+                    <div class="features-indent">
+                      <p>
+                          Valkyrja will act as configured below, if it takes any action, it will PM the naughty user
+                          letting them know about it. If you configure it to also ban for excessive spam, it will let the
+                          user know one message before banning them. Removed messages and banned users will be logged as
+                          configured in the <code>Moderation Log</code> section.
+                          <br/>
+                          Antispam will not take any action against Admins or Moderators. You should also configure <code>Ignore
+                              Channels</code> in the Logging section - Antispam will not be active in these channels.
+                          <br/>
+                          <i>Antispam will not even try to do anything if the bot does not have
+                              <code>ManageMessages</code> & <code>Ban</code> permissions.</i>
+                      </p>
+                    </div>
+                    <h2>Ignore lists</h2>
+                    <div class="features-indent">
+                      <p>
+                          <b>Ignored roles by antispam</b>
+                          <role-antispam-selector></role-antispam-selector>
+                      </p>
+                      <p>
+                          Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned
+                          to post a single link or anything else in this section, for three minutes.
+                      </p>
+                      <p>
+                          <b>Members ignore Antispam</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_ignore_members", 'data' => old('antispam_ignore_members', $serverConfig["antispam_ignore_members"])])
+                          Should members of roles configured on this page as <code>Member Roles</code> ignore this
+                          antispam?
+                          <br/>
+                          <i>Hint - an awesome combo of different features together with this checkbox: You can configure
+                              antispam to be really harsh, use <code>Verification</code> (configured below) and have the
+                              Verified role also be a <code>Member</code> (configured in Moderation section)</i>
+                      </p>
+                    </div>
+                    <h2>Punishment</h2>
+                    <div class="features-indent">
+                      <p>
+                          <b>Automated Mute</b>
+                          How many of the below configured <code>Infractions</code> do we tolerate before muting the user?
+                          <i>Requires <code>Muted Role</code> to be configured in the <code>Moderation</code> section.</i>
+                          <br/>
+                          @include("config.types.int", ['key' => "antispam_tolerance", 'data' => old('antispam_tolerance', $serverConfig["antispam_tolerance"])])
+                          (Use <code>0</code> (zero) to disable.)
+                          <br/>
+                          Duration of the mute.
+                          <br/>
+                          @include("config.types.int", ['key' => "antispam_mute_duration", 'data' => old('antispam_mute_duration', $serverConfig["antispam_mute_duration"])])
+                          (minutes)
+                          <br/><br/>
+                          <b>Automated ban</b>
+                          <br/>
+                          How many of the below configured <code>Infractions</code> do we tolerate before banning the user?
+                          <br/>
+                          <text-field init-id="antispam_tolerance_ban" init-name="antispam_tolerance_ban"
+                                      init-value="{{ old('antispam_tolerance_ban', $serverConfig["antispam_tolerance_ban"]) }}"></text-field>
+                          (Use <code>0</code> (zero) to disable.)
+                          <br/><br/>
+                          <b>Recommended configuration</b>
+                          <br/>
+                          For the best results we recommend these to be either <code>Mute=1</code> & <code>Ban=4</code>
+                          or <code>Mute=2</code> & <code>Ban=6</code> which translate into "mute twice, then ban." (<code>b=(m+1)*2</code>)
+                      </p>
+                    </div>
+                    <h2>User Joined</h2>
+                    <div class="features-indent">
+                      <p>
+                          <b>Kick Without Role</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
+                          Kick users if they do not get a role (by verifying via a command, reaction role, or our code verification) a little while after joining.
+                          <br/>
+                          @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
+                          Log these into the moderation channel (requires mod channel to be configured in the Logging section below.)
+                      </p>
+                      <p>
+                          <b>Ban username-spammers as they join</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_username", 'data' => old('antispam_username', $serverConfig["antispam_username"])])
+                          This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username. This will also ban if multiple people join with identical username within short time period.
+                      </p>
+                    </div>
+                    <h2>Infractions</h2>
+                    <div class="features-indent">
+                      <p>
+                          <b>discord invites</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_invites", 'data' => old('antispam_invites', $serverConfig["antispam_invites"])])
+                          remove messages that contain discord invites?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_invites_ban", 'data' => old('antispam_invites_ban', $serverConfig["antispam_invites_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> invites have been removed?
+                          <br/>This will also ban all those cute bots with invites in their name as soon as they join.
+                      </p>
+                      <p>
+                          <b>Duplicate messages</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_duplicate", 'data' => old('antispam_duplicate', $serverConfig["antispam_duplicate"])])
+                          Remove duplicate messages? Also known as <i>literally spam</i>.
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_duplicate_multiuser", 'data' => old('antispam_duplicate_multiuser', $serverConfig["antispam_duplicate_multiuser"])])
+                          We can also remove these between people. When spambots join to raid, it's often in large numbers and instead spamming less frequently. This will deal with this case.
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_duplicate_crossserver", 'data' => old('antispam_duplicate_crossserver', $serverConfig["antispam_duplicate_crossserver"])])
+                          We can also remove these cross-server. Imagine that there is someone going through many servers and posting some advertisement everywhere, but only a single message per-server so it doesn't count as standard spam. Valkyrja would notice these messages as being duplicates between servers.
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> messages have been removed?
+                      </p>
+                      <p>
+                          <b>Mass-mentions</b>
+                          <br/>
+                          Remove messages that mention more than <code>n</code> people? Set to <code>0</code> (zero) to
+                          disable, otherwise set the <code>n</code> amount.
+                          <br/>
+                          @include("config.types.int", ['key' => "antispam_mentions_max", 'data' => old('antispam_mentions_max', $serverConfig["antispam_mentions_max"])])
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_mentions_ban", 'data' => old('antispam_mentions_ban', $serverConfig["antispam_mentions_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> messages have been removed?
+                      </p>
+                      <p>
+                          <b>Mute fast-message spam</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_mute", 'data' => old('antispam_mute', $serverConfig["antispam_mute"])])
+                          Temporarily mute people if they send too many messages too fast? This is done by assigning them
+                          <code>Muted Role</code>, and if they continue spamming after they get muted twice, they get
+                          banned, because that's an obvious spambot. Both, the mute and the ban are logged as configured
+                          in the <code>Logging</code> section.
+                          <br/>
+                          Requires <code>Muted Role</code> to be configured in the <code>Moderation</code> section.
+                      </p>
+                      <p>
+                          <b>Known Porn links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_porn", 'data' => old('antispam_porn', $serverConfig["antispam_porn"])])
+                          Remove known porn links? (This is manually updated, if you see something that's not covered, let us know please!)
+                      </p>
+                      <p>
+                          <b>YouTube links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_youtube", 'data' => old('antispam_links_youtube', $serverConfig["antispam_links_youtube"])])
+                          Remove YouTube links?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_youtube_ban", 'data' => old('antispam_links_youtube_ban', $serverConfig["antispam_links_youtube_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>Twitch links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_twitch", 'data' => old('antispam_links_twitch', $serverConfig["antispam_links_twitch"])])
+                          Remove Twitch links?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_twitch_ban", 'data' => old('antispam_links_twitch_ban', $serverConfig["antispam_links_twitch_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>Hitbox/Smashcast links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_hitbox", 'data' => old('antispam_links_hitbox', $serverConfig["antispam_links_hitbox"])])
+                          Remove Hitbox and Smashcast links?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_hitbox_ban", 'data' => old('antispam_links_hitbox_ban', $serverConfig["antispam_links_hitbox_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>Beam/Mixer links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_beam", 'data' => old('antispam_links_beam', $serverConfig["antispam_links_beam"])])
+                          Remove Beam and Mixer links?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_beam_ban", 'data' => old('antispam_links_beam_ban', $serverConfig["antispam_links_beam_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>Imgur-like links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_imgur", 'data' => old('antispam_links_imgur', $serverConfig["antispam_links_imgur"])])
+                          Remove imgur, gfycat, giphy or tinypic links?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_imgur_ban", 'data' => old('antispam_links_imgur_ban', $serverConfig["antispam_links_imgur_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>All standard links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_standard", 'data' => old('antispam_links_standard', $serverConfig["antispam_links_standard"])])
+                          Remove all standard links? This is a list of more-less standard <code>TLD</code>s to be removed,
+                          for example <code>.com</code>, <code>.net</code>, and many others... <i>(except the options
+                              above (youtube, imgur,..) - enable those if you want them removed as well.)</i>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_standard_ban", 'data' => old('antispam_links_standard_ban', $serverConfig["antispam_links_standard_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>Extended links</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_extended", 'data' => old('antispam_links_extended', $serverConfig["antispam_links_extended"])])
+                          Remove Extended links? Extended links are basically <code>anything.anything</code>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_extended_ban", 'data' => old('antispam_links_extended_ban', $serverConfig["antispam_links_extended_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
+                          <b>Voice Channel switching</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_voice_switching", 'data' => old('antispam_voice_switching', $serverConfig["antispam_voice_switching"])])
+                          Warn and ban (for one hour) people who spam-switch voice channels.
+                      </p>
+                    </div>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
                         data-target="#configModeration" aria-expanded="false" aria-controls="configModeration">

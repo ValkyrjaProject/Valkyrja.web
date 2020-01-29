@@ -60,7 +60,7 @@ new Vue({
         ]),
         ...mapState([
             'command_prefix',
-            'antispam_tolerance',
+            'antispam_tolerance_ban',
             'roles',
             'channels',
             'categories',
