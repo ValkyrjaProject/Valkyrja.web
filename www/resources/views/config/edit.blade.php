@@ -182,11 +182,11 @@
                         @include("config.types.bool", ['key' => "antispam_duplicate", 'data' => old('antispam_duplicate', $serverConfig["antispam_duplicate"])])
                         Remove duplicate messages? Also known as <i>literally spam</i>.
                         <br/>
+                        @include("config.types.bool", ['key' => "antispam_duplicate_multiuser", 'data' => old('antispam_duplicate_multiuser', $serverConfig["antispam_duplicate_multiuser"])])
+                        We can also remove these between people. When spambots join to raid, it's often in large numbers and instead spamming less frequently. This will deal with this case.
+                        <br/>
                         @include("config.types.bool", ['key' => "antispam_duplicate_crossserver", 'data' => old('antispam_duplicate_crossserver', $serverConfig["antispam_duplicate_crossserver"])])
-                        We can also remove these cross-server. Imagine that there is someone going through many servers
-                        and posting some advertisement everywhere, but only a single message per-server so it doesn't
-                        count as standard spam. Valkyrja would notice these messages as being duplicates between
-                        servers.
+                        We can also remove these cross-server. Imagine that there is someone going through many servers and posting some advertisement everywhere, but only a single message per-server so it doesn't count as standard spam. Valkyrja would notice these messages as being duplicates between servers.
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
                         Ban people after <code>@{{ antispam_tolerance }}</code> messages have been removed?
