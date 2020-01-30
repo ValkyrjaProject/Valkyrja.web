@@ -147,13 +147,14 @@
                     <div class="features-indent">
                       <p>
                           <b>Automated Mute</b>
+                          <br/>
                           How many of the below configured <code>Infractions</code> do we tolerate before muting the user?
                           <i>Requires <code>Muted Role</code> to be configured in the <code>Moderation</code> section.</i>
                           <br/>
                           @include("config.types.int", ['key' => "antispam_tolerance", 'data' => old('antispam_tolerance', $serverConfig["antispam_tolerance"])])
                           (Use <code>0</code> (zero) to disable.)
                           <br/>
-                          Duration of the mute.
+                          Duration of the mute:
                           <br/>
                           @include("config.types.int", ['key' => "antispam_mute_duration", 'data' => old('antispam_mute_duration', $serverConfig["antispam_mute_duration"])])
                           (minutes)
