@@ -20,8 +20,8 @@
                 get() {
                     return this.$store.state.tos
                 },
-                set(e) {
-                    this.$store.dispatch('updateTOS', e.target.value);
+                set(value) {
+                    this.$store.dispatch('updateTOS', value);
                 }
             }
         },

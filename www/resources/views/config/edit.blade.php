@@ -36,7 +36,7 @@
                       <button class="btn btn-primary" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
                     </td>
                     <td style="vertical-align:middle; width:20px">
-                        <input type="hidden" name="tos" :value="tos">
+                        <input type="hidden" name="tos" :value="tos ? 1 : 0">
                         <tos-field init-name="tos"
                                     init-value="{{ old('tos', $serverConfig["tos"]) }}"></tos-field>
                     </td>

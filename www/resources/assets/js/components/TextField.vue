@@ -1,5 +1,5 @@
 <template>
-    <input class="form-control" type="text" :id="id" :name="name" v-model="value">
+    <input class="form-control" type="text" :id="id" :name="name" :value="value" @input="updateStoreValue">
 </template>
 
 <script>
@@ -16,16 +16,16 @@
             }
         },
         computed: {
-            value: {
-                get() {
-                    return this.$store.state[this.name]
-                },
-                set(e) {
-                    this.$store.dispatch('updateStoreValue', {
-                        key: this.initName,
-                        data: e.target.value
-                    })
-                }
+            value () {
+                return this.$store.state[this.name]
+            }
+        },
+        methods: {
+            updateStoreValue (e) {
+                this.$store.dispatch('updateStoreValue', {
+                    key: this.initName,
+                    data: e.target.value
+                })
             }
         },
         created() {
