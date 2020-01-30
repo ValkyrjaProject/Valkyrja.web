@@ -80,6 +80,12 @@ new Vue({
                 alert("Please accept terms of service");
             }
         },
+        toggleTOS() {
+            this.$store.dispatch('updateStoreValue', {
+                key: 'tos',
+                data: !this.tos
+            })
+        }
     },
     created() {
         const partArray = window.location.pathname.split( '/' );
@@ -95,6 +101,10 @@ new Vue({
             this.$store.dispatch('updateProfileOptions', state['profile_options']);
             this.$store.dispatch('updateRoleGroups', state['role_groups']);
             this.$store.dispatch('updateReactionRoles', state['reaction_roles']);
+            this.$store.dispatch('updateStoreValue', {
+                key: 'tos',
+                data: state['tos']
+            })
         }
     }
 });

@@ -14,6 +14,7 @@
 			'profile_options' => old('profile_options', (isset($errors) && count($errors) > 0) ? [] : $profile_options->all()),
 			'role_groups' => old('role_groups', (isset($errors) && count($errors) > 0) ? [] : $role_groups->all()),
 			'reaction_roles' => old('reaction_roles', (isset($errors) && count($errors) > 0) ? [] : $reaction_roles->all()),
+			'tos' => !$serverConfig["tos"] && isset($serverConfig["tos"]) ? 0 : 1
         ])) !!}"
     </script>
 @endsection
@@ -36,8 +37,7 @@
                       <button class="btn btn-primary" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
                     </td>
                     <td style="vertical-align:middle; width:20px">
-                        <input type="hidden" name="tos" value="0">
-                        <input class="form-control" style="display: inline" type="checkbox" id="tos" value="1" name="tos" {{ !$serverConfig["tos"] && isset($serverConfig["tos"]) ? "" : "checked"}} >
+                        <input class="form-control" style="display: inline" type="checkbox" id="tos" :value="tos" @click="toggleTOS" name="tos">
                     </td>
                     <td style="vertical-align:middle; width:auto; font-size:10pt">
                         By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
@@ -826,8 +826,7 @@
                       <button class="btn btn-primary" type="button" :disabled="anyLoading" @click="onSubmit">Save</button>
                     </td>
                     <td style="vertical-align:middle; width:20px">
-                        <input type="hidden" name="tos" value="0">
-                        <input class="form-control" style="display: inline" type="checkbox" id="tos" value="1" name="tos" {{ !$serverConfig["tos"] && isset($serverConfig["tos"]) ? "" : "checked"}} >
+                        <input class="form-control" style="display: inline" type="checkbox" id="tos" :value="tos" @click="toggleTOS" name="tos">
                     </td>
                     <td style="vertical-align:middle; width:auto; font-size:10pt">
                         By using the Valkyrja bot you agree to storing End User data (in compliance with Discord ToS) necessary for the functionality as configured on this website.
