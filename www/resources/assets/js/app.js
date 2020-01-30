@@ -7,6 +7,7 @@ import Sticky from './sticky'
 import RoleSelector from './components/RoleSelector.vue'
 import RolePermission from './components/RolePermission.vue'
 import TextField from './components/TextField.vue'
+import BoolField from './components/BoolField.vue'
 import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
@@ -27,6 +28,7 @@ new Vue({
         RoleSelector,
         RolePermission,
         TextField,
+        BoolField,
         TypeSelector,
         CustomInputList,
         CustomCommands,
@@ -79,12 +81,6 @@ new Vue({
             else if (!this.tos) {
                 alert("Please accept terms of service");
             }
-        },
-        toggleTOS() {
-            this.$store.dispatch('updateStoreValue', {
-                key: 'tos',
-                data: !this.tos
-            })
         }
     },
     created() {
@@ -101,10 +97,6 @@ new Vue({
             this.$store.dispatch('updateProfileOptions', state['profile_options']);
             this.$store.dispatch('updateRoleGroups', state['role_groups']);
             this.$store.dispatch('updateReactionRoles', state['reaction_roles']);
-            this.$store.dispatch('updateStoreValue', {
-                key: 'tos',
-                data: state['tos']
-            })
         }
     }
 });
