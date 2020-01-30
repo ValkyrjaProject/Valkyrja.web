@@ -1,6 +1,8 @@
 <template>
-    <input type="hidden" :name="name" :value="value">
-    <input class="form-control" style="display: inline" type="checkbox" :id="id" :value="value" @click="updateStoreValue" name="tos">
+    <container>
+        <input type="hidden" :name="name" value="0">
+        <input class="form-control" style="display: inline" type="checkbox" :id="id" value="1" @click="updateStoreValue" name="tos" :checked="value">
+    </container>
 </template>
 
 <script>
