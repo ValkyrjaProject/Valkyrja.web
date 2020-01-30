@@ -251,7 +251,7 @@ const mutations = {
     },
 
     UPDATE_TOS(state, value) {
-        state.tos = !!JSON.parse(String(!!this.value).toLowerCase());
+        state.tos = !!JSON.parse(String(!!value).toLowerCase());
     },
 
 

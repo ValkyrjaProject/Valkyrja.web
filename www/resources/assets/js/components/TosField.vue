@@ -18,7 +18,7 @@
         computed: {
             value: {
                 get() {
-                    return this.$store.state[this.name]
+                    return this.$store.state.tos
                 },
                 set(e) {
                     this.$store.dispatch('updateTOS', e.target.value);
