@@ -1,18 +1,13 @@
 <template>
-    <container>
-        <input class="form-control" style="display: inline" type="checkbox" v-model="value">
-    </container>
+    <input class="form-control" style="display: inline" type="checkbox" v-model="value">
 </template>
 
 <script>
     export default {
-        props: [
-            'initName',
-            'initValue'
-        ],
-        data: function () {
-            return {
-                name: this.initName,
+        props: {
+            'initValue': {
+                required: false,
+                default: null
             }
         },
         computed: {
@@ -26,7 +21,9 @@
             }
         },
         created() {
-            this.$store.dispatch('updateTOS', this.initValue)
+            if (this.initValue !== null) {
+                this.$store.dispatch('updateTOS', this.initValue)
+            }
         }
     }
 </script>
