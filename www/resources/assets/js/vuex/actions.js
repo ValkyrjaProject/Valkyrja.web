@@ -177,6 +177,10 @@ export const updateStoreValue = ({commit}, attribute) => {
     commit('UPDATE_STORE_VALUE', attribute)
 };
 
+export const updateTOS = ({commit}, value) => {
+    commit('UPDATE_TOS', value)
+};
+
 export const updateBotwinderCommands = ({commit}) => {
     configData.getBotwinderCommands()
         .then(response => {

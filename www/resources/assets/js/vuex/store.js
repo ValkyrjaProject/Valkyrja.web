@@ -250,6 +250,11 @@ const mutations = {
         state[payload.key] = payload.data;
     },
 
+    UPDATE_TOS(state, value) {
+        state.tos = !!JSON.parse(String(!!this.value).toLowerCase());
+    },
+
+
     UPDATE_BOTWINDER_COMMANDS(state, value) {
         state.botwinderCommands = value
     }

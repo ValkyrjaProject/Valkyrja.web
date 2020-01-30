@@ -7,7 +7,7 @@ import Sticky from './sticky'
 import RoleSelector from './components/RoleSelector.vue'
 import RolePermission from './components/RolePermission.vue'
 import TextField from './components/TextField.vue'
-import BoolField from './components/BoolField.vue'
+import TosField from './components/TosField.vue'
 import TypeSelector from './components/TypeSelector.vue'
 import CustomInputList from './components/CustomInputList.vue'
 import CustomCommands from './components/CustomCommands.vue'
@@ -28,7 +28,7 @@ new Vue({
         RoleSelector,
         RolePermission,
         TextField,
-        BoolField,
+        TosField,
         TypeSelector,
         CustomInputList,
         CustomCommands,
