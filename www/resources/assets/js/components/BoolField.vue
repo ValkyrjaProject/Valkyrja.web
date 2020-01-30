@@ -1,7 +1,6 @@
 <template>
     <container>
-        <input type="hidden" :name="name" value="0">
-        <input class="form-control" style="display: inline" type="checkbox" :id="id" value="1" v-model="value" name="tos">
+        <input class="form-control" style="display: inline" type="checkbox" :id="id" v-model="value">
     </container>
 </template>
 
@@ -34,7 +33,7 @@
         created() {
             this.$store.dispatch('updateStoreValue', {
                 key: this.initName,
-                data: !!this.initValue
+                data: !!JSON.parse(String(!!this.initValue).toLowerCase())
             })
         }
     }
