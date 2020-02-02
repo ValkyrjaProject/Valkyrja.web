@@ -470,6 +470,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>listPermissions</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>ServerOwner only!</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>permissions</h2>
                     <table class="command">
                     <tr>
@@ -621,7 +638,7 @@
                         <td>Admin</td>
                     </tr>
                     </table>
-                </di--v>
+                </div-->
                 <div class="features-indent">
                     <h2>nuke</h2>
                     <table class="command">
@@ -631,7 +648,7 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td>None, optional <code>@user</code> mentions or IDs</td>
+                        <td>Optional <code>@user</code> mentions or ID's to delete only messages from specific users.</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -656,23 +673,6 @@
                     </tr>
                     </table>
                 </div-->
-                <div class="features-indent">
-                    <h2>verify</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>This command will either send verification info to the user, or verify them manually if used by an Admin.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>See the <a href="/config">config</a> page for more info.</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>Admin</td>
-                    </tr>
-                    </table>
-                </div>
                 <div class="features-indent">
                     <h2>membersOf</h2>
                     <table class="command">
@@ -744,61 +744,6 @@
                     </table>
                 </div-->
                 <div class="features-indent">
-                    <h2>slow</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Enable or disable slowmode in the current channel.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>A number specifying message interval in seconds.</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>SubModerator</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>clear</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Deletes specified amount of messages (within two weeks.) If you mention someone as well, it will remove only their messages.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td><code>[@users] n</code> - optional <code>@user</code> mentions or ID's (this parameter(s) has to be first, if specified.) And mandatory <code>n</code> parameter, the count of how many messages to remove.</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>SubModerator</td>
-                    </tr>
-                    <tr>
-                        <td>Example</td>
-                        <td><code>!clear 3 @user</code> - removes the last three messages sent by the user.</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>nuke</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Deletes all the messages in the channel (within two weeks.)</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>Optional <code>@user</code> mentions or ID's to delete only messages from specific users.</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>SubModerator</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
                     <h2>op</h2>
                     <table class="command">
                     <tr>
@@ -811,7 +756,7 @@
                     </tr>
                     <tr>
                         <td>Permissions</td>
-                        <td>Moderator (& SubModerator - will apply to <code>mute</code> only)</td>
+                        <td>Moderator (&amp;SubModerator - will apply to <code>mute</code> only)</td>
                     </tr>
                     </table>
                 </div>
@@ -953,6 +898,78 @@
                 </div>
 
                 <h1 class="features-h1">Commands ~ SubModerator</h1>
+                <div class="features-indent">
+                    <h2>addQuote</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Add a new quote! Use with a username or mention as the first parameter, and the text as second. (Or you can just use a message ID.)</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>messageID</code> or <code>username text</code></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>removeQuote</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Remove the last created quote, or specify ID to be removed.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None or <code>ID</code> of a quote</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>slow</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Enable or disable slowmode in the current channel.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>A number specifying message interval in seconds.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>clear</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Deletes specified amount of messages (within two weeks.) If you mention someone as well, it will remove only their messages.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>[@users] n</code> - optional <code>@user</code> mentions or ID's (this parameter(s) has to be first, if specified.) And mandatory <code>n</code> parameter, the count of how many messages to remove.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    <tr>
+                        <td>Example</td>
+                        <td><code>!clear 3 @user</code> - removes the last three messages sent by the user.</td>
+                    </tr>
+                    </table>
+                </div>
                 <div class="features-indent">
                     <h2>mute</h2>
                     <table class="command">
@@ -1246,6 +1263,23 @@
 
                 <h1 class="features-h1">Commands ~ Everyone</h1>
                 <div class="features-indent">
+                    <h2>verify</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>This command will either send verification info to the user, or verify them manually if used by an Admin.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>See the <a href="/config">config</a> page for more info.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>publicRoles</h2>
                     <table class="command">
                     <tr>
@@ -1412,40 +1446,6 @@
                     <tr>
                         <td>Permissions</td>
                         <td>Everyone</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>addQuote</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Add a new quote! Use with a username or mention as the first parameter, and the text as second. (Or you can just use a message ID.)</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td><code>messageID</code> or <code>username text</code></td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>SubModerator</td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="features-indent">
-                    <h2>removeQuote</h2>
-                    <table class="command">
-                    <tr>
-                        <td>Description</td>
-                        <td>Remove the last created quote, or specify ID to be removed.</td>
-                    </tr>
-                    <tr>
-                        <td>Parameters</td>
-                        <td>None or <code>ID</code> of a quote</td>
-                    </tr>
-                    <tr>
-                        <td>Permissions</td>
-                        <td>SubModerator</td>
                     </tr>
                     </table>
                 </div>
