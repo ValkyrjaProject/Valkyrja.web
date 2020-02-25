@@ -4,26 +4,6 @@
 
 @section('content')
 <section class="container">
-    {{--<!--div class="col-xs-12">
-        <div class="row">
-            <h1>Valkyrja</h1>
-            <div>
-                <img src="/img/jefi-discord.jpg" alt="Valkyrja" class="square rounded-circle img-thumbnail" width="150px">
-            </div>
-        </div>
-        <p class="row">
-          Large scale bot where you may experience an occasional lag. We are constantly working on improving the infrastructure to cope with the load.
-          <br />
-          Both bots are identical, and there are no special features in either one.
-        </p><br />
-        <div class="row">
-            <a href="http://invite.valkyrja.app" class="external">
-                <button class="btn btn-primary">Invite</button>
-            </a>
-        </div>
-    </div>
-</section>
-<section class="main-body blue"-->--}}
     <section class="container">
         <div class="col-xs-12">
             <div class="row">
@@ -42,14 +22,14 @@
             </div>
             <p class="row">
               <br />
-              <b><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe</a></b> to support the project and unlock the premium features!
+              <b><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe</a></b> or become partner to support the project and unlock the premium features!
               <ul>
                   <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
                   <li><b>Karma</b> - People receive cookies (you can change that) when they get thanked.</li>
                   <li><b>Experience</b> and levels. Send messages to gain experience, send images to gain more experience. Level up to unlock fancy roles and karma cookies!</li>
                 </ul>
-              Handpicked <b>partners</b> get premium features without subscription. Only unique communities with worthy cause qualify, such as <b>open source</b> projects, Linux or other geeky places. <u>No gaming communities!</u> <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
+              <b>Partners</b> get premium features without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
             </p>
             <br />
             <p class="row">
