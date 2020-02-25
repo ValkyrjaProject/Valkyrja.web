@@ -958,7 +958,24 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td><code>[@users] n</code> - optional <code>@user</code> mentions or ID's (this parameter(s) has to be first, if specified.) And mandatory <code>n</code> parameter, the count of how many messages to remove.</td>
+                        <td><code>&lt;n&gt; [@users]</code> - optional <code>@user</code> mentions or ID's (this parameter(s) has to be last, if specified.) And mandatory <code>n</code> parameter, the count of how many messages to remove.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>clearRegex</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Delete only messages that match a regular expression within the last <code>n</code> messages.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>&lt;n&gt; &lt;regex&gt; [@users]</code> where you should not use any whitespace in the regular expression, use <code>\s</code> instead. (Note - ignores case.)</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
@@ -966,7 +983,7 @@
                     </tr>
                     <tr>
                         <td>Example</td>
-                        <td><code>!clear 3 @user</code> - removes the last three messages sent by the user.</td>
+                        <td><code>!clear 10 meme @user</code> - removes messages that match regular expression "meme" that were sent by the @user within the last 10 messagews.</td>
                     </tr>
                     </table>
                 </div>

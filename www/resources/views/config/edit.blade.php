@@ -179,7 +179,7 @@
                           <b>Kick Without Role</b>
                           <br/>
                           @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
-                          Kick users if they do not get a role (by verifying via a command, reaction role, or our code verification) a little while after joining.
+                          Kick users if they do not get a role (by verifying via a command, emoji reaction role, or our code verification) a little while after joining. Will not kick anyone who was around for more than one day. Use command to do that: <code>kickWithoutRoles</code>
                           <br/>
                           @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
                           Log these into the moderation channel (requires mod channel to be configured in the Logging section below.)
