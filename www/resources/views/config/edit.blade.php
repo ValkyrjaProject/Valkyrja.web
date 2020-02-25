@@ -186,7 +186,7 @@
                           @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
                           <br/>
                           @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
-                          Log these into the log channel (requires log channel to be configured in the Logging section below.)
+                          Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
                       </p>
                       <p>
                           <b>Ban username-spammers as they join</b>
