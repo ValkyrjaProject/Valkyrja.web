@@ -4,10 +4,10 @@
 
 @section('content')
 <div class="container">
-    <div class="col-md-7 col-lg-5">
+    <div class="col-md-5 col-lg-4 col-xl-3">
         <img src="/img/devs.jpg" alt="Rhea and SpyTec" class="image-left"/>
     </div>
-    <div class="col-md-5 col-lg-7">
+    <div class="col-md-7 col-lg-8 col-xl-8">
         <div class="row team-member padding-bottom">
             <div class="profile">
                 <img class="avatar" src="img/team-rhea.jpg" />
