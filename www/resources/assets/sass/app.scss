@@ -410,6 +410,9 @@ footer {
     font-weight: bold;
     font-family: 'Alegreya SC', serif;
   }
+  > p {
+    margin-top: 0.7rem;
+  }
 }
 
 .features-indent {
@@ -472,8 +475,11 @@ table.commands {
   }
 }
 
-.icons.spaced img {
-  margin-right: 5px;
+.icons.spaced {
+  margin-top: 0.7rem;
+  img {
+    margin-right: 5px;
+  }
 }
 
 .email {
