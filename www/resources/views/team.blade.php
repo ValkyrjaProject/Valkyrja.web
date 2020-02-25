@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="col-md-7 col-lg-5">
-        <img src="/img/sunset.jpg" alt="Rhea and SpyTec" class="image-left"/>
+        <img src="/img/devs.jpg" alt="Rhea and SpyTec" class="image-left"/>
     </div>
     <div class="col-md-5 col-lg-7">
         <div class="row team-member padding-bottom">
