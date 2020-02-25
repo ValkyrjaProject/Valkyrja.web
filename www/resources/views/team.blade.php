@@ -13,18 +13,16 @@
                 <img class="avatar" src="img/team-rhea.jpg" />
                 <p class="labels">
                 <span class="name">Rhea</span>
-                <br />Project and Code Lead</p>
+                <br />Valkyrja developer | .NET Core QE Lead at Red Hat</p>
             </div>
             <p><i>
-                Former Game Programmer, .NET Core Quality Engineering Lead & Community Manager, MountainBiker and an Evul Chick wearing her Red Hat, inspiring the desolate whitespace of Linux world with the delicate C# letters of simplified artificial intelligence.
+                Inspiring the desolate whitespace of Linux world with the delicate C# letters of simplified artificial intelligence.
             </i></p>
             <div class="icons spaced">
-                <a href="http://rhea-ayase.eu"><img src="/img/external.png" alt="Rhea's website"></a>
+                <a href="https://rhea.dev"><img src="/img/external.png" alt="Rhea's website"></a>
                 <a href="https://github.com/RheaAyase"><img src="/img/github.png" alt="github.com/RheaAyase"></a>
                 <a href="https://twitter.com/RheaAyase"><img src="/img/twitter.png" alt="twitter.com/RheaAyase"></a>
-                <a href="https://twitch.tv/RheaAyase"><img src="/img/twitch.png" alt="twitch.tv/RheaAyase"></a>
                 <a href="https://youtube.com/RheaAyase"><img src="/img/youtube.png" alt="youtube.com/RheaAyase"></a>
-                <a href="https://fedoraproject.org/wiki/User:Rhea"><img src="/img/fedora.png" alt="fedoraproject.org"></a>
             </div>
         </div>
         <div class="row team-member">
@@ -32,7 +30,7 @@
                 <img class="avatar" src="img/team-spytec.jpg" />
                 <p class="labels">
                 <span class="name">SpyTec</span>
-                <br />WebDev Lead</p>
+                <br />Website developer | Software Engineer at Red Hat</p>
             </div>
             <p><i>
                 Crafts websites. Also a professional slacker.
