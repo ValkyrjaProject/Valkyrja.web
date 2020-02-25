@@ -182,7 +182,11 @@
                           Kick users if they do not get a role (by verifying via a command, emoji reaction role, or our code verification) a little while after joining. Will not kick anyone who was around for more than one day. Use command to do that: <code>kickWithoutRoles</code>
                           <br/>
                           @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
-                          Log these into the moderation channel (requires mod channel to be configured in the Logging section below.)
+                          Log these into the log channel (requires log channel to be configured in the Logging section below.)
+                          <br/>
+                          The time between they join and get kicked out in minutes:
+                          <br/>
+                          @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
                       </p>
                       <p>
                           <b>Ban username-spammers as they join</b>
