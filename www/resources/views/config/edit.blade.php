@@ -185,6 +185,9 @@
                           <br/>
                           @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
                           <br/>
+                          @include("config.types.bool", ['key' => "antispam_norole_recent", 'data' => old('antispam_norole_recent', $serverConfig["antispam_norole_recent"])])
+                          Only recently created accounts.
+                          <br/>
                           @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
                           Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
                       </p>

@@ -112,6 +112,7 @@ class ConfigRequest extends FormRequest
             'execute_on_edit'                   => 'required|boolean',
             'log_antispam_kick'                 => 'required|boolean',
             'antispam_norole'                   => 'required|boolean',
+            'antispam_norole_recent'            => 'required|boolean',
             'antispam_norole_minutes'           => 'required|integer|between:5,1380',
             'antispam_username'                 => 'required|boolean',
             'antispam_invites'                  => 'required|boolean',
