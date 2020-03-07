@@ -173,31 +173,19 @@
                           or <code>Mute=2</code> & <code>Ban=6</code> which translate into "mute twice, then ban." (<code>b=(m+1)*2</code>)
                       </p>
                     </div>
-                    <h2>User Joined</h2>
+                    <h2>New user</h2>
                     <div class="features-indent">
-                      <p>
-                          <b>Kick Without Role</b>
-                          <br/>
-                          @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
-                          Kick users if they do not get a role (by verifying via a command, emoji reaction role, or our code verification) a little while after joining. Will not kick anyone who was around for more than one day. Use command to do that: <code>kickWithoutRoles</code>
-                          <br/>
-                          The time between they join and get kicked out in minutes:
-                          <br/>
-                          @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
-                          <br/>
-                          @include("config.types.bool", ['key' => "antispam_norole_recent", 'data' => old('antispam_norole_recent', $serverConfig["antispam_norole_recent"])])
-                          Only recently created accounts.
-                          <br/>
-                          @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
-                          Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
-                      </p>
                       <p>
                           <b>Ban username-spammers as they join</b>
                           <br/>
                           @include("config.types.bool", ['key' => "antispam_username", 'data' => old('antispam_username', $serverConfig["antispam_username"])])
                           This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username. This will also ban if multiple people join with identical username within short time period.
                       </p>
-                    </div>
+                      <p>
+                          <b>More...</b>
+                          <br/>
+                          For more verification options and options to kick people who fail it see the Verification section below.
+                      </p>
                     <h2>Infractions</h2>
                     <div class="features-indent">
                       <p>
@@ -608,8 +596,8 @@
                     New User / Verification
                 </button>
                 <div class="form-inline form-group collapse" id="configNewUser"><br/>
-                    <p><br/>
-                        <b>New User</b>
+                    <h2>New User</h2>
+                    <div class="features-indent">
                         <br/><br/>
                         @include("config.types.bool", ['key' => "welcome_pm", 'data' => old('welcome_pm', $serverConfig["welcome_pm"])])
                         PM the following message to the user, when they join your server. Use <code>{0}</code> in the
@@ -622,29 +610,41 @@
                         <type-selector init-id-type="welcome_roleid" label="name"
                                        :default-value='{{ json_encode($guild['roles']->get(old('welcome_roleid', $serverConfig["welcome_roleid"]))) }}'
                                        :values='roles'></type-selector>
-                    </p>
-                    <br/>
+                    </div>
+                    <h2>Kick on failed verification</h2>
+                    <div class="features-indent">
+                          <b>Kick Without Role</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
+                          Kick users if they do not get a role (by verifying via a command, emoji reaction role, or our code verification) a little while after joining. Will not kick anyone who was around for more than one day. Use command to do that: <code>kickWithoutRoles</code>
+                          <br/>
+                          The time between they join and get kicked out in minutes:
+                          <br/>
+                          @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_norole_recent", 'data' => old('antispam_norole_recent', $serverConfig["antispam_norole_recent"])])
+                          Only recently created accounts.
+                          <br/>
+                          @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
+                          Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
+                    </div>
+                    <h2>Verification</h2>
                     <p>
+
                         <br/><br/>
-                        <b>Code Verification</b>
+                        <b>Captcha Verification</b> (..kinda!)
                         <br/>
+                        @include("config.types.bool", ['key' => "captcha", 'data' => old('captcha', $serverConfig["captcha"])])
+                        The bot will send a simple ascii art animal to the user via PM and they have to identify it. Upon success the user is assigned below configured role and cookies.
+                        <br/><br/>
+                        <b>Find-a-Code Verification</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "verify", 'data' => old('verify', $serverConfig["verify"])])
                         The bot will send information how to get verified to the user via PM together with your rules
                         (configured below) and a hidden code within the text. They will be assigned Verified Role after
                         they find the code and reply with it back to the bot. We recommend to give this role normal
                         permissions, while the <code>@everyone</code> role should have just basic read permissions and
                         be unable to speak, upload files, etc...
-                        <br/><br/>
-                        @include("config.types.bool", ['key' => "verify", 'data' => old('verify', $serverConfig["verify"])])
-                        Enable verification system.
-                        <br/>
-                        Assign the following role to verified users.
-                        <br/>
-                        <type-selector init-id-type="verify_roleid" label="name"
-                                       :default-value='{{ json_encode($guild['roles']->get(old('verify_roleid', $serverConfig["verify_roleid"]))) }}'
-                                       :values='roles'></type-selector>
-                        <br/>
-                        (Recommended permissions: <a href="/img/verifyRole.png" target="_blank">Verified Role</a> and <a
-                                href="/img/verifyEveryone.png" target="_blank">@everyone</a>)
                         <br/><br/>
                         This message will be included in the instructions PMed to the user. If you are using Reddit, you
                         can just list the benefits (extra permissions) of the verification, or in case of the Code
@@ -659,11 +659,28 @@
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
                         <code>@{{ command_prefix }}verify</code> without parameters.
                         <br/><br/>
+                        <b>Role</b> - Assign the following role to verified users.
+                        <br/>
+                        <type-selector init-id-type="verify_roleid" label="name"
+                                       :default-value='{{ json_encode($guild['roles']->get(old('verify_roleid', $serverConfig["verify_roleid"]))) }}'
+                                       :values='roles'></type-selector>
+                        <br/>
+                        (Recommended permissions: <a href="/img/verifyRole.png" target="_blank">Verified Role</a> and <a
+                                href="/img/verifyEveryone.png" target="_blank">@everyone</a>)
+                        <br/><br/>
+                        <b>Cookies</b>
+                        <br/>
                         How many {{ $serverConfig["karma_currency"] }} do you want to give them? Use <code>0</code>
                         (zero) to disable. This also depends on whether your karma system is enabled or not.
                         <br/>
                         @include("config.types.int", ['key' => "verify_karma", 'data' => old('verify_karma', $serverConfig["verify_karma"])])
                         <br/><br/>
+                        <b>Statistics</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "stats", 'data' => old('stats', $serverConfig["stats"])])
+                        Enable verification statistics - this will keep track of how many people joined, left on their own, got banned by Valk's antispam, got kicked out by the above failed verification, and how many were removed by Discord itself. Use <code>@{{ command_prefix}}stats</code>
+                        <br/><br/>
+                        <b>Manual Verification</b>
                         If you need to verify someone manually, you can use the verify command with <code>force</code>
                         parameter, such as this:
                         <br/>
