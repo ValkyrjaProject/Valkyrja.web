@@ -186,6 +186,7 @@
                           <br/>
                           For more verification options and options to kick people who fail it see the Verification section below.
                       </p>
+                    </div>
                     <h2>Infractions</h2>
                     <div class="features-indent">
                       <p>
@@ -629,7 +630,7 @@
                           Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
                     </div>
                     <h2>Verification</h2>
-                    <p>
+                    <div class="features-indent">
                         <b>Captcha Verification</b> (..kinda!)
                         <br/>
                         @include("config.types.bool", ['key' => "captcha", 'data' => old('captcha', $serverConfig["captcha"])])
@@ -651,9 +652,9 @@
                             Guidelines</a> written by Rhea.
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "verify_message", 'data' => old('verify_message', $serverConfig["verify_message"])])
-                    </p>
+                    </div>
                     <h2>Common verification options</h2>
-                    <p>
+                    <div class="features-indent">
                         @include("config.types.bool", ['key' => "verify_on_welcome", 'data' => old('verify_on_welcome', $serverConfig["verify_on_welcome"])])
                         Send the verification info to the user, as soon as they join the server. You can also send it to
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
@@ -688,7 +689,7 @@
                         parameter, such as this:
                         <br/>
                         <code>@{{ command_prefix }}verify @Rhea force</code>
-                    </p>
+                    </div>
                 </div>
                 <button class="btn btn-fading btn-full-width"  type="button" data-toggle="collapse"
                         data-target="{{ $isPremium ? "#configSocial" : "#subscribeConfigSocial"}}" aria-expanded="false" aria-controls="{{ $isPremium ? "configSocial" : "subscribeConfigSocial"}}">
