@@ -599,7 +599,7 @@
                 <div class="form-inline form-group collapse" id="configNewUser"><br/>
                     <h2>New User</h2>
                     <div class="features-indent">
-                        <br/><br/>
+                        <b>As soon as they join...</b>
                         @include("config.types.bool", ['key' => "welcome_pm", 'data' => old('welcome_pm', $serverConfig["welcome_pm"])])
                         PM the following message to the user, when they join your server. Use <code>{0}</code> in the
                         message where their username should be.
@@ -614,20 +614,20 @@
                     </div>
                     <h2>Kick on failed verification</h2>
                     <div class="features-indent">
-                          <b>Kick Without Role</b>
-                          <br/>
-                          @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
-                          Kick users if they do not get a role (by verifying via a command, emoji reaction role, or our code verification) a little while after joining. Will not kick anyone who was around for more than one day. Use command to do that: <code>kickWithoutRoles</code>
-                          <br/>
-                          The time between they join and get kicked out in minutes:
-                          <br/>
-                          @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
-                          <br/>
-                          @include("config.types.bool", ['key' => "antispam_norole_recent", 'data' => old('antispam_norole_recent', $serverConfig["antispam_norole_recent"])])
-                          Only recently created accounts.
-                          <br/>
-                          @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
-                          Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
+                        <b>Kick Without Role</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
+                        Kick users if they do not get a role (by verifying via a command, emoji reaction role, or our code verification) a little while after joining. Will not kick anyone who was around for more than one day. Use command to do that: <code>kickWithoutRoles</code>
+                        <br/>
+                        The time between they join and get kicked out in minutes:
+                        <br/>
+                        @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
+                        <br/>
+                        @include("config.types.bool", ['key' => "antispam_norole_recent", 'data' => old('antispam_norole_recent', $serverConfig["antispam_norole_recent"])])
+                        Only recently created accounts.
+                        <br/>
+                        @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
+                        Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
                     </div>
                     <h2>Verification</h2>
                     <div class="features-indent">
@@ -655,6 +655,7 @@
                     </div>
                     <h2>Common verification options</h2>
                     <div class="features-indent">
+                        <b>Send pm automatically</b>
                         @include("config.types.bool", ['key' => "verify_on_welcome", 'data' => old('verify_on_welcome', $serverConfig["verify_on_welcome"])])
                         Send the verification info to the user, as soon as they join the server. You can also send it to
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
@@ -682,6 +683,8 @@
                         <br/>
                         @include("config.types.bool", ['key' => "stats", 'data' => old('stats', $serverConfig["stats"])])
                         Enable verification statistics - this will keep track of how many people joined, left on their own, got banned by Valk's antispam, got kicked out by the above failed verification, and how many were removed by Discord itself. Use <code>@{{ command_prefix}}stats</code>
+                        <br/>
+                        You can even set-up the role above even if it's assigned by different bot or any other verification system, and it will be tracked.
                         <br/><br/>
                         <b>Manual Verification</b>
                         <br/>
