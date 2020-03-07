@@ -64,6 +64,8 @@
                         <li><b>Encrypted Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
                         <li><b>Configure</b> many aspects of the bot: customize the command prefix, <b>antispam system</b> to remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing too!) And the Valkyrja will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
                         <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. The above also applies. Oh and they can get cookies for verifying, if you configure that as well.
+                        <li>If that's not your cup of beverage, you're welcome to many other forms of verification.</li>
+                        <li>Collect <b>statistics</b> about how many people joined, got kicked out by antispam, or passed verification. (<a href="/config">Can be configured.</a>)</li>
                         <li><b>Log user events</b> like user joining or leaving the server, being promoted or demoted, and PM a new user when they join the server. You can change these messages to your liking, set whether to @mention them, or just use their name as text, etc. (<a href="/config">Can be configured.</a>)</li>
                         <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
                         <li>You can even <b>log users switching between voice channels.</b></li>
@@ -207,6 +209,23 @@
                     <tr>
                         <td>Parameters</td>
                         <td>Use without arguments for help.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
+                    <h2>stats</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display join/verification stats.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>&gt;from&lt; [to]</code> dates (mandatory <code>from/since</code> optional <code>to</code>)</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>
