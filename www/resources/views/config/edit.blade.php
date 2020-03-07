@@ -630,8 +630,6 @@
                     </div>
                     <h2>Verification</h2>
                     <p>
-
-                        <br/><br/>
                         <b>Captcha Verification</b> (..kinda!)
                         <br/>
                         @include("config.types.bool", ['key' => "captcha", 'data' => old('captcha', $serverConfig["captcha"])])
@@ -653,13 +651,17 @@
                             Guidelines</a> written by Rhea.
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "verify_message", 'data' => old('verify_message', $serverConfig["verify_message"])])
-                        <br/><br/>
+                    </p>
+                    <h2>Common verification options</h2>
+                    <p>
                         @include("config.types.bool", ['key' => "verify_on_welcome", 'data' => old('verify_on_welcome', $serverConfig["verify_on_welcome"])])
                         Send the verification info to the user, as soon as they join the server. You can also send it to
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
                         <code>@{{ command_prefix }}verify</code> without parameters.
                         <br/><br/>
-                        <b>Role</b> - Assign the following role to verified users.
+                        <b>Role</b>
+                        <br/>
+                        Assign the following role to verified users.
                         <br/>
                         <type-selector init-id-type="verify_roleid" label="name"
                                        :default-value='{{ json_encode($guild['roles']->get(old('verify_roleid', $serverConfig["verify_roleid"]))) }}'
@@ -681,6 +683,7 @@
                         Enable verification statistics - this will keep track of how many people joined, left on their own, got banned by Valk's antispam, got kicked out by the above failed verification, and how many were removed by Discord itself. Use <code>@{{ command_prefix}}stats</code>
                         <br/><br/>
                         <b>Manual Verification</b>
+                        <br/>
                         If you need to verify someone manually, you can use the verify command with <code>force</code>
                         parameter, such as this:
                         <br/>
