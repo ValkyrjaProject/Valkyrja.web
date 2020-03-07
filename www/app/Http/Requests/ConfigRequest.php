@@ -181,6 +181,8 @@ class ConfigRequest extends FormRequest
             'welcome_pm'                        => 'required|boolean',
             'welcome_message'                   => 'string|nullable',
             'welcome_roleid'                    => 'required|integer',
+            'stats'                             => 'required|boolean',
+            'captcha'                           => 'required|boolean',
             'verify'                            => 'required|boolean',
             'verify_on_welcome'                 => 'required|boolean',
             'verify_roleid'                     => 'required|integer',
