@@ -727,6 +727,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>unverify</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Remove verified status from someone.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>User mentions or IDs</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>removeStreamPermission / announce</h2>
                     <table class="command">
                     <tr>
@@ -1311,7 +1328,7 @@
                     </tr>
                     <tr>
                         <td>Permissions</td>
-                        <td>Admin</td>
+                        <td>Everyone or Admin</td>
                     </tr>
                     </table>
                 </div>
