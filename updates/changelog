@@ -1,7 +1,7 @@
 #Changelog
 
 **Valkyrja 3.8** - 8th of March, 2020
-  * https://status.valkyrja.app - new fancy status page where you can see what's the bot doing. This doubles up as an off-site monitoring that will let us know if something's wrong.
+  * https://status.valkyrja.app - new fancy status page where you can see what the bot is doing. This doubles up as an off-site monitoring that will let us know if something's wrong.
   * `!names` - we've split off all the names/nicknames from the standard whois string as this may end up being a huge list of hundreds of names with some... individuals.
   * Using nuke or clear will now log all the deleted messages with a note that they were deleted by a command. Keep in mind that it will most likely group many log messages into one message (or even upload it all as a file.)
   * `!clear <n> [@users]` - A little change in the syntax of this command.
