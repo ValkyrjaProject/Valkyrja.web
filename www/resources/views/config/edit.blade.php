@@ -656,8 +656,9 @@
                     <h2>Common verification options</h2>
                     <div class="features-indent">
                         <b>Send pm automatically</b>
+                        <br/>
                         @include("config.types.bool", ['key' => "verify_on_welcome", 'data' => old('verify_on_welcome', $serverConfig["verify_on_welcome"])])
-                        Send the verification info to the user, as soon as they join the server. You can also send it to
+                        Send the verification info to the user as soon as they join the server. You can also send it to
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
                         <code>@{{ command_prefix }}verify</code> without parameters.
                         <br/><br/>
