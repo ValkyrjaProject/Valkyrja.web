@@ -184,6 +184,8 @@ class ConfigRequest extends FormRequest
             'stats'                             => 'required|boolean',
             'captcha'                           => 'required|boolean',
             'verify'                            => 'required|boolean',
+            'verify_accountage'                 => 'required|boolean',
+            'verify_accountage_days'            => 'required|integer|min:0',
             'verify_on_welcome'                 => 'required|boolean',
             'verify_roleid'                     => 'required|integer',
             'verify_karma'                      => 'required|integer',

@@ -624,7 +624,7 @@
                         @include("config.types.int", ['key' => "antispam_norole_minutes", 'data' => old('antispam_norole_minutes', $serverConfig["antispam_norole_minutes"])])
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_norole_recent", 'data' => old('antispam_norole_recent', $serverConfig["antispam_norole_recent"])])
-                        Only recently created accounts.
+                        Only recently created accounts - apply the Account Age configured below.
                         <br/>
                         @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
                         Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
@@ -661,6 +661,13 @@
                         Send the verification info to the user as soon as they join the server. You can also send it to
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
                         <code>@{{ command_prefix }}verify</code> without parameters.
+                        <br/><br/>
+                        <b>Account age</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "verify_accountage", 'data' => old('verify_accountage', $serverConfig["verify_accountage"])])
+                        Automatically assign the below configured Veirifcation role to accounts older than this time many days:
+                        <br/>
+                        @include("config.types.int", ['key' => "verify_accountage_days", 'data' => old('verify_accountage_days', $serverConfig["verify_accountage_days"])])
                         <br/><br/>
                         <b>Role</b>
                         <br/>
