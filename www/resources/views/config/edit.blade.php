@@ -600,6 +600,7 @@
                     <h2>New User</h2>
                     <div class="features-indent">
                         <b>As soon as they join...</b>
+                        <br/>
                         @include("config.types.bool", ['key' => "welcome_pm", 'data' => old('welcome_pm', $serverConfig["welcome_pm"])])
                         PM the following message to the user, when they join your server. Use <code>{0}</code> in the
                         message where their username should be.
@@ -665,7 +666,7 @@
                         <b>Account age</b>
                         <br/>
                         @include("config.types.bool", ['key' => "verify_accountage", 'data' => old('verify_accountage', $serverConfig["verify_accountage"])])
-                        Automatically assign the below configured Veirifcation role to accounts older than this time many days:
+                        Automatically assign the below configured veirifcation Role to accounts older than this time many days:
                         <br/>
                         @include("config.types.int", ['key' => "verify_accountage_days", 'data' => old('verify_accountage_days', $serverConfig["verify_accountage_days"])])
                         <br/><br/>
