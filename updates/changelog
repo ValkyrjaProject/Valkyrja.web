@@ -1,6 +1,6 @@
 #Changelog
 
-**Valkyrja 3.8** - 8th of March, 2020
+**Valkyrja 3.8** - 10th of March, 2020
   * https://status.valkyrja.app - new fancy status page where you can see what the bot is doing. This doubles up as an off-site monitoring that will let us know if something's wrong.
   * `!names` - we've split off all the names/nicknames from the standard whois string as this may end up being a huge list of hundreds of names with some... individuals.
   * Using nuke or clear will now log all the deleted messages with a note that they were deleted by a command. Keep in mind that it will most likely group many log messages into one message (or even upload it all as a file.)
@@ -8,7 +8,7 @@
   * `!clearRegex <n> <regex> [@users]` - You can also delete only messages that match specific regular expression ;)
   * `!restrictAlert` - Using this you can restrict Alert logs to search only one channel. (Or you can use standard logging ignored channels.)
   * Antispam - generally overhauled the config, you can now have it mute people first, before banning. There is also a new option to look for duplicate messages between users, not just by one user.
-  * Verification - generally overhauled the config, new type of sort of "captcha" verification was added and verification can now count how many people joined, left, verified, got kicked out, etc. Further the kick of people who fail it was moved out of the antispam section to the verification section, making it available to anyone without subscription or partnership. It was also upgraded by new tweakable options.
+  * Verification - generally overhauled the config, new type of sort of "captcha" verification was added and verification can now count how many people joined, left, verified, got kicked out, etc. Further the kick of people who fail it was moved out of the antispam section to the verification section, making it available to anyone **without subscription or partnership.** It was also upgraded by new tweakable options.
   * And last but not least a bunch of issues were fixed and backend details improved.
 
 **Valkyrja 3.7** - 2nd of January, 2020
