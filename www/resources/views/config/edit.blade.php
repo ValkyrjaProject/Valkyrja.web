@@ -628,7 +628,7 @@
                         Only recently created accounts - apply the Account Age configured below.
                         <br/>
                         @include("config.types.bool", ['key' => "log_antispam_kick", 'data' => old('log_antispam_kick', $serverConfig["log_antispam_kick"])])
-                        Log these into the User Activity log channel (requires it to be configured in the Logging section below.)
+                        Log these into the User Activity log channel (requires it to be configured in the Logging section above.)
                     </div>
                     <h2>Verification</h2>
                     <div class="features-indent">
