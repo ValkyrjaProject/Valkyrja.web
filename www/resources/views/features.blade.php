@@ -960,7 +960,7 @@
                     </tr>
                     <tr>
                         <td>Parameters</td>
-                        <td>A number specifying message interval in seconds.</td>
+                        <td>A number specifying message interval in seconds (or use time quantifiers s, m, h or d - e.g. <code>1m30s</code>)</td>
                     </tr>
                     <tr>
                         <td>Permissions</td>

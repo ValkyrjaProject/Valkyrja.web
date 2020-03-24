@@ -97,6 +97,13 @@
                         <code>@everyone</code> mentions, it is strongly recommended to keep this enabled.
                         <br/>
                     </p>
+                    <p>
+                        Notification channel - permission issues and other errors will go here, as well as config reload notifications.
+                        <br/>
+                        <type-selector init-id-type="notification_channelid" label="name"
+                                       :default-value='{{ json_encode($guild['channels']->get(old('notification_channelid', $serverConfig["notification_channelid"]))) }}'
+                                       :values='channels'></type-selector>
+                    </p>
                 </div>
                 <button class="btn btn-fading btn-full-width"  type="button" data-toggle="collapse"
                         data-target="{{ $isPremium ? "#configAntispam" : "#subscribeConfigAntispam"}}" aria-expanded="false" aria-controls="{{ $isPremium ? "configAntispam" : "subscribeConfigAntispam"}}">
