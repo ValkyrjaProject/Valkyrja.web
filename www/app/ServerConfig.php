@@ -8,7 +8,9 @@ class ServerConfig extends Model
 {
     protected $table = 'server_config';
     protected $primaryKey = 'serverid';
-    public $timestamps = false;
+    public $timestamps = true;
+    const UPDATED_AT = 'last_touched';
+    const CREATED_AT = null;
 
     protected $guarded = [
         'name',
