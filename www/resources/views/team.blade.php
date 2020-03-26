@@ -74,7 +74,7 @@
             <!-- Alice -->
             <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
-                    <img class="avatar" src="img/team-alice.jpg" />
+                    <img class="avatar" src="img/team-alice.png" />
                     <p class="labels">
                     <span class="name">Alice</span>
                     <br />Support</p>
