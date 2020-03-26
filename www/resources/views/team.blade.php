@@ -10,7 +10,7 @@
     <div class="col-md-7 col-lg-8 col-xl-8">
         <div class="row team-member padding-bottom">
             <div class="profile">
-                <img class="avatar" src="img/team-rhea.jpg" />
+                <img class="avatar" src="img/team-rhea.gif" />
                 <p class="labels">
                 <span class="name">Rhea</span>
                 <br />Valkyrja developer | .NET Core QE Lead at Red Hat</p>
@@ -71,18 +71,6 @@
             <h1 class="cell">Support Team</h1>
         </div>
         <div class="row container">
-            <!-- MasterChief -->
-            <div class="col-md-6 team-member padding-bottom">
-                <div class="profile">
-                    <img class="avatar" src="img/team-masterchief.jpg" />
-                    <p class="labels">
-                    <span class="name">MasterChief_John-117</span>
-                    <br />Support</p>
-                </div>
-                <p><i>
-                    Programmer in study, also a weirdo.
-                </i></p>
-            </div>
             <!-- Alice -->
             <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
@@ -95,9 +83,6 @@
                     System admin and technology enthusiast, supports the religion of cookies.
                 </i></p>
             </div>
-            <div class="clearfix hidden-sm-down">
-                <!-- endline -->
-            </div>
             <!-- DokaDoka -->
             <div class="col-md-6 team-member padding-bottom">
                 <div class="profile">
@@ -108,6 +93,33 @@
                 </div>
                 <p><i>
                     Engineering student and valkyrja enthusiast, crafts all the emojis.
+                </i></p>
+            </div>
+            <div class="clearfix hidden-sm-down">
+                <!-- endline -->
+            </div>
+            <!-- refi64 -->
+            <div class="col-md-6 team-member padding-bottom">
+                <div class="profile">
+                    <img class="avatar" src="img/team-refi64.png" />
+                    <p class="labels">
+                    <span class="name">re:fi.64</span>
+                    <br />Support</p>
+                </div>
+                <p><i>
+                    Linux poweruser, Flatpak nerd and weeb for life.
+                </i></p>
+            </div>
+            <!-- Tyler -->
+            <div class="col-md-6 team-member padding-bottom">
+                <div class="profile">
+                    <img class="avatar" src="img/team-tyler.png" />
+                    <p class="labels">
+                    <span class="name">Tyler</span>
+                    <br />Support</p>
+                </div>
+                <p><i>
+                    Web developer & Linux user who believes in privacy and data encryption.
                 </i></p>
             </div>
         </div>
