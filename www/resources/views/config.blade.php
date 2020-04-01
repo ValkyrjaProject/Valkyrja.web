@@ -20,6 +20,7 @@
 			We need to know what servers you can configure - required permissions to configure Valkyrja are <code>Administrator</code> & <code>ManageServer</code>.
 		</p>
 		<p><i>By the way, you need Valkyrja on your server before you can configure anything. <a href="/invite">Invite the bot!</a></i></p>
+                <p>You can also use our <a href="https://discord.new/FbNgtkaFjXsx">Discord server template!</a></p>
 	</div>
 </div>
 @endsection
