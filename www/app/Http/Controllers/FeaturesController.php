@@ -9,7 +9,7 @@ use App\Http\Requests;
 class FeaturesController extends Controller
 {
     /**
-    * Botwinder features page.
+    * Valkyrja features page.
     */
     public function index(){
         return view('features');

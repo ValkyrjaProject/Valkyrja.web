@@ -9,7 +9,7 @@ use App\Http\Requests;
 class HelpController extends Controller
 {
     /**
-    * Botwinder features page.
+    * Valkyrja features page.
     */
     public function index(){
         return view('help');

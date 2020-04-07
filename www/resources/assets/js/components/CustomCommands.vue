@@ -17,7 +17,7 @@
                     </label>
                     <div class="form-control-feedback" v-if="isDuplicate(props.activeItem)">Id must be unique.</div>
                     <div class="form-control-feedback" v-if="isBotwinderCommand(props.activeItem)">
-                        Id cannot be the same as a Botwinder command.
+                        Id cannot be the same as a Valkyrja command.
                     </div>
                     <div class="form-control-feedback" v-if="props.activeItem.commandid.length === 0">Id cannot be empty.</div>
                     <div class="form-control-feedback" v-if="hasWhitespace(props.activeItem.commandid)">

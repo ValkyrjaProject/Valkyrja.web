@@ -138,7 +138,7 @@ class ConfigController extends Controller
             abort(404, $e->getMessage());
         } catch (Throwable $e) {
             return redirect()->route("displayServers")->with('messages', [
-                'Could not retrieve Discord information. Is Botwinder on the selected server?'
+                'Could not retrieve Discord information. Is Valkyrja on the selected server?'
             ]);
         }
 

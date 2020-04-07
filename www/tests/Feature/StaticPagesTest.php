@@ -16,8 +16,8 @@ class StaticPagesTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSeeText('Botwinder - The Discord Bot');
-        $response->assertSee('href="//status.botwinder.info"');
+        $response->assertSeeText('Valkyrja - The Discord Bot');
+        $response->assertSee('href="//status.valkyrja.app"');
     }
 
     public function testDocsPage()
@@ -52,7 +52,7 @@ class StaticPagesTest extends TestCase
         $response = $this->get('/help');
         $response->assertStatus(200);
 
-        $response->assertSee('<a href="http://support.botwinder.info" target="_blank">our Discord server</a>');
+        $response->assertSee('<a href="https://support.valkyrja.app" target="_blank">our Discord server</a>');
     }
 
     public function testTeamPage()
