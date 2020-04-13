@@ -403,6 +403,13 @@
                             permissions</a>.
                     </p>
                     <p>
+                        <b>Slow mode</b>
+                        Default duration for the <code>@{{ command_prefix }}slow</code> command:
+                        <br/>
+                        @include("config.types.int", ['key' => "slowmode_default", 'data' => old('slowmode_default', $serverConfig["slowmode_default"])])
+                        (one message every <code>n</code>seconds)
+                    </p>
+                    <p>
                         <b><a href="http://rhea-ayase.eu/articles/2017-04/Moderation-guidelines" target="_blank">Moderation
                                 Guidelines</a></b>
                         <br/>
