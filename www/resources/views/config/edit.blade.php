@@ -404,6 +404,7 @@
                     </p>
                     <p>
                         <b>Slow mode</b>
+                        <br/>
                         Default duration for the <code>@{{ command_prefix }}slow</code> command:
                         <br/>
                         @include("config.types.int", ['key' => "slowmode_default", 'data' => old('slowmode_default', $serverConfig["slowmode_default"])])
