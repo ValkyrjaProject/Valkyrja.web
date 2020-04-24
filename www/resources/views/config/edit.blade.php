@@ -864,6 +864,7 @@
                 <div class="form-inline form-group collapse" id="otherstuff">
                     <p class="form-inline">
                         <b>Temporary Voice Channels</b> (<code>@{{ command_prefix }}tempChannel</code> or <code>@{{ command_prefix }}tmp</code>)
+                        <br/>
                         Channel category for the temporary voice channels
                         <br/>
                         <type-selector init-id-type="tempchannel_categoryid" label="name"
