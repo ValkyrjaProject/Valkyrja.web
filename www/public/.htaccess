@@ -30,13 +30,13 @@
     RewriteRule ^(.*)$ https://discord.gg/XgVvkXx [R=301,L]
 
     RewriteCond %{HTTP_HOST} invite\.valkyrja\.app$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=278834060053446666&scope=bot&permissions=1950739551 [R=301,L]
+    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=278834060053446666&scope=bot&permissions=289795327 [R=301,L]
     RewriteCond %{HTTP_HOST} invite\.botwinder\.info$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=278834060053446666&scope=bot&permissions=1950739551 [R=301,L]
+    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=278834060053446666&scope=bot&permissions=289795327 [R=301,L]
     RewriteCond %{HTTP_HOST} inviteb\.valkyrja\.app$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=184289712591077377&scope=bot&permissions=1950739551 [R=301,L]
+    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=184289712591077377&scope=bot&permissions=289795327 [R=301,L]
     RewriteCond %{HTTP_HOST} inviteb\.botwinder\.info$
-    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=184289712591077377&scope=bot&permissions=1950739551 [R=301,L]
+    RewriteRule ^(.*)$ https://discordapp.com/oauth2/authorize?&client_id=184289712591077377&scope=bot&permissions=289795327 [R=301,L]
 
     RewriteCond %{HTTP_HOST} twitter\.rhea-ayase\.eu$
     RewriteRule ^(.*)$ https://twitter.com/RheaAyase [R=301,L]
