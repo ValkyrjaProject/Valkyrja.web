@@ -295,6 +295,15 @@
                           Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
                       </p>
                       <p>
+                          <b>All the Chan links</b> (4chan, 8kun, etc..)
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_chan", 'data' => old('antispam_links_chan', $serverConfig["antispam_links_chan"])])
+                          Remove all the Chan links?
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_links_chan_ban", 'data' => old('antispam_links_chan_ban', $serverConfig["antispam_links_chan_ban"])])
+                          Ban people after <code>@{{ antispam_tolerance_ban }}</code> links have been removed?
+                      </p>
+                      <p>
                           <b>All standard links</b>
                           <br/>
                           @include("config.types.bool", ['key' => "antispam_links_standard", 'data' => old('antispam_links_standard', $serverConfig["antispam_links_standard"])])
