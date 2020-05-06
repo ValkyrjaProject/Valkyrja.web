@@ -394,7 +394,7 @@
                     </p>
                     <p>
                         <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role
-                        will be configured by Valkyrja to prevent people from talking in all your channels.
+                        will be configured by Valkyrja to prevent people from talking in all your channels. Should you wish to exclude some channels from this configuration, add the role to the channel yourself and the bot won't touch its permissions.
                         <br/>
                         <type-selector init-id-type="mute_roleid" label="name"
                                        :default-value='{{ json_encode($guild['roles']->get(old('mute_roleid',$serverConfig["mute_roleid"]))) }}'
