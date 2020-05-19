@@ -41,6 +41,13 @@
                                @input="updateActiveItemData">
                     </label>
                 </div>
+                <div class="form-group">
+                    <label>
+                        <input style="margin-right: 5px" command-name="mentions_enabled" :value="props.activeItem.mentions_enabled"
+                               @input="updateActiveItemData">
+                        Allow role mentions - these have to be entered using Discord ID format <code>&lt;@&amp;roleId&gt;</code> (or <code>&lt;@userId&gt;</code> etc)
+                    </label>
+                </div>
             </template>
         </item-modifier>
     </div>
@@ -81,7 +88,8 @@
                 return {
                     commandid: 'command',
                     response: 'Response',
-                    description: ''
+                    description: '',
+                    mentions_enabled: false
                 };
             },
         },

@@ -155,30 +155,30 @@ img.square {
 }
 
 .blue .btn.btn-fading {
-  -moz-border-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 10) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* FF3.6-15 */
-  -webkit-border-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 10) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* Chrome10-25,Safari5.1-6 */
-  border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 10) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  -moz-border-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 10) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* FF3.6-15 */
+  -webkit-border-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 10) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* Chrome10-25,Safari5.1-6 */
+  border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 10) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   background-color: rgba(41, 137, 216, 0.15);
-  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 10), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 10), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 10), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 10), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 10), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 10), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   &:hover {
-    -moz-border-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 20) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* FF3.6-15 */
-    -webkit-border-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 20) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* Chrome10-25,Safari5.1-6 */
-    border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 20) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    -moz-border-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 20) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* FF3.6-15 */
+    -webkit-border-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 20) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* Chrome10-25,Safari5.1-6 */
+    border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 20) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background-color: rgba(41, 137, 216, 0.15);
-    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 20), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 20), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 20), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 20), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 20), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 20), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   }
   &:active, &:focus {
-    -moz-border-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 30) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* FF3.6-15 */
-    -webkit-border-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 30) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* Chrome10-25,Safari5.1-6 */
-    border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, darken($blue_bg - #222, 30) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    -moz-border-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 30) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* FF3.6-15 */
+    -webkit-border-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 30) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* Chrome10-25,Safari5.1-6 */
+    border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, darken(subtract_color($blue_bg, #222), 30) 50%, rgba(255, 255, 255, 0) 100%) 1 0% !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background-color: rgba(41, 137, 216, 0.15);
-    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 30), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 30), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(darken($blue_bg - #222, 30), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 30), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 30), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(darken(subtract_color($blue_bg, #222), 30), 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   }
 }
 
@@ -191,7 +191,7 @@ img.square {
   &.blue {
     background-color: $blue_bg;
     hr {
-      border-color: $blue_bg - #222;
+      border-color: subtract_color($blue_bg, #222);
     }
   }
   .middle-container {
@@ -329,11 +329,11 @@ header {
           color: $botwinder_blue !important;
         }
         &:hover {
-          color: $botwinder_blue - #111 !important;
-          background-color: saturate($light_blue_bg - #101010, 10);
+          color: subtract_color($botwinder_blue, #111) !important;
+          background-color: saturate(subtract_color($light_blue_bg, #101010), 10);
         }
         &.active {
-          color: $botwinder_blue - #111 !important;
+          color: subtract_color($botwinder_blue, #111) !important;
           background-color: $light_blue_bg !important;
         }
         &:hover {
@@ -460,8 +460,8 @@ table.commands {
       background-color: #a6c9fe;
     }
     td {
-      border-right: 1px solid desaturate($table_border_color+#222, 10);
-      border-bottom: 1px solid desaturate($table_border_color+#222, 10);
+      border-right: 1px solid desaturate(add_color($table_border_color, #222), 10);
+      border-bottom: 1px solid desaturate(add_color($table_border_color, #222), 10);
       &:first-child {
         border-left: 1px solid $table_border_color;
       }

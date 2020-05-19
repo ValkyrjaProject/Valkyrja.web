@@ -177,8 +177,8 @@ table.commands {
       background-color: #a6c9fe;
     }
     td{
-      border-right: 1px solid desaturate($table_border_color+#222, 10);
-      border-bottom: 1px solid desaturate($table_border_color+#222, 10);
+      border-right: 1px solid desaturate(add_color($table_border_color, #222), 10);
+      border-bottom: 1px solid desaturate(add_color($table_border_color, #222), 10);
       &:first-child{
         border-left: 1px solid $table_border_color;
       }

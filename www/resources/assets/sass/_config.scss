@@ -1,3 +1,10 @@
+@function add_color($a, $b) {
+  @return adjust_color($a, $red: red($b), $green: green($b), $blue: blue($b));
+}
+@function subtract_color($minuend, $subtrahend) {
+  @return adjust_color($minuend, $red: -(red($subtrahend)), $green: -(green($subtrahend)), $blue: -(blue($subtrahend)));
+}
+
 $main_width:60%;
 $main_width_tablet: 100%;
 
@@ -5,7 +12,7 @@ $botwinder_blue:#206694;
 $light_blue_bg: #c4e1ff;
 $blue_bg: #8fc8ff;
 
-$table_border_color:$botwinder_blue - #222;
+$table_border_color: subtract_color($botwinder_blue, #222);
 
 $nav_link_hovertime: 40ms;
 

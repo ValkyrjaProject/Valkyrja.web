@@ -10,7 +10,8 @@ class CustomCommands extends Model
     protected $fillable = [
         'commandid',
         'response',
-        'description'
+        'description',
+        'mentions_enabled'
     ];
     protected $hidden = [
         'serverid'

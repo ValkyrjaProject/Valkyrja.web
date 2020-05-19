@@ -46,7 +46,7 @@ class ConfigRequest extends FormRequest
             if ($this->has('custom_commands')) {
                 $tempArr = [];
                 foreach($this['custom_commands'] as $key => $command) {
-                    $allowed = ['commandid', 'response', 'description'];
+                    $allowed = ['commandid', 'response', 'description', 'mentions_enabled'];
                     $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
                     if (!isset($tempArr[$key]['description'])) {
                         $tempArr[$key]['description'] = '';
@@ -214,6 +214,7 @@ class ConfigRequest extends FormRequest
             'custom_commands.*.commandid'       => 'required|alpha_dash|max:127',
             'custom_commands.*.response'        => 'required|string',
             'custom_commands.*.description'     => 'string',
+            'custom_commands.*.mentions_disabled' => 'boolean',
             'voice_channelid'                   => 'required|integer',
             'embed_voicechannel'                => 'required|boolean',
             'embed_activitychannel'             => 'required|boolean',
