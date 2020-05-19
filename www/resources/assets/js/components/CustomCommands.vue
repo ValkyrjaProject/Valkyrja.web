@@ -43,8 +43,10 @@
                 </div>
                 <div class="form-group">
                     <label>
-                        <input type="checkbox" style="margin-right: 5px" command-name="mentions_enabled" :value="props.activeItem.mentions_enabled"
-                               @input="updateActiveItemData">
+                        <input type="checkbox" style="margin-right: 5px" command-name="mentions_enabled" :checked="props.activeItem.mentions_enabled"
+                               @input="updateActiveItemData"
+                               :true-value="1"
+                               :false-value="0">
                         Allow role mentions - these have to be entered using Discord ID format <code>&lt;@&amp;roleId&gt;</code> (or <code>&lt;@userId&gt;</code> etc)
                     </label>
                 </div>
