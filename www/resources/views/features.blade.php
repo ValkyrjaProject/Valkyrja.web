@@ -26,7 +26,7 @@
                         </tr>
                         <tr>
                             <td><a href="https://github.com/RheaAyase/Valkyrja.secure">Valkyrja.secure</a></td>
-                            <td>Private repository containing sensitive code, such as antispam.</td>
+                            <td>Private repository containing sensitive code, such as antispam. (Sadly the risks of opening this up outweigh the benefits on Discord.) </td>
                         </tr>
                         <tr>
                             <td><a href="https://github.com/RheaAyase/Valkyrja.web">Valkyrja.web</a></td>
@@ -34,25 +34,19 @@
                         </tr>
                         <tr>
                             <td><a href="https://github.com/RheaAyase/Valkyrja.service">Valkyrja.service</a></td>
-                            <td>What you can see as <code>Skywinder</code> on Discord, a server cluster management bot.</td>
+                            <td>What you can see as <code>Sigrún</code> on Discord, effectively a sysadmin bot.</td>
                         </tr>
                         <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.status">Valkyrja.status</a></td>
-                            <td>The <code>status.valkyrja.app</code> page - slightly modified <a href="https://github.com/shevabam/ezservermonitor-web">eZ Server Monitor</a></td>
+                            <td><a href="https://github.com/RheaAyase/Valkyrja.specific">Valkyrja.specific</a></td>
+                            <td>Hacked up hardcoded test features enabled only on <i>specific</i> servers.</td>
                         </tr>
                     </table>
-                    While our hosted instance of Valkyrja is free for everyone, it requires a $10 subscription to access power-hungry features (Antispam, Profiles, Karma and Experience) on <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> - a monthly donation towards the cost of maintaining the servers.
-                    {{--<!--table class="command">
-                        <tr>
-                            <td>$10</td>
-                            <td>Unlimited in any way.</td>
-                        </tr>
-                        <tr>
-                            <td>$3</td>
-                            <td>Antispam, Karma and Experience (as performance heavy) features are disabled at this level.</td>
-                        </tr>
-                    </table-->--}}
                 </div>
+                <h1>Contribution</h1>
+                <p>
+                    Any contribution is most welcome. This could be from code, through artwork, proofreading, to testing and reporting bugs. Or even suggesting new features or improvements!
+                    Last but not least, financial contribution is also welcome - while our hosted instance of Valkyrja is free for everyone, it requires a $10 subscription to access power-hungry and non-essential features (Antispam, Profiles, Karma and Experience) on <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> - a monthly donation towards the cost of maintaining the servers.
+                </p>
                 <h1>Disclaimer</h1>
                 <p>
                     We recommend that the server owners link to, or copy and modify, this disclaimer about how they use the user data for moderation: <a href="http://radka.dev/disclaimer">http://radka.dev/disclaimer</a>
@@ -62,23 +56,13 @@
                     These are some features that are not fully covered by simple commands:
                     <ul>
                         <li><b>Encrypted Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
-                        <li><b>Configure</b> many aspects of the bot: customize the command prefix, <b>antispam system</b> to remove discord invites, links, spam or messages that contain many mentions, and ban these spambots! (<code>!permit</code> is a thing too!) And the Valkyrja will give you some cookies as well! (<a href="/config">Can be configured.</a>)</li>
-                        <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. The above also applies. Oh and they can get cookies for verifying, if you configure that as well.
-                        <li>If that's not your cup of beverage, you're welcome to many other forms of verification.</li>
-                        <li>Collect <b>statistics</b> about how many people joined, got kicked out by antispam, or passed verification. (<a href="/config">Can be configured.</a>)</li>
-                        <li><b>Log user events</b> like user joining or leaving the server, being promoted or demoted, and PM a new user when they join the server. You can change these messages to your liking, set whether to @mention them, or just use their name as text, etc. (<a href="/config">Can be configured.</a>)</li>
-                        <li><b>Log moderation events</b>, banned and kicked users, edited and deleted messages, where you can also set up "ignored channels" where the bot will ignore deleted messages, etc... (<a href="/config">Can be configured.</a>)</li>
-                        <li>You can even <b>log users switching between voice channels.</b></li>
-                        <li>Set up your own <b>custom commands</b>, with a few keywords! (<a href="/config">Can be configured.</a>)</li>
-                        <li>You can <b>create an alias</b> to <i>any</i> command. (<code>!alias</code>)</li>
-                        <li>Did you like <b>temporary channels</b> on TeamSpeak? No problem, we've got you. (<code>!tempChannel</code>)</li>
-                        <li><b>Cookies!</b> We have cookies! The karma system gives cookies to people who get thanked as an extra appreciation of helpful members of your community. (<a href="/config">Can be configured.</a>)</li>
-                        <li>Your members can create <b>profiles</b> and gain <b>experience</b> for every message and image they send, <b>level up</b> and be assigned roles. (They also get cookies for levelup.) (<a href="/config">Can be configured.</a>)</li>
-                        <!--li>Create <b>scheduled messages</b> or timers. These can even be <b>scheduled commands</b>, so you can even schedule a daily <code>!nuke</code> of a channel! :D (<code>!timers</code>)</li-->
-                        <!--li>Run a <b>poll</b>! Those can be as simple as with yes/no/abstain options, or you can add anything you desire. You can even choose to run a free poll where the user can vote on literally anything and it will be added as a new option! (<code>!poll</code>)</li-->
-                        <!--li>Run the best <b>events</b> in the universe with signups, checkin, keep track of score, etc... (<code>!event</code>)</li-->
-                        <!--li>Keep track of your <b>meetings</b>, generate nice minutes and logs. (<code>!meeting</code>)</li-->
-                        <li>Last but not least, we put a lot of emphasis on <b>security</b>. No server has access to any data from any other server, and no sensitive data is available to public. All the data stored on our servers is encrypted. Further, you can see below we have different permission levels, and everything somewhat important or sensitive is hidden behind those permissions, including previously known usernames, times, etc etc...</li>
+                        <li>Powerful <b>permission</b> system using which you can tweak every command to your liking. Change who can execut commands, in which channels, create aliases, or even set commands to self-destruct in the chat.</li>
+                        <li><b>Custom commands</b> that can send messages in the chat, or via PM to the user, or people mentioned. With optional permission to ping roles as well. The above mentioned permission system and all the tweaks apply to these as well. Using this combination you can create a custom command with which only select people can mention certain roles!</li>
+                        <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. If that's not your cup of beverage, you're welcome to many other forms of verification.</li>
+                        <li>Collect <b>statistics</b> about how many people joined, got kicked out by antispam, or passed verification.</li>
+                        <li>All the typical administration and moderation tools are available and highly customizable.</li>
+                        <li>Did you like <b>temporary channels</b> on TeamSpeak? No problem, we've got you. (<code>!tmp</code>)</li>
+                        <li>Last but not least, we put a lot of emphasis on <b>security</b>. No server has access to any data from any other server, and no sensitive data is available to public. All the data stored on our servers is encrypted while only one person in the world has access to this server. Authors are also part of this trust - both the bot developer and the web developer are Red Hat engineers with decent amount of experience working in their respective fields.</li>
                     </ul>
                 </p>
                 <h1 class="features-h1">Command permissions</h1>
