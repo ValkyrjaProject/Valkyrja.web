@@ -121,9 +121,6 @@
                           user know one message before banning them. Removed messages and banned users will be logged as
                           configured in the <code>Moderation Log</code> section.
                           <br/>
-                          Antispam will not take any action against Admins or Moderators. You should also configure <code>Ignore
-                              Channels</code> in the Logging section - Antispam will not be active in these channels.
-                          <br/>
                           <i>Antispam will not even try to do anything if the bot does not have
                               <code>ManageMessages</code> & <code>Ban</code> permissions.</i>
                       </p>
@@ -131,8 +128,11 @@
                     <h2>Ignore lists</h2>
                     <div class="features-indent">
                       <p>
-                          <b>Ignored roles by antispam</b>
-                          <role-antispam-selector></role-antispam-selector>
+                          <b>Ignored roles and channels</b>
+                          <br/>
+                          Antispam will not take any action against Admins or Moderators.
+                          <br/>
+                          You can configure specific roles and channels to be ignored by logging and antispam in the logging section below.
                       </p>
                       <p>
                           Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned
@@ -600,7 +600,7 @@
                         @include("config.types.bool", ['key' => "log_timestamp_leave", 'data' => old('log_timestamp_leave', $serverConfig["log_timestamp_leave"])])
                         Display timestamp.
                         <br/><br/>
-                        <b>Ignore channels</b> - messages deleted or edited in these channels will not be logged.
+                        <b>Ignored channels</b> - messages deleted or edited in these channels will not be logged and antispam won't take action in these channels.
                         <br />
                         <ignore-channel-list-selector>
                             <template slot-scope="added">
@@ -614,6 +614,10 @@
                                 </span>
                             </template>
                         </ignore-channel-list-selector>
+                        <br/><br/>
+                        <b>Ignored roles</b> - messages deleted or edited by people with these roles will not be logged and antispam won't take action against them.
+                        <br />
+                        <role-antispam-selector></role-antispam-selector>
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
