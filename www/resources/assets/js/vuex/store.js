@@ -216,13 +216,20 @@ const mutations = {
                 Vue.set(state.itemModifier, payload.key, {itemsList: [], activeItem: null});
             }
             let roles = [];
-            for (let i = 0; i < payload.data.length; i++) {
-                let find = roles.find(role => role.messageid === payload.data[i].messageid);
-                if (find) {
-                    find.roles.push({id: payload.data[i].roleid, emoji: payload.data[i].emoji})
+            if (payload.data instanceof Object) {
+                for (let [messageid, initRoles] of Object.entries(payload.data)) {
+                    roles.push({messageid, roles: initRoles })
                 }
-                else {
-                    roles.push({messageid: payload.data[i].messageid, roles: [{id: payload.data[i].roleid, emoji: payload.data[i].emoji}] })
+            }
+            else {
+                for (let i = 0; i < payload.data.length; i++) {
+                    let find = roles.find(role => role.messageid === payload.data[i].messageid);
+                    if (find) {
+                        find.roles.push({id: payload.data[i].roleid, emoji: payload.data[i].emoji})
+                    }
+                    else {
+                        roles.push({messageid: payload.data[i].messageid, roles: [{id: payload.data[i].roleid, emoji: payload.data[i].emoji}] })
+                    }
                 }
             }
             Vue.set(state.itemModifier[payload.key], 'itemsList', roles);
