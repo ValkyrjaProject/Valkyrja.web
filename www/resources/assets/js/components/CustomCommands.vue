@@ -26,7 +26,7 @@
                 </div>
                 <div class="from-group" :class="{'has-danger': props.activeItem.response.length === 0}">
                     <label class="form-control-label">
-                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code v-pre>{{mentioned}}</code> variables. To PM the mentioned user, add <code>&lt;pm&gt;</code> to the beginning, and to PM the one that issued the command, add <code>&lt;pm-sender&gt;</code>
+                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code v-pre>{{mentioned}}</code> variables. To PM the mentioned user, add <code>&lt;pm&gt;</code> to the beginning, and to PM the one that issued the command, add <code>&lt;pm-sender&gt;</code>. You can use RNG to choose from a list of responses using: <code v-pre>&lt;|&gt;reply1>&lt;|&gt;reply2>&lt;|&gt;</code>
                         <textarea class="form-control" command-name="response" :value="props.activeItem.response"
                                   @input="updateActiveItemData"></textarea>
                     </label>
