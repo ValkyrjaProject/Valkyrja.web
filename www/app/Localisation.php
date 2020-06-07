@@ -34,7 +34,7 @@ class Localisation extends Model
         // Flatten the results to get an array of the default values
         return collect($results)->flatMap(function ($r) {
             $map = [];
-            $map[$r->column_name] = preg_replace('/\\\\\\\n/', '\\r\\n', trim($r->column_default, "'"));
+            $map[$r->column_name] = trim($r->column_default, "'");
             return $map;
         });
     }

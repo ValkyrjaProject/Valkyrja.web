@@ -16,7 +16,7 @@
 			'reaction_roles' => old('reaction_roles', (isset($errors) && count($errors) > 0) ? [] : $reaction_roles->all()),
 			'localisation' => old('localisation', (isset($errors) && count($errors) > 0) ? null : $localisation ? $localisation : null)
         ])) !!}";
-        window.__LOCALISATION_DEFAULTS__ = '{!! json_encode($localisation_defaults, JSON_UNESCAPED_SLASHES) !!}';
+        window.__LOCALISATION_DEFAULTS__ = '{!! addslashes(json_encode($localisation_defaults)) !!}';
     </script>
 @endsection
 
