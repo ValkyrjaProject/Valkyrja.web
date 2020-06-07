@@ -89,6 +89,7 @@ new Vue({
         const partArray = window.location.pathname.split( '/' );
         if (partArray[3] === 'edit') {
             let state = JSON.parse(window.__INITIAL_STATE__);
+            let localisation = JSON.parse(window.__LOCALISATION_DEFAULTS__);
             this.$store.dispatch('updateRoles', state['roles']);
             this.$store.dispatch('updateChannels', state['channels']);
             this.$store.dispatch('updateCategories', state['categories']);
@@ -100,7 +101,7 @@ new Vue({
             this.$store.dispatch('updateRoleGroups', state['role_groups']);
             this.$store.dispatch('updateReactionRoles', state['reaction_roles']);
             this.$store.dispatch('updateLocalisation', state['localisation']);
-            this.$store.dispatch('updateLocalisationDefaults', state['localisation_defaults']);
+            this.$store.dispatch('updateLocalisationDefaults', localisation);
         }
     }
 });
