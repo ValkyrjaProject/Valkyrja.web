@@ -13,20 +13,17 @@
             <option :value="0">Default</option>
             <option :value="1">Custom</option>
         </select>
-        <button class="form-control"
-                :disabled="!this.isCustomSelected"
-                @click="dataIsExpanded=!dataIsExpanded">
-            {{ dataIsExpanded ? "Collapse" : "Expand" }}
-        </button>
-        <div class="inputs" v-show="dataIsExpanded">
-            <div v-if="isCustomSelected" v-for="(value, key) in localisation.data">
+        <div class="inputs">
+            <div v-for="(value, key) in localisation.data">
                 <div>
                     {{key}}
                 </div>
                 <textarea type="text"
                           class="form-control"
-                          :value="value"
-                          :name="'localisation[' + key + ']'"
+                          :disabled="!isCustomSelected"
+                          :value="isCustomSelected ? value : getDefaultValue(key)"
+                          :placeholder="getDefaultValue(key)"
+                          :name="isCustomSelected ? 'localisation[' + key + ']' : null"
                           @change="$el => setValue(key, $el)"
                 />
             </div>
@@ -49,7 +46,6 @@
             return {
                 localisation_id: this.initLocalisationId,
                 formName: 'custom_localisation',
-                dataIsExpanded: false
             }
         },
         components: {
@@ -58,9 +54,6 @@
         computed: {
             isCustomSelected() {
                 return this.localisation_id === 1
-            },
-            isExpanded() {
-                return this.dataIsExpanded && this.isCustomSelected
             },
             localisation() {
                 return this.$store.state.localisation;
@@ -72,6 +65,9 @@
                     key,
                     value: $el.target.value
                 });
+            },
+            getDefaultValue(key) {
+                return this.localisation.defaults[key]
             }
         },
         watch: {
