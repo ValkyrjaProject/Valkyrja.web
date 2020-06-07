@@ -693,6 +693,11 @@
                         them using <code>@{{ command_prefix }}verify @user</code> or they can request it be sent with
                         <code>@{{ command_prefix }}verify</code> without parameters.
                         <br/><br/>
+                        <b>Failed PM channel</b>
+                        <br/>
+                        Should the PM fail due to their privacy settings, Valkyrja can notify them about it in this channel:
+BUNNO WANTS A CHANNEL THING HERE
+                        <br/><br/>
                         <b>Account age</b>
                         <br/>
                         @include("config.types.bool", ['key' => "verify_accountage", 'data' => old('verify_accountage', $serverConfig["verify_accountage"])])
