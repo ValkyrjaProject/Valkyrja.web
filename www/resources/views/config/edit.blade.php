@@ -696,7 +696,10 @@
                         <b>Failed PM channel</b>
                         <br/>
                         Should the PM fail due to their privacy settings, Valkyrja can notify them about it in this channel:
-BUNNO WANTS A CHANNEL THING HERE
+                        <br/>
+                        <type-selector init-id-type="verify_channelid" label="name"
+                                       :default-value='{{ json_encode($guild['channels']->get(old('verify_channelid', $serverConfig["verify_channelid"]))) }}'
+                                       :values='channels'></type-selector>
                         <br/><br/>
                         <b>Account age</b>
                         <br/>
