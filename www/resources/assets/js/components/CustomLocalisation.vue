@@ -17,12 +17,12 @@
                 <div>
                     {{key}}
                 </div>
-                <input type="text"
-                       class="form-control"
-                       :value="value"
-                       :name="'localisation[' + key + ']'"
-                       @change="$el => setValue(key, $el)"
-                >
+                <textarea type="text"
+                          class="form-control"
+                          :value="value"
+                          :name="'localisation[' + key + ']'"
+                          @change="$el => setValue(key, $el)"
+                />
             </div>
         </div>
     </div>
