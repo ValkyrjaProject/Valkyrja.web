@@ -258,9 +258,8 @@ const mutations = {
         }
         for(let [key, value] of Object.entries(defaults)) {
             // if there is no data, set it
-            console.log('oof', key, value, Object.entries(defaults))
             if (!state.localisation.data[key]) {
-                Vue.set(state.localisation.data, key, value);
+                Vue.set(state.localisation.data, key, value.replace(/\\\\n/g, "\n"));
             }
         }
     },
