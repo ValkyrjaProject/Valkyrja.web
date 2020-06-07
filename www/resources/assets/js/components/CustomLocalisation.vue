@@ -1,7 +1,13 @@
 <template>
     <div class="customCommands localisation">
         <div>
-            Customize various command (and other feature) replies, translate them, or use random reply using <code>&lt;|&gt;</code> as a separator.<br>For example: <code>&lt;|&gt;message1&lt;|&gt;message2&lt;|&gt;</code><br>(If you have a command or a feature that isn't in the list but you would like to change it, let us know and we can add it!)
+            Customize various command (and other feature) replies, translate them, or use random reply using <code>&lt;|&gt;</code> as a separator.
+            <br>
+            For example: <code>&lt;|&gt;message1&lt;|&gt;message2&lt;|&gt;</code>
+            <br>
+            Make sure to include all the <code>{n}</code> string parameters as seen in the default setting.
+            <br>
+            (If you have a command or a feature that isn't in the list but you would like to change it, let us know and we can add it!)
         </div>
         <select v-model="localisation_id" class="form-control" name="localisation_id">
             <option :value="0">Default</option>
