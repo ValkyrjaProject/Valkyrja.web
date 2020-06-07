@@ -57,6 +57,7 @@
                     <ul>
                         <li><b>Encrypted Database</b> containing notes about users, all known usernames and nicknames, with good search based on keyword, userid or mention.</li>
                         <li>Powerful <b>permission</b> system using which you can tweak every command to your liking. Change who can execut commands, in which channels, create aliases, or even set commands to self-destruct in the chat.</li>
+                        <li><b>Customizable Localisation</b> - you can change messages that Valkyrja sends in response to commands or events. You can even use random responses.</li>
                         <li><b>Custom commands</b> that can send messages in the chat, or via PM to the user, or people mentioned. With optional permission to ping roles as well. The above mentioned permission system and all the tweaks apply to these as well. Using this combination you can create a custom command with which only select people can mention certain roles!</li>
                         <li>Force people to read the rules with the hidden code <b>verification system</b>, where the bot will send a user the rules, with hidden code, which they have to find and send back to get a member role assigned. If that's not your cup of beverage, you're welcome to many other forms of verification.</li>
                         <li>Collect <b>statistics</b> about how many people joined, got kicked out by antispam, or passed verification.</li>
