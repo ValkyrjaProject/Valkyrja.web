@@ -43,7 +43,7 @@ class LoginController extends Controller
             $access_token = $this->provider->getAccessToken('authorization_code', [
                 'code' => $request['code'],
             ]);
-            $response = $response->route('displayServers')->cookie('access_token', $access_token)->with('messages', ['You are now logged in!']);
+            $response = $response->route('displayServers')->cookie('access_token', encrypt($access_token))->with('messages', ['You are now logged in!']);
         } catch (DiscordRequestException $e) {
             $response = $response->route('login')->with('messages', ['There was an error logging you in, try again.']);
         }

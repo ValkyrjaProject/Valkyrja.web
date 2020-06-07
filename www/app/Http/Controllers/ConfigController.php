@@ -15,10 +15,12 @@ use App\Roles;
 use App\Partners;
 use App\Subscribers;
 use App\ServerConfig;
+use App\Localisation;
 use Discord\OAuth\Parts\Guild;
 use Discord\OAuth\Parts\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use League\OAuth2\Client\Grant\Exception\InvalidGrantException;
 use League\OAuth2\Client\Token\AccessToken;
 use Response;
@@ -103,7 +105,7 @@ class ConfigController extends Controller
      * @param Request $request
      * @param ServerConfig $serverConfig
      * @param String $serverId
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      * @throws App\Exceptions\EmptyUserException
      */
     public function edit(Request $request, ServerConfig $serverConfig, $serverId)
@@ -141,7 +143,7 @@ class ConfigController extends Controller
                 'Could not retrieve Discord information. Is Valkyrja on the selected server?'
             ]);
         }
-
+        $localisation = Localisation::where('id', $serverId)->first();
         $isPremium = $this->serverOrUserIsPremium($serverId, $discord_data);
         return view('config.edit', [
             'serverId' => $serverId,
@@ -152,6 +154,8 @@ class ConfigController extends Controller
             'profile_options' => ProfileOptions::where('serverid', $serverId)->get(),
             'role_groups' => RoleGroups::where('serverid', $serverId)->get(),
             'reaction_roles' => ReactionRoles::where('serverid', $serverId)->get(),
+            'localisation' => $localisation,
+            'localisation_defaults' => Localisation::getDefaults(),
             'guild' => [
                 'roles' => $guildRoles,
                 'channels' => $guildChannels,
@@ -190,36 +194,39 @@ class ConfigController extends Controller
         if (!$discord_data->canEditConfig($serverId) && !App::environment('local')) {
             abort(403, "Unauthorized access");
         }
+        return DB::transaction(function () use (&$serverId, &$request) {
+            //TODO: Put validated in own variable, use that instead of request.
+            $data = collect($request->validated());
+            /** @var ServerConfig $serverConfig */
+            $serverConfig = ServerConfig::where('serverid', $serverId)->first();
+            if ($serverConfig == null) {
+                dd('Server does not exist');
+            }
+            $serverConfig->updateCustomCommands($data->get('custom_commands', []));
+            $serverConfig->updateChannels($data->get('channels', []));
+            $serverConfig->updateProfileOptions($data->get('profile_options', []));
+            $serverConfig->updateRoleGroups($data->get('role_groups', []));
+            $serverConfig->updateReactionRoles($data->get('reaction_roles', []));
+            $serverConfig->updateLocalisation($data->get('localisation', []));
 
-        //TODO: Put validated in own variable, use that instead of request.
-        $data = collect($request->validated());
-        /** @var ServerConfig $serverConfig */
-        $serverConfig = ServerConfig::where('serverid', $serverId)->first();
-        if ($serverConfig == null) {
-            dd('Server does not exist');
-        }
-        $serverConfig->updateCustomCommands($data->get('custom_commands', []));
-        $serverConfig->updateChannels($data->get('channels', []));
-        $serverConfig->updateProfileOptions($data->get('profile_options', []));
-        $serverConfig->updateRoleGroups($data->get('role_groups', []));
-        $serverConfig->updateReactionRoles($data->get('reaction_roles', []));
+            $roles = $this->getRoles($data);
+            $serverConfig->updateRoles($roles);
 
-        $roles = $this->getRoles($data);
-        $serverConfig->updateRoles($roles);
-
-        if ($serverConfig->update($data->except([
-            'custom_commands',
-            'channels',
-            'roles',
-            'levels',
-            'profile_options',
-            'role_groups',
-            'reaction_roles',
-        ])->all())) {
-            return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
-        } else {
-            return redirect()->back()->with('errors', collect(['Failed to save config! Unknown error']));
-        }
+            if ($serverConfig->update($data->except([
+                'custom_commands',
+                'channels',
+                'roles',
+                'levels',
+                'profile_options',
+                'role_groups',
+                'reaction_roles',
+                'localisation',
+            ])->all())) {
+                return redirect()->route('displayServers')->with('messages', ['Your config was saved!']);
+            } else {
+                return redirect()->back()->with('errors', collect(['Failed to save config! Unknown error']));
+            }
+        });
     }
 
     /**

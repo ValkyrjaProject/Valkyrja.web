@@ -26,6 +26,10 @@ const state = {
     categories: [],
     data: {},
     botwinderCommands: [],
+    localisation: {
+        data: {},
+        defaults: {}
+    },
     itemModifier: {
         custom_commands: {
             itemsList: [], // list of command Objects
@@ -54,7 +58,7 @@ const state = {
         reaction_roles: {
             itemsList: [], // list of command Objects
             activeItem: null
-        },
+        }
     },
 };
 
@@ -236,6 +240,31 @@ const mutations = {
         }
     },
 
+    UPDATE_LOCALISATION(state, data) {
+        if (data === null) {
+            return
+        }
+        if (data instanceof Object) {
+            state.localisation.data = data;
+        }
+        else {
+            console.warn('localisation data is not an array!')
+        }
+    },
+
+    UPDATE_LOCALISATION_DEFAULTS(state, defaults) {
+        if (!(defaults instanceof Object)) {
+            return;
+        }
+        for(let [key, value] of Object.entries(defaults)) {
+            // if there is no data, set it
+            console.log('oof', key, value, Object.entries(defaults))
+            if (!state.localisation.data[key]) {
+                Vue.set(state.localisation.data, key, value);
+            }
+        }
+    },
+
     EDIT_ITEM_CLASS(state, payload) {
         if (state.itemModifier[payload.formName].itemsList[payload.index]['classData'] === undefined) Vue.set(state.itemModifier[payload.formName].itemsList[payload.index], 'classData', {});
         for (let key in payload.classData) {
@@ -261,9 +290,12 @@ const mutations = {
         state.tos = !!JSON.parse(String(!!value).toLowerCase());
     },
 
-
     UPDATE_BOTWINDER_COMMANDS(state, value) {
         state.botwinderCommands = value
+    },
+
+    SET_LOCALISATION_VALUE(state, {key, value}) {
+        Vue.set(state.localisation.data, key, value);
     }
 };
 

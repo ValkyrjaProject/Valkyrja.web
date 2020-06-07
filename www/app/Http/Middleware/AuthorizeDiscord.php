@@ -36,13 +36,13 @@ class AuthorizeDiscord
             if (is_string($access_token)) {
                 if (!(($access_token = decrypt($access_token)) instanceof AccessToken)) {
                     Log::warning('access_token is a string: '.$access_token);
-                    return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again');
+                    return $this->redirectToLogin($request, 'Err1. There was an error authenticating you. Please login again');
                 }
             }
         }
         catch (Exception $e) {
-            Log::warning('access_token is a string (could not decrypt): '.$access_token);
-            return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again');
+            Log::warning('access_token is a string (could not decrypt): '.$e);
+            return $this->redirectToLogin($request, 'Err2. There was an error authenticating you. Please login again');
         }
         if ($access_token->hasExpired()) {
             try {
@@ -52,7 +52,7 @@ class AuthorizeDiscord
             }
             catch (DiscordRequestException $e) {
                 Log::warning($e);
-                return $this->redirectToLogin($request, 'There was an error authenticating you. Please login again.');
+                return $this->redirectToLogin($request, 'Err3. There was an error authenticating you. Please login again.');
             }
             $response = $next($request);
             $response = $response instanceof Response ? $response : response($response);

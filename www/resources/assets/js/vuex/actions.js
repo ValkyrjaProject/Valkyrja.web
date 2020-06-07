@@ -154,6 +154,14 @@ export const updateReactionRoles = ({commit}, data) => {
     commit('UPDATE_REACTION_ROLES', {key: 'reaction_roles', data: data});
 };
 
+export const updateLocalisation = ({commit}, data) => {
+    commit('UPDATE_LOCALISATION', data);
+};
+
+export const updateLocalisationDefaults = ({commit}, data) => {
+    commit('UPDATE_LOCALISATION_DEFAULTS', data);
+};
+
 export const updateCommandCharacter = ({commit}, data) => {
     commit('EDIT_COMMAND_PREFIX', data);
 };
@@ -194,3 +202,7 @@ export const updateBotwinderCommands = ({commit}) => {
 export const clearAPIError = ({commit}) => {
     commit('CLEAR_API_ERROR');
 };
+
+export const setLocalisationValue = ({commit}, payload) => {
+    commit('SET_LOCALISATION_VALUE', payload)
+}

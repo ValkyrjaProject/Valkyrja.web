@@ -13,7 +13,9 @@
 			'channelsData' => old('channels', (isset($errors) && count($errors) > 0) ? [] : $channels->all()),
 			'profile_options' => old('profile_options', (isset($errors) && count($errors) > 0) ? [] : $profile_options->all()),
 			'role_groups' => old('role_groups', (isset($errors) && count($errors) > 0) ? [] : $role_groups->all()),
-			'reaction_roles' => old('reaction_roles', (isset($errors) && count($errors) > 0) ? [] : $reaction_roles->all())
+			'reaction_roles' => old('reaction_roles', (isset($errors) && count($errors) > 0) ? [] : $reaction_roles->all()),
+			'localisation' => old('localisation', (isset($errors) && count($errors) > 0) ? null : $localisation ? $localisation : null),
+			'localisation_defaults' => $localisation_defaults,
         ])) !!}"
     </script>
 @endsection
@@ -868,6 +870,15 @@
                 <div class="form-group collapse" id="customCommands">
                     <p>
                         <custom-commands form-name="custom_commands"></custom-commands>
+                    </p>
+                </div>
+                <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
+                        data-target="#localisation" aria-expanded="false" aria-controls="localisation">
+                    Localisation
+                </button>
+                <div class="form-inline form-group collapse" id="localisation">
+                    <p>
+                        <custom-localisation :init-localisation-id="{{ old('localisation_id', $serverConfig["localisation_id"]) }}"></custom-localisation>
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"

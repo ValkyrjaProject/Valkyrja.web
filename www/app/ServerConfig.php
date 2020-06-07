@@ -14,8 +14,7 @@ class ServerConfig extends Model
 
     protected $guarded = [
         'name',
-        'invite_url',
-        'localisation_id'
+        'invite_url'
     ];
 
     public function getAttributeValue($key)
@@ -69,6 +68,11 @@ class ServerConfig extends Model
     public function reaction_roles()
     {
         return $this->hasMany('App\ReactionRoles');
+    }
+
+    public function localisation()
+    {
+        return $this->hasOne('App\Localisation', 'id', 'serverid');
     }
 
     /**
@@ -160,6 +164,7 @@ class ServerConfig extends Model
         }
         return true;
     }
+
     public function updateReactionRoles($reaction_roles)
     {
         if (!is_array($reaction_roles) && count($reaction_roles) == 0) {
@@ -191,4 +196,14 @@ class ServerConfig extends Model
         }
         return true;
     }
+
+    public function updateLocalisation($localisation)
+    {
+        if (!is_array($localisation) || count($localisation) == 0) {
+            return false;
+        }
+        $this->localisation()->updateOrCreate(['id' => $this->serverid], $localisation);
+        return true;
+    }
+
 }

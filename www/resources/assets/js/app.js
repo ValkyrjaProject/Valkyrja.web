@@ -19,6 +19,7 @@ import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vu
 import RoleAntispamSelector from "./components/RoleAntispamSelector"
 import ProfilesEditor from "./components/ProfilesEditor"
 import ReactionRoles from "./components/ReactionRoles"
+import CustomLocalisation from "./components/CustomLocalisation";
 
 new Vue({
     store,
@@ -39,6 +40,7 @@ new Vue({
         RoleAntispamSelector,
         ProfilesEditor,
         ReactionRoles,
+        CustomLocalisation,
     },
     computed: {
         errors: {
@@ -97,6 +99,8 @@ new Vue({
             this.$store.dispatch('updateProfileOptions', state['profile_options']);
             this.$store.dispatch('updateRoleGroups', state['role_groups']);
             this.$store.dispatch('updateReactionRoles', state['reaction_roles']);
+            this.$store.dispatch('updateLocalisation', state['localisation']);
+            this.$store.dispatch('updateLocalisationDefaults', state['localisation_defaults']);
         }
     }
 });
