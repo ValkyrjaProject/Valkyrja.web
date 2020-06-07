@@ -97,6 +97,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>man</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Print a detailed manual page (embed) for a specific command.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>CommandId - Name of the command.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Everyone</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>patchnotes</h2>
                     <table class="command">
                     <tr>
