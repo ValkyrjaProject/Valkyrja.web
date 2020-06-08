@@ -253,7 +253,7 @@ class ConfigRequest extends FormRequest
             'reaction_roles.*.*.roleid'         => 'required|integer',
             'reaction_roles.*.*.emoji'          => 'required|string|max:250',
             'localisation_id'                   => 'required|integer',
-            'localisation'                      => 'required_if:localisationId,true',
+            'localisation'                      => 'required_if:localisation_id,1',
             'localisation.*'                    => 'string'
         ];
     }

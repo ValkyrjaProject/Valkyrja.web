@@ -6,7 +6,7 @@
         editItemClass
     } from '../vuex/actions';
 
-    export default {
+    export const ListItemsCustomName = (idName) => ({
         computed: {
             activeItem() {
                 return this.$store.state.itemModifier[this.formName].activeItem
@@ -38,7 +38,7 @@
                     key: this.activeItemIndex,
                     formName: this.formName,
                     roleName: this.roleName,
-                    data: role.id
+                    data: role[idName]
                 });
             },
             removeRole(role) {
@@ -46,7 +46,7 @@
                     key: this.activeItemIndex,
                     formName: this.formName,
                     roleName: this.roleName,
-                    data: role.id
+                    data: role[idName]
                 });
             },
             isDuplicate(check) {
@@ -107,5 +107,6 @@
             },
             //itemIsValid(item) {}
         }
-    }
+    });
+    export default ListItemsCustomName('id')
 </script>

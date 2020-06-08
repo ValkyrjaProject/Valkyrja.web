@@ -224,10 +224,10 @@ const mutations = {
                 for (let i = 0; i < payload.data.length; i++) {
                     let find = roles.find(role => role.messageid === payload.data[i].messageid);
                     if (find) {
-                        find.roles.push({id: payload.data[i].roleid, emoji: payload.data[i].emoji})
+                        find.roles.push({roleid: payload.data[i].roleid, emoji: payload.data[i].emoji})
                     }
                     else {
-                        roles.push({messageid: payload.data[i].messageid, roles: [{id: payload.data[i].roleid, emoji: payload.data[i].emoji}] })
+                        roles.push({messageid: payload.data[i].messageid, roles: [{roleid: payload.data[i].roleid, emoji: payload.data[i].emoji}] })
                     }
                 }
             }

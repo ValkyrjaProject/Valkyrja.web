@@ -59,7 +59,7 @@
             </div>
             <span v-for="message in itemList">
                 <span v-for="role, index in message.roles">
-                    <input type="hidden" :name="inputName('roleid', message.messageid, index)" :value="role.id">
+                    <input type="hidden" :name="inputName('roleid', message.messageid, index)" :value="role.roleid">
                     <input type="hidden" :name="inputName('emoji', message.messageid, index)" :value="role.emoji">
                 </span>
             </span>
@@ -69,7 +69,7 @@
 
 <script>
     import ListContainer from './ListContainer.vue'
-    import listItems from '../mixins/listItems.vue'
+    import { ListItemsCustomName } from '../mixins/listItems.vue'
     import {
         addItem,
         updateActiveItem,
@@ -78,7 +78,7 @@
     } from '../vuex/actions'
 
     export default {
-        mixins: [listItems],
+        mixins: [ListItemsCustomName('roleid')],
         props: {
             formName: {
                 required: true
@@ -107,18 +107,18 @@
             availableRoles() {
                 return this.$store.state['roles'].filter(role => {
                     return this.activeItem.roles.filter(item => {
-                        return item.id === role.id;
+                        return item.roleid === role.id;
                     }).length === 0;
                 });
             },
             addedRoles() {
                 return this.$store.state['roles'].filter(role => {
                     return this.activeItem.roles.filter(item => {
-                        if (this.activeRole && role.id === this.activeRole.id)
+                        if (this.activeRole && role.roleid === this.activeRole.roleid)
                             role.classData = {'active': true};
                         else
                             role.classData = {'active': false};
-                        return item.id === role.id;
+                        return item.roleid === role.id;
                     }).length !== 0;
                 });
             },
@@ -147,12 +147,12 @@
             },
             setActiveRole(item) {
                 this.activeRole = this.$store.state.itemModifier[this.formName].activeItem.roles.find(role => {
-                    return role.id === item.id
+                    return role.roleid === item.id
                 });
             },
             addEmojiRole(role) {
                 let item = {
-                    id: role.id,
+                    roleid: role.id,
                     emoji: "",
                 };
                 this.$store.dispatch("addEmojiRole", {
@@ -164,7 +164,7 @@
             removeEmojiRole(role) {
                 this.$store.dispatch("removeEmojiRole", {
                     formName: this.formName,
-                    item: role.id,
+                    item: role.roleid,
                 });
                 let activeItem = this.$store.state.itemModifier[this.formName].activeItem;
                 if (activeItem && activeItem.roles.length) {
