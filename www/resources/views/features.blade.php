@@ -406,6 +406,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>prune</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Kicks out all the inactive members.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Use the <code>manual</code> page command to see the details.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>ServerOwner</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>promoteEveryone</h2>
                     <table class="command">
                     <tr>
