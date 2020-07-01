@@ -1112,6 +1112,23 @@
                     </table>
                 </div-->
                 <div class="features-indent">
+                    <h2>warnings</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display your own warnings. (Allow everyone to use this command with the <code>permissions</code> command.)</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>None.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>listWarnedUsers</h2>
                     <table class="command">
                     <tr>
