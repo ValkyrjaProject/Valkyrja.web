@@ -1112,6 +1112,23 @@
                     </table>
                 </div-->
                 <div class="features-indent">
+                    <h2>listWarnedUsers</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Display a list of users with more than specific amount of warnings.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>n</code> - Threshold above which a user will be added to the output.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>whois</h2>
                     <table class="command">
                     <tr>
