@@ -379,20 +379,22 @@
                                        :values='roles'></type-selector>
                     </p>
                     <p>
+                        <b>Ban Default</b>
+                        <br/>
+                        Default ban duration, leave empty to disable.
+                        <br/>
+                        @include("config.types.text", ['key' => "ban_duration", 'data' => old('ban_duration', $serverConfig["ban_duration"])]) (<code>1d3h</code> format)
+                    </p>
+                    <p>
                         <b>Quickban</b>
                         <br/>
-                        Should you wish to use the <code>@{{ command_prefix }}quickban</code> you have to configure the
-                        reason why are you banning the user. This will be PMed them just like with standard <code>@{{
-                            command_prefix }}ban</code>. We recommend something like <code>Ignoring the rules / spamming
-                            inappropriate content.</code> (The command will be disabled if you leave this field empty.)
+                        Should you wish to use the <code>@{{ command_prefix }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>@{{ command_prefix }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "quickban_reason", 'data' => old('quickban_reason', $serverConfig["quickban_reason"])])
                         <br/><br/>
-                        And for how long do you want to ban them using this command? Set <code>0</code> (zero) for
-                        permanent ban.
+                        And for how long do you want to ban them using this command? Set <code>0</code> (zero) for permanent ban.
                         <br/>
-                        @include("config.types.int", ['key' => "quickban_duration", 'data' => old('quickban_duration', $serverConfig["quickban_duration"])])
-                        (hours)
+                        @include("config.types.int", ['key' => "quickban_duration", 'data' => old('quickban_duration', $serverConfig["quickban_duration"])]) (hours)
                     </p>
                     <p>
                         <code>Muted Role</code> - Role that will be used for the purpose of muting people, this role

@@ -146,6 +146,7 @@ class ConfigRequest extends FormRequest
             'antispam_ignore_members'           => 'required|boolean',
             'antispam_voice_switching'          => 'required|boolean',
             'operator_roleid'                   => 'required|integer',
+            'ban_duration'                      => 'string|nullable',
             'quickban_duration'                 => 'required|integer',
             'quickban_reason'                   => 'string|nullable',
             'mute_roleid'                       => 'required|integer',
