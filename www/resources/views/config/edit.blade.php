@@ -414,6 +414,10 @@
                         Example usage of this <i>chill-zone</i> channel: <a href="/img/mute.gif" target="_blank">gif</a>
                         which can be configured with <a href="/img/mute-permissions.gif" target="_blank">these
                             permissions</a>.
+                        <br/><br/>
+                        Include this in a PM to the muted user: (useful if you want to tell them to use a modmail bot instead of the above muted channel)
+                        <br/>
+                        @include("config.types.multi-line-text", ['key' => "mute_message", 'data' => old('mute_message', $serverConfig["mute_message"])])
                     </p>
                     <p>
                         <b>Slow mode</b>
