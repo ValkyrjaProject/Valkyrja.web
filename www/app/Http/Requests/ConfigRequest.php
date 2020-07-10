@@ -149,6 +149,7 @@ class ConfigRequest extends FormRequest
             'ban_duration'                      => 'string|nullable',
             'quickban_duration'                 => 'required|integer',
             'quickban_reason'                   => 'string|nullable',
+            'mute_message'                      => 'string|nullable',
             'mute_roleid'                       => 'required|integer',
             'mute_ignore_channelid'             => 'required|integer',
             'karma_enabled'                     => 'required|boolean',
