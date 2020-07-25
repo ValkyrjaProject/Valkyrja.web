@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div v-else-if="listType === 'doubleInput'">
-                <div class="listItem listItemGroup input-group" v-for="item in filterValue" :class="item.classData">
+                <div class="listItem listItemGroup input-group" v-for="item in filterValue" :key="item[idAttribute]" :class="item.classData">
                     <div class="input-group-addon" @click="click(item)">✕</div>
                     <span class="itemLeft btn" @click="input(item)">{{item[displayAttribute].trim().substring(0, 25)}}</span>
                 </div>
