@@ -162,9 +162,10 @@
                 this.activeRole = item;
             },
             removeEmojiRole(role) {
+                console.warn("role", role)
                 this.$store.dispatch("removeEmojiRole", {
                     formName: this.formName,
-                    item: role.roleid,
+                    item: role.id,
                 });
                 let activeItem = this.$store.state.itemModifier[this.formName].activeItem;
                 if (activeItem && activeItem.roles.length) {

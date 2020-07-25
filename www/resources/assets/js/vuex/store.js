@@ -145,7 +145,7 @@ const mutations = {
     REMOVE_EMOJI_ROLE(state, payload) {
         if (state.itemModifier[payload.formName].activeItem) {
             state.itemModifier[payload.formName].activeItem.roles
-                .splice(state.itemModifier[payload.formName].activeItem.roles.findIndex(x => x.id === payload.item), 1);
+                .splice(state.itemModifier[payload.formName].activeItem.roles.findIndex(x => x.roleid === payload.item), 1);
         }
     },
 
