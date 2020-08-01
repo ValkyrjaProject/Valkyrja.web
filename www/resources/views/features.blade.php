@@ -15,9 +15,9 @@
                 <h1>Open Source</h1>
                 <div class="features-indent">
                     Valkyrja is Open Source Software under highly permissive MIT license, contribution is most welcome.
-                    </br></br>
+                    </br>
                     We also offer a Modmail bot available for self-hosting, and hosted in our infrastructure for our <a href="https://www.patreon.com/ValkyrjaProject">Subscribers</a>
-                    </br></br>
+                    </br>
                     <a href="https://github.com/ValkyrjaProject">github.com/ValkyrjaProject</a>
                 </div>
                 <h1>Contribution</h1>
