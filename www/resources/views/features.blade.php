@@ -14,33 +14,11 @@
             <div>
                 <h1>Open Source</h1>
                 <div class="features-indent">
-                    Valkyrja is Open Source and you can find it in the below repositories, contribution is most welcome.
-                    <table class="command">
-                        <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.core">Valkyrja.core</a></td>
-                            <td>Core client code.</td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.discord">Valkyrja.discord</a></td>
-                            <td>Most of Valkyrja's features</td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.secure">Valkyrja.secure</a></td>
-                            <td>Private repository containing sensitive code, such as antispam. (Sadly the risks of opening this up outweigh the benefits on Discord.) </td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.web">Valkyrja.web</a></td>
-                            <td>This website.</td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.service">Valkyrja.service</a></td>
-                            <td>What you can see as <code>Sigrún</code> on Discord, effectively a sysadmin bot.</td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://github.com/RheaAyase/Valkyrja.specific">Valkyrja.specific</a></td>
-                            <td>Hacked up hardcoded test features enabled only on <i>specific</i> servers.</td>
-                        </tr>
-                    </table>
+                    Valkyrja is Open Source Software under highly permissive MIT license, contribution is most welcome.
+                    </br></br>
+                    We also offer a Modmail bot available for self-hosting, and hosted in our infrastructure for our <a href="https://www.patreon.com/ValkyrjaProject">Subscribers</a>
+                    </br></br>
+                    <a href="https://github.com/ValkyrjaProject">github.com/ValkyrjaProject</a>
                 </div>
                 <h1>Contribution</h1>
                 <p>
