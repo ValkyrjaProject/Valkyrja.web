@@ -13,12 +13,14 @@ class Channels extends Model
     protected $fillable = [
         'channelid',
         'ignored',
+        'auto_announce',
         'muted_until'
     ];
 
     protected $casts = [
         'channelid' => 'string',
         'ignored' => 'boolean',
+        'auto_announce' => 'boolean',
     ];
 
     protected function performInsert(Builder $query)
