@@ -213,7 +213,9 @@ class ConfigController extends Controller
             $roles = $this->getRoles($data);
             $serverConfig->updateRoles($roles);
 
-            if ($serverConfig->touch()->update($data->except([
+            $serverConfig->touch();
+
+            if ($serverConfig->update($data->except([
                 'custom_commands',
                 'channels',
                 'roles',
