@@ -227,10 +227,10 @@ class DiscordData extends Model
             $rawServerChannels = collect($this->discord->guild->getGuildChannels(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerChannels)) {
-                throw new ServerIssueException("Botwinder is not on the server, if it is, ask in Jefi's Nest");
+                throw new ServerIssueException("Valkyrja is not on the server, if it is, ask in Jefi's Nest");
             }
             elseif ($this->hasNoPermissions($rawServerChannels)) {
-                throw new ServerIssueException("Botwinder does not have sufficient permissions.");
+                throw new ServerIssueException("Valkyrja does not have sufficient permissions.");
             }
 
             $serverChannels = collect();
@@ -241,7 +241,7 @@ class DiscordData extends Model
                     throw new DiscordException('There was an error getting channels from the server. Please try again');
                 }
                 // If type is GUILD_TEXT
-                if ($serverChannel->type === 0) {
+                if ($serverChannel->type === 0 || $serverChannel->type === 5) {
                     $tempArray = [];
                     $tempArray['id'] = $serverChannel->id;
                     $tempArray['name'] = '#'.$serverChannel->name;
@@ -292,10 +292,10 @@ class DiscordData extends Model
             $rawServerRoles = collect($this->discord->guild->getGuildRoles(['guild.id' => (int)$this->serverId]));
 
             if ($this->botwinderIsNotOnServer($rawServerRoles)) {
-                throw new ServerIssueException("Botwinder is not on the server, if it is, ask in Jefi's Nest");
+                throw new ServerIssueException("Valkyrja is not on the server, if it is, ask in Jefi's Nest");
             }
             elseif ($this->hasNoPermissions($rawServerRoles)) {
-                throw new ServerIssueException("Botwinder does not have sufficient permissions.");
+                throw new ServerIssueException("Valkyrja does not have sufficient permissions.");
             }
 
             $serverRoles = collect();
