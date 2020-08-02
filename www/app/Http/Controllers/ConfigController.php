@@ -16,9 +16,6 @@ use App\Partners;
 use App\Subscribers;
 use App\ServerConfig;
 use App\Localisation;
-use Carbon\Carbon;
-use Discord\OAuth\Parts\Guild;
-use Discord\OAuth\Parts\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -82,7 +79,6 @@ class ConfigController extends Controller
                     ['You do not control any servers! If you do, refresh or logout and login again.']);
             }
         }
-
         return view('config.display_servers', [
             'user' => $user,
             'guilds' => $guilds
@@ -251,7 +247,7 @@ class ConfigController extends Controller
         if (!$request->input('serverId')) {
             return redirect()->route('displayServers');
         }
-        return redirect()->route('editConfig', ['serverID' => $request->input('serverId')]);
+        return redirect()->route('editConfig', ['serverId' => $request->input('serverId')]);
     }
 
     /**

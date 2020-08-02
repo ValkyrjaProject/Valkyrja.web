@@ -9,21 +9,20 @@ use App\Exceptions\ServerIssueException;
 use Cache;
 use Illuminate\Http\RedirectResponse;
 use Log;
-use Discord\OAuth\Discord;
-use Discord\OAuth\Parts\Guild;
-use Discord\OAuth\Parts\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use League\OAuth2\Client\Token\AccessToken;
 use RestCord\DiscordClient;
 use App\Exceptions\EmptyPropertyException;
+use Wohali\OAuth2\Client\Provider\Discord;
+use Wohali\OAuth2\Client\Provider\DiscordResourceOwner;
 
 class DiscordData extends Model
 {
 
     private $provider;
     private $discord;
-    /** @var User $user */
+    /** @var DiscordResourceOwner $user */
     private $user;
     private $userId;
     /** @var Collection $guilds */
@@ -31,15 +30,6 @@ class DiscordData extends Model
     /** @var AccessToken $access_token */
     private $access_token;
 
-    protected $userFillable = [
-        'id',
-        'username',
-        'email',
-        'discriminator',
-        'avatar',
-        'verified',
-        'mfa_enabled',
-    ];
     protected $guildFillable = [
         'id',
         'name',
@@ -80,26 +70,21 @@ class DiscordData extends Model
     }
 
     /**
-     * @return User
+     * @return DiscordResourceOwner
      * @throws EmptyUserException
      */
     public function getCurrentUser()
     {
         if (!isset($this->user)) {
-            if ($this->userId && Cache::has('user_'.$this->userId)) {
-                $user = Cache::get('user_'.$this->userId);
-                return $this->user = new User($this->provider, $this->access_token, $user);
-            }
+//            if ($this->userId && Cache::has('user_'.$this->userId)) {
+//                $user = Cache::get('user_'.$this->userId);
+//                return $this->user = new DiscordResourceOwner($this->provider, $this->access_token, $user);
+//            }
 
             $this->user = $this->provider->getResourceOwner($this->access_token);
             $this->userId = $this->user->getId();
 
-            $user = array();
-            foreach ($this->userFillable as $name) {
-                $user[$name] = $this->user->{$name};
-            }
-
-            Cache::add('user_'.$this->user->getId(), $user, 1);
+            Cache::add('user_'.$this->user->getId(), $this->user->toArray(), 1);
             usleep(200000);
         }
         if ($this->user->getId() == "") {
@@ -130,7 +115,9 @@ class DiscordData extends Model
                     return ($guild->owner || $guild->permissions & 40) && ServerConfig::find($guild->id);
                 });
             }
-            $guilds = $this->user->getGuildsAttribute();
+
+            $userDiscord = new DiscordClient(['token' => $this->access_token->getToken(), 'tokenType' => 'OAuth']);
+            $guilds = $userDiscord->user->getCurrentUserGuilds([]);
             $this->guilds = collect($guilds)->filter(function ($guild) {
                 return ($guild->owner || $guild->permissions & 40) && ServerConfig::find($guild->id);
             });

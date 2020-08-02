@@ -7,7 +7,7 @@
 	<div class="col-xs-12">
 		<h1>Select server</h1>
 		<p>
-			Hi {{ $user->username }}!<br />
+			Hi {{ $user->getUsername() }}!<br />
                         Check out this video how to set-up a secure Discord server with Valkyrja!<br />
                         <a href="https://youtu.be/KDQeN7FXO-4">youtu.be/KDQeN7FXO-4</a>
 		</p>
@@ -23,7 +23,7 @@
 					<option value="{{ $guild->id }}">{{ $guild->name }}</option>
 				@endforeach
 			</select>
-			<input type="hidden" name="userId" value="{{ $user->id }}">
+			<input type="hidden" name="userId" value="{{ $user->getId() }}">
 			{{ csrf_field() }}
 			<input type="submit" class="btn btn-primary" value="Select server">
 			<a href="{{ route('logout') }}" class="btn btn-danger" style="color: white;">Logout</a>
