@@ -61,6 +61,7 @@
                     let newChannel = {
                         channelid: channel.id,
                         ignored: true,
+                        auto_announce: false,
                     };
                     this.$store.dispatch('addItem', {
                         item: newChannel,

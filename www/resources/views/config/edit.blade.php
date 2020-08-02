@@ -610,18 +610,7 @@
                         <br/><br/>
                         <b>Ignored channels</b> - messages deleted or edited in these channels will not be logged and antispam won't take action in these channels.
                         <br />
-                        <ignore-channel-list-selector>
-                            <template slot-scope="added">
-                                <span v-for="channel in added.added">
-                                    <input type="hidden"
-                                           :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
-                                           :value="channel.channelid">
-                                    <input type="hidden"
-                                           :name="'channels['+added.added.indexOf(channel)+'][ignored]'"
-                                           :value="Number(channel.ignored)">
-                                </span>
-                            </template>
-                        </ignore-channel-list-selector>
+                        <ignore-channel-list-selector></ignore-channel-list-selector>
                         <br/><br/>
                         <b>Ignored roles</b> - messages deleted or edited by people with these roles will not be logged and antispam won't take action against them.
                         <br />
@@ -921,6 +910,9 @@
                                     <input type="hidden"
                                            :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
                                            :value="channel.channelid">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][ignored]'"
+                                           :value="Number(channel.ignored)">
                                     <input type="hidden"
                                            :name="'channels['+added.added.indexOf(channel)+'][auto_announce]'"
                                            :value="Number(channel.auto_announce)">

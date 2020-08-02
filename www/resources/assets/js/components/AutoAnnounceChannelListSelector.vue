@@ -60,6 +60,7 @@
                 else {
                     let newChannel = {
                         channelid: channel.id,
+                        ignored: false,
                         auto_announce: true,
                     };
                     this.$store.dispatch('addItem', {
