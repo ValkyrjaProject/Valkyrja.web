@@ -233,6 +233,7 @@ class ConfigRequest extends FormRequest
             'channels'                          => 'array',
             'channels.*'                        => 'array',
             'channels.*.channelid'              => 'required|integer|min:0',
+            'channels.*.auto_announce'          => 'boolean',
             'channels.*.ignored'                => 'boolean',
             'memo_enabled'                      => 'required|boolean',
             'profile_enabled'                   => 'required|boolean',

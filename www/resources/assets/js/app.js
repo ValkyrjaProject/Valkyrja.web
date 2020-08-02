@@ -16,6 +16,7 @@ import ColorPicker from './components/ColorPicker.vue'
 import ListSelector from './components/ListSelector.vue'
 import LevelSelector from './components/LevelSelector.vue'
 import IgnoreChannelListSelector from './components/IgnoreChannelListSelector.vue'
+import AutoAnnounceChannelListSelector from './components/AutoAnnounceChannelListSelector.vue'
 import RoleAntispamSelector from "./components/RoleAntispamSelector"
 import ProfilesEditor from "./components/ProfilesEditor"
 import ReactionRoles from "./components/ReactionRoles"
@@ -41,6 +42,7 @@ new Vue({
         ProfilesEditor,
         ReactionRoles,
         CustomLocalisation,
+        AutoAnnounceChannelListSelector,
     },
     computed: {
         errors: {

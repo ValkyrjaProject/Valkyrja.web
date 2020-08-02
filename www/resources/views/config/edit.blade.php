@@ -4,6 +4,7 @@
 
 @section('header')
     <script type="application/javascript">
+        import AutoAnnounceChannelListSelector from "../../assets/js/components/AutoAnnounceChannelListSelector";
         window.__INITIAL_STATE__ = "{!! addslashes(json_encode([
 			'channels' => array_values($guild['channels']->all()),
 			'categories' => array_values($guild['categories']->all()),
@@ -17,6 +18,9 @@
 			'localisation' => old('localisation', (isset($errors) && count($errors) > 0) ? null : $localisation ? $localisation : null)
         ])) !!}";
         window.__LOCALISATION_DEFAULTS__ = '{!! addslashes(json_encode($localisation_defaults)) !!}';
+        export default {
+            components: {AutoAnnounceChannelListSelector}
+        }
     </script>
 @endsection
 
@@ -911,6 +915,22 @@
                         <br/>
                         @include("config.types.bool", ['key' => "tempchannel_giveadmin", 'data' => old('tempchannel_giveadmin', $serverConfig["tempchannel_giveadmin"])])
                         Give the creator of a temporary voice channel permissions to modify the channel, and to move and mute people?
+                        <br/><br/>
+                        <b>Auto-announced channels</b><br/>
+                        Choose announcement channels that are to be automatically Published. (Requires <code>Send</code> & <code>Manage Messages</code> permissions.)
+                        <br />
+                        <auto-announce-channel-list-selector>
+                            <template slot-scope="added">
+                                <span v-for="channel in added.added">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][channelid]'"
+                                           :value="channel.channelid">
+                                    <input type="hidden"
+                                           :name="'channels['+added.added.indexOf(channel)+'][auto_announce]'"
+                                           :value="Number(channel.auto_announce)">
+                                </span>
+                            </template>
+                        </auto-announce-channel-list-selector>
                     </p>
                 </div>
                 {{ csrf_field() }}
