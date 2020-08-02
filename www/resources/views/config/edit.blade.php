@@ -4,7 +4,6 @@
 
 @section('header')
     <script type="application/javascript">
-        import AutoAnnounceChannelListSelector from "../../assets/js/components/AutoAnnounceChannelListSelector";
         window.__INITIAL_STATE__ = "{!! addslashes(json_encode([
 			'channels' => array_values($guild['channels']->all()),
 			'categories' => array_values($guild['categories']->all()),
@@ -18,9 +17,6 @@
 			'localisation' => old('localisation', (isset($errors) && count($errors) > 0) ? null : $localisation ? $localisation : null)
         ])) !!}";
         window.__LOCALISATION_DEFAULTS__ = '{!! addslashes(json_encode($localisation_defaults)) !!}';
-        export default {
-            components: {AutoAnnounceChannelListSelector}
-        }
     </script>
 @endsection
 
