@@ -16,6 +16,7 @@ use App\Partners;
 use App\Subscribers;
 use App\ServerConfig;
 use App\Localisation;
+use Carbon\Carbon;
 use Discord\OAuth\Parts\Guild;
 use Discord\OAuth\Parts\User;
 use Illuminate\Http\Request;
@@ -212,7 +213,7 @@ class ConfigController extends Controller
             $roles = $this->getRoles($data);
             $serverConfig->updateRoles($roles);
 
-            if ($serverConfig->update($data->except([
+            if ($serverConfig->touch()->update($data->except([
                 'custom_commands',
                 'channels',
                 'roles',
