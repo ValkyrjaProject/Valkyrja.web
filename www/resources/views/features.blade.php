@@ -1226,6 +1226,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>lockExp</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Locks, or unlocks, someones experience and therefore also activity role assignment.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>@user</code> mention or ID (or multiple mentions)</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>memberRoles</h2>
                     <table class="command">
                     <tr>
