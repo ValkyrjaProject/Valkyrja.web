@@ -26,7 +26,14 @@
                 </div>
                 <div class="from-group" :class="{'has-danger': props.activeItem.response.length === 0}">
                     <label class="form-control-label">
-                        <b>Response message</b> - You can use <code v-pre>{{sender}}</code> or <code v-pre>{{mentioned}}</code> variables. To PM the mentioned user, add <code>&lt;pm&gt;</code> to the beginning, and to PM the one that issued the command, add <code>&lt;pm-sender&gt;</code>. You can use RNG to choose from a list of responses using: <code v-pre>&lt;|&gt;reply1&lt;|&gt;reply2&lt;|&gt;</code>
+                        <b>Response message</b> - You can use the following:
+                        <ul>
+                            <li><code>{{sender}}</code> or <code>{{mentioned}}</code> anywhere - mentions the sender or the mentioned people.</li>
+                            <li><code>&lt;pm&gt;</code> in the beginning - PM the mentioned people.</li>
+                            <li><code>&lt;pm-sender&gt;</code> in the beginning - PM the one who issued the command.</li>
+                            <li>You can use RNG to choose from a list of responses using: <code>&lt;|&gt;reply1&lt;|&gt;reply2&lt;|&gt;</code></li>
+                            <li>You can send embeds instead using the full <code>!embed</code> command syntax - supports all the above options as well.</li>
+                        </ul>
                         <textarea class="form-control" command-name="response" :value="props.activeItem.response"
                                   @input="updateActiveItemData"></textarea>
                     </label>
