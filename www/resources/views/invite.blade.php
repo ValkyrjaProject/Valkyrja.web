@@ -28,6 +28,8 @@
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
                   <li><b>Karma</b> - People receive cookies (you can change that) when they get thanked.</li>
                   <li><b>Experience</b> and levels. Send messages to gain experience, send images to gain more experience. Level up to unlock fancy roles and karma cookies!</li>
+                  <li><b>Modmail</b> - We also offer our <a href="https://github.com/ValkyrjaProject/Valkyrja.modmail">Modmail bot</a> hosted in our infrastructure for our Subscribers and Partners.</li>
+                  <li><b>Custom bot development</b> within reason. Discuss with Rhea.</li>
                 </ul>
               <b>Partners</b> get premium features without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
             </p>
