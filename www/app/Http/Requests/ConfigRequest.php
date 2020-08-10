@@ -32,67 +32,55 @@ class ConfigRequest extends FormRequest
             }
             $this['roles'] = $roles;
         }
-    }
+        if ($this->has('custom_commands')) {
+            $tempArr = [];
+            foreach($this['custom_commands'] as $key => $command) {
+                $allowed = ['commandid', 'response', 'description', 'mentions_enabled'];
+                $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
+                if (!isset($tempArr[$key]['description'])) {
+                    $tempArr[$key]['description'] = '';
+                }
+            }
+            $this['custom_commands'] = $tempArr;
+        }
+        if ($this->has('roles')) {
+            $tempArr = [];
+            foreach($this['roles'] as $key => $command) {
+                $allowed = ['roleid', 'permission_level', 'public_id', 'antispam_ignored'];
 
-    /**
-     * Configure the validator instance.
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return void
-     */
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            if ($this->has('custom_commands')) {
-                $tempArr = [];
-                foreach($this['custom_commands'] as $key => $command) {
-                    $allowed = ['commandid', 'response', 'description', 'mentions_enabled'];
-                    $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
-                    if (!isset($tempArr[$key]['description'])) {
-                        $tempArr[$key]['description'] = '';
-                    }
-                }
-                $this['custom_commands'] = $tempArr;
+                if ($command['roleid'] === $this->route('serverId')) continue;
+                $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
             }
-            if ($this->has('roles')) {
-                $tempArr = [];
-                foreach($this['roles'] as $key => $command) {
-                    $allowed = ['roleid', 'permission_level', 'public_id', 'antispam_ignored'];
-
-                    if ($command['roleid'] === $this->route('serverId')) continue;
-                    $tempArr[$key] = array_intersect_key($command, array_flip($allowed));
-                }
-                $this['roles'] = $tempArr;
+            $this['roles'] = $tempArr;
+        }
+        if ($this->has('profile_options')) {
+            $tempArr = [];
+            foreach($this['profile_options'] as $key => $profile) {
+                $allowed = ['option', 'option_alt', 'label', 'property_order', 'inline'];
+                $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
             }
-            if ($this->has('profile_options')) {
-                $tempArr = [];
-                foreach($this['profile_options'] as $key => $profile) {
-                    $allowed = ['option', 'option_alt', 'label', 'property_order', 'inline'];
-                    $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
-                }
-                $this['profile_options'] = $tempArr;
+            $this['profile_options'] = $tempArr;
+        }
+        if ($this->has('role_groups')) {
+            $tempArr = [];
+            foreach($this['role_groups'] as $key => $profile) {
+                $allowed = ['groupid', 'role_limit', 'name'];
+                $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
             }
-            if ($this->has('role_groups')) {
-                $tempArr = [];
-                foreach($this['role_groups'] as $key => $profile) {
-                    $allowed = ['groupid', 'role_limit', 'name'];
-                    $tempArr[$key] = array_intersect_key($profile, array_flip($allowed));
-                }
-                $this['role_groups'] = $tempArr;
-            }
-            if ($this->has('quickban_reason') && is_null($this['quickban_reason'])) {
-                $this['quickban_reason'] = '';
-            }
-            if ($this->has('welcome_message') && is_null($this['welcome_message'])) {
-                $this['welcome_message'] = '';
-            }
-            if ($this->has('log_message_join') && is_null($this['log_message_join'])) {
-                $this['log_message_join'] = '';
-            }
-            if ($this->has('log_message_leave') && is_null($this['log_message_leave'])) {
-                $this['log_message_leave'] = '';
-            }
-        });
+            $this['role_groups'] = $tempArr;
+        }
+        if ($this->has('quickban_reason') && is_null($this['quickban_reason'])) {
+            $this['quickban_reason'] = '';
+        }
+        if ($this->has('welcome_message') && is_null($this['welcome_message'])) {
+            $this['welcome_message'] = '';
+        }
+        if ($this->has('log_message_join') && is_null($this['log_message_join'])) {
+            $this['log_message_join'] = '';
+        }
+        if ($this->has('log_message_leave') && is_null($this['log_message_leave'])) {
+            $this['log_message_leave'] = '';
+        }
     }
 
     /**

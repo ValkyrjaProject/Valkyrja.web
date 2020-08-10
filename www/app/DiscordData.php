@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 use League\OAuth2\Client\Token\AccessToken;
 use RestCord\DiscordClient;
 use App\Exceptions\EmptyPropertyException;
+use RestCord\Model\Guild\Guild;
 use Wohali\OAuth2\Client\Provider\Discord;
 use Wohali\OAuth2\Client\Provider\DiscordResourceOwner;
 
@@ -107,7 +108,7 @@ class DiscordData extends Model
                 $guilds = new Collection();
                 foreach ($userGuilds as $guild) {
                     $guilds->push(
-                        $this->provider->buildPart(Guild::class, $this->access_token, $guild)
+                        new Guild($guild)
                     );
                 }
 
