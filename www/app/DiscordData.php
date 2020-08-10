@@ -238,7 +238,7 @@ class DiscordData extends Model
                 }
                 else if($serverChannel->type === 4) {
                     $tempArray = [];
-                    $tempArray['id'] = $serverChannel->id;
+                    $tempArray['id'] = strval($serverChannel->id);
                     $tempArray['name'] = $serverChannel->name;
 
                     $serverCategories->push($tempArray);
@@ -294,7 +294,7 @@ class DiscordData extends Model
                     throw new DiscordException('There was an error getting roles from the server. Please try again');
                 }
                 $tempArray = [];
-                $tempArray['id'] = $serverRole->id;
+                $tempArray['id'] = strval($serverRole->id);
                 $tempArray['name'] = $serverRole->name;
 
                 $serverRoles->push($tempArray);

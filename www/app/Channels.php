@@ -23,6 +23,10 @@ class Channels extends Model
         'auto_announce' => 'boolean',
     ];
 
+    protected $hidden = [
+        'serverid'
+    ];
+
     protected function performInsert(Builder $query)
     {
         $this->muted_until = (new DateTime())->setDate(1,1,1)->setTime(0,0,0,0);
