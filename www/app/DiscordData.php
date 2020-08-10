@@ -231,7 +231,7 @@ class DiscordData extends Model
                 // If type is GUILD_TEXT
                 if ($serverChannel->type === 0 || $serverChannel->type === 5) {
                     $tempArray = [];
-                    $tempArray['id'] = $serverChannel->id;
+                    $tempArray['id'] = strval($serverChannel->id);
                     $tempArray['name'] = '#'.$serverChannel->name;
 
                     $serverChannels->push($tempArray);

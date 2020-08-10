@@ -21,6 +21,10 @@ class ReactionRoles extends Model
         'messageid' => 'string',
     ];
 
+    protected $hidden = [
+        'serverid'
+    ];
+
     /**
      * {@inheritdoc}
      */
