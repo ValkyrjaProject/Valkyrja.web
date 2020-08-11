@@ -6,7 +6,7 @@
   * https://github.com/ValkyrjaProject/Valkyrja.modmail - We now have a self-hostable modmail bot as well.
   * https://github.com/sponsors/RheaAyase - new subscription "tool" to hopefully replace Patreon one day. For now we will let you choose which you prefer. We're also changing the tiers, where 5$ subscription gets you not only Valkyrja premium, but you can also ask for a hosted instance of our Modmail with your own branding. 10$ will get you any custom bot/feature you desire (uh... within reason)
   * Custom Commands now support EMBEDS! Just paste the whole embed command into the config and you're done.
-  * You can now customize all kinds of strings that Valkyrja says in the Localisation section. Ping Rhea if you wish to see more.
+  * You can now customize all kinds of strings that Valkyrja says in the Localisation section. Ping Rhea should you wish to add more.
   * Automatically announce every message in your Announcement channels - config->other.
   * Add a short custom message to every PM notice when you mute someone - config->moderation.
   * Configure default `!ban` duration - config->moderation.
@@ -16,7 +16,7 @@
   * `!man <command>` Display a detailed manual page about a command - its usage, arguments, permissions, delete flags or channel restrictions.
   * `!op` now has a checkbox whether its required for moderation actions or not - config->moderation.
   * `!listWarnedUsers <n>` - Display a list of warned users with more than `<n>` infractions.
-  * `!warnings`/`!infractions` - List your own infractions. Potentionally public command but defaulting to SubModerators for opt-in (use `!permissions` to make it public)
+  * `!warnings`/`!infractions` - List your own infractions. Potentially public command but defaulting to SubModerators for opt-in (use `!permissions` to make it public)
   * `!expLock <@user>` prevents users from gaining more exp, lvlup or activity roles.
 
 **Valkyrja 3.8** - 10th of March, 2020
