@@ -377,6 +377,8 @@
                         <type-selector init-id-type="operator_roleid" label="name"
                                        :default-value='{{ json_encode($guild['roles']->get(old('operator_roleid', $serverConfig["operator_roleid"]))) }}'
                                        :values='roles'></type-selector>
+                        @include("config.types.bool", ['key' => "operator_enforce", 'data' => old('operator_enforce', $serverConfig["operator_enforce"])])
+                        Require OP for moderation actions.
                     </p>
                     <p>
                         <b>Ban Default</b>
