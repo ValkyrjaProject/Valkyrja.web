@@ -28,7 +28,7 @@
                     <label class="form-control-label">
                         <b>Response message</b> - You can use the following:
                         <ul>
-                            <li><code>{{sender}}</code> or <code>{{mentioned}}</code> anywhere - mentions the sender or the mentioned people.</li>
+                            <li><code v-pre>{{sender}}</code> or <code v-pre>{{mentioned}}</code> anywhere - mentions the sender or the mentioned people.</li>
                             <li><code>&lt;pm&gt;</code> in the beginning - PM the mentioned people.</li>
                             <li><code>&lt;pm-sender&gt;</code> in the beginning - PM the one who issued the command.</li>
                             <li>You can use RNG to choose from a list of responses using: <code>&lt;|&gt;reply1&lt;|&gt;reply2&lt;|&gt;</code></li>
