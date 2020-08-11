@@ -22,7 +22,7 @@
             </div>
             <p class="row">
               <br />
-              <b><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Subscribe</a></b> or become partner to support the project and unlock the premium features!
+              <b>Subscribe</b> either with <a href="https://github.com/sponsors/RheaAyase">GitHub (preferred)</a> or <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> to support the project and unlock the premium features!
               <ul>
                   <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
@@ -30,13 +30,13 @@
                   <li><b>Experience</b> and levels. Send messages to gain experience, send images to gain more experience. Level up to unlock fancy roles and karma cookies!</li>
                   <li><b>Modmail</b> - We also offer our <a href="https://github.com/ValkyrjaProject/Valkyrja.modmail">Modmail bot</a> hosted in our infrastructure for our Subscribers and Partners.</li>
                   <li><b>Custom bot development</b> within reason. Discuss with Rhea.</li>
-                </ul>
-              <b>Partners</b> get premium features without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
+              </ul>
+              <b>Partners</b> get all of the above without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
             </p>
             <br />
             <p class="row">
-              <b>Patreon info for subscribers:</b><ul>
-                <li>Please make sure to contact <code>Rhea#1234</code> with your patreon details (patreon username or email)</li>
+              <b>Info for subscribers:</b><ul>
+                <li>Please make sure to contact <code>Rhea#1234</code> with your details (github username or patreon email)</li>
                 <li>Remember that the bot is bound to the servers you own, or one extra server you explicitly ask for (talk to Rhea - PM her the <code>Server ID</code>)</li>
               </ul>
               <br /><i>Don't forget to set-up permissions and role hierarchy!</i>

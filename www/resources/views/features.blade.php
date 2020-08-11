@@ -16,14 +16,14 @@
                 <div class="features-indent">
                     Valkyrja is Open Source Software under highly permissive MIT license, contribution is most welcome.
                     </br>
-                    We also offer a Modmail bot available for self-hosting, and hosted in our infrastructure for our <a href="https://www.patreon.com/ValkyrjaProject">Subscribers</a> and Partners.
+                    We also offer a Modmail bot available for self-hosting, and hosted in our infrastructure for our <a href="https://github.com/sponsors/RheaAyase">GitHub</a> or <a href="https://www.patreon.com/ValkyrjaProject">Patreon</a> Subscribers and Partners.
                     </br>
                     <a href="https://github.com/ValkyrjaProject">github.com/ValkyrjaProject</a>
                 </div>
                 <h1>Contribution</h1>
                 <p>
                     Any contribution is most welcome. This could be from code, through artwork, proofreading, to testing and reporting bugs. Or even suggesting new features or improvements!
-                    Last but not least, financial contribution is also welcome - while our hosted instance of Valkyrja is free for everyone, it requires a $10 subscription to access power-hungry and non-essential features (Antispam, Profiles, Karma and Experience) on <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> - a monthly donation towards the cost of maintaining the servers.
+                    Last but not least, financial contribution is also welcome - while our hosted instance of Valkyrja is free for everyone, it requires a $10 subscription to access power-hungry and non-essential features (Antispam, Profiles, Karma and Experience) on <a href="https://github.com/sponsors/RheaAyase">GitHub</a> or <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> - a monthly donation towards the cost of maintaining the servers.
                 </p>
                 <h1>Disclaimer</h1>
                 <p>
