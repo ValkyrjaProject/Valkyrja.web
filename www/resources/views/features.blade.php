@@ -197,6 +197,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>addEmoji</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Add an emoji reaction to a message.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td><code>&lt;messageId&gt; &lt;emojis&gt;</code> - ID of the message (in the current channel); and Emojis that will be added as a reaction.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Admin</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>stats</h2>
                     <table class="command">
                     <tr>
