@@ -525,15 +525,19 @@
                         <color-picker input-name="color_alertchannel"
                                       hex-value="{{old('color_alertchannel', $serverConfig["color_alertchannel"])}}"></color-picker>
                         <br/>
-                        Use <a href="https://regex101.com">regular expression</a> to match messages, for example <code>gh?a+y|fag|nigger</code>. (Up to 20 RegEx ORs <code>|</code>)
-                        <br/>
-                        @include("config.types.multi-line-text", ['key' => "log_alert_regex", 'data' => old('log_alert_regex', $serverConfig["log_alert_regex"])])
-                        <br/>
                         Set a role you'd like mentioned with every alert (optional)
                         <br/>
                         <type-selector init-id-type="alert_role_mention" label="name"
                                        :default-value='{{ json_encode($guild['roles']->get(old('alert_role_mention',$serverConfig["alert_role_mention"]))) }}'
                                        :values='roles'></type-selector>
+                        <br/>
+                        Use a <a href="https://regex101.com">regular expression</a> to match messages, for example <code>gh?a+y|fag|nigger</code>. (Up to 30 RegEx ORs <code>|</code>)
+                        <br/>
+                        @include("config.types.multi-line-text", ['key' => "log_alert_regex", 'data' => old('log_alert_regex', $serverConfig["log_alert_regex"])])
+                        <br/>
+                        Matching messages of this <a href="https://regex101.com">regular expression</a> will be deleted. (Up to 30 RegEx ORs <code>|</code>)
+                        <br/>
+                        @include("config.types.multi-line-text", ['key' => "delete_alert_regex", 'data' => old('delete_alert_regex', $serverConfig["delete_alert_regex"])])
                         <br/><br/>
                         <b>Log Channel</b> - In which channel would you like to log the below configured events?
                         <br/>
