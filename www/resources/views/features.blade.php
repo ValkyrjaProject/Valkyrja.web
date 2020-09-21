@@ -1141,6 +1141,23 @@
                     </table>
                 </div>
                 <div class="features-indent">
+                    <h2>listIDs</h2>
+                    <table class="command">
+                    <tr>
+                        <td>Description</td>
+                        <td>Search and display all User IDs on this server that match a username expression.</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>An expression to use for username search.</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>SubModerator</td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="features-indent">
                     <h2>whois</h2>
                     <table class="command">
                     <tr>
