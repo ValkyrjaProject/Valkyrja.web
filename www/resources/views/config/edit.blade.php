@@ -191,6 +191,23 @@
                           This will immediately ban all the users who have any Discord invites, twitch, youtube or other kinds of naughty links in their username. This will also ban if multiple people join with identical username within short time period.
                       </p>
                       <p>
+                          <b>Limit join-rate (aka Anti-Raid)</b>
+                          <br/>
+                          @include("config.types.bool", ['key' => "antispam_joinrate_enabled", 'data' => old('antispam_joinrate_enabled', $serverConfig["antispam_joinrate_enabled"])])
+                          Limit join-rate by kicking (or 
+                          @include("config.types.bool", ['key' => "antispam_joinrate_ban", 'data' => old('antispam_joinrate_ban', $serverConfig["antispam_joinrate_ban"])])
+                          ban for 1h?) people if more than:
+                          <br/>
+                          <text-field init-id="antispam_joinrate_count" init-name="antispam_joinrate_count"
+                                      init-value="{{ old('antispam_joinrate_count', $serverConfig["antispam_joinrate_count"]) }}"></text-field>
+                          users join in
+                          <text-field init-id="antispam_joinrate_seconds" init-name="antispam_joinrate_seconds"
+                                      init-value="{{ old('antispam_joinrate_seconds', $serverConfig["antispam_joinrate_seconds"]) }}"></text-field>
+                          seconds (don't go over 300 seconds, that's too much!)
+                          <br/>
+                          Valkyrja will PM the kicked/banned people informing them about what's happening and that they can re-join later - in case they're real humans.
+                      </p>
+                      <p>
                           <b>More...</b>
                           <br/>
                           For more verification options and options to kick people who fail it see the Verification section below.
@@ -378,6 +395,7 @@
                                        :default-value='{{ json_encode($guild['roles']->get(old('operator_roleid', $serverConfig["operator_roleid"]))) }}'
                                        :values='roles'></type-selector>
                         @include("config.types.bool", ['key' => "operator_enforce", 'data' => old('operator_enforce', $serverConfig["operator_enforce"])])
+                        <br/>
                         Require OP for moderation actions.
                     </p>
                     <p>
@@ -535,7 +553,7 @@
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "log_alert_regex", 'data' => old('log_alert_regex', $serverConfig["log_alert_regex"])])
                         <br/>
-                        Matching messages of this <a href="https://regex101.com">regular expression</a> will be deleted. (Up to 30 RegEx ORs <code>|</code>)
+                        Matching messages of this <a href="https://regex101.com">regular expression</a> will be deleted. (Up to 20 RegEx ORs <code>|</code>)
                         <br/>
                         @include("config.types.multi-line-text", ['key' => "delete_alert_regex", 'data' => old('delete_alert_regex', $serverConfig["delete_alert_regex"])])
                         <br/><br/>
