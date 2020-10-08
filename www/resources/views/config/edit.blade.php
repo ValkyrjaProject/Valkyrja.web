@@ -134,11 +134,14 @@
                           <br/>
                           Antispam will not take any action against Admins or Moderators.
                           <br/>
-                          You can configure specific roles and channels to be ignored by logging and antispam in the logging section below.
+                          You can configure specific channels to be ignored by logging and antispam in the logging section below.
+                          <br/>
+                          Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned to post a single link or anything else in this section, for three minutes.
                       </p>
                       <p>
-                          Remember that you can <code>@{{ command_prefix }}permit @people</code> to allow anyone mentioned
-                          to post a single link or anything else in this section, for three minutes.
+                          <b>Ignored roles</b> - messages deleted or edited by people with these roles will not be logged and antispam won't take action against them.
+                          <br />
+                          <role-antispam-selector></role-antispam-selector>
                       </p>
                       <p>
                           <b>Members ignore Antispam</b>
@@ -636,9 +639,9 @@
                         <br />
                         <ignore-channel-list-selector></ignore-channel-list-selector>
                         <br/><br/>
-                        <b>Ignored roles</b> - messages deleted or edited by people with these roles will not be logged and antispam won't take action against them.
+                        {{-- <b>Ignored roles</b> - messages deleted or edited by people with these roles will not be logged and antispam won't take action against them.
                         <br />
-                        <role-antispam-selector></role-antispam-selector>
+                        <role-antispam-selector></role-antispam-selector> --}}
                     </p>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
