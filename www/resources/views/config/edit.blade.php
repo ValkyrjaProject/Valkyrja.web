@@ -684,6 +684,11 @@
                     </div>
                     <h2>Verification</h2>
                     <div class="features-indent">
+                        <b>Discord's Native Gating</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "native_gating", 'data' => old('native_gating', $serverConfig["native_gating"])])
+                        Assign the below configured Verification role (and count it towards the <code>stats</code>) when a new member joins and completes Discord's native "Membership Screening" feature.
+                        <br/><br/>
                         <b>Captcha Verification</b> (..kinda!)
                         <br/>
                         @include("config.types.bool", ['key' => "captcha", 'data' => old('captcha', $serverConfig["captcha"])])
