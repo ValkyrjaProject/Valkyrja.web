@@ -815,6 +815,9 @@
                         @include("config.types.bool", ['key' => "exp_enabled", 'data' => old('exp_enabled', $serverConfig["exp_enabled"])])
                         <b>Experience Enabled</b>
                         <br /><br />
+                        @include("config.types.bool", ['key' => "exp_ignored_channels", 'data' => old('exp_ignored_channels', $serverConfig["exp_ignored_channels"])])
+                        Apply ignored channels from the logging config section
+                        <br /><br />
                         @include("config.types.bool", ['key' => "exp_announce_levelup", 'data' => old('exp_announce_levelup', $serverConfig["exp_announce_levelup"])])
                         Announce level-up
                         <br /><br />
