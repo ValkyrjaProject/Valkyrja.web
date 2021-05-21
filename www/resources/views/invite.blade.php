@@ -13,7 +13,7 @@
                 </div>--}}
             </div>
             <p class="row">
-              Anyone can use our hosted instance of Valkyrja for free, however only <b>Subscribers</b> will get performance-heavy Antispam and Social features (Profiles, Karma and Experience.)
+              Valkyrja is now a subscriber-only bot. If you invite it, it will leave your server after some trial period.
             </p>
             <div class="row">
                 <a href="http://invite.valkyrja.app" class="external">
@@ -22,8 +22,14 @@
             </div>
             <p class="row">
               <br />
-              <b>Subscribe</b> either with <a href="https://github.com/sponsors/RheaAyase">GitHub (preferred)</a> or <a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a> to support the project and unlock the premium features!
+              <b>Subscribe</b> with:
               <ul>
+                  <li><a href="https://twitch.tv/RheaAyase" target="_blank">Twitch</a></li>
+                  <li><a href="https://github.com/sponsors/RheaAyase" target="_blank">GitHub</a></li>
+                  <li><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a></li>
+              </ul>
+              <b>Partners</b> get access without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
+          {{--<ul>
                   <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
                   <li><b>Karma</b> - People receive cookies (you can change that) when they get thanked.</li>
@@ -32,7 +38,7 @@
                   <li><b>Custom bot development</b> within reason. Discuss with Rhea.</li>
               </ul>
               <b>Partners</b> get all of the above without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
-            </p>
+          --}}  </p>
             <br />
             <p class="row">
               <b>Info for subscribers:</b><ul>
