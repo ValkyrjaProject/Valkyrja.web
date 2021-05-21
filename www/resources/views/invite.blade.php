@@ -29,7 +29,8 @@
                   <li><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a></li>
               </ul>
               <b>Partners</b> get access without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
-          {{--<ul>
+          {{--
+              <ul>
                   <li>Powerful customizable <b>Antispam</b> that ties into moderation and logging.</li>
                   <li><b>Profiles</b> - see <a href="/img/profiles.png">this example!</a></li>
                   <li><b>Karma</b> - People receive cookies (you can change that) when they get thanked.</li>
@@ -38,7 +39,8 @@
                   <li><b>Custom bot development</b> within reason. Discuss with Rhea.</li>
               </ul>
               <b>Partners</b> get all of the above without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
-          --}}  </p>
+          --}
+            </p>
             <br />
             <p class="row">
               <b>Info for subscribers:</b><ul>
