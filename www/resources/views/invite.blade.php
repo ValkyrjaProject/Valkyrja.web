@@ -37,7 +37,6 @@
                   <li><b>Modmail</b> - We also offer our <a href="https://github.com/ValkyrjaProject/Valkyrja.modmail">Modmail bot</a> hosted in our infrastructure for our Subscribers and Partners.</li>
                   <li><b>Custom bot development</b> within reason. Discuss with Rhea.</li>
               </ul>--}}
-              {{--<b>Partners</b> get all of the above without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>--}
             </p>
             <br />
             <p class="row">
