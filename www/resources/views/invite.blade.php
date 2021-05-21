@@ -23,11 +23,13 @@
             <p class="row">
               <br />
               <b>Subscribe</b> with:
+            </p>
               <ul>
                   <li><a href="https://twitch.tv/RheaAyase" target="_blank">Twitch</a></li>
                   <li><a href="https://github.com/sponsors/RheaAyase" target="_blank">GitHub</a></li>
                   <li><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a></li>
               </ul>
+            <p class="row">
               <b>Partners</b> get access without subscription. Only <u>non-gaming communities</u> qualify, such as <b>open source</b> projects, Linux or other geeky places. <i>(Talk to <a href="/team">Rhea</a> about it.)</i>
             </p>
           {{--<ul>
