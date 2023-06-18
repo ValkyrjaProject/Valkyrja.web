@@ -43,7 +43,7 @@
             <br />
             <p class="row">
               <b>Info for subscribers:</b><ul>
-                <li>Please make sure to contact <code>Rhea#1234</code> with your details (github username or patreon email)</li>
+                <li>Please make sure to contact <code>Rhea</code> with your details (github username or patreon email) (<code>@rhea</code> on Discord, do not send friend requests, send a DM. Join the Support server to do so.)</li>
                 <li>Remember that the bot is bound to the servers you own, or one extra server you explicitly ask for (talk to Rhea - PM her the <code>Server ID</code>)</li>
               </ul>
               <br /><i>Don't forget to set-up permissions and role hierarchy!</i>

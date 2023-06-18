@@ -13,7 +13,7 @@
             Please do not PM individual team members including Rhea. Join the <a href="https://discord.gg/XgVvkXx">Discord Server</a>, take a look at <code>FAQ</code>, recent entries in <code>#news</code>, and then ask in the <code>#support</code> channel.
         </p>
         <p>
-            Should you wish to have any and all the data related to your Discord account (or server you own) removed from our database, please contact Rhea#1234 directly.
+            Should you wish to have any and all the data related to your Discord account (or server you own) removed from our database, please contact Rhea directly (<code>@rhea</code> on Discord, do not send friend requests, send a DM. Join the Support server to do so.)
         </p>
     </div>
 </section>
