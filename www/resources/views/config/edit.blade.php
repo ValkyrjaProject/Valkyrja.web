@@ -409,6 +409,13 @@
                         @include("config.types.text", ['key' => "ban_duration", 'data' => old('ban_duration', $serverConfig["ban_duration"])]) (<code>1d3h</code> format)
                     </p>
                     <p>
+                        <b>Ban Limit</b>
+                        <br/>
+                        Limit how many members can you kick or ban using a single command. Set <code>0</code> (zero) for unlimited. Bypass using <code>@{{ command_prefix }}banMany</code> or <code>@{{ command_prefix }}kickMany</code>
+                        <br/>
+                        @include("config.types.int", ['key' => "ban_limit", 'data' => old('ban_limit', $serverConfig["ban_limit"])])
+                    </p>
+                    <p>
                         <b>Quickban</b>
                         <br/>
                         Should you wish to use the <code>@{{ command_prefix }}quickban</code> you have to configure the reason why are you banning the user. This will be PMed them just like with standard <code>@{{ command_prefix }}ban</code>. We recommend something like <code>Ignoring the rules / spamming inappropriate content.</code> (The command will be disabled if you leave this field empty.)
