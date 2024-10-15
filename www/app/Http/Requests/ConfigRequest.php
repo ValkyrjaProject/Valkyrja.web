@@ -140,7 +140,7 @@ class ConfigRequest extends FormRequest
             'operator_enforce'                  => 'required|boolean',
             'operator_roleid'                   => 'required|integer',
             'ban_duration'                      => 'string|nullable',
-            'ban_duration'                      => 'required|integer',
+            'ban_limit'                         => 'required|integer',
             'quickban_duration'                 => 'required|integer',
             'quickban_reason'                   => 'string|nullable',
             'mute_message'                      => 'string|nullable',
