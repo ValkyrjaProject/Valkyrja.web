@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         error_reporting(E_ALL ^ E_DEPRECATED);
+        if ($this->app->environment() === 'production') {
+            $this->app['request']->server->set('HTTPS','on');
+        }
     }
 
     /**
