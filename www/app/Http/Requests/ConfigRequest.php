@@ -111,6 +111,7 @@ class ConfigRequest extends FormRequest
             'antispam_duplicate_crossserver'    => 'required|boolean',
             'antispam_duplicate_multiuser'      => 'required|boolean',
             'antispam_duplicate_ban'            => 'required|boolean',
+            'antispam_attachments_max'          => 'required|integer',
             'antispam_mentions_max'             => 'required|integer',
             'antispam_mentions_ban'             => 'required|boolean',
             'antispam_mute'                     => 'required|boolean',

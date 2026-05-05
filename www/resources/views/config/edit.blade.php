@@ -242,6 +242,10 @@
                           <br/>
                           @include("config.types.bool", ['key' => "antispam_duplicate_ban", 'data' => old('antispam_duplicate_ban', $serverConfig["antispam_duplicate_ban"])])
                           Ban people after <code>@{{ antispam_tolerance_ban }}</code> messages have been removed?
+                          <br/>
+                          Attachments / images to tolerate. (Requires dulpicates enabled, but the images or attachments do not need to be duplicates. Maximum of `6`. The more public channels you have, the higher the number you want. If you have very few, use `2`.)
+                          <br/>
+                          @include("config.types.int", ['key' => "antispam_attachments_max", 'data' => old('antispam_attachments_max', $serverConfig["antispam_attachments_max"])])
                       </p>
                       <p>
                           <b>Mass-mentions</b>
