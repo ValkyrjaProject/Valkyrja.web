@@ -186,6 +186,7 @@ class ConfigRequest extends FormRequest
             'captcha'                           => 'required|boolean',
             'verify'                            => 'required|boolean',
             'verify_channelid'                  => 'required|integer',
+            'ban_new_accounts'                  => 'required|boolean',
             'verify_accountage'                 => 'required|boolean',
             'verify_accountage_days'            => 'required|integer|min:0',
             'verify_on_welcome'                 => 'required|boolean',

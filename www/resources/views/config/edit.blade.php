@@ -678,6 +678,11 @@
                     </div>
                     <h2>Kick on failed verification</h2>
                     <div class="features-indent">
+                        <b>Ban New Accounts</b>
+                        <br/>
+                        @include("config.types.bool", ['key' => "ban_new_accounts", 'data' => old('ban_new_accounts', $serverConfig["ban_new_accounts"])])
+                        Ban users (for 30 days) whos account age is less than the number of days specified below in the field <code>Account Age</code>
+                        <br/>
                         <b>Kick Without Role</b>
                         <br/>
                         @include("config.types.bool", ['key' => "antispam_norole", 'data' => old('antispam_norole', $serverConfig["antispam_norole"])])
