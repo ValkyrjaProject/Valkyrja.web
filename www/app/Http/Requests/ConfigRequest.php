@@ -138,6 +138,7 @@ class ConfigRequest extends FormRequest
             'antispam_joinrate_ban'             => 'required|boolean',
             'antispam_joinrate_count'           => 'required|integer',
             'antispam_joinrate_seconds'         => 'required|integer',
+            'antispam_honeypot'                 => 'required|integer',
             'operator_enforce'                  => 'required|boolean',
             'operator_roleid'                   => 'required|integer',
             'ban_duration'                      => 'string|nullable',

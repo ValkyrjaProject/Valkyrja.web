@@ -355,6 +355,15 @@
                           @include("config.types.bool", ['key' => "antispam_voice_switching", 'data' => old('antispam_voice_switching', $serverConfig["antispam_voice_switching"])])
                           Warn and ban (for one hour) people who spam-switch voice channels.
                       </p>
+                      <p>
+                        <b>Honeypot</b>
+                        <br/>
+                        Ban for any message in the following channel:
+                        <br/>
+                        <type-selector init-id-type="antispam_honeypot" label="name"
+                                       :default-value='{{ json_encode($guild['channels']->get(old('antispam_honeypot', $serverConfig["antispam_honeypot"]))) }}'
+                                       :values='channels'></type-selector>
+                      </p>
                     </div>
                 </div>
                 <button class="btn btn-fading btn-full-width" type="button" data-toggle="collapse"
