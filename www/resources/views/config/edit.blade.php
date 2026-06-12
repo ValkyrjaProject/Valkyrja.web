@@ -358,7 +358,7 @@
                       <p>
                         <b>Honeypot</b>
                         <br/>
-                        Ban for any message in the following channel:
+                        Ban for any message in the following channel. Configure Default Ban Duration in the moderation section.
                         <br/>
                         <type-selector init-id-type="antispam_honeypot" label="name"
                                        :default-value='{{ json_encode($guild['channels']->get(old('antispam_honeypot', $serverConfig["antispam_honeypot"]))) }}'
@@ -690,7 +690,7 @@
                         <b>Ban New Accounts</b>
                         <br/>
                         @include("config.types.bool", ['key' => "ban_new_accounts", 'data' => old('ban_new_accounts', $serverConfig["ban_new_accounts"])])
-                        Ban users (for 30 days) whos account age is less than the number of days specified below in the field <code>Account Age</code>
+                        Ban users whos account age is less than the number of days specified below in the field <code>Account Age</code> - configure default ban duration in the Moderation section.
                         <br/><br/>
                         <b>Kick Without Role</b>
                         <br/>
