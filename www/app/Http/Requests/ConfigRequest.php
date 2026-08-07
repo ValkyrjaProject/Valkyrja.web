@@ -148,6 +148,7 @@ class ConfigRequest extends FormRequest
             'mute_message'                      => 'string|nullable',
             'mute_roleid'                       => 'required|integer',
             'mute_ignore_channelid'             => 'required|integer',
+            'mute_context'                      => 'required|boolean',
             'slowmode_default'                  => 'required|integer',
             'karma_enabled'                     => 'required|boolean',
             'karma_limit_mentions'              => 'required|integer',

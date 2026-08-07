@@ -454,6 +454,9 @@
                                        :default-value='{{ json_encode($guild['channels']->get(old('mute_ignore_channelid', $serverConfig["mute_ignore_channelid"]))) }}'
                                        :values='channels'></type-selector>
                         <br/>
+                        @include("config.types.bool", ['key' => "mute_context", 'data' => old('mute_context', $serverConfig["mute_context"])])
+                        Include previous warnings in the <i>chill-zone</i>
+                        <br/>
                         Example usage of this <i>chill-zone</i> channel: <a href="/img/mute.gif" target="_blank">gif</a>
                         which can be configured with <a href="/img/mute-permissions.gif" target="_blank">these
                             permissions</a>.
