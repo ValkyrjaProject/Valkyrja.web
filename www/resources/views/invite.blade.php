@@ -25,7 +25,7 @@
               <b>Subscribe</b> with:
             </p>
               <ul>
-                  <li><a href="https://twitch.tv/RheaAyase" target="_blank">Twitch</a></li>
+                  <li><a href="https://twitch.tv/Rhea_dev" target="_blank">Twitch</a></li>
                   <li><a href="https://github.com/sponsors/RheaAyase" target="_blank">GitHub</a></li>
                   <li><a href="https://www.patreon.com/ValkyrjaProject" target="_blank">Patreon</a></li>
               </ul>
